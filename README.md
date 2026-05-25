@@ -2,6 +2,8 @@
 
 This is a training repo to explore the art of the "promptable". Original outdoor-inspired ecommerce platform for Ensemble-grafana. The repo contains a shopper-facing JavaScript storefront, three Spring Boot microservices, AWS deployment assets, and Grafana observability configuration.
 
+**Try the mock site:** [https://ensemble-grafana.com/](https://ensemble-grafana.com/) — browse products, use the cart and checkout flows, switch regions, and sign in with Google via Cognito to explore account features.
+
 ## Project Layout
 
 - `frontend/` - Vite JavaScript storefront with Grafana Faro instrumentation.
