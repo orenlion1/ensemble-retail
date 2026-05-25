@@ -1,6 +1,6 @@
 # Ensemble-Grafana
 
-Original outdoor-inspired ecommerce platform for Ensemble-grafana. The repo contains a shopper-facing JavaScript storefront, three Spring Boot microservices, AWS deployment assets, and Grafana observability configuration.
+This is a training repo to explore the art of the "promptable". Original outdoor-inspired ecommerce platform for Ensemble-grafana. The repo contains a shopper-facing JavaScript storefront, three Spring Boot microservices, AWS deployment assets, and Grafana observability configuration.
 
 ## Project Layout
 
