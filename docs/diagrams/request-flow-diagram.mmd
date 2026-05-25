@@ -1,0 +1,54 @@
+flowchart LR
+  browser["Browser\nensemble-grafana.com"]
+  dns["Route53\nA/AAAA alias"]
+  cf["CloudFront\nHTTPS + static/API routing"]
+  wafEdge["AWS WAF\nedge rules"]
+  s3["S3 frontend origin\nindex.html, JS, CSS"]
+  cognito["Cognito Hosted UI\nGoogle federation"]
+  google["Google IdP"]
+  apiPath{"/api/* ?"}
+  apiWaf["AWS WAF\nregional API rules"]
+  ingress["EKS API ingress / ALB"]
+  k6["Grafana Cloud k6\nregional, spike,\nbrowser checks"]
+  grafana["Grafana Cloud\nresults and telemetry"]
+
+  inventory["inventory-service\n/api/inventory/*"]
+  cart["cart-service\n/api/cart/*"]
+  account["account-service\n/api/account/*"]
+
+  postgres[("Postgres\ninventory catalog")]
+  dynamoCart[("DynamoDB\ncart state")]
+  dynamoAccount[("DynamoDB\naccount, address,\nwallet metadata")]
+
+  browser -->|"DNS lookup"| dns
+  dns -->|"CloudFront target"| browser
+  browser -->|"HTTPS request"| wafEdge
+  browser -->|"OAuth code + PKCE"| cognito
+  cognito -->|"Google authentication"| google
+  google -->|"identity claims"| cognito
+  cognito -->|"Cognito JWTs"| browser
+  k6 -->|"Synthetic load\nHTTPS + /api/*\nwith traceparent"| wafEdge
+  wafEdge --> cf
+  cf --> apiPath
+  apiPath -->|"No: static route"| s3
+  s3 -->|"HTML/assets"| cf
+  cf -->|"Storefront response"| browser
+
+  apiPath -->|"Yes: /api/*\nBearer JWT or API key"| apiWaf
+  apiWaf --> ingress
+  ingress -->|"/api/inventory/*"| inventory
+  ingress -->|"/api/cart/*"| cart
+  ingress -->|"/api/account/*"| account
+
+  inventory -->|"Read products, categories,\nstock, pricing"| postgres
+  postgres --> inventory
+  cart -->|"Read/write cart items"| dynamoCart
+  dynamoCart --> cart
+  account -->|"Read/write profile,\nshipping, wallet metadata"| dynamoAccount
+  dynamoAccount --> account
+
+  inventory -->|"JSON response"| ingress
+  cart -->|"JSON response"| ingress
+  account -->|"JSON response"| ingress
+  ingress --> apiWaf --> cf --> browser
+  k6 -->|"k6 result metrics\nand trace correlation"| grafana

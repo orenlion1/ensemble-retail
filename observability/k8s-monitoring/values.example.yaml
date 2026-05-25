@@ -1,0 +1,83 @@
+# Grafana k8s-monitoring Helm values for cluster ensemble-grafana.
+# Copy to a local file (for example values.local.yaml), replace placeholders, and do not commit secrets.
+#
+# Required environment variables before helm install:
+#   GRAFANA_CLOUD_METRICS_USER, GRAFANA_CLOUD_METRICS_PASSWORD
+#   GRAFANA_CLOUD_LOGS_USER, GRAFANA_CLOUD_LOGS_PASSWORD
+#   GRAFANA_CLOUD_FLEET_USER, GRAFANA_CLOUD_FLEET_PASSWORD
+
+cluster:
+  name: ensemble-grafana
+
+destinations:
+  grafana-cloud-metrics:
+    type: prometheus
+    url: https://prometheus-prod-66-prod-us-east-3.grafana.net/api/prom/push
+    auth:
+      type: basic
+      username: "${GRAFANA_CLOUD_METRICS_USER}"
+      password: "${GRAFANA_CLOUD_METRICS_PASSWORD}"
+  grafana-cloud-logs:
+    type: loki
+    url: https://logs-prod-042.grafana.net/loki/api/v1/push
+    auth:
+      type: basic
+      username: "${GRAFANA_CLOUD_LOGS_USER}"
+      password: "${GRAFANA_CLOUD_LOGS_PASSWORD}"
+
+clusterMetrics:
+  enabled: true
+  collector: alloy-metrics
+
+hostMetrics:
+  enabled: true
+  collector: alloy-metrics
+  linuxHosts:
+    enabled: true
+  windowsHosts:
+    enabled: false
+
+costMetrics:
+  enabled: false
+  collector: alloy-metrics
+
+clusterEvents:
+  enabled: false
+  collector: alloy-singleton
+
+nodeLogs:
+  enabled: true
+  collector: alloy-logs
+
+collectors:
+  alloy-metrics:
+    presets:
+      - clustered
+      - statefulset
+  alloy-singleton:
+    presets:
+      - singleton
+  alloy-logs:
+    presets:
+      - filesystem-log-reader
+      - daemonset
+
+collectorCommon:
+  alloy:
+    remoteConfig:
+      enabled: true
+      url: https://fleet-management-prod-028.grafana.net
+      auth:
+        type: basic
+        username: "${GRAFANA_CLOUD_FLEET_USER}"
+        password: "${GRAFANA_CLOUD_FLEET_PASSWORD}"
+
+telemetryServices:
+  kube-state-metrics:
+    deploy: true
+  node-exporter:
+    deploy: true
+  windows-exporter:
+    deploy: false
+  opencost:
+    deploy: false

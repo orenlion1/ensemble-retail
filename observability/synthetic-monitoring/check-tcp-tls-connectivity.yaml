@@ -1,0 +1,29 @@
+apiVersion: syntheticmonitoring.ext.grafana.app/v1alpha1
+kind: Check
+metadata:
+  name: "ensemble-grafana-tcp-tls-connectivity-2497"
+spec:
+  job: ensemble-grafana-tcp-tls-connectivity
+  target: ensemble-grafana.com:443
+  frequency: 60000
+  timeout: 10000
+  enabled: true
+  labels:
+    - name: environment
+      value: production
+    - name: service
+      value: edge
+    - name: check_type
+      value: tcp
+  probes:
+    - Oregon
+    - Montreal
+    - London
+  alertSensitivity: none
+  basicMetricsOnly: false
+  settings:
+    tcp:
+      tls: true
+      tlsConfig:
+        insecureSkipVerify: false
+      queryResponse: []

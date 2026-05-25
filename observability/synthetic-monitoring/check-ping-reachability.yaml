@@ -1,0 +1,28 @@
+apiVersion: syntheticmonitoring.ext.grafana.app/v1alpha1
+kind: Check
+metadata:
+  name: "ensemble-grafana-ping-reachability-2496"
+spec:
+  job: ensemble-grafana-ping-reachability
+  target: ensemble-grafana.com
+  frequency: 120000
+  timeout: 10000
+  enabled: true
+  labels:
+    - name: environment
+      value: production
+    - name: service
+      value: network
+    - name: check_type
+      value: ping
+  probes:
+    - Oregon
+    - Montreal
+    - London
+  alertSensitivity: none
+  basicMetricsOnly: false
+  settings:
+    ping:
+      packetCount: 3
+      payloadSize: 0
+      dontFragment: false

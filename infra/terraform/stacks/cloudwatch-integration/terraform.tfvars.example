@@ -1,0 +1,6 @@
+external_id   = "3254864"
+iam_role_name = "GrafanaLabsCloudWatchIntegration"
+
+# Grafana's current documented AWS account ID for CloudWatch metrics scrape.
+# Override only if the Grafana Cloud AWS account setup page for your stack shows a different value.
+grafana_account_id = "008923505280"

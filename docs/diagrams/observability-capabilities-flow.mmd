@@ -1,0 +1,80 @@
+flowchart TB
+  browser["Shopper browser\nReact storefront"]
+  faro["Grafana Faro SDK\nweb vitals, errors,\nlogs, sessions, user actions"]
+  tracing["Faro web tracing\ntrace context on fetch/XHR"]
+
+  cloudfront["CloudFront\nstatic + /api/* routing"]
+  ingress["EKS API ingress / ALB"]
+
+  subgraph services["Spring Boot services"]
+    inventory["inventory-service"]
+    cart["cart-service"]
+    account["account-service"]
+  end
+
+  actuator["Spring Actuator\n/actuator/prometheus"]
+  otel["Spring OpenTelemetry\ntraces + resource attrs"]
+  logs["Kubernetes pod logs\nservice labels"]
+  beyla["Grafana Beyla\nzero-code HTTP telemetry"]
+  pyroscope["Pyroscope Alloy DaemonSet\nJVM profiles"]
+  alloy["Grafana Alloy\nOTel collector"]
+
+  synth["Grafana Synthetic Monitoring\nHTTP, DNS, Ping, TCP"]
+  k6["Grafana Cloud k6\nregional load, spike benchmark,\nbrowser actions"]
+  k6Tracing["k6 Tempo instrumentation\nW3C trace context"]
+  irm["Grafana IRM\nincidents, labels,\non-call schedule"]
+
+  grafana["Grafana Cloud stack\norenlion.grafana.net"]
+  frontendObs["Frontend Observability\nFaro events and exceptions"]
+  tempo["Traces\nfrontend-to-backend waterfalls"]
+  prometheus["Metrics\nRED + infrastructure signals"]
+  loki["Logs\nnamespace + service labels"]
+  profiles["Profiles\nJava CPU profiles"]
+  smResults["Synthetic results\nuptime, TLS, DNS, latency"]
+  k6Results["k6 results\nVUs, checks, thresholds"]
+  incidents["IRM workflows\nseverity, ownership, response"]
+
+  browser -->|"page views, errors,\nuser actions"| faro
+  browser -->|"HTTP requests\nwith traceparent"| tracing
+  tracing --> cloudfront --> ingress
+  ingress --> inventory
+  ingress --> cart
+  ingress --> account
+
+  faro -->|"collector endpoint"| grafana
+  tracing -->|"frontend spans"| grafana
+
+  inventory --> actuator
+  cart --> actuator
+  account --> actuator
+  inventory --> otel
+  cart --> otel
+  account --> otel
+  inventory --> logs
+  cart --> logs
+  account --> logs
+
+  services -->|"HTTP telemetry"| beyla
+  services -->|"JVM attach"| pyroscope
+  actuator -->|"Prometheus scrape"| alloy
+  otel -->|"OTLP traces"| alloy
+  logs -->|"pod log collection"| alloy
+  beyla -->|"metrics + traces"| alloy
+  pyroscope -->|"profiles write"| grafana
+  alloy -->|"OTLP export"| grafana
+
+  synth -->|"checks production URL\nand API health"| cloudfront
+  synth -->|"check samples"| grafana
+  k6 --> k6Tracing
+  k6Tracing -->|"load checks\nwith traceparent"| cloudfront
+  k6 -->|"test metrics +\ntrace correlation"| grafana
+  irm -->|"incident and schedule state"| grafana
+
+  grafana --> frontendObs
+  grafana --> tempo
+  grafana --> prometheus
+  grafana --> loki
+  grafana --> profiles
+  grafana --> smResults
+  grafana --> k6Results
+  grafana --> incidents

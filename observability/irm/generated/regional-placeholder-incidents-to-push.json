@@ -1,0 +1,1298 @@
+[
+  {
+    "sequence": 1,
+    "file": "observability/irm/generated/regional-placeholder-manifests/01-placeholder-2024-12-01-uk-december-2024.yaml",
+    "type": "placeholder",
+    "date": "2024-12-01",
+    "title": "[Placeholder] UK December 2024 No Action Needed",
+    "region": "UK",
+    "start": "2024-12-01T04:01:00Z",
+    "end": "2024-12-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "UK",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 2,
+    "file": "observability/irm/generated/regional-placeholder-manifests/02-placeholder-2025-01-01-uk-january-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-01-01",
+    "title": "[Placeholder] UK January 2025 No Action Needed",
+    "region": "UK",
+    "start": "2025-01-01T04:01:00Z",
+    "end": "2025-01-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "UK",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 3,
+    "file": "observability/irm/generated/regional-placeholder-manifests/03-placeholder-2025-02-01-uk-february-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-02-01",
+    "title": "[Placeholder] UK February 2025 No Action Needed",
+    "region": "UK",
+    "start": "2025-02-01T04:01:00Z",
+    "end": "2025-02-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "UK",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 4,
+    "file": "observability/irm/generated/regional-placeholder-manifests/04-placeholder-2025-03-01-uk-march-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-03-01",
+    "title": "[Placeholder] UK March 2025 No Action Needed",
+    "region": "UK",
+    "start": "2025-03-01T04:01:00Z",
+    "end": "2025-03-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "UK",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 5,
+    "file": "observability/irm/generated/regional-placeholder-manifests/05-placeholder-2025-04-01-uk-april-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-04-01",
+    "title": "[Placeholder] UK April 2025 No Action Needed",
+    "region": "UK",
+    "start": "2025-04-01T04:01:00Z",
+    "end": "2025-04-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "UK",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 6,
+    "file": "observability/irm/generated/regional-placeholder-manifests/06-placeholder-2025-05-01-uk-may-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-05-01",
+    "title": "[Placeholder] UK May 2025 No Action Needed",
+    "region": "UK",
+    "start": "2025-05-01T04:01:00Z",
+    "end": "2025-05-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "UK",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 7,
+    "file": "observability/irm/generated/regional-placeholder-manifests/07-placeholder-2025-06-01-uk-june-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-06-01",
+    "title": "[Placeholder] UK June 2025 No Action Needed",
+    "region": "UK",
+    "start": "2025-06-01T04:01:00Z",
+    "end": "2025-06-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "UK",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 8,
+    "file": "observability/irm/generated/regional-placeholder-manifests/08-placeholder-2025-07-01-uk-july-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-07-01",
+    "title": "[Placeholder] UK July 2025 No Action Needed",
+    "region": "UK",
+    "start": "2025-07-01T04:01:00Z",
+    "end": "2025-07-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "UK",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 9,
+    "file": "observability/irm/generated/regional-placeholder-manifests/09-placeholder-2025-08-01-uk-august-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-08-01",
+    "title": "[Placeholder] UK August 2025 No Action Needed",
+    "region": "UK",
+    "start": "2025-08-01T04:01:00Z",
+    "end": "2025-08-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "UK",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 10,
+    "file": "observability/irm/generated/regional-placeholder-manifests/10-placeholder-2025-09-01-uk-september-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-09-01",
+    "title": "[Placeholder] UK September 2025 No Action Needed",
+    "region": "UK",
+    "start": "2025-09-01T04:01:00Z",
+    "end": "2025-09-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "UK",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 11,
+    "file": "observability/irm/generated/regional-placeholder-manifests/11-placeholder-2025-10-01-uk-october-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-10-01",
+    "title": "[Placeholder] UK October 2025 No Action Needed",
+    "region": "UK",
+    "start": "2025-10-01T04:01:00Z",
+    "end": "2025-10-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "UK",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 12,
+    "file": "observability/irm/generated/regional-placeholder-manifests/12-placeholder-2025-11-01-uk-november-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-11-01",
+    "title": "[Placeholder] UK November 2025 No Action Needed",
+    "region": "UK",
+    "start": "2025-11-01T04:01:00Z",
+    "end": "2025-11-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "UK",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 13,
+    "file": "observability/irm/generated/regional-placeholder-manifests/13-placeholder-2025-12-01-uk-december-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-12-01",
+    "title": "[Placeholder] UK December 2025 No Action Needed",
+    "region": "UK",
+    "start": "2025-12-01T04:01:00Z",
+    "end": "2025-12-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "UK",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 14,
+    "file": "observability/irm/generated/regional-placeholder-manifests/14-placeholder-2026-01-01-uk-january-2026.yaml",
+    "type": "placeholder",
+    "date": "2026-01-01",
+    "title": "[Placeholder] UK January 2026 No Action Needed",
+    "region": "UK",
+    "start": "2026-01-01T04:01:00Z",
+    "end": "2026-01-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "UK",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 15,
+    "file": "observability/irm/generated/regional-placeholder-manifests/15-placeholder-2026-02-01-uk-february-2026.yaml",
+    "type": "placeholder",
+    "date": "2026-02-01",
+    "title": "[Placeholder] UK February 2026 No Action Needed",
+    "region": "UK",
+    "start": "2026-02-01T04:01:00Z",
+    "end": "2026-02-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "UK",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 16,
+    "file": "observability/irm/generated/regional-placeholder-manifests/16-placeholder-2026-03-01-uk-march-2026.yaml",
+    "type": "placeholder",
+    "date": "2026-03-01",
+    "title": "[Placeholder] UK March 2026 No Action Needed",
+    "region": "UK",
+    "start": "2026-03-01T04:01:00Z",
+    "end": "2026-03-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "UK",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 17,
+    "file": "observability/irm/generated/regional-placeholder-manifests/17-placeholder-2026-04-01-uk-april-2026.yaml",
+    "type": "placeholder",
+    "date": "2026-04-01",
+    "title": "[Placeholder] UK April 2026 No Action Needed",
+    "region": "UK",
+    "start": "2026-04-01T04:01:00Z",
+    "end": "2026-04-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "UK",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 18,
+    "file": "observability/irm/generated/regional-placeholder-manifests/18-placeholder-2026-05-01-uk-may-2026.yaml",
+    "type": "placeholder",
+    "date": "2026-05-01",
+    "title": "[Placeholder] UK May 2026 No Action Needed",
+    "region": "UK",
+    "start": "2026-05-01T04:01:00Z",
+    "end": "2026-05-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "UK",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 19,
+    "file": "observability/irm/generated/regional-placeholder-manifests/19-placeholder-2024-12-01-china-december-2024.yaml",
+    "type": "placeholder",
+    "date": "2024-12-01",
+    "title": "[Placeholder] China December 2024 No Action Needed",
+    "region": "China",
+    "start": "2024-12-01T04:01:00Z",
+    "end": "2024-12-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "China",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 20,
+    "file": "observability/irm/generated/regional-placeholder-manifests/20-placeholder-2025-01-01-china-january-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-01-01",
+    "title": "[Placeholder] China January 2025 No Action Needed",
+    "region": "China",
+    "start": "2025-01-01T04:01:00Z",
+    "end": "2025-01-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "China",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 21,
+    "file": "observability/irm/generated/regional-placeholder-manifests/21-placeholder-2025-02-01-china-february-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-02-01",
+    "title": "[Placeholder] China February 2025 No Action Needed",
+    "region": "China",
+    "start": "2025-02-01T04:01:00Z",
+    "end": "2025-02-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "China",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 22,
+    "file": "observability/irm/generated/regional-placeholder-manifests/22-placeholder-2025-03-01-china-march-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-03-01",
+    "title": "[Placeholder] China March 2025 No Action Needed",
+    "region": "China",
+    "start": "2025-03-01T04:01:00Z",
+    "end": "2025-03-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "China",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 23,
+    "file": "observability/irm/generated/regional-placeholder-manifests/23-placeholder-2025-04-01-china-april-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-04-01",
+    "title": "[Placeholder] China April 2025 No Action Needed",
+    "region": "China",
+    "start": "2025-04-01T04:01:00Z",
+    "end": "2025-04-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "China",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 24,
+    "file": "observability/irm/generated/regional-placeholder-manifests/24-placeholder-2025-05-01-china-may-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-05-01",
+    "title": "[Placeholder] China May 2025 No Action Needed",
+    "region": "China",
+    "start": "2025-05-01T04:01:00Z",
+    "end": "2025-05-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "China",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 25,
+    "file": "observability/irm/generated/regional-placeholder-manifests/25-placeholder-2025-06-01-china-june-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-06-01",
+    "title": "[Placeholder] China June 2025 No Action Needed",
+    "region": "China",
+    "start": "2025-06-01T04:01:00Z",
+    "end": "2025-06-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "China",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 26,
+    "file": "observability/irm/generated/regional-placeholder-manifests/26-placeholder-2025-07-01-china-july-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-07-01",
+    "title": "[Placeholder] China July 2025 No Action Needed",
+    "region": "China",
+    "start": "2025-07-01T04:01:00Z",
+    "end": "2025-07-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "China",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 27,
+    "file": "observability/irm/generated/regional-placeholder-manifests/27-placeholder-2025-08-01-china-august-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-08-01",
+    "title": "[Placeholder] China August 2025 No Action Needed",
+    "region": "China",
+    "start": "2025-08-01T04:01:00Z",
+    "end": "2025-08-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "China",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 28,
+    "file": "observability/irm/generated/regional-placeholder-manifests/28-placeholder-2025-09-01-china-september-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-09-01",
+    "title": "[Placeholder] China September 2025 No Action Needed",
+    "region": "China",
+    "start": "2025-09-01T04:01:00Z",
+    "end": "2025-09-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "China",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 29,
+    "file": "observability/irm/generated/regional-placeholder-manifests/29-placeholder-2025-10-01-china-october-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-10-01",
+    "title": "[Placeholder] China October 2025 No Action Needed",
+    "region": "China",
+    "start": "2025-10-01T04:01:00Z",
+    "end": "2025-10-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "China",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 30,
+    "file": "observability/irm/generated/regional-placeholder-manifests/30-placeholder-2025-11-01-china-november-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-11-01",
+    "title": "[Placeholder] China November 2025 No Action Needed",
+    "region": "China",
+    "start": "2025-11-01T04:01:00Z",
+    "end": "2025-11-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "China",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 31,
+    "file": "observability/irm/generated/regional-placeholder-manifests/31-placeholder-2025-12-01-china-december-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-12-01",
+    "title": "[Placeholder] China December 2025 No Action Needed",
+    "region": "China",
+    "start": "2025-12-01T04:01:00Z",
+    "end": "2025-12-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "China",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 32,
+    "file": "observability/irm/generated/regional-placeholder-manifests/32-placeholder-2026-01-01-china-january-2026.yaml",
+    "type": "placeholder",
+    "date": "2026-01-01",
+    "title": "[Placeholder] China January 2026 No Action Needed",
+    "region": "China",
+    "start": "2026-01-01T04:01:00Z",
+    "end": "2026-01-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "China",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 33,
+    "file": "observability/irm/generated/regional-placeholder-manifests/33-placeholder-2026-02-01-china-february-2026.yaml",
+    "type": "placeholder",
+    "date": "2026-02-01",
+    "title": "[Placeholder] China February 2026 No Action Needed",
+    "region": "China",
+    "start": "2026-02-01T04:01:00Z",
+    "end": "2026-02-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "China",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 34,
+    "file": "observability/irm/generated/regional-placeholder-manifests/34-placeholder-2026-03-01-china-march-2026.yaml",
+    "type": "placeholder",
+    "date": "2026-03-01",
+    "title": "[Placeholder] China March 2026 No Action Needed",
+    "region": "China",
+    "start": "2026-03-01T04:01:00Z",
+    "end": "2026-03-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "China",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 35,
+    "file": "observability/irm/generated/regional-placeholder-manifests/35-placeholder-2026-04-01-china-april-2026.yaml",
+    "type": "placeholder",
+    "date": "2026-04-01",
+    "title": "[Placeholder] China April 2026 No Action Needed",
+    "region": "China",
+    "start": "2026-04-01T04:01:00Z",
+    "end": "2026-04-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "China",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 36,
+    "file": "observability/irm/generated/regional-placeholder-manifests/36-placeholder-2026-05-01-china-may-2026.yaml",
+    "type": "placeholder",
+    "date": "2026-05-01",
+    "title": "[Placeholder] China May 2026 No Action Needed",
+    "region": "China",
+    "start": "2026-05-01T04:01:00Z",
+    "end": "2026-05-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "China",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 37,
+    "file": "observability/irm/generated/regional-placeholder-manifests/37-placeholder-2024-12-01-canada-december-2024.yaml",
+    "type": "placeholder",
+    "date": "2024-12-01",
+    "title": "[Placeholder] Canada December 2024 No Action Needed",
+    "region": "Canada",
+    "start": "2024-12-01T04:01:00Z",
+    "end": "2024-12-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Canada",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 38,
+    "file": "observability/irm/generated/regional-placeholder-manifests/38-placeholder-2025-01-01-canada-january-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-01-01",
+    "title": "[Placeholder] Canada January 2025 No Action Needed",
+    "region": "Canada",
+    "start": "2025-01-01T04:01:00Z",
+    "end": "2025-01-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Canada",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 39,
+    "file": "observability/irm/generated/regional-placeholder-manifests/39-placeholder-2025-02-01-canada-february-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-02-01",
+    "title": "[Placeholder] Canada February 2025 No Action Needed",
+    "region": "Canada",
+    "start": "2025-02-01T04:01:00Z",
+    "end": "2025-02-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Canada",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 40,
+    "file": "observability/irm/generated/regional-placeholder-manifests/40-placeholder-2025-03-01-canada-march-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-03-01",
+    "title": "[Placeholder] Canada March 2025 No Action Needed",
+    "region": "Canada",
+    "start": "2025-03-01T04:01:00Z",
+    "end": "2025-03-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Canada",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 41,
+    "file": "observability/irm/generated/regional-placeholder-manifests/41-placeholder-2025-04-01-canada-april-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-04-01",
+    "title": "[Placeholder] Canada April 2025 No Action Needed",
+    "region": "Canada",
+    "start": "2025-04-01T04:01:00Z",
+    "end": "2025-04-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Canada",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 42,
+    "file": "observability/irm/generated/regional-placeholder-manifests/42-placeholder-2025-05-01-canada-may-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-05-01",
+    "title": "[Placeholder] Canada May 2025 No Action Needed",
+    "region": "Canada",
+    "start": "2025-05-01T04:01:00Z",
+    "end": "2025-05-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Canada",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 43,
+    "file": "observability/irm/generated/regional-placeholder-manifests/43-placeholder-2025-06-01-canada-june-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-06-01",
+    "title": "[Placeholder] Canada June 2025 No Action Needed",
+    "region": "Canada",
+    "start": "2025-06-01T04:01:00Z",
+    "end": "2025-06-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Canada",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 44,
+    "file": "observability/irm/generated/regional-placeholder-manifests/44-placeholder-2025-07-01-canada-july-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-07-01",
+    "title": "[Placeholder] Canada July 2025 No Action Needed",
+    "region": "Canada",
+    "start": "2025-07-01T04:01:00Z",
+    "end": "2025-07-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Canada",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 45,
+    "file": "observability/irm/generated/regional-placeholder-manifests/45-placeholder-2025-08-01-canada-august-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-08-01",
+    "title": "[Placeholder] Canada August 2025 No Action Needed",
+    "region": "Canada",
+    "start": "2025-08-01T04:01:00Z",
+    "end": "2025-08-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Canada",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 46,
+    "file": "observability/irm/generated/regional-placeholder-manifests/46-placeholder-2025-09-01-canada-september-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-09-01",
+    "title": "[Placeholder] Canada September 2025 No Action Needed",
+    "region": "Canada",
+    "start": "2025-09-01T04:01:00Z",
+    "end": "2025-09-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Canada",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 47,
+    "file": "observability/irm/generated/regional-placeholder-manifests/47-placeholder-2025-10-01-canada-october-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-10-01",
+    "title": "[Placeholder] Canada October 2025 No Action Needed",
+    "region": "Canada",
+    "start": "2025-10-01T04:01:00Z",
+    "end": "2025-10-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Canada",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 48,
+    "file": "observability/irm/generated/regional-placeholder-manifests/48-placeholder-2025-11-01-canada-november-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-11-01",
+    "title": "[Placeholder] Canada November 2025 No Action Needed",
+    "region": "Canada",
+    "start": "2025-11-01T04:01:00Z",
+    "end": "2025-11-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Canada",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 49,
+    "file": "observability/irm/generated/regional-placeholder-manifests/49-placeholder-2025-12-01-canada-december-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-12-01",
+    "title": "[Placeholder] Canada December 2025 No Action Needed",
+    "region": "Canada",
+    "start": "2025-12-01T04:01:00Z",
+    "end": "2025-12-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Canada",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 50,
+    "file": "observability/irm/generated/regional-placeholder-manifests/50-placeholder-2026-01-01-canada-january-2026.yaml",
+    "type": "placeholder",
+    "date": "2026-01-01",
+    "title": "[Placeholder] Canada January 2026 No Action Needed",
+    "region": "Canada",
+    "start": "2026-01-01T04:01:00Z",
+    "end": "2026-01-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Canada",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 51,
+    "file": "observability/irm/generated/regional-placeholder-manifests/51-placeholder-2026-02-01-canada-february-2026.yaml",
+    "type": "placeholder",
+    "date": "2026-02-01",
+    "title": "[Placeholder] Canada February 2026 No Action Needed",
+    "region": "Canada",
+    "start": "2026-02-01T04:01:00Z",
+    "end": "2026-02-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Canada",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 52,
+    "file": "observability/irm/generated/regional-placeholder-manifests/52-placeholder-2026-03-01-canada-march-2026.yaml",
+    "type": "placeholder",
+    "date": "2026-03-01",
+    "title": "[Placeholder] Canada March 2026 No Action Needed",
+    "region": "Canada",
+    "start": "2026-03-01T04:01:00Z",
+    "end": "2026-03-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Canada",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 53,
+    "file": "observability/irm/generated/regional-placeholder-manifests/53-placeholder-2026-04-01-canada-april-2026.yaml",
+    "type": "placeholder",
+    "date": "2026-04-01",
+    "title": "[Placeholder] Canada April 2026 No Action Needed",
+    "region": "Canada",
+    "start": "2026-04-01T04:01:00Z",
+    "end": "2026-04-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Canada",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 54,
+    "file": "observability/irm/generated/regional-placeholder-manifests/54-placeholder-2026-05-01-canada-may-2026.yaml",
+    "type": "placeholder",
+    "date": "2026-05-01",
+    "title": "[Placeholder] Canada May 2026 No Action Needed",
+    "region": "Canada",
+    "start": "2026-05-01T04:01:00Z",
+    "end": "2026-05-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Canada",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 55,
+    "file": "observability/irm/generated/regional-placeholder-manifests/55-placeholder-2024-12-01-eu-december-2024.yaml",
+    "type": "placeholder",
+    "date": "2024-12-01",
+    "title": "[Placeholder] EU December 2024 No Action Needed",
+    "region": "EU",
+    "start": "2024-12-01T04:01:00Z",
+    "end": "2024-12-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "EU",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 56,
+    "file": "observability/irm/generated/regional-placeholder-manifests/56-placeholder-2025-01-01-eu-january-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-01-01",
+    "title": "[Placeholder] EU January 2025 No Action Needed",
+    "region": "EU",
+    "start": "2025-01-01T04:01:00Z",
+    "end": "2025-01-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "EU",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 57,
+    "file": "observability/irm/generated/regional-placeholder-manifests/57-placeholder-2025-02-01-eu-february-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-02-01",
+    "title": "[Placeholder] EU February 2025 No Action Needed",
+    "region": "EU",
+    "start": "2025-02-01T04:01:00Z",
+    "end": "2025-02-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "EU",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 58,
+    "file": "observability/irm/generated/regional-placeholder-manifests/58-placeholder-2025-03-01-eu-march-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-03-01",
+    "title": "[Placeholder] EU March 2025 No Action Needed",
+    "region": "EU",
+    "start": "2025-03-01T04:01:00Z",
+    "end": "2025-03-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "EU",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 59,
+    "file": "observability/irm/generated/regional-placeholder-manifests/59-placeholder-2025-04-01-eu-april-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-04-01",
+    "title": "[Placeholder] EU April 2025 No Action Needed",
+    "region": "EU",
+    "start": "2025-04-01T04:01:00Z",
+    "end": "2025-04-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "EU",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 60,
+    "file": "observability/irm/generated/regional-placeholder-manifests/60-placeholder-2025-05-01-eu-may-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-05-01",
+    "title": "[Placeholder] EU May 2025 No Action Needed",
+    "region": "EU",
+    "start": "2025-05-01T04:01:00Z",
+    "end": "2025-05-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "EU",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 61,
+    "file": "observability/irm/generated/regional-placeholder-manifests/61-placeholder-2025-06-01-eu-june-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-06-01",
+    "title": "[Placeholder] EU June 2025 No Action Needed",
+    "region": "EU",
+    "start": "2025-06-01T04:01:00Z",
+    "end": "2025-06-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "EU",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 62,
+    "file": "observability/irm/generated/regional-placeholder-manifests/62-placeholder-2025-07-01-eu-july-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-07-01",
+    "title": "[Placeholder] EU July 2025 No Action Needed",
+    "region": "EU",
+    "start": "2025-07-01T04:01:00Z",
+    "end": "2025-07-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "EU",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 63,
+    "file": "observability/irm/generated/regional-placeholder-manifests/63-placeholder-2025-08-01-eu-august-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-08-01",
+    "title": "[Placeholder] EU August 2025 No Action Needed",
+    "region": "EU",
+    "start": "2025-08-01T04:01:00Z",
+    "end": "2025-08-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "EU",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 64,
+    "file": "observability/irm/generated/regional-placeholder-manifests/64-placeholder-2025-09-01-eu-september-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-09-01",
+    "title": "[Placeholder] EU September 2025 No Action Needed",
+    "region": "EU",
+    "start": "2025-09-01T04:01:00Z",
+    "end": "2025-09-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "EU",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 65,
+    "file": "observability/irm/generated/regional-placeholder-manifests/65-placeholder-2025-10-01-eu-october-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-10-01",
+    "title": "[Placeholder] EU October 2025 No Action Needed",
+    "region": "EU",
+    "start": "2025-10-01T04:01:00Z",
+    "end": "2025-10-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "EU",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 66,
+    "file": "observability/irm/generated/regional-placeholder-manifests/66-placeholder-2025-11-01-eu-november-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-11-01",
+    "title": "[Placeholder] EU November 2025 No Action Needed",
+    "region": "EU",
+    "start": "2025-11-01T04:01:00Z",
+    "end": "2025-11-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "EU",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 67,
+    "file": "observability/irm/generated/regional-placeholder-manifests/67-placeholder-2025-12-01-eu-december-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-12-01",
+    "title": "[Placeholder] EU December 2025 No Action Needed",
+    "region": "EU",
+    "start": "2025-12-01T04:01:00Z",
+    "end": "2025-12-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "EU",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 68,
+    "file": "observability/irm/generated/regional-placeholder-manifests/68-placeholder-2026-01-01-eu-january-2026.yaml",
+    "type": "placeholder",
+    "date": "2026-01-01",
+    "title": "[Placeholder] EU January 2026 No Action Needed",
+    "region": "EU",
+    "start": "2026-01-01T04:01:00Z",
+    "end": "2026-01-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "EU",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 69,
+    "file": "observability/irm/generated/regional-placeholder-manifests/69-placeholder-2026-02-01-eu-february-2026.yaml",
+    "type": "placeholder",
+    "date": "2026-02-01",
+    "title": "[Placeholder] EU February 2026 No Action Needed",
+    "region": "EU",
+    "start": "2026-02-01T04:01:00Z",
+    "end": "2026-02-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "EU",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 70,
+    "file": "observability/irm/generated/regional-placeholder-manifests/70-placeholder-2026-03-01-eu-march-2026.yaml",
+    "type": "placeholder",
+    "date": "2026-03-01",
+    "title": "[Placeholder] EU March 2026 No Action Needed",
+    "region": "EU",
+    "start": "2026-03-01T04:01:00Z",
+    "end": "2026-03-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "EU",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 71,
+    "file": "observability/irm/generated/regional-placeholder-manifests/71-placeholder-2026-04-01-eu-april-2026.yaml",
+    "type": "placeholder",
+    "date": "2026-04-01",
+    "title": "[Placeholder] EU April 2026 No Action Needed",
+    "region": "EU",
+    "start": "2026-04-01T04:01:00Z",
+    "end": "2026-04-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "EU",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 72,
+    "file": "observability/irm/generated/regional-placeholder-manifests/72-placeholder-2026-05-01-eu-may-2026.yaml",
+    "type": "placeholder",
+    "date": "2026-05-01",
+    "title": "[Placeholder] EU May 2026 No Action Needed",
+    "region": "EU",
+    "start": "2026-05-01T04:01:00Z",
+    "end": "2026-05-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "EU",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  }
+]

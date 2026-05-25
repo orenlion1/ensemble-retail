@@ -1,0 +1,40 @@
+server:
+  port: 8083
+  forward-headers-strategy: framework
+  error:
+    include-message: never
+    include-binding-errors: never
+    include-stacktrace: never
+spring:
+  application:
+    name: account-service
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${COGNITO_ISSUER_URI:}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  tracing:
+    sampling:
+      probability: 1.0
+  otlp:
+    tracing:
+      endpoint: ${OTEL_EXPORTER_OTLP_ENDPOINT:http://localhost:4318/v1/traces}
+logging:
+  level:
+    root: ${LOG_LEVEL:INFO}
+ensemble:
+  security:
+    api-key: ${API_TEST_KEY:}
+    jwt-enabled: ${JWT_AUTH_ENABLED:false}
+    allowed-origins: ${ALLOWED_CORS_ORIGINS:http://localhost:5173}
+  dynamodb:
+    table: ${DYNAMODB_ACCOUNT_TABLE:ensemble-accounts}

@@ -1,0 +1,324 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: inventory-service
+  namespace: ensemble-grafana
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::629513454417:role/ensemble-grafana-inventory-service
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: cart-service
+  namespace: ensemble-grafana
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::629513454417:role/ensemble-grafana-cart-service
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: account-service
+  namespace: ensemble-grafana
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::629513454417:role/ensemble-grafana-account-service
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-service
+  namespace: ensemble-grafana
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: inventory-service
+  template:
+    metadata:
+      labels:
+        app: inventory-service
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: /actuator/prometheus
+        prometheus.io/port: "8081"
+    spec:
+      serviceAccountName: inventory-service
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: inventory-service
+          image: 629513454417.dkr.ecr.us-east-1.amazonaws.com/inventory-service:0.1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8081
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+          env:
+            - name: POSTGRES_URL
+              valueFrom: { secretKeyRef: { name: ensemble-secrets, key: POSTGRES_URL } }
+            - name: POSTGRES_USER
+              valueFrom: { secretKeyRef: { name: ensemble-secrets, key: POSTGRES_USER } }
+            - name: POSTGRES_PASSWORD
+              valueFrom: { secretKeyRef: { name: ensemble-secrets, key: POSTGRES_PASSWORD } }
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: http://alloy.ensemble-observability.svc.cluster.local:4318/v1/traces
+            - name: JAVA_TOOL_OPTIONS
+              value: -XX:+UnlockDiagnosticVMOptions -XX:+DebugNonSafepoints
+            - name: LOG_LEVEL
+              value: INFO
+            - name: ALLOWED_CORS_ORIGINS
+              valueFrom: { secretKeyRef: { name: ensemble-secrets, key: ALLOWED_CORS_ORIGINS } }
+          resources:
+            requests: { cpu: 50m, memory: 128Mi }
+            limits: { cpu: 300m, memory: 384Mi }
+          readinessProbe:
+            httpGet: { path: /actuator/health/readiness, port: 8081 }
+            initialDelaySeconds: 60
+            periodSeconds: 10
+          livenessProbe:
+            httpGet: { path: /actuator/health/liveness, port: 8081 }
+            initialDelaySeconds: 90
+            periodSeconds: 20
+      volumes:
+        - name: tmp
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-service
+  namespace: ensemble-grafana
+spec:
+  selector:
+    app: inventory-service
+  ports:
+    - port: 80
+      targetPort: 8081
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: inventory-service
+  namespace: ensemble-grafana
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: inventory-service
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cart-service
+  namespace: ensemble-grafana
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: cart-service
+  template:
+    metadata:
+      labels:
+        app: cart-service
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: /actuator/prometheus
+        prometheus.io/port: "8082"
+    spec:
+      serviceAccountName: cart-service
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: cart-service
+          image: 629513454417.dkr.ecr.us-east-1.amazonaws.com/cart-service:0.1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8082
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+          env:
+            - name: DYNAMODB_CART_TABLE
+              value: ensemble-carts
+            - name: API_TEST_KEY
+              valueFrom: { secretKeyRef: { name: ensemble-secrets, key: API_TEST_KEY } }
+            - name: JWT_AUTH_ENABLED
+              value: "true"
+            - name: COGNITO_ISSUER_URI
+              valueFrom: { secretKeyRef: { name: ensemble-secrets, key: COGNITO_ISSUER_URI } }
+            - name: ALLOWED_CORS_ORIGINS
+              valueFrom: { secretKeyRef: { name: ensemble-secrets, key: ALLOWED_CORS_ORIGINS } }
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: http://alloy.ensemble-observability.svc.cluster.local:4318/v1/traces
+            - name: JAVA_TOOL_OPTIONS
+              value: -XX:+UnlockDiagnosticVMOptions -XX:+DebugNonSafepoints
+            - name: LOG_LEVEL
+              value: INFO
+          resources:
+            requests: { cpu: 50m, memory: 128Mi }
+            limits: { cpu: 300m, memory: 384Mi }
+          readinessProbe:
+            httpGet: { path: /actuator/health/readiness, port: 8082 }
+            initialDelaySeconds: 60
+            periodSeconds: 10
+          livenessProbe:
+            httpGet: { path: /actuator/health/liveness, port: 8082 }
+            initialDelaySeconds: 90
+            periodSeconds: 20
+      volumes:
+        - name: tmp
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cart-service
+  namespace: ensemble-grafana
+spec:
+  selector:
+    app: cart-service
+  ports:
+    - port: 80
+      targetPort: 8082
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: cart-service
+  namespace: ensemble-grafana
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: cart-service
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: account-service
+  namespace: ensemble-grafana
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: account-service
+  template:
+    metadata:
+      labels:
+        app: account-service
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: /actuator/prometheus
+        prometheus.io/port: "8083"
+    spec:
+      serviceAccountName: account-service
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: account-service
+          image: 629513454417.dkr.ecr.us-east-1.amazonaws.com/account-service:0.1.0-cn-region
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8083
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+          env:
+            - name: DYNAMODB_ACCOUNT_TABLE
+              value: ensemble-accounts
+            - name: API_TEST_KEY
+              valueFrom: { secretKeyRef: { name: ensemble-secrets, key: API_TEST_KEY } }
+            - name: JWT_AUTH_ENABLED
+              value: "true"
+            - name: COGNITO_ISSUER_URI
+              valueFrom: { secretKeyRef: { name: ensemble-secrets, key: COGNITO_ISSUER_URI } }
+            - name: ALLOWED_CORS_ORIGINS
+              valueFrom: { secretKeyRef: { name: ensemble-secrets, key: ALLOWED_CORS_ORIGINS } }
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: http://alloy.ensemble-observability.svc.cluster.local:4318/v1/traces
+            - name: JAVA_TOOL_OPTIONS
+              value: -XX:+UnlockDiagnosticVMOptions -XX:+DebugNonSafepoints
+            - name: LOG_LEVEL
+              value: INFO
+          resources:
+            requests: { cpu: 50m, memory: 128Mi }
+            limits: { cpu: 300m, memory: 384Mi }
+          readinessProbe:
+            httpGet: { path: /actuator/health/readiness, port: 8083 }
+            initialDelaySeconds: 60
+            periodSeconds: 10
+          livenessProbe:
+            httpGet: { path: /actuator/health/liveness, port: 8083 }
+            initialDelaySeconds: 90
+            periodSeconds: 20
+      volumes:
+        - name: tmp
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: account-service
+  namespace: ensemble-grafana
+spec:
+  selector:
+    app: account-service
+  ports:
+    - port: 80
+      targetPort: 8083
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: account-service
+  namespace: ensemble-grafana
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: account-service

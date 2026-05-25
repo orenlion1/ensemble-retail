@@ -1,0 +1,24 @@
+{
+  "name": "ensemble-grafana-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "test:images": "node ../scripts/check-broken-images.mjs"
+  },
+  "dependencies": {
+    "@grafana/faro-react": "^2.7.0",
+    "@grafana/faro-web-tracing": "^2.7.0",
+    "@vitejs/plugin-react": "^6.0.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.30.3",
+    "vite": "^8.0.14"
+  },
+  "devDependencies": {
+    "@grafana/faro-rollup-plugin": "^0.10.1"
+  }
+}

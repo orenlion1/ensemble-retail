@@ -1,0 +1,1298 @@
+[
+  {
+    "sequence": 1,
+    "type": "placeholder",
+    "date": "2024-12-01",
+    "title": "[Placeholder] UK December 2024 No Action Needed",
+    "id": "108",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2024-12-01T04:01:00Z",
+    "end": "2024-12-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "UK"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 2,
+    "type": "placeholder",
+    "date": "2025-01-01",
+    "title": "[Placeholder] UK January 2025 No Action Needed",
+    "id": "109",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-01-01T04:01:00Z",
+    "end": "2025-01-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "UK"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 3,
+    "type": "placeholder",
+    "date": "2025-02-01",
+    "title": "[Placeholder] UK February 2025 No Action Needed",
+    "id": "110",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-02-01T04:01:00Z",
+    "end": "2025-02-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "UK"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 4,
+    "type": "placeholder",
+    "date": "2025-03-01",
+    "title": "[Placeholder] UK March 2025 No Action Needed",
+    "id": "111",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-03-01T04:01:00Z",
+    "end": "2025-03-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "UK"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 5,
+    "type": "placeholder",
+    "date": "2025-04-01",
+    "title": "[Placeholder] UK April 2025 No Action Needed",
+    "id": "112",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-04-01T04:01:00Z",
+    "end": "2025-04-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "UK"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 6,
+    "type": "placeholder",
+    "date": "2025-05-01",
+    "title": "[Placeholder] UK May 2025 No Action Needed",
+    "id": "113",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-05-01T04:01:00Z",
+    "end": "2025-05-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "UK"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 7,
+    "type": "placeholder",
+    "date": "2025-06-01",
+    "title": "[Placeholder] UK June 2025 No Action Needed",
+    "id": "114",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-06-01T04:01:00Z",
+    "end": "2025-06-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "UK"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 8,
+    "type": "placeholder",
+    "date": "2025-07-01",
+    "title": "[Placeholder] UK July 2025 No Action Needed",
+    "id": "115",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-07-01T04:01:00Z",
+    "end": "2025-07-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "UK"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 9,
+    "type": "placeholder",
+    "date": "2025-08-01",
+    "title": "[Placeholder] UK August 2025 No Action Needed",
+    "id": "116",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-08-01T04:01:00Z",
+    "end": "2025-08-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "UK"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 10,
+    "type": "placeholder",
+    "date": "2025-09-01",
+    "title": "[Placeholder] UK September 2025 No Action Needed",
+    "id": "117",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-09-01T04:01:00Z",
+    "end": "2025-09-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "UK"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 11,
+    "type": "placeholder",
+    "date": "2025-10-01",
+    "title": "[Placeholder] UK October 2025 No Action Needed",
+    "id": "118",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-10-01T04:01:00Z",
+    "end": "2025-10-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "UK"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 12,
+    "type": "placeholder",
+    "date": "2025-11-01",
+    "title": "[Placeholder] UK November 2025 No Action Needed",
+    "id": "119",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-11-01T04:01:00Z",
+    "end": "2025-11-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "UK"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 13,
+    "type": "placeholder",
+    "date": "2025-12-01",
+    "title": "[Placeholder] UK December 2025 No Action Needed",
+    "id": "120",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-12-01T04:01:00Z",
+    "end": "2025-12-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "UK"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 14,
+    "type": "placeholder",
+    "date": "2026-01-01",
+    "title": "[Placeholder] UK January 2026 No Action Needed",
+    "id": "121",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2026-01-01T04:01:00Z",
+    "end": "2026-01-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "UK"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 15,
+    "type": "placeholder",
+    "date": "2026-02-01",
+    "title": "[Placeholder] UK February 2026 No Action Needed",
+    "id": "122",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2026-02-01T04:01:00Z",
+    "end": "2026-02-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "UK"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 16,
+    "type": "placeholder",
+    "date": "2026-03-01",
+    "title": "[Placeholder] UK March 2026 No Action Needed",
+    "id": "123",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2026-03-01T04:01:00Z",
+    "end": "2026-03-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "UK"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 17,
+    "type": "placeholder",
+    "date": "2026-04-01",
+    "title": "[Placeholder] UK April 2026 No Action Needed",
+    "id": "124",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2026-04-01T04:01:00Z",
+    "end": "2026-04-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "UK"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 18,
+    "type": "placeholder",
+    "date": "2026-05-01",
+    "title": "[Placeholder] UK May 2026 No Action Needed",
+    "id": "125",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2026-05-01T04:01:00Z",
+    "end": "2026-05-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "UK"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 19,
+    "type": "placeholder",
+    "date": "2024-12-01",
+    "title": "[Placeholder] China December 2024 No Action Needed",
+    "id": "126",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2024-12-01T04:01:00Z",
+    "end": "2024-12-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "China"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 20,
+    "type": "placeholder",
+    "date": "2025-01-01",
+    "title": "[Placeholder] China January 2025 No Action Needed",
+    "id": "127",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-01-01T04:01:00Z",
+    "end": "2025-01-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "China"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 21,
+    "type": "placeholder",
+    "date": "2025-02-01",
+    "title": "[Placeholder] China February 2025 No Action Needed",
+    "id": "128",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-02-01T04:01:00Z",
+    "end": "2025-02-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "China"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 22,
+    "type": "placeholder",
+    "date": "2025-03-01",
+    "title": "[Placeholder] China March 2025 No Action Needed",
+    "id": "129",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-03-01T04:01:00Z",
+    "end": "2025-03-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "China"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 23,
+    "type": "placeholder",
+    "date": "2025-04-01",
+    "title": "[Placeholder] China April 2025 No Action Needed",
+    "id": "130",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-04-01T04:01:00Z",
+    "end": "2025-04-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "China"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 24,
+    "type": "placeholder",
+    "date": "2025-05-01",
+    "title": "[Placeholder] China May 2025 No Action Needed",
+    "id": "131",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-05-01T04:01:00Z",
+    "end": "2025-05-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "China"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 25,
+    "type": "placeholder",
+    "date": "2025-06-01",
+    "title": "[Placeholder] China June 2025 No Action Needed",
+    "id": "132",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-06-01T04:01:00Z",
+    "end": "2025-06-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "China"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 26,
+    "type": "placeholder",
+    "date": "2025-07-01",
+    "title": "[Placeholder] China July 2025 No Action Needed",
+    "id": "133",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-07-01T04:01:00Z",
+    "end": "2025-07-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "China"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 27,
+    "type": "placeholder",
+    "date": "2025-08-01",
+    "title": "[Placeholder] China August 2025 No Action Needed",
+    "id": "134",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-08-01T04:01:00Z",
+    "end": "2025-08-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "China"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 28,
+    "type": "placeholder",
+    "date": "2025-09-01",
+    "title": "[Placeholder] China September 2025 No Action Needed",
+    "id": "135",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-09-01T04:01:00Z",
+    "end": "2025-09-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "China"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 29,
+    "type": "placeholder",
+    "date": "2025-10-01",
+    "title": "[Placeholder] China October 2025 No Action Needed",
+    "id": "136",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-10-01T04:01:00Z",
+    "end": "2025-10-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "China"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 30,
+    "type": "placeholder",
+    "date": "2025-11-01",
+    "title": "[Placeholder] China November 2025 No Action Needed",
+    "id": "137",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-11-01T04:01:00Z",
+    "end": "2025-11-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "China"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 31,
+    "type": "placeholder",
+    "date": "2025-12-01",
+    "title": "[Placeholder] China December 2025 No Action Needed",
+    "id": "138",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-12-01T04:01:00Z",
+    "end": "2025-12-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "China"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 32,
+    "type": "placeholder",
+    "date": "2026-01-01",
+    "title": "[Placeholder] China January 2026 No Action Needed",
+    "id": "139",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2026-01-01T04:01:00Z",
+    "end": "2026-01-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "China"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 33,
+    "type": "placeholder",
+    "date": "2026-02-01",
+    "title": "[Placeholder] China February 2026 No Action Needed",
+    "id": "140",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2026-02-01T04:01:00Z",
+    "end": "2026-02-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "China"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 34,
+    "type": "placeholder",
+    "date": "2026-03-01",
+    "title": "[Placeholder] China March 2026 No Action Needed",
+    "id": "141",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2026-03-01T04:01:00Z",
+    "end": "2026-03-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "China"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 35,
+    "type": "placeholder",
+    "date": "2026-04-01",
+    "title": "[Placeholder] China April 2026 No Action Needed",
+    "id": "142",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2026-04-01T04:01:00Z",
+    "end": "2026-04-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "China"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 36,
+    "type": "placeholder",
+    "date": "2026-05-01",
+    "title": "[Placeholder] China May 2026 No Action Needed",
+    "id": "143",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2026-05-01T04:01:00Z",
+    "end": "2026-05-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "China"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 37,
+    "type": "placeholder",
+    "date": "2024-12-01",
+    "title": "[Placeholder] Canada December 2024 No Action Needed",
+    "id": "144",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2024-12-01T04:01:00Z",
+    "end": "2024-12-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "Canada"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 38,
+    "type": "placeholder",
+    "date": "2025-01-01",
+    "title": "[Placeholder] Canada January 2025 No Action Needed",
+    "id": "145",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-01-01T04:01:00Z",
+    "end": "2025-01-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "Canada"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 39,
+    "type": "placeholder",
+    "date": "2025-02-01",
+    "title": "[Placeholder] Canada February 2025 No Action Needed",
+    "id": "146",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-02-01T04:01:00Z",
+    "end": "2025-02-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "Canada"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 40,
+    "type": "placeholder",
+    "date": "2025-03-01",
+    "title": "[Placeholder] Canada March 2025 No Action Needed",
+    "id": "147",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-03-01T04:01:00Z",
+    "end": "2025-03-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "Canada"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 41,
+    "type": "placeholder",
+    "date": "2025-04-01",
+    "title": "[Placeholder] Canada April 2025 No Action Needed",
+    "id": "148",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-04-01T04:01:00Z",
+    "end": "2025-04-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "Canada"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 42,
+    "type": "placeholder",
+    "date": "2025-05-01",
+    "title": "[Placeholder] Canada May 2025 No Action Needed",
+    "id": "149",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-05-01T04:01:00Z",
+    "end": "2025-05-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "Canada"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 43,
+    "type": "placeholder",
+    "date": "2025-06-01",
+    "title": "[Placeholder] Canada June 2025 No Action Needed",
+    "id": "150",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-06-01T04:01:00Z",
+    "end": "2025-06-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "Canada"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 44,
+    "type": "placeholder",
+    "date": "2025-07-01",
+    "title": "[Placeholder] Canada July 2025 No Action Needed",
+    "id": "151",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-07-01T04:01:00Z",
+    "end": "2025-07-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "Canada"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 45,
+    "type": "placeholder",
+    "date": "2025-08-01",
+    "title": "[Placeholder] Canada August 2025 No Action Needed",
+    "id": "152",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-08-01T04:01:00Z",
+    "end": "2025-08-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "Canada"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 46,
+    "type": "placeholder",
+    "date": "2025-09-01",
+    "title": "[Placeholder] Canada September 2025 No Action Needed",
+    "id": "153",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-09-01T04:01:00Z",
+    "end": "2025-09-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "Canada"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 47,
+    "type": "placeholder",
+    "date": "2025-10-01",
+    "title": "[Placeholder] Canada October 2025 No Action Needed",
+    "id": "154",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-10-01T04:01:00Z",
+    "end": "2025-10-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "Canada"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 48,
+    "type": "placeholder",
+    "date": "2025-11-01",
+    "title": "[Placeholder] Canada November 2025 No Action Needed",
+    "id": "155",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-11-01T04:01:00Z",
+    "end": "2025-11-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "Canada"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 49,
+    "type": "placeholder",
+    "date": "2025-12-01",
+    "title": "[Placeholder] Canada December 2025 No Action Needed",
+    "id": "156",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-12-01T04:01:00Z",
+    "end": "2025-12-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "Canada"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 50,
+    "type": "placeholder",
+    "date": "2026-01-01",
+    "title": "[Placeholder] Canada January 2026 No Action Needed",
+    "id": "157",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2026-01-01T04:01:00Z",
+    "end": "2026-01-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "Canada"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 51,
+    "type": "placeholder",
+    "date": "2026-02-01",
+    "title": "[Placeholder] Canada February 2026 No Action Needed",
+    "id": "158",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2026-02-01T04:01:00Z",
+    "end": "2026-02-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "Canada"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 52,
+    "type": "placeholder",
+    "date": "2026-03-01",
+    "title": "[Placeholder] Canada March 2026 No Action Needed",
+    "id": "159",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2026-03-01T04:01:00Z",
+    "end": "2026-03-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "Canada"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 53,
+    "type": "placeholder",
+    "date": "2026-04-01",
+    "title": "[Placeholder] Canada April 2026 No Action Needed",
+    "id": "160",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2026-04-01T04:01:00Z",
+    "end": "2026-04-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "Canada"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 54,
+    "type": "placeholder",
+    "date": "2026-05-01",
+    "title": "[Placeholder] Canada May 2026 No Action Needed",
+    "id": "161",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2026-05-01T04:01:00Z",
+    "end": "2026-05-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "Canada"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 55,
+    "type": "placeholder",
+    "date": "2024-12-01",
+    "title": "[Placeholder] EU December 2024 No Action Needed",
+    "id": "162",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2024-12-01T04:01:00Z",
+    "end": "2024-12-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "EU"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 56,
+    "type": "placeholder",
+    "date": "2025-01-01",
+    "title": "[Placeholder] EU January 2025 No Action Needed",
+    "id": "163",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-01-01T04:01:00Z",
+    "end": "2025-01-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "EU"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 57,
+    "type": "placeholder",
+    "date": "2025-02-01",
+    "title": "[Placeholder] EU February 2025 No Action Needed",
+    "id": "164",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-02-01T04:01:00Z",
+    "end": "2025-02-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "EU"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 58,
+    "type": "placeholder",
+    "date": "2025-03-01",
+    "title": "[Placeholder] EU March 2025 No Action Needed",
+    "id": "165",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-03-01T04:01:00Z",
+    "end": "2025-03-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "EU"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 59,
+    "type": "placeholder",
+    "date": "2025-04-01",
+    "title": "[Placeholder] EU April 2025 No Action Needed",
+    "id": "166",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-04-01T04:01:00Z",
+    "end": "2025-04-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "EU"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 60,
+    "type": "placeholder",
+    "date": "2025-05-01",
+    "title": "[Placeholder] EU May 2025 No Action Needed",
+    "id": "167",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-05-01T04:01:00Z",
+    "end": "2025-05-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "EU"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 61,
+    "type": "placeholder",
+    "date": "2025-06-01",
+    "title": "[Placeholder] EU June 2025 No Action Needed",
+    "id": "168",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-06-01T04:01:00Z",
+    "end": "2025-06-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "EU"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 62,
+    "type": "placeholder",
+    "date": "2025-07-01",
+    "title": "[Placeholder] EU July 2025 No Action Needed",
+    "id": "169",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-07-01T04:01:00Z",
+    "end": "2025-07-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "EU"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 63,
+    "type": "placeholder",
+    "date": "2025-08-01",
+    "title": "[Placeholder] EU August 2025 No Action Needed",
+    "id": "170",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-08-01T04:01:00Z",
+    "end": "2025-08-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "EU"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 64,
+    "type": "placeholder",
+    "date": "2025-09-01",
+    "title": "[Placeholder] EU September 2025 No Action Needed",
+    "id": "171",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-09-01T04:01:00Z",
+    "end": "2025-09-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "EU"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 65,
+    "type": "placeholder",
+    "date": "2025-10-01",
+    "title": "[Placeholder] EU October 2025 No Action Needed",
+    "id": "172",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-10-01T04:01:00Z",
+    "end": "2025-10-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "EU"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 66,
+    "type": "placeholder",
+    "date": "2025-11-01",
+    "title": "[Placeholder] EU November 2025 No Action Needed",
+    "id": "173",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-11-01T04:01:00Z",
+    "end": "2025-11-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "EU"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 67,
+    "type": "placeholder",
+    "date": "2025-12-01",
+    "title": "[Placeholder] EU December 2025 No Action Needed",
+    "id": "174",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-12-01T04:01:00Z",
+    "end": "2025-12-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "EU"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 68,
+    "type": "placeholder",
+    "date": "2026-01-01",
+    "title": "[Placeholder] EU January 2026 No Action Needed",
+    "id": "175",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2026-01-01T04:01:00Z",
+    "end": "2026-01-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "EU"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 69,
+    "type": "placeholder",
+    "date": "2026-02-01",
+    "title": "[Placeholder] EU February 2026 No Action Needed",
+    "id": "176",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2026-02-01T04:01:00Z",
+    "end": "2026-02-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "EU"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 70,
+    "type": "placeholder",
+    "date": "2026-03-01",
+    "title": "[Placeholder] EU March 2026 No Action Needed",
+    "id": "177",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2026-03-01T04:01:00Z",
+    "end": "2026-03-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "EU"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 71,
+    "type": "placeholder",
+    "date": "2026-04-01",
+    "title": "[Placeholder] EU April 2026 No Action Needed",
+    "id": "178",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2026-04-01T04:01:00Z",
+    "end": "2026-04-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "EU"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 72,
+    "type": "placeholder",
+    "date": "2026-05-01",
+    "title": "[Placeholder] EU May 2026 No Action Needed",
+    "id": "179",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2026-05-01T04:01:00Z",
+    "end": "2026-05-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "EU"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  }
+]

@@ -1,0 +1,21 @@
+apiVersion: incident.ext.grafana.app/v1alpha1
+kind: Incident
+spec:
+  title: "Holiday traffic spike - Labor Day China 2025-05-03"
+  description: "Holiday traffic spike results in shopping cart errors and order loss"
+  severity: "Sev-2: Significant Business Impact"
+  incidentStart: "2025-05-03T14:00:00Z"
+  incidentEnd: "2025-05-03T14:30:00Z"
+  labels:
+  - key: "region"
+    value: "China"
+  - key: "feature"
+    value: "shopping-cart-checkout"
+  - key: "client_impact"
+    value: "multiple-clients"
+  - key: "impact_type"
+    value: "availability"
+  - key: "service"
+    value: "cart"
+  - key: "root_cause"
+    value: "Scaling-Defect-Service"

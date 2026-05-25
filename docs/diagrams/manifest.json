@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Network Diagram",
+    "slug": "network-diagram",
+    "file": "docs/diagrams/network-diagram.mmd",
+    "png": "docs/diagrams/network-diagram.png"
+  },
+  {
+    "title": "Sequence Diagram",
+    "slug": "sequence-diagram",
+    "file": "docs/diagrams/sequence-diagram.mmd",
+    "png": "docs/diagrams/sequence-diagram.png"
+  },
+  {
+    "title": "Request Flow Diagram",
+    "slug": "request-flow-diagram",
+    "file": "docs/diagrams/request-flow-diagram.mmd",
+    "png": "docs/diagrams/request-flow-diagram.png"
+  },
+  {
+    "title": "Observability Capabilities Flow",
+    "slug": "observability-capabilities-flow",
+    "file": "docs/diagrams/observability-capabilities-flow.mmd",
+    "png": "docs/diagrams/observability-capabilities-flow.png"
+  }
+]

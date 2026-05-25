@@ -1,0 +1,32 @@
+apiVersion: syntheticmonitoring.ext.grafana.app/v1alpha1
+kind: Check
+metadata:
+  name: ensemble-grafana-dns-resolution
+spec:
+  job: ensemble-grafana-dns-resolution
+  target: ensemble-grafana.com
+  frequency: 120000
+  timeout: 10000
+  enabled: true
+  labels:
+    - name: environment
+      value: production
+    - name: service
+      value: dns
+    - name: check_type
+      value: dns
+  probes:
+    - Oregon
+    - Montreal
+    - London
+  alertSensitivity: none
+  basicMetricsOnly: false
+  settings:
+    dns:
+      ipVersion: V4
+      recordType: A
+      server: 8.8.8.8
+      port: 53
+      protocol: UDP
+      validRCodes:
+        - NOERROR
