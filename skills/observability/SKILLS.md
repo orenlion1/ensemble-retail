@@ -148,6 +148,8 @@ Required k6 environment:
 - Native k6 token for `k6 cloud login`.
 - `API_TEST_KEY` as a Grafana Cloud k6 environment variable/secret for protected cart/account writes.
 - `STOREFRONT_BASE_URL` and `API_BASE_URL` when static assets and APIs use separate origins.
+- Always use temporary local `.env` injection for k6 runs that require `API_TEST_KEY` (for example: `set -a && source .env && set +a && k6 cloud run -e API_TEST_KEY="$API_TEST_KEY" ...`), and keep `.env` gitignored.
+- If a run fails with missing/invalid API key errors (for example `API_TEST_KEY is required`), prompt the user to set or update `API_TEST_KEY` in `.env` and rerun.
 
 After each k6 run, validate Faro user-action telemetry in Grafana (for example with `gcx logs query`) and confirm expected `ensemble.user.action` events are present for browser-based flows.
 
