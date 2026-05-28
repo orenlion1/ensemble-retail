@@ -2,6 +2,9 @@ import { browser } from 'k6/browser';
 import { check, fail, sleep } from 'k6';
 
 export const options = {
+  cloud: {
+    name: 'ensemble-grafana-faro-user-actions-browser'
+  },
   scenarios: {
     storefront_actions: {
       executor: 'shared-iterations',
@@ -18,6 +21,10 @@ export const options = {
     checks: ['rate==1.0'],
     browser_web_vital_lcp: ['p(95)<4000'],
     browser_web_vital_cls: ['p(95)<0.1']
+  },
+  tags: {
+    app: 'ensemble-grafana',
+    test_type: 'faro-user-actions-browser'
   }
 };
 

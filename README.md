@@ -12,12 +12,13 @@ This is a training repo to explore the art of the "promptable". Original outdoor
 - `services/account-service/` - Spring Boot API for profile, shipping address, and wallet metadata.
 - `infra/k8s/` - EKS Kubernetes manifests for services, Alloy, Beyla, and API routing.
 - `infra/terraform/` - AWS infrastructure skeleton for Route53, ACM, CloudFront, WAF, S3, EKS, Postgres, and DynamoDB.
-- `infra/terraform/stacks/` - Incremental Terraform stacks for network, edge/static, auth, cluster, data, and workload IAM.
+- `infra/terraform/stacks/` - Incremental Terraform stacks for network, edge/static, auth, account-baseline, cluster, data, and workload IAM.
 - `observability/` - Grafana Alloy config, k8s-monitoring Helm values, synthetic checks, and starter dashboards. See `observability/README.md`.
 - `load-tests/` - k6 API and browser scenarios covering users, categories, product browsing, cart, checkout, account, and synthetic button-action flows.
 - `docs/` - deployment, security, domain/TLS, and Grafana IRM runbooks.
 - `scripts/security/` - predeploy security checks for secrets, Kubernetes hardening, and IaC controls.
 - `.github/workflows/build.yml` - GitHub Actions security checks, Maven service packages, and frontend build.
+- `.github/workflows/account-baseline-guard.yml` - Guardrail workflow for account-baseline Terraform validation and manual-approval apply path.
 - `skills/` - reusable `SKILLS.md` playbooks for replicating the dependency, infrastructure, observability, and coding patterns in future applications.
 
 ## CI (GitHub Actions)
@@ -47,7 +48,7 @@ The frontend dev server proxies `/api/inventory`, `/api/cart`, and `/api/account
 Terraform is split into smaller independently runnable stacks. Run them in order so each stack can pass outputs to the next one:
 
 ```text
-network -> edge-static -> auth -> cluster -> data -> workload-iam -> kubernetes
+network -> edge-static -> auth -> account-baseline -> cluster -> data -> workload-iam -> kubernetes
 ```
 
 Initialize and plan each stack from its own directory:
@@ -78,6 +79,7 @@ Then run:
 
 - `edge-static`: DNS, ACM, WAF, CloudFront, frontend/image/log S3 buckets.
 - `auth`: Cognito hosted UI, Google IdP, OAuth client. Any valid Google account can authenticate once the Google OAuth consent screen is published.
+- `account-baseline`: account-level Systems Manager default host-management role/service setting with guarded apply and `prevent_destroy`.
 - `cluster`: EKS cluster, managed node group (`t3.medium`, three nodes, desired/min/max 3), cluster/node IAM, OIDC provider.
 - `data`: DynamoDB tables, Aurora/Postgres inventory DB, runtime secret.
 - `workload-iam`: IRSA roles/policies for inventory, cart, and account services.
@@ -166,6 +168,33 @@ terraform apply \
   -var='private_subnet_ids=["subnet-048c5e6caccdfe474","subnet-04685f890ee355983"]' \
   -var='public_subnet_ids=["subnet-0e0d3de57984148ef","subnet-05a28012b54f0b378"]'
 ```
+
+The account-baseline stack configures the SSM account setting `/ssm/managed-instance/default-ec2-instance-management-role` to `AWSSystemsManagerDefaultEC2InstanceManagementRole`. This resolves SSM Agent errors such as:
+
+```text
+RequestManagedInstanceRoleToken: AccessDeniedException: Systems Manager's instance management role is not configured for account
+```
+
+After applying the account-baseline stack, verify:
+
+```sh
+cd infra/terraform/stacks/account-baseline
+terraform output ssm_default_host_management_role_name
+aws ssm get-service-setting \
+  --setting-id /ssm/managed-instance/default-ec2-instance-management-role \
+  --profile ensemble-grafana \
+  --region us-east-1
+```
+
+Use the guarded workflow for account-level baseline changes:
+
+```sh
+CONFIRM_ACCOUNT_BASELINE_APPLY=yes \
+AWS_PROFILE=ensemble-grafana \
+scripts/terraform/guarded-apply-account-baseline.sh
+```
+
+The guarded apply script fails closed unless the active caller identity account matches `629513454417` and the region is `us-east-1`.
 
 Validation on May 25, 2026: `pyroscope-alloy` was running `3/3` pods, and Grafana Cloud Profiles returned `account-service`, `cart-service`, and `inventory-service` with `process_cpu` and JVM allocation profile types in the last five minutes.
 
@@ -305,6 +334,8 @@ The token configured from `infra/k8s/observability-secrets.yaml` line 18 is vali
 
 The API-oriented k6 load test is `load-tests/ensemble-grafana.js`. The Grafana Cloud k6 regional load test is `load-tests/grafana-cloud-20-user-regional.js`. The traffic spike benchmark is `load-tests/grafana-cloud-traffic-spikes.js`. The scripted browser check is `load-tests/synthetic-browser-actions.js` and validates the storefront user actions that should also appear in Faro.
 
+Important distinction for Faro validation: `grafana-cloud-20-user-regional.js` is an HTTP/API test, so it does not execute browser JavaScript and cannot emit Faro user-action events. Use `synthetic-browser-actions.js` when validating Faro user-action request counts.
+
 All API write scenarios require `API_TEST_KEY` because cart and account workflows are protected. Set it locally or as a Grafana Cloud k6 environment variable/secret before running Cloud tests. Without it, the regional and spike tests fail fast before generating misleading 401-heavy results.
 
 The regional load test simulates 20 concurrent users for 10 minutes with five shopper personas:
@@ -330,6 +361,27 @@ API_BASE_URL=https://api.ensemble-grafana.com \
 k6 run load-tests/grafana-cloud-20-user-regional.js
 ```
 
+Run the same regional script with embedded Faro browser actions (enabled by default) in Grafana Cloud k6:
+
+```sh
+k6 cloud run load-tests/grafana-cloud-20-user-regional.js
+```
+
+Disable browser actions when you only want API load behavior:
+
+```sh
+ENABLE_FARO_BROWSER_ACTIONS=0 k6 cloud run load-tests/grafana-cloud-20-user-regional.js
+```
+
+Tune browser action pressure in shared Cloud runs:
+
+```sh
+BROWSER_ACTION_VUS=1 \
+BROWSER_ACTION_ITERATIONS=2 \
+BROWSER_ACTION_MAX_DURATION=10m \
+k6 cloud run load-tests/grafana-cloud-20-user-regional.js
+```
+
 Run a short smoke version:
 
 ```sh
@@ -345,6 +397,12 @@ Run it in Grafana Cloud k6 after authenticating the k6 CLI:
 ```sh
 k6 cloud login --token <k6-token> --stack orenlion
 k6 cloud run load-tests/grafana-cloud-20-user-regional.js
+```
+
+Run the Faro user-action browser scenario in Grafana Cloud k6:
+
+```sh
+k6 cloud run load-tests/synthetic-browser-actions.js
 ```
 
 For this environment, the working k6 credential is the native Grafana Cloud k6 token configured with `k6 cloud login`. The Grafana Cloud service account token stored at `infra/k8s/observability-secrets.yaml` line 18 is configured for `gcx` as `grafana.token` and `cloud.token`, but it is not accepted by the k6 token exchange:

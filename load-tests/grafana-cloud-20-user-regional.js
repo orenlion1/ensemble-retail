@@ -1,11 +1,14 @@
 import tempo from 'https://jslib.k6.io/http-instrumentation-tempo/1.0.0/index.js';
 import http from 'k6/http';
+import { browser } from 'k6/browser';
 import { check, fail, group, sleep } from 'k6';
 import { Counter, Trend } from 'k6/metrics';
 
 tempo.instrumentHTTP({
   propagator: 'w3c'
 });
+
+const enableFaroBrowserActions = (__ENV.ENABLE_FARO_BROWSER_ACTIONS || '1') !== '0';
 
 export const options = {
   cloud: {
@@ -14,10 +17,25 @@ export const options = {
   scenarios: {
     regional_shoppers: {
       executor: 'constant-vus',
+      exec: 'regionalJourney',
       vus: 20,
       duration: __ENV.TEST_DURATION || '10m',
       gracefulStop: '30s'
-    }
+    },
+    ...(enableFaroBrowserActions ? {
+      faro_browser_actions: {
+        executor: 'per-vu-iterations',
+        exec: 'browserFaroJourney',
+        vus: Number(__ENV.BROWSER_ACTION_VUS || 1),
+        iterations: Number(__ENV.BROWSER_ACTION_ITERATIONS || 1),
+        maxDuration: __ENV.BROWSER_ACTION_MAX_DURATION || '10m',
+        options: {
+          browser: {
+            type: 'chromium'
+          }
+        }
+      }
+    } : {})
   },
   thresholds: {
     http_req_failed: ['rate<0.03'],
@@ -49,6 +67,7 @@ const apiLatency = new Trend('api_latency');
 const cartUpdates = new Counter('cart_updates');
 const checkoutAttempts = new Counter('checkout_attempts');
 const regionChanges = new Counter('region_changes');
+const faroBrowserJourneys = new Counter('faro_browser_journeys');
 
 function headers(region, shopperId) {
   const profile = regionProfiles[region] || regionProfiles.US;
@@ -99,6 +118,74 @@ function putJson(path, body, region, persona, shopperId, name) {
   });
   apiLatency.add(response.timings.duration, { region, persona, name });
   return response;
+}
+
+function parseJson(response, fallbackValue) {
+  const contentType = response.headers['Content-Type'] || response.headers['content-type'] || '';
+  if (!contentType.includes('application/json')) {
+    return fallbackValue;
+  }
+
+  try {
+    return response.json();
+  } catch (_) {
+    return fallbackValue;
+  }
+}
+
+function byAction(name) {
+  return `[data-faro-user-action-name="${name}"]`;
+}
+
+async function clickAction(page, actionName, timeout = 15000) {
+  const locator = page.locator(byAction(actionName)).first();
+  await locator.waitFor({ state: 'visible', timeout });
+  await locator.click();
+}
+
+async function clickFirstMatchingAction(page, actionPrefix, timeout = 15000) {
+  const locator = page.locator(`[data-faro-user-action-name^="${actionPrefix}"]`).first();
+  await locator.waitFor({ state: 'visible', timeout });
+  await locator.click();
+}
+
+async function selectAction(page, selector, value, timeout = 15000) {
+  const locator = page.locator(selector).first();
+  await locator.waitFor({ state: 'visible', timeout });
+  await locator.selectOption(value);
+}
+
+export async function browserFaroJourney() {
+  const page = await browser.newPage();
+
+  try {
+    await page.goto(storefrontBaseUrl, { waitUntil: 'networkidle' });
+    await page.evaluate(() => {
+      localStorage.removeItem('ensemble-cart');
+      localStorage.setItem('ensemble-region', 'US');
+    });
+    await page.reload({ waitUntil: 'networkidle' });
+
+    await clickAction(page, 'select-department:womens');
+    await clickAction(page, 'select-department:mens');
+    await clickAction(page, 'select-category:mens-mid-layers');
+    await clickFirstMatchingAction(page, 'shopping-cart:add-item:');
+    await selectAction(page, '#region-selector', 'CA');
+    await selectAction(page, '#region-selector', 'US');
+
+    await page.evaluate(() => {
+      document.querySelector('#cart')?.scrollIntoView({ block: 'center' });
+    });
+    await clickAction(page, 'shopping-cart:checkout');
+
+    const checkoutVisible = await page.locator(byAction('shopping-cart:checkout')).first().isVisible();
+    check({ checkoutVisible }, {
+      'browser faro checkout reachable': result => result.checkoutVisible === true
+    });
+    faroBrowserJourneys.add(1);
+  } finally {
+    await page.close();
+  }
 }
 
 function selectProduct(products, persona) {
@@ -156,7 +243,7 @@ function saveAccount(region, persona, shopperId) {
   }, { region, persona });
 }
 
-export default function () {
+export function regionalJourney() {
   if (!apiKey) {
     fail('API_TEST_KEY is required for the regional k6 load test because cart and account workflows are protected.');
   }
@@ -179,10 +266,15 @@ export default function () {
 
     const productsResponse = getJson('/api/inventory/products', region, persona, shopperId, 'GET /api/inventory/products');
     check(productsResponse, {
-      'products loaded': response => response.status === 200
+      'products loaded': response => response.status === 200,
+      'products payload is json': response => {
+        const contentType = response.headers['Content-Type'] || response.headers['content-type'] || '';
+        return contentType.includes('application/json');
+      }
     }, { region, persona });
 
-    const products = productsResponse.json();
+    const parsedProducts = parseJson(productsResponse, []);
+    const products = Array.isArray(parsedProducts) ? parsedProducts : [];
     const product = selectProduct(products, persona);
 
     if (!product) {
