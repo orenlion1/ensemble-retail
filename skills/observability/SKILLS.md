@@ -149,6 +149,8 @@ Required k6 environment:
 - `API_TEST_KEY` as a Grafana Cloud k6 environment variable/secret for protected cart/account writes.
 - `STOREFRONT_BASE_URL` and `API_BASE_URL` when static assets and APIs use separate origins.
 
+After each k6 run, validate Faro user-action telemetry in Grafana (for example with `gcx logs query`) and confirm expected `ensemble.user.action` events are present for browser-based flows.
+
 Document uploaded k6 Cloud test URLs after upload.
 
 ## Grafana IRM
