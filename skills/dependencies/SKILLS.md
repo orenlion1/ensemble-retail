@@ -30,6 +30,8 @@ brew install \
   git \
   jq \
   k6 \
+  kubectx \
+  kubens \
   kubectl \
   maven \
   node \
@@ -60,6 +62,8 @@ mvn --version
 node --version
 npm --version
 k6 version
+kubectx --help
+kubens --help
 kubectl version --client
 terraform version
 rg --version
@@ -150,6 +154,8 @@ Never commit:
 
 Install:
 
+- `kubectx`
+- `kubens`
 - `kubectl`
 - AWS CLI auth support through `aws eks update-kubeconfig`.
 

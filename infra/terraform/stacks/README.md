@@ -61,7 +61,24 @@ export VITE_COGNITO_REDIRECT_URI="https://ensemble-grafana.com/auth/callback"
 
 The frontend exchanges the Cognito authorization code with PKCE. Do not provide the Google client secret to the frontend build.
 
-## 4. Cluster
+## 4. Account Baseline
+
+`stacks/account-baseline` owns account-wide baseline controls shared across workloads. This stack currently manages the Systems Manager default host-management role/service setting used by SSM Agent (`/ssm/managed-instance/default-ec2-instance-management-role`).
+
+Use a dedicated guarded pipeline with manual review/approval (for example, `scripts/terraform/guarded-apply-account-baseline.sh`) because this stack updates account-level settings and includes lifecycle protections (`prevent_destroy`).
+The guarded apply script verifies caller identity account `629513454417` before running Terraform.
+
+```bash
+cd infra/terraform/stacks/account-baseline
+terraform init
+terraform plan -out=tfplan
+terraform apply tfplan
+terraform output ssm_default_host_management_role_name
+```
+
+If SSM Agent logs show `RequestManagedInstanceRoleToken AccessDeniedException` with a message like `instance management role is not configured`, confirm this stack was applied and that the service setting now points to `AWSSystemsManagerDefaultEC2InstanceManagementRole`.
+
+## 5. Cluster
 
 `stacks/cluster` owns the EKS control plane, node group, cluster IAM, node IAM, and OIDC provider. Pass subnet outputs from `stacks/network`.
 
@@ -73,7 +90,7 @@ terraform plan \
   -var='public_subnet_ids=["subnet-public-a","subnet-public-b"]'
 ```
 
-## 5. Data
+## 6. Data
 
 `stacks/data` owns DynamoDB, Aurora/Postgres, the database security group, and the runtime Secrets Manager placeholder. Pass network outputs plus the EKS cluster security group from `stacks/cluster`.
 
@@ -87,7 +104,7 @@ terraform plan \
   -var='inventory_db_password=...'
 ```
 
-## 6. Workload IAM
+## 7. Workload IAM
 
 `stacks/workload-iam` owns IRSA roles and policies for the Spring Boot services. Pass OIDC outputs from `stacks/cluster` and table/secret outputs from `stacks/data`.
 
@@ -102,7 +119,7 @@ terraform plan \
   -var='app_runtime_secret_arn=arn:aws:secretsmanager:...'
 ```
 
-## 7. CloudWatch Integration
+## 8. CloudWatch Integration
 
 `stacks/cloudwatch-integration` owns the IAM role and inline policy that Grafana Cloud assumes to scrape AWS CloudWatch metrics. The `external_id` is the value shown in the Grafana Cloud AWS integration setup; this deployment uses `3254864`.
 
@@ -125,7 +142,7 @@ Current applied output:
 
 Troubleshooting: if Grafana reports `Failed to assume role on provided account`, confirm the Grafana AWS account form uses the exact `role_arn` output. A failed or successful connection attempt should appear in CloudTrail as an `AssumeRole` event for this role. If no event appears, Grafana is likely not calling this role ARN. If the Grafana UI shows different values for the 12-digit Grafana AWS account ID or External ID, pass them as `grafana_account_id` and `external_id` and reapply the stack.
 
-## 8. Kubernetes
+## 9. Kubernetes
 
 Kubernetes manifests remain under `infra/k8s` because they are applied after the AWS substrate exists and service account annotations have been populated with `stacks/workload-iam` outputs.
 
@@ -143,11 +160,12 @@ Use deployment states in this order:
 1. `network`: VPC, subnets, routing, NAT.
 2. `edge-static`: Route53 zone, ACM certificate, WAF, S3 buckets, CloudFront.
 3. `auth`: Cognito hosted UI, Google IdP, OAuth client.
-4. `cluster`: EKS cluster, node group, OIDC provider, cluster/node IAM.
-5. `data`: DynamoDB tables, RDS/Aurora inventory database, Secrets Manager runtime secret.
-6. `workload-iam`: IRSA roles and policies for inventory, cart, and account services.
-7. `cloudwatch-integration`: IAM role Grafana Cloud assumes to scrape AWS CloudWatch metrics.
-8. `kubernetes`: Kubernetes manifests or Helm releases after EKS exists.
+4. `account-baseline`: account-level SSM default host-management role and service setting.
+5. `cluster`: EKS cluster, node group, OIDC provider, cluster/node IAM.
+6. `data`: DynamoDB tables, RDS/Aurora inventory database, Secrets Manager runtime secret.
+7. `workload-iam`: IRSA roles and policies for inventory, cart, and account services.
+8. `cloudwatch-integration`: IAM role Grafana Cloud assumes to scrape AWS CloudWatch metrics.
+9. `kubernetes`: Kubernetes manifests or Helm releases after EKS exists.
 
 Downstream stacks should read upstream outputs through `terraform_remote_state` or a generated `*.auto.tfvars.json` file. Keep state movement explicit with `terraform state mv` when migrating already-created resources.
 

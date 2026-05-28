@@ -33,6 +33,7 @@ flowchart TB
   cognito["AWS Cognito\nGoogle federation"]
   grafana["Grafana Cloud\nFaro, metrics, logs, traces, profiles"]
   k6["Grafana Cloud k6\nload tests and browser checks"]
+  accountBaseline["Terraform account-baseline stack\naccount-level SSM host-management setting"]
 
   registrar -->|"NS delegation"| route53
   route53 -->|"A / AAAA alias"| cloudfront
@@ -49,6 +50,7 @@ flowchart TB
   cart --> dynamodb
   account --> dynamodb
   shopper -->|"Faro web telemetry"| grafana
+  accountBaseline -->|"SSM default host-management role setting"| eks
   k6 -->|"regional, spike,\nand browser checks\nwith traceparent"| cloudfront
   k6 -->|"test results +\ntrace correlation"| grafana
   beyla -->|"zero-code HTTP telemetry"| alloy
