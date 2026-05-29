@@ -121,26 +121,32 @@ terraform plan \
 
 ## 8. CloudWatch Integration
 
-`stacks/cloudwatch-integration` owns the IAM role and inline policy that Grafana Cloud assumes to scrape AWS CloudWatch metrics. The `external_id` is the value shown in the Grafana Cloud AWS integration setup; this deployment uses `3254864`.
+`stacks/cloudwatch-integration` owns the IAM role and inline policy that Grafana Cloud assumes to scrape AWS CloudWatch metrics. It also manages the Grafana Cloud AWS/RDS CloudWatch scrape job associated with stack `1665320` and AWS account resource `270`. The `external_id` is the value shown in the Grafana Cloud AWS integration setup; this deployment uses `3254864`.
 
 ```bash
 cd infra/terraform/stacks/cloudwatch-integration
 terraform init
 cp terraform.tfvars.example terraform.tfvars
+export GRAFANA_CLOUD_PROVIDER_ACCESS_TOKEN=<grafana-cloud-provider-token>
 terraform plan
 terraform apply
 terraform output role_arn
+terraform output rds_cloudwatch_scrape_job_id
 ```
 
-Copy the `role_arn` output into the Grafana Cloud AWS CloudWatch metrics integration.
+Copy the `role_arn` output into the Grafana Cloud AWS CloudWatch metrics integration if the AWS account resource has not already been created.
 
 Current applied output:
 
 - Role ARN: `arn:aws:iam::629513454417:role/GrafanaLabsCloudWatchIntegration`
 - External ID: `3254864`
 - Trusted Grafana AWS account: `008923505280`
+- Grafana stack ID: `1665320`
+- Grafana Cloud Provider API URL: `https://cloud-provider-api-prod-us-east-3.grafana.net`
+- Grafana AWS account resource ID: `270`
+- RDS scrape job: `ensemble-grafana-rds-cloudwatch`
 
-Troubleshooting: if Grafana reports `Failed to assume role on provided account`, confirm the Grafana AWS account form uses the exact `role_arn` output. A failed or successful connection attempt should appear in CloudTrail as an `AssumeRole` event for this role. If no event appears, Grafana is likely not calling this role ARN. If the Grafana UI shows different values for the 12-digit Grafana AWS account ID or External ID, pass them as `grafana_account_id` and `external_id` and reapply the stack.
+Troubleshooting: if Terraform cannot create the scrape job, confirm `GRAFANA_CLOUD_PROVIDER_ACCESS_TOKEN` is a Cloud Provider Observability token rather than a telemetry ingest token, and confirm `grafana_cloud_provider_url` matches the stack returned by `https://grafana.com/api/instances`. If Grafana reports `Failed to assume role on provided account`, confirm the Grafana AWS account form uses the exact `role_arn` output. A failed or successful connection attempt should appear in CloudTrail as an `AssumeRole` event for this role. If no event appears, Grafana is likely not calling this role ARN. If the Grafana UI shows different values for the 12-digit Grafana AWS account ID or External ID, pass them as `grafana_account_id` and `external_id` and reapply the stack.
 
 ## 9. Kubernetes
 

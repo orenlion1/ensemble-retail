@@ -14,3 +14,8 @@ output "grafana_account_id" {
   value       = var.grafana_account_id
   description = "Grafana Labs AWS account trusted by the CloudWatch integration role."
 }
+
+output "rds_cloudwatch_scrape_job_id" {
+  value       = grafana_cloud_provider_aws_cloudwatch_scrape_job.rds.id
+  description = "Grafana Cloud Provider AWS/RDS CloudWatch scrape job ID."
+}

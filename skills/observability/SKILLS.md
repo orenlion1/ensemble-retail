@@ -118,6 +118,7 @@ Minimum permission patterns:
 - IRM OnCall schedules and shifts: token must allow `grafana-irm-app.schedules:write`, `grafana-irm-app.schedules:read`, and `grafana-irm-app.user-settings:read`; the OnCall API URL comes from IRM Settings -> Admin & API.
 - IRM incidents: token must allow incident creation/update for the IRM incident API and should be scoped only to the stack/product needed.
 - Dashboards/datasources/alerts: stack service-account token with the relevant Grafana RBAC permissions for the resource type.
+- Terraform Cloud Provider Observability resources such as AWS CloudWatch scrape jobs: use `GRAFANA_CLOUD_PROVIDER_ACCESS_TOKEN` with `integration-management:read`, `integration-management:write`, and `stacks:read`, plus the regional `GRAFANA_CLOUD_PROVIDER_URL` for the stack.
 
 Troubleshooting cues:
 

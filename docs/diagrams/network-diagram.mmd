@@ -21,8 +21,10 @@ flowchart TB
 
   postgres["Postgres inventory DB"]
   dynamodb["DynamoDB\ncart/account state"]
+  cloudwatch["AWS CloudWatch\nRDS metrics"]
   cognito["AWS Cognito\nGoogle federation"]
   grafana["Grafana Cloud\nFaro, metrics, logs, traces, profiles"]
+  cloudwatchScrape["Grafana Cloud Provider\nAWS/RDS scrape job"]
   k6["Grafana Cloud k6\nload tests and browser checks"]
   accountBaseline["Terraform account-baseline stack\naccount-level SSM host-management setting"]
 
@@ -40,6 +42,9 @@ flowchart TB
   inventory --> postgres
   cart --> dynamodb
   account --> dynamodb
+  postgres -->|"RDS metrics"| cloudwatch
+  cloudwatchScrape -->|"assume AWS role\nand scrape metrics"| cloudwatch
+  cloudwatchScrape -->|"CloudWatch metrics"| grafana
   shopper -->|"Faro web telemetry"| grafana
   accountBaseline -->|"SSM default host-management role setting"| eks
   k6 -->|"regional, spike,\nand browser checks\nwith traceparent"| cloudfront

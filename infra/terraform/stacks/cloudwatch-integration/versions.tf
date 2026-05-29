@@ -9,9 +9,17 @@ terraform {
       source  = "hashicorp/time"
       version = "~> 0.12"
     }
+    grafana = {
+      source  = "grafana/grafana"
+      version = "~> 4.36"
+    }
   }
 }
 
 provider "aws" {
   region = var.aws_region
+}
+
+provider "grafana" {
+  cloud_provider_url = var.grafana_cloud_provider_url
 }

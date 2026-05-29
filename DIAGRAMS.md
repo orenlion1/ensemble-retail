@@ -30,8 +30,10 @@ flowchart TB
 
   postgres["Postgres inventory DB"]
   dynamodb["DynamoDB\ncart/account state"]
+  cloudwatch["AWS CloudWatch\nRDS metrics"]
   cognito["AWS Cognito\nGoogle federation"]
   grafana["Grafana Cloud\nFaro, metrics, logs, traces, profiles"]
+  cloudwatchScrape["Grafana Cloud Provider\nAWS/RDS scrape job"]
   k6["Grafana Cloud k6\nload tests and browser checks"]
   accountBaseline["Terraform account-baseline stack\naccount-level SSM host-management setting"]
 
@@ -49,6 +51,9 @@ flowchart TB
   inventory --> postgres
   cart --> dynamodb
   account --> dynamodb
+  postgres -->|"RDS metrics"| cloudwatch
+  cloudwatchScrape -->|"assume AWS role\nand scrape metrics"| cloudwatch
+  cloudwatchScrape -->|"CloudWatch metrics"| grafana
   shopper -->|"Faro web telemetry"| grafana
   accountBaseline -->|"SSM default host-management role setting"| eks
   k6 -->|"regional, spike,\nand browser checks\nwith traceparent"| cloudfront
@@ -220,6 +225,8 @@ flowchart TB
   beyla["Grafana Beyla\nzero-code HTTP telemetry"]
   pyroscope["Pyroscope Alloy DaemonSet\nJVM profiles"]
   alloy["Grafana Alloy\nOTel collector"]
+  cloudwatch["AWS CloudWatch\nRDS metrics"]
+  cloudwatchScrape["Grafana Cloud Provider\nAWS/RDS scrape job"]
 
   synth["Grafana Synthetic Monitoring\nHTTP, DNS, Ping, TCP"]
   k6["Grafana Cloud k6\nregional load, spike benchmark,\nbrowser actions"]
@@ -264,6 +271,8 @@ flowchart TB
   beyla -->|"metrics + traces"| alloy
   pyroscope -->|"profiles write"| grafana
   alloy -->|"OTLP export"| grafana
+  cloudwatchScrape -->|"assume AWS role\nand scrape AWS/RDS metrics"| cloudwatch
+  cloudwatch -->|"RDS CloudWatch samples"| grafana
 
   synth -->|"checks production URL\nand API health"| cloudfront
   synth -->|"check samples"| grafana

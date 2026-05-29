@@ -63,3 +63,109 @@ resource "time_sleep" "wait_for_iam_propagation" {
 
   create_duration = "10s"
 }
+
+resource "grafana_cloud_provider_aws_cloudwatch_scrape_job" "rds" {
+  name                    = var.rds_cloudwatch_scrape_job_name
+  enabled                 = true
+  aws_account_resource_id = var.grafana_aws_account_resource_id
+  stack_id                = var.grafana_stack_id
+  export_tags             = true
+
+  service {
+    name                    = "AWS/RDS"
+    scrape_interval_seconds = 300
+
+    metric {
+      name       = "AuroraGlobalDBDataTransferBytes"
+      statistics = ["p95", "Maximum"]
+    }
+    metric {
+      name       = "AuroraGlobalDBProgressLag"
+      statistics = ["Maximum", "p95"]
+    }
+    metric {
+      name       = "BurstBalance"
+      statistics = ["Average"]
+    }
+    metric {
+      name       = "CPUCreditBalance"
+      statistics = ["Average"]
+    }
+    metric {
+      name       = "CPUCreditUsage"
+      statistics = ["Average"]
+    }
+    metric {
+      name       = "CPUUtilization"
+      statistics = ["Maximum", "Average"]
+    }
+    metric {
+      name       = "DatabaseConnections"
+      statistics = ["Sum", "Maximum"]
+    }
+    metric {
+      name       = "DBLoad"
+      statistics = ["Average"]
+    }
+    metric {
+      name       = "DBLoadCPU"
+      statistics = ["Average"]
+    }
+    metric {
+      name       = "DBLoadNonCPU"
+      statistics = ["Average"]
+    }
+    metric {
+      name       = "EBSByteBalance%"
+      statistics = ["Average"]
+    }
+    metric {
+      name       = "EBSIOBalance%"
+      statistics = ["Average"]
+    }
+    metric {
+      name       = "FreeableMemory"
+      statistics = ["Average"]
+    }
+    metric {
+      name       = "FreeStorageSpace"
+      statistics = ["Average"]
+    }
+    metric {
+      name       = "FreeStorageSpaceLogVolume"
+      statistics = ["Average"]
+    }
+    metric {
+      name       = "ReadIOPS"
+      statistics = ["Average"]
+    }
+    metric {
+      name       = "ReadLatency"
+      statistics = ["Average", "Maximum"]
+    }
+    metric {
+      name       = "ReadThroughput"
+      statistics = ["Average"]
+    }
+    metric {
+      name       = "ReplicaLag"
+      statistics = ["Average"]
+    }
+    metric {
+      name       = "SwapUsage"
+      statistics = ["Average"]
+    }
+    metric {
+      name       = "WriteIOPS"
+      statistics = ["Average"]
+    }
+    metric {
+      name       = "WriteLatency"
+      statistics = ["Average", "Maximum"]
+    }
+    metric {
+      name       = "WriteThroughput"
+      statistics = ["Average"]
+    }
+  }
+}

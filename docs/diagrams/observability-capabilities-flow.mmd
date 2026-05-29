@@ -18,6 +18,8 @@ flowchart TB
   beyla["Grafana Beyla\nzero-code HTTP telemetry"]
   pyroscope["Pyroscope Alloy DaemonSet\nJVM profiles"]
   alloy["Grafana Alloy\nOTel collector"]
+  cloudwatch["AWS CloudWatch\nRDS metrics"]
+  cloudwatchScrape["Grafana Cloud Provider\nAWS/RDS scrape job"]
 
   synth["Grafana Synthetic Monitoring\nHTTP, DNS, Ping, TCP"]
   k6["Grafana Cloud k6\nregional load, spike benchmark,\nbrowser actions"]
@@ -62,6 +64,8 @@ flowchart TB
   beyla -->|"metrics + traces"| alloy
   pyroscope -->|"profiles write"| grafana
   alloy -->|"OTLP export"| grafana
+  cloudwatchScrape -->|"assume AWS role\nand scrape AWS/RDS metrics"| cloudwatch
+  cloudwatch -->|"RDS CloudWatch samples"| grafana
 
   synth -->|"checks production URL\nand API health"| cloudfront
   synth -->|"check samples"| grafana
