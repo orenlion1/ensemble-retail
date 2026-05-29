@@ -194,6 +194,7 @@ Browser action test expectations:
 - It should assert required action names fired.
 - It should include checkout and add/remove cart flows.
 - It should fail clearly when required actions are missing.
+- Run it after every frontend deployment against the deployed URL once CloudFront invalidation or cache refresh completes: `BASE_URL=https://ensemble-grafana.com k6 run load-tests/synthetic-browser-actions.js`.
 
 ## Security And Config
 
@@ -226,6 +227,7 @@ When coding changes affect infrastructure, observability, API flow, or user-visi
 
 - Frontend builds.
 - Playwright e2e tests pass after frontend changes: `cd frontend && npm run test:e2e`.
+- k6 browser-action validation passes after each frontend deployment: `BASE_URL=https://ensemble-grafana.com k6 run load-tests/synthetic-browser-actions.js`.
 - Local app can load categories/products.
 - Cart add/remove/checkout path works.
 - Account save path works.

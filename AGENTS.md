@@ -75,4 +75,5 @@ For large cross-cutting changes (deploy + observability + app code), run `code-r
 - For all coding changes that implement logic, fix bugs, or change behavior, follow `test-driven-development`; add or update tests before implementation when the change has behavioral impact.
 - When updating the frontend, follow `frontend-ui-engineering` and `browser-testing-with-devtools`; verify the UI in a real browser with Chrome DevTools MCP or the active browser tooling.
 - After frontend changes, run the scripted browser action test against the changed app: `BASE_URL=<frontend-url> k6 run load-tests/synthetic-browser-actions.js`. This test must continue to validate Faro button actions, cart flows, checkout, account save, and region/language mappings for US, Canada, China, and UK.
+- After every frontend deployment, run the same k6 browser-action validation against the deployed URL after the CloudFront invalidation or cache refresh completes: `BASE_URL=https://ensemble-grafana.com k6 run load-tests/synthetic-browser-actions.js`.
 - For k6, Grafana, Terraform, and Kubernetes changes, include the validation command or the observed run/upload URL when available.

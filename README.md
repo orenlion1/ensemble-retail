@@ -492,6 +492,8 @@ Run the scripted browser check against production:
 BASE_URL=https://ensemble-grafana.com k6 run load-tests/synthetic-browser-actions.js
 ```
 
+Run this production check after every frontend deployment, after the S3 sync and CloudFront invalidation have completed. It validates the deployed site still emits all expected Faro user actions and that cart, checkout, account save, and region/language flows work at the public URL.
+
 Run it against a local frontend:
 
 ```sh
