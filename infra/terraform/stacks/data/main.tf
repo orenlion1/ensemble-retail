@@ -13,6 +13,12 @@ resource "aws_dynamodb_table" "carts" {
     name = "shopperId"
     type = "S"
   }
+
+  tags = {
+    Application = "ensemble-grafana"
+    Stack       = "data"
+    Service     = "cart"
+  }
 }
 
 resource "aws_dynamodb_table" "accounts" {
@@ -30,11 +36,23 @@ resource "aws_dynamodb_table" "accounts" {
     name = "shopperId"
     type = "S"
   }
+
+  tags = {
+    Application = "ensemble-grafana"
+    Stack       = "data"
+    Service     = "account"
+  }
 }
 
 resource "aws_db_subnet_group" "inventory" {
   name       = "ensemble-inventory"
   subnet_ids = var.private_subnet_ids
+
+  tags = {
+    Application = "ensemble-grafana"
+    Stack       = "data"
+    Service     = "inventory"
+  }
 }
 
 resource "aws_security_group" "inventory_db" {
@@ -56,6 +74,12 @@ resource "aws_security_group" "inventory_db" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  tags = {
+    Application = "ensemble-grafana"
+    Stack       = "data"
+    Service     = "inventory"
+  }
 }
 
 resource "aws_rds_cluster" "inventory" {
@@ -72,6 +96,12 @@ resource "aws_rds_cluster" "inventory" {
   storage_encrypted         = true
   skip_final_snapshot       = false
   final_snapshot_identifier = "ensemble-inventory-final"
+
+  tags = {
+    Application = "ensemble-grafana"
+    Stack       = "data"
+    Service     = "inventory"
+  }
 }
 
 resource "aws_rds_cluster_instance" "inventory_writer" {
@@ -81,9 +111,20 @@ resource "aws_rds_cluster_instance" "inventory_writer" {
   engine              = aws_rds_cluster.inventory.engine
   engine_version      = aws_rds_cluster.inventory.engine_version
   publicly_accessible = false
+
+  tags = {
+    Application = "ensemble-grafana"
+    Stack       = "data"
+    Service     = "inventory"
+  }
 }
 
 resource "aws_secretsmanager_secret" "app_runtime" {
   name                    = "ensemble-grafana/runtime"
   recovery_window_in_days = 30
+
+  tags = {
+    Application = "ensemble-grafana"
+    Stack       = "data"
+  }
 }

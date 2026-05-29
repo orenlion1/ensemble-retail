@@ -145,6 +145,7 @@ Current applied output:
 - Grafana Cloud Provider API URL: `https://cloud-provider-api-prod-us-east-3.grafana.net`
 - Grafana AWS account resource ID: `270`
 - RDS scrape job: `ensemble-grafana-rds-cloudwatch`
+- RDS discovery tags: `Application=ensemble-grafana`, `Stack=data`, `Service=inventory`
 
 Troubleshooting: if Terraform cannot create the scrape job, confirm `GRAFANA_CLOUD_PROVIDER_ACCESS_TOKEN` is a Cloud Provider Observability token rather than a telemetry ingest token, and confirm `grafana_cloud_provider_url` matches the stack returned by `https://grafana.com/api/instances`. If Grafana reports `Failed to assume role on provided account`, confirm the Grafana AWS account form uses the exact `role_arn` output. A failed or successful connection attempt should appear in CloudTrail as an `AssumeRole` event for this role. If no event appears, Grafana is likely not calling this role ARN. If the Grafana UI shows different values for the 12-digit Grafana AWS account ID or External ID, pass them as `grafana_account_id` and `external_id` and reapply the stack.
 

@@ -116,6 +116,7 @@ Current applied CloudWatch integration values:
 - Grafana Cloud Provider API URL: `https://cloud-provider-api-prod-us-east-3.grafana.net`
 - Grafana AWS account resource ID: `270`
 - RDS scrape job: `ensemble-grafana-rds-cloudwatch`
+- RDS discovery tags: `Application=ensemble-grafana`, `Stack=data`, `Service=inventory`
 
 The Terraform provider needs `GRAFANA_CLOUD_PROVIDER_ACCESS_TOKEN` with Grafana Cloud Provider Observability permissions to create or update scrape jobs. The Cloud Provider API URL was resolved from `https://grafana.com/api/instances` for stack `orenlion`. If Grafana reports `Failed to assume role on provided account`, verify the AWS account form is using the exact role ARN above. CloudTrail should show an `AssumeRole` event for that role when Grafana attempts the connection; if no event appears, Grafana is likely pointed at a different ARN or account entry. If the Grafana Cloud AWS setup page shows a different 12-digit Grafana AWS account ID or a different External ID, rerun this stack with:
 
