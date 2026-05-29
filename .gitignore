@@ -41,5 +41,7 @@ infra/k8s/observability-secrets.example.yaml
 
 *.log
 *.class
+playwright-report/
+test-results/
 browser-devtools-*.png
 lighthouse-devtools*/

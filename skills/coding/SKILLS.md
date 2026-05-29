@@ -170,11 +170,23 @@ Account should include:
 Include:
 
 - Frontend build test.
+- Playwright browser regression test after each frontend UI or behavior change.
 - Broken image test using browser/devtools automation.
 - k6 API test.
 - k6 browser action synthetic test.
 - k6 regional and spike tests for Cloud.
 - Security predeploy script.
+
+Playwright test expectations:
+
+- Run `cd frontend && npm run test:e2e` after each frontend change.
+- Verify every visible button has `data-faro-user-action-name`.
+- Verify Faro action payloads are emitted for cart add/remove/quantity/checkout, product detail, sale add, region/language changes, Google login, and account save.
+- Verify the cart delete icon removes the item and the cart returns to empty state.
+- Verify Google login starts the Cognito Hosted UI flow without reaching the real provider in tests.
+- Verify region and language changes for US, Canada, China, and UK, including British English retail terms such as `Basket` and `Trousers`.
+- Verify no storefront images are broken.
+- Verify desktop and mobile screenshot baselines unless the layout change intentionally updates them.
 
 Browser action test expectations:
 
@@ -213,6 +225,7 @@ When coding changes affect infrastructure, observability, API flow, or user-visi
 ## Validation Checklist
 
 - Frontend builds.
+- Playwright e2e tests pass after frontend changes: `cd frontend && npm run test:e2e`.
 - Local app can load categories/products.
 - Cart add/remove/checkout path works.
 - Account save path works.

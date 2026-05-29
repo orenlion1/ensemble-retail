@@ -7,6 +7,7 @@
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0",
+    "test:e2e": "playwright test",
     "test:images": "node ../scripts/check-broken-images.mjs"
   },
   "dependencies": {
@@ -19,6 +20,8 @@
     "vite": "^8.0.14"
   },
   "devDependencies": {
-    "@grafana/faro-rollup-plugin": "^0.10.1"
+    "@grafana/faro-rollup-plugin": "^0.10.1",
+    "@playwright/test": "^1.60.0",
+    "@rolldown/pluginutils": "^1.0.1"
   }
 }

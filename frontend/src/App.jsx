@@ -703,13 +703,16 @@ export default function App() {
     : 0;
   const saleProducts = useMemo(() => products.filter(product => product.originalPrice), [products]);
 
-  function addToCart(product, size = product.sizes[0], color = product.colors[0]) {
-    trackAppAction(faroActionName('shopping-cart:add-item', product.id), {
+  function addToCart(product, options = {}) {
+    const size = options.size || product.sizes[0];
+    const color = options.color || product.colors[0];
+    const actionName = options.actionName || faroActionName('shopping-cart:add-item', product.id);
+    trackAppAction(actionName, {
       productId: product.id,
       productName: product.name,
       category: product.category,
       department: product.department,
-      source: 'cart-add'
+      source: options.source || 'product-grid'
     });
     const key = `${product.id}-${size}-${color}`;
     setCart(current => {
@@ -825,10 +828,12 @@ export default function App() {
 
   function loginWithGoogle() {
     trackAppAction('auth:google-login-start', {}, { importance: 'critical' });
-    beginGoogleLogin().catch(error => {
-      setAuthError(error.message);
-      trackAppAction('auth:google-login-error', { error: error.message });
-    });
+    window.setTimeout(() => {
+      beginGoogleLogin().catch(error => {
+        setAuthError(error.message);
+        trackAppAction('auth:google-login-error', { error: error.message });
+      });
+    }, 200);
   }
 
   function signOut() {
@@ -951,7 +956,7 @@ export default function App() {
                     <strong>${product.price}</strong>
                     {product.originalPrice && <em>{discountPercent(product)}% {t.off}</em>}
                   </p>
-                  <button onClick={() => addToCart(product)} data-faro-user-action-name={faroActionName('shopping-cart:add-item', product.id)}>{t.add}</button>
+                  <button onClick={() => addToCart(product, { actionName: faroActionName('shopping-cart:add-item', product.id), source: 'product-grid' })} data-faro-user-action-name={faroActionName('shopping-cart:add-item', product.id)}>{t.add}</button>
                 </div>
               </div>
             </article>
@@ -984,7 +989,7 @@ export default function App() {
                     <strong>${product.price}</strong>
                     <em>{discountPercent(product)}% {t.off}</em>
                   </p>
-                  <button onClick={() => addToCart(product)} data-faro-user-action-name={faroActionName('shopping-cart:add-sale-item', product.id)}>{t.add}</button>
+                  <button onClick={() => addToCart(product, { actionName: faroActionName('shopping-cart:add-sale-item', product.id), source: 'sale-grid' })} data-faro-user-action-name={faroActionName('shopping-cart:add-sale-item', product.id)}>{t.add}</button>
                 </div>
               </div>
             </article>
@@ -1007,7 +1012,7 @@ export default function App() {
             </p>
             <p>{t.sizes}: {selectedProduct.sizes.join(' / ')}</p>
             <p>{t.colors}: {selectedProduct.colors.map(localizeColor).join(' / ')}</p>
-            <button onClick={() => addToCart(selectedProduct)} data-faro-user-action-name={faroActionName('shopping-cart:add-detail-item', selectedProduct.id)}>{t.addSelectedDefault}</button>
+            <button onClick={() => addToCart(selectedProduct, { actionName: faroActionName('shopping-cart:add-detail-item', selectedProduct.id), source: 'product-detail' })} data-faro-user-action-name={faroActionName('shopping-cart:add-detail-item', selectedProduct.id)}>{t.addSelectedDefault}</button>
           </div>
         </section>
       )}

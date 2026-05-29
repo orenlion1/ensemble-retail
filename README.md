@@ -506,6 +506,20 @@ The browser check records `data-faro-user-action-name` interactions plus change/
 DEBUG_ACTIONS=1 BASE_URL=https://ensemble-grafana.com k6 run load-tests/synthetic-browser-actions.js
 ```
 
+The frontend also has Playwright browser regression tests for interactive UI behavior. These tests stub the Faro collector, verify emitted Faro action names for cart, checkout, region/language, Google login, and account save actions, check the cart delete icon, detect broken storefront images, and compare desktop/mobile screenshots.
+
+```sh
+cd frontend
+npm run test:e2e
+```
+
+Regenerate screenshot baselines intentionally after reviewed layout changes:
+
+```sh
+cd frontend
+npm run test:e2e -- --update-snapshots
+```
+
 ## Predeploy Security
 
 Run `scripts/security/predeploy-check.sh` before opening the platform to public traffic. The check looks for committed secret shapes and verifies the core Kubernetes, Spring Security, WAF, HSTS, and DynamoDB recovery controls are present.
