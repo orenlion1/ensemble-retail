@@ -82,8 +82,33 @@ Update:
 - `AGENTS.md` if the required validation region list changes.
 - `skills/coding/SKILLS.md` validation expectations.
 - This skill if the new region exposed a reusable localization lesson.
+- `skills/observability/incident-placeholder-template/SKILL.md` only if the placeholder incident template itself changes.
 
 Do not update `DIAGRAMS.md` for copy-only region additions because architecture, request flow, network boundaries, and telemetry flow are unchanged. If the change adds new services, identity providers, data stores, or routing, update diagrams and regenerate `docs/diagrams/` PNGs.
+
+## Monthly Placeholder Incidents
+
+For every new region, create monthly Grafana IRM placeholder incident review records before pushing incidents to Grafana. Use `skills/observability/incident-placeholder-template/SKILL.md`.
+
+Generate one placeholder incident per month:
+
+- Start with January 1, 2025.
+- Continue up to and including the current month. Use the actual current date to determine the ending month. For example, on May 30, 2026, include January 2025 through May 2026.
+- Use the first calendar day of each month as the unique incident date unless the user requests a different monthly date pattern.
+- Start time: `{DATE} 00:01 EDT`.
+- End time: `{DATE} 00:02 EDT`.
+- Replace `region:{region}` with the new region in the request, such as `region:Sweden`, `region:SE`, or the exact region label/value the user asks to use in IRM.
+- Keep the placeholder labels from the template:
+  - `client_impact:multiple-clients`
+  - `impact_type:availablity`
+
+Create a review file first, such as:
+
+```text
+reports/irm-placeholders/<region>-monthly-placeholders-<yyyymmdd>.json
+```
+
+The review file must include title, description, resolution summary, severity, start time, end time, and labels for each month. Do not push placeholder incidents to Grafana until the user approves the review file or explicitly asks to push them.
 
 ## Validation
 
@@ -128,4 +153,5 @@ The report must include:
 - Playwright and k6 cover the new region.
 - k6 browser action checks pass locally and in production after deployment.
 - gcx Faro user-action report shows the new region action events.
+- Monthly placeholder incident review file exists for the new region, covering January 2025 through the current month.
 - README, AGENTS, and coding skill expectations are in sync.
