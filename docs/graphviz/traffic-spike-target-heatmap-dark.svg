@@ -112,7 +112,7 @@
 <text xml:space="preserve" text-anchor="start" x="170.12" y="-98.7" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#f8fafc"> brighter cells mean more target pressure per completed wave.</text>
 <text xml:space="preserve" text-anchor="start" x="111.62" y="-76.75" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#f8fafc">Config: base=100, multiplier=2.</text>
 <text xml:space="preserve" text-anchor="start" x="111.62" y="-53.75" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#f8fafc">Regional shoppers: 30 VUs.</text>
-<text xml:space="preserve" text-anchor="start" x="111.62" y="-30.75" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#f8fafc">Storefront actions: 20 browser VUs.</text>
+<text xml:space="preserve" text-anchor="start" x="111.62" y="-30.75" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#f8fafc">Storefront actions: 5 browser VUs.</text>
 <text xml:space="preserve" text-anchor="start" x="111.62" y="-7.75" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#f8fafc">Duration: 10m.</text>
 </g>
 <!-- target_heatmap&#45;&gt;target_note -->
