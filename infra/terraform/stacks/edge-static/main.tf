@@ -1,4 +1,5 @@
 data "aws_caller_identity" "current" {}
+data "aws_canonical_user_id" "current" {}
 
 resource "aws_route53_zone" "primary" {
   name = var.domain_name
@@ -105,6 +106,86 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "logs" {
       sse_algorithm = "AES256"
     }
   }
+}
+
+resource "aws_s3_bucket_ownership_controls" "logs" {
+  bucket = aws_s3_bucket.logs.id
+
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
+
+resource "aws_s3_bucket_acl" "logs" {
+  bucket = aws_s3_bucket.logs.id
+
+  access_control_policy {
+    grant {
+      grantee {
+        id   = data.aws_canonical_user_id.current.id
+        type = "CanonicalUser"
+      }
+      permission = "FULL_CONTROL"
+    }
+
+    grant {
+      grantee {
+        id   = "c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0"
+        type = "CanonicalUser"
+      }
+      permission = "FULL_CONTROL"
+    }
+
+    owner {
+      id = data.aws_canonical_user_id.current.id
+    }
+  }
+
+  depends_on = [
+    aws_s3_bucket_ownership_controls.logs,
+    aws_s3_bucket_public_access_block.logs
+  ]
+}
+
+data "aws_iam_policy_document" "logs_delivery" {
+  statement {
+    sid = "AllowAlbAccessLogDeliveryAclCheck"
+    actions = [
+      "s3:GetBucketAcl"
+    ]
+    resources = [aws_s3_bucket.logs.arn]
+
+    principals {
+      type        = "Service"
+      identifiers = ["logdelivery.elasticloadbalancing.amazonaws.com"]
+    }
+  }
+
+  statement {
+    sid = "AllowAlbAccessLogDeliveryWrite"
+    actions = [
+      "s3:PutObject"
+    ]
+    resources = [
+      "${aws_s3_bucket.logs.arn}/alb/AWSLogs/${data.aws_caller_identity.current.account_id}/*"
+    ]
+
+    principals {
+      type        = "Service"
+      identifiers = ["logdelivery.elasticloadbalancing.amazonaws.com"]
+    }
+
+    condition {
+      test     = "StringEquals"
+      variable = "s3:x-amz-acl"
+      values   = ["bucket-owner-full-control"]
+    }
+  }
+}
+
+resource "aws_s3_bucket_policy" "logs" {
+  bucket = aws_s3_bucket.logs.id
+  policy = data.aws_iam_policy_document.logs_delivery.json
 }
 
 resource "aws_wafv2_web_acl" "edge" {
@@ -310,6 +391,12 @@ resource "aws_cloudfront_distribution" "frontend" {
   aliases             = [var.domain_name, "www.${var.domain_name}"]
   web_acl_id          = aws_wafv2_web_acl.edge.arn
   depends_on          = [aws_acm_certificate_validation.edge]
+
+  logging_config {
+    bucket          = aws_s3_bucket.logs.bucket_domain_name
+    include_cookies = false
+    prefix          = "cloudfront/"
+  }
 
   origin {
     domain_name              = aws_s3_bucket.frontend.bucket_regional_domain_name

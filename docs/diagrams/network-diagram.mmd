@@ -8,6 +8,7 @@ flowchart TB
   cloudfront["CloudFront distribution\nensemble-grafana.com"]
   staticS3["S3 frontend bucket\nprivate origin"]
   imageS3["S3 inventory images bucket"]
+  logsS3["S3 edge/API logs bucket\nCloudFront + ALB access logs"]
   apiAlb["API ingress / ALB\napi.ensemble-grafana.com"]
   regionalWaf["AWS WAF\nregional API scope"]
 
@@ -35,7 +36,9 @@ flowchart TB
   shopper -->|"Google sign-in"| cognito --> google
   cloudfront -->|"static assets"| staticS3
   cloudfront -->|"inventory images"| imageS3
+  cloudfront -->|"standard access logs"| logsS3
   cloudfront -->|"/api/*"| regionalWaf --> apiAlb
+  apiAlb -->|"ALB access logs"| logsS3
   apiAlb --> inventory
   apiAlb --> cart
   apiAlb --> account

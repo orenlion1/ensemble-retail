@@ -11,7 +11,7 @@ class AccountControllerTest {
 
   @Test
   void accountShippingAddressAcceptsAllStorefrontRegions() {
-    for (String country : new String[] { "US", "CA", "CN", "UK" }) {
+    for (String country : new String[] { "US", "CA", "CN", "UK", "SE" }) {
       AccountController.Account account = new AccountController.Account(
           "shopper-" + country.toLowerCase(),
           "Regional Shopper",

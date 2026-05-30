@@ -64,7 +64,7 @@ public class AccountController {
       @NotBlank @Size(max = 80) String city,
       @NotBlank @Size(max = 40) String region,
       @NotBlank @Size(max = 20) String postalCode,
-      @NotBlank @Pattern(regexp = "US|CA|CN|UK") String country) {}
+      @NotBlank @Pattern(regexp = "US|CA|CN|UK|SE") String country) {}
 
   public record Wallet(
       @NotBlank @Size(max = 80) String label,

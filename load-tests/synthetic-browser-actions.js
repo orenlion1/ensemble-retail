@@ -32,6 +32,7 @@ export const options = {
 
 const baseUrl = __ENV.BASE_URL || 'https://ensemble-grafana.com';
 const storefrontUserActions = new Counter('storefront_user_actions');
+const storefrontUserActionEvents = new Counter('storefront_user_action_events');
 const shoppingCartAddItems = new Counter('shopping_cart_add_items');
 const shoppingCartAddDetailItems = new Counter('shopping_cart_add_detail_items');
 const shoppingCartAddSaleItems = new Counter('shopping_cart_add_sale_items');
@@ -44,6 +45,38 @@ const regionLanguageExpectations = {
   UK: { lang: 'en-GB', language: 'British English', languageSlug: 'british-english', text: 'Basket', secondaryText: 'Trousers', forbiddenTextPattern: '\\bPants?\\b' },
   SE: { lang: 'sv-SE', language: 'Swedish', languageSlug: 'swedish', text: 'Varukorg', secondaryText: 'Herr' }
 };
+export const USER_ACTION_RATE_FAMILIES = [
+  'select-department:womens',
+  'select-department:mens',
+  'select-category:mens-mid-layers',
+  'sort-products:price-low',
+  'search-products',
+  'select-region:SE',
+  'select-language:swedish',
+  'select-region:US',
+  'select-language:american-english',
+  'view-product',
+  'shopping-cart:add-detail-item',
+  'close-product-detail',
+  'shopping-cart:add-item',
+  'view-sale-product',
+  'shopping-cart:add-sale-item',
+  'shopping-cart:change-quantity',
+  'shopping-cart:checkout',
+  'checkout-dialog:close',
+  'shopping-cart:remove-item',
+  'save-account'
+];
+const USER_ACTION_PREFIX_FAMILIES = [
+  'view-product:',
+  'shopping-cart:add-detail-item:',
+  'close-product-detail:',
+  'shopping-cart:add-item:',
+  'view-sale-product:',
+  'shopping-cart:add-sale-item:',
+  'shopping-cart:change-quantity:',
+  'shopping-cart:remove-item:'
+];
 
 function byAction(name) {
   return `[data-faro-user-action-name="${name}"]`;
@@ -51,11 +84,22 @@ function byAction(name) {
 
 function recordActionTotals(actions) {
   storefrontUserActions.add(actions.length);
+  actions.forEach(action => {
+    storefrontUserActionEvents.add(1, {
+      action_name: action,
+      action_family: actionFamily(action)
+    });
+  });
   shoppingCartAddItems.add(actions.filter(action => action.startsWith('shopping-cart:add-item:')).length);
   shoppingCartAddDetailItems.add(actions.filter(action => action.startsWith('shopping-cart:add-detail-item:')).length);
   shoppingCartAddSaleItems.add(actions.filter(action => action.startsWith('shopping-cart:add-sale-item:')).length);
   shoppingCartRemoveItems.add(actions.filter(action => action.startsWith('shopping-cart:remove-item:')).length);
   shoppingCartCheckout.add(actions.filter(action => action === 'shopping-cart:checkout').length);
+}
+
+function actionFamily(action) {
+  const prefix = USER_ACTION_PREFIX_FAMILIES.find(candidate => action.startsWith(candidate));
+  return prefix ? prefix.replace(/:$/, '') : action;
 }
 
 async function recordUserActions(page) {

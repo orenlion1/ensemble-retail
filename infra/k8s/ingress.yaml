@@ -12,7 +12,7 @@ metadata:
     alb.ingress.kubernetes.io/ssl-policy: ELBSecurityPolicy-TLS13-1-2-2021-06
     alb.ingress.kubernetes.io/certificate-arn: ACM_CERTIFICATE_ARN
     alb.ingress.kubernetes.io/wafv2-acl-arn: WAFV2_REGIONAL_ACL_ARN
-    alb.ingress.kubernetes.io/load-balancer-attributes: deletion_protection.enabled=true,routing.http.drop_invalid_header_fields.enabled=true,access_logs.s3.enabled=false
+    alb.ingress.kubernetes.io/load-balancer-attributes: deletion_protection.enabled=true,routing.http.drop_invalid_header_fields.enabled=true,access_logs.s3.enabled=true,access_logs.s3.bucket=ensemble-grafana-logs-629513454417,access_logs.s3.prefix=alb
 spec:
   ingressClassName: alb
   rules:

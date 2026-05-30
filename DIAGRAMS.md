@@ -17,6 +17,7 @@ flowchart TB
   cloudfront["CloudFront distribution\nensemble-grafana.com"]
   staticS3["S3 frontend bucket\nprivate origin"]
   imageS3["S3 inventory images bucket"]
+  logsS3["S3 edge/API logs bucket\nCloudFront + ALB access logs"]
   apiAlb["API ingress / ALB\napi.ensemble-grafana.com"]
   regionalWaf["AWS WAF\nregional API scope"]
 
@@ -44,7 +45,9 @@ flowchart TB
   shopper -->|"Google sign-in"| cognito --> google
   cloudfront -->|"static assets"| staticS3
   cloudfront -->|"inventory images"| imageS3
+  cloudfront -->|"standard access logs"| logsS3
   cloudfront -->|"/api/*"| regionalWaf --> apiAlb
+  apiAlb -->|"ALB access logs"| logsS3
   apiAlb --> inventory
   apiAlb --> cart
   apiAlb --> account
@@ -212,6 +215,7 @@ flowchart TB
 
   cloudfront["CloudFront\nstatic + /api/* routing"]
   ingress["EKS API ingress / ALB"]
+  edgeLogs["S3 access logs\nCloudFront + ALB"]
 
   subgraph services["Spring Boot services"]
     inventory["inventory-service"]
@@ -246,6 +250,8 @@ flowchart TB
   browser -->|"page views, errors,\nuser actions"| faro
   browser -->|"HTTP requests\nwith traceparent"| tracing
   tracing --> cloudfront --> ingress
+  cloudfront -->|"standard access logs"| edgeLogs
+  ingress -->|"ALB access logs"| edgeLogs
   ingress --> inventory
   ingress --> cart
   ingress --> account
@@ -268,6 +274,7 @@ flowchart TB
   actuator -->|"Prometheus scrape"| alloy
   otel -->|"OTLP traces"| alloy
   logs -->|"pod log collection"| alloy
+  edgeLogs -->|"RCA source for\nedge/API status codes"| grafana
   beyla -->|"metrics + traces"| alloy
   pyroscope -->|"profiles write"| grafana
   alloy -->|"OTLP export"| grafana

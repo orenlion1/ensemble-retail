@@ -14,6 +14,7 @@ Use this skill when adding the Ensemble-Grafana observability pattern to a new a
 - Use Grafana Beyla for zero-code backend HTTP telemetry.
 - Use Grafana Synthetic Monitoring for uptime, DNS, ping, TCP, and API checks.
 - Use Grafana Cloud k6 for load and browser-action tests.
+- Enable CloudFront and ALB access logs for edge/API status-code RCA when load tests expose 4xx/5xx behavior.
 
 ## Frontend Observability
 
@@ -143,12 +144,15 @@ Recommended spike profile:
 - Spike 2 at 2x spike 1 for stress validation.
 - Spike 3 at 2x spike 2 for stress validation.
 - Add recovery windows between spikes.
+- Keep browser-action load sustained with multiple browser VUs when Faro user-action volume is part of the test goal. A single shared browser iteration only validates coverage; it does not produce meaningful user-action volume.
+- When user-action throughput is the goal, add tagged per-action counters and thresholds for every expected action family. Default Ensemble traffic-spike runs target at least 10 user-action events per second per action family.
 
 Required k6 environment:
 
 - Native k6 token for `k6 cloud login`.
 - `API_TEST_KEY` as a Grafana Cloud k6 environment variable/secret for protected cart/account writes.
 - `STOREFRONT_BASE_URL` and `API_BASE_URL` when static assets and APIs use separate origins.
+- For end-to-end edge tests, set `API_BASE_URL` to the storefront domain so `/api/*` traverses CloudFront. Use the API origin domain only when intentionally bypassing CloudFront.
 - Run load tests in Grafana Cloud k6 by default with `k6 cloud run`. Use local `k6 run` only for script debugging or when Grafana Cloud k6 is unavailable.
 - Always use temporary local `.env` injection for k6 Cloud runs that require `API_TEST_KEY` (for example: `set -a && source .env && set +a && k6 cloud run -e API_TEST_KEY="$API_TEST_KEY" ...`), and keep `.env` gitignored.
 - If a run fails with missing/invalid API key errors (for example `API_TEST_KEY is required`), prompt the user to set or update `API_TEST_KEY` in `.env` and rerun.

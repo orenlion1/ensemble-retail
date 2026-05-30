@@ -3,14 +3,22 @@ import { check, fail, group, sleep } from 'k6';
 import { Counter, Trend } from 'k6/metrics';
 import { regionalJourney } from './grafana-cloud-20-user-regional.js';
 import { summaryOutput } from './summary.js';
-import storefrontActions from './synthetic-browser-actions.js';
+import storefrontActions, { USER_ACTION_RATE_FAMILIES } from './synthetic-browser-actions.js';
 
 const baseSpikeUsers = Number(__ENV.BASE_SPIKE_USERS || 100);
 const spikeMultiplier = Number(__ENV.SPIKE_MULTIPLIER || 2);
 const spikeTwoUsers = Math.ceil(baseSpikeUsers * spikeMultiplier);
 const spikeThreeUsers = Math.ceil(spikeTwoUsers * spikeMultiplier);
 const regionalShopperVus = Number(__ENV.REGIONAL_SHOPPER_VUS || 30);
-const browserActionIterations = Number(__ENV.BROWSER_ACTION_ITERATIONS || 1);
+const userActionTargetRps = Number(__ENV.USER_ACTION_TARGET_RPS || 10);
+const browserActionVus = Number(__ENV.BROWSER_ACTION_VUS || 60);
+const browserActionDuration = __ENV.BROWSER_ACTION_DURATION || __ENV.TEST_DURATION || '10m';
+const userActionRateThresholds = Object.fromEntries(
+  USER_ACTION_RATE_FAMILIES.map(actionFamily => [
+    `storefront_user_action_events{action_family:${actionFamily}}`,
+    [`rate>=${userActionTargetRps}`]
+  ])
+);
 
 export const options = {
   cloud: {
@@ -43,10 +51,10 @@ export const options = {
     },
     storefront_actions: {
       exec: 'storefrontActionsScenario',
-      executor: 'shared-iterations',
-      vus: 1,
-      iterations: browserActionIterations,
-      maxDuration: __ENV.BROWSER_ACTION_MAX_DURATION || '10m',
+      executor: 'constant-vus',
+      vus: browserActionVus,
+      duration: browserActionDuration,
+      gracefulStop: '30s',
       options: {
         browser: {
           type: 'chromium'
@@ -65,12 +73,13 @@ export const options = {
     cart_updates: ['count>20'],
     checkout_attempts: ['count>5'],
     region_changes: ['count>20'],
-    storefront_user_actions: ['count>10'],
-    shopping_cart_add_items: ['count>0'],
-    shopping_cart_add_detail_items: ['count>0'],
-    shopping_cart_add_sale_items: ['count>0'],
-    shopping_cart_remove_items: ['count>0'],
-    shopping_cart_checkout: ['count>0'],
+    storefront_user_actions: ['count>300'],
+    ...userActionRateThresholds,
+    shopping_cart_add_items: ['count>10'],
+    shopping_cart_add_detail_items: ['count>10'],
+    shopping_cart_add_sale_items: ['count>10'],
+    shopping_cart_remove_items: ['count>10'],
+    shopping_cart_checkout: ['count>10'],
     browser_web_vital_lcp: ['p(95)<4000'],
     browser_web_vital_cls: ['p(95)<0.1']
   },
@@ -80,12 +89,15 @@ export const options = {
     spike_one_users: String(baseSpikeUsers),
     spike_two_users: String(spikeTwoUsers),
     spike_three_users: String(spikeThreeUsers),
-    spike_multiplier: String(spikeMultiplier)
+    spike_multiplier: String(spikeMultiplier),
+    user_action_target_rps: String(userActionTargetRps),
+    browser_action_vus: String(browserActionVus),
+    browser_action_duration: browserActionDuration
   }
 };
 
 const storefrontBaseUrl = (__ENV.STOREFRONT_BASE_URL || __ENV.BASE_URL || 'https://ensemble-grafana.com').replace(/\/$/, '');
-const apiBaseUrl = (__ENV.API_BASE_URL || __ENV.BASE_URL || 'https://api.ensemble-grafana.com').replace(/\/$/, '');
+const apiBaseUrl = (__ENV.API_BASE_URL || __ENV.STOREFRONT_BASE_URL || __ENV.BASE_URL || 'https://ensemble-grafana.com').replace(/\/$/, '');
 const apiKey = __ENV.API_TEST_KEY || '';
 const regions = ['US', 'CA', 'CN', 'UK', 'SE'];
 const regionProfiles = {
@@ -304,6 +316,8 @@ export function handleSummary(data) {
     },
     spikeMultiplier,
     regionalShopperVus,
-    browserActionIterations
+    userActionTargetRps,
+    browserActionVus,
+    browserActionDuration
   });
 }
