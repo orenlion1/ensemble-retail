@@ -1,5 +1,7 @@
 import { browser } from 'k6/browser';
 import { check, fail, sleep } from 'k6';
+import { Counter } from 'k6/metrics';
+import { summaryOutput } from './summary.js';
 
 export const options = {
   cloud: {
@@ -29,6 +31,12 @@ export const options = {
 };
 
 const baseUrl = __ENV.BASE_URL || 'https://ensemble-grafana.com';
+const storefrontUserActions = new Counter('storefront_user_actions');
+const shoppingCartAddItems = new Counter('shopping_cart_add_items');
+const shoppingCartAddDetailItems = new Counter('shopping_cart_add_detail_items');
+const shoppingCartAddSaleItems = new Counter('shopping_cart_add_sale_items');
+const shoppingCartRemoveItems = new Counter('shopping_cart_remove_items');
+const shoppingCartCheckout = new Counter('shopping_cart_checkout');
 const regionLanguageExpectations = {
   US: { lang: 'en-US', language: 'American English', languageSlug: 'american-english', text: 'Cart' },
   CA: { lang: 'fr-CA', language: 'French', languageSlug: 'french', text: 'Panier' },
@@ -39,6 +47,15 @@ const regionLanguageExpectations = {
 
 function byAction(name) {
   return `[data-faro-user-action-name="${name}"]`;
+}
+
+function recordActionTotals(actions) {
+  storefrontUserActions.add(actions.length);
+  shoppingCartAddItems.add(actions.filter(action => action.startsWith('shopping-cart:add-item:')).length);
+  shoppingCartAddDetailItems.add(actions.filter(action => action.startsWith('shopping-cart:add-detail-item:')).length);
+  shoppingCartAddSaleItems.add(actions.filter(action => action.startsWith('shopping-cart:add-sale-item:')).length);
+  shoppingCartRemoveItems.add(actions.filter(action => action.startsWith('shopping-cart:remove-item:')).length);
+  shoppingCartCheckout.add(actions.filter(action => action === 'shopping-cart:checkout').length);
 }
 
 async function recordUserActions(page) {
@@ -227,6 +244,7 @@ export default async function () {
     sleep(1);
 
     const actions = await page.evaluate(() => window.__k6UserActions.map(action => action.actionName));
+    recordActionTotals(actions);
     if (__ENV.DEBUG_ACTIONS === '1') {
       console.log(JSON.stringify(actions));
     }
@@ -274,4 +292,13 @@ export default async function () {
   } finally {
     await page.close();
   }
+}
+
+export function handleSummary(data) {
+  return summaryOutput(data, {
+    testName: 'Browser action synthetic check',
+    slug: 'browser-actions',
+    source: 'k6-local',
+    baseUrl
+  });
 }

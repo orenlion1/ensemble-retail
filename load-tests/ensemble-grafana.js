@@ -2,6 +2,7 @@ import tempo from 'https://jslib.k6.io/http-instrumentation-tempo/1.0.0/index.js
 import http from 'k6/http';
 import { check, sleep } from 'k6';
 import { Trend } from 'k6/metrics';
+import { summaryOutput } from './summary.js';
 
 tempo.instrumentHTTP({
   propagator: 'w3c'
@@ -87,4 +88,13 @@ export default function () {
   check(account, { 'account saved': response => response.status === 200 });
 
   sleep(1);
+}
+
+export function handleSummary(data) {
+  return summaryOutput(data, {
+    testName: 'API flow load test',
+    slug: 'api-flow',
+    source: 'k6-local',
+    apiBaseUrl: baseUrl
+  });
 }

@@ -2,6 +2,7 @@ import tempo from 'https://jslib.k6.io/http-instrumentation-tempo/1.0.0/index.js
 import http from 'k6/http';
 import { check, fail, group, sleep } from 'k6';
 import { Counter, Trend } from 'k6/metrics';
+import { summaryOutput } from './summary.js';
 
 tempo.instrumentHTTP({
   propagator: 'w3c'
@@ -243,5 +244,20 @@ export default function () {
     }
 
     sleep(persona === 'sale_hunter' ? 1 : 2);
+  });
+}
+
+export function handleSummary(data) {
+  return summaryOutput(data, {
+    testName: 'Traffic spike benchmark',
+    slug: 'traffic-spikes',
+    source: 'k6-local',
+    storefrontBaseUrl,
+    apiBaseUrl,
+    spikeUsers: {
+      spikeOne: baseSpikeUsers,
+      spikeTwo: spikeTwoUsers,
+      spikeThree: spikeThreeUsers
+    }
   });
 }

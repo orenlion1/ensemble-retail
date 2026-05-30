@@ -1,0 +1,2 @@
+date,generatedAt,testName,httpRequests,httpFailures,httpFailureRate,checksTotal,checksPassRate,storefrontUserActions,shoppingCartAddItems,shoppingCartAddDetailItems,shoppingCartAddSaleItems,shoppingCartRemoveItems,shoppingCartCheckout,cartUpdates,checkoutAttempts,regionChanges,sourceFile
+"2026-05-30","2026-05-30T14:58:50.640Z","Browser action synthetic check","135","14","0.1037037037037037","29","1","31","1","2","1","1","1","","","","reports/load-tests/k6-local-summary-browser-actions-20260530T145837Z.json"

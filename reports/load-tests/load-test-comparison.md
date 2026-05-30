@@ -1,6 +1,6 @@
 # k6 Load Test Comparison
 
-Generated: 2026-05-30T14:30:17.124Z
+Generated: 2026-05-30T15:00:45.535Z
 
 Source summary: `reports/load-tests/k6-summary-20260530T131841Z.json`
 
@@ -41,6 +41,10 @@ Source run history: `reports/load-tests/k6-runs-20260530-091706.json`
 
 ![Latest HTTP p95](comparison/latest-http-p95.svg)
 
+### Latest User Action And Cart Totals
+
+![Latest user action and cart totals](comparison/latest-user-action-totals.svg)
+
 ## Result Summary
 
 | Test | Runs | Passed | Failed | Errors | Pass Rate |
@@ -48,6 +52,14 @@ Source run history: `reports/load-tests/k6-runs-20260530-091706.json`
 | 20-user regional load test | 5 | 4 | 1 | 0 | 80.00% |
 | Browser action synthetic check | 2 | 2 | 0 | 0 | 100.00% |
 | Traffic spike benchmark | 5 | 2 | 2 | 1 | 40.00% |
+
+## Request And User Action Totals
+
+These totals come from local k6 summary files named `reports/load-tests/k6-local-summary-*.json`. Cloud run history still provides total HTTP requests for latest runs, but per-action counters such as shopping cart add/remove require these local summaries or equivalent exported metric data.
+
+| Date | Generated | Test | HTTP Requests | HTTP Failures | HTTP Failure Rate | User Actions | Cart Adds Total | Add Item | Add Detail | Add Sale | Remove Item | Checkout | API Cart Updates | Checkout Attempts | Region Changes |
+|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 2026-05-30 | 05/30/2026, 10:58 | Browser action synthetic check | 135 | 14 | 10.37% | 31 | 4 | 1 | 2 | 1 | 1 | 1 | n/a | n/a | n/a |
 
 ## Run History
 
@@ -69,4 +81,5 @@ Source run history: `reports/load-tests/k6-runs-20260530-091706.json`
 ## Machine-Readable Comparison
 
 - CSV: [comparison/load-test-runs.csv](comparison/load-test-runs.csv)
+- Counter CSV: [comparison/load-test-counters.csv](comparison/load-test-counters.csv)
 - SVG charts are stored under [comparison/](comparison/).

@@ -16,6 +16,13 @@ function latestFile(prefix) {
   return files.at(-1) ? path.join(reportsDir, files.at(-1)) : null;
 }
 
+function filesWithPrefix(prefix) {
+  return readdirSync(reportsDir)
+    .filter(file => file.startsWith(prefix) && file.endsWith('.json'))
+    .sort()
+    .map(file => path.join(reportsDir, file));
+}
+
 function formatDate(value, options = {}) {
   if (!value) return 'n/a';
   return new Intl.DateTimeFormat('en-US', {
@@ -106,6 +113,39 @@ function latestByTest(summary) {
     recentRuns: test.recentRuns || [],
     error: test.error
   }));
+}
+
+function localSummariesFrom(files) {
+  return files.map(file => {
+    const summary = readJson(file);
+    const metricValues = name => summary.metrics?.[name]?.values || {};
+    const metricCount = name => metricValues(name).count ?? (
+      Number.isFinite(metricValues(name).passes) && Number.isFinite(metricValues(name).fails)
+        ? metricValues(name).passes + metricValues(name).fails
+        : null
+    );
+    const metricFailures = name => metricValues(name).passes ?? null;
+    const httpFailureMetric = summary.metrics?.http_req_failed ? 'http_req_failed' : 'browser_http_req_failed';
+    const httpDurationMetric = summary.metrics?.http_req_duration ? 'http_req_duration' : 'browser_http_req_duration';
+    return {
+      file,
+      generatedAt: summary.generatedAt,
+      date: dayKey(summary.generatedAt),
+      testName: summary.testName || 'Local k6 run',
+      source: summary.source || 'k6-local',
+      totals: {
+        ...(summary.totals || {}),
+        httpRequests: summary.totals?.httpRequests ?? metricCount('http_reqs') ?? metricCount(httpFailureMetric),
+        httpFailures: summary.totals?.httpFailures ?? metricFailures(httpFailureMetric),
+        httpFailureRate: summary.totals?.httpFailureRate ?? metricValues(httpFailureMetric).rate ?? null,
+        httpDurationP95Ms: summary.totals?.httpDurationP95Ms ?? metricValues(httpDurationMetric)['p(95)'] ?? null,
+        checksTotal: summary.totals?.checksTotal ?? metricCount('checks'),
+        checksPassRate: summary.totals?.checksPassRate ?? metricValues('checks').rate ?? null
+      },
+      userActions: summary.userActions || {},
+      businessCounters: summary.businessCounters || {}
+    };
+  }).sort((a, b) => new Date(a.generatedAt) - new Date(b.generatedAt));
 }
 
 function writeBarChart(file, title, rows, options = {}) {
@@ -223,8 +263,57 @@ function writeCsv(file, rows) {
   writeFileSync(path.join(outputDir, file), `${lines.join('\n')}\n`);
 }
 
+function writeLocalCounterCsv(file, rows) {
+  const headers = [
+    'date',
+    'generatedAt',
+    'testName',
+    'httpRequests',
+    'httpFailures',
+    'httpFailureRate',
+    'checksTotal',
+    'checksPassRate',
+    'storefrontUserActions',
+    'shoppingCartAddItems',
+    'shoppingCartAddDetailItems',
+    'shoppingCartAddSaleItems',
+    'shoppingCartRemoveItems',
+    'shoppingCartCheckout',
+    'cartUpdates',
+    'checkoutAttempts',
+    'regionChanges',
+    'sourceFile'
+  ];
+  const valueFor = (row, header) => ({
+    date: row.date,
+    generatedAt: row.generatedAt,
+    testName: row.testName,
+    httpRequests: row.totals.httpRequests,
+    httpFailures: row.totals.httpFailures,
+    httpFailureRate: row.totals.httpFailureRate,
+    checksTotal: row.totals.checksTotal,
+    checksPassRate: row.totals.checksPassRate,
+    storefrontUserActions: row.userActions.total,
+    shoppingCartAddItems: row.userActions.shoppingCartAddItems,
+    shoppingCartAddDetailItems: row.userActions.shoppingCartAddDetailItems,
+    shoppingCartAddSaleItems: row.userActions.shoppingCartAddSaleItems,
+    shoppingCartRemoveItems: row.userActions.shoppingCartRemoveItems,
+    shoppingCartCheckout: row.userActions.shoppingCartCheckout,
+    cartUpdates: row.businessCounters.cartUpdates,
+    checkoutAttempts: row.businessCounters.checkoutAttempts,
+    regionChanges: row.businessCounters.regionChanges,
+    sourceFile: path.relative('.', row.file)
+  })[header] ?? '';
+  const lines = [headers.join(',')];
+  rows.forEach(row => {
+    lines.push(headers.map(header => `"${String(valueFor(row, header)).replaceAll('"', '""')}"`).join(','));
+  });
+  writeFileSync(path.join(outputDir, file), `${lines.join('\n')}\n`);
+}
+
 const summaryFile = latestFile('k6-summary-');
 const rawRunsFile = latestFile('k6-runs-');
+const localSummaryFiles = filesWithPrefix('k6-local-summary-');
 
 if (!summaryFile) {
   console.error('No reports/load-tests/k6-summary-*.json file found.');
@@ -237,9 +326,11 @@ const summary = readJson(summaryFile);
 const rawRuns = rawRunsFile ? readJson(rawRunsFile) : { loadTests: [] };
 const runs = allRunsFrom(rawRuns);
 const latestTests = latestByTest(summary);
+const localSummaries = localSummariesFrom(localSummaryFiles);
 const generatedAt = new Date().toISOString();
 
 writeCsv('load-test-runs.csv', runs);
+writeLocalCounterCsv('load-test-counters.csv', localSummaries);
 writeResultHeatmap('load-test-results-by-date.svg', runs);
 writeTimelineChart('load-test-duration-by-date.svg', 'Run Duration By Date', runs, 'durationSeconds', {
   format: value => `${Math.round(value / 60)}m`
@@ -272,6 +363,25 @@ writeBarChart('latest-http-p95.svg', 'Latest HTTP Duration p95', latestTests
   })), {
     colorFor: () => '#2563eb'
   });
+writeBarChart('latest-user-action-totals.svg', 'Latest User Action And Cart Totals', localSummaries.slice(-8).flatMap(summary => [
+  {
+    label: `${summary.testName} cart add (${summary.date})`,
+    value: (summary.userActions.shoppingCartAddItems || 0) + (summary.userActions.shoppingCartAddDetailItems || 0) + (summary.userActions.shoppingCartAddSaleItems || 0),
+    display: String((summary.userActions.shoppingCartAddItems || 0) + (summary.userActions.shoppingCartAddDetailItems || 0) + (summary.userActions.shoppingCartAddSaleItems || 0))
+  },
+  {
+    label: `${summary.testName} cart remove (${summary.date})`,
+    value: summary.userActions.shoppingCartRemoveItems || 0,
+    display: String(summary.userActions.shoppingCartRemoveItems || 0)
+  },
+  {
+    label: `${summary.testName} API cart updates (${summary.date})`,
+    value: summary.businessCounters.cartUpdates || 0,
+    display: String(summary.businessCounters.cartUpdates || 0)
+  }
+]).filter(row => row.value > 0), {
+  colorFor: row => row.label.includes('remove') ? '#dc2626' : row.label.includes('API') ? '#9333ea' : '#16a34a'
+});
 
 const latestRows = latestTests.map(test => {
   const latest = test.latest;
@@ -317,6 +427,30 @@ const resultSummaryRows = [...new Set(runs.map(run => run.testName))].sort().map
   return `| ${testName} | ${total} | ${passed} | ${failed} | ${errors} | ${total ? percent(passed / total) : 'n/a'} |`;
 });
 
+const localCounterRows = localSummaries.slice().reverse().map(summary => {
+  const totalCartAdds = (summary.userActions.shoppingCartAddItems || 0)
+    + (summary.userActions.shoppingCartAddDetailItems || 0)
+    + (summary.userActions.shoppingCartAddSaleItems || 0);
+  return [
+    `| ${summary.date}`,
+    formatDate(summary.generatedAt),
+    summary.testName,
+    summary.totals.httpRequests ?? 'n/a',
+    summary.totals.httpFailures ?? 'n/a',
+    percent(summary.totals.httpFailureRate),
+    summary.userActions.total ?? 'n/a',
+    totalCartAdds || 'n/a',
+    summary.userActions.shoppingCartAddItems ?? 'n/a',
+    summary.userActions.shoppingCartAddDetailItems ?? 'n/a',
+    summary.userActions.shoppingCartAddSaleItems ?? 'n/a',
+    summary.userActions.shoppingCartRemoveItems ?? 'n/a',
+    summary.userActions.shoppingCartCheckout ?? 'n/a',
+    summary.businessCounters.cartUpdates ?? 'n/a',
+    summary.businessCounters.checkoutAttempts ?? 'n/a',
+    summary.businessCounters.regionChanges ?? 'n/a'
+  ].join(' | ') + ' |';
+});
+
 const markdown = `# k6 Load Test Comparison
 
 Generated: ${generatedAt}
@@ -357,11 +491,23 @@ ${latestRows.join('\n')}
 
 ![Latest HTTP p95](comparison/latest-http-p95.svg)
 
+### Latest User Action And Cart Totals
+
+![Latest user action and cart totals](comparison/latest-user-action-totals.svg)
+
 ## Result Summary
 
 | Test | Runs | Passed | Failed | Errors | Pass Rate |
 |---|---:|---:|---:|---:|---:|
 ${resultSummaryRows.join('\n')}
+
+## Request And User Action Totals
+
+These totals come from local k6 summary files named \`reports/load-tests/k6-local-summary-*.json\`. Cloud run history still provides total HTTP requests for latest runs, but per-action counters such as shopping cart add/remove require these local summaries or equivalent exported metric data.
+
+| Date | Generated | Test | HTTP Requests | HTTP Failures | HTTP Failure Rate | User Actions | Cart Adds Total | Add Item | Add Detail | Add Sale | Remove Item | Checkout | API Cart Updates | Checkout Attempts | Region Changes |
+|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+${localCounterRows.length ? localCounterRows.join('\n') : '| n/a | n/a | No local k6 summary files found | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |'}
 
 ## Run History
 
@@ -372,6 +518,7 @@ ${historyRows.join('\n')}
 ## Machine-Readable Comparison
 
 - CSV: [comparison/load-test-runs.csv](comparison/load-test-runs.csv)
+- Counter CSV: [comparison/load-test-counters.csv](comparison/load-test-counters.csv)
 - SVG charts are stored under [comparison/](comparison/).
 `;
 

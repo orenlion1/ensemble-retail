@@ -482,10 +482,12 @@ node scripts/report-load-tests.mjs
 The report is written to `reports/load-tests/load-test-comparison.md`. Generate it for passed, failed, and error runs whenever Grafana/k6 returns usable run metadata. Each run is identified by test name, run ID, and date. The generated `reports/load-tests/comparison/` folder includes:
 
 - `load-test-runs.csv` for spreadsheet comparisons.
+- `load-test-counters.csv` for total HTTP requests, user actions, shopping cart add/remove actions, checkout actions, cart updates, checkout attempts, and region changes.
 - `load-test-results-by-date.svg` for pass/fail/error history.
 - `load-test-duration-by-date.svg` for runtime comparison.
 - `load-test-vuh-by-date.svg` for Grafana Cloud VUH cost comparison.
 - `latest-http-failure-rate.svg`, `latest-check-pass-rate.svg`, and `latest-http-p95.svg` for latest-run health comparisons.
+- `latest-user-action-totals.svg` for comparing cart add, cart remove, and API cart update totals across recent local summary files.
 
 ### k6 Traffic Spike Benchmark
 

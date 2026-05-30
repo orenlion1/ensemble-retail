@@ -3,6 +3,7 @@ import http from 'k6/http';
 import { browser } from 'k6/browser';
 import { check, fail, group, sleep } from 'k6';
 import { Counter, Trend } from 'k6/metrics';
+import { summaryOutput } from './summary.js';
 
 tempo.instrumentHTTP({
   propagator: 'w3c'
@@ -311,5 +312,15 @@ export function regionalJourney() {
     } else {
       sleep(2);
     }
+  });
+}
+
+export function handleSummary(data) {
+  return summaryOutput(data, {
+    testName: '30-user regional load test',
+    slug: 'regional',
+    source: 'k6-local',
+    storefrontBaseUrl,
+    apiBaseUrl
   });
 }
