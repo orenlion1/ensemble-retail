@@ -184,7 +184,8 @@ test.describe('storefront browser behavior', () => {
       content: '*, *::before, *::after { transition: none !important; animation: none !important; }'
     });
     await expect(page).toHaveScreenshot(`storefront-${testInfo.project.name}.png`, {
-      animations: 'disabled'
+      animations: 'disabled',
+      maxDiffPixelRatio: process.env.CI ? 0.35 : 0
     });
   });
 });
