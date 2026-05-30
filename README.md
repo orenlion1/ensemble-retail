@@ -494,7 +494,7 @@ The report is written to `reports/load-tests/load-test-comparison.md`. Generate 
 
 Slash command alias: `/traffic-spike-load-test`. The repo-local command definition is `.codex/commands/traffic-spike-load-test.md` and points agents at `skills/observability/SKILLS.md` before running the benchmark and post-run reports.
 
-The spike benchmark is `load-tests/grafana-cloud-traffic-spikes.js`. It uses the same regional shopper personas as the regional test, but benchmarks three traffic spikes where each peak is 2x the previous one. The default first spike is now 100 VUs:
+The spike benchmark is `load-tests/grafana-cloud-traffic-spikes.js`. The alternate Grafana Cloud run entrypoint `load-tests/grafana-cloud-traffic-spikes-2.js` reuses the same scenarios and thresholds, but publishes the run under the Cloud k6 test name `ensemble-grafana-traffic-spikes-2`. It uses the same regional shopper personas as the regional test, but benchmarks three traffic spikes where each peak is 2x the previous one. The default first spike is now 100 VUs:
 
 - Spike 1: `100` VUs.
 - Spike 2: `200` VUs.
@@ -512,6 +512,18 @@ API_TEST_KEY="$API_TEST_KEY" \
 STOREFRONT_BASE_URL=https://ensemble-grafana.com \
 API_BASE_URL=https://ensemble-grafana.com \
 k6 cloud run load-tests/grafana-cloud-traffic-spikes.js
+```
+
+Use the second named Cloud k6 test when a separate Grafana Cloud run history is needed:
+
+```sh
+set -a
+source .env
+set +a
+API_TEST_KEY="$API_TEST_KEY" \
+STOREFRONT_BASE_URL=https://ensemble-grafana.com \
+API_BASE_URL=https://ensemble-grafana.com \
+k6 cloud run load-tests/grafana-cloud-traffic-spikes-2.js
 ```
 
 The command uploads the execution to Grafana Cloud k6 and returns a run URL. `API_TEST_KEY` can come from the local `.env` injection above or from the Grafana Cloud k6 project environment. The default `API_BASE_URL` is the storefront domain so `/api/*` requests traverse CloudFront and the edge WAF before reaching the API origin. Set `API_BASE_URL=https://api.ensemble-grafana.com` only when intentionally testing the ALB/API origin directly.
