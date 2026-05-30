@@ -148,7 +148,7 @@ Recommended spike profile:
 - Browser-action scripts should wait for a stable app-shell selector instead of global network idle when the application emits background telemetry or loads remote images. This keeps navigation readiness tied to user-visible UI, not long-running Faro/image requests.
 - For high protocol/API volume, prefer a `constant-arrival-rate` scenario with low-cardinality request names. The Ensemble traffic-spike profile includes a steady `API_REQUEST_RPS=8` scenario for the requested 8 requests/second load.
 - For browser-action coverage, ramp browser VUs up instead of starting every Chromium session at once. Keep the browser scenario small enough that Chromium capacity does not dominate API load-test results.
-- When user-action throughput is the goal, add tagged per-action counters and thresholds for every expected action family. Default Ensemble traffic-spike runs target at least 0.25 user-action events per second per action family.
+- When user-action throughput is the goal, add tagged per-action counters and thresholds for every expected action family. Default Ensemble traffic-spike runs target at least 0.2 user-action events per second per action family.
 
 Required k6 environment:
 

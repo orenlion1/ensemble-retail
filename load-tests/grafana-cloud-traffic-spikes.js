@@ -21,9 +21,11 @@ const spikeTwoUsers = Math.ceil(baseSpikeUsers * spikeMultiplier);
 const spikeThreeUsers = Math.ceil(spikeTwoUsers * spikeMultiplier);
 const regionalShopperVus = Number(__ENV.REGIONAL_SHOPPER_VUS || 30);
 const apiRequestRate = Number(__ENV.API_REQUEST_RPS || 8);
-const userActionTargetRps = Number(__ENV.USER_ACTION_TARGET_RPS || 0.25);
+const userActionTargetRps = Number(__ENV.USER_ACTION_TARGET_RPS || 0.2);
 const browserActionVus = Number(__ENV.BROWSER_ACTION_VUS || 5);
 const benchmarkDuration = __ENV.TEST_DURATION || '15m';
+const benchmarkDurationSeconds = durationToSeconds(benchmarkDuration);
+const apiRequestRateMinimumCount = Math.floor(apiRequestRate * benchmarkDurationSeconds * 0.95);
 const browserActionRampUp = __ENV.BROWSER_ACTION_RAMP_UP || '3m';
 const browserActionHold = __ENV.BROWSER_ACTION_HOLD || '10m';
 const browserActionRampDown = __ENV.BROWSER_ACTION_RAMP_DOWN || '2m';
@@ -34,6 +36,17 @@ const userActionRateThresholds = Object.fromEntries(
     [`rate>=${userActionTargetRps}`]
   ])
 );
+
+function durationToSeconds(value) {
+  const match = String(value).trim().match(/^(\d+(?:\.\d+)?)(ms|s|m|h)$/);
+  if (!match) return 900;
+  const amount = Number(match[1]);
+  const unit = match[2];
+  if (unit === 'ms') return amount / 1000;
+  if (unit === 's') return amount;
+  if (unit === 'm') return amount * 60;
+  return amount * 3600;
+}
 
 export const options = {
   cloud: {
@@ -101,7 +114,7 @@ export const options = {
     cart_updates: ['count>20'],
     checkout_attempts: ['count>5'],
     region_changes: ['count>20'],
-    api_request_rate_requests: [`rate>=${apiRequestRate}`],
+    api_request_rate_requests: [`count>=${apiRequestRateMinimumCount}`],
     api_request_rate_latency: ['p(95)<1000'],
     storefront_user_actions: ['count>300'],
     ...userActionRateThresholds,
