@@ -34,7 +34,7 @@ digraph traffic_spike_requests_only {
   subgraph cluster_parallel {
     label="Parallel request load"; color="#cbd5e1"; style="rounded,dashed"; fontsize=13; fontname="Helvetica";
     regional [label="{regional_shoppers|30 VUs|~120 req/wave}", fillcolor="#ecfdf5"];
-    browser_actions [label="{storefront_actions|60 browser VUs × 10m|browser requests vary; Faro actions targeted}", fillcolor="#faf5ff"];
+    browser_actions [label="{storefront_actions|20 browser VUs × 10m|browser requests vary; Faro actions targeted}", fillcolor="#faf5ff"];
   }
 
   note -> p_avg [label="basis"];

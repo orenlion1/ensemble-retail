@@ -120,7 +120,7 @@
 <g id="node8" class="node">
 <title>legend</title>
 <text xml:space="preserve" text-anchor="start" x="4" y="-163.82" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="14.00">Config:</text>
-<text xml:space="preserve" text-anchor="start" x="51.25" y="-163.82" font-family="Helvetica,sans-Serif" font-size="14.00"> base 100, multiplier 2, regional 30 VUs, storefront actions 60 browser VUs for 10m</text>
+<text xml:space="preserve" text-anchor="start" x="51.25" y="-163.82" font-family="Helvetica,sans-Serif" font-size="14.00"> base 100, multiplier 2, regional 30 VUs, storefront actions 20 browser VUs for 10m</text>
 <text xml:space="preserve" text-anchor="start" x="4" y="-144.88" font-family="Helvetica,sans-Serif" font-size="10.00">browser 3 · cart_builder 4 · account_manager 4 · sale_hunter 4 · checkout 5; actual totals depend on completed iterations.</text>
 </g>
 </g>

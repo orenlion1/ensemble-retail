@@ -293,7 +293,7 @@
 <title>storefront</title>
 <path fill="#faf5ff" stroke="#334155" d="M1649.38,-181.5C1649.38,-181.5 1479.62,-181.5 1479.62,-181.5 1473.62,-181.5 1467.62,-175.5 1467.62,-169.5 1467.62,-169.5 1467.62,-134.5 1467.62,-134.5 1467.62,-128.5 1473.62,-122.5 1479.62,-122.5 1479.62,-122.5 1649.38,-122.5 1649.38,-122.5 1655.38,-122.5 1661.38,-128.5 1661.38,-134.5 1661.38,-134.5 1661.38,-169.5 1661.38,-169.5 1661.38,-175.5 1655.38,-181.5 1649.38,-181.5"/>
 <text xml:space="preserve" text-anchor="middle" x="1564.5" y="-166.1" font-family="Helvetica,sans-Serif" font-size="12.00">storefront_actions</text>
-<text xml:space="preserve" text-anchor="middle" x="1564.5" y="-153.35" font-family="Helvetica,sans-Serif" font-size="12.00">60 browser VUs for 10m</text>
+<text xml:space="preserve" text-anchor="middle" x="1564.5" y="-153.35" font-family="Helvetica,sans-Serif" font-size="12.00">20 browser VUs for 10m</text>
 <text xml:space="preserve" text-anchor="middle" x="1564.5" y="-140.6" font-family="Helvetica,sans-Serif" font-size="12.00">Faro UI actions + browser metrics</text>
 <text xml:space="preserve" text-anchor="middle" x="1564.5" y="-127.85" font-family="Helvetica,sans-Serif" font-size="12.00">standard http_reqs may be n/a</text>
 </g>

@@ -290,7 +290,7 @@
 <polygon fill="none" stroke="#334155" points="10,-1 10,-33.5 174.5,-33.5 174.5,-1 10,-1"/>
 <text xml:space="preserve" text-anchor="start" x="18" y="-13.5" font-family="Courier,monospace" font-size="14.00">storefront_actions</text>
 <polygon fill="none" stroke="#334155" points="174.5,-1 174.5,-33.5 324.75,-33.5 324.75,-1 174.5,-1"/>
-<text xml:space="preserve" text-anchor="start" x="182.5" y="-13.5" font-family="Helvetica,sans-Serif" font-size="14.00">60 browser VUs / 10m</text>
+<text xml:space="preserve" text-anchor="start" x="182.5" y="-13.5" font-family="Helvetica,sans-Serif" font-size="14.00">20 browser VUs / 10m</text>
 <polygon fill="none" stroke="#334155" points="324.75,-1 324.75,-33.5 817,-33.5 817,-1 324.75,-1"/>
 <text xml:space="preserve" text-anchor="start" x="332.75" y="-13.5" font-family="Helvetica,sans-Serif" font-size="14.00">Generates Faro UI actions and browser metrics; standard http_reqs may be n/a</text>
 <polygon fill="none" stroke="#334155" points="9,0 9,-129 818,-129 818,0 9,0"/>

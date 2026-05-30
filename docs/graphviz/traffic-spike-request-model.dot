@@ -43,7 +43,7 @@ digraph traffic_spike_request_model {
   subgraph cluster_parallel {
     label="Parallel scenarios in combined script"; color="#cbd5e1"; style="rounded,dashed"; fontsize=16; fontname="Helvetica";
     regional [label="regional_shoppers\n30 VUs for TEST_DURATION/default 10m\n~120 requests per completed wave", fillcolor="#ecfdf5"];
-    storefront [label="storefront_actions\n60 browser VUs for 10m\nFaro UI actions + browser metrics\nstandard http_reqs may be n/a", fillcolor="#faf5ff"];
+    storefront [label="storefront_actions\n20 browser VUs for 10m\nFaro UI actions + browser metrics\nstandard http_reqs may be n/a", fillcolor="#faf5ff"];
   }
 
   note -> avg;
