@@ -121,7 +121,7 @@
 <polygon fill="none" stroke="#334155" points="23.75,-456 23.75,-487 154.5,-487 154.5,-456 23.75,-456"/>
 <text xml:space="preserve" text-anchor="start" x="31.75" y="-467.75" font-family="Helvetica,sans-Serif" font-size="14.00">Warmup / recovery</text>
 <polygon fill="none" stroke="#334155" points="154.5,-456 154.5,-487 226,-487 226,-456 154.5,-456"/>
-<text xml:space="preserve" text-anchor="start" x="198.5" y="-467.75" font-family="Helvetica,sans-Serif" font-size="14.00">1m</text>
+<text xml:space="preserve" text-anchor="start" x="198.5" y="-467.75" font-family="Helvetica,sans-Serif" font-size="14.00">2m</text>
 <polygon fill="none" stroke="#334155" points="226,-456 226,-487 313.25,-487 313.25,-456 226,-456"/>
 <text xml:space="preserve" text-anchor="start" x="290.25" y="-467.75" font-family="Helvetica,sans-Serif" font-size="14.00">25</text>
 <polygon fill="none" stroke="#334155" points="313.25,-456 313.25,-487 446.25,-487 446.25,-456 313.25,-456"/>
@@ -149,7 +149,7 @@
 <polygon fill="none" stroke="#334155" points="23.75,-394 23.75,-425 154.5,-425 154.5,-394 23.75,-394"/>
 <text xml:space="preserve" text-anchor="start" x="31.75" y="-405.75" font-family="Helvetica,sans-Serif" font-size="14.00">Hold spike 1</text>
 <polygon fill="none" stroke="#334155" points="154.5,-394 154.5,-425 226,-425 226,-394 154.5,-394"/>
-<text xml:space="preserve" text-anchor="start" x="198.5" y="-405.75" font-family="Helvetica,sans-Serif" font-size="14.00">1m</text>
+<text xml:space="preserve" text-anchor="start" x="198.5" y="-405.75" font-family="Helvetica,sans-Serif" font-size="14.00">2m</text>
 <polygon fill="none" stroke="#334155" points="226,-394 226,-425 313.25,-425 313.25,-394 226,-394"/>
 <text xml:space="preserve" text-anchor="start" x="282.75" y="-405.75" font-family="Helvetica,sans-Serif" font-size="14.00">100</text>
 <polygon fill="none" stroke="#334155" points="313.25,-394 313.25,-425 446.25,-425 446.25,-394 313.25,-394"/>
@@ -163,7 +163,7 @@
 <polygon fill="none" stroke="#334155" points="23.75,-363 23.75,-394 154.5,-394 154.5,-363 23.75,-363"/>
 <text xml:space="preserve" text-anchor="start" x="31.75" y="-374.75" font-family="Helvetica,sans-Serif" font-size="14.00">Recovery</text>
 <polygon fill="none" stroke="#334155" points="154.5,-363 154.5,-394 226,-394 226,-363 154.5,-363"/>
-<text xml:space="preserve" text-anchor="start" x="198.5" y="-374.75" font-family="Helvetica,sans-Serif" font-size="14.00">1m</text>
+<text xml:space="preserve" text-anchor="start" x="176.75" y="-374.75" font-family="Helvetica,sans-Serif" font-size="14.00">1m30s</text>
 <polygon fill="none" stroke="#334155" points="226,-363 226,-394 313.25,-394 313.25,-363 226,-363"/>
 <text xml:space="preserve" text-anchor="start" x="290.25" y="-374.75" font-family="Helvetica,sans-Serif" font-size="14.00">25</text>
 <polygon fill="none" stroke="#334155" points="313.25,-363 313.25,-394 446.25,-394 446.25,-363 313.25,-363"/>
@@ -191,7 +191,7 @@
 <polygon fill="none" stroke="#334155" points="23.75,-301 23.75,-332 154.5,-332 154.5,-301 23.75,-301"/>
 <text xml:space="preserve" text-anchor="start" x="31.75" y="-312.75" font-family="Helvetica,sans-Serif" font-size="14.00">Hold spike 2</text>
 <polygon fill="none" stroke="#334155" points="154.5,-301 154.5,-332 226,-332 226,-301 154.5,-301"/>
-<text xml:space="preserve" text-anchor="start" x="198.5" y="-312.75" font-family="Helvetica,sans-Serif" font-size="14.00">1m</text>
+<text xml:space="preserve" text-anchor="start" x="198.5" y="-312.75" font-family="Helvetica,sans-Serif" font-size="14.00">2m</text>
 <polygon fill="none" stroke="#334155" points="226,-301 226,-332 313.25,-332 313.25,-301 226,-301"/>
 <text xml:space="preserve" text-anchor="start" x="282.75" y="-312.75" font-family="Helvetica,sans-Serif" font-size="14.00">200</text>
 <polygon fill="none" stroke="#334155" points="313.25,-301 313.25,-332 446.25,-332 446.25,-301 313.25,-301"/>
@@ -205,7 +205,7 @@
 <polygon fill="none" stroke="#334155" points="23.75,-270 23.75,-301 154.5,-301 154.5,-270 23.75,-270"/>
 <text xml:space="preserve" text-anchor="start" x="31.75" y="-281.75" font-family="Helvetica,sans-Serif" font-size="14.00">Recovery</text>
 <polygon fill="none" stroke="#334155" points="154.5,-270 154.5,-301 226,-301 226,-270 154.5,-270"/>
-<text xml:space="preserve" text-anchor="start" x="198.5" y="-281.75" font-family="Helvetica,sans-Serif" font-size="14.00">1m</text>
+<text xml:space="preserve" text-anchor="start" x="176.75" y="-281.75" font-family="Helvetica,sans-Serif" font-size="14.00">1m30s</text>
 <polygon fill="none" stroke="#334155" points="226,-270 226,-301 313.25,-301 313.25,-270 226,-270"/>
 <text xml:space="preserve" text-anchor="start" x="290.25" y="-281.75" font-family="Helvetica,sans-Serif" font-size="14.00">25</text>
 <polygon fill="none" stroke="#334155" points="313.25,-270 313.25,-301 446.25,-301 446.25,-270 313.25,-270"/>
@@ -233,7 +233,7 @@
 <polygon fill="none" stroke="#334155" points="23.75,-208 23.75,-239 154.5,-239 154.5,-208 23.75,-208"/>
 <text xml:space="preserve" text-anchor="start" x="31.75" y="-219.75" font-family="Helvetica,sans-Serif" font-size="14.00">Hold spike 3</text>
 <polygon fill="none" stroke="#334155" points="154.5,-208 154.5,-239 226,-239 226,-208 154.5,-208"/>
-<text xml:space="preserve" text-anchor="start" x="198.5" y="-219.75" font-family="Helvetica,sans-Serif" font-size="14.00">1m</text>
+<text xml:space="preserve" text-anchor="start" x="198.5" y="-219.75" font-family="Helvetica,sans-Serif" font-size="14.00">2m</text>
 <polygon fill="none" stroke="#334155" points="226,-208 226,-239 313.25,-239 313.25,-208 226,-208"/>
 <text xml:space="preserve" text-anchor="start" x="282.75" y="-219.75" font-family="Helvetica,sans-Serif" font-size="14.00">400</text>
 <polygon fill="none" stroke="#334155" points="313.25,-208 313.25,-239 446.25,-239 446.25,-208 313.25,-208"/>
@@ -247,7 +247,7 @@
 <polygon fill="none" stroke="#334155" points="23.75,-177 23.75,-208 154.5,-208 154.5,-177 23.75,-177"/>
 <text xml:space="preserve" text-anchor="start" x="31.75" y="-188.75" font-family="Helvetica,sans-Serif" font-size="14.00">Ramp down</text>
 <polygon fill="none" stroke="#334155" points="154.5,-177 154.5,-208 226,-208 226,-177 154.5,-177"/>
-<text xml:space="preserve" text-anchor="start" x="198.5" y="-188.75" font-family="Helvetica,sans-Serif" font-size="14.00">1m</text>
+<text xml:space="preserve" text-anchor="start" x="176.75" y="-188.75" font-family="Helvetica,sans-Serif" font-size="14.00">2m30s</text>
 <polygon fill="none" stroke="#334155" points="226,-177 226,-208 313.25,-208 313.25,-177 226,-177"/>
 <text xml:space="preserve" text-anchor="start" x="297.75" y="-188.75" font-family="Helvetica,sans-Serif" font-size="14.00">0</text>
 <polygon fill="none" stroke="#334155" points="313.25,-177 313.25,-208 446.25,-208 446.25,-177 313.25,-177"/>
@@ -269,31 +269,31 @@
 <!-- parallel_table -->
 <g id="node4" class="node">
 <title>parallel_table</title>
-<polygon fill="#f3e8ff" stroke="none" points="13.75,-97 13.75,-128 813.25,-128 813.25,-97 13.75,-97"/>
-<polygon fill="none" stroke="#334155" points="13.75,-97 13.75,-128 813.25,-128 813.25,-97 13.75,-97"/>
+<polygon fill="#f3e8ff" stroke="none" points="10,-97 10,-128 817,-128 817,-97 10,-97"/>
+<polygon fill="none" stroke="#334155" points="10,-97 10,-128 817,-128 817,-97 10,-97"/>
 <text xml:space="preserve" text-anchor="start" x="281.88" y="-107.7" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="14.00">Parallel scenarios in the combined script</text>
-<polygon fill="#f1f5f9" stroke="none" points="13.75,-66 13.75,-97 178.25,-97 178.25,-66 13.75,-66"/>
-<polygon fill="none" stroke="#334155" points="13.75,-66 13.75,-97 178.25,-97 178.25,-66 13.75,-66"/>
-<text xml:space="preserve" text-anchor="start" x="67.5" y="-76.7" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="14.00">Scenario</text>
-<polygon fill="#f1f5f9" stroke="none" points="178.25,-66 178.25,-97 321,-97 321,-66 178.25,-66"/>
-<polygon fill="none" stroke="#334155" points="178.25,-66 178.25,-97 321,-97 321,-66 178.25,-66"/>
+<polygon fill="#f1f5f9" stroke="none" points="10,-66 10,-97 174.5,-97 174.5,-66 10,-66"/>
+<polygon fill="none" stroke="#334155" points="10,-66 10,-97 174.5,-97 174.5,-66 10,-66"/>
+<text xml:space="preserve" text-anchor="start" x="63.75" y="-76.7" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="14.00">Scenario</text>
+<polygon fill="#f1f5f9" stroke="none" points="174.5,-66 174.5,-97 324.75,-97 324.75,-66 174.5,-66"/>
+<polygon fill="none" stroke="#334155" points="174.5,-66 174.5,-97 324.75,-97 324.75,-66 174.5,-66"/>
 <text xml:space="preserve" text-anchor="start" x="233.5" y="-76.7" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="14.00">Load</text>
-<polygon fill="#f1f5f9" stroke="none" points="321,-66 321,-97 813.25,-97 813.25,-66 321,-66"/>
-<polygon fill="none" stroke="#334155" points="321,-66 321,-97 813.25,-97 813.25,-66 321,-66"/>
-<text xml:space="preserve" text-anchor="start" x="518.38" y="-76.7" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="14.00">Request model</text>
-<polygon fill="none" stroke="#334155" points="13.75,-33.5 13.75,-66 178.25,-66 178.25,-33.5 13.75,-33.5"/>
-<text xml:space="preserve" text-anchor="start" x="21.75" y="-46" font-family="Courier,monospace" font-size="14.00">regional_shoppers</text>
-<polygon fill="none" stroke="#334155" points="178.25,-33.5 178.25,-66 321,-66 321,-33.5 178.25,-33.5"/>
-<text xml:space="preserve" text-anchor="start" x="268.75" y="-46" font-family="Helvetica,sans-Serif" font-size="14.00">30 VUs</text>
-<polygon fill="none" stroke="#334155" points="321,-33.5 321,-66 813.25,-66 813.25,-33.5 321,-33.5"/>
-<text xml:space="preserve" text-anchor="start" x="329" y="-46" font-family="Helvetica,sans-Serif" font-size="14.00">About 120 requests per completed wave</text>
-<polygon fill="none" stroke="#334155" points="13.75,-1 13.75,-33.5 178.25,-33.5 178.25,-1 13.75,-1"/>
-<text xml:space="preserve" text-anchor="start" x="21.75" y="-13.5" font-family="Courier,monospace" font-size="14.00">storefront_actions</text>
-<polygon fill="none" stroke="#334155" points="178.25,-1 178.25,-33.5 321,-33.5 321,-1 178.25,-1"/>
-<text xml:space="preserve" text-anchor="start" x="186.25" y="-13.5" font-family="Helvetica,sans-Serif" font-size="14.00">5 browser VUs / 10m</text>
-<polygon fill="none" stroke="#334155" points="321,-1 321,-33.5 813.25,-33.5 813.25,-1 321,-1"/>
-<text xml:space="preserve" text-anchor="start" x="329" y="-13.5" font-family="Helvetica,sans-Serif" font-size="14.00">Generates Faro UI actions and browser metrics; standard http_reqs may be n/a</text>
-<polygon fill="none" stroke="#334155" points="12.75,0 12.75,-129 814.25,-129 814.25,0 12.75,0"/>
+<polygon fill="#f1f5f9" stroke="none" points="324.75,-66 324.75,-97 817,-97 817,-66 324.75,-66"/>
+<polygon fill="none" stroke="#334155" points="324.75,-66 324.75,-97 817,-97 817,-66 324.75,-66"/>
+<text xml:space="preserve" text-anchor="start" x="522.12" y="-76.7" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="14.00">Request model</text>
+<polygon fill="none" stroke="#334155" points="10,-33.5 10,-66 174.5,-66 174.5,-33.5 10,-33.5"/>
+<text xml:space="preserve" text-anchor="start" x="18" y="-46" font-family="Courier,monospace" font-size="14.00">regional_shoppers</text>
+<polygon fill="none" stroke="#334155" points="174.5,-33.5 174.5,-66 324.75,-66 324.75,-33.5 174.5,-33.5"/>
+<text xml:space="preserve" text-anchor="start" x="272.5" y="-46" font-family="Helvetica,sans-Serif" font-size="14.00">30 VUs</text>
+<polygon fill="none" stroke="#334155" points="324.75,-33.5 324.75,-66 817,-66 817,-33.5 324.75,-33.5"/>
+<text xml:space="preserve" text-anchor="start" x="332.75" y="-46" font-family="Helvetica,sans-Serif" font-size="14.00">About 120 requests per completed wave</text>
+<polygon fill="none" stroke="#334155" points="10,-1 10,-33.5 174.5,-33.5 174.5,-1 10,-1"/>
+<text xml:space="preserve" text-anchor="start" x="18" y="-13.5" font-family="Courier,monospace" font-size="14.00">storefront_actions</text>
+<polygon fill="none" stroke="#334155" points="174.5,-1 174.5,-33.5 324.75,-33.5 324.75,-1 174.5,-1"/>
+<text xml:space="preserve" text-anchor="start" x="182.5" y="-13.5" font-family="Helvetica,sans-Serif" font-size="14.00">60 browser VUs / 15m</text>
+<polygon fill="none" stroke="#334155" points="324.75,-1 324.75,-33.5 817,-33.5 817,-1 324.75,-1"/>
+<text xml:space="preserve" text-anchor="start" x="332.75" y="-13.5" font-family="Helvetica,sans-Serif" font-size="14.00">Generates Faro UI actions and browser metrics; standard http_reqs may be n/a</text>
+<polygon fill="none" stroke="#334155" points="9,0 9,-129 818,-129 818,0 9,0"/>
 </g>
 <!-- stage_table&#45;&gt;parallel_table -->
 <g id="edge3" class="edge">

@@ -55,7 +55,7 @@
 <title>warmup</title>
 <path fill="#f1f5f9" stroke="#334155" d="M1613.38,-314.25C1613.38,-314.25 1515.62,-314.25 1515.62,-314.25 1509.62,-314.25 1503.62,-308.25 1503.62,-302.25 1503.62,-302.25 1503.62,-241.75 1503.62,-241.75 1503.62,-235.75 1509.62,-229.75 1515.62,-229.75 1515.62,-229.75 1613.38,-229.75 1613.38,-229.75 1619.38,-229.75 1625.38,-235.75 1625.38,-241.75 1625.38,-241.75 1625.38,-302.25 1625.38,-302.25 1625.38,-308.25 1619.38,-314.25 1613.38,-314.25"/>
 <text xml:space="preserve" text-anchor="middle" x="1564.5" y="-298.85" font-family="Helvetica,sans-Serif" font-size="12.00">Warmup</text>
-<text xml:space="preserve" text-anchor="middle" x="1564.5" y="-286.1" font-family="Helvetica,sans-Serif" font-size="12.00">1m, 25 VUs</text>
+<text xml:space="preserve" text-anchor="middle" x="1564.5" y="-286.1" font-family="Helvetica,sans-Serif" font-size="12.00">2m, 25 VUs</text>
 <text xml:space="preserve" text-anchor="middle" x="1564.5" y="-273.35" font-family="Helvetica,sans-Serif" font-size="12.00">~100 requests</text>
 <text xml:space="preserve" text-anchor="middle" x="1564.5" y="-260.6" font-family="Helvetica,sans-Serif" font-size="12.00">15 cart updates</text>
 <text xml:space="preserve" text-anchor="middle" x="1564.5" y="-247.85" font-family="Helvetica,sans-Serif" font-size="12.00">5 checkout attempts</text>
@@ -73,7 +73,7 @@
 <title>regional</title>
 <path fill="#ecfdf5" stroke="#334155" d="M1673,-90.12C1673,-90.12 1456,-90.12 1456,-90.12 1450,-90.12 1444,-84.12 1444,-78.12 1444,-78.12 1444,-55.88 1444,-55.88 1444,-49.88 1450,-43.88 1456,-43.88 1456,-43.88 1673,-43.88 1673,-43.88 1679,-43.88 1685,-49.88 1685,-55.88 1685,-55.88 1685,-78.12 1685,-78.12 1685,-84.12 1679,-90.12 1673,-90.12"/>
 <text xml:space="preserve" text-anchor="middle" x="1564.5" y="-74.72" font-family="Helvetica,sans-Serif" font-size="12.00">regional_shoppers</text>
-<text xml:space="preserve" text-anchor="middle" x="1564.5" y="-61.98" font-family="Helvetica,sans-Serif" font-size="12.00">30 VUs for TEST_DURATION/default 10m</text>
+<text xml:space="preserve" text-anchor="middle" x="1564.5" y="-61.98" font-family="Helvetica,sans-Serif" font-size="12.00">30 VUs for TEST_DURATION/default 15m</text>
 <text xml:space="preserve" text-anchor="middle" x="1564.5" y="-49.23" font-family="Helvetica,sans-Serif" font-size="12.00">~120 requests per completed wave</text>
 </g>
 <!-- avg&#45;&gt;regional -->
@@ -160,7 +160,7 @@
 <title>hold1</title>
 <path fill="#bfdbfe" stroke="#334155" d="M2052.75,-314.25C2052.75,-314.25 1947.5,-314.25 1947.5,-314.25 1941.5,-314.25 1935.5,-308.25 1935.5,-302.25 1935.5,-302.25 1935.5,-241.75 1935.5,-241.75 1935.5,-235.75 1941.5,-229.75 1947.5,-229.75 1947.5,-229.75 2052.75,-229.75 2052.75,-229.75 2058.75,-229.75 2064.75,-235.75 2064.75,-241.75 2064.75,-241.75 2064.75,-302.25 2064.75,-302.25 2064.75,-308.25 2058.75,-314.25 2052.75,-314.25"/>
 <text xml:space="preserve" text-anchor="middle" x="2000.12" y="-298.85" font-family="Helvetica,sans-Serif" font-size="12.00">Hold Spike 1</text>
-<text xml:space="preserve" text-anchor="middle" x="2000.12" y="-286.1" font-family="Helvetica,sans-Serif" font-size="12.00">1m, 100 VUs</text>
+<text xml:space="preserve" text-anchor="middle" x="2000.12" y="-286.1" font-family="Helvetica,sans-Serif" font-size="12.00">2m, 100 VUs</text>
 <text xml:space="preserve" text-anchor="middle" x="2000.12" y="-273.35" font-family="Helvetica,sans-Serif" font-size="12.00">~400 requests / wave</text>
 <text xml:space="preserve" text-anchor="middle" x="2000.12" y="-260.6" font-family="Helvetica,sans-Serif" font-size="12.00">60 cart updates</text>
 <text xml:space="preserve" text-anchor="middle" x="2000.12" y="-247.85" font-family="Helvetica,sans-Serif" font-size="12.00">20 checkout attempts</text>
@@ -177,7 +177,7 @@
 <title>recovery1</title>
 <path fill="#f1f5f9" stroke="#334155" d="M2237,-314.25C2237,-314.25 2131.75,-314.25 2131.75,-314.25 2125.75,-314.25 2119.75,-308.25 2119.75,-302.25 2119.75,-302.25 2119.75,-241.75 2119.75,-241.75 2119.75,-235.75 2125.75,-229.75 2131.75,-229.75 2131.75,-229.75 2237,-229.75 2237,-229.75 2243,-229.75 2249,-235.75 2249,-241.75 2249,-241.75 2249,-302.25 2249,-302.25 2249,-308.25 2243,-314.25 2237,-314.25"/>
 <text xml:space="preserve" text-anchor="middle" x="2184.38" y="-298.85" font-family="Helvetica,sans-Serif" font-size="12.00">Recovery</text>
-<text xml:space="preserve" text-anchor="middle" x="2184.38" y="-286.1" font-family="Helvetica,sans-Serif" font-size="12.00">1m, 25 VUs</text>
+<text xml:space="preserve" text-anchor="middle" x="2184.38" y="-286.1" font-family="Helvetica,sans-Serif" font-size="12.00">1m30s, 25 VUs</text>
 <text xml:space="preserve" text-anchor="middle" x="2184.38" y="-273.35" font-family="Helvetica,sans-Serif" font-size="12.00">~100 requests / wave</text>
 <text xml:space="preserve" text-anchor="middle" x="2184.38" y="-260.6" font-family="Helvetica,sans-Serif" font-size="12.00">15 cart updates</text>
 <text xml:space="preserve" text-anchor="middle" x="2184.38" y="-247.85" font-family="Helvetica,sans-Serif" font-size="12.00">5 checkout attempts</text>
@@ -211,7 +211,7 @@
 <title>hold2</title>
 <path fill="#fcd34d" stroke="#334155" d="M2604.75,-314.25C2604.75,-314.25 2499.5,-314.25 2499.5,-314.25 2493.5,-314.25 2487.5,-308.25 2487.5,-302.25 2487.5,-302.25 2487.5,-241.75 2487.5,-241.75 2487.5,-235.75 2493.5,-229.75 2499.5,-229.75 2499.5,-229.75 2604.75,-229.75 2604.75,-229.75 2610.75,-229.75 2616.75,-235.75 2616.75,-241.75 2616.75,-241.75 2616.75,-302.25 2616.75,-302.25 2616.75,-308.25 2610.75,-314.25 2604.75,-314.25"/>
 <text xml:space="preserve" text-anchor="middle" x="2552.12" y="-298.85" font-family="Helvetica,sans-Serif" font-size="12.00">Hold Spike 2</text>
-<text xml:space="preserve" text-anchor="middle" x="2552.12" y="-286.1" font-family="Helvetica,sans-Serif" font-size="12.00">1m, 200 VUs</text>
+<text xml:space="preserve" text-anchor="middle" x="2552.12" y="-286.1" font-family="Helvetica,sans-Serif" font-size="12.00">2m, 200 VUs</text>
 <text xml:space="preserve" text-anchor="middle" x="2552.12" y="-273.35" font-family="Helvetica,sans-Serif" font-size="12.00">~800 requests / wave</text>
 <text xml:space="preserve" text-anchor="middle" x="2552.12" y="-260.6" font-family="Helvetica,sans-Serif" font-size="12.00">120 cart updates</text>
 <text xml:space="preserve" text-anchor="middle" x="2552.12" y="-247.85" font-family="Helvetica,sans-Serif" font-size="12.00">40 checkout attempts</text>
@@ -228,7 +228,7 @@
 <title>recovery2</title>
 <path fill="#f1f5f9" stroke="#334155" d="M2789,-314.25C2789,-314.25 2683.75,-314.25 2683.75,-314.25 2677.75,-314.25 2671.75,-308.25 2671.75,-302.25 2671.75,-302.25 2671.75,-241.75 2671.75,-241.75 2671.75,-235.75 2677.75,-229.75 2683.75,-229.75 2683.75,-229.75 2789,-229.75 2789,-229.75 2795,-229.75 2801,-235.75 2801,-241.75 2801,-241.75 2801,-302.25 2801,-302.25 2801,-308.25 2795,-314.25 2789,-314.25"/>
 <text xml:space="preserve" text-anchor="middle" x="2736.38" y="-298.85" font-family="Helvetica,sans-Serif" font-size="12.00">Recovery</text>
-<text xml:space="preserve" text-anchor="middle" x="2736.38" y="-286.1" font-family="Helvetica,sans-Serif" font-size="12.00">1m, 25 VUs</text>
+<text xml:space="preserve" text-anchor="middle" x="2736.38" y="-286.1" font-family="Helvetica,sans-Serif" font-size="12.00">1m30s, 25 VUs</text>
 <text xml:space="preserve" text-anchor="middle" x="2736.38" y="-273.35" font-family="Helvetica,sans-Serif" font-size="12.00">~100 requests / wave</text>
 <text xml:space="preserve" text-anchor="middle" x="2736.38" y="-260.6" font-family="Helvetica,sans-Serif" font-size="12.00">15 cart updates</text>
 <text xml:space="preserve" text-anchor="middle" x="2736.38" y="-247.85" font-family="Helvetica,sans-Serif" font-size="12.00">5 checkout attempts</text>
@@ -262,7 +262,7 @@
 <title>hold3</title>
 <path fill="#fca5a5" stroke="#334155" d="M3163.5,-314.25C3163.5,-314.25 3051.5,-314.25 3051.5,-314.25 3045.5,-314.25 3039.5,-308.25 3039.5,-302.25 3039.5,-302.25 3039.5,-241.75 3039.5,-241.75 3039.5,-235.75 3045.5,-229.75 3051.5,-229.75 3051.5,-229.75 3163.5,-229.75 3163.5,-229.75 3169.5,-229.75 3175.5,-235.75 3175.5,-241.75 3175.5,-241.75 3175.5,-302.25 3175.5,-302.25 3175.5,-308.25 3169.5,-314.25 3163.5,-314.25"/>
 <text xml:space="preserve" text-anchor="middle" x="3107.5" y="-298.85" font-family="Helvetica,sans-Serif" font-size="12.00">Hold Spike 3</text>
-<text xml:space="preserve" text-anchor="middle" x="3107.5" y="-286.1" font-family="Helvetica,sans-Serif" font-size="12.00">1m, 400 VUs</text>
+<text xml:space="preserve" text-anchor="middle" x="3107.5" y="-286.1" font-family="Helvetica,sans-Serif" font-size="12.00">2m, 400 VUs</text>
 <text xml:space="preserve" text-anchor="middle" x="3107.5" y="-273.35" font-family="Helvetica,sans-Serif" font-size="12.00">~1600 requests / wave</text>
 <text xml:space="preserve" text-anchor="middle" x="3107.5" y="-260.6" font-family="Helvetica,sans-Serif" font-size="12.00">240 cart updates</text>
 <text xml:space="preserve" text-anchor="middle" x="3107.5" y="-247.85" font-family="Helvetica,sans-Serif" font-size="12.00">80 checkout attempts</text>
@@ -279,7 +279,7 @@
 <title>rampdown</title>
 <path fill="#e2e8f0" stroke="#334155" d="M3355.25,-295.12C3355.25,-295.12 3242.5,-295.12 3242.5,-295.12 3236.5,-295.12 3230.5,-289.12 3230.5,-283.12 3230.5,-283.12 3230.5,-260.88 3230.5,-260.88 3230.5,-254.88 3236.5,-248.88 3242.5,-248.88 3242.5,-248.88 3355.25,-248.88 3355.25,-248.88 3361.25,-248.88 3367.25,-254.88 3367.25,-260.88 3367.25,-260.88 3367.25,-283.12 3367.25,-283.12 3367.25,-289.12 3361.25,-295.12 3355.25,-295.12"/>
 <text xml:space="preserve" text-anchor="middle" x="3298.88" y="-279.73" font-family="Helvetica,sans-Serif" font-size="12.00">Ramp down</text>
-<text xml:space="preserve" text-anchor="middle" x="3298.88" y="-266.98" font-family="Helvetica,sans-Serif" font-size="12.00">1m, 0 VUs</text>
+<text xml:space="preserve" text-anchor="middle" x="3298.88" y="-266.98" font-family="Helvetica,sans-Serif" font-size="12.00">2m30s, 0 VUs</text>
 <text xml:space="preserve" text-anchor="middle" x="3298.88" y="-254.22" font-family="Helvetica,sans-Serif" font-size="12.00">requests decrease to 0</text>
 </g>
 <!-- hold3&#45;&gt;rampdown -->
@@ -293,7 +293,7 @@
 <title>storefront</title>
 <path fill="#faf5ff" stroke="#334155" d="M1649.38,-181.5C1649.38,-181.5 1479.62,-181.5 1479.62,-181.5 1473.62,-181.5 1467.62,-175.5 1467.62,-169.5 1467.62,-169.5 1467.62,-134.5 1467.62,-134.5 1467.62,-128.5 1473.62,-122.5 1479.62,-122.5 1479.62,-122.5 1649.38,-122.5 1649.38,-122.5 1655.38,-122.5 1661.38,-128.5 1661.38,-134.5 1661.38,-134.5 1661.38,-169.5 1661.38,-169.5 1661.38,-175.5 1655.38,-181.5 1649.38,-181.5"/>
 <text xml:space="preserve" text-anchor="middle" x="1564.5" y="-166.1" font-family="Helvetica,sans-Serif" font-size="12.00">storefront_actions</text>
-<text xml:space="preserve" text-anchor="middle" x="1564.5" y="-153.35" font-family="Helvetica,sans-Serif" font-size="12.00">5 browser VUs for 10m</text>
+<text xml:space="preserve" text-anchor="middle" x="1564.5" y="-153.35" font-family="Helvetica,sans-Serif" font-size="12.00">60 browser VUs for 15m</text>
 <text xml:space="preserve" text-anchor="middle" x="1564.5" y="-140.6" font-family="Helvetica,sans-Serif" font-size="12.00">Faro UI actions + browser metrics</text>
 <text xml:space="preserve" text-anchor="middle" x="1564.5" y="-127.85" font-family="Helvetica,sans-Serif" font-size="12.00">standard http_reqs may be n/a</text>
 </g>

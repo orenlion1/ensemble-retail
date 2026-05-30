@@ -4,7 +4,7 @@
   "metadata": {
     "annotations": {
       "grafana.app/createdBy": "service-account:bfn4sb0kofeo0b",
-      "grafana.app/message": "Align traffic spike heatmap with current 5 browser VU config",
+      "grafana.app/message": "Align traffic spike heatmap with current 15m / 60 browser VU config",
       "grafana.app/updatedBy": "service-account:ffn1sscdjmscge",
       "grafana.app/updatedTimestamp": "2026-05-30T20:56:45Z"
     },
