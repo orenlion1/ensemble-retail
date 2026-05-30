@@ -212,8 +212,14 @@ async function loadRegionForLanguageValidation(page, region) {
   await page.evaluate(nextRegion => {
     localStorage.setItem('ensemble-region', nextRegion);
   }, region);
-  await page.reload({ waitUntil: 'networkidle' });
+  await page.reload({ waitUntil: 'domcontentloaded' });
+  await waitForStorefrontReady(page);
   await validateRegionLanguage(page, region);
+}
+
+async function waitForStorefrontReady(page) {
+  await page.locator('#region-selector').waitFor({ state: 'visible', timeout: 30000 });
+  await page.locator('[data-faro-user-action-name="select-department:mens"]').waitFor({ state: 'visible', timeout: 30000 });
 }
 
 async function fillField(page, selector, value) {
@@ -232,12 +238,14 @@ export default async function () {
   const page = await browser.newPage();
 
   try {
-    await page.goto(baseUrl, { waitUntil: 'networkidle' });
+    await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+    await waitForStorefrontReady(page);
     await page.evaluate(() => {
       localStorage.removeItem('ensemble-cart');
       localStorage.setItem('ensemble-region', 'US');
     });
-    await page.reload({ waitUntil: 'networkidle' });
+    await page.reload({ waitUntil: 'domcontentloaded' });
+    await waitForStorefrontReady(page);
 
     await loadRegionForLanguageValidation(page, 'CA');
     await loadRegionForLanguageValidation(page, 'CN');

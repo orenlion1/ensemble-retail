@@ -145,6 +145,7 @@ Recommended spike profile:
 - Spike 3 at 2x spike 2 for stress validation.
 - Add recovery windows between spikes.
 - Keep browser-action load sustained with multiple browser VUs when Faro user-action volume is part of the test goal. A single shared browser iteration only validates coverage; it does not produce meaningful user-action volume. Keep browser VU counts lower than protocol API VUs because each browser VU launches Chromium and can fail first with page navigation timeouts under spike pressure.
+- Browser-action scripts should wait for a stable app-shell selector instead of global network idle when the application emits background telemetry or loads remote images. This keeps navigation readiness tied to user-visible UI, not long-running Faro/image requests.
 - When user-action throughput is the goal, add tagged per-action counters and thresholds for every expected action family. Default Ensemble traffic-spike runs target at least 0.25 user-action events per second per action family.
 
 Required k6 environment:
