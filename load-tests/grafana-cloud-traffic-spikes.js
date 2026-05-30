@@ -10,8 +10,9 @@ const spikeMultiplier = Number(__ENV.SPIKE_MULTIPLIER || 2);
 const spikeTwoUsers = Math.ceil(baseSpikeUsers * spikeMultiplier);
 const spikeThreeUsers = Math.ceil(spikeTwoUsers * spikeMultiplier);
 const regionalShopperVus = Number(__ENV.REGIONAL_SHOPPER_VUS || 30);
-const userActionTargetRps = Number(__ENV.USER_ACTION_TARGET_RPS || 8);
-const browserActionVus = Number(__ENV.BROWSER_ACTION_VUS || 60);
+const apiRequestRate = Number(__ENV.API_REQUEST_RPS || 8);
+const userActionTargetRps = Number(__ENV.USER_ACTION_TARGET_RPS || 0.25);
+const browserActionVus = Number(__ENV.BROWSER_ACTION_VUS || 5);
 const benchmarkDuration = __ENV.TEST_DURATION || '15m';
 const browserActionRampUp = __ENV.BROWSER_ACTION_RAMP_UP || '3m';
 const browserActionHold = __ENV.BROWSER_ACTION_HOLD || '10m';
@@ -53,6 +54,16 @@ export const options = {
       duration: benchmarkDuration,
       gracefulStop: '30s'
     },
+    api_request_rate: {
+      exec: 'apiRequestRateScenario',
+      executor: 'constant-arrival-rate',
+      rate: apiRequestRate,
+      timeUnit: '1s',
+      duration: benchmarkDuration,
+      preAllocatedVUs: Number(__ENV.API_REQUEST_PRE_ALLOCATED_VUS || 20),
+      maxVUs: Number(__ENV.API_REQUEST_MAX_VUS || 80),
+      gracefulStop: '30s'
+    },
     storefront_actions: {
       exec: 'storefrontActionsScenario',
       executor: 'ramping-vus',
@@ -80,6 +91,8 @@ export const options = {
     cart_updates: ['count>20'],
     checkout_attempts: ['count>5'],
     region_changes: ['count>20'],
+    api_request_rate_requests: [`rate>=${apiRequestRate}`],
+    api_request_rate_latency: ['p(95)<1000'],
     storefront_user_actions: ['count>300'],
     ...userActionRateThresholds,
     shopping_cart_add_items: ['count>10'],
@@ -97,6 +110,7 @@ export const options = {
     spike_two_users: String(spikeTwoUsers),
     spike_three_users: String(spikeThreeUsers),
     spike_multiplier: String(spikeMultiplier),
+    api_request_rps: String(apiRequestRate),
     user_action_target_rps: String(userActionTargetRps),
     browser_action_vus: String(browserActionVus),
     browser_action_duration: browserActionDuration,
@@ -120,9 +134,21 @@ const regionProfiles = {
 const personas = ['browser', 'cart_builder', 'account_manager', 'sale_hunter', 'checkout'];
 
 const spikeApiLatency = new Trend('spike_api_latency');
+const apiRequestRateLatency = new Trend('api_request_rate_latency');
+const apiRequestRateRequests = new Counter('api_request_rate_requests');
 const spikeCartUpdates = new Counter('spike_cart_updates');
 const spikeCheckoutAttempts = new Counter('spike_checkout_attempts');
 const spikeRegionChanges = new Counter('spike_region_changes');
+
+const steadyProduct = {
+  id: 'mens-midlayer-grid',
+  name: "Men's Grid Fleece Midlayer",
+  originalPrice: 128.00,
+  price: 109.00,
+  sizes: ['M'],
+  colors: ['Pine'],
+  image: 'https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=900&q=80'
+};
 
 function activeSpike() {
   if (__VU <= baseSpikeUsers) return 'spike_1';
@@ -306,6 +332,57 @@ export function regionalJourneyScenario() {
   regionalJourney();
 }
 
+export function apiRequestRateScenario() {
+  if (!apiKey) {
+    fail('API_TEST_KEY is required for the API request-rate scenario because cart and account workflows are protected.');
+  }
+
+  const region = regionForIteration();
+  const persona = personaForVu();
+  const shopperId = `steady-${region.toLowerCase()}-${__VU}-${__ITER}`;
+  const mode = __ITER % 5;
+  let response;
+  let requestName = 'GET /';
+
+  if (mode === 0) {
+    requestName = 'GET /';
+    response = http.get(`${storefrontBaseUrl}/?region=${region}&steady=api-rate`, requestOptions(region, persona, 'GET /', 'steady_api_rate'));
+  } else if (mode === 1) {
+    requestName = 'GET /api/inventory/categories';
+    response = getJson('/api/inventory/categories', region, persona, shopperId, 'GET /api/inventory/categories', 'steady_api_rate');
+  } else if (mode === 2) {
+    requestName = 'GET /api/inventory/products';
+    response = getJson('/api/inventory/products', region, persona, shopperId, 'GET /api/inventory/products', 'steady_api_rate');
+  } else if (mode === 3) {
+    requestName = 'PUT /api/cart/carts/:shopperId';
+    response = putJson(`/api/cart/carts/${shopperId}`, buildCart(shopperId, steadyProduct, 1), region, persona, shopperId, 'PUT /api/cart/carts/:shopperId', 'steady_api_rate');
+  } else {
+    requestName = 'PUT /api/account/accounts/:shopperId';
+    response = putJson(`/api/account/accounts/${shopperId}`, {
+      shopperId,
+      name: `Steady Shopper ${__VU}`,
+      email: `${shopperId}@example.com`,
+      shippingAddress: {
+        line1: `${300 + __VU} Rate Trail`,
+        city: 'Denver',
+        region: 'CO',
+        postalCode: '80202',
+        country: region
+      },
+      wallet: {
+        label: 'Visa ending 4242',
+        billingPostalCode: '80202'
+      }
+    }, region, persona, shopperId, 'PUT /api/account/accounts/:shopperId', 'steady_api_rate');
+  }
+
+  apiRequestRateRequests.add(1, { region, persona });
+  apiRequestRateLatency.add(response.timings.duration, { region, persona, name: requestName });
+  check(response, {
+    'steady API request succeeded': result => result.status >= 200 && result.status < 400
+  }, { region, persona });
+}
+
 export async function storefrontActionsScenario() {
   await storefrontActions();
 }
@@ -326,6 +403,7 @@ export function handleSummary(data) {
     },
     spikeMultiplier,
     regionalShopperVus,
+    apiRequestRate,
     userActionTargetRps,
     browserActionVus,
     browserActionDuration,
