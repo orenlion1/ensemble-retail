@@ -539,7 +539,7 @@ API_BASE_URL=https://ensemble-grafana.com \
 k6 cloud run load-tests/grafana-cloud-traffic-spikes.js
 ```
 
-The default combined benchmark peaks at 515 VUs: 400 traffic-spike VUs, 30 regional shoppers, up to 80 steady API request-rate VUs, and 5 browser-action VUs. Increase the project VU quota before running the default benchmark in Cloud k6, or temporarily lower `BASE_SPIKE_USERS`, `REGIONAL_SHOPPER_VUS`, or `BROWSER_ACTION_VUS` for quota-constrained validation runs.
+The default combined benchmark peaks at 500 VUs: 400 traffic-spike VUs, 30 regional shoppers, up to 65 steady API request-rate VUs, and 5 browser-action VUs. Increase the project VU quota before running the default benchmark in Cloud k6, or temporarily lower `BASE_SPIKE_USERS`, `REGIONAL_SHOPPER_VUS`, `API_REQUEST_MAX_VUS`, or `BROWSER_ACTION_VUS` for quota-constrained validation runs.
 
 The steady API scenario is the requested 8 requests/second load. It uses `constant-arrival-rate`, runs for 15 minutes, and rotates across storefront, inventory, cart, and account requests through CloudFront. The browser-action scenario uses sustained browser VUs rather than a single shared iteration. Its default target is at least 0.25 user-action events per second for every expected action family. Browser VUs ramp to the 5-VU target over 3 minutes, hold for 10 minutes, and ramp down for 2 minutes so Grafana Cloud does not launch every Chromium session in the same startup burst. The script publishes a tagged `storefront_user_action_events` counter with `action_family` labels and fails the run when any expected action family is below `USER_ACTION_TARGET_RPS`. Browser-action load is intentionally lower than protocol API load because the full synthetic journey launches Chromium and captures Faro actions. Browser navigation waits for the storefront app shell instead of global network idle so background Faro or image requests do not fail the benchmark before the UI is usable.
 
@@ -558,7 +558,7 @@ Optional knobs for the combined scenarios:
 - `SPIKE_MULTIPLIER`: traffic spike growth multiplier, default `2`.
 - `API_REQUEST_RPS`: steady protocol/API request rate, default `8`.
 - `API_REQUEST_PRE_ALLOCATED_VUS`: preallocated VUs for the steady request-rate scenario, default `20`.
-- `API_REQUEST_MAX_VUS`: max VUs for the steady request-rate scenario, default `80`.
+- `API_REQUEST_MAX_VUS`: max VUs for the steady request-rate scenario, default `65`.
 - `USER_ACTION_TARGET_RPS`: minimum target rate for every expected browser user-action family, default `0.25`.
 - `BROWSER_ACTION_VUS`: concurrent browser VUs that repeatedly execute the full user-action journey, default `5`.
 - `BROWSER_ACTION_DURATION`: duration for sustained browser user-action load, default `TEST_DURATION` or `15m`.

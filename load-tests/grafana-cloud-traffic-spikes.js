@@ -61,7 +61,7 @@ export const options = {
       timeUnit: '1s',
       duration: benchmarkDuration,
       preAllocatedVUs: Number(__ENV.API_REQUEST_PRE_ALLOCATED_VUS || 20),
-      maxVUs: Number(__ENV.API_REQUEST_MAX_VUS || 80),
+      maxVUs: Number(__ENV.API_REQUEST_MAX_VUS || 65),
       gracefulStop: '30s'
     },
     storefront_actions: {
