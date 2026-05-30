@@ -8,538 +8,538 @@
  viewBox="0.00 0.00 2738.00 1023.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(18 1005)">
 <title>observability_capabilities_flow</title>
-<polygon fill="white" stroke="none" points="-18,18 -18,-1005 2720.49,-1005 2720.49,18 -18,18"/>
-<text xml:space="preserve" text-anchor="middle" x="1351.24" y="-964" font-family="Helvetica,sans-Serif" font-size="20.00">Observability Capabilities Flow</text>
+<polygon fill="#0b1220" stroke="none" points="-18,18 -18,-1005 2720.49,-1005 2720.49,18 -18,18"/>
+<text xml:space="preserve" text-anchor="middle" x="1351.24" y="-964" font-family="Helvetica,sans-Serif" font-size="20.00" fill="#f8fafc">Observability Capabilities Flow</text>
 <g id="clust1" class="cluster">
 <title>cluster_services</title>
-<path fill="white" stroke="#94a3b8" stroke-dasharray="5,2" d="M1340.62,-400C1340.62,-400 1515.62,-400 1515.62,-400 1521.62,-400 1527.62,-406 1527.62,-412 1527.62,-412 1527.62,-605 1527.62,-605 1527.62,-611 1521.62,-617 1515.62,-617 1515.62,-617 1340.62,-617 1340.62,-617 1334.62,-617 1328.62,-611 1328.62,-605 1328.62,-605 1328.62,-412 1328.62,-412 1328.62,-406 1334.62,-400 1340.62,-400"/>
-<text xml:space="preserve" text-anchor="middle" x="1428.12" y="-594" font-family="Helvetica,sans-Serif" font-size="20.00">Spring Boot services</text>
+<path fill="#0b1220" stroke="#64748b" stroke-dasharray="5,2" d="M1340.62,-400C1340.62,-400 1515.62,-400 1515.62,-400 1521.62,-400 1527.62,-406 1527.62,-412 1527.62,-412 1527.62,-605 1527.62,-605 1527.62,-611 1521.62,-617 1515.62,-617 1515.62,-617 1340.62,-617 1340.62,-617 1334.62,-617 1328.62,-611 1328.62,-605 1328.62,-605 1328.62,-412 1328.62,-412 1328.62,-406 1334.62,-400 1340.62,-400"/>
+<text xml:space="preserve" text-anchor="middle" x="1428.12" y="-594" font-family="Helvetica,sans-Serif" font-size="20.00" fill="#f8fafc">Spring Boot services</text>
 </g>
 <!-- browser -->
 <g id="node1" class="node">
 <title>browser</title>
-<path fill="#dbeafe" stroke="#334155" d="M162.03,-922C162.03,-922 85.5,-922 85.5,-922 79.5,-922 73.5,-916 73.5,-910 73.5,-910 73.5,-898 73.5,-898 73.5,-892 79.5,-886 85.5,-886 85.5,-886 162.03,-886 162.03,-886 168.03,-886 174.03,-892 174.03,-898 174.03,-898 174.03,-910 174.03,-910 174.03,-916 168.03,-922 162.03,-922"/>
-<text xml:space="preserve" text-anchor="middle" x="123.76" y="-905.55" font-family="Helvetica,sans-Serif" font-size="11.00">Shopper browser</text>
-<text xml:space="preserve" text-anchor="middle" x="123.76" y="-893.55" font-family="Helvetica,sans-Serif" font-size="11.00">React storefront</text>
+<path fill="#1e3a8a" stroke="#64748b" d="M162.03,-922C162.03,-922 85.5,-922 85.5,-922 79.5,-922 73.5,-916 73.5,-910 73.5,-910 73.5,-898 73.5,-898 73.5,-892 79.5,-886 85.5,-886 85.5,-886 162.03,-886 162.03,-886 168.03,-886 174.03,-892 174.03,-898 174.03,-898 174.03,-910 174.03,-910 174.03,-916 168.03,-922 162.03,-922"/>
+<text xml:space="preserve" text-anchor="middle" x="123.76" y="-905.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">Shopper browser</text>
+<text xml:space="preserve" text-anchor="middle" x="123.76" y="-893.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">React storefront</text>
 </g>
 <!-- faro -->
 <g id="node2" class="node">
 <title>faro</title>
-<path fill="#f3e8ff" stroke="#334155" d="M650.06,-958C650.06,-958 438.53,-958 438.53,-958 432.53,-958 426.53,-952 426.53,-946 426.53,-946 426.53,-934 426.53,-934 426.53,-928 432.53,-922 438.53,-922 438.53,-922 650.06,-922 650.06,-922 656.06,-922 662.06,-928 662.06,-934 662.06,-934 662.06,-946 662.06,-946 662.06,-952 656.06,-958 650.06,-958"/>
-<text xml:space="preserve" text-anchor="middle" x="544.29" y="-941.55" font-family="Helvetica,sans-Serif" font-size="11.00">Grafana Faro SDK</text>
-<text xml:space="preserve" text-anchor="middle" x="544.29" y="-929.55" font-family="Helvetica,sans-Serif" font-size="11.00">web vitals, errors, logs, sessions, user actions</text>
+<path fill="#6b21a8" stroke="#64748b" d="M650.06,-958C650.06,-958 438.53,-958 438.53,-958 432.53,-958 426.53,-952 426.53,-946 426.53,-946 426.53,-934 426.53,-934 426.53,-928 432.53,-922 438.53,-922 438.53,-922 650.06,-922 650.06,-922 656.06,-922 662.06,-928 662.06,-934 662.06,-934 662.06,-946 662.06,-946 662.06,-952 656.06,-958 650.06,-958"/>
+<text xml:space="preserve" text-anchor="middle" x="544.29" y="-941.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">Grafana Faro SDK</text>
+<text xml:space="preserve" text-anchor="middle" x="544.29" y="-929.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">web vitals, errors, logs, sessions, user actions</text>
 </g>
 <!-- browser&#45;&gt;faro -->
 <g id="edge1" class="edge">
 <title>browser&#45;&gt;faro</title>
-<path fill="none" stroke="#475569" d="M174.42,-908.27C234.08,-913.4 336.36,-922.2 418.11,-929.23"/>
-<polygon fill="#475569" stroke="#475569" points="417.76,-931.66 424.95,-929.82 418.18,-926.78 417.76,-931.66"/>
-<text xml:space="preserve" text-anchor="middle" x="337.03" y="-928.53" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#334155">page views, errors, user actions</text>
+<path fill="none" stroke="#94a3b8" d="M174.42,-908.27C234.08,-913.4 336.36,-922.2 418.11,-929.23"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="417.76,-931.66 424.95,-929.82 418.18,-926.78 417.76,-931.66"/>
+<text xml:space="preserve" text-anchor="middle" x="337.03" y="-928.53" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">page views, errors, user actions</text>
 </g>
 <!-- tracing -->
 <g id="node3" class="node">
 <title>tracing</title>
-<path fill="#f3e8ff" stroke="#334155" d="M605.81,-887C605.81,-887 482.78,-887 482.78,-887 476.78,-887 470.78,-881 470.78,-875 470.78,-875 470.78,-863 470.78,-863 470.78,-857 476.78,-851 482.78,-851 482.78,-851 605.81,-851 605.81,-851 611.81,-851 617.81,-857 617.81,-863 617.81,-863 617.81,-875 617.81,-875 617.81,-881 611.81,-887 605.81,-887"/>
-<text xml:space="preserve" text-anchor="middle" x="544.29" y="-870.55" font-family="Helvetica,sans-Serif" font-size="11.00">Faro web tracing</text>
-<text xml:space="preserve" text-anchor="middle" x="544.29" y="-858.55" font-family="Helvetica,sans-Serif" font-size="11.00">trace context on fetch/XHR</text>
+<path fill="#6b21a8" stroke="#64748b" d="M605.81,-887C605.81,-887 482.78,-887 482.78,-887 476.78,-887 470.78,-881 470.78,-875 470.78,-875 470.78,-863 470.78,-863 470.78,-857 476.78,-851 482.78,-851 482.78,-851 605.81,-851 605.81,-851 611.81,-851 617.81,-857 617.81,-863 617.81,-863 617.81,-875 617.81,-875 617.81,-881 611.81,-887 605.81,-887"/>
+<text xml:space="preserve" text-anchor="middle" x="544.29" y="-870.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">Faro web tracing</text>
+<text xml:space="preserve" text-anchor="middle" x="544.29" y="-858.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">trace context on fetch/XHR</text>
 </g>
 <!-- browser&#45;&gt;tracing -->
 <g id="edge2" class="edge">
 <title>browser&#45;&gt;tracing</title>
-<path fill="none" stroke="#475569" d="M174.23,-895.96C202.87,-891.58 239.65,-886.42 272.53,-883.25 336.02,-877.13 408.16,-873.5 462,-871.43"/>
-<polygon fill="#475569" stroke="#475569" points="462.06,-873.88 468.97,-871.17 461.88,-868.99 462.06,-873.88"/>
-<text xml:space="preserve" text-anchor="middle" x="337.03" y="-884.45" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#334155">HTTP requests with traceparent</text>
+<path fill="none" stroke="#94a3b8" d="M174.23,-895.96C202.87,-891.58 239.65,-886.42 272.53,-883.25 336.02,-877.13 408.16,-873.5 462,-871.43"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="462.06,-873.88 468.97,-871.17 461.88,-868.99 462.06,-873.88"/>
+<text xml:space="preserve" text-anchor="middle" x="337.03" y="-884.45" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">HTTP requests with traceparent</text>
 </g>
 <!-- grafana -->
 <g id="node22" class="node">
 <title>grafana</title>
-<path fill="#ede9fe" stroke="#334155" d="M2476.71,-310C2476.71,-310 2385.18,-310 2385.18,-310 2379.18,-310 2373.18,-304 2373.18,-298 2373.18,-298 2373.18,-286 2373.18,-286 2373.18,-280 2379.18,-274 2385.18,-274 2385.18,-274 2476.71,-274 2476.71,-274 2482.71,-274 2488.71,-280 2488.71,-286 2488.71,-286 2488.71,-298 2488.71,-298 2488.71,-304 2482.71,-310 2476.71,-310"/>
-<text xml:space="preserve" text-anchor="middle" x="2430.94" y="-293.55" font-family="Helvetica,sans-Serif" font-size="11.00">Grafana Cloud stack</text>
-<text xml:space="preserve" text-anchor="middle" x="2430.94" y="-281.55" font-family="Helvetica,sans-Serif" font-size="11.00">orenlion.grafana.net</text>
+<path fill="#4c1d95" stroke="#64748b" d="M2476.71,-310C2476.71,-310 2385.18,-310 2385.18,-310 2379.18,-310 2373.18,-304 2373.18,-298 2373.18,-298 2373.18,-286 2373.18,-286 2373.18,-280 2379.18,-274 2385.18,-274 2385.18,-274 2476.71,-274 2476.71,-274 2482.71,-274 2488.71,-280 2488.71,-286 2488.71,-286 2488.71,-298 2488.71,-298 2488.71,-304 2482.71,-310 2476.71,-310"/>
+<text xml:space="preserve" text-anchor="middle" x="2430.94" y="-293.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">Grafana Cloud stack</text>
+<text xml:space="preserve" text-anchor="middle" x="2430.94" y="-281.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">orenlion.grafana.net</text>
 </g>
 <!-- faro&#45;&gt;grafana -->
 <g id="edge10" class="edge">
 <title>faro&#45;&gt;grafana</title>
-<path fill="none" stroke="#475569" d="M662.22,-941.4C737.43,-942.18 837.27,-943 925.57,-943 925.57,-943 925.57,-943 2124.29,-943 2177.5,-943 2341.96,-799.39 2348.18,-789 2396.65,-708.04 2421.51,-410.37 2428.12,-318.91"/>
-<polygon fill="#475569" stroke="#475569" points="2430.56,-319.14 2428.61,-311.99 2425.67,-318.79 2430.56,-319.14"/>
-<text xml:space="preserve" text-anchor="middle" x="1427.62" y="-944.2" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#334155">collector endpoint</text>
+<path fill="none" stroke="#94a3b8" d="M662.22,-941.4C737.43,-942.18 837.27,-943 925.57,-943 925.57,-943 925.57,-943 2124.29,-943 2177.5,-943 2341.96,-799.39 2348.18,-789 2396.65,-708.04 2421.51,-410.37 2428.12,-318.91"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="2430.56,-319.14 2428.61,-311.99 2425.67,-318.79 2430.56,-319.14"/>
+<text xml:space="preserve" text-anchor="middle" x="1427.62" y="-944.2" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">collector endpoint</text>
 </g>
 <!-- cloudfront -->
 <g id="node4" class="node">
 <title>cloudfront</title>
-<path fill="#dbeafe" stroke="#334155" d="M972.34,-340C972.34,-340 880.81,-340 880.81,-340 874.81,-340 868.81,-334 868.81,-328 868.81,-328 868.81,-316 868.81,-316 868.81,-310 874.81,-304 880.81,-304 880.81,-304 972.34,-304 972.34,-304 978.34,-304 984.34,-310 984.34,-316 984.34,-316 984.34,-328 984.34,-328 984.34,-334 978.34,-340 972.34,-340"/>
-<text xml:space="preserve" text-anchor="middle" x="926.57" y="-323.55" font-family="Helvetica,sans-Serif" font-size="11.00">CloudFront</text>
-<text xml:space="preserve" text-anchor="middle" x="926.57" y="-311.55" font-family="Helvetica,sans-Serif" font-size="11.00">static + /api/* routing</text>
+<path fill="#1e3a8a" stroke="#64748b" d="M972.34,-340C972.34,-340 880.81,-340 880.81,-340 874.81,-340 868.81,-334 868.81,-328 868.81,-328 868.81,-316 868.81,-316 868.81,-310 874.81,-304 880.81,-304 880.81,-304 972.34,-304 972.34,-304 978.34,-304 984.34,-310 984.34,-316 984.34,-316 984.34,-328 984.34,-328 984.34,-334 978.34,-340 972.34,-340"/>
+<text xml:space="preserve" text-anchor="middle" x="926.57" y="-323.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">CloudFront</text>
+<text xml:space="preserve" text-anchor="middle" x="926.57" y="-311.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">static + /api/* routing</text>
 </g>
 <!-- tracing&#45;&gt;cloudfront -->
 <g id="edge3" class="edge">
 <title>tracing&#45;&gt;cloudfront</title>
-<path fill="none" stroke="#475569" d="M557.95,-850.8C614.34,-769.68 842.89,-440.94 908.12,-347.11"/>
-<polygon fill="#475569" stroke="#475569" points="910.03,-348.66 912.01,-341.51 906,-345.86 910.03,-348.66"/>
+<path fill="none" stroke="#94a3b8" d="M557.95,-850.8C614.34,-769.68 842.89,-440.94 908.12,-347.11"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="910.03,-348.66 912.01,-341.51 906,-345.86 910.03,-348.66"/>
 </g>
 <!-- tracing&#45;&gt;grafana -->
 <g id="edge11" class="edge">
 <title>tracing&#45;&gt;grafana</title>
-<path fill="none" stroke="#475569" d="M618.2,-869C694.75,-869 818.62,-869 925.57,-869 925.57,-869 925.57,-869 2124.29,-869 2377.02,-869 2421.37,-431.4 2428.61,-318.38"/>
-<polygon fill="#475569" stroke="#475569" points="2431.04,-318.87 2429.02,-311.73 2426.15,-318.57 2431.04,-318.87"/>
-<text xml:space="preserve" text-anchor="middle" x="1427.62" y="-870.2" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#334155">frontend spans</text>
+<path fill="none" stroke="#94a3b8" d="M618.2,-869C694.75,-869 818.62,-869 925.57,-869 925.57,-869 925.57,-869 2124.29,-869 2377.02,-869 2421.37,-431.4 2428.61,-318.38"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="2431.04,-318.87 2429.02,-311.73 2426.15,-318.57 2431.04,-318.87"/>
+<text xml:space="preserve" text-anchor="middle" x="1427.62" y="-870.2" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">frontend spans</text>
 </g>
 <!-- ingress -->
 <g id="node5" class="node">
 <title>ingress</title>
-<path fill="#e0e7ff" stroke="#334155" d="M1150.12,-444C1150.12,-444 1047.34,-444 1047.34,-444 1041.34,-444 1035.34,-438 1035.34,-432 1035.34,-432 1035.34,-420 1035.34,-420 1035.34,-414 1041.34,-408 1047.34,-408 1047.34,-408 1150.12,-408 1150.12,-408 1156.12,-408 1162.12,-414 1162.12,-420 1162.12,-420 1162.12,-432 1162.12,-432 1162.12,-438 1156.12,-444 1150.12,-444"/>
-<text xml:space="preserve" text-anchor="middle" x="1098.73" y="-421.55" font-family="Helvetica,sans-Serif" font-size="11.00">EKS API ingress / ALB</text>
+<path fill="#3730a3" stroke="#64748b" d="M1150.12,-444C1150.12,-444 1047.34,-444 1047.34,-444 1041.34,-444 1035.34,-438 1035.34,-432 1035.34,-432 1035.34,-420 1035.34,-420 1035.34,-414 1041.34,-408 1047.34,-408 1047.34,-408 1150.12,-408 1150.12,-408 1156.12,-408 1162.12,-414 1162.12,-420 1162.12,-420 1162.12,-432 1162.12,-432 1162.12,-438 1156.12,-444 1150.12,-444"/>
+<text xml:space="preserve" text-anchor="middle" x="1098.73" y="-421.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">EKS API ingress / ALB</text>
 </g>
 <!-- cloudfront&#45;&gt;ingress -->
 <g id="edge4" class="edge">
 <title>cloudfront&#45;&gt;ingress</title>
-<path fill="none" stroke="#475569" d="M957.6,-340.35C986.31,-357.9 1029.67,-384.4 1060.54,-403.27"/>
-<polygon fill="#475569" stroke="#475569" points="1059.17,-405.31 1066.42,-406.87 1061.73,-401.12 1059.17,-405.31"/>
+<path fill="none" stroke="#94a3b8" d="M957.6,-340.35C986.31,-357.9 1029.67,-384.4 1060.54,-403.27"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="1059.17,-405.31 1066.42,-406.87 1061.73,-401.12 1059.17,-405.31"/>
 </g>
 <!-- edgeLogs -->
 <g id="node6" class="node">
 <title>edgeLogs</title>
-<path fill="#fef3c7" stroke="#334155" d="M1467.76,-340C1467.76,-340 1387.48,-340 1387.48,-340 1381.48,-340 1375.48,-334 1375.48,-328 1375.48,-328 1375.48,-316 1375.48,-316 1375.48,-310 1381.48,-304 1387.48,-304 1387.48,-304 1467.76,-304 1467.76,-304 1473.76,-304 1479.76,-310 1479.76,-316 1479.76,-316 1479.76,-328 1479.76,-328 1479.76,-334 1473.76,-340 1467.76,-340"/>
-<text xml:space="preserve" text-anchor="middle" x="1427.62" y="-323.55" font-family="Helvetica,sans-Serif" font-size="11.00">S3 access logs</text>
-<text xml:space="preserve" text-anchor="middle" x="1427.62" y="-311.55" font-family="Helvetica,sans-Serif" font-size="11.00">CloudFront + ALB</text>
+<path fill="#713f12" stroke="#64748b" d="M1467.76,-340C1467.76,-340 1387.48,-340 1387.48,-340 1381.48,-340 1375.48,-334 1375.48,-328 1375.48,-328 1375.48,-316 1375.48,-316 1375.48,-310 1381.48,-304 1387.48,-304 1387.48,-304 1467.76,-304 1467.76,-304 1473.76,-304 1479.76,-310 1479.76,-316 1479.76,-316 1479.76,-328 1479.76,-328 1479.76,-334 1473.76,-340 1467.76,-340"/>
+<text xml:space="preserve" text-anchor="middle" x="1427.62" y="-323.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">S3 access logs</text>
+<text xml:space="preserve" text-anchor="middle" x="1427.62" y="-311.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">CloudFront + ALB</text>
 </g>
 <!-- cloudfront&#45;&gt;edgeLogs -->
 <g id="edge5" class="edge">
 <title>cloudfront&#45;&gt;edgeLogs</title>
-<path fill="none" stroke="#475569" d="M984.82,-322C1080.01,-322 1269.9,-322 1366.78,-322"/>
-<polygon fill="#475569" stroke="#475569" points="1366.78,-324.45 1373.78,-322 1366.78,-319.55 1366.78,-324.45"/>
-<text xml:space="preserve" text-anchor="middle" x="1098.73" y="-323.2" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#334155">standard access logs</text>
+<path fill="none" stroke="#94a3b8" d="M984.82,-322C1080.01,-322 1269.9,-322 1366.78,-322"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="1366.78,-324.45 1373.78,-322 1366.78,-319.55 1366.78,-324.45"/>
+<text xml:space="preserve" text-anchor="middle" x="1098.73" y="-323.2" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">standard access logs</text>
 </g>
 <!-- ingress&#45;&gt;edgeLogs -->
 <g id="edge6" class="edge">
 <title>ingress&#45;&gt;edgeLogs</title>
-<path fill="none" stroke="#475569" d="M1157.79,-407.53C1216.79,-388.76 1307.72,-359.83 1367.2,-340.9"/>
-<polygon fill="#475569" stroke="#475569" points="1367.64,-343.33 1373.57,-338.88 1366.16,-338.66 1367.64,-343.33"/>
-<text xml:space="preserve" text-anchor="middle" x="1247.87" y="-399.31" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#334155">ALB access logs</text>
+<path fill="none" stroke="#94a3b8" d="M1157.79,-407.53C1216.79,-388.76 1307.72,-359.83 1367.2,-340.9"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="1367.64,-343.33 1373.57,-338.88 1366.16,-338.66 1367.64,-343.33"/>
+<text xml:space="preserve" text-anchor="middle" x="1247.87" y="-399.31" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">ALB access logs</text>
 </g>
 <!-- inventory -->
 <g id="node7" class="node">
 <title>inventory</title>
-<path fill="#dcfce7" stroke="#334155" d="M1464.76,-444C1464.76,-444 1390.48,-444 1390.48,-444 1384.48,-444 1378.48,-438 1378.48,-432 1378.48,-432 1378.48,-420 1378.48,-420 1378.48,-414 1384.48,-408 1390.48,-408 1390.48,-408 1464.76,-408 1464.76,-408 1470.76,-408 1476.76,-414 1476.76,-420 1476.76,-420 1476.76,-432 1476.76,-432 1476.76,-438 1470.76,-444 1464.76,-444"/>
-<text xml:space="preserve" text-anchor="middle" x="1427.62" y="-421.55" font-family="Helvetica,sans-Serif" font-size="11.00">inventory&#45;service</text>
+<path fill="#14532d" stroke="#64748b" d="M1464.76,-444C1464.76,-444 1390.48,-444 1390.48,-444 1384.48,-444 1378.48,-438 1378.48,-432 1378.48,-432 1378.48,-420 1378.48,-420 1378.48,-414 1384.48,-408 1390.48,-408 1390.48,-408 1464.76,-408 1464.76,-408 1470.76,-408 1476.76,-414 1476.76,-420 1476.76,-420 1476.76,-432 1476.76,-432 1476.76,-438 1470.76,-444 1464.76,-444"/>
+<text xml:space="preserve" text-anchor="middle" x="1427.62" y="-421.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">inventory&#45;service</text>
 </g>
 <!-- ingress&#45;&gt;inventory -->
 <g id="edge7" class="edge">
 <title>ingress&#45;&gt;inventory</title>
-<path fill="none" stroke="#475569" d="M1162.37,-426C1222.27,-426 1311.81,-426 1369.72,-426"/>
-<polygon fill="#475569" stroke="#475569" points="1369.51,-428.45 1376.51,-426 1369.51,-423.55 1369.51,-428.45"/>
+<path fill="none" stroke="#94a3b8" d="M1162.37,-426C1222.27,-426 1311.81,-426 1369.72,-426"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="1369.51,-428.45 1376.51,-426 1369.51,-423.55 1369.51,-428.45"/>
 </g>
 <!-- cart -->
 <g id="node8" class="node">
 <title>cart</title>
-<path fill="#dcfce7" stroke="#334155" d="M1452.01,-580C1452.01,-580 1403.23,-580 1403.23,-580 1397.23,-580 1391.23,-574 1391.23,-568 1391.23,-568 1391.23,-556 1391.23,-556 1391.23,-550 1397.23,-544 1403.23,-544 1403.23,-544 1452.01,-544 1452.01,-544 1458.01,-544 1464.01,-550 1464.01,-556 1464.01,-556 1464.01,-568 1464.01,-568 1464.01,-574 1458.01,-580 1452.01,-580"/>
-<text xml:space="preserve" text-anchor="middle" x="1427.62" y="-557.55" font-family="Helvetica,sans-Serif" font-size="11.00">cart&#45;service</text>
+<path fill="#14532d" stroke="#64748b" d="M1452.01,-580C1452.01,-580 1403.23,-580 1403.23,-580 1397.23,-580 1391.23,-574 1391.23,-568 1391.23,-568 1391.23,-556 1391.23,-556 1391.23,-550 1397.23,-544 1403.23,-544 1403.23,-544 1452.01,-544 1452.01,-544 1458.01,-544 1464.01,-550 1464.01,-556 1464.01,-556 1464.01,-568 1464.01,-568 1464.01,-574 1458.01,-580 1452.01,-580"/>
+<text xml:space="preserve" text-anchor="middle" x="1427.62" y="-557.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">cart&#45;service</text>
 </g>
 <!-- ingress&#45;&gt;cart -->
 <g id="edge8" class="edge">
 <title>ingress&#45;&gt;cart</title>
-<path fill="none" stroke="#475569" d="M1121.48,-444.41C1138.45,-458.01 1163.1,-476.15 1187.12,-488 1251.87,-519.95 1333.28,-541.57 1382.56,-552.83"/>
-<polygon fill="#475569" stroke="#475569" points="1381.94,-555.2 1389.31,-554.34 1383.02,-550.42 1381.94,-555.2"/>
+<path fill="none" stroke="#94a3b8" d="M1121.48,-444.41C1138.45,-458.01 1163.1,-476.15 1187.12,-488 1251.87,-519.95 1333.28,-541.57 1382.56,-552.83"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="1381.94,-555.2 1389.31,-554.34 1383.02,-550.42 1381.94,-555.2"/>
 </g>
 <!-- account -->
 <g id="node9" class="node">
 <title>account</title>
-<path fill="#dcfce7" stroke="#334155" d="M1461.76,-512C1461.76,-512 1393.48,-512 1393.48,-512 1387.48,-512 1381.48,-506 1381.48,-500 1381.48,-500 1381.48,-488 1381.48,-488 1381.48,-482 1387.48,-476 1393.48,-476 1393.48,-476 1461.76,-476 1461.76,-476 1467.76,-476 1473.76,-482 1473.76,-488 1473.76,-488 1473.76,-500 1473.76,-500 1473.76,-506 1467.76,-512 1461.76,-512"/>
-<text xml:space="preserve" text-anchor="middle" x="1427.62" y="-489.55" font-family="Helvetica,sans-Serif" font-size="11.00">account&#45;service</text>
+<path fill="#14532d" stroke="#64748b" d="M1461.76,-512C1461.76,-512 1393.48,-512 1393.48,-512 1387.48,-512 1381.48,-506 1381.48,-500 1381.48,-500 1381.48,-488 1381.48,-488 1381.48,-482 1387.48,-476 1393.48,-476 1393.48,-476 1461.76,-476 1461.76,-476 1467.76,-476 1473.76,-482 1473.76,-488 1473.76,-488 1473.76,-500 1473.76,-500 1473.76,-506 1467.76,-512 1461.76,-512"/>
+<text xml:space="preserve" text-anchor="middle" x="1427.62" y="-489.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">account&#45;service</text>
 </g>
 <!-- ingress&#45;&gt;account -->
 <g id="edge9" class="edge">
 <title>ingress&#45;&gt;account</title>
-<path fill="none" stroke="#475569" d="M1161.12,-444.4C1169.81,-446.76 1178.67,-449.04 1187.12,-451 1250.53,-465.72 1324.37,-478.3 1373.12,-485.98"/>
-<polygon fill="#475569" stroke="#475569" points="1372.53,-488.37 1379.82,-487.03 1373.29,-483.53 1372.53,-488.37"/>
+<path fill="none" stroke="#94a3b8" d="M1161.12,-444.4C1169.81,-446.76 1178.67,-449.04 1187.12,-451 1250.53,-465.72 1324.37,-478.3 1373.12,-485.98"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="1372.53,-488.37 1379.82,-487.03 1373.29,-483.53 1372.53,-488.37"/>
 </g>
 <!-- edgeLogs&#45;&gt;grafana -->
 <g id="edge30" class="edge">
 <title>edgeLogs&#45;&gt;grafana</title>
-<path fill="none" stroke="#475569" d="M1452.53,-303.61C1475.48,-287.21 1511.84,-264.38 1547.62,-255 1574.7,-247.9 1582.71,-252.78 1610.62,-255 1621.84,-255.89 1624.42,-257.88 1635.62,-259 1905.32,-286.08 2228.69,-291.03 2364.66,-291.87"/>
-<polygon fill="#475569" stroke="#475569" points="2364.43,-294.32 2371.44,-291.91 2364.46,-289.42 2364.43,-294.32"/>
-<text xml:space="preserve" text-anchor="middle" x="1912.65" y="-284.67" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#334155">RCA source for edge/API status codes</text>
+<path fill="none" stroke="#94a3b8" d="M1452.53,-303.61C1475.48,-287.21 1511.84,-264.38 1547.62,-255 1574.7,-247.9 1582.71,-252.78 1610.62,-255 1621.84,-255.89 1624.42,-257.88 1635.62,-259 1905.32,-286.08 2228.69,-291.03 2364.66,-291.87"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="2364.43,-294.32 2371.44,-291.91 2364.46,-289.42 2364.43,-294.32"/>
+<text xml:space="preserve" text-anchor="middle" x="1912.65" y="-284.67" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">RCA source for edge/API status codes</text>
 </g>
 <!-- actuator -->
 <g id="node10" class="node">
 <title>actuator</title>
-<path fill="#e0f2fe" stroke="#334155" d="M1760.52,-469C1760.52,-469 1665.24,-469 1665.24,-469 1659.24,-469 1653.24,-463 1653.24,-457 1653.24,-457 1653.24,-445 1653.24,-445 1653.24,-439 1659.24,-433 1665.24,-433 1665.24,-433 1760.52,-433 1760.52,-433 1766.52,-433 1772.52,-439 1772.52,-445 1772.52,-445 1772.52,-457 1772.52,-457 1772.52,-463 1766.52,-469 1760.52,-469"/>
-<text xml:space="preserve" text-anchor="middle" x="1712.88" y="-452.55" font-family="Helvetica,sans-Serif" font-size="11.00">Spring Actuator</text>
-<text xml:space="preserve" text-anchor="middle" x="1712.88" y="-440.55" font-family="Helvetica,sans-Serif" font-size="11.00">/actuator/prometheus</text>
+<path fill="#164e63" stroke="#64748b" d="M1760.52,-469C1760.52,-469 1665.24,-469 1665.24,-469 1659.24,-469 1653.24,-463 1653.24,-457 1653.24,-457 1653.24,-445 1653.24,-445 1653.24,-439 1659.24,-433 1665.24,-433 1665.24,-433 1760.52,-433 1760.52,-433 1766.52,-433 1772.52,-439 1772.52,-445 1772.52,-445 1772.52,-457 1772.52,-457 1772.52,-463 1766.52,-469 1760.52,-469"/>
+<text xml:space="preserve" text-anchor="middle" x="1712.88" y="-452.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">Spring Actuator</text>
+<text xml:space="preserve" text-anchor="middle" x="1712.88" y="-440.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">/actuator/prometheus</text>
 </g>
 <!-- inventory&#45;&gt;actuator -->
 <g id="edge12" class="edge">
 <title>inventory&#45;&gt;actuator</title>
-<path fill="none" stroke="#475569" d="M1464.75,-407.52C1485.55,-395.31 1510.81,-377.6 1527.62,-356 1542.83,-336.46 1527.21,-318.02 1547.62,-304 1570.7,-288.15 1588.74,-286.53 1610.62,-304 1649.8,-335.28 1604.44,-374.74 1635.62,-414 1639.96,-419.47 1645.31,-424.18 1651.15,-428.23"/>
-<polygon fill="#475569" stroke="#475569" points="1649.69,-430.2 1656.92,-431.87 1652.31,-426.06 1649.69,-430.2"/>
+<path fill="none" stroke="#94a3b8" d="M1464.75,-407.52C1485.55,-395.31 1510.81,-377.6 1527.62,-356 1542.83,-336.46 1527.21,-318.02 1547.62,-304 1570.7,-288.15 1588.74,-286.53 1610.62,-304 1649.8,-335.28 1604.44,-374.74 1635.62,-414 1639.96,-419.47 1645.31,-424.18 1651.15,-428.23"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="1649.69,-430.2 1656.92,-431.87 1652.31,-426.06 1649.69,-430.2"/>
 </g>
 <!-- otel -->
 <g id="node11" class="node">
 <title>otel</title>
-<path fill="#e0f2fe" stroke="#334155" d="M1763.52,-673C1763.52,-673 1662.24,-673 1662.24,-673 1656.24,-673 1650.24,-667 1650.24,-661 1650.24,-661 1650.24,-649 1650.24,-649 1650.24,-643 1656.24,-637 1662.24,-637 1662.24,-637 1763.52,-637 1763.52,-637 1769.52,-637 1775.52,-643 1775.52,-649 1775.52,-649 1775.52,-661 1775.52,-661 1775.52,-667 1769.52,-673 1763.52,-673"/>
-<text xml:space="preserve" text-anchor="middle" x="1712.88" y="-656.55" font-family="Helvetica,sans-Serif" font-size="11.00">Spring OpenTelemetry</text>
-<text xml:space="preserve" text-anchor="middle" x="1712.88" y="-644.55" font-family="Helvetica,sans-Serif" font-size="11.00">traces + resource attrs</text>
+<path fill="#164e63" stroke="#64748b" d="M1763.52,-673C1763.52,-673 1662.24,-673 1662.24,-673 1656.24,-673 1650.24,-667 1650.24,-661 1650.24,-661 1650.24,-649 1650.24,-649 1650.24,-643 1656.24,-637 1662.24,-637 1662.24,-637 1763.52,-637 1763.52,-637 1769.52,-637 1775.52,-643 1775.52,-649 1775.52,-649 1775.52,-661 1775.52,-661 1775.52,-667 1769.52,-673 1763.52,-673"/>
+<text xml:space="preserve" text-anchor="middle" x="1712.88" y="-656.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">Spring OpenTelemetry</text>
+<text xml:space="preserve" text-anchor="middle" x="1712.88" y="-644.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">traces + resource attrs</text>
 </g>
 <!-- inventory&#45;&gt;otel -->
 <g id="edge15" class="edge">
 <title>inventory&#45;&gt;otel</title>
-<path fill="none" stroke="#475569" d="M1476.99,-411.15C1517.72,-401.92 1574.91,-397.11 1610.62,-429 1674.81,-486.32 1584.2,-552 1635.62,-621 1638.69,-625.12 1642.37,-628.75 1646.44,-631.95"/>
-<polygon fill="#475569" stroke="#475569" points="1644.73,-633.74 1651.87,-635.76 1647.54,-629.73 1644.73,-633.74"/>
+<path fill="none" stroke="#94a3b8" d="M1476.99,-411.15C1517.72,-401.92 1574.91,-397.11 1610.62,-429 1674.81,-486.32 1584.2,-552 1635.62,-621 1638.69,-625.12 1642.37,-628.75 1646.44,-631.95"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="1644.73,-633.74 1651.87,-635.76 1647.54,-629.73 1644.73,-633.74"/>
 </g>
 <!-- logs -->
 <g id="node12" class="node">
 <title>logs</title>
-<path fill="#e0f2fe" stroke="#334155" d="M1759.02,-537C1759.02,-537 1666.74,-537 1666.74,-537 1660.74,-537 1654.74,-531 1654.74,-525 1654.74,-525 1654.74,-513 1654.74,-513 1654.74,-507 1660.74,-501 1666.74,-501 1666.74,-501 1759.02,-501 1759.02,-501 1765.02,-501 1771.02,-507 1771.02,-513 1771.02,-513 1771.02,-525 1771.02,-525 1771.02,-531 1765.02,-537 1759.02,-537"/>
-<text xml:space="preserve" text-anchor="middle" x="1712.88" y="-520.55" font-family="Helvetica,sans-Serif" font-size="11.00">Kubernetes pod logs</text>
-<text xml:space="preserve" text-anchor="middle" x="1712.88" y="-508.55" font-family="Helvetica,sans-Serif" font-size="11.00">service labels</text>
+<path fill="#164e63" stroke="#64748b" d="M1759.02,-537C1759.02,-537 1666.74,-537 1666.74,-537 1660.74,-537 1654.74,-531 1654.74,-525 1654.74,-525 1654.74,-513 1654.74,-513 1654.74,-507 1660.74,-501 1666.74,-501 1666.74,-501 1759.02,-501 1759.02,-501 1765.02,-501 1771.02,-507 1771.02,-513 1771.02,-513 1771.02,-525 1771.02,-525 1771.02,-531 1765.02,-537 1759.02,-537"/>
+<text xml:space="preserve" text-anchor="middle" x="1712.88" y="-520.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">Kubernetes pod logs</text>
+<text xml:space="preserve" text-anchor="middle" x="1712.88" y="-508.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">service labels</text>
 </g>
 <!-- inventory&#45;&gt;logs -->
 <g id="edge18" class="edge">
 <title>inventory&#45;&gt;logs</title>
-<path fill="none" stroke="#475569" d="M1454.57,-407.61C1488.78,-383.42 1544.95,-343.84 1547.62,-343 1574.33,-334.6 1589.17,-325 1610.62,-343 1659.7,-384.2 1596.19,-434.49 1635.62,-485 1639.04,-489.38 1643.14,-493.2 1647.64,-496.55"/>
-<polygon fill="#475569" stroke="#475569" points="1646.05,-498.43 1653.24,-500.27 1648.77,-494.36 1646.05,-498.43"/>
+<path fill="none" stroke="#94a3b8" d="M1454.57,-407.61C1488.78,-383.42 1544.95,-343.84 1547.62,-343 1574.33,-334.6 1589.17,-325 1610.62,-343 1659.7,-384.2 1596.19,-434.49 1635.62,-485 1639.04,-489.38 1643.14,-493.2 1647.64,-496.55"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="1646.05,-498.43 1653.24,-500.27 1648.77,-494.36 1646.05,-498.43"/>
 </g>
 <!-- beyla -->
 <g id="node13" class="node">
 <title>beyla</title>
-<path fill="#f3e8ff" stroke="#334155" d="M1773.27,-605C1773.27,-605 1652.49,-605 1652.49,-605 1646.49,-605 1640.49,-599 1640.49,-593 1640.49,-593 1640.49,-581 1640.49,-581 1640.49,-575 1646.49,-569 1652.49,-569 1652.49,-569 1773.27,-569 1773.27,-569 1779.27,-569 1785.27,-575 1785.27,-581 1785.27,-581 1785.27,-593 1785.27,-593 1785.27,-599 1779.27,-605 1773.27,-605"/>
-<text xml:space="preserve" text-anchor="middle" x="1712.88" y="-588.55" font-family="Helvetica,sans-Serif" font-size="11.00">Grafana Beyla</text>
-<text xml:space="preserve" text-anchor="middle" x="1712.88" y="-576.55" font-family="Helvetica,sans-Serif" font-size="11.00">zero&#45;code HTTP telemetry</text>
+<path fill="#6b21a8" stroke="#64748b" d="M1773.27,-605C1773.27,-605 1652.49,-605 1652.49,-605 1646.49,-605 1640.49,-599 1640.49,-593 1640.49,-593 1640.49,-581 1640.49,-581 1640.49,-575 1646.49,-569 1652.49,-569 1652.49,-569 1773.27,-569 1773.27,-569 1779.27,-569 1785.27,-575 1785.27,-581 1785.27,-581 1785.27,-593 1785.27,-593 1785.27,-599 1779.27,-605 1773.27,-605"/>
+<text xml:space="preserve" text-anchor="middle" x="1712.88" y="-588.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">Grafana Beyla</text>
+<text xml:space="preserve" text-anchor="middle" x="1712.88" y="-576.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">zero&#45;code HTTP telemetry</text>
 </g>
 <!-- inventory&#45;&gt;beyla -->
 <g id="edge21" class="edge">
 <title>inventory&#45;&gt;beyla</title>
-<path fill="none" stroke="#475569" d="M1451.99,-407.69C1489.79,-380.43 1564.74,-336.41 1610.62,-376.25 1670.52,-428.27 1587.86,-489.65 1635.62,-553 1638.71,-557.1 1642.41,-560.72 1646.49,-563.91"/>
-<polygon fill="#475569" stroke="#475569" points="1644.79,-565.71 1651.93,-567.71 1647.59,-561.69 1644.79,-565.71"/>
-<text xml:space="preserve" text-anchor="middle" x="1579.12" y="-377.45" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#334155">HTTP telemetry</text>
+<path fill="none" stroke="#94a3b8" d="M1451.99,-407.69C1489.79,-380.43 1564.74,-336.41 1610.62,-376.25 1670.52,-428.27 1587.86,-489.65 1635.62,-553 1638.71,-557.1 1642.41,-560.72 1646.49,-563.91"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="1644.79,-565.71 1651.93,-567.71 1647.59,-561.69 1644.79,-565.71"/>
+<text xml:space="preserve" text-anchor="middle" x="1579.12" y="-377.45" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">HTTP telemetry</text>
 </g>
 <!-- pyroscope -->
 <g id="node14" class="node">
 <title>pyroscope</title>
-<path fill="#f3e8ff" stroke="#334155" d="M1778.15,-398C1778.15,-398 1647.62,-398 1647.62,-398 1641.62,-398 1635.62,-392 1635.62,-386 1635.62,-386 1635.62,-374 1635.62,-374 1635.62,-368 1641.62,-362 1647.62,-362 1647.62,-362 1778.15,-362 1778.15,-362 1784.15,-362 1790.15,-368 1790.15,-374 1790.15,-374 1790.15,-386 1790.15,-386 1790.15,-392 1784.15,-398 1778.15,-398"/>
-<text xml:space="preserve" text-anchor="middle" x="1712.88" y="-381.55" font-family="Helvetica,sans-Serif" font-size="11.00">Pyroscope Alloy DaemonSet</text>
-<text xml:space="preserve" text-anchor="middle" x="1712.88" y="-369.55" font-family="Helvetica,sans-Serif" font-size="11.00">JVM profiles</text>
+<path fill="#6b21a8" stroke="#64748b" d="M1778.15,-398C1778.15,-398 1647.62,-398 1647.62,-398 1641.62,-398 1635.62,-392 1635.62,-386 1635.62,-386 1635.62,-374 1635.62,-374 1635.62,-368 1641.62,-362 1647.62,-362 1647.62,-362 1778.15,-362 1778.15,-362 1784.15,-362 1790.15,-368 1790.15,-374 1790.15,-374 1790.15,-386 1790.15,-386 1790.15,-392 1784.15,-398 1778.15,-398"/>
+<text xml:space="preserve" text-anchor="middle" x="1712.88" y="-381.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">Pyroscope Alloy DaemonSet</text>
+<text xml:space="preserve" text-anchor="middle" x="1712.88" y="-369.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">JVM profiles</text>
 </g>
 <!-- inventory&#45;&gt;pyroscope -->
 <g id="edge24" class="edge">
 <title>inventory&#45;&gt;pyroscope</title>
-<path fill="none" stroke="#475569" d="M1466.75,-407.71C1487.71,-395.77 1512.46,-378.27 1527.62,-356 1548.67,-325.08 1518.2,-297.34 1547.62,-274.25 1569.65,-256.96 1586.33,-260.32 1610.62,-274.25 1629.71,-285.2 1621.36,-300.23 1635.62,-317 1648.16,-331.75 1664.45,-345.72 1678.75,-356.75"/>
-<polygon fill="#475569" stroke="#475569" points="1676.89,-358.42 1683.95,-360.68 1679.85,-354.51 1676.89,-358.42"/>
-<text xml:space="preserve" text-anchor="middle" x="1579.12" y="-275.45" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#334155">JVM attach</text>
+<path fill="none" stroke="#94a3b8" d="M1466.75,-407.71C1487.71,-395.77 1512.46,-378.27 1527.62,-356 1548.67,-325.08 1518.2,-297.34 1547.62,-274.25 1569.65,-256.96 1586.33,-260.32 1610.62,-274.25 1629.71,-285.2 1621.36,-300.23 1635.62,-317 1648.16,-331.75 1664.45,-345.72 1678.75,-356.75"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="1676.89,-358.42 1683.95,-360.68 1679.85,-354.51 1676.89,-358.42"/>
+<text xml:space="preserve" text-anchor="middle" x="1579.12" y="-275.45" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">JVM attach</text>
 </g>
 <!-- cart&#45;&gt;actuator -->
 <g id="edge13" class="edge">
 <title>cart&#45;&gt;actuator</title>
-<path fill="none" stroke="#475569" d="M1440.23,-580.41C1470.22,-625.79 1552,-735.72 1610.62,-684 1677.46,-625.03 1582.51,-556.59 1635.62,-485 1638.61,-480.97 1642.18,-477.41 1646.13,-474.27"/>
-<polygon fill="#475569" stroke="#475569" points="1647.54,-476.27 1651.84,-470.23 1644.71,-472.27 1647.54,-476.27"/>
+<path fill="none" stroke="#94a3b8" d="M1440.23,-580.41C1470.22,-625.79 1552,-735.72 1610.62,-684 1677.46,-625.03 1582.51,-556.59 1635.62,-485 1638.61,-480.97 1642.18,-477.41 1646.13,-474.27"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="1647.54,-476.27 1651.84,-470.23 1644.71,-472.27 1647.54,-476.27"/>
 </g>
 <!-- cart&#45;&gt;otel -->
 <g id="edge16" class="edge">
 <title>cart&#45;&gt;otel</title>
-<path fill="none" stroke="#475569" d="M1431.59,-580.38C1440.08,-626 1469.08,-744.21 1547.62,-792 1571.54,-806.56 1585.62,-804.61 1610.62,-792 1656.83,-768.69 1687.18,-713.25 1701.76,-680.48"/>
-<polygon fill="#475569" stroke="#475569" points="1703.84,-681.85 1704.36,-674.46 1699.34,-679.91 1703.84,-681.85"/>
+<path fill="none" stroke="#94a3b8" d="M1431.59,-580.38C1440.08,-626 1469.08,-744.21 1547.62,-792 1571.54,-806.56 1585.62,-804.61 1610.62,-792 1656.83,-768.69 1687.18,-713.25 1701.76,-680.48"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="1703.84,-681.85 1704.36,-674.46 1699.34,-679.91 1703.84,-681.85"/>
 </g>
 <!-- cart&#45;&gt;logs -->
 <g id="edge19" class="edge">
 <title>cart&#45;&gt;logs</title>
-<path fill="none" stroke="#475569" d="M1437.09,-580.19C1462.92,-633.38 1543.1,-781.32 1610.62,-723 1668.42,-673.08 1589.48,-613.85 1635.62,-553 1638.97,-548.58 1643.03,-544.71 1647.51,-541.35"/>
-<polygon fill="#475569" stroke="#475569" points="1648.63,-543.54 1653.07,-537.6 1645.9,-539.48 1648.63,-543.54"/>
+<path fill="none" stroke="#94a3b8" d="M1437.09,-580.19C1462.92,-633.38 1543.1,-781.32 1610.62,-723 1668.42,-673.08 1589.48,-613.85 1635.62,-553 1638.97,-548.58 1643.03,-544.71 1647.51,-541.35"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="1648.63,-543.54 1653.07,-537.6 1645.9,-539.48 1648.63,-543.54"/>
 </g>
 <!-- cart&#45;&gt;beyla -->
 <g id="edge22" class="edge">
 <title>cart&#45;&gt;beyla</title>
-<path fill="none" stroke="#475569" d="M1433.04,-580.48C1444.09,-621.96 1477.2,-721.96 1547.62,-762 1571.96,-775.84 1589.16,-779.99 1610.62,-762 1659.39,-721.11 1596.43,-671.14 1635.62,-621 1638.84,-616.88 1642.67,-613.24 1646.87,-610.04"/>
-<polygon fill="#475569" stroke="#475569" points="1648.1,-612.17 1652.5,-606.2 1645.34,-608.12 1648.1,-612.17"/>
-<text xml:space="preserve" text-anchor="middle" x="1579.12" y="-775.18" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#334155">HTTP telemetry</text>
+<path fill="none" stroke="#94a3b8" d="M1433.04,-580.48C1444.09,-621.96 1477.2,-721.96 1547.62,-762 1571.96,-775.84 1589.16,-779.99 1610.62,-762 1659.39,-721.11 1596.43,-671.14 1635.62,-621 1638.84,-616.88 1642.67,-613.24 1646.87,-610.04"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="1648.1,-612.17 1652.5,-606.2 1645.34,-608.12 1648.1,-612.17"/>
+<text xml:space="preserve" text-anchor="middle" x="1579.12" y="-775.18" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">HTTP telemetry</text>
 </g>
 <!-- cart&#45;&gt;pyroscope -->
 <g id="edge25" class="edge">
 <title>cart&#45;&gt;pyroscope</title>
-<path fill="none" stroke="#475569" d="M1464.37,-579.1C1504.81,-595.65 1570.27,-613.6 1610.62,-579 1665.92,-531.58 1592.34,-475.6 1635.62,-417 1639.55,-411.67 1644.46,-407.08 1649.88,-403.12"/>
-<polygon fill="#475569" stroke="#475569" points="1651.22,-405.17 1655.71,-399.27 1648.52,-401.08 1651.22,-405.17"/>
-<text xml:space="preserve" text-anchor="middle" x="1579.12" y="-599.98" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#334155">JVM attach</text>
+<path fill="none" stroke="#94a3b8" d="M1464.37,-579.1C1504.81,-595.65 1570.27,-613.6 1610.62,-579 1665.92,-531.58 1592.34,-475.6 1635.62,-417 1639.55,-411.67 1644.46,-407.08 1649.88,-403.12"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="1651.22,-405.17 1655.71,-399.27 1648.52,-401.08 1651.22,-405.17"/>
+<text xml:space="preserve" text-anchor="middle" x="1579.12" y="-599.98" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">JVM attach</text>
 </g>
 <!-- account&#45;&gt;actuator -->
 <g id="edge14" class="edge">
 <title>account&#45;&gt;actuator</title>
-<path fill="none" stroke="#475569" d="M1474.04,-490.02C1510.97,-486.48 1564.34,-480.68 1610.62,-473 1621.69,-471.16 1633.37,-468.92 1644.72,-466.57"/>
-<polygon fill="#475569" stroke="#475569" points="1645.08,-469 1651.42,-465.16 1644.07,-464.2 1645.08,-469"/>
+<path fill="none" stroke="#94a3b8" d="M1474.04,-490.02C1510.97,-486.48 1564.34,-480.68 1610.62,-473 1621.69,-471.16 1633.37,-468.92 1644.72,-466.57"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="1645.08,-469 1651.42,-465.16 1644.07,-464.2 1645.08,-469"/>
 </g>
 <!-- account&#45;&gt;otel -->
 <g id="edge17" class="edge">
 <title>account&#45;&gt;otel</title>
-<path fill="none" stroke="#475569" d="M1474.16,-501C1492.69,-505.87 1513.12,-514.11 1527.62,-528 1545.2,-544.84 1531.03,-561.18 1547.62,-579 1572.89,-606.15 1609.78,-624.42 1642.2,-636.23"/>
-<polygon fill="#475569" stroke="#475569" points="1641.06,-638.42 1648.48,-638.44 1642.69,-633.8 1641.06,-638.42"/>
+<path fill="none" stroke="#94a3b8" d="M1474.16,-501C1492.69,-505.87 1513.12,-514.11 1527.62,-528 1545.2,-544.84 1531.03,-561.18 1547.62,-579 1572.89,-606.15 1609.78,-624.42 1642.2,-636.23"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="1641.06,-638.42 1648.48,-638.44 1642.69,-633.8 1641.06,-638.42"/>
 </g>
 <!-- account&#45;&gt;logs -->
 <g id="edge20" class="edge">
 <title>account&#45;&gt;logs</title>
-<path fill="none" stroke="#475569" d="M1474.25,-502.08C1496.34,-505.69 1523.29,-509.65 1547.62,-512 1579.95,-515.13 1616,-516.86 1646.07,-517.81"/>
-<polygon fill="#475569" stroke="#475569" points="1645.8,-520.26 1652.87,-518.02 1645.95,-515.36 1645.8,-520.26"/>
+<path fill="none" stroke="#94a3b8" d="M1474.25,-502.08C1496.34,-505.69 1523.29,-509.65 1547.62,-512 1579.95,-515.13 1616,-516.86 1646.07,-517.81"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="1645.8,-520.26 1652.87,-518.02 1645.95,-515.36 1645.8,-520.26"/>
 </g>
 <!-- account&#45;&gt;beyla -->
 <g id="edge23" class="edge">
 <title>account&#45;&gt;beyla</title>
-<path fill="none" stroke="#475569" d="M1474.1,-507.8C1491.14,-513.44 1510.5,-520.42 1527.62,-528 1536.9,-532.11 1538.25,-535.11 1547.62,-539 1574.59,-550.2 1605.07,-559.88 1632.38,-567.55"/>
-<polygon fill="#475569" stroke="#475569" points="1631.51,-569.85 1638.91,-569.36 1632.82,-565.13 1631.51,-569.85"/>
-<text xml:space="preserve" text-anchor="middle" x="1579.12" y="-562.08" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#334155">HTTP telemetry</text>
+<path fill="none" stroke="#94a3b8" d="M1474.1,-507.8C1491.14,-513.44 1510.5,-520.42 1527.62,-528 1536.9,-532.11 1538.25,-535.11 1547.62,-539 1574.59,-550.2 1605.07,-559.88 1632.38,-567.55"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="1631.51,-569.85 1638.91,-569.36 1632.82,-565.13 1631.51,-569.85"/>
+<text xml:space="preserve" text-anchor="middle" x="1579.12" y="-562.08" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">HTTP telemetry</text>
 </g>
 <!-- account&#45;&gt;pyroscope -->
 <g id="edge26" class="edge">
 <title>account&#45;&gt;pyroscope</title>
-<path fill="none" stroke="#475569" d="M1474.23,-479.17C1491.11,-473.47 1510.34,-466.71 1527.62,-460 1574.67,-441.74 1627.4,-418.56 1664.36,-401.86"/>
-<polygon fill="#475569" stroke="#475569" points="1665.26,-404.14 1670.63,-399.02 1663.24,-399.68 1665.26,-404.14"/>
-<text xml:space="preserve" text-anchor="middle" x="1579.12" y="-453.18" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#334155">JVM attach</text>
+<path fill="none" stroke="#94a3b8" d="M1474.23,-479.17C1491.11,-473.47 1510.34,-466.71 1527.62,-460 1574.67,-441.74 1627.4,-418.56 1664.36,-401.86"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="1665.26,-404.14 1670.63,-399.02 1663.24,-399.68 1665.26,-404.14"/>
+<text xml:space="preserve" text-anchor="middle" x="1579.12" y="-453.18" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">JVM attach</text>
 </g>
 <!-- alloy -->
 <g id="node15" class="node">
 <title>alloy</title>
-<path fill="#f3e8ff" stroke="#334155" d="M2152.18,-537C2152.18,-537 2094.4,-537 2094.4,-537 2088.4,-537 2082.4,-531 2082.4,-525 2082.4,-525 2082.4,-513 2082.4,-513 2082.4,-507 2088.4,-501 2094.4,-501 2094.4,-501 2152.18,-501 2152.18,-501 2158.18,-501 2164.18,-507 2164.18,-513 2164.18,-513 2164.18,-525 2164.18,-525 2164.18,-531 2158.18,-537 2152.18,-537"/>
-<text xml:space="preserve" text-anchor="middle" x="2123.29" y="-520.55" font-family="Helvetica,sans-Serif" font-size="11.00">Grafana Alloy</text>
-<text xml:space="preserve" text-anchor="middle" x="2123.29" y="-508.55" font-family="Helvetica,sans-Serif" font-size="11.00">OTel collector</text>
+<path fill="#6b21a8" stroke="#64748b" d="M2152.18,-537C2152.18,-537 2094.4,-537 2094.4,-537 2088.4,-537 2082.4,-531 2082.4,-525 2082.4,-525 2082.4,-513 2082.4,-513 2082.4,-507 2088.4,-501 2094.4,-501 2094.4,-501 2152.18,-501 2152.18,-501 2158.18,-501 2164.18,-507 2164.18,-513 2164.18,-513 2164.18,-525 2164.18,-525 2164.18,-531 2158.18,-537 2152.18,-537"/>
+<text xml:space="preserve" text-anchor="middle" x="2123.29" y="-520.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">Grafana Alloy</text>
+<text xml:space="preserve" text-anchor="middle" x="2123.29" y="-508.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">OTel collector</text>
 </g>
 <!-- actuator&#45;&gt;alloy -->
 <g id="edge27" class="edge">
 <title>actuator&#45;&gt;alloy</title>
-<path fill="none" stroke="#475569" d="M1772.83,-460.82C1853.98,-474.33 1998.57,-498.4 2073.8,-510.93"/>
-<polygon fill="#475569" stroke="#475569" points="2073.38,-513.34 2080.69,-512.07 2074.18,-508.51 2073.38,-513.34"/>
-<text xml:space="preserve" text-anchor="middle" x="1912.65" y="-500.11" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#334155">Prometheus scrape</text>
+<path fill="none" stroke="#94a3b8" d="M1772.83,-460.82C1853.98,-474.33 1998.57,-498.4 2073.8,-510.93"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="2073.38,-513.34 2080.69,-512.07 2074.18,-508.51 2073.38,-513.34"/>
+<text xml:space="preserve" text-anchor="middle" x="1912.65" y="-500.11" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">Prometheus scrape</text>
 </g>
 <!-- otel&#45;&gt;alloy -->
 <g id="edge28" class="edge">
 <title>otel&#45;&gt;alloy</title>
-<path fill="none" stroke="#475569" d="M1775.77,-646.69C1836.94,-637.13 1932.4,-618.54 2010.15,-587 2038.9,-575.34 2068.81,-556.83 2090.51,-542.06"/>
-<polygon fill="#475569" stroke="#475569" points="2091.63,-544.26 2096,-538.27 2088.85,-540.23 2091.63,-544.26"/>
-<text xml:space="preserve" text-anchor="middle" x="1912.65" y="-639.93" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#334155">OTLP traces</text>
+<path fill="none" stroke="#94a3b8" d="M1775.77,-646.69C1836.94,-637.13 1932.4,-618.54 2010.15,-587 2038.9,-575.34 2068.81,-556.83 2090.51,-542.06"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="2091.63,-544.26 2096,-538.27 2088.85,-540.23 2091.63,-544.26"/>
+<text xml:space="preserve" text-anchor="middle" x="1912.65" y="-639.93" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">OTLP traces</text>
 </g>
 <!-- logs&#45;&gt;alloy -->
 <g id="edge29" class="edge">
 <title>logs&#45;&gt;alloy</title>
-<path fill="none" stroke="#475569" d="M1771.1,-519C1851.85,-519 1997.83,-519 2073.64,-519"/>
-<polygon fill="#475569" stroke="#475569" points="2073.57,-521.45 2080.57,-519 2073.57,-516.55 2073.57,-521.45"/>
-<text xml:space="preserve" text-anchor="middle" x="1912.65" y="-520.2" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#334155">pod log collection</text>
+<path fill="none" stroke="#94a3b8" d="M1771.1,-519C1851.85,-519 1997.83,-519 2073.64,-519"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="2073.57,-521.45 2080.57,-519 2073.57,-516.55 2073.57,-521.45"/>
+<text xml:space="preserve" text-anchor="middle" x="1912.65" y="-520.2" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">pod log collection</text>
 </g>
 <!-- beyla&#45;&gt;alloy -->
 <g id="edge31" class="edge">
 <title>beyla&#45;&gt;alloy</title>
-<path fill="none" stroke="#475569" d="M1785.49,-575.08C1868.43,-561.27 2002.77,-538.9 2074.14,-527.02"/>
-<polygon fill="#475569" stroke="#475569" points="2074.11,-529.51 2080.61,-525.94 2073.31,-524.67 2074.11,-529.51"/>
-<text xml:space="preserve" text-anchor="middle" x="1912.65" y="-569.96" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#334155">metrics + traces</text>
+<path fill="none" stroke="#94a3b8" d="M1785.49,-575.08C1868.43,-561.27 2002.77,-538.9 2074.14,-527.02"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="2074.11,-529.51 2080.61,-525.94 2073.31,-524.67 2074.11,-529.51"/>
+<text xml:space="preserve" text-anchor="middle" x="1912.65" y="-569.96" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">metrics + traces</text>
 </g>
 <!-- pyroscope&#45;&gt;grafana -->
 <g id="edge32" class="edge">
 <title>pyroscope&#45;&gt;grafana</title>
-<path fill="none" stroke="#475569" d="M1790.27,-377.29C1910.16,-371.94 2149.35,-356.86 2348.18,-317 2354.32,-315.77 2360.66,-314.26 2366.96,-312.61"/>
-<polygon fill="#475569" stroke="#475569" points="2367.34,-315.05 2373.45,-310.84 2366.05,-310.32 2367.34,-315.05"/>
-<text xml:space="preserve" text-anchor="middle" x="2123.29" y="-361.1" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#334155">profiles write</text>
+<path fill="none" stroke="#94a3b8" d="M1790.27,-377.29C1910.16,-371.94 2149.35,-356.86 2348.18,-317 2354.32,-315.77 2360.66,-314.26 2366.96,-312.61"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="2367.34,-315.05 2373.45,-310.84 2366.05,-310.32 2367.34,-315.05"/>
+<text xml:space="preserve" text-anchor="middle" x="2123.29" y="-361.1" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">profiles write</text>
 </g>
 <!-- alloy&#45;&gt;grafana -->
 <g id="edge33" class="edge">
 <title>alloy&#45;&gt;grafana</title>
-<path fill="none" stroke="#475569" d="M2164.67,-503.83C2212.12,-484.65 2291.55,-448.25 2348.18,-400 2376.12,-376.19 2400.39,-341.26 2415.08,-317.62"/>
-<polygon fill="#475569" stroke="#475569" points="2417.16,-318.92 2418.71,-311.67 2412.97,-316.37 2417.16,-318.92"/>
-<text xml:space="preserve" text-anchor="middle" x="2292.3" y="-471.72" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#334155">OTLP export</text>
+<path fill="none" stroke="#94a3b8" d="M2164.67,-503.83C2212.12,-484.65 2291.55,-448.25 2348.18,-400 2376.12,-376.19 2400.39,-341.26 2415.08,-317.62"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="2417.16,-318.92 2418.71,-311.67 2412.97,-316.37 2417.16,-318.92"/>
+<text xml:space="preserve" text-anchor="middle" x="2292.3" y="-471.72" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">OTLP export</text>
 </g>
 <!-- cloudwatch -->
 <g id="node16" class="node">
 <title>cloudwatch</title>
-<path fill="#f1f5f9" stroke="#334155" d="M2163.8,-243C2163.8,-243 2082.77,-243 2082.77,-243 2076.77,-243 2070.77,-237 2070.77,-231 2070.77,-231 2070.77,-219 2070.77,-219 2070.77,-213 2076.77,-207 2082.77,-207 2082.77,-207 2163.8,-207 2163.8,-207 2169.8,-207 2175.8,-213 2175.8,-219 2175.8,-219 2175.8,-231 2175.8,-231 2175.8,-237 2169.8,-243 2163.8,-243"/>
-<text xml:space="preserve" text-anchor="middle" x="2123.29" y="-226.55" font-family="Helvetica,sans-Serif" font-size="11.00">AWS CloudWatch</text>
-<text xml:space="preserve" text-anchor="middle" x="2123.29" y="-214.55" font-family="Helvetica,sans-Serif" font-size="11.00">RDS metrics</text>
+<path fill="#334155" stroke="#64748b" d="M2163.8,-243C2163.8,-243 2082.77,-243 2082.77,-243 2076.77,-243 2070.77,-237 2070.77,-231 2070.77,-231 2070.77,-219 2070.77,-219 2070.77,-213 2076.77,-207 2082.77,-207 2082.77,-207 2163.8,-207 2163.8,-207 2169.8,-207 2175.8,-213 2175.8,-219 2175.8,-219 2175.8,-231 2175.8,-231 2175.8,-237 2169.8,-243 2163.8,-243"/>
+<text xml:space="preserve" text-anchor="middle" x="2123.29" y="-226.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">AWS CloudWatch</text>
+<text xml:space="preserve" text-anchor="middle" x="2123.29" y="-214.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">RDS metrics</text>
 </g>
 <!-- cloudwatch&#45;&gt;grafana -->
 <g id="edge35" class="edge">
 <title>cloudwatch&#45;&gt;grafana</title>
-<path fill="none" stroke="#475569" d="M2176.2,-228.65C2222.09,-232.77 2290.5,-241.13 2348.18,-257.25 2360.37,-260.65 2373.14,-265.45 2384.87,-270.38"/>
-<polygon fill="#475569" stroke="#475569" points="2383.62,-272.52 2391.02,-273.04 2385.56,-268.02 2383.62,-272.52"/>
-<text xml:space="preserve" text-anchor="middle" x="2292.3" y="-258.45" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#334155">RDS CloudWatch samples</text>
+<path fill="none" stroke="#94a3b8" d="M2176.2,-228.65C2222.09,-232.77 2290.5,-241.13 2348.18,-257.25 2360.37,-260.65 2373.14,-265.45 2384.87,-270.38"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="2383.62,-272.52 2391.02,-273.04 2385.56,-268.02 2383.62,-272.52"/>
+<text xml:space="preserve" text-anchor="middle" x="2292.3" y="-258.45" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">RDS CloudWatch samples</text>
 </g>
 <!-- cloudwatchScrape -->
 <g id="node17" class="node">
 <title>cloudwatchScrape</title>
-<path fill="#f3e8ff" stroke="#334155" d="M1766.52,-243C1766.52,-243 1659.24,-243 1659.24,-243 1653.24,-243 1647.24,-237 1647.24,-231 1647.24,-231 1647.24,-219 1647.24,-219 1647.24,-213 1653.24,-207 1659.24,-207 1659.24,-207 1766.52,-207 1766.52,-207 1772.52,-207 1778.52,-213 1778.52,-219 1778.52,-219 1778.52,-231 1778.52,-231 1778.52,-237 1772.52,-243 1766.52,-243"/>
-<text xml:space="preserve" text-anchor="middle" x="1712.88" y="-226.55" font-family="Helvetica,sans-Serif" font-size="11.00">Grafana Cloud Provider</text>
-<text xml:space="preserve" text-anchor="middle" x="1712.88" y="-214.55" font-family="Helvetica,sans-Serif" font-size="11.00">AWS/RDS scrape job</text>
+<path fill="#6b21a8" stroke="#64748b" d="M1766.52,-243C1766.52,-243 1659.24,-243 1659.24,-243 1653.24,-243 1647.24,-237 1647.24,-231 1647.24,-231 1647.24,-219 1647.24,-219 1647.24,-213 1653.24,-207 1659.24,-207 1659.24,-207 1766.52,-207 1766.52,-207 1772.52,-207 1778.52,-213 1778.52,-219 1778.52,-219 1778.52,-231 1778.52,-231 1778.52,-237 1772.52,-243 1766.52,-243"/>
+<text xml:space="preserve" text-anchor="middle" x="1712.88" y="-226.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">Grafana Cloud Provider</text>
+<text xml:space="preserve" text-anchor="middle" x="1712.88" y="-214.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">AWS/RDS scrape job</text>
 </g>
 <!-- cloudwatchScrape&#45;&gt;cloudwatch -->
 <g id="edge34" class="edge">
 <title>cloudwatchScrape&#45;&gt;cloudwatch</title>
-<path fill="none" stroke="#475569" d="M1778.6,-225C1856.61,-225 1986.66,-225 2062.44,-225"/>
-<polygon fill="#475569" stroke="#475569" points="2061.99,-227.45 2068.99,-225 2061.99,-222.55 2061.99,-227.45"/>
-<text xml:space="preserve" text-anchor="middle" x="1912.65" y="-226.2" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#334155">assume AWS role and scrape AWS/RDS metrics</text>
+<path fill="none" stroke="#94a3b8" d="M1778.6,-225C1856.61,-225 1986.66,-225 2062.44,-225"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="2061.99,-227.45 2068.99,-225 2061.99,-222.55 2061.99,-227.45"/>
+<text xml:space="preserve" text-anchor="middle" x="1912.65" y="-226.2" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">assume AWS role and scrape AWS/RDS metrics</text>
 </g>
 <!-- synth -->
 <g id="node18" class="node">
 <title>synth</title>
-<path fill="#f3e8ff" stroke="#334155" d="M610.68,-207C610.68,-207 477.9,-207 477.9,-207 471.9,-207 465.9,-201 465.9,-195 465.9,-195 465.9,-183 465.9,-183 465.9,-177 471.9,-171 477.9,-171 477.9,-171 610.68,-171 610.68,-171 616.68,-171 622.68,-177 622.68,-183 622.68,-183 622.68,-195 622.68,-195 622.68,-201 616.68,-207 610.68,-207"/>
-<text xml:space="preserve" text-anchor="middle" x="544.29" y="-190.55" font-family="Helvetica,sans-Serif" font-size="11.00">Grafana Synthetic Monitoring</text>
-<text xml:space="preserve" text-anchor="middle" x="544.29" y="-178.55" font-family="Helvetica,sans-Serif" font-size="11.00">HTTP, DNS, Ping, TCP</text>
+<path fill="#6b21a8" stroke="#64748b" d="M610.68,-207C610.68,-207 477.9,-207 477.9,-207 471.9,-207 465.9,-201 465.9,-195 465.9,-195 465.9,-183 465.9,-183 465.9,-177 471.9,-171 477.9,-171 477.9,-171 610.68,-171 610.68,-171 616.68,-171 622.68,-177 622.68,-183 622.68,-183 622.68,-195 622.68,-195 622.68,-201 616.68,-207 610.68,-207"/>
+<text xml:space="preserve" text-anchor="middle" x="544.29" y="-190.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">Grafana Synthetic Monitoring</text>
+<text xml:space="preserve" text-anchor="middle" x="544.29" y="-178.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">HTTP, DNS, Ping, TCP</text>
 </g>
 <!-- synth&#45;&gt;cloudfront -->
 <g id="edge36" class="edge">
 <title>synth&#45;&gt;cloudfront</title>
-<path fill="none" stroke="#475569" d="M623.06,-202.49C684.7,-214.86 772.1,-236.18 843.81,-268.25 861.97,-276.37 880.61,-288.3 895.51,-298.86"/>
-<polygon fill="#475569" stroke="#475569" points="893.74,-300.61 900.85,-302.72 896.6,-296.63 893.74,-300.61"/>
-<text xml:space="preserve" text-anchor="middle" x="765.43" y="-269.45" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#334155">checks production URL and API health</text>
+<path fill="none" stroke="#94a3b8" d="M623.06,-202.49C684.7,-214.86 772.1,-236.18 843.81,-268.25 861.97,-276.37 880.61,-288.3 895.51,-298.86"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="893.74,-300.61 900.85,-302.72 896.6,-296.63 893.74,-300.61"/>
+<text xml:space="preserve" text-anchor="middle" x="765.43" y="-269.45" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">checks production URL and API health</text>
 </g>
 <!-- synth&#45;&gt;grafana -->
 <g id="edge37" class="edge">
 <title>synth&#45;&gt;grafana</title>
-<path fill="none" stroke="#475569" d="M623.14,-181.53C699.95,-174.82 820.74,-166 925.57,-166 925.57,-166 925.57,-166 1248.87,-166 1676.82,-166 1787.98,-129.12 2211.43,-191 2273.73,-200.1 2291.88,-199.81 2348.18,-228 2368.91,-238.38 2389.45,-254.49 2404.76,-267.94"/>
-<polygon fill="#475569" stroke="#475569" points="2403.01,-269.67 2409.86,-272.51 2406.28,-266.02 2403.01,-269.67"/>
-<text xml:space="preserve" text-anchor="middle" x="1427.62" y="-166.75" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#334155">check samples</text>
+<path fill="none" stroke="#94a3b8" d="M623.14,-181.53C699.95,-174.82 820.74,-166 925.57,-166 925.57,-166 925.57,-166 1248.87,-166 1676.82,-166 1787.98,-129.12 2211.43,-191 2273.73,-200.1 2291.88,-199.81 2348.18,-228 2368.91,-238.38 2389.45,-254.49 2404.76,-267.94"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="2403.01,-269.67 2409.86,-272.51 2406.28,-266.02 2403.01,-269.67"/>
+<text xml:space="preserve" text-anchor="middle" x="1427.62" y="-166.75" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">check samples</text>
 </g>
 <!-- k6 -->
 <g id="node19" class="node">
 <title>k6</title>
-<path fill="#f3e8ff" stroke="#334155" d="M235.53,-136C235.53,-136 12,-136 12,-136 6,-136 0,-130 0,-124 0,-124 0,-112 0,-112 0,-106 6,-100 12,-100 12,-100 235.53,-100 235.53,-100 241.53,-100 247.53,-106 247.53,-112 247.53,-112 247.53,-124 247.53,-124 247.53,-130 241.53,-136 235.53,-136"/>
-<text xml:space="preserve" text-anchor="middle" x="123.76" y="-119.55" font-family="Helvetica,sans-Serif" font-size="11.00">Grafana Cloud k6</text>
-<text xml:space="preserve" text-anchor="middle" x="123.76" y="-107.55" font-family="Helvetica,sans-Serif" font-size="11.00">regional load, spike benchmark, browser actions</text>
+<path fill="#6b21a8" stroke="#64748b" d="M235.53,-136C235.53,-136 12,-136 12,-136 6,-136 0,-130 0,-124 0,-124 0,-112 0,-112 0,-106 6,-100 12,-100 12,-100 235.53,-100 235.53,-100 241.53,-100 247.53,-106 247.53,-112 247.53,-112 247.53,-124 247.53,-124 247.53,-130 241.53,-136 235.53,-136"/>
+<text xml:space="preserve" text-anchor="middle" x="123.76" y="-119.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">Grafana Cloud k6</text>
+<text xml:space="preserve" text-anchor="middle" x="123.76" y="-107.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">regional load, spike benchmark, browser actions</text>
 </g>
 <!-- k6Tracing -->
 <g id="node20" class="node">
 <title>k6Tracing</title>
-<path fill="#f3e8ff" stroke="#334155" d="M602.43,-288C602.43,-288 486.15,-288 486.15,-288 480.15,-288 474.15,-282 474.15,-276 474.15,-276 474.15,-264 474.15,-264 474.15,-258 480.15,-252 486.15,-252 486.15,-252 602.43,-252 602.43,-252 608.43,-252 614.43,-258 614.43,-264 614.43,-264 614.43,-276 614.43,-276 614.43,-282 608.43,-288 602.43,-288"/>
-<text xml:space="preserve" text-anchor="middle" x="544.29" y="-271.55" font-family="Helvetica,sans-Serif" font-size="11.00">k6 Tempo instrumentation</text>
-<text xml:space="preserve" text-anchor="middle" x="544.29" y="-259.55" font-family="Helvetica,sans-Serif" font-size="11.00">W3C trace context</text>
+<path fill="#6b21a8" stroke="#64748b" d="M602.43,-288C602.43,-288 486.15,-288 486.15,-288 480.15,-288 474.15,-282 474.15,-276 474.15,-276 474.15,-264 474.15,-264 474.15,-258 480.15,-252 486.15,-252 486.15,-252 602.43,-252 602.43,-252 608.43,-252 614.43,-258 614.43,-264 614.43,-264 614.43,-276 614.43,-276 614.43,-282 608.43,-288 602.43,-288"/>
+<text xml:space="preserve" text-anchor="middle" x="544.29" y="-271.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">k6 Tempo instrumentation</text>
+<text xml:space="preserve" text-anchor="middle" x="544.29" y="-259.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">W3C trace context</text>
 </g>
 <!-- k6&#45;&gt;k6Tracing -->
 <g id="edge38" class="edge">
 <title>k6&#45;&gt;k6Tracing</title>
-<path fill="none" stroke="#475569" d="M175.67,-136.49C253.65,-164.81 402.28,-218.79 484.66,-248.71"/>
-<polygon fill="#475569" stroke="#475569" points="483.58,-250.92 491,-251.01 485.25,-246.31 483.58,-250.92"/>
+<path fill="none" stroke="#94a3b8" d="M175.67,-136.49C253.65,-164.81 402.28,-218.79 484.66,-248.71"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="483.58,-250.92 491,-251.01 485.25,-246.31 483.58,-250.92"/>
 </g>
 <!-- k6&#45;&gt;grafana -->
 <g id="edge40" class="edge">
 <title>k6&#45;&gt;grafana</title>
-<path fill="none" stroke="#475569" d="M247.72,-103.19C331.01,-94.42 443.62,-85 543.29,-85 543.29,-85 543.29,-85 2124.29,-85 2233.64,-85 2262.36,-119.24 2348.18,-187 2376.49,-209.35 2400.68,-243.49 2415.24,-266.72"/>
-<polygon fill="#475569" stroke="#475569" points="2413.08,-267.89 2418.83,-272.57 2417.26,-265.32 2413.08,-267.89"/>
-<text xml:space="preserve" text-anchor="middle" x="1247.87" y="-86.2" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#334155">test metrics + trace correlation</text>
+<path fill="none" stroke="#94a3b8" d="M247.72,-103.19C331.01,-94.42 443.62,-85 543.29,-85 543.29,-85 543.29,-85 2124.29,-85 2233.64,-85 2262.36,-119.24 2348.18,-187 2376.49,-209.35 2400.68,-243.49 2415.24,-266.72"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="2413.08,-267.89 2418.83,-272.57 2417.26,-265.32 2413.08,-267.89"/>
+<text xml:space="preserve" text-anchor="middle" x="1247.87" y="-86.2" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">test metrics + trace correlation</text>
 </g>
 <!-- k6Tracing&#45;&gt;cloudfront -->
 <g id="edge39" class="edge">
 <title>k6Tracing&#45;&gt;cloudfront</title>
-<path fill="none" stroke="#475569" d="M614.81,-277.59C675.4,-284.47 765.59,-295.32 843.81,-307.25 849.18,-308.07 854.73,-308.96 860.3,-309.9"/>
-<polygon fill="#475569" stroke="#475569" points="859.65,-312.27 866.97,-311.03 860.48,-307.44 859.65,-312.27"/>
-<text xml:space="preserve" text-anchor="middle" x="765.43" y="-308.45" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#334155">load checks with traceparent</text>
+<path fill="none" stroke="#94a3b8" d="M614.81,-277.59C675.4,-284.47 765.59,-295.32 843.81,-307.25 849.18,-308.07 854.73,-308.96 860.3,-309.9"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="859.65,-312.27 866.97,-311.03 860.48,-307.44 859.65,-312.27"/>
+<text xml:space="preserve" text-anchor="middle" x="765.43" y="-308.45" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">load checks with traceparent</text>
 </g>
 <!-- irm -->
 <g id="node21" class="node">
 <title>irm</title>
-<path fill="#f3e8ff" stroke="#334155" d="M2199.43,-36C2199.43,-36 2047.15,-36 2047.15,-36 2041.15,-36 2035.15,-30 2035.15,-24 2035.15,-24 2035.15,-12 2035.15,-12 2035.15,-6 2041.15,0 2047.15,0 2047.15,0 2199.43,0 2199.43,0 2205.43,0 2211.43,-6 2211.43,-12 2211.43,-12 2211.43,-24 2211.43,-24 2211.43,-30 2205.43,-36 2199.43,-36"/>
-<text xml:space="preserve" text-anchor="middle" x="2123.29" y="-19.55" font-family="Helvetica,sans-Serif" font-size="11.00">Grafana IRM</text>
-<text xml:space="preserve" text-anchor="middle" x="2123.29" y="-7.55" font-family="Helvetica,sans-Serif" font-size="11.00">incidents, labels, on&#45;call schedule</text>
+<path fill="#6b21a8" stroke="#64748b" d="M2199.43,-36C2199.43,-36 2047.15,-36 2047.15,-36 2041.15,-36 2035.15,-30 2035.15,-24 2035.15,-24 2035.15,-12 2035.15,-12 2035.15,-6 2041.15,0 2047.15,0 2047.15,0 2199.43,0 2199.43,0 2205.43,0 2211.43,-6 2211.43,-12 2211.43,-12 2211.43,-24 2211.43,-24 2211.43,-30 2205.43,-36 2199.43,-36"/>
+<text xml:space="preserve" text-anchor="middle" x="2123.29" y="-19.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">Grafana IRM</text>
+<text xml:space="preserve" text-anchor="middle" x="2123.29" y="-7.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">incidents, labels, on&#45;call schedule</text>
 </g>
 <!-- irm&#45;&gt;grafana -->
 <g id="edge41" class="edge">
 <title>irm&#45;&gt;grafana</title>
-<path fill="none" stroke="#475569" d="M2211.9,-10.05C2257.26,-10.6 2310.82,-19.17 2348.18,-50.25 2413.89,-104.91 2427,-214.48 2429.47,-265.15"/>
-<polygon fill="#475569" stroke="#475569" points="2427.02,-265.21 2429.75,-272.11 2431.91,-265.02 2427.02,-265.21"/>
-<text xml:space="preserve" text-anchor="middle" x="2292.3" y="-51.45" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#334155">incident and schedule state</text>
+<path fill="none" stroke="#94a3b8" d="M2211.9,-10.05C2257.26,-10.6 2310.82,-19.17 2348.18,-50.25 2413.89,-104.91 2427,-214.48 2429.47,-265.15"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="2427.02,-265.21 2429.75,-272.11 2431.91,-265.02 2427.02,-265.21"/>
+<text xml:space="preserve" text-anchor="middle" x="2292.3" y="-51.45" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">incident and schedule state</text>
 </g>
 <!-- frontendObs -->
 <g id="node23" class="node">
 <title>frontendObs</title>
-<path fill="#faf5ff" stroke="#334155" d="M2683.74,-548C2683.74,-548 2558.46,-548 2558.46,-548 2552.46,-548 2546.46,-542 2546.46,-536 2546.46,-536 2546.46,-524 2546.46,-524 2546.46,-518 2552.46,-512 2558.46,-512 2558.46,-512 2683.74,-512 2683.74,-512 2689.74,-512 2695.74,-518 2695.74,-524 2695.74,-524 2695.74,-536 2695.74,-536 2695.74,-542 2689.74,-548 2683.74,-548"/>
-<text xml:space="preserve" text-anchor="middle" x="2621.1" y="-531.55" font-family="Helvetica,sans-Serif" font-size="11.00">Frontend Observability</text>
-<text xml:space="preserve" text-anchor="middle" x="2621.1" y="-519.55" font-family="Helvetica,sans-Serif" font-size="11.00">Faro events and exceptions</text>
+<path fill="#581c87" stroke="#64748b" d="M2683.74,-548C2683.74,-548 2558.46,-548 2558.46,-548 2552.46,-548 2546.46,-542 2546.46,-536 2546.46,-536 2546.46,-524 2546.46,-524 2546.46,-518 2552.46,-512 2558.46,-512 2558.46,-512 2683.74,-512 2683.74,-512 2689.74,-512 2695.74,-518 2695.74,-524 2695.74,-524 2695.74,-536 2695.74,-536 2695.74,-542 2689.74,-548 2683.74,-548"/>
+<text xml:space="preserve" text-anchor="middle" x="2621.1" y="-531.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">Frontend Observability</text>
+<text xml:space="preserve" text-anchor="middle" x="2621.1" y="-519.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">Faro events and exceptions</text>
 </g>
 <!-- grafana&#45;&gt;frontendObs -->
 <g id="edge42" class="edge">
 <title>grafana&#45;&gt;frontendObs</title>
-<path fill="none" stroke="#475569" d="M2437.03,-310.41C2448.77,-349.67 2481.28,-442.38 2539.71,-496 2544.42,-500.32 2549.76,-504.14 2555.4,-507.51"/>
-<polygon fill="#475569" stroke="#475569" points="2554.03,-509.56 2561.34,-510.8 2556.41,-505.27 2554.03,-509.56"/>
+<path fill="none" stroke="#94a3b8" d="M2437.03,-310.41C2448.77,-349.67 2481.28,-442.38 2539.71,-496 2544.42,-500.32 2549.76,-504.14 2555.4,-507.51"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="2554.03,-509.56 2561.34,-510.8 2556.41,-505.27 2554.03,-509.56"/>
 </g>
 <!-- tempo -->
 <g id="node24" class="node">
 <title>tempo</title>
-<path fill="#faf5ff" stroke="#334155" d="M2690.49,-480C2690.49,-480 2551.71,-480 2551.71,-480 2545.71,-480 2539.71,-474 2539.71,-468 2539.71,-468 2539.71,-456 2539.71,-456 2539.71,-450 2545.71,-444 2551.71,-444 2551.71,-444 2690.49,-444 2690.49,-444 2696.49,-444 2702.49,-450 2702.49,-456 2702.49,-456 2702.49,-468 2702.49,-468 2702.49,-474 2696.49,-480 2690.49,-480"/>
-<text xml:space="preserve" text-anchor="middle" x="2621.1" y="-463.55" font-family="Helvetica,sans-Serif" font-size="11.00">Traces</text>
-<text xml:space="preserve" text-anchor="middle" x="2621.1" y="-451.55" font-family="Helvetica,sans-Serif" font-size="11.00">frontend&#45;to&#45;backend waterfalls</text>
+<path fill="#581c87" stroke="#64748b" d="M2690.49,-480C2690.49,-480 2551.71,-480 2551.71,-480 2545.71,-480 2539.71,-474 2539.71,-468 2539.71,-468 2539.71,-456 2539.71,-456 2539.71,-450 2545.71,-444 2551.71,-444 2551.71,-444 2690.49,-444 2690.49,-444 2696.49,-444 2702.49,-450 2702.49,-456 2702.49,-456 2702.49,-468 2702.49,-468 2702.49,-474 2696.49,-480 2690.49,-480"/>
+<text xml:space="preserve" text-anchor="middle" x="2621.1" y="-463.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">Traces</text>
+<text xml:space="preserve" text-anchor="middle" x="2621.1" y="-451.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">frontend&#45;to&#45;backend waterfalls</text>
 </g>
 <!-- grafana&#45;&gt;tempo -->
 <g id="edge43" class="edge">
 <title>grafana&#45;&gt;tempo</title>
-<path fill="none" stroke="#475569" d="M2442.25,-310.26C2459.22,-338.86 2495.6,-394.44 2539.71,-428 2545.56,-432.45 2552.07,-436.43 2558.79,-439.96"/>
-<polygon fill="#475569" stroke="#475569" points="2557.42,-442.02 2564.78,-442.95 2559.61,-437.63 2557.42,-442.02"/>
+<path fill="none" stroke="#94a3b8" d="M2442.25,-310.26C2459.22,-338.86 2495.6,-394.44 2539.71,-428 2545.56,-432.45 2552.07,-436.43 2558.79,-439.96"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="2557.42,-442.02 2564.78,-442.95 2559.61,-437.63 2557.42,-442.02"/>
 </g>
 <!-- prometheus -->
 <g id="node25" class="node">
 <title>prometheus</title>
-<path fill="#faf5ff" stroke="#334155" d="M2685.61,-412C2685.61,-412 2556.58,-412 2556.58,-412 2550.58,-412 2544.58,-406 2544.58,-400 2544.58,-400 2544.58,-388 2544.58,-388 2544.58,-382 2550.58,-376 2556.58,-376 2556.58,-376 2685.61,-376 2685.61,-376 2691.61,-376 2697.61,-382 2697.61,-388 2697.61,-388 2697.61,-400 2697.61,-400 2697.61,-406 2691.61,-412 2685.61,-412"/>
-<text xml:space="preserve" text-anchor="middle" x="2621.1" y="-395.55" font-family="Helvetica,sans-Serif" font-size="11.00">Metrics</text>
-<text xml:space="preserve" text-anchor="middle" x="2621.1" y="-383.55" font-family="Helvetica,sans-Serif" font-size="11.00">RED + infrastructure signals</text>
+<path fill="#581c87" stroke="#64748b" d="M2685.61,-412C2685.61,-412 2556.58,-412 2556.58,-412 2550.58,-412 2544.58,-406 2544.58,-400 2544.58,-400 2544.58,-388 2544.58,-388 2544.58,-382 2550.58,-376 2556.58,-376 2556.58,-376 2685.61,-376 2685.61,-376 2691.61,-376 2697.61,-382 2697.61,-388 2697.61,-388 2697.61,-400 2697.61,-400 2697.61,-406 2691.61,-412 2685.61,-412"/>
+<text xml:space="preserve" text-anchor="middle" x="2621.1" y="-395.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">Metrics</text>
+<text xml:space="preserve" text-anchor="middle" x="2621.1" y="-383.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">RED + infrastructure signals</text>
 </g>
 <!-- grafana&#45;&gt;prometheus -->
 <g id="edge44" class="edge">
 <title>grafana&#45;&gt;prometheus</title>
-<path fill="none" stroke="#475569" d="M2458.24,-310.29C2479.63,-324.75 2510.89,-344.94 2539.71,-360 2547.92,-364.29 2556.78,-368.47 2565.53,-372.34"/>
-<polygon fill="#475569" stroke="#475569" points="2564.38,-374.51 2571.78,-375.06 2566.34,-370.02 2564.38,-374.51"/>
+<path fill="none" stroke="#94a3b8" d="M2458.24,-310.29C2479.63,-324.75 2510.89,-344.94 2539.71,-360 2547.92,-364.29 2556.78,-368.47 2565.53,-372.34"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="2564.38,-374.51 2571.78,-375.06 2566.34,-370.02 2564.38,-374.51"/>
 </g>
 <!-- loki -->
 <g id="node26" class="node">
 <title>loki</title>
-<path fill="#faf5ff" stroke="#334155" d="M2684.11,-344C2684.11,-344 2558.08,-344 2558.08,-344 2552.08,-344 2546.08,-338 2546.08,-332 2546.08,-332 2546.08,-320 2546.08,-320 2546.08,-314 2552.08,-308 2558.08,-308 2558.08,-308 2684.11,-308 2684.11,-308 2690.11,-308 2696.11,-314 2696.11,-320 2696.11,-320 2696.11,-332 2696.11,-332 2696.11,-338 2690.11,-344 2684.11,-344"/>
-<text xml:space="preserve" text-anchor="middle" x="2621.1" y="-327.55" font-family="Helvetica,sans-Serif" font-size="11.00">Logs</text>
-<text xml:space="preserve" text-anchor="middle" x="2621.1" y="-315.55" font-family="Helvetica,sans-Serif" font-size="11.00">namespace + service labels</text>
+<path fill="#581c87" stroke="#64748b" d="M2684.11,-344C2684.11,-344 2558.08,-344 2558.08,-344 2552.08,-344 2546.08,-338 2546.08,-332 2546.08,-332 2546.08,-320 2546.08,-320 2546.08,-314 2552.08,-308 2558.08,-308 2558.08,-308 2684.11,-308 2684.11,-308 2690.11,-308 2696.11,-314 2696.11,-320 2696.11,-320 2696.11,-332 2696.11,-332 2696.11,-338 2690.11,-344 2684.11,-344"/>
+<text xml:space="preserve" text-anchor="middle" x="2621.1" y="-327.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">Logs</text>
+<text xml:space="preserve" text-anchor="middle" x="2621.1" y="-315.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">namespace + service labels</text>
 </g>
 <!-- grafana&#45;&gt;loki -->
 <g id="edge45" class="edge">
 <title>grafana&#45;&gt;loki</title>
-<path fill="none" stroke="#475569" d="M2489.16,-302.34C2504.49,-305.11 2521.38,-308.16 2537.77,-311.12"/>
-<polygon fill="#475569" stroke="#475569" points="2536.96,-313.47 2544.29,-312.3 2537.83,-308.64 2536.96,-313.47"/>
+<path fill="none" stroke="#94a3b8" d="M2489.16,-302.34C2504.49,-305.11 2521.38,-308.16 2537.77,-311.12"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="2536.96,-313.47 2544.29,-312.3 2537.83,-308.64 2536.96,-313.47"/>
 </g>
 <!-- profiles -->
 <g id="node27" class="node">
 <title>profiles</title>
-<path fill="#faf5ff" stroke="#334155" d="M2661.24,-276C2661.24,-276 2580.96,-276 2580.96,-276 2574.96,-276 2568.96,-270 2568.96,-264 2568.96,-264 2568.96,-252 2568.96,-252 2568.96,-246 2574.96,-240 2580.96,-240 2580.96,-240 2661.24,-240 2661.24,-240 2667.24,-240 2673.24,-246 2673.24,-252 2673.24,-252 2673.24,-264 2673.24,-264 2673.24,-270 2667.24,-276 2661.24,-276"/>
-<text xml:space="preserve" text-anchor="middle" x="2621.1" y="-259.55" font-family="Helvetica,sans-Serif" font-size="11.00">Profiles</text>
-<text xml:space="preserve" text-anchor="middle" x="2621.1" y="-247.55" font-family="Helvetica,sans-Serif" font-size="11.00">Java CPU profiles</text>
+<path fill="#581c87" stroke="#64748b" d="M2661.24,-276C2661.24,-276 2580.96,-276 2580.96,-276 2574.96,-276 2568.96,-270 2568.96,-264 2568.96,-264 2568.96,-252 2568.96,-252 2568.96,-246 2574.96,-240 2580.96,-240 2580.96,-240 2661.24,-240 2661.24,-240 2667.24,-240 2673.24,-246 2673.24,-252 2673.24,-252 2673.24,-264 2673.24,-264 2673.24,-270 2667.24,-276 2661.24,-276"/>
+<text xml:space="preserve" text-anchor="middle" x="2621.1" y="-259.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">Profiles</text>
+<text xml:space="preserve" text-anchor="middle" x="2621.1" y="-247.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">Java CPU profiles</text>
 </g>
 <!-- grafana&#45;&gt;profiles -->
 <g id="edge46" class="edge">
 <title>grafana&#45;&gt;profiles</title>
-<path fill="none" stroke="#475569" d="M2489.16,-281.66C2511.7,-277.59 2537.58,-272.91 2560.35,-268.8"/>
-<polygon fill="#475569" stroke="#475569" points="2560.65,-271.23 2567.1,-267.58 2559.78,-266.41 2560.65,-271.23"/>
+<path fill="none" stroke="#94a3b8" d="M2489.16,-281.66C2511.7,-277.59 2537.58,-272.91 2560.35,-268.8"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="2560.65,-271.23 2567.1,-267.58 2559.78,-266.41 2560.65,-271.23"/>
 </g>
 <!-- smResults -->
 <g id="node28" class="node">
 <title>smResults</title>
-<path fill="#faf5ff" stroke="#334155" d="M2681.86,-208C2681.86,-208 2560.33,-208 2560.33,-208 2554.33,-208 2548.33,-202 2548.33,-196 2548.33,-196 2548.33,-184 2548.33,-184 2548.33,-178 2554.33,-172 2560.33,-172 2560.33,-172 2681.86,-172 2681.86,-172 2687.86,-172 2693.86,-178 2693.86,-184 2693.86,-184 2693.86,-196 2693.86,-196 2693.86,-202 2687.86,-208 2681.86,-208"/>
-<text xml:space="preserve" text-anchor="middle" x="2621.1" y="-191.55" font-family="Helvetica,sans-Serif" font-size="11.00">Synthetic results</text>
-<text xml:space="preserve" text-anchor="middle" x="2621.1" y="-179.55" font-family="Helvetica,sans-Serif" font-size="11.00">uptime, TLS, DNS, latency</text>
+<path fill="#581c87" stroke="#64748b" d="M2681.86,-208C2681.86,-208 2560.33,-208 2560.33,-208 2554.33,-208 2548.33,-202 2548.33,-196 2548.33,-196 2548.33,-184 2548.33,-184 2548.33,-178 2554.33,-172 2560.33,-172 2560.33,-172 2681.86,-172 2681.86,-172 2687.86,-172 2693.86,-178 2693.86,-184 2693.86,-184 2693.86,-196 2693.86,-196 2693.86,-202 2687.86,-208 2681.86,-208"/>
+<text xml:space="preserve" text-anchor="middle" x="2621.1" y="-191.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">Synthetic results</text>
+<text xml:space="preserve" text-anchor="middle" x="2621.1" y="-179.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">uptime, TLS, DNS, latency</text>
 </g>
 <!-- grafana&#45;&gt;smResults -->
 <g id="edge47" class="edge">
 <title>grafana&#45;&gt;smResults</title>
-<path fill="none" stroke="#475569" d="M2458.24,-273.71C2479.63,-259.25 2510.89,-239.06 2539.71,-224 2547.92,-219.71 2556.78,-215.53 2565.53,-211.66"/>
-<polygon fill="#475569" stroke="#475569" points="2566.34,-213.98 2571.78,-208.94 2564.38,-209.49 2566.34,-213.98"/>
+<path fill="none" stroke="#94a3b8" d="M2458.24,-273.71C2479.63,-259.25 2510.89,-239.06 2539.71,-224 2547.92,-219.71 2556.78,-215.53 2565.53,-211.66"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="2566.34,-213.98 2571.78,-208.94 2564.38,-209.49 2566.34,-213.98"/>
 </g>
 <!-- k6Results -->
 <g id="node29" class="node">
 <title>k6Results</title>
-<path fill="#faf5ff" stroke="#334155" d="M2675.49,-140C2675.49,-140 2566.71,-140 2566.71,-140 2560.71,-140 2554.71,-134 2554.71,-128 2554.71,-128 2554.71,-116 2554.71,-116 2554.71,-110 2560.71,-104 2566.71,-104 2566.71,-104 2675.49,-104 2675.49,-104 2681.49,-104 2687.49,-110 2687.49,-116 2687.49,-116 2687.49,-128 2687.49,-128 2687.49,-134 2681.49,-140 2675.49,-140"/>
-<text xml:space="preserve" text-anchor="middle" x="2621.1" y="-123.55" font-family="Helvetica,sans-Serif" font-size="11.00">k6 results</text>
-<text xml:space="preserve" text-anchor="middle" x="2621.1" y="-111.55" font-family="Helvetica,sans-Serif" font-size="11.00">VUs, checks, thresholds</text>
+<path fill="#581c87" stroke="#64748b" d="M2675.49,-140C2675.49,-140 2566.71,-140 2566.71,-140 2560.71,-140 2554.71,-134 2554.71,-128 2554.71,-128 2554.71,-116 2554.71,-116 2554.71,-110 2560.71,-104 2566.71,-104 2566.71,-104 2675.49,-104 2675.49,-104 2681.49,-104 2687.49,-110 2687.49,-116 2687.49,-116 2687.49,-128 2687.49,-128 2687.49,-134 2681.49,-140 2675.49,-140"/>
+<text xml:space="preserve" text-anchor="middle" x="2621.1" y="-123.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">k6 results</text>
+<text xml:space="preserve" text-anchor="middle" x="2621.1" y="-111.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">VUs, checks, thresholds</text>
 </g>
 <!-- grafana&#45;&gt;k6Results -->
 <g id="edge48" class="edge">
 <title>grafana&#45;&gt;k6Results</title>
-<path fill="none" stroke="#475569" d="M2442.25,-273.74C2459.22,-245.14 2495.6,-189.56 2539.71,-156 2545.56,-151.55 2552.07,-147.57 2558.79,-144.04"/>
-<polygon fill="#475569" stroke="#475569" points="2559.61,-146.37 2564.78,-141.05 2557.42,-141.98 2559.61,-146.37"/>
+<path fill="none" stroke="#94a3b8" d="M2442.25,-273.74C2459.22,-245.14 2495.6,-189.56 2539.71,-156 2545.56,-151.55 2552.07,-147.57 2558.79,-144.04"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="2559.61,-146.37 2564.78,-141.05 2557.42,-141.98 2559.61,-146.37"/>
 </g>
 <!-- incidents -->
 <g id="node30" class="node">
 <title>incidents</title>
-<path fill="#faf5ff" stroke="#334155" d="M2688.99,-72C2688.99,-72 2553.21,-72 2553.21,-72 2547.21,-72 2541.21,-66 2541.21,-60 2541.21,-60 2541.21,-48 2541.21,-48 2541.21,-42 2547.21,-36 2553.21,-36 2553.21,-36 2688.99,-36 2688.99,-36 2694.99,-36 2700.99,-42 2700.99,-48 2700.99,-48 2700.99,-60 2700.99,-60 2700.99,-66 2694.99,-72 2688.99,-72"/>
-<text xml:space="preserve" text-anchor="middle" x="2621.1" y="-55.55" font-family="Helvetica,sans-Serif" font-size="11.00">IRM workflows</text>
-<text xml:space="preserve" text-anchor="middle" x="2621.1" y="-43.55" font-family="Helvetica,sans-Serif" font-size="11.00">severity, ownership, response</text>
+<path fill="#581c87" stroke="#64748b" d="M2688.99,-72C2688.99,-72 2553.21,-72 2553.21,-72 2547.21,-72 2541.21,-66 2541.21,-60 2541.21,-60 2541.21,-48 2541.21,-48 2541.21,-42 2547.21,-36 2553.21,-36 2553.21,-36 2688.99,-36 2688.99,-36 2694.99,-36 2700.99,-42 2700.99,-48 2700.99,-48 2700.99,-60 2700.99,-60 2700.99,-66 2694.99,-72 2688.99,-72"/>
+<text xml:space="preserve" text-anchor="middle" x="2621.1" y="-55.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">IRM workflows</text>
+<text xml:space="preserve" text-anchor="middle" x="2621.1" y="-43.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">severity, ownership, response</text>
 </g>
 <!-- grafana&#45;&gt;incidents -->
 <g id="edge49" class="edge">
 <title>grafana&#45;&gt;incidents</title>
-<path fill="none" stroke="#475569" d="M2437.03,-273.59C2448.77,-234.33 2481.28,-141.62 2539.71,-88 2544.42,-83.68 2549.76,-79.86 2555.4,-76.49"/>
-<polygon fill="#475569" stroke="#475569" points="2556.41,-78.73 2561.34,-73.2 2554.03,-74.44 2556.41,-78.73"/>
+<path fill="none" stroke="#94a3b8" d="M2437.03,-273.59C2448.77,-234.33 2481.28,-141.62 2539.71,-88 2544.42,-83.68 2549.76,-79.86 2555.4,-76.49"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="2556.41,-78.73 2561.34,-73.2 2554.03,-74.44 2556.41,-78.73"/>
 </g>
 </g>
 </svg>

@@ -2,15 +2,17 @@
 
 Architecture diagrams for the Ensemble-Grafana ecommerce platform.
 
-Graphviz DOT sources are authoritative. Rendered SVG and PNG exports are stored in `docs/diagrams/`.
+Graphviz DOT sources are authoritative for architecture and flow diagrams. Mermaid is authoritative for the sequence diagram because it preserves request and response lifelines across dependencies. The diagrams use dark-mode styling with high-contrast text where supported. Rendered SVG and PNG exports are stored in `docs/diagrams/`.
 
-Regenerate exports after editing a DOT file:
+Regenerate exports after editing a diagram source:
 
 ```sh
 for f in docs/diagrams/*.dot; do
   dot -Tsvg "$f" > "${f%.dot}.svg"
   dot -Tpng -Gdpi=192 "$f" > "${f%.dot}.png"
 done
+npx -y @mermaid-js/mermaid-cli -i docs/diagrams/sequence-diagram.mmd -o docs/diagrams/sequence-diagram.svg -b transparent -t dark
+npx -y @mermaid-js/mermaid-cli -i docs/diagrams/sequence-diagram.mmd -o docs/diagrams/sequence-diagram.png -b transparent -t dark -s 2
 ```
 
 ## Network Diagram
@@ -28,7 +30,8 @@ digraph network_diagram {
     fontname="Helvetica",
     fontsize=20,
     labelloc=t,
-    bgcolor="white",
+    bgcolor="#0b1220",
+    fontcolor="#f8fafc",
     pad=0.25,
     nodesep=0.45,
     ranksep=0.7
@@ -38,49 +41,51 @@ digraph network_diagram {
     style="rounded,filled",
     fontname="Helvetica",
     fontsize=11,
-    color="#334155",
-    fillcolor="#f8fafc",
+    color="#64748b",
+    fillcolor="#111827",
+    fontcolor="#f8fafc",
     margin="0.12,0.08"
   ];
   edge [
     fontname="Helvetica",
     fontsize=9,
-    color="#475569",
-    fontcolor="#334155",
+    color="#94a3b8",
+    fontcolor="#f8fafc",
     arrowsize=0.7
   ];
 
 
-  shopper [label="Shopper browser", fillcolor="#dbeafe"];
+  shopper [label="Shopper browser", fillcolor="#1e3a8a"];
   registrar [label="Domain registrar"];
-  route53 [label="Route53 hosted zone\nensemble-grafana.com", fillcolor="#e0f2fe"];
-  acm [label="ACM certificate\nus-east-1 / ISSUED", fillcolor="#ecfeff"];
-  edgeWaf [label="AWS WAF\nCloudFront scope", fillcolor="#fee2e2"];
-  cloudfront [label="CloudFront distribution\nensemble-grafana.com", fillcolor="#dbeafe"];
-  staticS3 [label="S3 frontend bucket\nprivate origin", fillcolor="#fef3c7"];
-  imageS3 [label="S3 inventory images bucket", fillcolor="#fef3c7"];
-  logsS3 [label="S3 edge/API logs bucket\nCloudFront + ALB logs", fillcolor="#fef3c7"];
-  regionalWaf [label="AWS WAF\nregional API scope", fillcolor="#fee2e2"];
-  apiAlb [label="API ingress / ALB\napi.ensemble-grafana.com", fillcolor="#e0e7ff"];
-  cognito [label="AWS Cognito\nGoogle federation", fillcolor="#ede9fe"];
-  google [label="Google Identity Provider", fillcolor="#ede9fe"];
-  postgres [label="Postgres inventory DB", shape=cylinder, fillcolor="#dcfce7"];
-  dynamodb [label="DynamoDB\ncart/account state", shape=cylinder, fillcolor="#dcfce7"];
-  cloudwatch [label="AWS CloudWatch\nRDS metrics", fillcolor="#f1f5f9"];
-  cloudwatchScrape [label="Grafana Cloud Provider\nAWS/RDS scrape job", fillcolor="#faf5ff"];
-  grafana [label="Grafana Cloud\nFaro, metrics, logs, traces, profiles", fillcolor="#f3e8ff"];
-  k6 [label="Grafana Cloud k6\nload tests and browser checks", fillcolor="#f3e8ff"];
-  accountBaseline [label="Terraform account-baseline stack\nSSM host-management setting", fillcolor="#e2e8f0"];
+  route53 [label="Route53 hosted zone\nensemble-grafana.com", fillcolor="#164e63"];
+  acm [label="ACM certificate\nus-east-1 / ISSUED", fillcolor="#155e75"];
+  edgeWaf [label="AWS WAF\nCloudFront scope", fillcolor="#7f1d1d"];
+  cloudfront [label="CloudFront distribution\nensemble-grafana.com", fillcolor="#1e3a8a"];
+  staticS3 [label="S3 frontend bucket\nprivate origin", fillcolor="#713f12"];
+  imageS3 [label="S3 inventory images bucket", fillcolor="#713f12"];
+  logsS3 [label="S3 edge/API logs bucket\nCloudFront + ALB logs", fillcolor="#713f12"];
+  regionalWaf [label="AWS WAF\nregional API scope", fillcolor="#7f1d1d"];
+  apiAlb [label="API ingress / ALB\napi.ensemble-grafana.com", fillcolor="#3730a3"];
+  cognito [label="AWS Cognito\nGoogle federation", fillcolor="#4c1d95"];
+  google [label="Google Identity Provider", fillcolor="#4c1d95"];
+  postgres [label="Postgres inventory DB", shape=cylinder, fillcolor="#14532d"];
+  dynamodb [label="DynamoDB\ncart/account state", shape=cylinder, fillcolor="#14532d"];
+  cloudwatch [label="AWS CloudWatch\nRDS metrics", fillcolor="#334155"];
+  cloudwatchScrape [label="Grafana Cloud Provider\nAWS/RDS scrape job", fillcolor="#581c87"];
+  grafana [label="Grafana Cloud\nFaro, metrics, logs, traces, profiles", fillcolor="#6b21a8"];
+  k6 [label="Grafana Cloud k6\nload tests and browser checks", fillcolor="#6b21a8"];
+  accountBaseline [label="Terraform account-baseline stack\nSSM host-management setting", fillcolor="#334155"];
 
   subgraph cluster_eks {
     label="EKS cluster";
-    color="#94a3b8";
+    color="#64748b";
+    fontcolor="#f8fafc";
     style="rounded,dashed";
-    beyla [label="Grafana Beyla", fillcolor="#faf5ff"];
-    alloy [label="Grafana Alloy\nOTel collector", fillcolor="#faf5ff"];
-    inventory [label="inventory-service\nSpring Boot pods", fillcolor="#dcfce7"];
-    cart [label="cart-service\nSpring Boot pods", fillcolor="#dcfce7"];
-    account [label="account-service\nSpring Boot pods", fillcolor="#dcfce7"];
+    beyla [label="Grafana Beyla", fillcolor="#581c87"];
+    alloy [label="Grafana Alloy\nOTel collector", fillcolor="#581c87"];
+    inventory [label="inventory-service\nSpring Boot pods", fillcolor="#14532d"];
+    cart [label="cart-service\nSpring Boot pods", fillcolor="#14532d"];
+    account [label="account-service\nSpring Boot pods", fillcolor="#14532d"];
   }
 
   registrar -> route53 [label="NS delegation"];
@@ -119,79 +124,84 @@ digraph network_diagram {
 
 ## Sequence Diagram
 
-Source: `docs/diagrams/sequence-diagram.dot`
+Source: `docs/diagrams/sequence-diagram.mmd`
 
 Rendered: [SVG](docs/diagrams/sequence-diagram.svg) · [PNG](docs/diagrams/sequence-diagram.png)
 
-```dot
-digraph sequence_diagram {
-  rankdir=TB;
-  label="Frontend-to-Backend Sequence";
+```mermaid
+sequenceDiagram
+  autonumber
+  actor Shopper
+  participant Browser as Browser storefront
+  participant Route53 as Route53 DNS
+  participant CloudFront as CloudFront + edge WAF
+  participant S3 as S3 static origin
+  participant Cognito as Cognito hosted UI
+  participant Google as Google IdP
+  participant API as API ingress / ALB
+  participant Inventory as inventory-service
+  participant Cart as cart-service
+  participant Account as account-service
+  participant Postgres as Postgres inventory DB
+  participant DynamoDB as DynamoDB shopper state
+  participant Alloy as Grafana Alloy
+  participant Grafana as Grafana Cloud
+  participant K6 as Grafana Cloud k6
 
-  graph [
-    fontname="Helvetica",
-    fontsize=20,
-    labelloc=t,
-    bgcolor="white",
-    pad=0.25,
-    nodesep=0.45,
-    ranksep=0.7
-  ];
-  node [
-    shape=box,
-    style="rounded,filled",
-    fontname="Helvetica",
-    fontsize=11,
-    color="#334155",
-    fillcolor="#f8fafc",
-    margin="0.12,0.08"
-  ];
-  edge [
-    fontname="Helvetica",
-    fontsize=9,
-    color="#475569",
-    fontcolor="#334155",
-    arrowsize=0.7
-  ];
+  Shopper->>Browser: Open https://ensemble-grafana.com
+  Browser->>Route53: Resolve ensemble-grafana.com
+  Route53-->>Browser: CloudFront alias target
+  Browser->>CloudFront: HTTPS GET /
+  CloudFront->>S3: Fetch index.html and assets
+  S3-->>CloudFront: Static storefront
+  CloudFront-->>Browser: HTML, JS, CSS, security headers
+  Browser-->>Grafana: Faro page load, web vitals, session telemetry
 
-  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=10, color="#334155", fillcolor="#f8fafc"];
+  Shopper->>Browser: Sign in with Google
+  Browser->>Cognito: Start OAuth authorization
+  Cognito->>Google: Redirect for Google authentication
+  Google-->>Cognito: Authorization code / identity claims
+  Cognito-->>Browser: Auth callback with authorization code
+  Browser->>Cognito: Exchange code with PKCE verifier
+  Cognito-->>Browser: Cognito tokens and Google profile claims
+  Browser->>Browser: Populate account name and email
 
-  start [label="1. Shopper opens https://ensemble-grafana.com", fillcolor="#dbeafe"];
-  dns [label="2. Browser resolves Route53 alias to CloudFront", fillcolor="#e0f2fe"];
-  static [label="3. CloudFront + edge WAF fetch storefront from S3", fillcolor="#fef3c7"];
-  faro [label="4. Browser sends Faro page load, vitals, session telemetry", fillcolor="#f3e8ff"];
-  signin [label="5. Shopper starts Google sign-in", fillcolor="#ede9fe"];
-  oauth [label="6. Cognito redirects to Google and exchanges code with PKCE", fillcolor="#ede9fe"];
-  accountPopulate [label="7. Browser receives Cognito tokens and populates account name/email", fillcolor="#dbeafe"];
-  products [label="8. Browser GET /api/inventory/products through CloudFront", fillcolor="#dbeafe"];
-  inventory [label="9. ALB forwards to inventory-service with trace context", fillcolor="#dcfce7"];
-  postgres [label="10. inventory-service queries Postgres catalog", shape=cylinder, fillcolor="#bbf7d0"];
-  cartAdd [label="11. Shopper adds item: PUT /api/cart/carts/{shopperId}", fillcolor="#dbeafe"];
-  cart [label="12. cart-service persists cart state to DynamoDB", fillcolor="#dcfce7"];
-  dynamoCart [label="13. DynamoDB acknowledges cart write", shape=cylinder, fillcolor="#bbf7d0"];
-  accountSave [label="14. Shopper saves shipping address and wallet metadata", fillcolor="#dbeafe"];
-  account [label="15. account-service persists profile, address, wallet metadata", fillcolor="#dcfce7"];
-  dynamoAccount [label="16. DynamoDB acknowledges account write", shape=cylinder, fillcolor="#bbf7d0"];
-  telemetry [label="17. Services emit metrics, logs, traces to Alloy", fillcolor="#f3e8ff"];
-  grafana [label="18. Alloy and Faro forward telemetry to Grafana Cloud", fillcolor="#f3e8ff"];
-  k6 [label="19. Grafana Cloud k6 runs regional, spike, browser checks", fillcolor="#f3e8ff"];
-  k6Results [label="20. k6 publishes run metrics, checks, trace correlation", fillcolor="#f3e8ff"];
+  Browser->>CloudFront: GET /api/inventory/products
+  CloudFront->>API: Route /api/* request
+  API->>Inventory: Forward request with trace context
+  Inventory->>Postgres: Query catalog, categories, prices, stock
+  Postgres-->>Inventory: Inventory rows
+  Inventory-->>API: Product response
+  API-->>CloudFront: JSON response
+  CloudFront-->>Browser: Product data
 
-  start -> dns -> static -> faro -> signin -> oauth -> accountPopulate -> products -> inventory -> postgres -> cartAdd -> cart -> dynamoCart -> accountSave -> account -> dynamoAccount -> telemetry -> grafana -> k6 -> k6Results;
+  Shopper->>Browser: Add item to cart
+  Browser->>CloudFront: PUT /api/cart/carts/{shopperId} with Bearer JWT
+  CloudFront->>API: Route cart request
+  API->>Cart: Update cart with trace context and JWT
+  Cart->>DynamoDB: Persist cart state
+  DynamoDB-->>Cart: Write acknowledged
+  Cart-->>Browser: Updated cart
 
-  subgraph cluster_participants {
-    label="Key participants";
-    color="#cbd5e1";
-    style="rounded,dashed";
-    p1 [label="Browser / Shopper", fillcolor="#dbeafe"];
-    p2 [label="Route53 / CloudFront / S3", fillcolor="#fef3c7"];
-    p3 [label="Cognito / Google IdP", fillcolor="#ede9fe"];
-    p4 [label="ALB / Spring services", fillcolor="#dcfce7"];
-    p5 [label="Postgres / DynamoDB", shape=cylinder, fillcolor="#bbf7d0"];
-    p6 [label="Alloy / Grafana / k6", fillcolor="#f3e8ff"];
-    p1 -> p2 -> p3 -> p4 -> p5 -> p6 [style=invis];
-  }
-}
+  Shopper->>Browser: Save shipping address and wallet metadata
+  Browser->>CloudFront: PUT /api/account/accounts/{shopperId} with Bearer JWT
+  CloudFront->>API: Route account request
+  API->>Account: Update account with trace context and JWT
+  Account->>DynamoDB: Persist address and wallet metadata
+  DynamoDB-->>Account: Write acknowledged
+  Account-->>Browser: Saved account
+
+  Inventory-->>Alloy: Metrics, logs, traces
+  Cart-->>Alloy: Metrics, logs, traces
+  Account-->>Alloy: Metrics, logs, traces
+  Alloy-->>Grafana: Forward telemetry
+
+  K6->>CloudFront: Run regional, spike, and browser checks with W3C trace context
+  CloudFront->>API: Route k6 /api/* requests
+  API->>Inventory: Product/catalog load
+  API->>Cart: Protected cart writes with API_TEST_KEY
+  API->>Account: Protected account writes with API_TEST_KEY
+  K6-->>Grafana: Publish k6 run metrics, checks, and trace correlation metadata
 ```
 
 ## Request Flow Diagram
@@ -209,7 +219,8 @@ digraph request_flow_diagram {
     fontname="Helvetica",
     fontsize=20,
     labelloc=t,
-    bgcolor="white",
+    bgcolor="#0b1220",
+    fontcolor="#f8fafc",
     pad=0.25,
     nodesep=0.45,
     ranksep=0.7
@@ -219,38 +230,39 @@ digraph request_flow_diagram {
     style="rounded,filled",
     fontname="Helvetica",
     fontsize=11,
-    color="#334155",
-    fillcolor="#f8fafc",
+    color="#64748b",
+    fillcolor="#111827",
+    fontcolor="#f8fafc",
     margin="0.12,0.08"
   ];
   edge [
     fontname="Helvetica",
     fontsize=9,
-    color="#475569",
-    fontcolor="#334155",
+    color="#94a3b8",
+    fontcolor="#f8fafc",
     arrowsize=0.7
   ];
 
 
-  browser [label="Browser\nensemble-grafana.com", fillcolor="#dbeafe"];
-  dns [label="Route53\nA/AAAA alias", fillcolor="#e0f2fe"];
-  wafEdge [label="AWS WAF\nedge rules", fillcolor="#fee2e2"];
-  cf [label="CloudFront\nHTTPS + static/API routing", fillcolor="#dbeafe"];
-  apiPath [label="/api/* ?", shape=diamond, fillcolor="#fff7ed"];
-  s3 [label="S3 frontend origin\nindex.html, JS, CSS", fillcolor="#fef3c7"];
-  cognito [label="Cognito Hosted UI\nGoogle federation", fillcolor="#ede9fe"];
-  google [label="Google IdP", fillcolor="#ede9fe"];
-  apiWaf [label="AWS WAF\nregional API rules", fillcolor="#fee2e2"];
-  ingress [label="EKS API ingress / ALB", fillcolor="#e0e7ff"];
-  k6 [label="Grafana Cloud k6\nregional, spike, browser checks", fillcolor="#f3e8ff"];
-  grafana [label="Grafana Cloud\nresults and telemetry", fillcolor="#f3e8ff"];
+  browser [label="Browser\nensemble-grafana.com", fillcolor="#1e3a8a"];
+  dns [label="Route53\nA/AAAA alias", fillcolor="#164e63"];
+  wafEdge [label="AWS WAF\nedge rules", fillcolor="#7f1d1d"];
+  cf [label="CloudFront\nHTTPS + static/API routing", fillcolor="#1e3a8a"];
+  apiPath [label="/api/* ?", shape=diamond, fillcolor="#7c2d12"];
+  s3 [label="S3 frontend origin\nindex.html, JS, CSS", fillcolor="#713f12"];
+  cognito [label="Cognito Hosted UI\nGoogle federation", fillcolor="#4c1d95"];
+  google [label="Google IdP", fillcolor="#4c1d95"];
+  apiWaf [label="AWS WAF\nregional API rules", fillcolor="#7f1d1d"];
+  ingress [label="EKS API ingress / ALB", fillcolor="#3730a3"];
+  k6 [label="Grafana Cloud k6\nregional, spike, browser checks", fillcolor="#6b21a8"];
+  grafana [label="Grafana Cloud\nresults and telemetry", fillcolor="#6b21a8"];
 
-  inventory [label="inventory-service\n/api/inventory/*", fillcolor="#dcfce7"];
-  cart [label="cart-service\n/api/cart/*", fillcolor="#dcfce7"];
-  account [label="account-service\n/api/account/*", fillcolor="#dcfce7"];
-  postgres [label="Postgres\ninventory catalog", shape=cylinder, fillcolor="#bbf7d0"];
-  dynamoCart [label="DynamoDB\ncart state", shape=cylinder, fillcolor="#bbf7d0"];
-  dynamoAccount [label="DynamoDB\naccount, address, wallet metadata", shape=cylinder, fillcolor="#bbf7d0"];
+  inventory [label="inventory-service\n/api/inventory/*", fillcolor="#14532d"];
+  cart [label="cart-service\n/api/cart/*", fillcolor="#14532d"];
+  account [label="account-service\n/api/account/*", fillcolor="#14532d"];
+  postgres [label="Postgres\ninventory catalog", shape=cylinder, fillcolor="#166534"];
+  dynamoCart [label="DynamoDB\ncart state", shape=cylinder, fillcolor="#166534"];
+  dynamoAccount [label="DynamoDB\naccount, address, wallet metadata", shape=cylinder, fillcolor="#166534"];
 
   browser -> dns [label="DNS lookup"];
   dns -> browser [label="CloudFront target"];
@@ -300,7 +312,8 @@ digraph observability_capabilities_flow {
     fontname="Helvetica",
     fontsize=20,
     labelloc=t,
-    bgcolor="white",
+    bgcolor="#0b1220",
+    fontcolor="#f8fafc",
     pad=0.25,
     nodesep=0.45,
     ranksep=0.7
@@ -310,57 +323,59 @@ digraph observability_capabilities_flow {
     style="rounded,filled",
     fontname="Helvetica",
     fontsize=11,
-    color="#334155",
-    fillcolor="#f8fafc",
+    color="#64748b",
+    fillcolor="#111827",
+    fontcolor="#f8fafc",
     margin="0.12,0.08"
   ];
   edge [
     fontname="Helvetica",
     fontsize=9,
-    color="#475569",
-    fontcolor="#334155",
+    color="#94a3b8",
+    fontcolor="#f8fafc",
     arrowsize=0.7
   ];
 
 
-  browser [label="Shopper browser\nReact storefront", fillcolor="#dbeafe"];
-  faro [label="Grafana Faro SDK\nweb vitals, errors, logs, sessions, user actions", fillcolor="#f3e8ff"];
-  tracing [label="Faro web tracing\ntrace context on fetch/XHR", fillcolor="#f3e8ff"];
-  cloudfront [label="CloudFront\nstatic + /api/* routing", fillcolor="#dbeafe"];
-  ingress [label="EKS API ingress / ALB", fillcolor="#e0e7ff"];
-  edgeLogs [label="S3 access logs\nCloudFront + ALB", fillcolor="#fef3c7"];
+  browser [label="Shopper browser\nReact storefront", fillcolor="#1e3a8a"];
+  faro [label="Grafana Faro SDK\nweb vitals, errors, logs, sessions, user actions", fillcolor="#6b21a8"];
+  tracing [label="Faro web tracing\ntrace context on fetch/XHR", fillcolor="#6b21a8"];
+  cloudfront [label="CloudFront\nstatic + /api/* routing", fillcolor="#1e3a8a"];
+  ingress [label="EKS API ingress / ALB", fillcolor="#3730a3"];
+  edgeLogs [label="S3 access logs\nCloudFront + ALB", fillcolor="#713f12"];
 
   subgraph cluster_services {
     label="Spring Boot services";
-    color="#94a3b8";
+    color="#64748b";
+    fontcolor="#f8fafc";
     style="rounded,dashed";
-    inventory [label="inventory-service", fillcolor="#dcfce7"];
-    cart [label="cart-service", fillcolor="#dcfce7"];
-    account [label="account-service", fillcolor="#dcfce7"];
+    inventory [label="inventory-service", fillcolor="#14532d"];
+    cart [label="cart-service", fillcolor="#14532d"];
+    account [label="account-service", fillcolor="#14532d"];
   }
 
-  actuator [label="Spring Actuator\n/actuator/prometheus", fillcolor="#e0f2fe"];
-  otel [label="Spring OpenTelemetry\ntraces + resource attrs", fillcolor="#e0f2fe"];
-  logs [label="Kubernetes pod logs\nservice labels", fillcolor="#e0f2fe"];
-  beyla [label="Grafana Beyla\nzero-code HTTP telemetry", fillcolor="#f3e8ff"];
-  pyroscope [label="Pyroscope Alloy DaemonSet\nJVM profiles", fillcolor="#f3e8ff"];
-  alloy [label="Grafana Alloy\nOTel collector", fillcolor="#f3e8ff"];
-  cloudwatch [label="AWS CloudWatch\nRDS metrics", fillcolor="#f1f5f9"];
-  cloudwatchScrape [label="Grafana Cloud Provider\nAWS/RDS scrape job", fillcolor="#f3e8ff"];
-  synth [label="Grafana Synthetic Monitoring\nHTTP, DNS, Ping, TCP", fillcolor="#f3e8ff"];
-  k6 [label="Grafana Cloud k6\nregional load, spike benchmark, browser actions", fillcolor="#f3e8ff"];
-  k6Tracing [label="k6 Tempo instrumentation\nW3C trace context", fillcolor="#f3e8ff"];
-  irm [label="Grafana IRM\nincidents, labels, on-call schedule", fillcolor="#f3e8ff"];
+  actuator [label="Spring Actuator\n/actuator/prometheus", fillcolor="#164e63"];
+  otel [label="Spring OpenTelemetry\ntraces + resource attrs", fillcolor="#164e63"];
+  logs [label="Kubernetes pod logs\nservice labels", fillcolor="#164e63"];
+  beyla [label="Grafana Beyla\nzero-code HTTP telemetry", fillcolor="#6b21a8"];
+  pyroscope [label="Pyroscope Alloy DaemonSet\nJVM profiles", fillcolor="#6b21a8"];
+  alloy [label="Grafana Alloy\nOTel collector", fillcolor="#6b21a8"];
+  cloudwatch [label="AWS CloudWatch\nRDS metrics", fillcolor="#334155"];
+  cloudwatchScrape [label="Grafana Cloud Provider\nAWS/RDS scrape job", fillcolor="#6b21a8"];
+  synth [label="Grafana Synthetic Monitoring\nHTTP, DNS, Ping, TCP", fillcolor="#6b21a8"];
+  k6 [label="Grafana Cloud k6\nregional load, spike benchmark, browser actions", fillcolor="#6b21a8"];
+  k6Tracing [label="k6 Tempo instrumentation\nW3C trace context", fillcolor="#6b21a8"];
+  irm [label="Grafana IRM\nincidents, labels, on-call schedule", fillcolor="#6b21a8"];
 
-  grafana [label="Grafana Cloud stack\norenlion.grafana.net", fillcolor="#ede9fe"];
-  frontendObs [label="Frontend Observability\nFaro events and exceptions", fillcolor="#faf5ff"];
-  tempo [label="Traces\nfrontend-to-backend waterfalls", fillcolor="#faf5ff"];
-  prometheus [label="Metrics\nRED + infrastructure signals", fillcolor="#faf5ff"];
-  loki [label="Logs\nnamespace + service labels", fillcolor="#faf5ff"];
-  profiles [label="Profiles\nJava CPU profiles", fillcolor="#faf5ff"];
-  smResults [label="Synthetic results\nuptime, TLS, DNS, latency", fillcolor="#faf5ff"];
-  k6Results [label="k6 results\nVUs, checks, thresholds", fillcolor="#faf5ff"];
-  incidents [label="IRM workflows\nseverity, ownership, response", fillcolor="#faf5ff"];
+  grafana [label="Grafana Cloud stack\norenlion.grafana.net", fillcolor="#4c1d95"];
+  frontendObs [label="Frontend Observability\nFaro events and exceptions", fillcolor="#581c87"];
+  tempo [label="Traces\nfrontend-to-backend waterfalls", fillcolor="#581c87"];
+  prometheus [label="Metrics\nRED + infrastructure signals", fillcolor="#581c87"];
+  loki [label="Logs\nnamespace + service labels", fillcolor="#581c87"];
+  profiles [label="Profiles\nJava CPU profiles", fillcolor="#581c87"];
+  smResults [label="Synthetic results\nuptime, TLS, DNS, latency", fillcolor="#581c87"];
+  k6Results [label="k6 results\nVUs, checks, thresholds", fillcolor="#581c87"];
+  incidents [label="IRM workflows\nseverity, ownership, response", fillcolor="#581c87"];
 
   browser -> faro [label="page views, errors, user actions"];
   browser -> tracing [label="HTTP requests with traceparent"];
@@ -412,4 +427,3 @@ digraph observability_capabilities_flow {
   grafana -> incidents;
 }
 ```
-

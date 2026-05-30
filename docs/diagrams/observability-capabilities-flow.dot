@@ -6,7 +6,8 @@ digraph observability_capabilities_flow {
     fontname="Helvetica",
     fontsize=20,
     labelloc=t,
-    bgcolor="white",
+    bgcolor="#0b1220",
+    fontcolor="#f8fafc",
     pad=0.25,
     nodesep=0.45,
     ranksep=0.7
@@ -16,57 +17,59 @@ digraph observability_capabilities_flow {
     style="rounded,filled",
     fontname="Helvetica",
     fontsize=11,
-    color="#334155",
-    fillcolor="#f8fafc",
+    color="#64748b",
+    fillcolor="#111827",
+    fontcolor="#f8fafc",
     margin="0.12,0.08"
   ];
   edge [
     fontname="Helvetica",
     fontsize=9,
-    color="#475569",
-    fontcolor="#334155",
+    color="#94a3b8",
+    fontcolor="#f8fafc",
     arrowsize=0.7
   ];
 
 
-  browser [label="Shopper browser\nReact storefront", fillcolor="#dbeafe"];
-  faro [label="Grafana Faro SDK\nweb vitals, errors, logs, sessions, user actions", fillcolor="#f3e8ff"];
-  tracing [label="Faro web tracing\ntrace context on fetch/XHR", fillcolor="#f3e8ff"];
-  cloudfront [label="CloudFront\nstatic + /api/* routing", fillcolor="#dbeafe"];
-  ingress [label="EKS API ingress / ALB", fillcolor="#e0e7ff"];
-  edgeLogs [label="S3 access logs\nCloudFront + ALB", fillcolor="#fef3c7"];
+  browser [label="Shopper browser\nReact storefront", fillcolor="#1e3a8a"];
+  faro [label="Grafana Faro SDK\nweb vitals, errors, logs, sessions, user actions", fillcolor="#6b21a8"];
+  tracing [label="Faro web tracing\ntrace context on fetch/XHR", fillcolor="#6b21a8"];
+  cloudfront [label="CloudFront\nstatic + /api/* routing", fillcolor="#1e3a8a"];
+  ingress [label="EKS API ingress / ALB", fillcolor="#3730a3"];
+  edgeLogs [label="S3 access logs\nCloudFront + ALB", fillcolor="#713f12"];
 
   subgraph cluster_services {
     label="Spring Boot services";
-    color="#94a3b8";
+    color="#64748b";
+    fontcolor="#f8fafc";
     style="rounded,dashed";
-    inventory [label="inventory-service", fillcolor="#dcfce7"];
-    cart [label="cart-service", fillcolor="#dcfce7"];
-    account [label="account-service", fillcolor="#dcfce7"];
+    inventory [label="inventory-service", fillcolor="#14532d"];
+    cart [label="cart-service", fillcolor="#14532d"];
+    account [label="account-service", fillcolor="#14532d"];
   }
 
-  actuator [label="Spring Actuator\n/actuator/prometheus", fillcolor="#e0f2fe"];
-  otel [label="Spring OpenTelemetry\ntraces + resource attrs", fillcolor="#e0f2fe"];
-  logs [label="Kubernetes pod logs\nservice labels", fillcolor="#e0f2fe"];
-  beyla [label="Grafana Beyla\nzero-code HTTP telemetry", fillcolor="#f3e8ff"];
-  pyroscope [label="Pyroscope Alloy DaemonSet\nJVM profiles", fillcolor="#f3e8ff"];
-  alloy [label="Grafana Alloy\nOTel collector", fillcolor="#f3e8ff"];
-  cloudwatch [label="AWS CloudWatch\nRDS metrics", fillcolor="#f1f5f9"];
-  cloudwatchScrape [label="Grafana Cloud Provider\nAWS/RDS scrape job", fillcolor="#f3e8ff"];
-  synth [label="Grafana Synthetic Monitoring\nHTTP, DNS, Ping, TCP", fillcolor="#f3e8ff"];
-  k6 [label="Grafana Cloud k6\nregional load, spike benchmark, browser actions", fillcolor="#f3e8ff"];
-  k6Tracing [label="k6 Tempo instrumentation\nW3C trace context", fillcolor="#f3e8ff"];
-  irm [label="Grafana IRM\nincidents, labels, on-call schedule", fillcolor="#f3e8ff"];
+  actuator [label="Spring Actuator\n/actuator/prometheus", fillcolor="#164e63"];
+  otel [label="Spring OpenTelemetry\ntraces + resource attrs", fillcolor="#164e63"];
+  logs [label="Kubernetes pod logs\nservice labels", fillcolor="#164e63"];
+  beyla [label="Grafana Beyla\nzero-code HTTP telemetry", fillcolor="#6b21a8"];
+  pyroscope [label="Pyroscope Alloy DaemonSet\nJVM profiles", fillcolor="#6b21a8"];
+  alloy [label="Grafana Alloy\nOTel collector", fillcolor="#6b21a8"];
+  cloudwatch [label="AWS CloudWatch\nRDS metrics", fillcolor="#334155"];
+  cloudwatchScrape [label="Grafana Cloud Provider\nAWS/RDS scrape job", fillcolor="#6b21a8"];
+  synth [label="Grafana Synthetic Monitoring\nHTTP, DNS, Ping, TCP", fillcolor="#6b21a8"];
+  k6 [label="Grafana Cloud k6\nregional load, spike benchmark, browser actions", fillcolor="#6b21a8"];
+  k6Tracing [label="k6 Tempo instrumentation\nW3C trace context", fillcolor="#6b21a8"];
+  irm [label="Grafana IRM\nincidents, labels, on-call schedule", fillcolor="#6b21a8"];
 
-  grafana [label="Grafana Cloud stack\norenlion.grafana.net", fillcolor="#ede9fe"];
-  frontendObs [label="Frontend Observability\nFaro events and exceptions", fillcolor="#faf5ff"];
-  tempo [label="Traces\nfrontend-to-backend waterfalls", fillcolor="#faf5ff"];
-  prometheus [label="Metrics\nRED + infrastructure signals", fillcolor="#faf5ff"];
-  loki [label="Logs\nnamespace + service labels", fillcolor="#faf5ff"];
-  profiles [label="Profiles\nJava CPU profiles", fillcolor="#faf5ff"];
-  smResults [label="Synthetic results\nuptime, TLS, DNS, latency", fillcolor="#faf5ff"];
-  k6Results [label="k6 results\nVUs, checks, thresholds", fillcolor="#faf5ff"];
-  incidents [label="IRM workflows\nseverity, ownership, response", fillcolor="#faf5ff"];
+  grafana [label="Grafana Cloud stack\norenlion.grafana.net", fillcolor="#4c1d95"];
+  frontendObs [label="Frontend Observability\nFaro events and exceptions", fillcolor="#581c87"];
+  tempo [label="Traces\nfrontend-to-backend waterfalls", fillcolor="#581c87"];
+  prometheus [label="Metrics\nRED + infrastructure signals", fillcolor="#581c87"];
+  loki [label="Logs\nnamespace + service labels", fillcolor="#581c87"];
+  profiles [label="Profiles\nJava CPU profiles", fillcolor="#581c87"];
+  smResults [label="Synthetic results\nuptime, TLS, DNS, latency", fillcolor="#581c87"];
+  k6Results [label="k6 results\nVUs, checks, thresholds", fillcolor="#581c87"];
+  incidents [label="IRM workflows\nseverity, ownership, response", fillcolor="#581c87"];
 
   browser -> faro [label="page views, errors, user actions"];
   browser -> tracing [label="HTTP requests with traceparent"];

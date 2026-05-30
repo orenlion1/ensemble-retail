@@ -545,6 +545,13 @@ The browser-action scenario uses sustained browser VUs rather than a single shar
 
 Graphviz traffic-spike diagrams live under `docs/graphviz/` and are generated from the current default benchmark profile: `BASE_SPIKE_USERS=100`, `SPIKE_MULTIPLIER=2`, `REGIONAL_SHOPPER_VUS=30`, and `BROWSER_ACTION_VUS=5`. The Grafana dashboard `Ensemble Traffic Spike Graphviz Model` uses the dark heatmap DOT from `docs/graphviz/traffic-spike-target-heatmap-dark.dot` and the HTML heatmap from `docs/graphviz/traffic-spike-target-heatmap.html`; update it with `gcx dashboards update ensemble-traffic-spike-graphviz -f observability/grafana/dashboards/traffic-spike-graphviz.json` after refreshing the dashboard manifest with `gcx dashboards get ensemble-traffic-spike-graphviz -o json`. Dashboard URL: `https://orenlion.grafana.net/d/6d68e547-2aac-4f8c-bc87-73139bff4816/ensemble-traffic-spike-graphviz-model`.
 
+The Grafana folder `Diagrams` contains the dashboard `Ensemble Graphviz Diagrams`, which embeds every current Graphviz DOT source from `docs/diagrams/` and `docs/graphviz/`. Folder URL: `https://orenlion.grafana.net/dashboards/f/ensemble-diagrams/diagrams`. Dashboard URL: `https://orenlion.grafana.net/d/ensemble-graphviz-diagrams/ensemble-graphviz-diagrams`. Recreate or update it with:
+
+```sh
+gcx api /api/folders -d '{"uid":"ensemble-diagrams","title":"Diagrams"}'
+gcx api /api/dashboards/db -d @observability/grafana/dashboards/ensemble-graphviz-diagrams-api.json
+```
+
 Optional knobs for the combined scenarios:
 
 - `REGIONAL_SHOPPER_VUS`: regional API shopper load, default `30`.

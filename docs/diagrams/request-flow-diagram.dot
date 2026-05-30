@@ -6,7 +6,8 @@ digraph request_flow_diagram {
     fontname="Helvetica",
     fontsize=20,
     labelloc=t,
-    bgcolor="white",
+    bgcolor="#0b1220",
+    fontcolor="#f8fafc",
     pad=0.25,
     nodesep=0.45,
     ranksep=0.7
@@ -16,38 +17,39 @@ digraph request_flow_diagram {
     style="rounded,filled",
     fontname="Helvetica",
     fontsize=11,
-    color="#334155",
-    fillcolor="#f8fafc",
+    color="#64748b",
+    fillcolor="#111827",
+    fontcolor="#f8fafc",
     margin="0.12,0.08"
   ];
   edge [
     fontname="Helvetica",
     fontsize=9,
-    color="#475569",
-    fontcolor="#334155",
+    color="#94a3b8",
+    fontcolor="#f8fafc",
     arrowsize=0.7
   ];
 
 
-  browser [label="Browser\nensemble-grafana.com", fillcolor="#dbeafe"];
-  dns [label="Route53\nA/AAAA alias", fillcolor="#e0f2fe"];
-  wafEdge [label="AWS WAF\nedge rules", fillcolor="#fee2e2"];
-  cf [label="CloudFront\nHTTPS + static/API routing", fillcolor="#dbeafe"];
-  apiPath [label="/api/* ?", shape=diamond, fillcolor="#fff7ed"];
-  s3 [label="S3 frontend origin\nindex.html, JS, CSS", fillcolor="#fef3c7"];
-  cognito [label="Cognito Hosted UI\nGoogle federation", fillcolor="#ede9fe"];
-  google [label="Google IdP", fillcolor="#ede9fe"];
-  apiWaf [label="AWS WAF\nregional API rules", fillcolor="#fee2e2"];
-  ingress [label="EKS API ingress / ALB", fillcolor="#e0e7ff"];
-  k6 [label="Grafana Cloud k6\nregional, spike, browser checks", fillcolor="#f3e8ff"];
-  grafana [label="Grafana Cloud\nresults and telemetry", fillcolor="#f3e8ff"];
+  browser [label="Browser\nensemble-grafana.com", fillcolor="#1e3a8a"];
+  dns [label="Route53\nA/AAAA alias", fillcolor="#164e63"];
+  wafEdge [label="AWS WAF\nedge rules", fillcolor="#7f1d1d"];
+  cf [label="CloudFront\nHTTPS + static/API routing", fillcolor="#1e3a8a"];
+  apiPath [label="/api/* ?", shape=diamond, fillcolor="#7c2d12"];
+  s3 [label="S3 frontend origin\nindex.html, JS, CSS", fillcolor="#713f12"];
+  cognito [label="Cognito Hosted UI\nGoogle federation", fillcolor="#4c1d95"];
+  google [label="Google IdP", fillcolor="#4c1d95"];
+  apiWaf [label="AWS WAF\nregional API rules", fillcolor="#7f1d1d"];
+  ingress [label="EKS API ingress / ALB", fillcolor="#3730a3"];
+  k6 [label="Grafana Cloud k6\nregional, spike, browser checks", fillcolor="#6b21a8"];
+  grafana [label="Grafana Cloud\nresults and telemetry", fillcolor="#6b21a8"];
 
-  inventory [label="inventory-service\n/api/inventory/*", fillcolor="#dcfce7"];
-  cart [label="cart-service\n/api/cart/*", fillcolor="#dcfce7"];
-  account [label="account-service\n/api/account/*", fillcolor="#dcfce7"];
-  postgres [label="Postgres\ninventory catalog", shape=cylinder, fillcolor="#bbf7d0"];
-  dynamoCart [label="DynamoDB\ncart state", shape=cylinder, fillcolor="#bbf7d0"];
-  dynamoAccount [label="DynamoDB\naccount, address, wallet metadata", shape=cylinder, fillcolor="#bbf7d0"];
+  inventory [label="inventory-service\n/api/inventory/*", fillcolor="#14532d"];
+  cart [label="cart-service\n/api/cart/*", fillcolor="#14532d"];
+  account [label="account-service\n/api/account/*", fillcolor="#14532d"];
+  postgres [label="Postgres\ninventory catalog", shape=cylinder, fillcolor="#166534"];
+  dynamoCart [label="DynamoDB\ncart state", shape=cylinder, fillcolor="#166534"];
+  dynamoAccount [label="DynamoDB\naccount, address, wallet metadata", shape=cylinder, fillcolor="#166534"];
 
   browser -> dns [label="DNS lookup"];
   dns -> browser [label="CloudFront target"];
