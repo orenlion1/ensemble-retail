@@ -107,13 +107,42 @@
       {
         "id": 4,
         "type": "grafana-graphviz-panel",
+        "title": "Sequence Diagram",
+        "description": "Source: docs/diagrams/sequence-diagram.dot",
+        "gridPos": {
+          "h": 14,
+          "w": 12,
+          "x": 12,
+          "y": 12
+        },
+        "datasource": null,
+        "fieldConfig": {
+          "defaults": {},
+          "overrides": []
+        },
+        "options": {
+          "dotDiagram": "digraph sequence_dependency_diagram {\n  label=\"Frontend-to-Backend Request Sequence as Stacked Horizontal Paths\";\n  labelloc=t;\n  rankdir=TB;\n\n  graph [\n    fontname=\"Helvetica,Arial,sans-serif\",\n    fontsize=22,\n    bgcolor=\"#0b1220\",\n    fontcolor=\"#f8fafc\",\n    newrank=true,\n    nodesep=0.30,\n    ranksep=0.35,\n    splines=polyline,\n    outputorder=edgesfirst,\n    pad=0.25\n  ];\n\n  node [\n    shape=box,\n    style=\"filled,setlinewidth(2)\",\n    fontname=\"Helvetica,Arial,sans-serif\",\n    fontsize=11,\n    color=\"#64748b\",\n    fillcolor=\"#111827\",\n    fontcolor=\"#f8fafc\",\n    margin=\"0.10,0.06\"\n  ];\n\n  edge [\n    fontname=\"Helvetica,Arial,sans-serif\",\n    fontsize=9,\n    color=\"#94a3b8\",\n    fontcolor=\"#f8fafc\",\n    arrowsize=0.55,\n    penwidth=2\n  ];\n\n  key [shape=plain, label=<\n    <TABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"6\" COLOR=\"#475569\">\n      <TR><TD BGCOLOR=\"#1e3a8a\"><FONT COLOR=\"#f8fafc\"><B>Browser</B></FONT></TD>\n      <TD BGCOLOR=\"#164e63\"><FONT COLOR=\"#f8fafc\"><B>DNS / Edge</B></FONT></TD>\n      <TD BGCOLOR=\"#713f12\"><FONT COLOR=\"#f8fafc\"><B>Static Origin</B></FONT></TD>\n      <TD BGCOLOR=\"#4c1d95\"><FONT COLOR=\"#f8fafc\"><B>Identity</B></FONT></TD>\n      <TD BGCOLOR=\"#14532d\"><FONT COLOR=\"#f8fafc\"><B>API / Services</B></FONT></TD>\n      <TD BGCOLOR=\"#166534\"><FONT COLOR=\"#f8fafc\"><B>Data Stores</B></FONT></TD>\n      <TD BGCOLOR=\"#6b21a8\"><FONT COLOR=\"#f8fafc\"><B>Telemetry</B></FONT></TD>\n      <TD BGCOLOR=\"#713f12\"><FONT COLOR=\"#f8fafc\"><B>k6</B></FONT></TD></TR>\n    </TABLE>\n  >];\n\n  start [label=\"Shopper browser\", shape=ellipse, fillcolor=\"#1e3a8a\", color=\"#1e3a8a\"];\n\n  subgraph cluster_static {\n    label=\"1. Storefront page load\";\n    graph [rank=same];\n    color=\"#38bdf8\";\n    fontcolor=\"#bae6fd\";\n    style=\"rounded,setlinewidth(2)\";\n    static_browser [label=\"Open\\nensemble-grafana.com\", fillcolor=\"#1e3a8a\", color=\"#1e3a8a\", group=c1];\n    static_dns [label=\"Route53\\nDNS alias\", fillcolor=\"#164e63\", color=\"#38bdf8\", group=c2];\n    static_cf [label=\"CloudFront\\n+ edge WAF\", fillcolor=\"#164e63\", color=\"#38bdf8\", group=c3];\n    static_s3 [label=\"S3\\nstatic origin\", fillcolor=\"#713f12\", color=\"#f59e0b\", group=c4];\n    static_render [label=\"Render HTML,\\nJS, CSS, headers\", fillcolor=\"#1e3a8a\", color=\"#1e3a8a\", group=c5];\n    static_faro [label=\"Faro page load,\\nvitals, session\", fillcolor=\"#6b21a8\", color=\"#c084fc\", group=c6];\n    static_grafana [label=\"Grafana Cloud\\nfrontend telemetry\", fillcolor=\"#6b21a8\", color=\"#c084fc\", group=c7];\n    static_browser -> static_dns [label=\"resolve\"];\n    static_dns -> static_cf [label=\"alias\"];\n    static_cf -> static_s3 [label=\"fetch\"];\n    static_s3 -> static_render [label=\"assets\"];\n    static_render -> static_faro [label=\"web signal\"];\n    static_faro -> static_grafana [label=\"collect\"];\n  }\n\n  subgraph cluster_auth {\n    label=\"2. Google sign-in through Cognito\";\n    graph [rank=same];\n    color=\"#a855f7\";\n    fontcolor=\"#e9d5ff\";\n    style=\"rounded,setlinewidth(2)\";\n    auth_browser [label=\"Start\\nGoogle sign-in\", fillcolor=\"#1e3a8a\", color=\"#1e3a8a\", group=c1];\n    auth_cognito [label=\"Cognito\\nOAuth authorize\", fillcolor=\"#4c1d95\", color=\"#a855f7\", group=c2];\n    auth_google [label=\"Google IdP\\nauthentication\", fillcolor=\"#4c1d95\", color=\"#a855f7\", group=c3];\n    auth_claims [label=\"Cognito tokens\\n+ profile claims\", fillcolor=\"#4c1d95\", color=\"#a855f7\", group=c4];\n    auth_account [label=\"Populate account\\nname + email\", fillcolor=\"#1e3a8a\", color=\"#1e3a8a\", group=c5];\n    auth_browser -> auth_cognito [label=\"authorize\"];\n    auth_cognito -> auth_google [label=\"redirect\"];\n    auth_google -> auth_claims [label=\"claims\"];\n    auth_claims -> auth_account [label=\"callback + PKCE\"];\n  }\n\n  subgraph cluster_inventory {\n    label=\"3. Inventory browse request\";\n    graph [rank=same];\n    color=\"#22c55e\";\n    fontcolor=\"#bbf7d0\";\n    style=\"rounded,setlinewidth(2)\";\n    inv_browser [label=\"GET\\n/api/inventory/products\", fillcolor=\"#1e3a8a\", color=\"#1e3a8a\", group=c1];\n    inv_cf [label=\"CloudFront\\n/api/* route\", fillcolor=\"#164e63\", color=\"#38bdf8\", group=c2];\n    inv_api [label=\"ALB /\\nAPI ingress\", fillcolor=\"#14532d\", color=\"#22c55e\", group=c3];\n    inv_service [label=\"inventory-service\\ntrace context\", fillcolor=\"#14532d\", color=\"#22c55e\", group=c4];\n    inv_db [label=\"Postgres\\ncatalog rows\", shape=cylinder, fillcolor=\"#166534\", color=\"#16a34a\", group=c5];\n    inv_response [label=\"JSON product data\\nback to browser\", fillcolor=\"#1e3a8a\", color=\"#1e3a8a\", group=c6];\n    inv_browser -> inv_cf;\n    inv_cf -> inv_api;\n    inv_api -> inv_service;\n    inv_service -> inv_db [label=\"query\"];\n    inv_db -> inv_response [label=\"rows -> JSON\"];\n  }\n\n  subgraph cluster_cart {\n    label=\"4. Cart update request\";\n    graph [rank=same];\n    color=\"#22c55e\";\n    fontcolor=\"#bbf7d0\";\n    style=\"rounded,setlinewidth(2)\";\n    cart_browser [label=\"PUT\\n/api/cart/carts/{shopperId}\", fillcolor=\"#1e3a8a\", color=\"#1e3a8a\", group=c1];\n    cart_cf [label=\"CloudFront\\n/api/* route\", fillcolor=\"#164e63\", color=\"#38bdf8\", group=c2];\n    cart_api [label=\"ALB /\\nJWT + trace\", fillcolor=\"#14532d\", color=\"#22c55e\", group=c3];\n    cart_service [label=\"cart-service\\nupdate cart\", fillcolor=\"#14532d\", color=\"#22c55e\", group=c4];\n    cart_db [label=\"DynamoDB\\ncart state\", shape=cylinder, fillcolor=\"#166534\", color=\"#16a34a\", group=c5];\n    cart_response [label=\"Updated cart\\nback to browser\", fillcolor=\"#1e3a8a\", color=\"#1e3a8a\", group=c6];\n    cart_browser -> cart_cf [label=\"Bearer JWT\"];\n    cart_cf -> cart_api;\n    cart_api -> cart_service;\n    cart_service -> cart_db [label=\"persist\"];\n    cart_db -> cart_response [label=\"ack\"];\n  }\n\n  subgraph cluster_account {\n    label=\"5. Account save request\";\n    graph [rank=same];\n    color=\"#22c55e\";\n    fontcolor=\"#bbf7d0\";\n    style=\"rounded,setlinewidth(2)\";\n    acct_browser [label=\"PUT\\n/api/account/accounts/{shopperId}\", fillcolor=\"#1e3a8a\", color=\"#1e3a8a\", group=c1];\n    acct_cf [label=\"CloudFront\\n/api/* route\", fillcolor=\"#164e63\", color=\"#38bdf8\", group=c2];\n    acct_api [label=\"ALB /\\nJWT + trace\", fillcolor=\"#14532d\", color=\"#22c55e\", group=c3];\n    acct_service [label=\"account-service\\nprofile + wallet\", fillcolor=\"#14532d\", color=\"#22c55e\", group=c4];\n    acct_db [label=\"DynamoDB\\naccount state\", shape=cylinder, fillcolor=\"#166534\", color=\"#16a34a\", group=c5];\n    acct_response [label=\"Saved account\\nback to browser\", fillcolor=\"#1e3a8a\", color=\"#1e3a8a\", group=c6];\n    acct_browser -> acct_cf [label=\"Bearer JWT\"];\n    acct_cf -> acct_api;\n    acct_api -> acct_service;\n    acct_service -> acct_db [label=\"persist\"];\n    acct_db -> acct_response [label=\"ack\"];\n  }\n\n  subgraph cluster_telemetry {\n    label=\"6. Backend telemetry\";\n    graph [rank=same];\n    color=\"#c084fc\";\n    fontcolor=\"#f3e8ff\";\n    style=\"rounded,setlinewidth(2)\";\n    telemetry_services [label=\"inventory / cart /\\naccount services\", fillcolor=\"#14532d\", color=\"#22c55e\", group=c1];\n    telemetry_alloy [label=\"Grafana Alloy\\nmetrics, logs, traces\", fillcolor=\"#6b21a8\", color=\"#c084fc\", group=c2];\n    telemetry_grafana [label=\"Grafana Cloud\\nMimir, Loki, Tempo,\\nPyroscope\", fillcolor=\"#6b21a8\", color=\"#c084fc\", group=c3];\n    telemetry_services -> telemetry_alloy [label=\"OTel + Prometheus\"];\n    telemetry_alloy -> telemetry_grafana [label=\"export\"];\n  }\n\n  subgraph cluster_k6 {\n    label=\"7. k6 load and browser checks\";\n    graph [rank=same];\n    color=\"#f59e0b\";\n    fontcolor=\"#fde68a\";\n    style=\"rounded,setlinewidth(2)\";\n    k6_runner [label=\"Grafana Cloud k6\\nregional + spike + browser\", fillcolor=\"#713f12\", color=\"#f59e0b\", group=c1];\n    k6_cf [label=\"CloudFront\\n/api/* + storefront\", fillcolor=\"#164e63\", color=\"#38bdf8\", group=c2];\n    k6_api [label=\"ALB / API\\ntraceparent\", fillcolor=\"#14532d\", color=\"#22c55e\", group=c3];\n    k6_services [label=\"inventory / cart /\\naccount services\", fillcolor=\"#14532d\", color=\"#22c55e\", group=c4];\n    k6_grafana [label=\"Grafana Cloud\\nrun metrics + checks\", fillcolor=\"#6b21a8\", color=\"#c084fc\", group=c5];\n    k6_runner -> k6_cf [label=\"regional, spike,\\nbrowser actions\"];\n    k6_cf -> k6_api;\n    k6_api -> k6_services;\n    k6_runner -> k6_grafana [label=\"results\"];\n  }\n\n  key -> start [style=invis, weight=20];\n  start -> static_browser [style=invis, weight=20];\n  static_browser -> auth_browser [style=invis, weight=20];\n  auth_browser -> inv_browser [style=invis, weight=20];\n  inv_browser -> cart_browser [style=invis, weight=20];\n  cart_browser -> acct_browser [style=invis, weight=20];\n  acct_browser -> telemetry_services [style=invis, weight=20];\n  telemetry_services -> k6_runner [style=invis, weight=20];\n}\n",
+          "edgeOverrides": [],
+          "inputMode": "code",
+          "layoutEngine": "dot",
+          "namedThresholds": [],
+          "nodeOverrides": [],
+          "rankDirection": "TB",
+          "splineType": "ortho"
+        },
+        "targets": [],
+        "transparent": false
+      },
+      {
+        "id": 5,
+        "type": "grafana-graphviz-panel",
         "title": "Traffic Spike Request Cards",
         "description": "Source: docs/graphviz/traffic-spike-request-cards.dot",
         "gridPos": {
           "h": 12,
           "w": 12,
-          "x": 12,
-          "y": 12
+          "x": 0,
+          "y": 24
         },
         "datasource": null,
         "fieldConfig": {
@@ -134,14 +163,14 @@
         "transparent": false
       },
       {
-        "id": 5,
+        "id": 6,
         "type": "grafana-graphviz-panel",
         "title": "Traffic Spike Request Model",
         "description": "Source: docs/graphviz/traffic-spike-request-model.dot",
         "gridPos": {
           "h": 12,
           "w": 12,
-          "x": 0,
+          "x": 12,
           "y": 24
         },
         "datasource": null,
@@ -163,15 +192,15 @@
         "transparent": false
       },
       {
-        "id": 6,
+        "id": 7,
         "type": "grafana-graphviz-panel",
         "title": "Traffic Spike Request Tables",
         "description": "Source: docs/graphviz/traffic-spike-request-tables.dot",
         "gridPos": {
           "h": 12,
           "w": 12,
-          "x": 12,
-          "y": 24
+          "x": 0,
+          "y": 36
         },
         "datasource": null,
         "fieldConfig": {
@@ -192,14 +221,14 @@
         "transparent": false
       },
       {
-        "id": 7,
+        "id": 8,
         "type": "grafana-graphviz-panel",
         "title": "Traffic Spike Requests Only",
         "description": "Source: docs/graphviz/traffic-spike-requests-only.dot",
         "gridPos": {
           "h": 12,
           "w": 12,
-          "x": 0,
+          "x": 12,
           "y": 36
         },
         "datasource": null,
@@ -221,15 +250,15 @@
         "transparent": false
       },
       {
-        "id": 8,
+        "id": 9,
         "type": "grafana-graphviz-panel",
         "title": "Traffic Spike Target Heatmap Dark",
         "description": "Source: docs/graphviz/traffic-spike-target-heatmap-dark.dot",
         "gridPos": {
           "h": 10,
           "w": 12,
-          "x": 12,
-          "y": 36
+          "x": 0,
+          "y": 48
         },
         "datasource": null,
         "fieldConfig": {
@@ -250,14 +279,14 @@
         "transparent": false
       },
       {
-        "id": 9,
+        "id": 10,
         "type": "grafana-graphviz-panel",
         "title": "Traffic Spike Target Heatmap",
         "description": "Source: docs/graphviz/traffic-spike-target-heatmap.dot",
         "gridPos": {
           "h": 10,
           "w": 12,
-          "x": 0,
+          "x": 12,
           "y": 48
         },
         "datasource": null,
@@ -279,15 +308,15 @@
         "transparent": false
       },
       {
-        "id": 10,
+        "id": 11,
         "type": "grafana-graphviz-panel",
         "title": "Traffic Spike",
         "description": "Source: docs/graphviz/traffic-spike.dot",
         "gridPos": {
           "h": 12,
           "w": 12,
-          "x": 12,
-          "y": 48
+          "x": 0,
+          "y": 60
         },
         "datasource": null,
         "fieldConfig": {

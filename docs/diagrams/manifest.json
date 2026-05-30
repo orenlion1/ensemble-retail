@@ -9,7 +9,7 @@
   {
     "title": "Sequence Diagram",
     "slug": "sequence-diagram",
-    "file": "docs/diagrams/sequence-diagram.mmd",
+    "file": "docs/diagrams/sequence-diagram.dot",
     "svg": "docs/diagrams/sequence-diagram.svg",
     "png": "docs/diagrams/sequence-diagram.png"
   },
