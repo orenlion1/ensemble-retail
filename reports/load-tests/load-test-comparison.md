@@ -1,12 +1,12 @@
 # k6 Load Test Comparison
 
-Generated: 2026-05-30T19:31:28.324Z
+Generated: 2026-05-30T20:01:43.732Z
 
 Source summary: `reports/load-tests/k6-summary-20260530T131841Z.json`
 
 Source run history: `reports/load-tests/k6-runs-20260530-091706.json`
 
-Source Faro action totals: `reports/frontend-user-actions/faro-user-action-totals-20260530T193127Z.json`
+Source Faro action totals: `reports/frontend-user-actions/faro-user-action-totals-20260530T200131Z.json`
 
 ## Latest Runs
 
@@ -76,47 +76,47 @@ These totals come from local k6 summary files named `reports/load-tests/k6-local
 
 These totals come from the latest `gcx logs query` output under `reports/frontend-user-actions/faro-user-action-totals-*.json`. They use the latest sample from a rolling `6h` `count_over_time` query to show what Grafana Cloud received after k6 browser-action runs.
 
-Total executions: 352
+Total executions: 9995
 
 | Action | Importance | Severity | Executions |
 |---|---|---|---:|
-| search-products | normal | unset | 34 |
-| close-product-detail:mens-midlayer-grid | normal | unset | 20 |
-| select-language:american-english | normal | unset | 20 |
-| shopping-cart:add-detail-item:mens-midlayer-grid | normal | unset | 20 |
-| select-language:swedish | normal | unset | 18 |
-| checkout-dialog:close | normal | unset | 15 |
-| edit-account-name | normal | unset | 14 |
-| shopping-cart:checkout | critical | unset | 14 |
-| shopping-cart:add-sale-item:mens-midlayer-grid | normal | unset | 12 |
-| sort-products:price-low | normal | unset | 12 |
-| edit-account-email | normal | unset | 10 |
-| edit-shipping-address | normal | unset | 10 |
-| save-account | critical | unset | 10 |
-| select-category:mens-mid-layers | normal | unset | 10 |
-| select-department:mens | normal | unset | 10 |
-| select-department:womens | normal | unset | 10 |
-| select-region:us | normal | unset | 10 |
-| shopping-cart:add-item:mens-midlayer-grid | normal | unset | 10 |
-| shopping-cart:change-quantity:mens-midlayer-grid | normal | unset | 10 |
-| shopping-cart:remove-item:mens-midlayer-grid | normal | unset | 10 |
-| view-product:product-grid-mens-midlayer-grid | normal | unset | 10 |
-| view-product:sale-grid-mens-midlayer-grid | normal | unset | 10 |
-| select-region:se | normal | unset | 9 |
-| select-language:french | normal | unset | 8 |
+| search-products | normal | unset | 916 |
+| select-language:swedish | normal | unset | 728 |
+| select-language:american-english | normal | unset | 720 |
+| shopping-cart:add-detail-item:mens-midlayer-grid | normal | unset | 680 |
+| close-product-detail:mens-midlayer-grid | normal | unset | 678 |
+| sort-products:price-low | normal | unset | 414 |
+| select-region:se | normal | unset | 364 |
+| select-region:us | normal | unset | 360 |
+| select-department:womens | normal | unset | 359 |
+| select-department:mens | normal | unset | 353 |
+| select-category:mens-mid-layers | normal | unset | 349 |
+| view-product:product-grid-mens-midlayer-grid | normal | unset | 344 |
+| shopping-cart:add-item:mens-midlayer-grid | normal | unset | 339 |
+| shopping-cart:add-sale-item:mens-midlayer-grid | normal | unset | 339 |
+| edit-account-name | normal | unset | 338 |
+| shopping-cart:checkout | critical | unset | 338 |
+| view-product:sale-grid-mens-midlayer-grid | normal | unset | 338 |
+| checkout-dialog:close | normal | unset | 337 |
+| shopping-cart:change-quantity:mens-midlayer-grid | normal | unset | 337 |
+| shopping-cart:remove-item:mens-midlayer-grid | normal | unset | 335 |
+| edit-account-email | normal | unset | 334 |
+| edit-shipping-address | normal | unset | 334 |
+| save-account | critical | unset | 334 |
 | shopping-cart:add-sale-item:womens-softshell-hoody | normal | unset | 6 |
-| select-language:british-english | normal | unset | 4 |
-| select-language:mandarin | normal | unset | 4 |
-| shopping-cart:checkout | normal | unset | 4 |
-| select-region:ca | normal | unset | 3 |
 | shopping-cart:add-sale-item:mens-trail-pant | normal | unset | 3 |
-| select-region:cn | normal | unset | 2 |
-| select-region:uk | normal | unset | 2 |
+| select-language:british-english | normal | unset | 2 |
+| select-language:french | normal | unset | 2 |
+| select-language:mandarin | normal | unset | 2 |
 | shopping-cart:add-item:mens-daypack-22 | normal | unset | 2 |
 | auth:google-login-complete | normal | unset | 1 |
 | auth:google-login-start | normal | unset | 1 |
 | navigate-checkout:grafana | normal | unset | 1 |
 | navigate-header:cart | normal | unset | 1 |
+| select-region:ca | normal | unset | 1 |
+| select-region:cn | normal | unset | 1 |
+| select-region:uk | normal | unset | 1 |
+| shopping-cart:checkout | normal | unset | 1 |
 | shopping-cart:remove-item:womens-rain-cap | normal | unset | 1 |
 | view-product:product-grid-mens-shell-alpha | normal | unset | 1 |
 
