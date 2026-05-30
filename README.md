@@ -541,13 +541,13 @@ k6 cloud run load-tests/grafana-cloud-traffic-spikes.js
 
 The default combined benchmark peaks at 490 VUs: 400 traffic-spike VUs, 30 regional shoppers, and 60 browser-action VUs. Increase the project VU quota before running the default benchmark in Cloud k6, or temporarily lower `BASE_SPIKE_USERS`, `REGIONAL_SHOPPER_VUS`, or `BROWSER_ACTION_VUS` for quota-constrained validation runs.
 
-The browser-action scenario uses sustained browser VUs rather than a single shared iteration. Its default target is at least 10 user-action events per second for every expected action family. The script publishes a tagged `storefront_user_action_events` counter with `action_family` labels and fails the run when any expected action family is below `USER_ACTION_TARGET_RPS`.
+The browser-action scenario uses sustained browser VUs rather than a single shared iteration. Its default target is at least 5 user-action events per second for every expected action family. The script publishes a tagged `storefront_user_action_events` counter with `action_family` labels and fails the run when any expected action family is below `USER_ACTION_TARGET_RPS`.
 
 Optional knobs for the combined scenarios:
 
 - `REGIONAL_SHOPPER_VUS`: regional API shopper load, default `30`.
 - `SPIKE_MULTIPLIER`: traffic spike growth multiplier, default `2`.
-- `USER_ACTION_TARGET_RPS`: minimum target rate for every expected browser user-action family, default `10`.
+- `USER_ACTION_TARGET_RPS`: minimum target rate for every expected browser user-action family, default `5`.
 - `BROWSER_ACTION_VUS`: concurrent browser VUs that repeatedly execute the full user-action journey, default `60`.
 - `BROWSER_ACTION_DURATION`: duration for sustained browser user-action load, default `TEST_DURATION` or `10m`.
 
