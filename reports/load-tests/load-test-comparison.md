@@ -1,10 +1,10 @@
 # k6 Load Test Comparison
 
-Generated: 2026-05-30T21:09:48.379Z
+Generated: 2026-05-30T22:48:59.593Z
 
-Source summary: `reports/load-tests/k6-summary-20260530T131841Z.json`
+Source summary: `reports/load-tests/k6-summary-20260530T224859Z.json`
 
-Source run history: `reports/load-tests/k6-runs-20260530-091706.json`
+Source run history: `reports/load-tests/k6-runs-20260530T224859Z.json`
 
 Source Faro action totals: `reports/frontend-user-actions/faro-user-action-totals-20260530T210943Z.json`
 
@@ -14,7 +14,7 @@ Source Faro action totals: `reports/frontend-user-actions/faro-user-action-total
 |---:|---|---|---|---:|---:|---:|---:|---:|---:|
 | 1228494 | API flow load test | n/a | n/a | n/a | n/a | n/a | n/a | n/a | No runs found |
 | 1228490 | 20-user regional load test | [7634314](https://orenlion.grafana.net/a/k6-app/runs/7634314) | 05/28/2026, 12:00 | ❌ | 13.9m | 503257 | 66.50% | 56.8 ms | 25.21% |
-| 1228496 | Traffic spike benchmark | [7627516](https://orenlion.grafana.net/a/k6-app/runs/7627516) | 05/27/2026, 13:05 | ❌ | 11.8m | 432009 | 66.49% | 59.6 ms | 33.51% |
+| 1228496 | Traffic spike benchmark | [7648780](https://orenlion.grafana.net/a/k6-app/runs/7648780) | 05/30/2026, 18:28 | ✅ | 15.0m | n/a | n/a | n/a | n/a |
 | 1228497 | Browser action synthetic check | [7642853](https://orenlion.grafana.net/a/k6-app/runs/7642853) | 05/29/2026, 17:21 | ✅ | 3.8m | n/a | n/a | n/a | 100.00% |
 
 ## Visual Comparison
@@ -53,7 +53,7 @@ Source Faro action totals: `reports/frontend-user-actions/faro-user-action-total
 |---|---:|---:|---:|---:|---:|
 | 20-user regional load test | 5 | 4 | 1 | 0 | 80.00% |
 | Browser action synthetic check | 2 | 2 | 0 | 0 | 100.00% |
-| Traffic spike benchmark | 5 | 2 | 2 | 1 | 40.00% |
+| Traffic spike benchmark | 6 | 3 | 2 | 1 | 50.00% |
 
 ## Request And User Action Totals
 
@@ -126,6 +126,7 @@ Total executions: 26870
 
 | Date | Started | Test | Run | Result | Duration | Total VUH | Protocol VUH | Browser VUH |
 |---|---|---|---|---:|---:|---:|---:|---:|
+| 2026-05-30 | 05/30/2026, 18:28 | Traffic spike benchmark | [7648780](https://orenlion.grafana.net/a/k6-app/runs/7648780) | ✅ | 15.0m | 129.00 | 117.16 | 11.84 |
 | 2026-05-29 | 05/29/2026, 17:21 | Browser action synthetic check | [7642853](https://orenlion.grafana.net/a/k6-app/runs/7642853) | ✅ | 0.3m | 1.00 | 0.00 | 1.00 |
 | 2026-05-28 | 05/28/2026, 12:00 | 20-user regional load test | [7634314](https://orenlion.grafana.net/a/k6-app/runs/7634314) | ❌ | 10.0m | 5.01 | 3.34 | 1.67 |
 | 2026-05-28 | 05/28/2026, 11:35 | 20-user regional load test | [7634188](https://orenlion.grafana.net/a/k6-app/runs/7634188) | ✅ | 10.0m | 5.01 | 3.34 | 1.67 |

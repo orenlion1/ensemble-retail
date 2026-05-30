@@ -11,3 +11,4 @@ date,created,testName,testId,runId,result,status,durationSeconds,totalVuh,protoc
 "2026-05-28","2026-05-28T15:35:47.811156Z","20-user regional load test","1228490","7634188","passed","completed","600","5.01","3.34","1.67","21","1","https://orenlion.grafana.net/a/k6-app/runs/7634188"
 "2026-05-28","2026-05-28T16:00:47.612875Z","20-user regional load test","1228490","7634314","failed","completed","600","5.01","3.34","1.67","21","1","https://orenlion.grafana.net/a/k6-app/runs/7634314"
 "2026-05-29","2026-05-29T21:21:03.845310Z","Browser action synthetic check","1228497","7642853","passed","completed","21","1","0","1","1","1","https://orenlion.grafana.net/a/k6-app/runs/7642853"
+"2026-05-30","2026-05-30T22:28:12+00:00","Traffic spike benchmark","1228496","7648780","passed","completed","900","129","117.16","11.84","500","5","https://orenlion.grafana.net/a/k6-app/runs/7648780"
