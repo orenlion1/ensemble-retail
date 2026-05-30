@@ -16,6 +16,7 @@ This is a training repo to explore the art of the "promptable". Original outdoor
 - `observability/` - Grafana Alloy config, k8s-monitoring Helm values, synthetic checks, and starter dashboards. See `observability/README.md`.
 - `load-tests/` - k6 API and browser scenarios covering users, categories, product browsing, cart, checkout, account, and synthetic button-action flows.
 - `docs/` - deployment, security, domain/TLS, and Grafana IRM runbooks.
+- `docs/graviton-migration.md` - plan for migrating EKS workers and service images from x86 to AWS Graviton/ARM64.
 - `scripts/security/` - predeploy security checks for secrets, Kubernetes hardening, and IaC controls.
 - `.github/workflows/build.yml` - GitHub Actions security checks, Maven service packages, frontend build, Playwright browser checks, and k6 script inspection.
 - `.github/workflows/account-baseline-guard.yml` - Guardrail workflow for account-baseline Terraform validation and manual-approval apply path.
@@ -491,13 +492,13 @@ The report is written to `reports/load-tests/load-test-comparison.md`. Generate 
 
 ### k6 Traffic Spike Benchmark
 
-The spike benchmark is `load-tests/grafana-cloud-traffic-spikes.js`. It uses the same regional shopper personas as the regional test, but benchmarks three traffic spikes where each peak is 50% higher than the previous one. The default first spike is now 30 VUs, a 50% increase over the previous 20-VU baseline:
+The spike benchmark is `load-tests/grafana-cloud-traffic-spikes.js`. It uses the same regional shopper personas as the regional test, but benchmarks three traffic spikes where each peak is 50% higher than the previous one. The default first spike is now 40 VUs, matching the latest validated 2x benchmark level:
 
-- Spike 1: `30` VUs.
-- Spike 2: `45` VUs.
-- Spike 3: `68` VUs.
+- Spike 1: `40` VUs.
+- Spike 2: `60` VUs.
+- Spike 3: `90` VUs.
 
-Each spike ramps quickly, holds for one minute, and then returns to a low recovery load before the next spike. Requests are tagged by `spike`, `region`, `persona`, and endpoint name.
+Each spike ramps quickly, holds for one minute, and then returns to a low recovery load before the next spike. Requests are tagged by `spike`, `region`, `persona`, and endpoint name. The traffic spike script is now the combined benchmark entrypoint: it runs the three-spike API benchmark, the regional shopper load scenario, and the full browser-action synthetic journey that validates Faro user actions and region/language UI behavior.
 
 Run locally:
 
@@ -520,11 +521,17 @@ Override the first spike size with `BASE_SPIKE_USERS`; the next two spikes remai
 
 ```sh
 API_TEST_KEY=<api-test-key> \
-BASE_SPIKE_USERS=40 \
+BASE_SPIKE_USERS=60 \
 STOREFRONT_BASE_URL=https://ensemble-grafana.com \
 API_BASE_URL=https://api.ensemble-grafana.com \
 k6 run load-tests/grafana-cloud-traffic-spikes.js
 ```
+
+Optional knobs for the combined scenarios:
+
+- `REGIONAL_SHOPPER_VUS`: regional API shopper load, default `30`.
+- `BROWSER_ACTION_ITERATIONS`: full browser-action synthetic iterations, default `1`.
+- `BROWSER_ACTION_MAX_DURATION`: max duration for the browser-action scenario, default `10m`.
 
 The browser action check covers:
 

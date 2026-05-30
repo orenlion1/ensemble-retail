@@ -1,16 +1,15 @@
-import tempo from 'https://jslib.k6.io/http-instrumentation-tempo/1.0.0/index.js';
 import http from 'k6/http';
 import { check, fail, group, sleep } from 'k6';
 import { Counter, Trend } from 'k6/metrics';
+import { regionalJourney } from './grafana-cloud-20-user-regional.js';
 import { summaryOutput } from './summary.js';
+import storefrontActions from './synthetic-browser-actions.js';
 
-tempo.instrumentHTTP({
-  propagator: 'w3c'
-});
-
-const baseSpikeUsers = Number(__ENV.BASE_SPIKE_USERS || 30);
+const baseSpikeUsers = Number(__ENV.BASE_SPIKE_USERS || 40);
 const spikeTwoUsers = Math.ceil(baseSpikeUsers * 1.5);
 const spikeThreeUsers = Math.ceil(spikeTwoUsers * 1.5);
+const regionalShopperVus = Number(__ENV.REGIONAL_SHOPPER_VUS || 30);
+const browserActionIterations = Number(__ENV.BROWSER_ACTION_ITERATIONS || 1);
 
 export const options = {
   cloud: {
@@ -18,6 +17,7 @@ export const options = {
   },
   scenarios: {
     traffic_spikes: {
+      exec: 'trafficSpikeJourney',
       executor: 'ramping-vus',
       stages: [
         { duration: '1m', target: Math.ceil(baseSpikeUsers * 0.25) },
@@ -32,6 +32,25 @@ export const options = {
         { duration: '1m', target: 0 }
       ],
       gracefulRampDown: '30s'
+    },
+    regional_shoppers: {
+      exec: 'regionalJourneyScenario',
+      executor: 'constant-vus',
+      vus: regionalShopperVus,
+      duration: __ENV.TEST_DURATION || '10m',
+      gracefulStop: '30s'
+    },
+    storefront_actions: {
+      exec: 'storefrontActionsScenario',
+      executor: 'shared-iterations',
+      vus: 1,
+      iterations: browserActionIterations,
+      maxDuration: __ENV.BROWSER_ACTION_MAX_DURATION || '10m',
+      options: {
+        browser: {
+          type: 'chromium'
+        }
+      }
     }
   },
   thresholds: {
@@ -40,7 +59,19 @@ export const options = {
     spike_api_latency: ['p(95)<1000'],
     spike_cart_updates: ['count>20'],
     spike_checkout_attempts: ['count>5'],
-    spike_region_changes: ['count>30']
+    spike_region_changes: ['count>30'],
+    api_latency: ['p(95)<750'],
+    cart_updates: ['count>20'],
+    checkout_attempts: ['count>5'],
+    region_changes: ['count>20'],
+    storefront_user_actions: ['count>10'],
+    shopping_cart_add_items: ['count>0'],
+    shopping_cart_add_detail_items: ['count>0'],
+    shopping_cart_add_sale_items: ['count>0'],
+    shopping_cart_remove_items: ['count>0'],
+    shopping_cart_checkout: ['count>0'],
+    browser_web_vital_lcp: ['p(95)<4000'],
+    browser_web_vital_cls: ['p(95)<0.1']
   },
   tags: {
     app: 'ensemble-grafana',
@@ -182,7 +213,7 @@ function saveAccount(region, persona, shopperId, spike) {
   }, { region, persona, spike });
 }
 
-export default function () {
+export function trafficSpikeJourney() {
   if (!apiKey) {
     fail('API_TEST_KEY is required for the spike benchmark because cart and account workflows are protected.');
   }
@@ -247,9 +278,19 @@ export default function () {
   });
 }
 
+export function regionalJourneyScenario() {
+  regionalJourney();
+}
+
+export async function storefrontActionsScenario() {
+  await storefrontActions();
+}
+
+export default trafficSpikeJourney;
+
 export function handleSummary(data) {
   return summaryOutput(data, {
-    testName: 'Traffic spike benchmark',
+    testName: 'Combined traffic spike, regional, and browser-action benchmark',
     slug: 'traffic-spikes',
     source: 'k6-local',
     storefrontBaseUrl,
@@ -258,6 +299,8 @@ export function handleSummary(data) {
       spikeOne: baseSpikeUsers,
       spikeTwo: spikeTwoUsers,
       spikeThree: spikeThreeUsers
-    }
+    },
+    regionalShopperVus,
+    browserActionIterations
   });
 }
