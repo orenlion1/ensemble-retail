@@ -522,6 +522,15 @@ BASE_URL=https://ensemble-grafana.com k6 run load-tests/synthetic-browser-action
 
 Run this production check after every frontend deployment, after the S3 sync and CloudFront invalidation have completed. It validates the deployed site still emits all expected Faro user actions and that cart, checkout, account save, and region/language flows work at the public URL.
 
+After the production browser check, run a `gcx` Faro user-action report so Grafana Cloud confirms the events arrived:
+
+```sh
+mkdir -p reports/frontend-user-actions
+gcx logs query -d grafanacloud-logs '{kind="event", app_id="464"} |~ "event_name=(ensemble|faro)\\.user\\.action"' --since 2h --limit 0 -o json
+```
+
+Store the summarized report in `reports/frontend-user-actions/`. It should include total events, counts by action, counts by region/locale, Faro user-action durations, and any missing required post-change actions.
+
 Run it against a local frontend:
 
 ```sh

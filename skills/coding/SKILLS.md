@@ -195,6 +195,7 @@ Browser action test expectations:
 - It should include checkout and add/remove cart flows.
 - It should fail clearly when required actions are missing.
 - Run it after every frontend deployment against the deployed URL once CloudFront invalidation or cache refresh completes: `BASE_URL=https://ensemble-grafana.com k6 run load-tests/synthetic-browser-actions.js`.
+- After every frontend deployment, run `gcx` Faro user-action queries and generate a report in `reports/frontend-user-actions/` summarizing action counts, region/locale counts, user-action durations, and missing required actions.
 
 ## Security And Config
 
