@@ -10,7 +10,7 @@ Use this command when the user asks to run the traffic spike benchmark, validate
 
 1. Follow `skills/observability/SKILLS.md`, especially the `k6 Load Testing` section.
 2. Confirm `API_TEST_KEY` is available from the local `.env` file or the current shell environment. Do not print the value.
-3. Run the traffic spike benchmark:
+3. Run the traffic spike benchmark in Grafana Cloud k6:
 
 ```sh
 set -a
@@ -19,7 +19,7 @@ set +a
 STOREFRONT_BASE_URL="${STOREFRONT_BASE_URL:-https://ensemble-grafana.com}" \
 API_BASE_URL="${API_BASE_URL:-https://api.ensemble-grafana.com}" \
 API_TEST_KEY="$API_TEST_KEY" \
-k6 run load-tests/grafana-cloud-traffic-spikes.js
+k6 cloud run load-tests/grafana-cloud-traffic-spikes.js
 ```
 
 4. After the run concludes, generate the standard comparison report:
@@ -35,11 +35,12 @@ node scripts/report-faro-user-actions.mjs
 node scripts/report-load-tests.mjs
 ```
 
-6. Summarize the run result, threshold failures, report path, and any Grafana Cloud run URL if available.
+6. Summarize the run result, threshold failures, report path, and the Grafana Cloud k6 run URL.
 
 ## Notes
 
 - The default traffic spike baseline is controlled by `BASE_SPIKE_USERS` in `load-tests/grafana-cloud-traffic-spikes.js`.
 - The current default spike sequence is `100`, `150`, and `225` VUs.
 - Use `BASE_SPIKE_USERS=<value>` to override the first spike for one run.
+- Use local `k6 run` only when explicitly debugging a script or when Grafana Cloud k6 is unavailable.
 - Keep generated raw k6 JSON ignored; commit only intentional report artifacts when the user asks to persist them.

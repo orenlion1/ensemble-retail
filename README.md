@@ -502,7 +502,21 @@ The spike benchmark is `load-tests/grafana-cloud-traffic-spikes.js`. It uses the
 
 Each spike ramps quickly, holds for one minute, and then returns to a low recovery load before the next spike. Requests are tagged by `spike`, `region`, `persona`, and endpoint name. The traffic spike script is now the combined benchmark entrypoint: it runs the three-spike API benchmark, the regional shopper load scenario, and the full browser-action synthetic journey that validates Faro user actions and region/language UI behavior.
 
-Run locally:
+Run in Grafana Cloud k6:
+
+```sh
+set -a
+source .env
+set +a
+API_TEST_KEY="$API_TEST_KEY" \
+STOREFRONT_BASE_URL=https://ensemble-grafana.com \
+API_BASE_URL=https://api.ensemble-grafana.com \
+k6 cloud run load-tests/grafana-cloud-traffic-spikes.js
+```
+
+The command uploads the execution to Grafana Cloud k6 and returns a run URL. `API_TEST_KEY` can come from the local `.env` injection above or from the Grafana Cloud k6 project environment.
+
+Local execution is only for script debugging:
 
 ```sh
 API_TEST_KEY=<api-test-key> \
@@ -510,23 +524,18 @@ STOREFRONT_BASE_URL=https://ensemble-grafana.com \
 API_BASE_URL=https://api.ensemble-grafana.com \
 k6 run load-tests/grafana-cloud-traffic-spikes.js
 ```
-
-Run in Grafana Cloud k6:
-
-```sh
-k6 cloud run load-tests/grafana-cloud-traffic-spikes.js
-```
-
-This command also requires `API_TEST_KEY` to be present in the Grafana Cloud k6 project environment.
 
 Override the first spike size with `BASE_SPIKE_USERS`; the next two spikes remain 50% larger than the previous peak:
 
 ```sh
-API_TEST_KEY=<api-test-key> \
+set -a
+source .env
+set +a
+API_TEST_KEY="$API_TEST_KEY" \
 BASE_SPIKE_USERS=60 \
 STOREFRONT_BASE_URL=https://ensemble-grafana.com \
 API_BASE_URL=https://api.ensemble-grafana.com \
-k6 run load-tests/grafana-cloud-traffic-spikes.js
+k6 cloud run load-tests/grafana-cloud-traffic-spikes.js
 ```
 
 Optional knobs for the combined scenarios:
