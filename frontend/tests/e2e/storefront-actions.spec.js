@@ -78,7 +78,7 @@ test.describe('storefront browser behavior', () => {
     await expect(checkoutDialog).toBeVisible();
     await expect(checkoutDialog.getByRole('img', { name: 'Grafana logo' })).toBeVisible();
     const grafanaLink = checkoutDialog.getByRole('link', { name: 'Grafana' });
-    await expect(grafanaLink).toHaveAttribute('href', 'https://orenlion.grafana.net/');
+    await expect(grafanaLink).toHaveAttribute('href', 'https://orenlion.grafana.net/a/grafana-kowalski-app/apps/464/actions?var-Filters=');
     await expectActionAttribute(grafanaLink, 'navigate-checkout:grafana');
     const closeCheckoutDialog = checkoutDialog.getByRole('button', { name: 'Close' });
     await expectActionAttribute(closeCheckoutDialog, 'checkout-dialog:close');

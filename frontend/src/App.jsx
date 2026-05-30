@@ -26,7 +26,7 @@ const regions = [
   { code: 'UK', label: 'UK', flag: '🇬🇧', locale: 'en-GB', language: 'British English', copyKey: 'enGB' }
 ];
 
-const grafanaStackUrl = 'https://orenlion.grafana.net/';
+const grafanaStackUrl = 'https://orenlion.grafana.net/a/grafana-kowalski-app/apps/464/actions?var-Filters=';
 
 function regionConfigFor(code) {
   return regions.find(item => item.code === code) || regions[0];
