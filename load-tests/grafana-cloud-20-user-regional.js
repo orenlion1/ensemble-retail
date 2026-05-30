@@ -12,13 +12,13 @@ const enableFaroBrowserActions = (__ENV.ENABLE_FARO_BROWSER_ACTIONS || '1') !== 
 
 export const options = {
   cloud: {
-    name: 'ensemble-grafana-20-user-regional'
+    name: 'ensemble-grafana-30-user-regional'
   },
   scenarios: {
     regional_shoppers: {
       executor: 'constant-vus',
       exec: 'regionalJourney',
-      vus: 20,
+      vus: Number(__ENV.REGIONAL_SHOPPER_VUS || 30),
       duration: __ENV.TEST_DURATION || '10m',
       gracefulStop: '30s'
     },

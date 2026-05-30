@@ -12,8 +12,8 @@ export const options = {
     shoppers: {
       executor: 'ramping-vus',
       stages: [
-        { duration: '1m', target: 10 },
-        { duration: '3m', target: 25 },
+        { duration: '1m', target: 15 },
+        { duration: '3m', target: 38 },
         { duration: '1m', target: 0 }
       ]
     }

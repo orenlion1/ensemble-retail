@@ -367,7 +367,7 @@ awk -F= '$1=="API_TEST_KEY" {v=substr($0,index($0,"=")+1); gsub(/\r$/, "", v); p
 
 After the hashes match, run the 30-second production regional smoke test.
 
-The regional load test simulates 20 concurrent users for 10 minutes with five shopper personas:
+The regional load test now starts at 30 concurrent users for 10 minutes with five shopper personas, a 50% increase over the previous 20-user baseline:
 
 - `browser`: browses storefront, categories, and products.
 - `cart_builder`: browses men's products and updates cart quantities.
@@ -381,9 +381,19 @@ The API load scripts use low-cardinality group and request labels for Grafana Cl
 
 Use `STOREFRONT_BASE_URL` and `API_BASE_URL` when the static site and API are routed through different origins. The current production API origin is `https://api.ensemble-grafana.com`.
 
-Run the 20-user regional test locally:
+Run the 30-user regional test locally:
 
 ```sh
+API_TEST_KEY=<api-test-key> \
+STOREFRONT_BASE_URL=https://ensemble-grafana.com \
+API_BASE_URL=https://api.ensemble-grafana.com \
+k6 run load-tests/grafana-cloud-20-user-regional.js
+```
+
+Override regional load with `REGIONAL_SHOPPER_VUS` when benchmarking a different target:
+
+```sh
+REGIONAL_SHOPPER_VUS=45 \
 API_TEST_KEY=<api-test-key> \
 STOREFRONT_BASE_URL=https://ensemble-grafana.com \
 API_BASE_URL=https://api.ensemble-grafana.com \
@@ -445,7 +455,7 @@ Use line 18 for Grafana Cloud/OTLP-facing `gcx` configuration, Synthetic Monitor
 The load tests have been uploaded to Grafana Cloud k6 in stack `https://orenlion.grafana.net`, default project `7637489`:
 
 - API flow load test: `https://orenlion.grafana.net/a/k6-app/tests/1228494`
-- 20-user regional load test: `https://orenlion.grafana.net/a/k6-app/tests/1228490`
+- 30-user regional load test: `https://orenlion.grafana.net/a/k6-app/tests/1228490`
 - Traffic spike benchmark: `https://orenlion.grafana.net/a/k6-app/tests/1228496`
 - Browser action synthetic check: `https://orenlion.grafana.net/a/k6-app/tests/1228497`
 
@@ -454,7 +464,7 @@ Creating k6 load tests through `gcx` remains blocked until a Grafana Cloud token
 ```sh
 gcx k6 projects list
 gcx k6 load-tests create \
-  --name ensemble-grafana-20-user-regional \
+  --name ensemble-grafana-30-user-regional \
   --project-id <k6-project-id> \
   --script load-tests/grafana-cloud-20-user-regional.js
 ```
@@ -479,11 +489,11 @@ The report is written to `reports/load-tests/load-test-comparison.md`. Generate 
 
 ### k6 Traffic Spike Benchmark
 
-The spike benchmark is `load-tests/grafana-cloud-traffic-spikes.js`. It uses the same regional shopper personas as the 20-user test, but benchmarks three traffic spikes where each peak is 50% higher than the previous one:
+The spike benchmark is `load-tests/grafana-cloud-traffic-spikes.js`. It uses the same regional shopper personas as the regional test, but benchmarks three traffic spikes where each peak is 50% higher than the previous one. The default first spike is now 30 VUs, a 50% increase over the previous 20-VU baseline:
 
-- Spike 1: `20` VUs.
-- Spike 2: `30` VUs.
-- Spike 3: `45` VUs.
+- Spike 1: `30` VUs.
+- Spike 2: `45` VUs.
+- Spike 3: `68` VUs.
 
 Each spike ramps quickly, holds for one minute, and then returns to a low recovery load before the next spike. Requests are tagged by `spike`, `region`, `persona`, and endpoint name.
 

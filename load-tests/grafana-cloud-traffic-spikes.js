@@ -7,7 +7,7 @@ tempo.instrumentHTTP({
   propagator: 'w3c'
 });
 
-const baseSpikeUsers = Number(__ENV.BASE_SPIKE_USERS || 20);
+const baseSpikeUsers = Number(__ENV.BASE_SPIKE_USERS || 30);
 const spikeTwoUsers = Math.ceil(baseSpikeUsers * 1.5);
 const spikeThreeUsers = Math.ceil(spikeTwoUsers * 1.5);
 
