@@ -160,7 +160,7 @@ a {
   background: linear-gradient(90deg, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.08)), url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=80") center/cover;
   color: white;
   display: flex;
-  height: clamp(360px, 50vh, 520px);
+  height: clamp(300px, 34vw, 560px);
   overflow: hidden;
   padding: 4vw;
 }

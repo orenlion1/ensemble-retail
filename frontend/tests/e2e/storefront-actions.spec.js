@@ -207,6 +207,22 @@ test.describe('storefront browser behavior', () => {
     expect(Math.abs((narrowDetailBox.width / narrowDetailBox.height) - (16 / 11))).toBeLessThan(0.05);
   });
 
+  test('hero image scales when the viewport expands', async ({ page }) => {
+    const hero = page.locator('.hero');
+
+    await page.setViewportSize({ width: 900, height: 900 });
+    const compactHeroBox = await hero.boundingBox();
+
+    await page.setViewportSize({ width: 1600, height: 900 });
+    const expandedHeroBox = await hero.boundingBox();
+
+    expect(compactHeroBox).not.toBeNull();
+    expect(expandedHeroBox).not.toBeNull();
+    expect(expandedHeroBox.width).toBeGreaterThan(compactHeroBox.width);
+    expect(expandedHeroBox.height).toBeGreaterThan(compactHeroBox.height);
+    expect(expandedHeroBox.height).toBeLessThanOrEqual(560);
+  });
+
   test('desktop and mobile layouts remain screenshot-stable', async ({ page }, testInfo) => {
     await page.addStyleTag({
       content: '*, *::before, *::after { transition: none !important; animation: none !important; }'
