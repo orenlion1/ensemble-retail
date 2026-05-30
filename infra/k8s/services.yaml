@@ -256,7 +256,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: account-service
-          image: 629513454417.dkr.ecr.us-east-1.amazonaws.com/account-service:0.1.0-cn-region
+          image: 629513454417.dkr.ecr.us-east-1.amazonaws.com/account-service:0.1.0-se-region
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8083
