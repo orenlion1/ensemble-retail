@@ -472,6 +472,18 @@ gcx k6 load-tests create \
 
 The most recent Cloud run started successfully at `https://orenlion.grafana.net/a/k6-app/runs/7612474`, then failed immediately because `API_TEST_KEY` was not configured in the Cloud runtime.
 
+When `gcx k6 runs list` fails with the k6 token-exchange error, pull run history through the Grafana k6 Cloud REST API with the native k6 token instead:
+
+```sh
+set -a
+source .env
+set +a
+node scripts/pull-k6-runs-direct.mjs
+node scripts/report-load-tests.mjs
+```
+
+The direct pull uses `Authorization: Bearer $K6_CLOUD_TOKEN`, `X-Stack-Id: 1665320`, and the documented `/cloud/v6/load_tests/{id}/test_runs` endpoint. It writes normalized `reports/load-tests/k6-summary-*.json` and `reports/load-tests/k6-runs-*.json` files for the comparison report. Raw `k6-*.json` report pulls stay gitignored.
+
 ### k6 Load Test Comparison Report
 
 After every k6 load test concludes, pull or preserve the latest run data under `reports/load-tests/`, then generate the comparison report and visualizations:

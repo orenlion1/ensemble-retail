@@ -159,6 +159,7 @@ Required k6 environment:
 - Run load tests in Grafana Cloud k6 by default with `k6 cloud run`. Use local `k6 run` only for script debugging or when Grafana Cloud k6 is unavailable.
 - Always use temporary local `.env` injection for k6 Cloud runs that require `API_TEST_KEY` (for example: `set -a && source .env && set +a && k6 cloud run -e API_TEST_KEY="$API_TEST_KEY" ...`), and keep `.env` gitignored.
 - If a run fails with missing/invalid API key errors (for example `API_TEST_KEY is required`), prompt the user to set or update `API_TEST_KEY` in `.env` and rerun.
+- If `gcx k6` fails during token exchange, use the Grafana k6 Cloud REST API directly with the native k6 token: `Authorization: Bearer $K6_CLOUD_TOKEN`, `X-Stack-Id: <stack id>`, and `/cloud/v6/load_tests/{id}/test_runs`. Normalize the response into the same `reports/load-tests/k6-summary-*.json` and `reports/load-tests/k6-runs-*.json` shape expected by the load-test report.
 
 After each k6 browser-action run, validate Faro user-action telemetry in Grafana with `gcx logs query` and confirm expected `faro.user.action` events are present for browser-based flows. For frontend deployments and k6 load-test reporting, generate a report in `reports/frontend-user-actions/` using `node scripts/report-faro-user-actions.mjs`. The report must use the standard six-hour execution query:
 

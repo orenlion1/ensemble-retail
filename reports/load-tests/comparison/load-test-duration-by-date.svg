@@ -14,30 +14,29 @@
 <line x1="80" y1="70" x2="940" y2="70" stroke="#e5e7eb"/>
 <text x="70" y="74" text-anchor="end" font-family="Arial, sans-serif" font-size="12" fill="#6b7280">15m</text>
 <text x="80" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-05-25</text>
-<text x="295" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-05-27</text>
-<text x="510" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-05-28</text>
-<text x="725" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-05-29</text>
+<text x="510" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-05-27</text>
 <text x="940" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-05-30</text>
-<polyline points="295,193.33333333333334 295,193.33333333333334 510,193.33333333333334 510,193.33333333333334 510,193.33333333333334" fill="none" stroke="#2563eb" stroke-width="3"/>
-<circle cx="295" cy="193.33333333333334" r="5" fill="#2563eb"/>
-<circle cx="295" cy="193.33333333333334" r="5" fill="#2563eb"/>
-<circle cx="510" cy="193.33333333333334" r="5" fill="#2563eb"/>
-<circle cx="510" cy="193.33333333333334" r="5" fill="#2563eb"/>
-<circle cx="510" cy="193.33333333333334" r="5" fill="#2563eb"/>
+<polyline points="80,426.43333333333334 80,230.33333333333334 510,230.33333333333334 510,230.33333333333334 510,230.33333333333334 940,230.33333333333334 940,230.33333333333334 940,193.33333333333334 940,193.33333333333334 940,193.33333333333334 940,428.9 940,193.33333333333334 940,404.23333333333335 940,401.76666666666665 940,193.33333333333334 940,428.9 940,396.8333333333333 940,70 940,70 940,70" fill="none" stroke="#2563eb" stroke-width="3"/>
+<circle cx="80" cy="426.43333333333334" r="5" fill="#2563eb"/>
+<circle cx="80" cy="230.33333333333334" r="5" fill="#2563eb"/>
+<circle cx="510" cy="230.33333333333334" r="5" fill="#2563eb"/>
+<circle cx="510" cy="230.33333333333334" r="5" fill="#2563eb"/>
+<circle cx="510" cy="230.33333333333334" r="5" fill="#2563eb"/>
+<circle cx="940" cy="230.33333333333334" r="5" fill="#2563eb"/>
+<circle cx="940" cy="230.33333333333334" r="5" fill="#2563eb"/>
+<circle cx="940" cy="193.33333333333334" r="5" fill="#2563eb"/>
+<circle cx="940" cy="193.33333333333334" r="5" fill="#2563eb"/>
+<circle cx="940" cy="193.33333333333334" r="5" fill="#2563eb"/>
+<circle cx="940" cy="428.9" r="5" fill="#2563eb"/>
+<circle cx="940" cy="193.33333333333334" r="5" fill="#2563eb"/>
+<circle cx="940" cy="404.23333333333335" r="5" fill="#2563eb"/>
+<circle cx="940" cy="401.76666666666665" r="5" fill="#2563eb"/>
+<circle cx="940" cy="193.33333333333334" r="5" fill="#2563eb"/>
+<circle cx="940" cy="428.9" r="5" fill="#2563eb"/>
+<circle cx="940" cy="396.8333333333333" r="5" fill="#2563eb"/>
+<circle cx="940" cy="70" r="5" fill="#2563eb"/>
+<circle cx="940" cy="70" r="5" fill="#2563eb"/>
+<circle cx="940" cy="70" r="5" fill="#2563eb"/>
 <rect x="976" y="59" width="14" height="14" fill="#2563eb"/>
-<text x="998" y="70" font-family="Arial, sans-serif" font-size="13" fill="#374151">20-user regional load test</text>
-<polyline points="295,433.8333333333333 725,431.3666666666667" fill="none" stroke="#dc2626" stroke-width="3"/>
-<circle cx="295" cy="433.8333333333333" r="5" fill="#dc2626"/>
-<circle cx="725" cy="431.3666666666667" r="5" fill="#dc2626"/>
-<rect x="976" y="83" width="14" height="14" fill="#dc2626"/>
-<text x="998" y="94" font-family="Arial, sans-serif" font-size="13" fill="#374151">Browser action synthetic check</text>
-<polyline points="80,426.43333333333334 80,230.33333333333334 295,230.33333333333334 295,230.33333333333334 295,230.33333333333334 940,70" fill="none" stroke="#16a34a" stroke-width="3"/>
-<circle cx="80" cy="426.43333333333334" r="5" fill="#16a34a"/>
-<circle cx="80" cy="230.33333333333334" r="5" fill="#16a34a"/>
-<circle cx="295" cy="230.33333333333334" r="5" fill="#16a34a"/>
-<circle cx="295" cy="230.33333333333334" r="5" fill="#16a34a"/>
-<circle cx="295" cy="230.33333333333334" r="5" fill="#16a34a"/>
-<circle cx="940" cy="70" r="5" fill="#16a34a"/>
-<rect x="976" y="107" width="14" height="14" fill="#16a34a"/>
-<text x="998" y="118" font-family="Arial, sans-serif" font-size="13" fill="#374151">Traffic spike benchmark</text>
+<text x="998" y="70" font-family="Arial, sans-serif" font-size="13" fill="#374151">Traffic spike benchmark</text>
 </svg>
