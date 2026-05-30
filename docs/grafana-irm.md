@@ -112,6 +112,8 @@ Created resolved Sev-2 incidents `24` through `40` for each month in 2025 and Ja
 
 Regional placeholder incidents were created for `UK`, `China`, `Canada`, and `EU`, covering monthly placeholders from `2024-12-01` through `2026-05-01`. These are resolved incidents `108` through `179`: `UK=108-125`, `China=126-143`, `Canada=144-161`, and `EU=162-179`. Results are recorded in `observability/irm/generated/regional-placeholder-incident-push-summary.md` and `observability/irm/generated/regional-placeholder-incident-push-results.json`.
 
+Sweden was added as a `region` label value and pushed as resolved placeholder incidents `184` through `200`, covering monthly placeholders from `2025-01-01` through `2026-05-01`. Results are recorded in `observability/irm/generated/sweden-placeholder-incident-push-summary.md` and `observability/irm/generated/sweden-placeholder-incident-push-results.json`; the review file is `observability/irm/sweden-monthly-placeholder-incidents-review.md`.
+
 These use `skills/observability/incident-placeholder-template/SKILL.md` and intentionally bypass the standard incident policy requiring `feature` and `service` labels.
 
 Common template:

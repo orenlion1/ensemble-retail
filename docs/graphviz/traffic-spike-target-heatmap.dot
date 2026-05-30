@@ -1,0 +1,73 @@
+digraph traffic_spike_target_heatmap {
+  graph [
+    rankdir=TB,
+    labelloc=t,
+    label="Traffic Spike Test Targets",
+    fontsize=22,
+    fontname="Helvetica",
+    nodesep=0.35,
+    ranksep=0.4
+  ];
+
+  node [
+    shape=plain,
+    fontname="Helvetica"
+  ];
+
+  edge [
+    style=invis
+  ];
+
+  target_heatmap [
+    label=<
+      <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="7" COLOR="#334155">
+        <TR>
+          <TD BGCOLOR="#e0f2fe"><B>Stage</B></TD>
+          <TD BGCOLOR="#e0f2fe"><B>VUs</B></TD>
+          <TD BGCOLOR="#dcfce7"><B>Cart updates</B></TD>
+          <TD BGCOLOR="#fef3c7"><B>Checkout attempts</B></TD>
+          <TD BGCOLOR="#dbeafe"><B>Region changes</B></TD>
+        </TR>
+        <TR>
+          <TD ALIGN="LEFT">Warmup / Recovery</TD>
+          <TD><B>25</B></TD>
+          <TD BGCOLOR="#bbf7d0">15</TD>
+          <TD BGCOLOR="#fde68a">5</TD>
+          <TD BGCOLOR="#bfdbfe">25</TD>
+        </TR>
+        <TR>
+          <TD ALIGN="LEFT">Spike 1</TD>
+          <TD><B>100</B></TD>
+          <TD BGCOLOR="#4ade80"><B>60</B></TD>
+          <TD BGCOLOR="#facc15"><B>20</B></TD>
+          <TD BGCOLOR="#60a5fa"><B>100</B></TD>
+        </TR>
+        <TR>
+          <TD ALIGN="LEFT">Spike 2</TD>
+          <TD><B>150</B></TD>
+          <TD BGCOLOR="#22c55e"><B>90</B></TD>
+          <TD BGCOLOR="#eab308"><B>30</B></TD>
+          <TD BGCOLOR="#3b82f6"><B>150</B></TD>
+        </TR>
+        <TR>
+          <TD ALIGN="LEFT">Spike 3</TD>
+          <TD><B>225</B></TD>
+          <TD BGCOLOR="#15803d"><FONT COLOR="white"><B>135</B></FONT></TD>
+          <TD BGCOLOR="#a16207"><FONT COLOR="white"><B>45</B></FONT></TD>
+          <TD BGCOLOR="#1d4ed8"><FONT COLOR="white"><B>225</B></FONT></TD>
+        </TR>
+      </TABLE>
+    >
+  ];
+
+  target_note [
+    label=<
+      <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
+        <TR><TD ALIGN="LEFT"><B>Readout:</B> darker cells mean more target pressure per completed wave.</TD></TR>
+        <TR><TD ALIGN="LEFT">Cart and checkout validate transaction paths; region validates localization and request header behavior.</TD></TR>
+      </TABLE>
+    >
+  ];
+
+  target_heatmap -> target_note;
+}

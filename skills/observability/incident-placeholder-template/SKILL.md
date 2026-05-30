@@ -26,7 +26,7 @@ This template bypasses the stricter `incident-creation` skill rules. Do not requ
 
 Keep `impact_type:availablity` spelled exactly as shown when the user requests this placeholder template.
 Replace `{DATE}` with the requested placeholder incident date. For monthly placeholder exercises, use the first calendar day of the month unless the user provides a specific holiday date.
-Replace `region:{region}` with the region in the request, such as `region:US`, `region:UK`, `region:China`, `region:Canada`, or `region:EU`. If the request does not specify a region, default to `region:US`.
+Replace `region:{region}` with the region in the request, such as `region:US`, `region:UK`, `region:China`, `region:Canada`, `region:EU`, or `region:Sweden`. If the request does not specify a region, default to `region:US`.
 
 ## Workflow
 
