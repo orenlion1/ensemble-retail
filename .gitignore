@@ -45,3 +45,7 @@ playwright-report/
 test-results/
 browser-devtools-*.png
 lighthouse-devtools*/
+
+# Raw observability pulls can include runtime tokens or high-volume API payloads.
+reports/load-tests/k6-*.json
+reports/frontend-user-actions/*.json

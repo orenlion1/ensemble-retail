@@ -461,6 +461,22 @@ gcx k6 load-tests create \
 
 The most recent Cloud run started successfully at `https://orenlion.grafana.net/a/k6-app/runs/7612474`, then failed immediately because `API_TEST_KEY` was not configured in the Cloud runtime.
 
+### k6 Load Test Comparison Report
+
+After pulling k6 Cloud run data into `reports/load-tests/`, generate the comparison report and visualizations:
+
+```sh
+node scripts/report-load-tests.mjs
+```
+
+The report is written to `reports/load-tests/load-test-comparison.md`. Each run is identified by test name, run ID, and date. The generated `reports/load-tests/comparison/` folder includes:
+
+- `load-test-runs.csv` for spreadsheet comparisons.
+- `load-test-results-by-date.svg` for pass/fail/error history.
+- `load-test-duration-by-date.svg` for runtime comparison.
+- `load-test-vuh-by-date.svg` for Grafana Cloud VUH cost comparison.
+- `latest-http-failure-rate.svg`, `latest-check-pass-rate.svg`, and `latest-http-p95.svg` for latest-run health comparisons.
+
 ### k6 Traffic Spike Benchmark
 
 The spike benchmark is `load-tests/grafana-cloud-traffic-spikes.js`. It uses the same regional shopper personas as the 20-user test, but benchmarks three traffic spikes where each peak is 50% higher than the previous one:

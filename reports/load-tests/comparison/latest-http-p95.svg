@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="186" viewBox="0 0 1100 186" role="img" aria-label="Latest HTTP Duration p95">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="24" y="34" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#111827">Latest HTTP Duration p95</text>
+<text x="24" y="92" font-family="Arial, sans-serif" font-size="14" fill="#374151">20-user regional load test (2026-05-28)</text>
+<rect x="260" y="75" width="724.119594249283" height="22" rx="4" fill="#2563eb"/>
+<text x="992.119594249283" y="92" font-family="Arial, sans-serif" font-size="14" fill="#111827">56.8 ms</text>
+<text x="24" y="130" font-family="Arial, sans-serif" font-size="14" fill="#374151">Traffic spike benchmark (2026-05-27)</text>
+<rect x="260" y="113" width="760" height="22" rx="4" fill="#2563eb"/>
+<text x="1028" y="130" font-family="Arial, sans-serif" font-size="14" fill="#111827">59.6 ms</text>
+</svg>
