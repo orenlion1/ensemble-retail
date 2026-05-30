@@ -182,7 +182,7 @@ resource "aws_wafv2_web_acl" "edge" {
     }
     statement {
       rate_based_statement {
-        limit              = 1000
+        limit              = var.edge_rate_limit_per_ip
         aggregate_key_type = "IP"
       }
     }
@@ -236,7 +236,7 @@ resource "aws_wafv2_web_acl" "api_regional" {
     }
     statement {
       rate_based_statement {
-        limit              = 500
+        limit              = var.api_rate_limit_per_ip
         aggregate_key_type = "IP"
       }
     }

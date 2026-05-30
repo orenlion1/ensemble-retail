@@ -91,7 +91,7 @@ aws eks update-kubeconfig --name ensemble-grafana --region us-east-1 --profile e
 scripts/kubernetes/apply-manifests.sh
 ```
 
-The checked-in Kubernetes service manifest is pinned to the deployed account `629513454417`, ECR service images, and three replicas per Spring Boot service. Rolling updates use `maxSurge: 0` and `maxUnavailable: 2`, with PodDisruptionBudgets set to `minAvailable: 1`, so one pod remains available while the other two update. If deploying to another AWS account, replace the IRSA role annotations and image registry before applying `infra/k8s/services.yaml`.
+The checked-in Kubernetes service manifest is pinned to the deployed account `629513454417`, ECR service images, and three replicas per Spring Boot service. Rolling updates use `maxSurge: 0` and `maxUnavailable: 2`, with PodDisruptionBudgets set to `minAvailable: 1`, so one pod remains available while the other two update. WAF rate limits are configured by the `edge-static` Terraform stack as `edge_rate_limit_per_ip` and `api_rate_limit_per_ip`, currently `200000` requests per source IP per 5-minute AWS WAF evaluation window, so repeated local 20-VU k6 smoke tests can run without being blocked by WAF. If deploying to another AWS account, replace the IRSA role annotations and image registry before applying `infra/k8s/services.yaml`.
 
 Detailed inputs and handoff outputs are documented in `infra/terraform/stacks/README.md`. Do not commit `.tfvars`, state files, generated `network.auto.tfvars.json`, or real secrets.
 
