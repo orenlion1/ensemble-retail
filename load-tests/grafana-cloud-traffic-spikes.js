@@ -5,6 +5,16 @@ import { regionalJourney } from './grafana-cloud-20-user-regional.js';
 import { summaryOutput } from './summary.js';
 import storefrontActions, { USER_ACTION_RATE_FAMILIES } from './synthetic-browser-actions.js';
 
+// Cloud k6 worker env injection:
+//   set -a && source .env && set +a
+//   K6_CLOUD_TOKEN="$K6_CLOUD_TOKEN" k6 cloud run \
+//     -e API_TEST_KEY="$API_TEST_KEY" \
+//     -e STOREFRONT_BASE_URL=https://ensemble-grafana.com \
+//     -e API_BASE_URL=https://ensemble-grafana.com \
+//     load-tests/grafana-cloud-traffic-spikes.js
+// Plain shell env assignments before `k6 cloud run` authenticate the uploader, but
+// `-e` is what injects protected app env vars into the remote cloud workers.
+
 const baseSpikeUsers = Number(__ENV.BASE_SPIKE_USERS || 100);
 const spikeMultiplier = Number(__ENV.SPIKE_MULTIPLIER || 2);
 const spikeTwoUsers = Math.ceil(baseSpikeUsers * spikeMultiplier);

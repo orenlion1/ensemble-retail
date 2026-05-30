@@ -75,3 +75,4 @@ jobs:
           k6 inspect load-tests/synthetic-browser-actions.js
           k6 inspect load-tests/grafana-cloud-20-user-regional.js
           k6 inspect load-tests/grafana-cloud-traffic-spikes.js
+          k6 inspect load-tests/grafana-cloud-traffic-spikes-2.js
