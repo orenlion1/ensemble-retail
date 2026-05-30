@@ -345,6 +345,27 @@ Important distinction for Faro validation: `grafana-cloud-20-user-regional.js` i
 
 All API write scenarios require `API_TEST_KEY` because cart and account workflows are protected. Set it locally or as a Grafana Cloud k6 environment variable/secret before running Cloud tests. Without it, the regional and spike tests fail fast before generating misleading 401-heavy results.
 
+When local `.env` `API_TEST_KEY` changes, sync it to Kubernetes and restart the services that read it from environment variables:
+
+```sh
+API_TEST_KEY=$(awk -F= '$1=="API_TEST_KEY" {print substr($0,index($0,"=")+1)}' .env)
+API_TEST_KEY_B64=$(printf '%s' "$API_TEST_KEY" | base64 | tr -d '\n')
+
+kubectl -n ensemble-grafana patch secret ensemble-secrets \
+  --type merge \
+  -p "{\"data\":{\"API_TEST_KEY\":\"$API_TEST_KEY_B64\"}}"
+
+kubectl -n ensemble-grafana rollout restart deployment/cart-service deployment/account-service
+kubectl -n ensemble-grafana rollout status deployment/cart-service
+kubectl -n ensemble-grafana rollout status deployment/account-service
+
+kubectl -n ensemble-grafana get secret ensemble-secrets \
+  -o jsonpath='{.data.API_TEST_KEY}' | base64 --decode | shasum -a 256
+awk -F= '$1=="API_TEST_KEY" {v=substr($0,index($0,"=")+1); gsub(/\r$/, "", v); printf "%s", v}' .env | shasum -a 256
+```
+
+After the hashes match, run the 30-second production regional smoke test.
+
 The regional load test simulates 20 concurrent users for 10 minutes with five shopper personas:
 
 - `browser`: browses storefront, categories, and products.
