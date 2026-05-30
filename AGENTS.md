@@ -62,7 +62,7 @@ For large cross-cutting changes (deploy + observability + app code), run `code-r
 - Update `README.md` for every infrastructure or observability change, including Terraform stacks, Kubernetes manifests, CloudFront/API routing, Grafana Cloud, Faro, Alloy, Beyla, Pyroscope, Synthetic Monitoring, k6, alerting, incidents, secrets, certificates, DNS, WAF, and deployment commands.
 - Document reusable `gcx` permission dependencies in `skills/observability/SKILLS.md`. Keep `README.md` focused on this deployment's concrete token locations, current auth blockers, stack URLs, command examples, and observed resource IDs.
 - Update `DIAGRAMS.md` whenever a change affects architecture, request flow, network boundaries, telemetry flow, data stores, identity/auth, CI/load testing, or operational dependencies.
-- Whenever `DIAGRAMS.md` changes, regenerate the Mermaid source extracts and PNG exports in `docs/diagrams/` so the rendered files stay in sync with the authoritative diagrams.
+- Whenever `DIAGRAMS.md` changes, regenerate the Graphviz DOT sources plus SVG and PNG exports in `docs/diagrams/` so the rendered files stay in sync with the authoritative diagrams.
 - If no diagram update is needed, mention that in the work summary and explain why the existing diagrams still match the system.
 
 ## Documentation Quality Bar

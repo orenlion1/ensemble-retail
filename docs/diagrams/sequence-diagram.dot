@@ -1,0 +1,68 @@
+digraph sequence_diagram {
+  rankdir=TB;
+  label="Frontend-to-Backend Sequence";
+
+  graph [
+    fontname="Helvetica",
+    fontsize=20,
+    labelloc=t,
+    bgcolor="white",
+    pad=0.25,
+    nodesep=0.45,
+    ranksep=0.7
+  ];
+  node [
+    shape=box,
+    style="rounded,filled",
+    fontname="Helvetica",
+    fontsize=11,
+    color="#334155",
+    fillcolor="#f8fafc",
+    margin="0.12,0.08"
+  ];
+  edge [
+    fontname="Helvetica",
+    fontsize=9,
+    color="#475569",
+    fontcolor="#334155",
+    arrowsize=0.7
+  ];
+
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=10, color="#334155", fillcolor="#f8fafc"];
+
+  start [label="1. Shopper opens https://ensemble-grafana.com", fillcolor="#dbeafe"];
+  dns [label="2. Browser resolves Route53 alias to CloudFront", fillcolor="#e0f2fe"];
+  static [label="3. CloudFront + edge WAF fetch storefront from S3", fillcolor="#fef3c7"];
+  faro [label="4. Browser sends Faro page load, vitals, session telemetry", fillcolor="#f3e8ff"];
+  signin [label="5. Shopper starts Google sign-in", fillcolor="#ede9fe"];
+  oauth [label="6. Cognito redirects to Google and exchanges code with PKCE", fillcolor="#ede9fe"];
+  accountPopulate [label="7. Browser receives Cognito tokens and populates account name/email", fillcolor="#dbeafe"];
+  products [label="8. Browser GET /api/inventory/products through CloudFront", fillcolor="#dbeafe"];
+  inventory [label="9. ALB forwards to inventory-service with trace context", fillcolor="#dcfce7"];
+  postgres [label="10. inventory-service queries Postgres catalog", shape=cylinder, fillcolor="#bbf7d0"];
+  cartAdd [label="11. Shopper adds item: PUT /api/cart/carts/{shopperId}", fillcolor="#dbeafe"];
+  cart [label="12. cart-service persists cart state to DynamoDB", fillcolor="#dcfce7"];
+  dynamoCart [label="13. DynamoDB acknowledges cart write", shape=cylinder, fillcolor="#bbf7d0"];
+  accountSave [label="14. Shopper saves shipping address and wallet metadata", fillcolor="#dbeafe"];
+  account [label="15. account-service persists profile, address, wallet metadata", fillcolor="#dcfce7"];
+  dynamoAccount [label="16. DynamoDB acknowledges account write", shape=cylinder, fillcolor="#bbf7d0"];
+  telemetry [label="17. Services emit metrics, logs, traces to Alloy", fillcolor="#f3e8ff"];
+  grafana [label="18. Alloy and Faro forward telemetry to Grafana Cloud", fillcolor="#f3e8ff"];
+  k6 [label="19. Grafana Cloud k6 runs regional, spike, browser checks", fillcolor="#f3e8ff"];
+  k6Results [label="20. k6 publishes run metrics, checks, trace correlation", fillcolor="#f3e8ff"];
+
+  start -> dns -> static -> faro -> signin -> oauth -> accountPopulate -> products -> inventory -> postgres -> cartAdd -> cart -> dynamoCart -> accountSave -> account -> dynamoAccount -> telemetry -> grafana -> k6 -> k6Results;
+
+  subgraph cluster_participants {
+    label="Key participants";
+    color="#cbd5e1";
+    style="rounded,dashed";
+    p1 [label="Browser / Shopper", fillcolor="#dbeafe"];
+    p2 [label="Route53 / CloudFront / S3", fillcolor="#fef3c7"];
+    p3 [label="Cognito / Google IdP", fillcolor="#ede9fe"];
+    p4 [label="ALB / Spring services", fillcolor="#dcfce7"];
+    p5 [label="Postgres / DynamoDB", shape=cylinder, fillcolor="#bbf7d0"];
+    p6 [label="Alloy / Grafana / k6", fillcolor="#f3e8ff"];
+    p1 -> p2 -> p3 -> p4 -> p5 -> p6 [style=invis];
+  }
+}

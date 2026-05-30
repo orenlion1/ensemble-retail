@@ -1,0 +1,95 @@
+digraph network_diagram {
+  rankdir=LR;
+  label="Ensemble-Grafana Network Diagram";
+
+  graph [
+    fontname="Helvetica",
+    fontsize=20,
+    labelloc=t,
+    bgcolor="white",
+    pad=0.25,
+    nodesep=0.45,
+    ranksep=0.7
+  ];
+  node [
+    shape=box,
+    style="rounded,filled",
+    fontname="Helvetica",
+    fontsize=11,
+    color="#334155",
+    fillcolor="#f8fafc",
+    margin="0.12,0.08"
+  ];
+  edge [
+    fontname="Helvetica",
+    fontsize=9,
+    color="#475569",
+    fontcolor="#334155",
+    arrowsize=0.7
+  ];
+
+
+  shopper [label="Shopper browser", fillcolor="#dbeafe"];
+  registrar [label="Domain registrar"];
+  route53 [label="Route53 hosted zone\nensemble-grafana.com", fillcolor="#e0f2fe"];
+  acm [label="ACM certificate\nus-east-1 / ISSUED", fillcolor="#ecfeff"];
+  edgeWaf [label="AWS WAF\nCloudFront scope", fillcolor="#fee2e2"];
+  cloudfront [label="CloudFront distribution\nensemble-grafana.com", fillcolor="#dbeafe"];
+  staticS3 [label="S3 frontend bucket\nprivate origin", fillcolor="#fef3c7"];
+  imageS3 [label="S3 inventory images bucket", fillcolor="#fef3c7"];
+  logsS3 [label="S3 edge/API logs bucket\nCloudFront + ALB logs", fillcolor="#fef3c7"];
+  regionalWaf [label="AWS WAF\nregional API scope", fillcolor="#fee2e2"];
+  apiAlb [label="API ingress / ALB\napi.ensemble-grafana.com", fillcolor="#e0e7ff"];
+  cognito [label="AWS Cognito\nGoogle federation", fillcolor="#ede9fe"];
+  google [label="Google Identity Provider", fillcolor="#ede9fe"];
+  postgres [label="Postgres inventory DB", shape=cylinder, fillcolor="#dcfce7"];
+  dynamodb [label="DynamoDB\ncart/account state", shape=cylinder, fillcolor="#dcfce7"];
+  cloudwatch [label="AWS CloudWatch\nRDS metrics", fillcolor="#f1f5f9"];
+  cloudwatchScrape [label="Grafana Cloud Provider\nAWS/RDS scrape job", fillcolor="#faf5ff"];
+  grafana [label="Grafana Cloud\nFaro, metrics, logs, traces, profiles", fillcolor="#f3e8ff"];
+  k6 [label="Grafana Cloud k6\nload tests and browser checks", fillcolor="#f3e8ff"];
+  accountBaseline [label="Terraform account-baseline stack\nSSM host-management setting", fillcolor="#e2e8f0"];
+
+  subgraph cluster_eks {
+    label="EKS cluster";
+    color="#94a3b8";
+    style="rounded,dashed";
+    beyla [label="Grafana Beyla", fillcolor="#faf5ff"];
+    alloy [label="Grafana Alloy\nOTel collector", fillcolor="#faf5ff"];
+    inventory [label="inventory-service\nSpring Boot pods", fillcolor="#dcfce7"];
+    cart [label="cart-service\nSpring Boot pods", fillcolor="#dcfce7"];
+    account [label="account-service\nSpring Boot pods", fillcolor="#dcfce7"];
+  }
+
+  registrar -> route53 [label="NS delegation"];
+  route53 -> cloudfront [label="A / AAAA alias"];
+  acm -> cloudfront [label="TLS certificate"];
+  shopper -> edgeWaf [label="HTTPS storefront"];
+  edgeWaf -> cloudfront;
+  shopper -> cognito [label="Google sign-in"];
+  cognito -> google;
+  cloudfront -> staticS3 [label="static assets"];
+  cloudfront -> imageS3 [label="inventory images"];
+  cloudfront -> logsS3 [label="standard access logs"];
+  cloudfront -> regionalWaf [label="/api/*"];
+  regionalWaf -> apiAlb;
+  apiAlb -> logsS3 [label="ALB access logs"];
+  apiAlb -> inventory;
+  apiAlb -> cart;
+  apiAlb -> account;
+  inventory -> postgres;
+  cart -> dynamodb;
+  account -> dynamodb;
+  postgres -> cloudwatch [label="RDS metrics"];
+  cloudwatchScrape -> cloudwatch [label="assume AWS role\nand scrape metrics"];
+  cloudwatchScrape -> grafana [label="CloudWatch metrics"];
+  shopper -> grafana [label="Faro web telemetry"];
+  accountBaseline -> beyla [label="SSM default role setting"];
+  k6 -> cloudfront [label="regional, spike, browser checks\nwith traceparent"];
+  k6 -> grafana [label="test results + trace correlation"];
+  beyla -> alloy [label="zero-code HTTP telemetry"];
+  inventory -> alloy [label="OTel + Prometheus"];
+  cart -> alloy [label="OTel + Prometheus"];
+  account -> alloy [label="OTel + Prometheus"];
+  alloy -> grafana;
+}
