@@ -51,6 +51,27 @@ jobs:
       - name: Install dependencies
         working-directory: frontend
         run: npm ci
+      - name: Install Playwright browsers
+        working-directory: frontend
+        run: npx playwright install --with-deps chromium
       - name: Build storefront
         working-directory: frontend
         run: npm run build
+      - name: Playwright frontend behavior checks
+        working-directory: frontend
+        run: npm run test:e2e
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: frontend/playwright-report/
+          if-no-files-found: ignore
+          retention-days: 7
+      - name: Install k6
+        uses: grafana/setup-k6-action@v1
+      - name: Inspect k6 frontend and regional scripts
+        run: |
+          k6 inspect load-tests/synthetic-browser-actions.js
+          k6 inspect load-tests/grafana-cloud-20-user-regional.js
+          k6 inspect load-tests/grafana-cloud-traffic-spikes.js

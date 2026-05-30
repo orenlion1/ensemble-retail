@@ -17,7 +17,7 @@ This is a training repo to explore the art of the "promptable". Original outdoor
 - `load-tests/` - k6 API and browser scenarios covering users, categories, product browsing, cart, checkout, account, and synthetic button-action flows.
 - `docs/` - deployment, security, domain/TLS, and Grafana IRM runbooks.
 - `scripts/security/` - predeploy security checks for secrets, Kubernetes hardening, and IaC controls.
-- `.github/workflows/build.yml` - GitHub Actions security checks, Maven service packages, and frontend build.
+- `.github/workflows/build.yml` - GitHub Actions security checks, Maven service packages, frontend build, Playwright browser checks, and k6 script inspection.
 - `.github/workflows/account-baseline-guard.yml` - Guardrail workflow for account-baseline Terraform validation and manual-approval apply path.
 - `skills/` - reusable `SKILLS.md` playbooks for replicating the dependency, infrastructure, observability, and coding patterns in future applications.
 
@@ -27,7 +27,8 @@ On push and pull requests to `main` or `master`, `.github/workflows/build.yml` r
 
 1. `scripts/security/predeploy-check.sh` (scans **git-tracked** files for `glc_`, `glsa_`, `GOCSPX-`, AWS keys, and private keys)
 2. `mvn package` for `inventory-service`, `cart-service`, and `account-service` (Java 21)
-3. `npm ci` and `npm run build` for `frontend/`
+3. `npm ci`, `npm run build`, and `npm run test:e2e` for `frontend/`
+4. `k6 inspect` for `load-tests/synthetic-browser-actions.js`, `load-tests/grafana-cloud-20-user-regional.js`, and `load-tests/grafana-cloud-traffic-spikes.js`
 
 Runtime secrets stay out of git via `.gitignore` (see `infra/k8s/observability-secrets.example.template.yaml` for the observability secret schema).
 

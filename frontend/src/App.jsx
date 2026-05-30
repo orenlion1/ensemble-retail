@@ -997,7 +997,7 @@ export default function App() {
         setAuthError(error.message);
         trackAppAction('auth:google-login-error', { error: error.message });
       });
-    }, 200);
+    }, 500);
   }
 
   function signOut() {
