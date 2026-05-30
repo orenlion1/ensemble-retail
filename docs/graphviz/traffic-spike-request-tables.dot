@@ -1,220 +1,31 @@
 digraph traffic_spike_request_tables {
-  graph [
-    rankdir=TB,
-    labelloc=t,
-    label="Traffic Spike Request Model",
-    fontsize=22,
-    fontname="Helvetica",
-    nodesep=0.55,
-    ranksep=0.65
-  ];
+  graph [rankdir=TB, labelloc=t, label="Traffic Spike Request Model", fontsize=22, fontname="Helvetica", nodesep=0.55, ranksep=0.65];
+  node [shape=plain, fontname="Helvetica"];
+  edge [color="#94a3b8", arrowsize=0.7];
 
-  node [
-    shape=plain,
-    fontname="Helvetica"
-  ];
+  caveat [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="8" COLOR="#f97316"><TR><TD BGCOLOR="#fff7ed"><B>Important caveat</B></TD></TR><TR><TD ALIGN="LEFT">Requests per stage are not fixed. <B>ramping-vus</B> keeps each active VU looping as fast as the journey allows.<BR/>Exact totals depend on response time, persona sleep time, and completed iterations.</TD></TR></TABLE>
+  >];
+  persona_table [label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="7" COLOR="#334155"><TR><TD COLSPAN="3" BGCOLOR="#e0f2fe"><B>Per completed traffic-spike user iteration</B></TD></TR><TR><TD BGCOLOR="#f1f5f9"><B>Persona</B></TD><TD BGCOLOR="#f1f5f9"><B>Requests</B></TD><TD BGCOLOR="#f1f5f9"><B>Counters / actions</B></TD></TR><TR><TD ALIGN="LEFT"><FONT FACE="Courier">browser</FONT></TD><TD ALIGN="RIGHT">3</TD><TD ALIGN="LEFT"><FONT FACE="Courier">spike_region_changes +1</FONT></TD></TR><TR><TD ALIGN="LEFT"><FONT FACE="Courier">cart_builder</FONT></TD><TD ALIGN="RIGHT">4</TD><TD ALIGN="LEFT"><FONT FACE="Courier">spike_region_changes +1</FONT>, <FONT FACE="Courier">spike_cart_updates +1</FONT></TD></TR><TR><TD ALIGN="LEFT"><FONT FACE="Courier">account_manager</FONT></TD><TD ALIGN="RIGHT">4</TD><TD ALIGN="LEFT"><FONT FACE="Courier">spike_region_changes +1</FONT></TD></TR><TR><TD ALIGN="LEFT"><FONT FACE="Courier">sale_hunter</FONT></TD><TD ALIGN="RIGHT">4</TD><TD ALIGN="LEFT"><FONT FACE="Courier">spike_region_changes +1</FONT>, <FONT FACE="Courier">spike_cart_updates +1</FONT></TD></TR><TR><TD ALIGN="LEFT"><FONT FACE="Courier">checkout</FONT></TD><TD ALIGN="RIGHT">5</TD><TD ALIGN="LEFT"><FONT FACE="Courier">spike_region_changes +1</FONT>, <FONT FACE="Courier">spike_cart_updates +1</FONT>, <FONT FACE="Courier">spike_checkout_attempts +1</FONT></TD></TR><TR><TD BGCOLOR="#ecfeff" ALIGN="LEFT"><B>Average</B></TD><TD BGCOLOR="#ecfeff" ALIGN="RIGHT"><B>4</B></TD><TD BGCOLOR="#ecfeff" ALIGN="LEFT"><B>requests per completed user iteration</B></TD></TR></TABLE>
+  >];
+  stage_table [label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="7" COLOR="#334155"><TR><TD COLSPAN="7" BGCOLOR="#dcfce7"><B>Current stage estimates per completed wave</B></TD></TR><TR><TD BGCOLOR="#f1f5f9"><B>Stage</B></TD><TD BGCOLOR="#f1f5f9"><B>Duration</B></TD><TD BGCOLOR="#f1f5f9"><B>Target VUs</B></TD><TD BGCOLOR="#f1f5f9"><B>Approx requests</B></TD><TD BGCOLOR="#f1f5f9"><B>Cart updates</B></TD><TD BGCOLOR="#f1f5f9"><B>Checkout attempts</B></TD><TD BGCOLOR="#f1f5f9"><B>Region changes</B></TD></TR>
+      <TR><TD ALIGN="LEFT">Warmup / recovery</TD><TD ALIGN="RIGHT">1m</TD><TD ALIGN="RIGHT">25</TD><TD ALIGN="RIGHT">100</TD><TD ALIGN="RIGHT">15</TD><TD ALIGN="RIGHT">5</TD><TD ALIGN="RIGHT">25</TD></TR>
+      <TR><TD ALIGN="LEFT">Ramp to spike 1</TD><TD ALIGN="RIGHT">30s</TD><TD ALIGN="RIGHT">100</TD><TD ALIGN="RIGHT">up to 400 at target</TD><TD ALIGN="RIGHT">60</TD><TD ALIGN="RIGHT">20</TD><TD ALIGN="RIGHT">100</TD></TR>
+      <TR><TD ALIGN="LEFT">Hold spike 1</TD><TD ALIGN="RIGHT">1m</TD><TD ALIGN="RIGHT">100</TD><TD ALIGN="RIGHT">400 per wave</TD><TD ALIGN="RIGHT">60</TD><TD ALIGN="RIGHT">20</TD><TD ALIGN="RIGHT">100</TD></TR>
+      <TR><TD ALIGN="LEFT">Recovery</TD><TD ALIGN="RIGHT">1m</TD><TD ALIGN="RIGHT">25</TD><TD ALIGN="RIGHT">100 per wave</TD><TD ALIGN="RIGHT">15</TD><TD ALIGN="RIGHT">5</TD><TD ALIGN="RIGHT">25</TD></TR>
+      <TR><TD ALIGN="LEFT">Ramp to spike 2</TD><TD ALIGN="RIGHT">30s</TD><TD ALIGN="RIGHT">200</TD><TD ALIGN="RIGHT">up to 800 at target</TD><TD ALIGN="RIGHT">120</TD><TD ALIGN="RIGHT">40</TD><TD ALIGN="RIGHT">200</TD></TR>
+      <TR><TD ALIGN="LEFT">Hold spike 2</TD><TD ALIGN="RIGHT">1m</TD><TD ALIGN="RIGHT">200</TD><TD ALIGN="RIGHT">800 per wave</TD><TD ALIGN="RIGHT">120</TD><TD ALIGN="RIGHT">40</TD><TD ALIGN="RIGHT">200</TD></TR>
+      <TR><TD ALIGN="LEFT">Recovery</TD><TD ALIGN="RIGHT">1m</TD><TD ALIGN="RIGHT">25</TD><TD ALIGN="RIGHT">100 per wave</TD><TD ALIGN="RIGHT">15</TD><TD ALIGN="RIGHT">5</TD><TD ALIGN="RIGHT">25</TD></TR>
+      <TR><TD ALIGN="LEFT">Ramp to spike 3</TD><TD ALIGN="RIGHT">30s</TD><TD ALIGN="RIGHT">400</TD><TD ALIGN="RIGHT">up to 1600 at target</TD><TD ALIGN="RIGHT">240</TD><TD ALIGN="RIGHT">80</TD><TD ALIGN="RIGHT">400</TD></TR>
+      <TR><TD ALIGN="LEFT">Hold spike 3</TD><TD ALIGN="RIGHT">1m</TD><TD ALIGN="RIGHT">400</TD><TD ALIGN="RIGHT">1600 per wave</TD><TD ALIGN="RIGHT">240</TD><TD ALIGN="RIGHT">80</TD><TD ALIGN="RIGHT">400</TD></TR>
+      <TR><TD ALIGN="LEFT">Ramp down</TD><TD ALIGN="RIGHT">1m</TD><TD ALIGN="RIGHT">0</TD><TD ALIGN="RIGHT">decreasing to 0</TD><TD ALIGN="RIGHT">decreasing</TD><TD ALIGN="RIGHT">decreasing</TD><TD ALIGN="RIGHT">decreasing</TD></TR></TABLE>
+  >];
+  parallel_table [label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="7" COLOR="#334155"><TR><TD COLSPAN="3" BGCOLOR="#f3e8ff"><B>Parallel scenarios in the combined script</B></TD></TR><TR><TD BGCOLOR="#f1f5f9"><B>Scenario</B></TD><TD BGCOLOR="#f1f5f9"><B>Load</B></TD><TD BGCOLOR="#f1f5f9"><B>Request model</B></TD></TR><TR><TD ALIGN="LEFT"><FONT FACE="Courier">regional_shoppers</FONT></TD><TD ALIGN="RIGHT">30 VUs</TD><TD ALIGN="LEFT">About 120 requests per completed wave</TD></TR><TR><TD ALIGN="LEFT"><FONT FACE="Courier">storefront_actions</FONT></TD><TD ALIGN="RIGHT">60 browser VUs / 10m</TD><TD ALIGN="LEFT">Generates Faro UI actions and browser metrics; standard http_reqs may be n/a</TD></TR></TABLE>
+  >];
 
-  edge [
-    color="#94a3b8",
-    arrowsize=0.7
-  ];
-
-  caveat [
-    label=<
-      <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="8" COLOR="#f97316">
-        <TR>
-          <TD BGCOLOR="#fff7ed"><B>Important caveat</B></TD>
-        </TR>
-        <TR>
-          <TD ALIGN="LEFT">
-            Requests per stage are not fixed. <B>ramping-vus</B> keeps each active VU looping as fast as the journey allows.<BR/>
-            Exact totals depend on response time, persona sleep time, and completed iterations.
-          </TD>
-        </TR>
-      </TABLE>
-    >
-  ];
-
-  persona_table [
-    label=<
-      <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="7" COLOR="#334155">
-        <TR>
-          <TD COLSPAN="3" BGCOLOR="#e0f2fe"><B>Per completed traffic-spike user iteration</B></TD>
-        </TR>
-        <TR>
-          <TD BGCOLOR="#f1f5f9"><B>Persona</B></TD>
-          <TD BGCOLOR="#f1f5f9"><B>Requests</B></TD>
-          <TD BGCOLOR="#f1f5f9"><B>Counters / actions</B></TD>
-        </TR>
-        <TR>
-          <TD ALIGN="LEFT"><FONT FACE="Courier">browser</FONT></TD>
-          <TD ALIGN="RIGHT">3</TD>
-          <TD ALIGN="LEFT"><FONT FACE="Courier">spike_region_changes +1</FONT></TD>
-        </TR>
-        <TR>
-          <TD ALIGN="LEFT"><FONT FACE="Courier">cart_builder</FONT></TD>
-          <TD ALIGN="RIGHT">4</TD>
-          <TD ALIGN="LEFT"><FONT FACE="Courier">spike_region_changes +1</FONT>, <FONT FACE="Courier">spike_cart_updates +1</FONT></TD>
-        </TR>
-        <TR>
-          <TD ALIGN="LEFT"><FONT FACE="Courier">account_manager</FONT></TD>
-          <TD ALIGN="RIGHT">4</TD>
-          <TD ALIGN="LEFT"><FONT FACE="Courier">spike_region_changes +1</FONT></TD>
-        </TR>
-        <TR>
-          <TD ALIGN="LEFT"><FONT FACE="Courier">sale_hunter</FONT></TD>
-          <TD ALIGN="RIGHT">4</TD>
-          <TD ALIGN="LEFT"><FONT FACE="Courier">spike_region_changes +1</FONT>, <FONT FACE="Courier">spike_cart_updates +1</FONT></TD>
-        </TR>
-        <TR>
-          <TD ALIGN="LEFT"><FONT FACE="Courier">checkout</FONT></TD>
-          <TD ALIGN="RIGHT">5</TD>
-          <TD ALIGN="LEFT"><FONT FACE="Courier">spike_region_changes +1</FONT>, <FONT FACE="Courier">spike_cart_updates +1</FONT>, <FONT FACE="Courier">spike_checkout_attempts +1</FONT></TD>
-        </TR>
-        <TR>
-          <TD BGCOLOR="#ecfeff" ALIGN="LEFT"><B>Average</B></TD>
-          <TD BGCOLOR="#ecfeff" ALIGN="RIGHT"><B>4</B></TD>
-          <TD BGCOLOR="#ecfeff" ALIGN="LEFT"><B>requests per completed user iteration</B></TD>
-        </TR>
-      </TABLE>
-    >
-  ];
-
-  stage_table [
-    label=<
-      <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="7" COLOR="#334155">
-        <TR>
-          <TD COLSPAN="7" BGCOLOR="#dcfce7"><B>Current stage estimates per completed wave</B></TD>
-        </TR>
-        <TR>
-          <TD BGCOLOR="#f1f5f9"><B>Stage</B></TD>
-          <TD BGCOLOR="#f1f5f9"><B>Duration</B></TD>
-          <TD BGCOLOR="#f1f5f9"><B>Target VUs</B></TD>
-          <TD BGCOLOR="#f1f5f9"><B>Approx requests</B></TD>
-          <TD BGCOLOR="#f1f5f9"><B>Cart updates</B></TD>
-          <TD BGCOLOR="#f1f5f9"><B>Checkout attempts</B></TD>
-          <TD BGCOLOR="#f1f5f9"><B>Region changes</B></TD>
-        </TR>
-        <TR>
-          <TD ALIGN="LEFT">Warmup / recovery</TD>
-          <TD ALIGN="RIGHT">1m</TD>
-          <TD ALIGN="RIGHT">25</TD>
-          <TD ALIGN="RIGHT">100</TD>
-          <TD ALIGN="RIGHT">15</TD>
-          <TD ALIGN="RIGHT">5</TD>
-          <TD ALIGN="RIGHT">25</TD>
-        </TR>
-        <TR>
-          <TD ALIGN="LEFT">Ramp to spike 1</TD>
-          <TD ALIGN="RIGHT">30s</TD>
-          <TD ALIGN="RIGHT">100</TD>
-          <TD ALIGN="RIGHT">up to 400 at target</TD>
-          <TD ALIGN="RIGHT">60</TD>
-          <TD ALIGN="RIGHT">20</TD>
-          <TD ALIGN="RIGHT">100</TD>
-        </TR>
-        <TR>
-          <TD ALIGN="LEFT">Hold spike 1</TD>
-          <TD ALIGN="RIGHT">1m</TD>
-          <TD ALIGN="RIGHT">100</TD>
-          <TD ALIGN="RIGHT">400 per wave</TD>
-          <TD ALIGN="RIGHT">60</TD>
-          <TD ALIGN="RIGHT">20</TD>
-          <TD ALIGN="RIGHT">100</TD>
-        </TR>
-        <TR>
-          <TD ALIGN="LEFT">Recovery</TD>
-          <TD ALIGN="RIGHT">1m</TD>
-          <TD ALIGN="RIGHT">25</TD>
-          <TD ALIGN="RIGHT">100 per wave</TD>
-          <TD ALIGN="RIGHT">15</TD>
-          <TD ALIGN="RIGHT">5</TD>
-          <TD ALIGN="RIGHT">25</TD>
-        </TR>
-        <TR>
-          <TD ALIGN="LEFT">Ramp to spike 2</TD>
-          <TD ALIGN="RIGHT">30s</TD>
-          <TD ALIGN="RIGHT">150</TD>
-          <TD ALIGN="RIGHT">up to 600 at target</TD>
-          <TD ALIGN="RIGHT">90</TD>
-          <TD ALIGN="RIGHT">30</TD>
-          <TD ALIGN="RIGHT">150</TD>
-        </TR>
-        <TR>
-          <TD ALIGN="LEFT">Hold spike 2</TD>
-          <TD ALIGN="RIGHT">1m</TD>
-          <TD ALIGN="RIGHT">150</TD>
-          <TD ALIGN="RIGHT">600 per wave</TD>
-          <TD ALIGN="RIGHT">90</TD>
-          <TD ALIGN="RIGHT">30</TD>
-          <TD ALIGN="RIGHT">150</TD>
-        </TR>
-        <TR>
-          <TD ALIGN="LEFT">Recovery</TD>
-          <TD ALIGN="RIGHT">1m</TD>
-          <TD ALIGN="RIGHT">25</TD>
-          <TD ALIGN="RIGHT">100 per wave</TD>
-          <TD ALIGN="RIGHT">15</TD>
-          <TD ALIGN="RIGHT">5</TD>
-          <TD ALIGN="RIGHT">25</TD>
-        </TR>
-        <TR>
-          <TD ALIGN="LEFT">Ramp to spike 3</TD>
-          <TD ALIGN="RIGHT">30s</TD>
-          <TD ALIGN="RIGHT">225</TD>
-          <TD ALIGN="RIGHT">up to 900 at target</TD>
-          <TD ALIGN="RIGHT">135</TD>
-          <TD ALIGN="RIGHT">45</TD>
-          <TD ALIGN="RIGHT">225</TD>
-        </TR>
-        <TR>
-          <TD ALIGN="LEFT">Hold spike 3</TD>
-          <TD ALIGN="RIGHT">1m</TD>
-          <TD ALIGN="RIGHT">225</TD>
-          <TD ALIGN="RIGHT">900 per wave</TD>
-          <TD ALIGN="RIGHT">135</TD>
-          <TD ALIGN="RIGHT">45</TD>
-          <TD ALIGN="RIGHT">225</TD>
-        </TR>
-        <TR>
-          <TD ALIGN="LEFT">Ramp down</TD>
-          <TD ALIGN="RIGHT">1m</TD>
-          <TD ALIGN="RIGHT">0</TD>
-          <TD ALIGN="RIGHT">decreasing to 0</TD>
-          <TD ALIGN="RIGHT">decreasing</TD>
-          <TD ALIGN="RIGHT">decreasing</TD>
-          <TD ALIGN="RIGHT">decreasing</TD>
-        </TR>
-      </TABLE>
-    >
-  ];
-
-  parallel_table [
-    label=<
-      <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="7" COLOR="#334155">
-        <TR>
-          <TD COLSPAN="3" BGCOLOR="#f3e8ff"><B>Parallel scenarios in the combined script</B></TD>
-        </TR>
-        <TR>
-          <TD BGCOLOR="#f1f5f9"><B>Scenario</B></TD>
-          <TD BGCOLOR="#f1f5f9"><B>Load</B></TD>
-          <TD BGCOLOR="#f1f5f9"><B>Request model</B></TD>
-        </TR>
-        <TR>
-          <TD ALIGN="LEFT"><FONT FACE="Courier">regional_shoppers</FONT></TD>
-          <TD ALIGN="RIGHT">30 VUs</TD>
-          <TD ALIGN="LEFT">About 4 requests per completed iteration</TD>
-        </TR>
-        <TR>
-          <TD ALIGN="LEFT"><FONT FACE="Courier">storefront_actions</FONT></TD>
-          <TD ALIGN="RIGHT">1 browser iteration</TD>
-          <TD ALIGN="LEFT">Generates Faro UI actions rather than simple API request counts</TD>
-        </TR>
-      </TABLE>
-    >
-  ];
-
-  caveat -> persona_table;
-  persona_table -> stage_table;
-  stage_table -> parallel_table;
+  caveat -> persona_table -> stage_table -> parallel_table;
 }
+

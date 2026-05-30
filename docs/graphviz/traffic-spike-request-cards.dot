@@ -1,113 +1,34 @@
 digraph traffic_spike_request_cards {
-  graph [
-    rankdir=LR,
-    labelloc=t,
-    label="Traffic Spike Request Model",
-    fontsize=22,
-    fontname="Helvetica",
-    nodesep=0.35,
-    ranksep=0.45,
-    splines=ortho
-  ];
+  graph [rankdir=LR, labelloc=t, label="Traffic Spike Request Model", fontsize=22, fontname="Helvetica", nodesep=0.35, ranksep=0.45, splines=ortho];
+  node [shape=plain, fontname="Helvetica"];
+  edge [color="#94a3b8", arrowsize=0.6];
 
-  node [
-    shape=plain,
-    fontname="Helvetica"
-  ];
-
-  edge [
-    color="#94a3b8",
-    arrowsize=0.6
-  ];
-
-  warmup [
-    label=<
-      <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#64748b">
-        <TR><TD BGCOLOR="#f8fafc"><B>Warmup</B></TD></TR>
-        <TR><TD><FONT POINT-SIZE="18"><B>25 VUs</B></FONT></TD></TR>
-        <TR><TD>~100 req/wave</TD></TR>
-        <TR><TD><FONT POINT-SIZE="10">cart 15 · checkout 5 · region 25</FONT></TD></TR>
-      </TABLE>
-    >
-  ];
-
-  spike1 [
-    label=<
-      <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#ef4444">
-        <TR><TD BGCOLOR="#fee2e2"><B>Spike 1</B></TD></TR>
-        <TR><TD><FONT POINT-SIZE="22"><B>100 VUs</B></FONT></TD></TR>
-        <TR><TD><B>~400 req/wave</B></TD></TR>
-        <TR><TD><FONT POINT-SIZE="10">cart 60 · checkout 20 · region 100</FONT></TD></TR>
-      </TABLE>
-    >
-  ];
-
-  recovery1 [
-    label=<
-      <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#64748b">
-        <TR><TD BGCOLOR="#f8fafc"><B>Recovery</B></TD></TR>
-        <TR><TD><FONT POINT-SIZE="18"><B>25 VUs</B></FONT></TD></TR>
-        <TR><TD>~100 req/wave</TD></TR>
-        <TR><TD><FONT POINT-SIZE="10">cart 15 · checkout 5 · region 25</FONT></TD></TR>
-      </TABLE>
-    >
-  ];
-
-  spike2 [
-    label=<
-      <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#dc2626">
-        <TR><TD BGCOLOR="#fecaca"><B>Spike 2</B></TD></TR>
-        <TR><TD><FONT POINT-SIZE="22"><B>150 VUs</B></FONT></TD></TR>
-        <TR><TD><B>~600 req/wave</B></TD></TR>
-        <TR><TD><FONT POINT-SIZE="10">cart 90 · checkout 30 · region 150</FONT></TD></TR>
-      </TABLE>
-    >
-  ];
-
-  recovery2 [
-    label=<
-      <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#64748b">
-        <TR><TD BGCOLOR="#f8fafc"><B>Recovery</B></TD></TR>
-        <TR><TD><FONT POINT-SIZE="18"><B>25 VUs</B></FONT></TD></TR>
-        <TR><TD>~100 req/wave</TD></TR>
-        <TR><TD><FONT POINT-SIZE="10">cart 15 · checkout 5 · region 25</FONT></TD></TR>
-      </TABLE>
-    >
-  ];
-
-  spike3 [
-    label=<
-      <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#991b1b">
-        <TR><TD BGCOLOR="#fca5a5"><B>Spike 3</B></TD></TR>
-        <TR><TD><FONT POINT-SIZE="24"><B>225 VUs</B></FONT></TD></TR>
-        <TR><TD><B>~900 req/wave</B></TD></TR>
-        <TR><TD><FONT POINT-SIZE="10">cart 135 · checkout 45 · region 225</FONT></TD></TR>
-      </TABLE>
-    >
-  ];
-
-  rampdown [
-    label=<
-      <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#64748b">
-        <TR><TD BGCOLOR="#f8fafc"><B>Ramp down</B></TD></TR>
-        <TR><TD><FONT POINT-SIZE="18"><B>0 VUs</B></FONT></TD></TR>
-        <TR><TD>decreasing</TD></TR>
-        <TR><TD><FONT POINT-SIZE="10">cart · checkout · region decrease</FONT></TD></TR>
-      </TABLE>
-    >
-  ];
-
-  legend [
-    label=<
-      <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
-        <TR><TD ALIGN="LEFT"><B>Persona avg:</B> 4 requests / completed iteration</TD></TR>
-        <TR><TD ALIGN="LEFT"><FONT POINT-SIZE="10">browser 3 · cart_builder 4 · account_manager 4 · sale_hunter 4 · checkout 5</FONT></TD></TR>
-        <TR><TD ALIGN="LEFT"><FONT POINT-SIZE="10">Actual totals depend on response time, sleep time, and completed iterations.</FONT></TD></TR>
-      </TABLE>
-    >
-  ];
+  warmup [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#64748b"><TR><TD BGCOLOR="#f8fafc"><B>Warmup</B></TD></TR><TR><TD><FONT POINT-SIZE="18"><B>25 VUs</B></FONT></TD></TR><TR><TD>~100 req/wave</TD></TR><TR><TD><FONT POINT-SIZE="10">cart 15 · checkout 5 · region 25</FONT></TD></TR></TABLE>
+  >];
+  spike1 [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#ef4444"><TR><TD BGCOLOR="#fee2e2"><B>Spike 1</B></TD></TR><TR><TD><FONT POINT-SIZE="22"><B>100 VUs</B></FONT></TD></TR><TR><TD><B>~400 req/wave</B></TD></TR><TR><TD><FONT POINT-SIZE="10">cart 60 · checkout 20 · region 100</FONT></TD></TR></TABLE>
+  >];
+  recovery1 [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#64748b"><TR><TD BGCOLOR="#f8fafc"><B>Recovery</B></TD></TR><TR><TD><FONT POINT-SIZE="18"><B>25 VUs</B></FONT></TD></TR><TR><TD>~100 req/wave</TD></TR><TR><TD><FONT POINT-SIZE="10">cart 15 · checkout 5 · region 25</FONT></TD></TR></TABLE>
+  >];
+  spike2 [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#dc2626"><TR><TD BGCOLOR="#fecaca"><B>Spike 2</B></TD></TR><TR><TD><FONT POINT-SIZE="22"><B>200 VUs</B></FONT></TD></TR><TR><TD><B>~800 req/wave</B></TD></TR><TR><TD><FONT POINT-SIZE="10">cart 120 · checkout 40 · region 200</FONT></TD></TR></TABLE>
+  >];
+  recovery2 [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#64748b"><TR><TD BGCOLOR="#f8fafc"><B>Recovery</B></TD></TR><TR><TD><FONT POINT-SIZE="18"><B>25 VUs</B></FONT></TD></TR><TR><TD>~100 req/wave</TD></TR><TR><TD><FONT POINT-SIZE="10">cart 15 · checkout 5 · region 25</FONT></TD></TR></TABLE>
+  >];
+  spike3 [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#991b1b"><TR><TD BGCOLOR="#fca5a5"><B>Spike 3</B></TD></TR><TR><TD><FONT POINT-SIZE="24"><B>400 VUs</B></FONT></TD></TR><TR><TD><B>~1600 req/wave</B></TD></TR><TR><TD><FONT POINT-SIZE="10">cart 240 · checkout 80 · region 400</FONT></TD></TR></TABLE>
+  >];
+  rampdown [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#64748b"><TR><TD BGCOLOR="#f8fafc"><B>Ramp down</B></TD></TR><TR><TD><FONT POINT-SIZE="18"><B>0 VUs</B></FONT></TD></TR><TR><TD>decreasing</TD></TR><TR><TD><FONT POINT-SIZE="10">counters decrease with active VUs</FONT></TD></TR></TABLE>
+  >];
+  legend [label=<
+    <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4"><TR><TD ALIGN="LEFT"><B>Config:</B> base 100, multiplier 2, regional 30 VUs, storefront actions 60 browser VUs for 10m</TD></TR><TR><TD ALIGN="LEFT"><FONT POINT-SIZE="10">browser 3 · cart_builder 4 · account_manager 4 · sale_hunter 4 · checkout 5; actual totals depend on completed iterations.</FONT></TD></TR></TABLE>
+  >];
 
   warmup -> spike1 -> recovery1 -> spike2 -> recovery2 -> spike3 -> rampdown;
-
   { rank=same; legend }
 }
+

@@ -105,7 +105,7 @@ For k6 traffic spike models, show:
 Default labels for the current Ensemble traffic spike script:
 
 ```text
-25 -> 100 -> 100 -> 25 -> 150 -> 150 -> 25 -> 225 -> 225 -> 0
+25 -> 100 -> 100 -> 25 -> 200 -> 200 -> 25 -> 400 -> 400 -> 0
 ```
 
 Use live Grafana/k6 metrics beside the graph when available rather than pretending the static model is measured telemetry.

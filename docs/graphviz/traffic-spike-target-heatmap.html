@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Traffic Spike Target Heatmap</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1220;
+      --panel: #111827;
+      --line: #475569;
+      --text: #f8fafc;
+      --muted: #f8fafc;
+      --blue-1: #1d4ed8;
+      --blue-2: #2563eb;
+      --blue-3: #1e40af;
+      --blue-4: #1e3a8a;
+      --green-1: #166534;
+      --green-2: #15803d;
+      --green-3: #15803d;
+      --green-4: #166534;
+      --amber-1: #854d0e;
+      --amber-2: #a16207;
+      --amber-3: #92400e;
+      --amber-4: #713f12;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .heatmap {
+      box-sizing: border-box;
+      width: 100%;
+      min-height: 100%;
+      padding: 18px;
+      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.18), transparent 34%), var(--bg);
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid var(--line);
+      background: rgba(17, 24, 39, 0.94);
+      box-shadow: 0 18px 46px rgba(0, 0, 0, 0.28);
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: center;
+      vertical-align: middle;
+      font-size: 14px;
+    }
+    th {
+      background: #1e3a5f;
+      color: #f8fafc;
+      font-weight: 700;
+    }
+    td.stage {
+      text-align: left;
+      background: var(--panel);
+      font-weight: 650;
+      white-space: nowrap;
+    }
+    td.vus { background: var(--panel); font-weight: 700; }
+    td.requests.warmup { background: #334155; }
+    td.requests.s1 { background: var(--blue-2); color: #f8fafc; font-weight: 700; }
+    td.requests.s2 { background: var(--blue-3); color: #f8fafc; font-weight: 800; }
+    td.requests.s3 { background: var(--blue-4); color: #f8fafc; font-weight: 800; }
+    td.cart.warmup { background: var(--green-1); color: #f8fafc; }
+    td.cart.s1 { background: var(--green-2); color: #f8fafc; font-weight: 700; }
+    td.cart.s2 { background: var(--green-3); color: #f8fafc; font-weight: 800; }
+    td.cart.s3 { background: var(--green-4); color: #f8fafc; font-weight: 800; }
+    td.checkout.warmup { background: var(--amber-1); color: #f8fafc; }
+    td.checkout.s1 { background: var(--amber-2); color: #f8fafc; font-weight: 700; }
+    td.checkout.s2 { background: var(--amber-3); color: #f8fafc; font-weight: 800; }
+    td.checkout.s3 { background: var(--amber-4); color: #f8fafc; font-weight: 800; }
+    td.region.warmup { background: var(--blue-1); color: #f8fafc; }
+    td.region.s1 { background: var(--blue-2); color: #f8fafc; font-weight: 700; }
+    td.region.s2 { background: var(--blue-3); color: #f8fafc; font-weight: 800; }
+    td.region.s3 { background: var(--blue-4); color: #f8fafc; font-weight: 800; }
+    .note {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+      max-width: 920px;
+    }
+    .note strong { color: var(--text); }
+  </style>
+</head>
+<body>
+  <section class="heatmap" aria-label="Traffic spike target heatmap">
+    <h2>Traffic Spike Test Targets</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Stage</th>
+          <th>VUs</th>
+          <th>Requests / wave</th>
+          <th>Cart updates</th>
+          <th>Checkout attempts</th>
+          <th>Region changes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="stage">Warmup / Recovery</td>
+          <td class="vus">25</td>
+          <td class="requests warmup">100</td>
+          <td class="cart warmup">15</td>
+          <td class="checkout warmup">5</td>
+          <td class="region warmup">25</td>
+        </tr>
+        <tr>
+          <td class="stage">Spike 1</td>
+          <td class="vus">100</td>
+          <td class="requests s1">400</td>
+          <td class="cart s1">60</td>
+          <td class="checkout s1">20</td>
+          <td class="region s1">100</td>
+        </tr>
+        <tr>
+          <td class="stage">Spike 2</td>
+          <td class="vus">200</td>
+          <td class="requests s2">800</td>
+          <td class="cart s2">120</td>
+          <td class="checkout s2">40</td>
+          <td class="region s2">200</td>
+        </tr>
+        <tr>
+          <td class="stage">Spike 3</td>
+          <td class="vus">400</td>
+          <td class="requests s3">1600</td>
+          <td class="cart s3">240</td>
+          <td class="checkout s3">80</td>
+          <td class="region s3">400</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="note"><strong>Current config:</strong> BASE_SPIKE_USERS=100, SPIKE_MULTIPLIER=2, regional_shoppers=30 VUs.<br>storefront_actions=60 browser VUs for 10m. Brighter cells mean more target pressure per completed wave.</p>
+  </section>
+</body>
+</html>

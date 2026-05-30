@@ -543,6 +543,8 @@ The default combined benchmark peaks at 490 VUs: 400 traffic-spike VUs, 30 regio
 
 The browser-action scenario uses sustained browser VUs rather than a single shared iteration. Its default target is at least 5 user-action events per second for every expected action family. The script publishes a tagged `storefront_user_action_events` counter with `action_family` labels and fails the run when any expected action family is below `USER_ACTION_TARGET_RPS`.
 
+Graphviz traffic-spike diagrams live under `docs/graphviz/` and are generated from the current default benchmark profile: `BASE_SPIKE_USERS=100`, `SPIKE_MULTIPLIER=2`, `REGIONAL_SHOPPER_VUS=30`, and `BROWSER_ACTION_VUS=60`. The Grafana dashboard `Ensemble Traffic Spike Graphviz Model` uses the dark heatmap DOT from `docs/graphviz/traffic-spike-target-heatmap-dark.dot` and the HTML heatmap from `docs/graphviz/traffic-spike-target-heatmap.html`; update it with `gcx dashboards update ensemble-traffic-spike-graphviz -f observability/grafana/dashboards/traffic-spike-graphviz.json` after refreshing the dashboard manifest with `gcx dashboards get ensemble-traffic-spike-graphviz -o json`. Dashboard URL: `https://orenlion.grafana.net/d/6d68e547-2aac-4f8c-bc87-73139bff4816/ensemble-traffic-spike-graphviz-model`.
+
 Optional knobs for the combined scenarios:
 
 - `REGIONAL_SHOPPER_VUS`: regional API shopper load, default `30`.

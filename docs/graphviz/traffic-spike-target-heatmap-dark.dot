@@ -1,76 +1,25 @@
 digraph traffic_spike_target_heatmap_dark {
-  graph [
-    rankdir=TB,
-    labelloc=t,
-    label="Traffic Spike Test Targets",
-    bgcolor="#0b1220",
-    fontcolor="#e5e7eb",
-    fontsize=22,
-    fontname="Helvetica",
-    nodesep=0.35,
-    ranksep=0.4
-  ];
+  graph [rankdir=TB, labelloc=t, label="Traffic Spike Test Targets", bgcolor="#0b1220", fontcolor="#f8fafc", fontsize=22, fontname="Helvetica", nodesep=0.35, ranksep=0.4];
+  node [shape=plain, fontname="Helvetica", fontcolor="#f8fafc"];
+  edge [style=invis];
 
-  node [
-    shape=plain,
-    fontname="Helvetica",
-    fontcolor="#e5e7eb"
-  ];
+  target_heatmap [label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="7" COLOR="#475569">
+      <TR><TD BGCOLOR="#1e3a5f"><FONT COLOR="#f8fafc"><B>Stage</B></FONT></TD><TD BGCOLOR="#1e3a5f"><FONT COLOR="#f8fafc"><B>VUs</B></FONT></TD><TD BGCOLOR="#1e3a5f"><FONT COLOR="#f8fafc"><B>Requests / wave</B></FONT></TD><TD BGCOLOR="#14532d"><FONT COLOR="#f8fafc"><B>Cart updates</B></FONT></TD><TD BGCOLOR="#713f12"><FONT COLOR="#f8fafc"><B>Checkout attempts</B></FONT></TD><TD BGCOLOR="#1e40af"><FONT COLOR="#f8fafc"><B>Region changes</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#111827"><FONT COLOR="#f8fafc">Warmup / Recovery</FONT></TD><TD BGCOLOR="#111827"><FONT COLOR="#f8fafc"><B>25</B></FONT></TD><TD BGCOLOR="#334155"><FONT COLOR="#f8fafc">100</FONT></TD><TD BGCOLOR="#166534"><FONT COLOR="#f8fafc">15</FONT></TD><TD BGCOLOR="#854d0e"><FONT COLOR="#f8fafc">5</FONT></TD><TD BGCOLOR="#1d4ed8"><FONT COLOR="#f8fafc">25</FONT></TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#111827"><FONT COLOR="#f8fafc">Spike 1</FONT></TD><TD BGCOLOR="#111827"><FONT COLOR="#f8fafc"><B>100</B></FONT></TD><TD BGCOLOR="#2563eb"><FONT COLOR="#f8fafc"><B>400</B></FONT></TD><TD BGCOLOR="#15803d"><FONT COLOR="#f8fafc"><B>60</B></FONT></TD><TD BGCOLOR="#a16207"><FONT COLOR="#f8fafc"><B>20</B></FONT></TD><TD BGCOLOR="#2563eb"><FONT COLOR="#f8fafc"><B>100</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#111827"><FONT COLOR="#f8fafc">Spike 2</FONT></TD><TD BGCOLOR="#111827"><FONT COLOR="#f8fafc"><B>200</B></FONT></TD><TD BGCOLOR="#1e40af"><FONT COLOR="#f8fafc"><B>800</B></FONT></TD><TD BGCOLOR="#15803d"><FONT COLOR="#f8fafc"><B>120</B></FONT></TD><TD BGCOLOR="#92400e"><FONT COLOR="#f8fafc"><B>40</B></FONT></TD><TD BGCOLOR="#1e40af"><FONT COLOR="#f8fafc"><B>200</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#111827"><FONT COLOR="#f8fafc">Spike 3</FONT></TD><TD BGCOLOR="#111827"><FONT COLOR="#f8fafc"><B>400</B></FONT></TD><TD BGCOLOR="#1e3a8a"><FONT COLOR="#f8fafc"><B>1600</B></FONT></TD><TD BGCOLOR="#166534"><FONT COLOR="#f8fafc"><B>240</B></FONT></TD><TD BGCOLOR="#713f12"><FONT COLOR="#f8fafc"><B>80</B></FONT></TD><TD BGCOLOR="#1e3a8a"><FONT COLOR="#f8fafc"><B>400</B></FONT></TD></TR>
+    </TABLE>
+  >];
 
-  edge [
-    style=invis
-  ];
-
-  target_heatmap [
-    label=<
-      <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="7" COLOR="#475569">
-        <TR>
-          <TD BGCOLOR="#1e3a5f"><FONT COLOR="#f8fafc"><B>Stage</B></FONT></TD>
-          <TD BGCOLOR="#1e3a5f"><FONT COLOR="#f8fafc"><B>VUs</B></FONT></TD>
-          <TD BGCOLOR="#14532d"><FONT COLOR="#f8fafc"><B>Cart updates</B></FONT></TD>
-          <TD BGCOLOR="#713f12"><FONT COLOR="#f8fafc"><B>Checkout attempts</B></FONT></TD>
-          <TD BGCOLOR="#1e40af"><FONT COLOR="#f8fafc"><B>Region changes</B></FONT></TD>
-        </TR>
-        <TR>
-          <TD ALIGN="LEFT" BGCOLOR="#111827"><FONT COLOR="#e5e7eb">Warmup / Recovery</FONT></TD>
-          <TD BGCOLOR="#111827"><FONT COLOR="#e5e7eb"><B>25</B></FONT></TD>
-          <TD BGCOLOR="#166534"><FONT COLOR="#dcfce7">15</FONT></TD>
-          <TD BGCOLOR="#854d0e"><FONT COLOR="#fef3c7">5</FONT></TD>
-          <TD BGCOLOR="#1d4ed8"><FONT COLOR="#dbeafe">25</FONT></TD>
-        </TR>
-        <TR>
-          <TD ALIGN="LEFT" BGCOLOR="#111827"><FONT COLOR="#e5e7eb">Spike 1</FONT></TD>
-          <TD BGCOLOR="#111827"><FONT COLOR="#e5e7eb"><B>100</B></FONT></TD>
-          <TD BGCOLOR="#15803d"><FONT COLOR="#f0fdf4"><B>60</B></FONT></TD>
-          <TD BGCOLOR="#a16207"><FONT COLOR="#fffbeb"><B>20</B></FONT></TD>
-          <TD BGCOLOR="#2563eb"><FONT COLOR="#eff6ff"><B>100</B></FONT></TD>
-        </TR>
-        <TR>
-          <TD ALIGN="LEFT" BGCOLOR="#111827"><FONT COLOR="#e5e7eb">Spike 2</FONT></TD>
-          <TD BGCOLOR="#111827"><FONT COLOR="#e5e7eb"><B>150</B></FONT></TD>
-          <TD BGCOLOR="#16a34a"><FONT COLOR="#052e16"><B>90</B></FONT></TD>
-          <TD BGCOLOR="#ca8a04"><FONT COLOR="#422006"><B>30</B></FONT></TD>
-          <TD BGCOLOR="#3b82f6"><FONT COLOR="#0f172a"><B>150</B></FONT></TD>
-        </TR>
-        <TR>
-          <TD ALIGN="LEFT" BGCOLOR="#111827"><FONT COLOR="#e5e7eb">Spike 3</FONT></TD>
-          <TD BGCOLOR="#111827"><FONT COLOR="#e5e7eb"><B>225</B></FONT></TD>
-          <TD BGCOLOR="#4ade80"><FONT COLOR="#052e16"><B>135</B></FONT></TD>
-          <TD BGCOLOR="#facc15"><FONT COLOR="#422006"><B>45</B></FONT></TD>
-          <TD BGCOLOR="#93c5fd"><FONT COLOR="#172554"><B>225</B></FONT></TD>
-        </TR>
-      </TABLE>
-    >
-  ];
-
-  target_note [
-    label=<
-      <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
-        <TR><TD ALIGN="LEFT"><FONT COLOR="#e5e7eb"><B>Readout:</B> brighter cells mean more target pressure per completed wave.</FONT></TD></TR>
-        <TR><TD ALIGN="LEFT"><FONT COLOR="#cbd5e1">Cart and checkout validate transaction paths; region validates localization and request header behavior.</FONT></TD></TR>
-      </TABLE>
-    >
-  ];
+  target_note [label=<
+    <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
+      <TR><TD ALIGN="LEFT"><FONT COLOR="#f8fafc"><B>Readout:</B> brighter cells mean more target pressure per completed wave.</FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><FONT COLOR="#f8fafc">Current config: BASE_SPIKE_USERS=100, SPIKE_MULTIPLIER=2, regional_shoppers=30 VUs.</FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><FONT COLOR="#f8fafc">storefront_actions=60 browser VUs for 10m.</FONT></TD></TR>
+    </TABLE>
+  >];
 
   target_heatmap -> target_note;
 }
