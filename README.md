@@ -16,7 +16,6 @@ This is a training repo to explore the art of the "promptable". Original outdoor
 - `observability/` - Grafana Alloy config, k8s-monitoring Helm values, synthetic checks, and starter dashboards. See `observability/README.md`.
 - `load-tests/` - k6 API and browser scenarios covering users, categories, product browsing, cart, checkout, account, and synthetic button-action flows.
 - `docs/` - deployment, security, domain/TLS, and Grafana IRM runbooks.
-- `docs/graviton-migration.md` - plan for migrating EKS workers and service images from x86 to AWS Graviton/ARM64.
 - `scripts/security/` - predeploy security checks for secrets, Kubernetes hardening, and IaC controls.
 - `.github/workflows/build.yml` - GitHub Actions security checks, Maven service packages, frontend build, Playwright browser checks, and k6 script inspection.
 - `.github/workflows/account-baseline-guard.yml` - Guardrail workflow for account-baseline Terraform validation and manual-approval apply path.
@@ -498,7 +497,7 @@ The spike benchmark is `load-tests/grafana-cloud-traffic-spikes.js`. It uses the
 - Spike 2: `45` VUs.
 - Spike 3: `68` VUs.
 
-Each spike ramps quickly, holds for one minute, and then returns to a low recovery load before the next spike. Requests are tagged by `spike`, `region`, `persona`, and endpoint name. The traffic spike script is now the combined benchmark entrypoint: it runs the three-spike API benchmark, the regional shopper load scenario, and the full browser-action synthetic journey that validates Faro user actions and region/language UI behavior.
+Each spike ramps quickly, holds for one minute, and then returns to a low recovery load before the next spike. Requests are tagged by `spike`, `region`, `persona`, and endpoint name.
 
 Run locally:
 
@@ -526,12 +525,6 @@ STOREFRONT_BASE_URL=https://ensemble-grafana.com \
 API_BASE_URL=https://api.ensemble-grafana.com \
 k6 run load-tests/grafana-cloud-traffic-spikes.js
 ```
-
-Optional knobs for the combined scenarios:
-
-- `REGIONAL_SHOPPER_VUS`: regional API shopper load, default `30`.
-- `BROWSER_ACTION_ITERATIONS`: full browser-action synthetic iterations, default `1`.
-- `BROWSER_ACTION_MAX_DURATION`: max duration for the browser-action scenario, default `10m`.
 
 The browser action check covers:
 
