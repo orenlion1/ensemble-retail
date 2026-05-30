@@ -411,6 +411,46 @@ select {
   width: 20px;
 }
 
+.checkoutDialogBackdrop {
+  align-items: center;
+  background: rgba(17, 20, 18, 0.68);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  padding: 1.25rem;
+  position: fixed;
+  z-index: 30;
+}
+
+.checkoutDialog {
+  align-items: center;
+  background: #fff;
+  box-shadow: 0 24px 80px rgba(17, 20, 18, 0.28);
+  color: #111412;
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 88px minmax(0, 1fr);
+  max-width: 520px;
+  padding: 1.5rem;
+  width: min(100%, 520px);
+}
+
+.checkoutDialog h2 {
+  font-size: 1.7rem;
+  margin-bottom: 0.65rem;
+}
+
+.checkoutDialog p:not(.eyebrow) {
+  color: #444a45;
+  margin: 0 0 1rem;
+}
+
+.grafanaLogo {
+  display: block;
+  height: 88px;
+  width: 88px;
+}
+
 form {
   background: #fff;
   padding: 1.25rem;
@@ -507,6 +547,10 @@ label input {
   .deleteCartItem {
     grid-column: 3;
     grid-row: 1 / span 2;
+  }
+
+  .checkoutDialog {
+    grid-template-columns: 1fr;
   }
 
   .productGrid {

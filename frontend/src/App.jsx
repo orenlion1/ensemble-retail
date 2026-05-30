@@ -74,6 +74,7 @@ const copy = {
     saleDiscount: percent => `Spring sale discount (${percent}% off)`,
     subtotal: 'Subtotal',
     mockCheckout: 'Mock checkout',
+    checkoutDialogTitle: 'Grafana trace ready',
     checkoutConfirmed: 'Mock checkout confirmed. Trace this order in Grafana.',
     accountTitle: 'Shipping and wallet',
     name: 'Name',
@@ -132,6 +133,7 @@ const copy = {
     saleDiscount: percent => `Rabais des soldes du printemps (${percent} % de rabais)`,
     subtotal: 'Sous-total',
     mockCheckout: 'Simuler le paiement',
+    checkoutDialogTitle: 'Trace Grafana prête',
     checkoutConfirmed: 'Paiement simulé confirmé. Suivez cette commande dans Grafana.',
     accountTitle: 'Livraison et portefeuille',
     name: 'Nom',
@@ -190,6 +192,7 @@ const copy = {
     saleDiscount: percent => `Spring sale discount (${percent}% off)`,
     subtotal: 'Subtotal',
     mockCheckout: 'Mock checkout',
+    checkoutDialogTitle: 'Grafana trace ready',
     checkoutConfirmed: 'Mock checkout confirmed. Trace this order in Grafana.',
     accountTitle: 'Delivery and wallet',
     name: 'Name',
@@ -248,6 +251,7 @@ const copy = {
     saleDiscount: percent => `春季特卖折扣（${percent}% 优惠）`,
     subtotal: '小计',
     mockCheckout: '模拟结账',
+    checkoutDialogTitle: 'Grafana 追踪已就绪',
     checkoutConfirmed: '模拟结账已确认。请在 Grafana 中追踪此订单。',
     accountTitle: '配送和钱包',
     name: '姓名',
@@ -378,6 +382,17 @@ function localizeUkRetailTerms(value) {
   return String(value || '')
     .replace(/\bPants\b/g, 'Trousers')
     .replace(/\bPant\b/g, 'Trouser');
+}
+
+function GrafanaLogoMark() {
+  return (
+    <svg className="grafanaLogo" viewBox="0 0 96 96" role="img" aria-label="Grafana logo">
+      <circle cx="48" cy="48" r="42" fill="#f46800" />
+      <path fill="#fff" d="M48 18c-6 0-11 2-16 5l5 9c3-2 7-3 11-3 12 0 22 10 22 22 0 10-7 19-17 21v-9c5-2 9-7 9-13 0-8-6-14-14-14s-14 6-14 14c0 2 .4 4 1.3 6l-8 4A23 23 0 0 1 25 50c0-13 10-24 23-24 2 0 4 .3 6 .8l2-9A32 32 0 0 0 48 18Z" />
+      <path fill="#fff" d="M42 50a6 6 0 1 1 12 0 6 6 0 0 1-12 0Z" />
+      <path fill="#111412" fillOpacity=".16" d="M48 6a42 42 0 1 1 0 84 42 42 0 0 0 0-84Z" />
+    </svg>
+  );
 }
 
 function readStoredJson(key, fallback) {
@@ -566,6 +581,7 @@ export default function App() {
   const [authSession, setAuthSession] = useState(readStoredAuthSession);
   const [authError, setAuthError] = useState('');
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [checkoutDialogOpen, setCheckoutDialogOpen] = useState(false);
   const selectedRegion = regionConfigFor(region);
   const locale = selectedRegion.copyKey;
   const t = copy[locale];
@@ -789,7 +805,14 @@ export default function App() {
       triggerName: 'click',
       importance: 'critical'
     });
-    alert(t.checkoutConfirmed);
+    setCheckoutDialogOpen(true);
+  }
+
+  function closeCheckoutDialog() {
+    trackAppAction('checkout-dialog:close', {}, {
+      triggerName: 'click'
+    });
+    setCheckoutDialogOpen(false);
   }
 
   function updateQuantity(key, quantity) {
@@ -1112,6 +1135,20 @@ export default function App() {
           <button type="submit" data-faro-user-action-name="save-account">{t.saveAccount}</button>
         </form>
       </section>
+
+      {checkoutDialogOpen && (
+        <div className="checkoutDialogBackdrop" role="presentation">
+          <section className="checkoutDialog" role="dialog" aria-modal="true" aria-labelledby="checkout-dialog-title">
+            <GrafanaLogoMark />
+            <div>
+              <p className="eyebrow">Grafana</p>
+              <h2 id="checkout-dialog-title">{t.checkoutDialogTitle}</h2>
+              <p>{t.checkoutConfirmed}</p>
+              <button type="button" onClick={closeCheckoutDialog} data-faro-user-action-name="checkout-dialog:close">{t.close}</button>
+            </div>
+          </section>
+        </div>
+      )}
     </main>
   );
 }

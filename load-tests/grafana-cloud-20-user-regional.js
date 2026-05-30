@@ -177,6 +177,7 @@ export async function browserFaroJourney() {
       document.querySelector('#cart')?.scrollIntoView({ block: 'center' });
     });
     await clickAction(page, 'shopping-cart:checkout');
+    await clickAction(page, 'checkout-dialog:close');
 
     const checkoutVisible = await page.locator(byAction('shopping-cart:checkout')).first().isVisible();
     check({ checkoutVisible }, {

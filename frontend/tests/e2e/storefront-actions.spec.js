@@ -72,9 +72,16 @@ test.describe('storefront browser behavior', () => {
 
     const checkout = page.getByRole('button', { name: 'Mock checkout' });
     await expectActionAttribute(checkout, actionNames.checkout);
-    page.once('dialog', dialog => dialog.accept());
     await checkout.click();
     await expectFaroAction(faroBodies, actionNames.checkout);
+    const checkoutDialog = page.getByRole('dialog', { name: 'Grafana trace ready' });
+    await expect(checkoutDialog).toBeVisible();
+    await expect(checkoutDialog.getByRole('img', { name: 'Grafana logo' })).toBeVisible();
+    const closeCheckoutDialog = checkoutDialog.getByRole('button', { name: 'Close' });
+    await expectActionAttribute(closeCheckoutDialog, 'checkout-dialog:close');
+    await closeCheckoutDialog.click();
+    await expectFaroAction(faroBodies, 'checkout-dialog:close');
+    await expect(checkoutDialog).toHaveCount(0);
 
     const remove = page.getByRole('button', { name: /Remove Men's Alpine Shell Jacket from cart/ });
     await expectActionAttribute(remove, actionNames.removeProduct);

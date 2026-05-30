@@ -199,13 +199,8 @@ export default async function () {
     await page.locator('#cart input[type="number"]').first().fill('2');
     await page.keyboard.press('Tab');
 
-    await page.evaluate(() => {
-      window.__k6LastAlert = null;
-      window.alert = message => {
-        window.__k6LastAlert = message;
-      };
-    });
     await domClickAction(page, 'shopping-cart:checkout');
+    await clickAction(page, 'checkout-dialog:close');
     await clickFirstMatchingAction(page, 'shopping-cart:remove-item:');
 
     await fillField(page, '#account-name', 'Synthetic Shopper');
@@ -236,6 +231,7 @@ export default async function () {
       'select-region:US',
       'select-language:american-english',
       'shopping-cart:checkout',
+      'checkout-dialog:close',
       'save-account'
     ];
     const requiredPrefixActions = [
