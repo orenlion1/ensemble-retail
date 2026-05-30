@@ -13,6 +13,9 @@ const regionalShopperVus = Number(__ENV.REGIONAL_SHOPPER_VUS || 30);
 const userActionTargetRps = Number(__ENV.USER_ACTION_TARGET_RPS || 8);
 const browserActionVus = Number(__ENV.BROWSER_ACTION_VUS || 60);
 const benchmarkDuration = __ENV.TEST_DURATION || '15m';
+const browserActionRampUp = __ENV.BROWSER_ACTION_RAMP_UP || '3m';
+const browserActionHold = __ENV.BROWSER_ACTION_HOLD || '10m';
+const browserActionRampDown = __ENV.BROWSER_ACTION_RAMP_DOWN || '2m';
 const browserActionDuration = __ENV.BROWSER_ACTION_DURATION || benchmarkDuration;
 const userActionRateThresholds = Object.fromEntries(
   USER_ACTION_RATE_FAMILIES.map(actionFamily => [
@@ -52,10 +55,13 @@ export const options = {
     },
     storefront_actions: {
       exec: 'storefrontActionsScenario',
-      executor: 'constant-vus',
-      vus: browserActionVus,
-      duration: browserActionDuration,
-      gracefulStop: '30s',
+      executor: 'ramping-vus',
+      stages: [
+        { duration: browserActionRampUp, target: browserActionVus },
+        { duration: browserActionHold, target: browserActionVus },
+        { duration: browserActionRampDown, target: 0 }
+      ],
+      gracefulRampDown: '30s',
       options: {
         browser: {
           type: 'chromium'
@@ -93,7 +99,10 @@ export const options = {
     spike_multiplier: String(spikeMultiplier),
     user_action_target_rps: String(userActionTargetRps),
     browser_action_vus: String(browserActionVus),
-    browser_action_duration: browserActionDuration
+    browser_action_duration: browserActionDuration,
+    browser_action_ramp_up: browserActionRampUp,
+    browser_action_hold: browserActionHold,
+    browser_action_ramp_down: browserActionRampDown
   }
 };
 
@@ -319,6 +328,9 @@ export function handleSummary(data) {
     regionalShopperVus,
     userActionTargetRps,
     browserActionVus,
-    browserActionDuration
+    browserActionDuration,
+    browserActionRampUp,
+    browserActionHold,
+    browserActionRampDown
   });
 }

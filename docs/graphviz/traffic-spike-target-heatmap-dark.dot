@@ -18,7 +18,7 @@ digraph traffic_spike_target_heatmap_dark {
       <TR><TD ALIGN="LEFT"><FONT COLOR="#f8fafc"><B>Readout:</B> brighter cells mean more target pressure per completed wave.</FONT></TD></TR>
       <TR><TD ALIGN="LEFT"><FONT COLOR="#f8fafc">Config: base=100, multiplier=2.</FONT></TD></TR>
       <TR><TD ALIGN="LEFT"><FONT COLOR="#f8fafc">Regional shoppers: 30 VUs.</FONT></TD></TR>
-      <TR><TD ALIGN="LEFT"><FONT COLOR="#f8fafc">Storefront actions: 60 browser VUs.</FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><FONT COLOR="#f8fafc">Storefront actions: ramp to 60 browser VUs.</FONT></TD></TR>
       <TR><TD ALIGN="LEFT"><FONT COLOR="#f8fafc">Duration: 15m.</FONT></TD></TR>
     </TABLE>
   >];

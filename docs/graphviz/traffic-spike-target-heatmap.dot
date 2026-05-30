@@ -16,7 +16,7 @@ digraph traffic_spike_target_heatmap {
   target_note [label=<
     <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
       <TR><TD ALIGN="LEFT"><B>Readout:</B> darker cells mean more target pressure per completed wave.</TD></TR>
-      <TR><TD ALIGN="LEFT">Current config: BASE_SPIKE_USERS=100, SPIKE_MULTIPLIER=2, regional_shoppers=30 VUs, storefront_actions=60 browser VUs for 15m.</TD></TR>
+      <TR><TD ALIGN="LEFT">Current config: BASE_SPIKE_USERS=100, SPIKE_MULTIPLIER=2, regional_shoppers=30 VUs, storefront_actions=ramp to 60 browser VUs over 3m, hold 10m, ramp down 2m.</TD></TR>
     </TABLE>
   >];
 

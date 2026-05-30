@@ -541,7 +541,7 @@ k6 cloud run load-tests/grafana-cloud-traffic-spikes.js
 
 The default combined benchmark peaks at 490 VUs: 400 traffic-spike VUs, 30 regional shoppers, and 60 browser-action VUs. Increase the project VU quota before running the default benchmark in Cloud k6, or temporarily lower `BASE_SPIKE_USERS`, `REGIONAL_SHOPPER_VUS`, or `BROWSER_ACTION_VUS` for quota-constrained validation runs.
 
-The browser-action scenario uses sustained browser VUs rather than a single shared iteration. Its default target is at least 8 user-action events per second for every expected action family, which is the browser/Faro proxy for the requested 8 requests per second user-action load. The script publishes a tagged `storefront_user_action_events` counter with `action_family` labels and fails the run when any expected action family is below `USER_ACTION_TARGET_RPS`. Browser-action load is intentionally lower than protocol API load because the full synthetic journey launches Chromium and captures Faro actions. Browser navigation waits for the storefront app shell instead of global network idle so background Faro or image requests do not fail the benchmark before the UI is usable.
+The browser-action scenario uses sustained browser VUs rather than a single shared iteration. Its default target is at least 8 user-action events per second for every expected action family, which is the browser/Faro proxy for the requested 8 requests per second user-action load. Browser VUs ramp to the 60-VU target over 3 minutes, hold for 10 minutes, and ramp down for 2 minutes so Grafana Cloud does not launch every Chromium session in the same startup burst. The script publishes a tagged `storefront_user_action_events` counter with `action_family` labels and fails the run when any expected action family is below `USER_ACTION_TARGET_RPS`. Browser-action load is intentionally lower than protocol API load because the full synthetic journey launches Chromium and captures Faro actions. Browser navigation waits for the storefront app shell instead of global network idle so background Faro or image requests do not fail the benchmark before the UI is usable.
 
 Graphviz traffic-spike diagrams live under `docs/graphviz/` and are generated from the current default benchmark profile: `BASE_SPIKE_USERS=100`, `SPIKE_MULTIPLIER=2`, `REGIONAL_SHOPPER_VUS=30`, and `BROWSER_ACTION_VUS=60`. The Grafana dashboard `Ensemble Traffic Spike Graphviz Model` uses the dark heatmap DOT from `docs/graphviz/traffic-spike-target-heatmap-dark.dot` and the HTML heatmap from `docs/graphviz/traffic-spike-target-heatmap.html`; update it with `gcx dashboards update ensemble-traffic-spike-graphviz -f observability/grafana/dashboards/traffic-spike-graphviz.json` after refreshing the dashboard manifest with `gcx dashboards get ensemble-traffic-spike-graphviz -o json`. Dashboard URL: `https://orenlion.grafana.net/d/6d68e547-2aac-4f8c-bc87-73139bff4816/ensemble-traffic-spike-graphviz-model`.
 
@@ -559,6 +559,9 @@ Optional knobs for the combined scenarios:
 - `USER_ACTION_TARGET_RPS`: minimum target rate for every expected browser user-action family, default `8`.
 - `BROWSER_ACTION_VUS`: concurrent browser VUs that repeatedly execute the full user-action journey, default `60`.
 - `BROWSER_ACTION_DURATION`: duration for sustained browser user-action load, default `TEST_DURATION` or `15m`.
+- `BROWSER_ACTION_RAMP_UP`: browser-action ramp-up duration, default `3m`.
+- `BROWSER_ACTION_HOLD`: browser-action hold duration, default `10m`.
+- `BROWSER_ACTION_RAMP_DOWN`: browser-action ramp-down duration, default `2m`.
 
 The browser action check covers:
 
