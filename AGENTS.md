@@ -16,6 +16,7 @@ This repository treats infrastructure, deployment, and observability changes as 
 | Terraform, AWS, EKS, K8s | `skills/infrastructure/SKILLS.md` |
 | Grafana Cloud, Faro, Alloy, k6, dashboards | `skills/observability/SKILLS.md` |
 | IRM incidents and labels | `skills/observability/incident-creation/SKILL.md` |
+| Graphviz diagrams | `skills/graphviz/SKILL.md` |
 | Frontend and Spring Boot services | `skills/coding/SKILLS.md` |
 | Storefront region/localization additions | `skills/coding/add-region-localization/SKILL.md` |
 | Toolchain install and validation | `skills/dependencies/SKILLS.md` |
@@ -49,6 +50,7 @@ For large cross-cutting changes (deploy + observability + app code), run `code-r
 |------|---------------|-------------------|
 | Terraform / K8s / deploy | `skills/infrastructure/SKILLS.md` | `security-auditor` |
 | Grafana / k6 / Faro / IRM | `skills/observability/SKILLS.md` (+ `incident-creation` for incidents) | `test-engineer` |
+| Graphviz diagram creation or generated diagram assets | `skills/graphviz/SKILL.md` | `test-engineer` |
 | App or API behavior | `skills/coding/SKILLS.md` + `test-driven-development` | `code-reviewer` |
 | New storefront region or language | `skills/coding/add-region-localization/SKILL.md` + `frontend-ui-engineering` + `browser-testing-with-devtools` | `test-engineer` |
 | Tooling setup | `skills/dependencies/SKILLS.md` | — |

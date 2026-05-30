@@ -492,11 +492,13 @@ The report is written to `reports/load-tests/load-test-comparison.md`. Generate 
 
 ### k6 Traffic Spike Benchmark
 
-The spike benchmark is `load-tests/grafana-cloud-traffic-spikes.js`. It uses the same regional shopper personas as the regional test, but benchmarks three traffic spikes where each peak is 50% higher than the previous one. The default first spike is now 40 VUs, matching the latest validated 2x benchmark level:
+Slash command alias: `/traffic-spike-load-test`. The repo-local command definition is `.codex/commands/traffic-spike-load-test.md` and points agents at `skills/observability/SKILLS.md` before running the benchmark and post-run reports.
 
-- Spike 1: `40` VUs.
-- Spike 2: `60` VUs.
-- Spike 3: `90` VUs.
+The spike benchmark is `load-tests/grafana-cloud-traffic-spikes.js`. It uses the same regional shopper personas as the regional test, but benchmarks three traffic spikes where each peak is 50% higher than the previous one. The default first spike is now 100 VUs:
+
+- Spike 1: `100` VUs.
+- Spike 2: `150` VUs.
+- Spike 3: `225` VUs.
 
 Each spike ramps quickly, holds for one minute, and then returns to a low recovery load before the next spike. Requests are tagged by `spike`, `region`, `persona`, and endpoint name. The traffic spike script is now the combined benchmark entrypoint: it runs the three-spike API benchmark, the regional shopper load scenario, and the full browser-action synthetic journey that validates Faro user actions and region/language UI behavior.
 

@@ -1,0 +1,13 @@
+digraph traffic_spike {
+  rankdir=LR;
+
+  warmup [label="Warmup\n25 VUs"];
+  spike1 [label="Spike 1\n100 VUs\n~400 req/wave"];
+  recovery1 [label="Recovery\n25 VUs"];
+  spike2 [label="Spike 2\n150 VUs\n~600 req/wave"];
+  recovery2 [label="Recovery\n25 VUs"];
+  spike3 [label="Spike 3\n225 VUs\n~900 req/wave"];
+  rampdown [label="Ramp down\n0 VUs"];
+
+  warmup -> spike1 -> recovery1 -> spike2 -> recovery2 -> spike3 -> rampdown;
+}

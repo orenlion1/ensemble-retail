@@ -5,7 +5,7 @@ import { regionalJourney } from './grafana-cloud-20-user-regional.js';
 import { summaryOutput } from './summary.js';
 import storefrontActions from './synthetic-browser-actions.js';
 
-const baseSpikeUsers = Number(__ENV.BASE_SPIKE_USERS || 40);
+const baseSpikeUsers = Number(__ENV.BASE_SPIKE_USERS || 100);
 const spikeTwoUsers = Math.ceil(baseSpikeUsers * 1.5);
 const spikeThreeUsers = Math.ceil(spikeTwoUsers * 1.5);
 const regionalShopperVus = Number(__ENV.REGIONAL_SHOPPER_VUS || 30);

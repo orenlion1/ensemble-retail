@@ -28,6 +28,7 @@ brew install \
   docker \
   gcx \
   git \
+  graphviz \
   jq \
   k6 \
   kubectx \
@@ -57,6 +58,7 @@ aws --version
 docker --version
 gcx version
 git --version
+dot -V
 java --version
 mvn --version
 node --version
@@ -71,6 +73,24 @@ jq --version
 ```
 
 Record the important versions in the setup notes when reproducing a build or debugging environment differences.
+
+## Graphviz Diagrams
+
+Use Graphviz for local rendering and validation of DOT diagrams before pushing Graphviz panels or diagram assets to Grafana:
+
+```sh
+brew install graphviz
+dot -V
+```
+
+Render a smoke-test SVG:
+
+```sh
+printf 'digraph { warmup -> spike1 -> recovery -> spike2 }' | dot -Tsvg > /tmp/graphviz-smoke-test.svg
+file /tmp/graphviz-smoke-test.svg
+```
+
+Use Graphviz DOT for Grafana Graphviz panel diagrams such as traffic spike stage models, service dependency flows, and request/telemetry paths. Keep DOT node IDs simple and put display text in `label` attributes.
 
 ## Java And Maven
 

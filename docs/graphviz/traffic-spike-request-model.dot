@@ -1,0 +1,161 @@
+digraph traffic_spike_request_model {
+  graph [
+    rankdir=LR,
+    labelloc=t,
+    label="Traffic Spike Request and Counter Model",
+    fontsize=22,
+    fontname="Helvetica",
+    nodesep=0.45,
+    ranksep=0.75
+  ];
+
+  node [
+    shape=box,
+    style="rounded,filled",
+    fontname="Helvetica",
+    fontsize=12,
+    color="#334155",
+    fillcolor="#f8fafc"
+  ];
+
+  edge [
+    color="#475569",
+    arrowsize=0.8,
+    fontname="Helvetica",
+    fontsize=11
+  ];
+
+  note [
+    shape=note,
+    fillcolor="#fff7ed",
+    color="#f97316",
+    label="Totals are not fixed per stage.\nramping-vus loops each active VU.\nActual totals depend on response time,\npersona sleep time, and completed iterations."
+  ];
+
+  avg [
+    shape=component,
+    fillcolor="#ecfeff",
+    color="#0891b2",
+    label="Average per completed\ntraffic-spike iteration\n4 requests / wave"
+  ];
+
+  subgraph cluster_personas {
+    label="Per Completed User Iteration";
+    color="#cbd5e1";
+    style="rounded,dashed";
+    fontsize=16;
+    fontname="Helvetica";
+
+    browser [
+      label="browser\n3 requests\nregion +1",
+      fillcolor="#eef2ff"
+    ];
+
+    cart_builder [
+      label="cart_builder\n4 requests\nregion +1\ncart updates +1",
+      fillcolor="#f0fdf4"
+    ];
+
+    account_manager [
+      label="account_manager\n4 requests\nregion +1",
+      fillcolor="#f8fafc"
+    ];
+
+    sale_hunter [
+      label="sale_hunter\n4 requests\nregion +1\ncart updates +1",
+      fillcolor="#fefce8"
+    ];
+
+    checkout [
+      label="checkout\n5 requests\nregion +1\ncart updates +1\ncheckout attempts +1",
+      fillcolor="#fef2f2"
+    ];
+
+    browser -> cart_builder -> account_manager -> sale_hunter -> checkout [
+      style=invis
+    ];
+  }
+
+  subgraph cluster_stages {
+    label="Expected Per Completed Wave";
+    color="#cbd5e1";
+    style="rounded,dashed";
+    fontsize=16;
+    fontname="Helvetica";
+
+    warmup [
+      label="Warmup / Recovery\n1m, 25 VUs\n~100 requests\n15 cart updates\n5 checkout attempts\n25 region changes",
+      fillcolor="#f1f5f9"
+    ];
+
+    ramp1 [
+      label="Ramp to Spike 1\n30s, 100 VUs\nup to ~400 requests\n60 cart updates\n20 checkout attempts\n100 region changes",
+      fillcolor="#dbeafe"
+    ];
+
+    hold1 [
+      label="Hold Spike 1\n1m, 100 VUs\n~400 requests / wave\n60 cart updates\n20 checkout attempts\n100 region changes",
+      fillcolor="#bfdbfe"
+    ];
+
+    recovery1 [
+      label="Recovery\n1m, 25 VUs\n~100 requests / wave\n15 cart updates\n5 checkout attempts\n25 region changes",
+      fillcolor="#f1f5f9"
+    ];
+
+    ramp2 [
+      label="Ramp to Spike 2\n30s, 150 VUs\nup to ~600 requests\n90 cart updates\n30 checkout attempts\n150 region changes",
+      fillcolor="#fde68a"
+    ];
+
+    hold2 [
+      label="Hold Spike 2\n1m, 150 VUs\n~600 requests / wave\n90 cart updates\n30 checkout attempts\n150 region changes",
+      fillcolor="#fcd34d"
+    ];
+
+    recovery2 [
+      label="Recovery\n1m, 25 VUs\n~100 requests / wave\n15 cart updates\n5 checkout attempts\n25 region changes",
+      fillcolor="#f1f5f9"
+    ];
+
+    ramp3 [
+      label="Ramp to Spike 3\n30s, 225 VUs\nup to ~900 requests\n135 cart updates\n45 checkout attempts\n225 region changes",
+      fillcolor="#fecaca"
+    ];
+
+    hold3 [
+      label="Hold Spike 3\n1m, 225 VUs\n~900 requests / wave\n135 cart updates\n45 checkout attempts\n225 region changes",
+      fillcolor="#fca5a5"
+    ];
+
+    rampdown [
+      label="Ramp down\n1m, 0 VUs\nrequests decrease to 0\ncounters decrease to 0",
+      fillcolor="#e2e8f0"
+    ];
+
+    warmup -> ramp1 -> hold1 -> recovery1 -> ramp2 -> hold2 -> recovery2 -> ramp3 -> hold3 -> rampdown;
+  }
+
+  subgraph cluster_parallel {
+    label="Parallel Scenarios In Combined Script";
+    color="#cbd5e1";
+    style="rounded,dashed";
+    fontsize=16;
+    fontname="Helvetica";
+
+    regional [
+      label="regional_shoppers\n30 VUs\n~4 requests per completed iteration",
+      fillcolor="#ecfdf5"
+    ];
+
+    storefront [
+      label="storefront_actions\n1 browser iteration\nFaro UI actions\nnot simple API request counts",
+      fillcolor="#faf5ff"
+    ];
+  }
+
+  note -> avg;
+  avg -> warmup [label="stage estimates"];
+  avg -> regional [label="parallel load"];
+  checkout -> avg [label="persona average"];
+}

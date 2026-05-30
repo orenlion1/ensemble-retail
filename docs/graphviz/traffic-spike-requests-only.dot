@@ -1,0 +1,91 @@
+digraph traffic_spike_requests_only {
+  graph [
+    rankdir=LR,
+    labelloc=t,
+    label="Traffic Spike Requests per Completed Wave",
+    fontsize=20,
+    fontname="Helvetica",
+    nodesep=0.28,
+    ranksep=0.45,
+    splines=polyline,
+    outputorder=edgesfirst
+  ];
+
+  node [
+    shape=record,
+    style="rounded,filled",
+    fontname="Helvetica",
+    fontsize=11,
+    color="#334155",
+    fillcolor="#f8fafc",
+    margin="0.08,0.05"
+  ];
+
+  edge [
+    color="#475569",
+    arrowsize=0.7,
+    penwidth=1.2,
+    fontname="Helvetica",
+    fontsize=10
+  ];
+
+  note [
+    shape=note,
+    fillcolor="#fff7ed",
+    color="#f97316",
+    label="Estimates assume each active VU completes one iteration.\nActual request totals vary with latency, sleeps, and loop count."
+  ];
+
+  subgraph cluster_persona_math {
+    label="Per iteration request mix";
+    color="#cbd5e1";
+    style="rounded,dashed";
+    fontsize=13;
+    fontname="Helvetica";
+
+    p_browser [label="{browser|3 req}"];
+    p_cart [label="{cart_builder|4 req}"];
+    p_account [label="{account_manager|4 req}"];
+    p_sale [label="{sale_hunter|4 req}"];
+    p_checkout [label="{checkout|5 req}"];
+    p_avg [label="{avg|4 req / VU wave}", fillcolor="#ecfeff", color="#0891b2"];
+
+    p_browser -> p_cart -> p_account -> p_sale -> p_checkout -> p_avg [style=invis];
+  }
+
+  subgraph cluster_stage_flow {
+    label="Stage request model";
+    color="#cbd5e1";
+    style="rounded,dashed";
+    fontsize=13;
+    fontname="Helvetica";
+
+    warmup [label="{Warmup|1m|25 VUs|~100 req}", fillcolor="#f1f5f9"];
+    ramp1 [label="{Ramp 1|30s|100 VUs|up to ~400 req}", fillcolor="#dbeafe"];
+    hold1 [label="{Hold 1|1m|100 VUs|~400 req/wave}", fillcolor="#bfdbfe"];
+    rec1 [label="{Recover|1m|25 VUs|~100 req/wave}", fillcolor="#f1f5f9"];
+    ramp2 [label="{Ramp 2|30s|150 VUs|up to ~600 req}", fillcolor="#fde68a"];
+    hold2 [label="{Hold 2|1m|150 VUs|~600 req/wave}", fillcolor="#fcd34d"];
+    rec2 [label="{Recover|1m|25 VUs|~100 req/wave}", fillcolor="#f1f5f9"];
+    ramp3 [label="{Ramp 3|30s|225 VUs|up to ~900 req}", fillcolor="#fecaca"];
+    hold3 [label="{Hold 3|1m|225 VUs|~900 req/wave}", fillcolor="#fca5a5"];
+    down [label="{Ramp down|1m|0 VUs|→ 0 req}", fillcolor="#e2e8f0"];
+
+    warmup -> ramp1 -> hold1 -> rec1 -> ramp2 -> hold2 -> rec2 -> ramp3 -> hold3 -> down;
+  }
+
+  subgraph cluster_parallel {
+    label="Parallel request load";
+    color="#cbd5e1";
+    style="rounded,dashed";
+    fontsize=13;
+    fontname="Helvetica";
+
+    regional [label="{regional_shoppers|30 VUs|~120 req/wave}", fillcolor="#ecfdf5"];
+    browser_actions [label="{storefront_actions|1 browser iteration|UI/browser requests vary}", fillcolor="#faf5ff"];
+  }
+
+  note -> p_avg [label="basis"];
+  p_avg -> warmup [label="× target VUs"];
+  p_avg -> regional [label="30 × 4"];
+}
