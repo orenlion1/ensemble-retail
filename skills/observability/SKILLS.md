@@ -154,6 +154,14 @@ Required k6 environment:
 
 After each k6 browser-action run, validate Faro user-action telemetry in Grafana with `gcx logs query` and confirm expected `ensemble.user.action` and `faro.user.action` events are present for browser-based flows. For frontend deployments, generate a report in `reports/frontend-user-actions/` that includes total events, counts by action, counts by region/locale, Faro user-action durations, and missing required post-change actions.
 
+After any k6 load test concludes, update the load-test comparison artifacts:
+
+```bash
+node scripts/report-load-tests.mjs
+```
+
+This produces `reports/load-tests/load-test-comparison.md`, `reports/load-tests/comparison/load-test-runs.csv`, and SVG charts for results by date, duration, VUH cost, latest HTTP failure rate, latest check pass rate, and latest HTTP p95. Run it for passed, failed, and error runs whenever Grafana/k6 returns usable run metadata. Keep raw `reports/load-tests/k6-*.json` pulls ignored because Grafana Cloud run payloads can include runtime token fields.
+
 Document uploaded k6 Cloud test URLs after upload.
 
 ## Grafana IRM

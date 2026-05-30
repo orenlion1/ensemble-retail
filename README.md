@@ -463,13 +463,13 @@ The most recent Cloud run started successfully at `https://orenlion.grafana.net/
 
 ### k6 Load Test Comparison Report
 
-After pulling k6 Cloud run data into `reports/load-tests/`, generate the comparison report and visualizations:
+After every k6 load test concludes, pull or preserve the latest run data under `reports/load-tests/`, then generate the comparison report and visualizations:
 
 ```sh
 node scripts/report-load-tests.mjs
 ```
 
-The report is written to `reports/load-tests/load-test-comparison.md`. Each run is identified by test name, run ID, and date. The generated `reports/load-tests/comparison/` folder includes:
+The report is written to `reports/load-tests/load-test-comparison.md`. Generate it for passed, failed, and error runs whenever Grafana/k6 returns usable run metadata. Each run is identified by test name, run ID, and date. The generated `reports/load-tests/comparison/` folder includes:
 
 - `load-test-runs.csv` for spreadsheet comparisons.
 - `load-test-results-by-date.svg` for pass/fail/error history.
