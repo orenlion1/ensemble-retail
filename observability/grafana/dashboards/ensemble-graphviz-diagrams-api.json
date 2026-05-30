@@ -1,344 +1,480 @@
 {
-  "dashboard": {
-    "id": null,
-    "uid": "ensemble-graphviz-diagrams",
-    "title": "Ensemble Graphviz Diagrams",
+  "apiVersion": "dashboard.grafana.app/v2",
+  "kind": "Dashboard",
+  "metadata": {
+    "annotations": {
+      "grafana.app/createdBy": "service-account:ffn1sscdjmscge",
+      "grafana.app/message": "Add load run history table to Load Test tab",
+      "grafana.app/updatedBy": "service-account:ffn1sscdjmscge",
+      "grafana.app/updatedTimestamp": "2026-05-30T23:30:01Z"
+    },
+    "creationTimestamp": "2026-05-30T21:25:26Z",
+    "generation": 11,
+    "labels": {
+      "grafana.app/deprecatedInternalID": "2689969128804352"
+    },
+    "name": "ensemble-graphviz-diagrams",
+    "namespace": "stacks-1665320",
+    "resourceVersion": "2060866349546078488",
+    "uid": "2b774a56-5210-4abe-b58b-57f772616c4e"
+  },
+  "spec": {
+    "annotations": [
+      {
+        "kind": "AnnotationQuery",
+        "spec": {
+          "builtIn": true,
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations \u0026 Alerts",
+          "query": {
+            "datasource": {
+              "name": "-- Grafana --"
+            },
+            "group": "grafana",
+            "kind": "DataQuery",
+            "spec": {},
+            "version": "v0"
+          }
+        }
+      }
+    ],
+    "cursorSync": "Off",
+    "editable": true,
+    "elements": {
+      "panel-1": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "group": "",
+                      "kind": "DataQuery",
+                      "spec": {},
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Source: docs/diagrams/network-diagram.dot",
+          "id": 1,
+          "links": [],
+          "title": "Network Diagram",
+          "vizConfig": {
+            "group": "grafana-graphviz-panel",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
+              "options": {
+                "_assistantHelp": "",
+                "builderModeActions": {},
+                "dotDiagram": "digraph network_diagram {\n  rankdir=LR;\n  label=\"Ensemble-Grafana Network Diagram\";\n\n  graph [\n    fontname=\"Helvetica\",\n    fontsize=20,\n    labelloc=t,\n    bgcolor=\"#0b1220\",\n    fontcolor=\"#f8fafc\",\n    pad=0.25,\n    nodesep=0.45,\n    ranksep=0.7\n  ];\n  node [\n    shape=box,\n    style=\"rounded,filled\",\n    fontname=\"Helvetica\",\n    fontsize=11,\n    color=\"#64748b\",\n    fillcolor=\"#111827\",\n    fontcolor=\"#f8fafc\",\n    margin=\"0.12,0.08\"\n  ];\n  edge [\n    fontname=\"Helvetica\",\n    fontsize=9,\n    color=\"#94a3b8\",\n    fontcolor=\"#f8fafc\",\n    arrowsize=0.7\n  ];\n\n\n  shopper [label=\"Shopper browser\", fillcolor=\"#1e3a8a\"];\n  registrar [label=\"Domain registrar\"];\n  route53 [label=\"Route53 hosted zone\\nensemble-grafana.com\", fillcolor=\"#164e63\"];\n  acm [label=\"ACM certificate\\nus-east-1 / ISSUED\", fillcolor=\"#155e75\"];\n  edgeWaf [label=\"AWS WAF\\nCloudFront scope\", fillcolor=\"#7f1d1d\"];\n  cloudfront [label=\"CloudFront distribution\\nensemble-grafana.com\", fillcolor=\"#1e3a8a\"];\n  staticS3 [label=\"S3 frontend bucket\\nprivate origin\", fillcolor=\"#713f12\"];\n  imageS3 [label=\"S3 inventory images bucket\", fillcolor=\"#713f12\"];\n  logsS3 [label=\"S3 edge/API logs bucket\\nCloudFront + ALB logs\", fillcolor=\"#713f12\"];\n  regionalWaf [label=\"AWS WAF\\nregional API scope\", fillcolor=\"#7f1d1d\"];\n  apiAlb [label=\"API ingress / ALB\\napi.ensemble-grafana.com\", fillcolor=\"#3730a3\"];\n  cognito [label=\"AWS Cognito\\nGoogle federation\", fillcolor=\"#4c1d95\"];\n  google [label=\"Google Identity Provider\", fillcolor=\"#4c1d95\"];\n  postgres [label=\"Postgres inventory DB\", shape=cylinder, fillcolor=\"#14532d\"];\n  dynamodb [label=\"DynamoDB\\ncart/account state\", shape=cylinder, fillcolor=\"#14532d\"];\n  cloudwatch [label=\"AWS CloudWatch\\nRDS metrics\", fillcolor=\"#334155\"];\n  cloudwatchScrape [label=\"Grafana Cloud Provider\\nAWS/RDS scrape job\", fillcolor=\"#581c87\"];\n  grafana [label=\"Grafana Cloud\\nFaro, metrics, logs, traces, profiles\", fillcolor=\"#6b21a8\"];\n  k6 [label=\"Grafana Cloud k6\\nload tests and browser checks\", fillcolor=\"#6b21a8\"];\n  accountBaseline [label=\"Terraform account-baseline stack\\nSSM host-management setting\", fillcolor=\"#334155\"];\n\n  subgraph cluster_eks {\n    label=\"EKS cluster\";\n    color=\"#64748b\";\n    fontcolor=\"#f8fafc\";\n    style=\"rounded,dashed\";\n    beyla [label=\"Grafana Beyla\", fillcolor=\"#581c87\"];\n    alloy [label=\"Grafana Alloy\\nOTel collector\", fillcolor=\"#581c87\"];\n    inventory [label=\"inventory-service\\nSpring Boot pods\", fillcolor=\"#14532d\"];\n    cart [label=\"cart-service\\nSpring Boot pods\", fillcolor=\"#14532d\"];\n    account [label=\"account-service\\nSpring Boot pods\", fillcolor=\"#14532d\"];\n  }\n\n  registrar -\u003e route53 [label=\"NS delegation\"];\n  route53 -\u003e cloudfront [label=\"A / AAAA alias\"];\n  acm -\u003e cloudfront [label=\"TLS certificate\"];\n  shopper -\u003e edgeWaf [label=\"HTTPS storefront\"];\n  edgeWaf -\u003e cloudfront;\n  shopper -\u003e cognito [label=\"Google sign-in\"];\n  cognito -\u003e google;\n  cloudfront -\u003e staticS3 [label=\"static assets\"];\n  cloudfront -\u003e imageS3 [label=\"inventory images\"];\n  cloudfront -\u003e logsS3 [label=\"standard access logs\"];\n  cloudfront -\u003e regionalWaf [label=\"/api/*\"];\n  regionalWaf -\u003e apiAlb;\n  apiAlb -\u003e logsS3 [label=\"ALB access logs\"];\n  apiAlb -\u003e inventory;\n  apiAlb -\u003e cart;\n  apiAlb -\u003e account;\n  inventory -\u003e postgres;\n  cart -\u003e dynamodb;\n  account -\u003e dynamodb;\n  postgres -\u003e cloudwatch [label=\"RDS metrics\"];\n  cloudwatchScrape -\u003e cloudwatch [label=\"assume AWS role\\nand scrape metrics\"];\n  cloudwatchScrape -\u003e grafana [label=\"CloudWatch metrics\"];\n  shopper -\u003e grafana [label=\"Faro web telemetry\"];\n  accountBaseline -\u003e beyla [label=\"SSM default role setting\"];\n  k6 -\u003e cloudfront [label=\"regional, spike, browser checks\\nwith traceparent\"];\n  k6 -\u003e grafana [label=\"test results + trace correlation\"];\n  beyla -\u003e alloy [label=\"zero-code HTTP telemetry\"];\n  inventory -\u003e alloy [label=\"OTel + Prometheus\"];\n  cart -\u003e alloy [label=\"OTel + Prometheus\"];\n  account -\u003e alloy [label=\"OTel + Prometheus\"];\n  alloy -\u003e grafana;\n}\n",
+                "dotQueryConfig": {
+                  "fieldName": "dot_diagram"
+                },
+                "edgeOverrides": [],
+                "inputMode": "code",
+                "layoutEngine": "dot",
+                "namedThresholds": [],
+                "nodeOverrides": [],
+                "rankDirection": "TB",
+                "splineType": "ortho"
+              }
+            },
+            "version": "0.0.5"
+          }
+        }
+      },
+      "panel-11": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "group": "",
+                      "kind": "DataQuery",
+                      "spec": {},
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Source: docs/diagrams/observability-capabilities-flow.dot",
+          "id": 11,
+          "links": [],
+          "title": "Observability Architecture",
+          "vizConfig": {
+            "group": "grafana-graphviz-panel",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
+              "options": {
+                "_assistantHelp": "",
+                "builderModeActions": {},
+                "dotDiagram": "digraph observability_capabilities_flow {\n  rankdir=LR;\n  label=\"Observability Capabilities Flow\";\n\n  graph [\n    fontname=\"Helvetica\",\n    fontsize=20,\n    labelloc=t,\n    bgcolor=\"#0b1220\",\n    fontcolor=\"#f8fafc\",\n    pad=0.25,\n    nodesep=0.45,\n    ranksep=0.7\n  ];\n  node [\n    shape=box,\n    style=\"rounded,filled\",\n    fontname=\"Helvetica\",\n    fontsize=11,\n    color=\"#64748b\",\n    fillcolor=\"#111827\",\n    fontcolor=\"#f8fafc\",\n    margin=\"0.12,0.08\"\n  ];\n  edge [\n    fontname=\"Helvetica\",\n    fontsize=9,\n    color=\"#94a3b8\",\n    fontcolor=\"#f8fafc\",\n    arrowsize=0.7\n  ];\n\n\n  browser [label=\"Shopper browser\\nReact storefront\", fillcolor=\"#1e3a8a\"];\n  faro [label=\"Grafana Faro SDK\\nweb vitals, errors, logs, sessions, user actions\", fillcolor=\"#6b21a8\"];\n  tracing [label=\"Faro web tracing\\ntrace context on fetch/XHR\", fillcolor=\"#6b21a8\"];\n  cloudfront [label=\"CloudFront\\nstatic + /api/* routing\", fillcolor=\"#1e3a8a\"];\n  ingress [label=\"EKS API ingress / ALB\", fillcolor=\"#3730a3\"];\n  edgeLogs [label=\"S3 access logs\\nCloudFront + ALB\", fillcolor=\"#713f12\"];\n\n  subgraph cluster_services {\n    label=\"Spring Boot services\";\n    color=\"#64748b\";\n    fontcolor=\"#f8fafc\";\n    style=\"rounded,dashed\";\n    inventory [label=\"inventory-service\", fillcolor=\"#14532d\"];\n    cart [label=\"cart-service\", fillcolor=\"#14532d\"];\n    account [label=\"account-service\", fillcolor=\"#14532d\"];\n  }\n\n  actuator [label=\"Spring Actuator\\n/actuator/prometheus\", fillcolor=\"#164e63\"];\n  otel [label=\"Spring OpenTelemetry\\ntraces + resource attrs\", fillcolor=\"#164e63\"];\n  logs [label=\"Kubernetes pod logs\\nservice labels\", fillcolor=\"#164e63\"];\n  beyla [label=\"Grafana Beyla\\nzero-code HTTP telemetry\", fillcolor=\"#6b21a8\"];\n  pyroscope [label=\"Pyroscope Alloy DaemonSet\\nJVM profiles\", fillcolor=\"#6b21a8\"];\n  alloy [label=\"Grafana Alloy\\nOTel collector\", fillcolor=\"#6b21a8\"];\n  cloudwatch [label=\"AWS CloudWatch\\nRDS metrics\", fillcolor=\"#334155\"];\n  cloudwatchScrape [label=\"Grafana Cloud Provider\\nAWS/RDS scrape job\", fillcolor=\"#6b21a8\"];\n  synth [label=\"Grafana Synthetic Monitoring\\nHTTP, DNS, Ping, TCP\", fillcolor=\"#6b21a8\"];\n  k6 [label=\"Grafana Cloud k6\\nregional load, spike benchmark, browser actions\", fillcolor=\"#6b21a8\"];\n  k6Tracing [label=\"k6 Tempo instrumentation\\nW3C trace context\", fillcolor=\"#6b21a8\"];\n  irm [label=\"Grafana IRM\\nincidents, labels, on-call schedule\", fillcolor=\"#6b21a8\"];\n\n  grafana [label=\"Grafana Cloud stack\\norenlion.grafana.net\", fillcolor=\"#4c1d95\"];\n  frontendObs [label=\"Frontend Observability\\nFaro events and exceptions\", fillcolor=\"#581c87\"];\n  tempo [label=\"Traces\\nfrontend-to-backend waterfalls\", fillcolor=\"#581c87\"];\n  prometheus [label=\"Metrics\\nRED + infrastructure signals\", fillcolor=\"#581c87\"];\n  loki [label=\"Logs\\nnamespace + service labels\", fillcolor=\"#581c87\"];\n  profiles [label=\"Profiles\\nJava CPU profiles\", fillcolor=\"#581c87\"];\n  smResults [label=\"Synthetic results\\nuptime, TLS, DNS, latency\", fillcolor=\"#581c87\"];\n  k6Results [label=\"k6 results\\nVUs, checks, thresholds\", fillcolor=\"#581c87\"];\n  incidents [label=\"IRM workflows\\nseverity, ownership, response\", fillcolor=\"#581c87\"];\n\n  browser -\u003e faro [label=\"page views, errors, user actions\"];\n  browser -\u003e tracing [label=\"HTTP requests with traceparent\"];\n  tracing -\u003e cloudfront -\u003e ingress;\n  cloudfront -\u003e edgeLogs [label=\"standard access logs\"];\n  ingress -\u003e edgeLogs [label=\"ALB access logs\"];\n  ingress -\u003e inventory;\n  ingress -\u003e cart;\n  ingress -\u003e account;\n  faro -\u003e grafana [label=\"collector endpoint\"];\n  tracing -\u003e grafana [label=\"frontend spans\"];\n  inventory -\u003e actuator;\n  cart -\u003e actuator;\n  account -\u003e actuator;\n  inventory -\u003e otel;\n  cart -\u003e otel;\n  account -\u003e otel;\n  inventory -\u003e logs;\n  cart -\u003e logs;\n  account -\u003e logs;\n  inventory -\u003e beyla [label=\"HTTP telemetry\"];\n  cart -\u003e beyla [label=\"HTTP telemetry\"];\n  account -\u003e beyla [label=\"HTTP telemetry\"];\n  inventory -\u003e pyroscope [label=\"JVM attach\"];\n  cart -\u003e pyroscope [label=\"JVM attach\"];\n  account -\u003e pyroscope [label=\"JVM attach\"];\n  actuator -\u003e alloy [label=\"Prometheus scrape\"];\n  otel -\u003e alloy [label=\"OTLP traces\"];\n  logs -\u003e alloy [label=\"pod log collection\"];\n  edgeLogs -\u003e grafana [label=\"RCA source for edge/API status codes\"];\n  beyla -\u003e alloy [label=\"metrics + traces\"];\n  pyroscope -\u003e grafana [label=\"profiles write\"];\n  alloy -\u003e grafana [label=\"OTLP export\"];\n  cloudwatchScrape -\u003e cloudwatch [label=\"assume AWS role and scrape AWS/RDS metrics\"];\n  cloudwatch -\u003e grafana [label=\"RDS CloudWatch samples\"];\n  synth -\u003e cloudfront [label=\"checks production URL and API health\"];\n  synth -\u003e grafana [label=\"check samples\"];\n  k6 -\u003e k6Tracing;\n  k6Tracing -\u003e cloudfront [label=\"load checks with traceparent\"];\n  k6 -\u003e grafana [label=\"test metrics + trace correlation\"];\n  irm -\u003e grafana [label=\"incident and schedule state\"];\n  grafana -\u003e frontendObs;\n  grafana -\u003e tempo;\n  grafana -\u003e prometheus;\n  grafana -\u003e loki;\n  grafana -\u003e profiles;\n  grafana -\u003e smResults;\n  grafana -\u003e k6Results;\n  grafana -\u003e incidents;\n}\n",
+                "dotQueryConfig": {
+                  "fieldName": "dot_diagram"
+                },
+                "edgeOverrides": [],
+                "inputMode": "code",
+                "layoutEngine": "dot",
+                "namedThresholds": [],
+                "nodeOverrides": [],
+                "rankDirection": "TB",
+                "splineType": "ortho"
+              }
+            },
+            "version": "0.0.5"
+          }
+        }
+      },
+      "panel-16": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "group": "",
+                      "kind": "DataQuery",
+                      "spec": {},
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Source: docs/graphviz/traffic-spike-target-heatmap-dark.dot",
+          "id": 16,
+          "links": [],
+          "title": "Traffic Spike Target Heatmap Dark",
+          "vizConfig": {
+            "group": "grafana-graphviz-panel",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
+              "options": {
+                "_assistantHelp": "",
+                "builderModeActions": {},
+                "dotDiagram": "digraph traffic_spike_target_heatmap_dark {\n  graph [rankdir=TB, labelloc=t, label=\"Traffic Spike Test Targets\", bgcolor=\"#0b1220\", fontcolor=\"#f8fafc\", fontsize=22, fontname=\"Helvetica\", nodesep=0.35, ranksep=0.4];\n  node [shape=plain, fontname=\"Helvetica\", fontcolor=\"#f8fafc\"];\n  edge [style=invis];\n\n  target_heatmap [label=\u003c\n    \u003cTABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"7\" COLOR=\"#475569\"\u003e\n      \u003cTR\u003e\u003cTD BGCOLOR=\"#1e3a5f\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eStage\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e3a5f\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eVUs\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e3a5f\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eRequests / wave\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#14532d\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eCart updates\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#713f12\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eCheckout attempts\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e40af\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eRegion changes\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n      \u003cTR\u003e\u003cTD ALIGN=\"LEFT\" BGCOLOR=\"#111827\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eWarmup / Recovery\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#111827\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e25\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#334155\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e100\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#166534\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e15\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#854d0e\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e5\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1d4ed8\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e25\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n      \u003cTR\u003e\u003cTD ALIGN=\"LEFT\" BGCOLOR=\"#111827\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eSpike 1\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#111827\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e100\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#2563eb\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e400\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#15803d\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e60\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#a16207\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e20\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#2563eb\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e100\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n      \u003cTR\u003e\u003cTD ALIGN=\"LEFT\" BGCOLOR=\"#111827\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eSpike 2\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#111827\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e200\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e40af\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e800\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#15803d\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e120\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#92400e\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e40\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e40af\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e200\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n      \u003cTR\u003e\u003cTD ALIGN=\"LEFT\" BGCOLOR=\"#111827\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eSpike 3\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#111827\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e400\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e3a8a\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e1600\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#166534\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e240\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#713f12\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e80\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e3a8a\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e400\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n    \u003c/TABLE\u003e\n  \u003e];\n\n  target_note [label=\u003c\n    \u003cTABLE BORDER=\"0\" CELLBORDER=\"0\" CELLSPACING=\"0\" CELLPADDING=\"4\"\u003e\n      \u003cTR\u003e\u003cTD ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eReadout:\u003c/B\u003e brighter cells mean more target pressure per completed wave.\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n      \u003cTR\u003e\u003cTD ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eConfig: base=100, multiplier=2.\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n      \u003cTR\u003e\u003cTD ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eRegional shoppers: 30 VUs.\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n      \u003cTR\u003e\u003cTD ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eStorefront actions: 5 browser VUs.\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n      \u003cTR\u003e\u003cTD ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eDuration: 10m.\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n    \u003c/TABLE\u003e\n  \u003e];\n\n  target_heatmap -\u003e target_note;\n}\n",
+                "dotQueryConfig": {
+                  "fieldName": "dot_diagram"
+                },
+                "edgeOverrides": [],
+                "inputMode": "code",
+                "layoutEngine": "dot",
+                "namedThresholds": [],
+                "nodeOverrides": [],
+                "rankDirection": "TB",
+                "splineType": "ortho"
+              }
+            },
+            "version": "0.0.5"
+          }
+        }
+      },
+      "panel-17": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "group": "",
+                      "kind": "DataQuery",
+                      "spec": {},
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Source: docs/graphviz/load-run-table.dot",
+          "id": 17,
+          "links": [],
+          "title": "Load Run History Table",
+          "vizConfig": {
+            "group": "grafana-graphviz-panel",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
+              "options": {
+                "_assistantHelp": "",
+                "builderModeActions": {},
+                "dotDiagram": "digraph load_run_table {\n  graph [\n    rankdir=TB,\n    bgcolor=\"#ffffff\",\n    pad=\"0.35\",\n    nodesep=\"0.35\",\n    ranksep=\"0.45\",\n    fontname=\"Arial\",\n    labelloc=\"t\",\n    label=\"Ensemble-Grafana k6 Traffic Spike Run History\"\n  ];\n\n  node [\n    shape=plain,\n    fontname=\"Arial\"\n  ];\n\n  runs [\n    label=\u003c\n      \u003cTABLE BORDER=\"0\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"7\" COLOR=\"#d1d5db\"\u003e\n        \u003cTR\u003e\n          \u003cTD BGCOLOR=\"#111827\"\u003e\u003cFONT COLOR=\"#ffffff\"\u003e\u003cB\u003eStarted\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#111827\"\u003e\u003cFONT COLOR=\"#ffffff\"\u003e\u003cB\u003eRun\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#111827\"\u003e\u003cFONT COLOR=\"#ffffff\"\u003e\u003cB\u003eResult\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#111827\"\u003e\u003cFONT COLOR=\"#ffffff\"\u003e\u003cB\u003eDuration\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#111827\"\u003e\u003cFONT COLOR=\"#ffffff\"\u003e\u003cB\u003eTotal VUH\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#111827\"\u003e\u003cFONT COLOR=\"#ffffff\"\u003e\u003cB\u003eProtocol\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#111827\"\u003e\u003cFONT COLOR=\"#ffffff\"\u003e\u003cB\u003eBrowser\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD\u003e05/30/2026 18:27\u003c/TD\u003e\n          \u003cTD\u003e\u003cFONT POINT-SIZE=\"11\"\u003e7648780\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#dcfce7\"\u003e\u003cFONT COLOR=\"#166534\"\u003e\u003cB\u003ePASS\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD\u003e15.0m\u003c/TD\u003e\n          \u003cTD\u003e129.00\u003c/TD\u003e\n          \u003cTD\u003e117.16\u003c/TD\u003e\n          \u003cTD\u003e11.84\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD\u003e05/30/2026 18:01\u003c/TD\u003e\n          \u003cTD\u003e\u003cFONT POINT-SIZE=\"11\"\u003e7648612\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#fee2e2\"\u003e\u003cFONT COLOR=\"#991b1b\"\u003e\u003cB\u003eFAIL\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD\u003e15.0m\u003c/TD\u003e\n          \u003cTD\u003e129.00\u003c/TD\u003e\n          \u003cTD\u003e117.16\u003c/TD\u003e\n          \u003cTD\u003e11.84\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD\u003e05/30/2026 17:43\u003c/TD\u003e\n          \u003cTD\u003e\u003cFONT POINT-SIZE=\"11\"\u003e7648492\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#fee2e2\"\u003e\u003cFONT COLOR=\"#991b1b\"\u003e\u003cB\u003eFAIL\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD\u003e15.0m\u003c/TD\u003e\n          \u003cTD\u003e225.99\u003c/TD\u003e\n          \u003cTD\u003e94.35\u003c/TD\u003e\n          \u003cTD\u003e131.64\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD\u003e05/30/2026 17:37\u003c/TD\u003e\n          \u003cTD\u003e\u003cFONT POINT-SIZE=\"11\"\u003e7648480\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#fef3c7\"\u003e\u003cFONT COLOR=\"#92400e\"\u003e\u003cB\u003eERROR\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD\u003e1.8m\u003c/TD\u003e\n          \u003cTD\u003e30.05\u003c/TD\u003e\n          \u003cTD\u003e12.55\u003c/TD\u003e\n          \u003cTD\u003e17.50\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD\u003e05/30/2026 17:36\u003c/TD\u003e\n          \u003cTD\u003e\u003cFONT POINT-SIZE=\"11\"\u003e7648472\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#fef3c7\"\u003e\u003cFONT COLOR=\"#92400e\"\u003e\u003cB\u003eERROR\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD\u003e0.5m\u003c/TD\u003e\n          \u003cTD\u003e7.73\u003c/TD\u003e\n          \u003cTD\u003e3.23\u003c/TD\u003e\n          \u003cTD\u003e4.50\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD\u003e05/30/2026 16:55\u003c/TD\u003e\n          \u003cTD\u003e\u003cFONT POINT-SIZE=\"11\"\u003e7648337\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#dcfce7\"\u003e\u003cFONT COLOR=\"#166534\"\u003e\u003cB\u003ePASS\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD\u003e10.0m\u003c/TD\u003e\n          \u003cTD\u003e80.01\u003c/TD\u003e\n          \u003cTD\u003e71.67\u003c/TD\u003e\n          \u003cTD\u003e8.34\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD\u003e05/30/2026 16:50\u003c/TD\u003e\n          \u003cTD\u003e\u003cFONT POINT-SIZE=\"11\"\u003e7648323\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#fef3c7\"\u003e\u003cFONT COLOR=\"#92400e\"\u003e\u003cB\u003eERROR\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD\u003e1.6m\u003c/TD\u003e\n          \u003cTD\u003e12.41\u003c/TD\u003e\n          \u003cTD\u003e11.11\u003c/TD\u003e\n          \u003cTD\u003e1.30\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD\u003e05/30/2026 16:45\u003c/TD\u003e\n          \u003cTD\u003e\u003cFONT POINT-SIZE=\"11\"\u003e7648315\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#fef3c7\"\u003e\u003cFONT COLOR=\"#92400e\"\u003e\u003cB\u003eERROR\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD\u003e1.4m\u003c/TD\u003e\n          \u003cTD\u003e15.24\u003c/TD\u003e\n          \u003cTD\u003e10.40\u003c/TD\u003e\n          \u003cTD\u003e4.84\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD\u003e05/30/2026 16:23\u003c/TD\u003e\n          \u003cTD\u003e\u003cFONT POINT-SIZE=\"11\"\u003e7648249\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#fee2e2\"\u003e\u003cFONT COLOR=\"#991b1b\"\u003e\u003cB\u003eFAIL\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD\u003e10.0m\u003c/TD\u003e\n          \u003cTD\u003e157.34\u003c/TD\u003e\n          \u003cTD\u003e65.69\u003c/TD\u003e\n          \u003cTD\u003e91.65\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD\u003e05/30/2026 16:20\u003c/TD\u003e\n          \u003cTD\u003e\u003cFONT POINT-SIZE=\"11\"\u003e7648230\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#fef3c7\"\u003e\u003cFONT COLOR=\"#92400e\"\u003e\u003cB\u003eERROR\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD\u003e0.5m\u003c/TD\u003e\n          \u003cTD\u003e7.73\u003c/TD\u003e\n          \u003cTD\u003e3.23\u003c/TD\u003e\n          \u003cTD\u003e4.50\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD\u003e05/30/2026 15:46\u003c/TD\u003e\n          \u003cTD\u003e\u003cFONT POINT-SIZE=\"11\"\u003e7648063\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#fee2e2\"\u003e\u003cFONT COLOR=\"#991b1b\"\u003e\u003cB\u003eFAIL\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD\u003e10.0m\u003c/TD\u003e\n          \u003cTD\u003e157.34\u003c/TD\u003e\n          \u003cTD\u003e65.69\u003c/TD\u003e\n          \u003cTD\u003e91.65\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD\u003e05/30/2026 14:56\u003c/TD\u003e\n          \u003cTD\u003e\u003cFONT POINT-SIZE=\"11\"\u003e7647787\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#dcfce7\"\u003e\u003cFONT COLOR=\"#166534\"\u003e\u003cB\u003ePASS\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD\u003e10.0m\u003c/TD\u003e\n          \u003cTD\u003e73.34\u003c/TD\u003e\n          \u003cTD\u003e71.67\u003c/TD\u003e\n          \u003cTD\u003e1.67\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD\u003e05/30/2026 14:40\u003c/TD\u003e\n          \u003cTD\u003e\u003cFONT POINT-SIZE=\"11\"\u003e7647743\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#dcfce7\"\u003e\u003cFONT COLOR=\"#166534\"\u003e\u003cB\u003ePASS\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD\u003e10.0m\u003c/TD\u003e\n          \u003cTD\u003e18.01\u003c/TD\u003e\n          \u003cTD\u003e16.34\u003c/TD\u003e\n          \u003cTD\u003e1.67\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD\u003e05/30/2026 10:55\u003c/TD\u003e\n          \u003cTD\u003e\u003cFONT POINT-SIZE=\"11\"\u003e7646958\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#dcfce7\"\u003e\u003cFONT COLOR=\"#166534\"\u003e\u003cB\u003ePASS\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD\u003e8.5m\u003c/TD\u003e\n          \u003cTD\u003e12.75\u003c/TD\u003e\n          \u003cTD\u003e12.75\u003c/TD\u003e\n          \u003cTD\u003e0.00\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD\u003e05/30/2026 10:29\u003c/TD\u003e\n          \u003cTD\u003e\u003cFONT POINT-SIZE=\"11\"\u003e7646874\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#dcfce7\"\u003e\u003cFONT COLOR=\"#166534\"\u003e\u003cB\u003ePASS\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD\u003e8.5m\u003c/TD\u003e\n          \u003cTD\u003e6.38\u003c/TD\u003e\n          \u003cTD\u003e6.38\u003c/TD\u003e\n          \u003cTD\u003e0.00\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD\u003e05/27/2026 13:05\u003c/TD\u003e\n          \u003cTD\u003e\u003cFONT POINT-SIZE=\"11\"\u003e7627516\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#fee2e2\"\u003e\u003cFONT COLOR=\"#991b1b\"\u003e\u003cB\u003eFAIL\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD\u003e8.5m\u003c/TD\u003e\n          \u003cTD\u003e6.38\u003c/TD\u003e\n          \u003cTD\u003e6.38\u003c/TD\u003e\n          \u003cTD\u003e0.00\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD\u003e05/27/2026 12:41\u003c/TD\u003e\n          \u003cTD\u003e\u003cFONT POINT-SIZE=\"11\"\u003e7627390\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#fee2e2\"\u003e\u003cFONT COLOR=\"#991b1b\"\u003e\u003cB\u003eFAIL\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD\u003e8.5m\u003c/TD\u003e\n          \u003cTD\u003e6.38\u003c/TD\u003e\n          \u003cTD\u003e6.38\u003c/TD\u003e\n          \u003cTD\u003e0.00\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD\u003e05/27/2026 12:06\u003c/TD\u003e\n          \u003cTD\u003e\u003cFONT POINT-SIZE=\"11\"\u003e7627249\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#dcfce7\"\u003e\u003cFONT COLOR=\"#166534\"\u003e\u003cB\u003ePASS\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD\u003e8.5m\u003c/TD\u003e\n          \u003cTD\u003e6.38\u003c/TD\u003e\n          \u003cTD\u003e6.38\u003c/TD\u003e\n          \u003cTD\u003e0.00\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD\u003e05/25/2026 08:58\u003c/TD\u003e\n          \u003cTD\u003e\u003cFONT POINT-SIZE=\"11\"\u003e7612573\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#dcfce7\"\u003e\u003cFONT COLOR=\"#166534\"\u003e\u003cB\u003ePASS\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD\u003e8.5m\u003c/TD\u003e\n          \u003cTD\u003e6.38\u003c/TD\u003e\n          \u003cTD\u003e6.38\u003c/TD\u003e\n          \u003cTD\u003e0.00\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD\u003e05/25/2026 08:57\u003c/TD\u003e\n          \u003cTD\u003e\u003cFONT POINT-SIZE=\"11\"\u003e7612567\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#fef3c7\"\u003e\u003cFONT COLOR=\"#92400e\"\u003e\u003cB\u003eERROR\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD\u003e0.6m\u003c/TD\u003e\n          \u003cTD\u003e1.00\u003c/TD\u003e\n          \u003cTD\u003e1.00\u003c/TD\u003e\n          \u003cTD\u003e0.00\u003c/TD\u003e\n        \u003c/TR\u003e\n      \u003c/TABLE\u003e\n    \u003e\n  ];\n\n  summary [\n    label=\u003c\n      \u003cTABLE BORDER=\"0\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"8\" COLOR=\"#d1d5db\"\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#f3f4f6\"\u003e\u003cB\u003eSummary\u003c/B\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD ALIGN=\"LEFT\"\u003eRuns: 20\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD ALIGN=\"LEFT\"\u003ePassed: 8\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD ALIGN=\"LEFT\"\u003eFailed: 6\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD ALIGN=\"LEFT\"\u003eErrors: 6\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD ALIGN=\"LEFT\"\u003ePass rate: 40%\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD ALIGN=\"LEFT\"\u003eLatest passing 400-VU run: 7648780\u003c/TD\u003e\u003c/TR\u003e\n      \u003c/TABLE\u003e\n    \u003e\n  ];\n\n  summary -\u003e runs [\n    style=invis,\n    weight=2\n  ];\n}\n",
+                "dotQueryConfig": {
+                  "fieldName": "dot_diagram"
+                },
+                "edgeOverrides": [],
+                "inputMode": "code",
+                "layoutEngine": "dot",
+                "namedThresholds": [],
+                "nodeOverrides": [],
+                "rankDirection": "TB",
+                "splineType": "ortho"
+              }
+            },
+            "version": "0.0.5"
+          }
+        }
+      },
+      "panel-3": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "group": "",
+                      "kind": "DataQuery",
+                      "spec": {},
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Source: docs/diagrams/request-flow-diagram.dot",
+          "id": 3,
+          "links": [],
+          "title": "Request Flow Diagram",
+          "vizConfig": {
+            "group": "grafana-graphviz-panel",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
+              "options": {
+                "_assistantHelp": "",
+                "builderModeActions": {},
+                "dotDiagram": "digraph request_flow_diagram {\n  rankdir=LR;\n  label=\"Browser Request Flow Through Backend Services\";\n\n  graph [\n    fontname=\"Helvetica\",\n    fontsize=20,\n    labelloc=t,\n    bgcolor=\"#0b1220\",\n    fontcolor=\"#f8fafc\",\n    pad=0.25,\n    nodesep=0.45,\n    ranksep=0.7\n  ];\n  node [\n    shape=box,\n    style=\"rounded,filled\",\n    fontname=\"Helvetica\",\n    fontsize=11,\n    color=\"#64748b\",\n    fillcolor=\"#111827\",\n    fontcolor=\"#f8fafc\",\n    margin=\"0.12,0.08\"\n  ];\n  edge [\n    fontname=\"Helvetica\",\n    fontsize=9,\n    color=\"#94a3b8\",\n    fontcolor=\"#f8fafc\",\n    arrowsize=0.7\n  ];\n\n\n  browser [label=\"Browser\\nensemble-grafana.com\", fillcolor=\"#1e3a8a\"];\n  dns [label=\"Route53\\nA/AAAA alias\", fillcolor=\"#164e63\"];\n  wafEdge [label=\"AWS WAF\\nedge rules\", fillcolor=\"#7f1d1d\"];\n  cf [label=\"CloudFront\\nHTTPS + static/API routing\", fillcolor=\"#1e3a8a\"];\n  apiPath [label=\"/api/* ?\", shape=diamond, fillcolor=\"#7c2d12\"];\n  s3 [label=\"S3 frontend origin\\nindex.html, JS, CSS\", fillcolor=\"#713f12\"];\n  cognito [label=\"Cognito Hosted UI\\nGoogle federation\", fillcolor=\"#4c1d95\"];\n  google [label=\"Google IdP\", fillcolor=\"#4c1d95\"];\n  apiWaf [label=\"AWS WAF\\nregional API rules\", fillcolor=\"#7f1d1d\"];\n  ingress [label=\"EKS API ingress / ALB\", fillcolor=\"#3730a3\"];\n  k6 [label=\"Grafana Cloud k6\\nregional, spike, browser checks\", fillcolor=\"#6b21a8\"];\n  grafana [label=\"Grafana Cloud\\nresults and telemetry\", fillcolor=\"#6b21a8\"];\n\n  inventory [label=\"inventory-service\\n/api/inventory/*\", fillcolor=\"#14532d\"];\n  cart [label=\"cart-service\\n/api/cart/*\", fillcolor=\"#14532d\"];\n  account [label=\"account-service\\n/api/account/*\", fillcolor=\"#14532d\"];\n  postgres [label=\"Postgres\\ninventory catalog\", shape=cylinder, fillcolor=\"#166534\"];\n  dynamoCart [label=\"DynamoDB\\ncart state\", shape=cylinder, fillcolor=\"#166534\"];\n  dynamoAccount [label=\"DynamoDB\\naccount, address, wallet metadata\", shape=cylinder, fillcolor=\"#166534\"];\n\n  browser -\u003e dns [label=\"DNS lookup\"];\n  dns -\u003e browser [label=\"CloudFront target\"];\n  browser -\u003e wafEdge [label=\"HTTPS request\"];\n  browser -\u003e cognito [label=\"OAuth code + PKCE\"];\n  cognito -\u003e google [label=\"Google authentication\"];\n  google -\u003e cognito [label=\"identity claims\"];\n  cognito -\u003e browser [label=\"Cognito JWTs\"];\n  k6 -\u003e wafEdge [label=\"Synthetic load\\nHTTPS + /api/*\\nwith traceparent\"];\n  wafEdge -\u003e cf;\n  cf -\u003e apiPath;\n  apiPath -\u003e s3 [label=\"No: static route\"];\n  s3 -\u003e cf [label=\"HTML/assets\"];\n  cf -\u003e browser [label=\"Storefront response\"];\n\n  apiPath -\u003e apiWaf [label=\"Yes: /api/*\\nBearer JWT or API key\"];\n  apiWaf -\u003e ingress;\n  ingress -\u003e inventory [label=\"/api/inventory/*\"];\n  ingress -\u003e cart [label=\"/api/cart/*\"];\n  ingress -\u003e account [label=\"/api/account/*\"];\n  inventory -\u003e postgres [label=\"Read products, categories, stock, pricing\"];\n  postgres -\u003e inventory;\n  cart -\u003e dynamoCart [label=\"Read/write cart items\"];\n  dynamoCart -\u003e cart;\n  account -\u003e dynamoAccount [label=\"Read/write profile, shipping, wallet\"];\n  dynamoAccount -\u003e account;\n  inventory -\u003e ingress [label=\"JSON response\"];\n  cart -\u003e ingress [label=\"JSON response\"];\n  account -\u003e ingress [label=\"JSON response\"];\n  ingress -\u003e apiWaf -\u003e cf -\u003e browser;\n  k6 -\u003e grafana [label=\"k6 result metrics\\nand trace correlation\"];\n}\n",
+                "dotQueryConfig": {
+                  "fieldName": "dot_diagram"
+                },
+                "edgeOverrides": [],
+                "inputMode": "code",
+                "layoutEngine": "dot",
+                "namedThresholds": [],
+                "nodeOverrides": [],
+                "rankDirection": "TB",
+                "splineType": "ortho"
+              }
+            },
+            "version": "0.0.5"
+          }
+        }
+      }
+    },
+    "layout": {
+      "kind": "TabsLayout",
+      "spec": {
+        "tabs": [
+          {
+            "kind": "TabsLayoutTab",
+            "spec": {
+              "layout": {
+                "kind": "GridLayout",
+                "spec": {
+                  "items": [
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-1"
+                        },
+                        "height": 13,
+                        "width": 24,
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-3"
+                        },
+                        "height": 12,
+                        "width": 24,
+                        "x": 0,
+                        "y": 13
+                      }
+                    }
+                  ]
+                }
+              },
+              "title": "Network"
+            }
+          },
+          {
+            "kind": "TabsLayoutTab",
+            "spec": {
+              "layout": {
+                "kind": "GridLayout",
+                "spec": {
+                  "items": [
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-11"
+                        },
+                        "height": 19,
+                        "width": 24,
+                        "x": 0,
+                        "y": 0
+                      }
+                    }
+                  ]
+                }
+              },
+              "title": "Observability"
+            }
+          },
+          {
+            "kind": "TabsLayoutTab",
+            "spec": {
+              "layout": {
+                "kind": "GridLayout",
+                "spec": {
+                  "items": [
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-16"
+                        },
+                        "height": 14,
+                        "width": 24,
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-17"
+                        },
+                        "height": 24,
+                        "width": 24,
+                        "x": 0,
+                        "y": 14
+                      }
+                    }
+                  ]
+                }
+              },
+              "title": "Load Test"
+            }
+          }
+        ]
+      }
+    },
+    "links": [],
+    "liveNow": false,
+    "preload": false,
     "tags": [
       "ensemble-grafana",
       "graphviz",
       "diagrams"
     ],
-    "timezone": "browser",
-    "schemaVersion": 39,
-    "version": 0,
-    "refresh": "",
-    "time": {
+    "timeSettings": {
+      "autoRefresh": "",
+      "autoRefreshIntervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "fiscalYearStartMonth": 0,
       "from": "now-6h",
+      "hideTimepicker": false,
+      "timezone": "browser",
       "to": "now"
     },
-    "panels": [
-      {
-        "id": 1,
-        "type": "grafana-graphviz-panel",
-        "title": "Network Diagram",
-        "description": "Source: docs/diagrams/network-diagram.dot",
-        "gridPos": {
-          "h": 12,
-          "w": 12,
-          "x": 0,
-          "y": 0
-        },
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {},
-          "overrides": []
-        },
-        "options": {
-          "dotDiagram": "digraph network_diagram {\n  rankdir=LR;\n  label=\"Ensemble-Grafana Network Diagram\";\n\n  graph [\n    fontname=\"Helvetica\",\n    fontsize=20,\n    labelloc=t,\n    bgcolor=\"#0b1220\",\n    fontcolor=\"#f8fafc\",\n    pad=0.25,\n    nodesep=0.45,\n    ranksep=0.7\n  ];\n  node [\n    shape=box,\n    style=\"rounded,filled\",\n    fontname=\"Helvetica\",\n    fontsize=11,\n    color=\"#64748b\",\n    fillcolor=\"#111827\",\n    fontcolor=\"#f8fafc\",\n    margin=\"0.12,0.08\"\n  ];\n  edge [\n    fontname=\"Helvetica\",\n    fontsize=9,\n    color=\"#94a3b8\",\n    fontcolor=\"#f8fafc\",\n    arrowsize=0.7\n  ];\n\n\n  shopper [label=\"Shopper browser\", fillcolor=\"#1e3a8a\"];\n  registrar [label=\"Domain registrar\"];\n  route53 [label=\"Route53 hosted zone\\nensemble-grafana.com\", fillcolor=\"#164e63\"];\n  acm [label=\"ACM certificate\\nus-east-1 / ISSUED\", fillcolor=\"#155e75\"];\n  edgeWaf [label=\"AWS WAF\\nCloudFront scope\", fillcolor=\"#7f1d1d\"];\n  cloudfront [label=\"CloudFront distribution\\nensemble-grafana.com\", fillcolor=\"#1e3a8a\"];\n  staticS3 [label=\"S3 frontend bucket\\nprivate origin\", fillcolor=\"#713f12\"];\n  imageS3 [label=\"S3 inventory images bucket\", fillcolor=\"#713f12\"];\n  logsS3 [label=\"S3 edge/API logs bucket\\nCloudFront + ALB logs\", fillcolor=\"#713f12\"];\n  regionalWaf [label=\"AWS WAF\\nregional API scope\", fillcolor=\"#7f1d1d\"];\n  apiAlb [label=\"API ingress / ALB\\napi.ensemble-grafana.com\", fillcolor=\"#3730a3\"];\n  cognito [label=\"AWS Cognito\\nGoogle federation\", fillcolor=\"#4c1d95\"];\n  google [label=\"Google Identity Provider\", fillcolor=\"#4c1d95\"];\n  postgres [label=\"Postgres inventory DB\", shape=cylinder, fillcolor=\"#14532d\"];\n  dynamodb [label=\"DynamoDB\\ncart/account state\", shape=cylinder, fillcolor=\"#14532d\"];\n  cloudwatch [label=\"AWS CloudWatch\\nRDS metrics\", fillcolor=\"#334155\"];\n  cloudwatchScrape [label=\"Grafana Cloud Provider\\nAWS/RDS scrape job\", fillcolor=\"#581c87\"];\n  grafana [label=\"Grafana Cloud\\nFaro, metrics, logs, traces, profiles\", fillcolor=\"#6b21a8\"];\n  k6 [label=\"Grafana Cloud k6\\nload tests and browser checks\", fillcolor=\"#6b21a8\"];\n  accountBaseline [label=\"Terraform account-baseline stack\\nSSM host-management setting\", fillcolor=\"#334155\"];\n\n  subgraph cluster_eks {\n    label=\"EKS cluster\";\n    color=\"#64748b\";\n    fontcolor=\"#f8fafc\";\n    style=\"rounded,dashed\";\n    beyla [label=\"Grafana Beyla\", fillcolor=\"#581c87\"];\n    alloy [label=\"Grafana Alloy\\nOTel collector\", fillcolor=\"#581c87\"];\n    inventory [label=\"inventory-service\\nSpring Boot pods\", fillcolor=\"#14532d\"];\n    cart [label=\"cart-service\\nSpring Boot pods\", fillcolor=\"#14532d\"];\n    account [label=\"account-service\\nSpring Boot pods\", fillcolor=\"#14532d\"];\n  }\n\n  registrar -> route53 [label=\"NS delegation\"];\n  route53 -> cloudfront [label=\"A / AAAA alias\"];\n  acm -> cloudfront [label=\"TLS certificate\"];\n  shopper -> edgeWaf [label=\"HTTPS storefront\"];\n  edgeWaf -> cloudfront;\n  shopper -> cognito [label=\"Google sign-in\"];\n  cognito -> google;\n  cloudfront -> staticS3 [label=\"static assets\"];\n  cloudfront -> imageS3 [label=\"inventory images\"];\n  cloudfront -> logsS3 [label=\"standard access logs\"];\n  cloudfront -> regionalWaf [label=\"/api/*\"];\n  regionalWaf -> apiAlb;\n  apiAlb -> logsS3 [label=\"ALB access logs\"];\n  apiAlb -> inventory;\n  apiAlb -> cart;\n  apiAlb -> account;\n  inventory -> postgres;\n  cart -> dynamodb;\n  account -> dynamodb;\n  postgres -> cloudwatch [label=\"RDS metrics\"];\n  cloudwatchScrape -> cloudwatch [label=\"assume AWS role\\nand scrape metrics\"];\n  cloudwatchScrape -> grafana [label=\"CloudWatch metrics\"];\n  shopper -> grafana [label=\"Faro web telemetry\"];\n  accountBaseline -> beyla [label=\"SSM default role setting\"];\n  k6 -> cloudfront [label=\"regional, spike, browser checks\\nwith traceparent\"];\n  k6 -> grafana [label=\"test results + trace correlation\"];\n  beyla -> alloy [label=\"zero-code HTTP telemetry\"];\n  inventory -> alloy [label=\"OTel + Prometheus\"];\n  cart -> alloy [label=\"OTel + Prometheus\"];\n  account -> alloy [label=\"OTel + Prometheus\"];\n  alloy -> grafana;\n}\n",
-          "edgeOverrides": [],
-          "inputMode": "code",
-          "layoutEngine": "dot",
-          "namedThresholds": [],
-          "nodeOverrides": [],
-          "rankDirection": "TB",
-          "splineType": "ortho"
-        },
-        "targets": [],
-        "transparent": false
-      },
-      {
-        "id": 2,
-        "type": "grafana-graphviz-panel",
-        "title": "Observability Capabilities Flow",
-        "description": "Source: docs/diagrams/observability-capabilities-flow.dot",
-        "gridPos": {
-          "h": 12,
-          "w": 12,
-          "x": 12,
-          "y": 0
-        },
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {},
-          "overrides": []
-        },
-        "options": {
-          "dotDiagram": "digraph observability_capabilities_flow {\n  rankdir=LR;\n  label=\"Observability Capabilities Flow\";\n\n  graph [\n    fontname=\"Helvetica\",\n    fontsize=20,\n    labelloc=t,\n    bgcolor=\"#0b1220\",\n    fontcolor=\"#f8fafc\",\n    pad=0.25,\n    nodesep=0.45,\n    ranksep=0.7\n  ];\n  node [\n    shape=box,\n    style=\"rounded,filled\",\n    fontname=\"Helvetica\",\n    fontsize=11,\n    color=\"#64748b\",\n    fillcolor=\"#111827\",\n    fontcolor=\"#f8fafc\",\n    margin=\"0.12,0.08\"\n  ];\n  edge [\n    fontname=\"Helvetica\",\n    fontsize=9,\n    color=\"#94a3b8\",\n    fontcolor=\"#f8fafc\",\n    arrowsize=0.7\n  ];\n\n\n  browser [label=\"Shopper browser\\nReact storefront\", fillcolor=\"#1e3a8a\"];\n  faro [label=\"Grafana Faro SDK\\nweb vitals, errors, logs, sessions, user actions\", fillcolor=\"#6b21a8\"];\n  tracing [label=\"Faro web tracing\\ntrace context on fetch/XHR\", fillcolor=\"#6b21a8\"];\n  cloudfront [label=\"CloudFront\\nstatic + /api/* routing\", fillcolor=\"#1e3a8a\"];\n  ingress [label=\"EKS API ingress / ALB\", fillcolor=\"#3730a3\"];\n  edgeLogs [label=\"S3 access logs\\nCloudFront + ALB\", fillcolor=\"#713f12\"];\n\n  subgraph cluster_services {\n    label=\"Spring Boot services\";\n    color=\"#64748b\";\n    fontcolor=\"#f8fafc\";\n    style=\"rounded,dashed\";\n    inventory [label=\"inventory-service\", fillcolor=\"#14532d\"];\n    cart [label=\"cart-service\", fillcolor=\"#14532d\"];\n    account [label=\"account-service\", fillcolor=\"#14532d\"];\n  }\n\n  actuator [label=\"Spring Actuator\\n/actuator/prometheus\", fillcolor=\"#164e63\"];\n  otel [label=\"Spring OpenTelemetry\\ntraces + resource attrs\", fillcolor=\"#164e63\"];\n  logs [label=\"Kubernetes pod logs\\nservice labels\", fillcolor=\"#164e63\"];\n  beyla [label=\"Grafana Beyla\\nzero-code HTTP telemetry\", fillcolor=\"#6b21a8\"];\n  pyroscope [label=\"Pyroscope Alloy DaemonSet\\nJVM profiles\", fillcolor=\"#6b21a8\"];\n  alloy [label=\"Grafana Alloy\\nOTel collector\", fillcolor=\"#6b21a8\"];\n  cloudwatch [label=\"AWS CloudWatch\\nRDS metrics\", fillcolor=\"#334155\"];\n  cloudwatchScrape [label=\"Grafana Cloud Provider\\nAWS/RDS scrape job\", fillcolor=\"#6b21a8\"];\n  synth [label=\"Grafana Synthetic Monitoring\\nHTTP, DNS, Ping, TCP\", fillcolor=\"#6b21a8\"];\n  k6 [label=\"Grafana Cloud k6\\nregional load, spike benchmark, browser actions\", fillcolor=\"#6b21a8\"];\n  k6Tracing [label=\"k6 Tempo instrumentation\\nW3C trace context\", fillcolor=\"#6b21a8\"];\n  irm [label=\"Grafana IRM\\nincidents, labels, on-call schedule\", fillcolor=\"#6b21a8\"];\n\n  grafana [label=\"Grafana Cloud stack\\norenlion.grafana.net\", fillcolor=\"#4c1d95\"];\n  frontendObs [label=\"Frontend Observability\\nFaro events and exceptions\", fillcolor=\"#581c87\"];\n  tempo [label=\"Traces\\nfrontend-to-backend waterfalls\", fillcolor=\"#581c87\"];\n  prometheus [label=\"Metrics\\nRED + infrastructure signals\", fillcolor=\"#581c87\"];\n  loki [label=\"Logs\\nnamespace + service labels\", fillcolor=\"#581c87\"];\n  profiles [label=\"Profiles\\nJava CPU profiles\", fillcolor=\"#581c87\"];\n  smResults [label=\"Synthetic results\\nuptime, TLS, DNS, latency\", fillcolor=\"#581c87\"];\n  k6Results [label=\"k6 results\\nVUs, checks, thresholds\", fillcolor=\"#581c87\"];\n  incidents [label=\"IRM workflows\\nseverity, ownership, response\", fillcolor=\"#581c87\"];\n\n  browser -> faro [label=\"page views, errors, user actions\"];\n  browser -> tracing [label=\"HTTP requests with traceparent\"];\n  tracing -> cloudfront -> ingress;\n  cloudfront -> edgeLogs [label=\"standard access logs\"];\n  ingress -> edgeLogs [label=\"ALB access logs\"];\n  ingress -> inventory;\n  ingress -> cart;\n  ingress -> account;\n  faro -> grafana [label=\"collector endpoint\"];\n  tracing -> grafana [label=\"frontend spans\"];\n  inventory -> actuator;\n  cart -> actuator;\n  account -> actuator;\n  inventory -> otel;\n  cart -> otel;\n  account -> otel;\n  inventory -> logs;\n  cart -> logs;\n  account -> logs;\n  inventory -> beyla [label=\"HTTP telemetry\"];\n  cart -> beyla [label=\"HTTP telemetry\"];\n  account -> beyla [label=\"HTTP telemetry\"];\n  inventory -> pyroscope [label=\"JVM attach\"];\n  cart -> pyroscope [label=\"JVM attach\"];\n  account -> pyroscope [label=\"JVM attach\"];\n  actuator -> alloy [label=\"Prometheus scrape\"];\n  otel -> alloy [label=\"OTLP traces\"];\n  logs -> alloy [label=\"pod log collection\"];\n  edgeLogs -> grafana [label=\"RCA source for edge/API status codes\"];\n  beyla -> alloy [label=\"metrics + traces\"];\n  pyroscope -> grafana [label=\"profiles write\"];\n  alloy -> grafana [label=\"OTLP export\"];\n  cloudwatchScrape -> cloudwatch [label=\"assume AWS role and scrape AWS/RDS metrics\"];\n  cloudwatch -> grafana [label=\"RDS CloudWatch samples\"];\n  synth -> cloudfront [label=\"checks production URL and API health\"];\n  synth -> grafana [label=\"check samples\"];\n  k6 -> k6Tracing;\n  k6Tracing -> cloudfront [label=\"load checks with traceparent\"];\n  k6 -> grafana [label=\"test metrics + trace correlation\"];\n  irm -> grafana [label=\"incident and schedule state\"];\n  grafana -> frontendObs;\n  grafana -> tempo;\n  grafana -> prometheus;\n  grafana -> loki;\n  grafana -> profiles;\n  grafana -> smResults;\n  grafana -> k6Results;\n  grafana -> incidents;\n}\n",
-          "edgeOverrides": [],
-          "inputMode": "code",
-          "layoutEngine": "dot",
-          "namedThresholds": [],
-          "nodeOverrides": [],
-          "rankDirection": "TB",
-          "splineType": "ortho"
-        },
-        "targets": [],
-        "transparent": false
-      },
-      {
-        "id": 3,
-        "type": "grafana-graphviz-panel",
-        "title": "Request Flow Diagram",
-        "description": "Source: docs/diagrams/request-flow-diagram.dot",
-        "gridPos": {
-          "h": 12,
-          "w": 12,
-          "x": 0,
-          "y": 12
-        },
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {},
-          "overrides": []
-        },
-        "options": {
-          "dotDiagram": "digraph request_flow_diagram {\n  rankdir=LR;\n  label=\"Browser Request Flow Through Backend Services\";\n\n  graph [\n    fontname=\"Helvetica\",\n    fontsize=20,\n    labelloc=t,\n    bgcolor=\"#0b1220\",\n    fontcolor=\"#f8fafc\",\n    pad=0.25,\n    nodesep=0.45,\n    ranksep=0.7\n  ];\n  node [\n    shape=box,\n    style=\"rounded,filled\",\n    fontname=\"Helvetica\",\n    fontsize=11,\n    color=\"#64748b\",\n    fillcolor=\"#111827\",\n    fontcolor=\"#f8fafc\",\n    margin=\"0.12,0.08\"\n  ];\n  edge [\n    fontname=\"Helvetica\",\n    fontsize=9,\n    color=\"#94a3b8\",\n    fontcolor=\"#f8fafc\",\n    arrowsize=0.7\n  ];\n\n\n  browser [label=\"Browser\\nensemble-grafana.com\", fillcolor=\"#1e3a8a\"];\n  dns [label=\"Route53\\nA/AAAA alias\", fillcolor=\"#164e63\"];\n  wafEdge [label=\"AWS WAF\\nedge rules\", fillcolor=\"#7f1d1d\"];\n  cf [label=\"CloudFront\\nHTTPS + static/API routing\", fillcolor=\"#1e3a8a\"];\n  apiPath [label=\"/api/* ?\", shape=diamond, fillcolor=\"#7c2d12\"];\n  s3 [label=\"S3 frontend origin\\nindex.html, JS, CSS\", fillcolor=\"#713f12\"];\n  cognito [label=\"Cognito Hosted UI\\nGoogle federation\", fillcolor=\"#4c1d95\"];\n  google [label=\"Google IdP\", fillcolor=\"#4c1d95\"];\n  apiWaf [label=\"AWS WAF\\nregional API rules\", fillcolor=\"#7f1d1d\"];\n  ingress [label=\"EKS API ingress / ALB\", fillcolor=\"#3730a3\"];\n  k6 [label=\"Grafana Cloud k6\\nregional, spike, browser checks\", fillcolor=\"#6b21a8\"];\n  grafana [label=\"Grafana Cloud\\nresults and telemetry\", fillcolor=\"#6b21a8\"];\n\n  inventory [label=\"inventory-service\\n/api/inventory/*\", fillcolor=\"#14532d\"];\n  cart [label=\"cart-service\\n/api/cart/*\", fillcolor=\"#14532d\"];\n  account [label=\"account-service\\n/api/account/*\", fillcolor=\"#14532d\"];\n  postgres [label=\"Postgres\\ninventory catalog\", shape=cylinder, fillcolor=\"#166534\"];\n  dynamoCart [label=\"DynamoDB\\ncart state\", shape=cylinder, fillcolor=\"#166534\"];\n  dynamoAccount [label=\"DynamoDB\\naccount, address, wallet metadata\", shape=cylinder, fillcolor=\"#166534\"];\n\n  browser -> dns [label=\"DNS lookup\"];\n  dns -> browser [label=\"CloudFront target\"];\n  browser -> wafEdge [label=\"HTTPS request\"];\n  browser -> cognito [label=\"OAuth code + PKCE\"];\n  cognito -> google [label=\"Google authentication\"];\n  google -> cognito [label=\"identity claims\"];\n  cognito -> browser [label=\"Cognito JWTs\"];\n  k6 -> wafEdge [label=\"Synthetic load\\nHTTPS + /api/*\\nwith traceparent\"];\n  wafEdge -> cf;\n  cf -> apiPath;\n  apiPath -> s3 [label=\"No: static route\"];\n  s3 -> cf [label=\"HTML/assets\"];\n  cf -> browser [label=\"Storefront response\"];\n\n  apiPath -> apiWaf [label=\"Yes: /api/*\\nBearer JWT or API key\"];\n  apiWaf -> ingress;\n  ingress -> inventory [label=\"/api/inventory/*\"];\n  ingress -> cart [label=\"/api/cart/*\"];\n  ingress -> account [label=\"/api/account/*\"];\n  inventory -> postgres [label=\"Read products, categories, stock, pricing\"];\n  postgres -> inventory;\n  cart -> dynamoCart [label=\"Read/write cart items\"];\n  dynamoCart -> cart;\n  account -> dynamoAccount [label=\"Read/write profile, shipping, wallet\"];\n  dynamoAccount -> account;\n  inventory -> ingress [label=\"JSON response\"];\n  cart -> ingress [label=\"JSON response\"];\n  account -> ingress [label=\"JSON response\"];\n  ingress -> apiWaf -> cf -> browser;\n  k6 -> grafana [label=\"k6 result metrics\\nand trace correlation\"];\n}\n",
-          "edgeOverrides": [],
-          "inputMode": "code",
-          "layoutEngine": "dot",
-          "namedThresholds": [],
-          "nodeOverrides": [],
-          "rankDirection": "TB",
-          "splineType": "ortho"
-        },
-        "targets": [],
-        "transparent": false
-      },
-      {
-        "id": 4,
-        "type": "grafana-graphviz-panel",
-        "title": "Sequence Diagram",
-        "description": "Source: docs/diagrams/sequence-diagram.dot",
-        "gridPos": {
-          "h": 14,
-          "w": 12,
-          "x": 12,
-          "y": 12
-        },
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {},
-          "overrides": []
-        },
-        "options": {
-          "dotDiagram": "digraph sequence_dependency_diagram {\n  label=\"Frontend-to-Backend Request Sequence as Stacked Horizontal Paths\";\n  labelloc=t;\n  rankdir=TB;\n\n  graph [\n    fontname=\"Helvetica,Arial,sans-serif\",\n    fontsize=22,\n    bgcolor=\"#0b1220\",\n    fontcolor=\"#f8fafc\",\n    newrank=true,\n    nodesep=0.30,\n    ranksep=0.35,\n    splines=polyline,\n    outputorder=edgesfirst,\n    pad=0.25\n  ];\n\n  node [\n    shape=box,\n    style=\"filled,setlinewidth(2)\",\n    fontname=\"Helvetica,Arial,sans-serif\",\n    fontsize=11,\n    color=\"#64748b\",\n    fillcolor=\"#111827\",\n    fontcolor=\"#f8fafc\",\n    margin=\"0.10,0.06\"\n  ];\n\n  edge [\n    fontname=\"Helvetica,Arial,sans-serif\",\n    fontsize=9,\n    color=\"#94a3b8\",\n    fontcolor=\"#f8fafc\",\n    arrowsize=0.55,\n    penwidth=2\n  ];\n\n  key [shape=plain, label=<\n    <TABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"6\" COLOR=\"#475569\">\n      <TR><TD BGCOLOR=\"#1e3a8a\"><FONT COLOR=\"#f8fafc\"><B>Browser</B></FONT></TD>\n      <TD BGCOLOR=\"#164e63\"><FONT COLOR=\"#f8fafc\"><B>DNS / Edge</B></FONT></TD>\n      <TD BGCOLOR=\"#713f12\"><FONT COLOR=\"#f8fafc\"><B>Static Origin</B></FONT></TD>\n      <TD BGCOLOR=\"#4c1d95\"><FONT COLOR=\"#f8fafc\"><B>Identity</B></FONT></TD>\n      <TD BGCOLOR=\"#14532d\"><FONT COLOR=\"#f8fafc\"><B>API / Services</B></FONT></TD>\n      <TD BGCOLOR=\"#166534\"><FONT COLOR=\"#f8fafc\"><B>Data Stores</B></FONT></TD>\n      <TD BGCOLOR=\"#6b21a8\"><FONT COLOR=\"#f8fafc\"><B>Telemetry</B></FONT></TD>\n      <TD BGCOLOR=\"#713f12\"><FONT COLOR=\"#f8fafc\"><B>k6</B></FONT></TD></TR>\n    </TABLE>\n  >];\n\n  start [label=\"Shopper browser\", shape=ellipse, fillcolor=\"#1e3a8a\", color=\"#1e3a8a\"];\n\n  subgraph cluster_static {\n    label=\"1. Storefront page load\";\n    graph [rank=same];\n    color=\"#38bdf8\";\n    fontcolor=\"#bae6fd\";\n    style=\"rounded,setlinewidth(2)\";\n    static_browser [label=\"Open\\nensemble-grafana.com\", fillcolor=\"#1e3a8a\", color=\"#1e3a8a\", group=c1];\n    static_dns [label=\"Route53\\nDNS alias\", fillcolor=\"#164e63\", color=\"#38bdf8\", group=c2];\n    static_cf [label=\"CloudFront\\n+ edge WAF\", fillcolor=\"#164e63\", color=\"#38bdf8\", group=c3];\n    static_s3 [label=\"S3\\nstatic origin\", fillcolor=\"#713f12\", color=\"#f59e0b\", group=c4];\n    static_render [label=\"Render HTML,\\nJS, CSS, headers\", fillcolor=\"#1e3a8a\", color=\"#1e3a8a\", group=c5];\n    static_faro [label=\"Faro page load,\\nvitals, session\", fillcolor=\"#6b21a8\", color=\"#c084fc\", group=c6];\n    static_grafana [label=\"Grafana Cloud\\nfrontend telemetry\", fillcolor=\"#6b21a8\", color=\"#c084fc\", group=c7];\n    static_browser -> static_dns [label=\"resolve\"];\n    static_dns -> static_cf [label=\"alias\"];\n    static_cf -> static_s3 [label=\"fetch\"];\n    static_s3 -> static_render [label=\"assets\"];\n    static_render -> static_faro [label=\"web signal\"];\n    static_faro -> static_grafana [label=\"collect\"];\n  }\n\n  subgraph cluster_auth {\n    label=\"2. Google sign-in through Cognito\";\n    graph [rank=same];\n    color=\"#a855f7\";\n    fontcolor=\"#e9d5ff\";\n    style=\"rounded,setlinewidth(2)\";\n    auth_browser [label=\"Start\\nGoogle sign-in\", fillcolor=\"#1e3a8a\", color=\"#1e3a8a\", group=c1];\n    auth_cognito [label=\"Cognito\\nOAuth authorize\", fillcolor=\"#4c1d95\", color=\"#a855f7\", group=c2];\n    auth_google [label=\"Google IdP\\nauthentication\", fillcolor=\"#4c1d95\", color=\"#a855f7\", group=c3];\n    auth_claims [label=\"Cognito tokens\\n+ profile claims\", fillcolor=\"#4c1d95\", color=\"#a855f7\", group=c4];\n    auth_account [label=\"Populate account\\nname + email\", fillcolor=\"#1e3a8a\", color=\"#1e3a8a\", group=c5];\n    auth_browser -> auth_cognito [label=\"authorize\"];\n    auth_cognito -> auth_google [label=\"redirect\"];\n    auth_google -> auth_claims [label=\"claims\"];\n    auth_claims -> auth_account [label=\"callback + PKCE\"];\n  }\n\n  subgraph cluster_inventory {\n    label=\"3. Inventory browse request\";\n    graph [rank=same];\n    color=\"#22c55e\";\n    fontcolor=\"#bbf7d0\";\n    style=\"rounded,setlinewidth(2)\";\n    inv_browser [label=\"GET\\n/api/inventory/products\", fillcolor=\"#1e3a8a\", color=\"#1e3a8a\", group=c1];\n    inv_cf [label=\"CloudFront\\n/api/* route\", fillcolor=\"#164e63\", color=\"#38bdf8\", group=c2];\n    inv_api [label=\"ALB /\\nAPI ingress\", fillcolor=\"#14532d\", color=\"#22c55e\", group=c3];\n    inv_service [label=\"inventory-service\\ntrace context\", fillcolor=\"#14532d\", color=\"#22c55e\", group=c4];\n    inv_db [label=\"Postgres\\ncatalog rows\", shape=cylinder, fillcolor=\"#166534\", color=\"#16a34a\", group=c5];\n    inv_response [label=\"JSON product data\\nback to browser\", fillcolor=\"#1e3a8a\", color=\"#1e3a8a\", group=c6];\n    inv_browser -> inv_cf;\n    inv_cf -> inv_api;\n    inv_api -> inv_service;\n    inv_service -> inv_db [label=\"query\"];\n    inv_db -> inv_response [label=\"rows -> JSON\"];\n  }\n\n  subgraph cluster_cart {\n    label=\"4. Cart update request\";\n    graph [rank=same];\n    color=\"#22c55e\";\n    fontcolor=\"#bbf7d0\";\n    style=\"rounded,setlinewidth(2)\";\n    cart_browser [label=\"PUT\\n/api/cart/carts/{shopperId}\", fillcolor=\"#1e3a8a\", color=\"#1e3a8a\", group=c1];\n    cart_cf [label=\"CloudFront\\n/api/* route\", fillcolor=\"#164e63\", color=\"#38bdf8\", group=c2];\n    cart_api [label=\"ALB /\\nJWT + trace\", fillcolor=\"#14532d\", color=\"#22c55e\", group=c3];\n    cart_service [label=\"cart-service\\nupdate cart\", fillcolor=\"#14532d\", color=\"#22c55e\", group=c4];\n    cart_db [label=\"DynamoDB\\ncart state\", shape=cylinder, fillcolor=\"#166534\", color=\"#16a34a\", group=c5];\n    cart_response [label=\"Updated cart\\nback to browser\", fillcolor=\"#1e3a8a\", color=\"#1e3a8a\", group=c6];\n    cart_browser -> cart_cf [label=\"Bearer JWT\"];\n    cart_cf -> cart_api;\n    cart_api -> cart_service;\n    cart_service -> cart_db [label=\"persist\"];\n    cart_db -> cart_response [label=\"ack\"];\n  }\n\n  subgraph cluster_account {\n    label=\"5. Account save request\";\n    graph [rank=same];\n    color=\"#22c55e\";\n    fontcolor=\"#bbf7d0\";\n    style=\"rounded,setlinewidth(2)\";\n    acct_browser [label=\"PUT\\n/api/account/accounts/{shopperId}\", fillcolor=\"#1e3a8a\", color=\"#1e3a8a\", group=c1];\n    acct_cf [label=\"CloudFront\\n/api/* route\", fillcolor=\"#164e63\", color=\"#38bdf8\", group=c2];\n    acct_api [label=\"ALB /\\nJWT + trace\", fillcolor=\"#14532d\", color=\"#22c55e\", group=c3];\n    acct_service [label=\"account-service\\nprofile + wallet\", fillcolor=\"#14532d\", color=\"#22c55e\", group=c4];\n    acct_db [label=\"DynamoDB\\naccount state\", shape=cylinder, fillcolor=\"#166534\", color=\"#16a34a\", group=c5];\n    acct_response [label=\"Saved account\\nback to browser\", fillcolor=\"#1e3a8a\", color=\"#1e3a8a\", group=c6];\n    acct_browser -> acct_cf [label=\"Bearer JWT\"];\n    acct_cf -> acct_api;\n    acct_api -> acct_service;\n    acct_service -> acct_db [label=\"persist\"];\n    acct_db -> acct_response [label=\"ack\"];\n  }\n\n  subgraph cluster_telemetry {\n    label=\"6. Backend telemetry\";\n    graph [rank=same];\n    color=\"#c084fc\";\n    fontcolor=\"#f3e8ff\";\n    style=\"rounded,setlinewidth(2)\";\n    telemetry_services [label=\"inventory / cart /\\naccount services\", fillcolor=\"#14532d\", color=\"#22c55e\", group=c1];\n    telemetry_alloy [label=\"Grafana Alloy\\nmetrics, logs, traces\", fillcolor=\"#6b21a8\", color=\"#c084fc\", group=c2];\n    telemetry_grafana [label=\"Grafana Cloud\\nMimir, Loki, Tempo,\\nPyroscope\", fillcolor=\"#6b21a8\", color=\"#c084fc\", group=c3];\n    telemetry_services -> telemetry_alloy [label=\"OTel + Prometheus\"];\n    telemetry_alloy -> telemetry_grafana [label=\"export\"];\n  }\n\n  subgraph cluster_k6 {\n    label=\"7. k6 load and browser checks\";\n    graph [rank=same];\n    color=\"#f59e0b\";\n    fontcolor=\"#fde68a\";\n    style=\"rounded,setlinewidth(2)\";\n    k6_runner [label=\"Grafana Cloud k6\\nregional + spike + browser\", fillcolor=\"#713f12\", color=\"#f59e0b\", group=c1];\n    k6_cf [label=\"CloudFront\\n/api/* + storefront\", fillcolor=\"#164e63\", color=\"#38bdf8\", group=c2];\n    k6_api [label=\"ALB / API\\ntraceparent\", fillcolor=\"#14532d\", color=\"#22c55e\", group=c3];\n    k6_services [label=\"inventory / cart /\\naccount services\", fillcolor=\"#14532d\", color=\"#22c55e\", group=c4];\n    k6_grafana [label=\"Grafana Cloud\\nrun metrics + checks\", fillcolor=\"#6b21a8\", color=\"#c084fc\", group=c5];\n    k6_runner -> k6_cf [label=\"regional, spike,\\nbrowser actions\"];\n    k6_cf -> k6_api;\n    k6_api -> k6_services;\n    k6_runner -> k6_grafana [label=\"results\"];\n  }\n\n  key -> start [style=invis, weight=20];\n  start -> static_browser [style=invis, weight=20];\n  static_browser -> auth_browser [style=invis, weight=20];\n  auth_browser -> inv_browser [style=invis, weight=20];\n  inv_browser -> cart_browser [style=invis, weight=20];\n  cart_browser -> acct_browser [style=invis, weight=20];\n  acct_browser -> telemetry_services [style=invis, weight=20];\n  telemetry_services -> k6_runner [style=invis, weight=20];\n}\n",
-          "edgeOverrides": [],
-          "inputMode": "code",
-          "layoutEngine": "dot",
-          "namedThresholds": [],
-          "nodeOverrides": [],
-          "rankDirection": "TB",
-          "splineType": "ortho"
-        },
-        "targets": [],
-        "transparent": false
-      },
-      {
-        "id": 5,
-        "type": "grafana-graphviz-panel",
-        "title": "Traffic Spike Request Cards",
-        "description": "Source: docs/graphviz/traffic-spike-request-cards.dot",
-        "gridPos": {
-          "h": 12,
-          "w": 12,
-          "x": 0,
-          "y": 24
-        },
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {},
-          "overrides": []
-        },
-        "options": {
-          "dotDiagram": "digraph traffic_spike_request_cards {\n  graph [rankdir=LR, labelloc=t, label=\"Traffic Spike Request Model\", fontsize=22, fontname=\"Helvetica\", nodesep=0.35, ranksep=0.45, splines=ortho];\n  node [shape=plain, fontname=\"Helvetica\"];\n  edge [color=\"#94a3b8\", arrowsize=0.6];\n\n  warmup [label=<\n    <TABLE BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" CELLPADDING=\"6\" COLOR=\"#64748b\"><TR><TD BGCOLOR=\"#f8fafc\"><B>Warmup</B></TD></TR><TR><TD><FONT POINT-SIZE=\"18\"><B>25 VUs</B></FONT></TD></TR><TR><TD>~100 req/wave</TD></TR><TR><TD><FONT POINT-SIZE=\"10\">cart 15 · checkout 5 · region 25</FONT></TD></TR></TABLE>\n  >];\n  spike1 [label=<\n    <TABLE BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" CELLPADDING=\"6\" COLOR=\"#ef4444\"><TR><TD BGCOLOR=\"#fee2e2\"><B>Spike 1</B></TD></TR><TR><TD><FONT POINT-SIZE=\"22\"><B>100 VUs</B></FONT></TD></TR><TR><TD><B>~400 req/wave</B></TD></TR><TR><TD><FONT POINT-SIZE=\"10\">cart 60 · checkout 20 · region 100</FONT></TD></TR></TABLE>\n  >];\n  recovery1 [label=<\n    <TABLE BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" CELLPADDING=\"6\" COLOR=\"#64748b\"><TR><TD BGCOLOR=\"#f8fafc\"><B>Recovery</B></TD></TR><TR><TD><FONT POINT-SIZE=\"18\"><B>25 VUs</B></FONT></TD></TR><TR><TD>~100 req/wave</TD></TR><TR><TD><FONT POINT-SIZE=\"10\">cart 15 · checkout 5 · region 25</FONT></TD></TR></TABLE>\n  >];\n  spike2 [label=<\n    <TABLE BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" CELLPADDING=\"6\" COLOR=\"#dc2626\"><TR><TD BGCOLOR=\"#fecaca\"><B>Spike 2</B></TD></TR><TR><TD><FONT POINT-SIZE=\"22\"><B>200 VUs</B></FONT></TD></TR><TR><TD><B>~800 req/wave</B></TD></TR><TR><TD><FONT POINT-SIZE=\"10\">cart 120 · checkout 40 · region 200</FONT></TD></TR></TABLE>\n  >];\n  recovery2 [label=<\n    <TABLE BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" CELLPADDING=\"6\" COLOR=\"#64748b\"><TR><TD BGCOLOR=\"#f8fafc\"><B>Recovery</B></TD></TR><TR><TD><FONT POINT-SIZE=\"18\"><B>25 VUs</B></FONT></TD></TR><TR><TD>~100 req/wave</TD></TR><TR><TD><FONT POINT-SIZE=\"10\">cart 15 · checkout 5 · region 25</FONT></TD></TR></TABLE>\n  >];\n  spike3 [label=<\n    <TABLE BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" CELLPADDING=\"6\" COLOR=\"#991b1b\"><TR><TD BGCOLOR=\"#fca5a5\"><B>Spike 3</B></TD></TR><TR><TD><FONT POINT-SIZE=\"24\"><B>400 VUs</B></FONT></TD></TR><TR><TD><B>~1600 req/wave</B></TD></TR><TR><TD><FONT POINT-SIZE=\"10\">cart 240 · checkout 80 · region 400</FONT></TD></TR></TABLE>\n  >];\n  rampdown [label=<\n    <TABLE BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" CELLPADDING=\"6\" COLOR=\"#64748b\"><TR><TD BGCOLOR=\"#f8fafc\"><B>Ramp down</B></TD></TR><TR><TD><FONT POINT-SIZE=\"18\"><B>0 VUs</B></FONT></TD></TR><TR><TD>decreasing</TD></TR><TR><TD><FONT POINT-SIZE=\"10\">counters decrease with active VUs</FONT></TD></TR></TABLE>\n  >];\n  legend [label=<\n    <TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLSPACING=\"0\" CELLPADDING=\"4\"><TR><TD ALIGN=\"LEFT\"><B>Config:</B> base 100, multiplier 2, regional 30 VUs, steady API 8 req/sec, storefront actions ramp to 5 browser VUs over 3m, hold 10m, ramp down 2m</TD></TR><TR><TD ALIGN=\"LEFT\"><FONT POINT-SIZE=\"10\">browser 3 · cart_builder 4 · account_manager 4 · sale_hunter 4 · checkout 5; actual totals depend on completed iterations.</FONT></TD></TR></TABLE>\n  >];\n\n  warmup -> spike1 -> recovery1 -> spike2 -> recovery2 -> spike3 -> rampdown;\n  { rank=same; legend }\n}\n\n",
-          "edgeOverrides": [],
-          "inputMode": "code",
-          "layoutEngine": "dot",
-          "namedThresholds": [],
-          "nodeOverrides": [],
-          "rankDirection": "TB",
-          "splineType": "ortho"
-        },
-        "targets": [],
-        "transparent": false
-      },
-      {
-        "id": 6,
-        "type": "grafana-graphviz-panel",
-        "title": "Traffic Spike Request Model",
-        "description": "Source: docs/graphviz/traffic-spike-request-model.dot",
-        "gridPos": {
-          "h": 12,
-          "w": 12,
-          "x": 12,
-          "y": 24
-        },
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {},
-          "overrides": []
-        },
-        "options": {
-          "dotDiagram": "digraph traffic_spike_request_model {\n  graph [\n    rankdir=LR,\n    labelloc=t,\n    label=\"Traffic Spike Request and Counter Model\",\n    fontsize=22,\n    fontname=\"Helvetica\",\n    nodesep=0.45,\n    ranksep=0.75\n  ];\n\n  node [shape=box, style=\"rounded,filled\", fontname=\"Helvetica\", fontsize=12, color=\"#334155\", fillcolor=\"#f8fafc\"];\n  edge [color=\"#475569\", arrowsize=0.8, fontname=\"Helvetica\", fontsize=11];\n\n  note [shape=note, fillcolor=\"#fff7ed\", color=\"#f97316\", label=\"ramping-vus loops each active VU.\\nCounts below are per completed VU wave.\\nActual totals depend on latency, sleeps, and iteration completion.\"];\n  avg [shape=component, fillcolor=\"#ecfeff\", color=\"#0891b2\", label=\"Average traffic_spikes iteration\\n4 requests / VU wave\"];\n\n  subgraph cluster_personas {\n    label=\"traffic_spikes persona mix\"; color=\"#cbd5e1\"; style=\"rounded,dashed\"; fontsize=16; fontname=\"Helvetica\";\n    browser [label=\"browser\\n3 requests\\nregion +1\", fillcolor=\"#eef2ff\"];\n    cart_builder [label=\"cart_builder\\n4 requests\\nregion +1\\ncart updates +1\", fillcolor=\"#f0fdf4\"];\n    account_manager [label=\"account_manager\\n4 requests\\nregion +1\", fillcolor=\"#f8fafc\"];\n    sale_hunter [label=\"sale_hunter\\n4 requests\\nregion +1\\ncart updates +1\", fillcolor=\"#fefce8\"];\n    checkout [label=\"checkout\\n5 requests\\nregion +1\\ncart updates +1\\ncheckout attempts +1\", fillcolor=\"#fef2f2\"];\n    browser -> cart_builder -> account_manager -> sale_hunter -> checkout [style=invis];\n  }\n\n  subgraph cluster_stages {\n    label=\"Current k6 stages from grafana-cloud-traffic-spikes.js\"; color=\"#cbd5e1\"; style=\"rounded,dashed\"; fontsize=16; fontname=\"Helvetica\";\n    warmup [label=\"Warmup\\n2m, 25 VUs\\n~100 requests\\n15 cart updates\\n5 checkout attempts\\n25 region changes\", fillcolor=\"#f1f5f9\"];\n    ramp1 [label=\"Ramp to Spike 1\\n30s, 100 VUs\\nup to ~400 requests\\n60 cart updates\\n20 checkout attempts\\n100 region changes\", fillcolor=\"#dbeafe\"];\n    hold1 [label=\"Hold Spike 1\\n2m, 100 VUs\\n~400 requests / wave\\n60 cart updates\\n20 checkout attempts\\n100 region changes\", fillcolor=\"#bfdbfe\"];\n    recovery1 [label=\"Recovery\\n1m30s, 25 VUs\\n~100 requests / wave\\n15 cart updates\\n5 checkout attempts\\n25 region changes\", fillcolor=\"#f1f5f9\"];\n    ramp2 [label=\"Ramp to Spike 2\\n30s, 200 VUs\\nup to ~800 requests\\n120 cart updates\\n40 checkout attempts\\n200 region changes\", fillcolor=\"#fde68a\"];\n    hold2 [label=\"Hold Spike 2\\n2m, 200 VUs\\n~800 requests / wave\\n120 cart updates\\n40 checkout attempts\\n200 region changes\", fillcolor=\"#fcd34d\"];\n    recovery2 [label=\"Recovery\\n1m30s, 25 VUs\\n~100 requests / wave\\n15 cart updates\\n5 checkout attempts\\n25 region changes\", fillcolor=\"#f1f5f9\"];\n    ramp3 [label=\"Ramp to Spike 3\\n30s, 400 VUs\\nup to ~1600 requests\\n240 cart updates\\n80 checkout attempts\\n400 region changes\", fillcolor=\"#fecaca\"];\n    hold3 [label=\"Hold Spike 3\\n2m, 400 VUs\\n~1600 requests / wave\\n240 cart updates\\n80 checkout attempts\\n400 region changes\", fillcolor=\"#fca5a5\"];\n    rampdown [label=\"Ramp down\\n2m30s, 0 VUs\\nrequests decrease to 0\", fillcolor=\"#e2e8f0\"];\n    warmup -> ramp1 -> hold1 -> recovery1 -> ramp2 -> hold2 -> recovery2 -> ramp3 -> hold3 -> rampdown;\n  }\n\n  subgraph cluster_parallel {\n    label=\"Parallel scenarios in combined script\"; color=\"#cbd5e1\"; style=\"rounded,dashed\"; fontsize=16; fontname=\"Helvetica\";\n    regional [label=\"regional_shoppers\\n30 VUs for TEST_DURATION/default 15m\\n~120 requests per completed wave\", fillcolor=\"#ecfdf5\"];\n    api_rate [label=\"api_request_rate\\nconstant arrival rate\\n8 requests/sec for 15m\", fillcolor=\"#e0f2fe\"];\n    storefront [label=\"storefront_actions\\nramp to 5 browser VUs over 3m, hold 10m, ramp down 2m\\nFaro UI actions + browser metrics\\nstandard http_reqs may be n/a\", fillcolor=\"#faf5ff\"];\n  }\n\n  note -> avg;\n  avg -> warmup [label=\"stage estimates\"];\n  avg -> regional [label=\"parallel HTTP load\"];\n  avg -> api_rate [label=\"steady API pressure\"];\n  checkout -> avg [label=\"persona average\"];\n}\n",
-          "edgeOverrides": [],
-          "inputMode": "code",
-          "layoutEngine": "dot",
-          "namedThresholds": [],
-          "nodeOverrides": [],
-          "rankDirection": "TB",
-          "splineType": "ortho"
-        },
-        "targets": [],
-        "transparent": false
-      },
-      {
-        "id": 7,
-        "type": "grafana-graphviz-panel",
-        "title": "Traffic Spike Request Tables",
-        "description": "Source: docs/graphviz/traffic-spike-request-tables.dot",
-        "gridPos": {
-          "h": 12,
-          "w": 12,
-          "x": 0,
-          "y": 36
-        },
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {},
-          "overrides": []
-        },
-        "options": {
-          "dotDiagram": "digraph traffic_spike_request_tables {\n  graph [rankdir=TB, labelloc=t, label=\"Traffic Spike Request Model\", fontsize=22, fontname=\"Helvetica\", nodesep=0.55, ranksep=0.65];\n  node [shape=plain, fontname=\"Helvetica\"];\n  edge [color=\"#94a3b8\", arrowsize=0.7];\n\n  caveat [label=<\n    <TABLE BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" CELLPADDING=\"8\" COLOR=\"#f97316\"><TR><TD BGCOLOR=\"#fff7ed\"><B>Important caveat</B></TD></TR><TR><TD ALIGN=\"LEFT\">Requests per stage are not fixed. <B>ramping-vus</B> keeps each active VU looping as fast as the journey allows.<BR/>Exact totals depend on response time, persona sleep time, and completed iterations.</TD></TR></TABLE>\n  >];\n  persona_table [label=<\n    <TABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"7\" COLOR=\"#334155\"><TR><TD COLSPAN=\"3\" BGCOLOR=\"#e0f2fe\"><B>Per completed traffic-spike user iteration</B></TD></TR><TR><TD BGCOLOR=\"#f1f5f9\"><B>Persona</B></TD><TD BGCOLOR=\"#f1f5f9\"><B>Requests</B></TD><TD BGCOLOR=\"#f1f5f9\"><B>Counters / actions</B></TD></TR><TR><TD ALIGN=\"LEFT\"><FONT FACE=\"Courier\">browser</FONT></TD><TD ALIGN=\"RIGHT\">3</TD><TD ALIGN=\"LEFT\"><FONT FACE=\"Courier\">spike_region_changes +1</FONT></TD></TR><TR><TD ALIGN=\"LEFT\"><FONT FACE=\"Courier\">cart_builder</FONT></TD><TD ALIGN=\"RIGHT\">4</TD><TD ALIGN=\"LEFT\"><FONT FACE=\"Courier\">spike_region_changes +1</FONT>, <FONT FACE=\"Courier\">spike_cart_updates +1</FONT></TD></TR><TR><TD ALIGN=\"LEFT\"><FONT FACE=\"Courier\">account_manager</FONT></TD><TD ALIGN=\"RIGHT\">4</TD><TD ALIGN=\"LEFT\"><FONT FACE=\"Courier\">spike_region_changes +1</FONT></TD></TR><TR><TD ALIGN=\"LEFT\"><FONT FACE=\"Courier\">sale_hunter</FONT></TD><TD ALIGN=\"RIGHT\">4</TD><TD ALIGN=\"LEFT\"><FONT FACE=\"Courier\">spike_region_changes +1</FONT>, <FONT FACE=\"Courier\">spike_cart_updates +1</FONT></TD></TR><TR><TD ALIGN=\"LEFT\"><FONT FACE=\"Courier\">checkout</FONT></TD><TD ALIGN=\"RIGHT\">5</TD><TD ALIGN=\"LEFT\"><FONT FACE=\"Courier\">spike_region_changes +1</FONT>, <FONT FACE=\"Courier\">spike_cart_updates +1</FONT>, <FONT FACE=\"Courier\">spike_checkout_attempts +1</FONT></TD></TR><TR><TD BGCOLOR=\"#ecfeff\" ALIGN=\"LEFT\"><B>Average</B></TD><TD BGCOLOR=\"#ecfeff\" ALIGN=\"RIGHT\"><B>4</B></TD><TD BGCOLOR=\"#ecfeff\" ALIGN=\"LEFT\"><B>requests per completed user iteration</B></TD></TR></TABLE>\n  >];\n  stage_table [label=<\n    <TABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"7\" COLOR=\"#334155\"><TR><TD COLSPAN=\"7\" BGCOLOR=\"#dcfce7\"><B>Current stage estimates per completed wave</B></TD></TR><TR><TD BGCOLOR=\"#f1f5f9\"><B>Stage</B></TD><TD BGCOLOR=\"#f1f5f9\"><B>Duration</B></TD><TD BGCOLOR=\"#f1f5f9\"><B>Target VUs</B></TD><TD BGCOLOR=\"#f1f5f9\"><B>Approx requests</B></TD><TD BGCOLOR=\"#f1f5f9\"><B>Cart updates</B></TD><TD BGCOLOR=\"#f1f5f9\"><B>Checkout attempts</B></TD><TD BGCOLOR=\"#f1f5f9\"><B>Region changes</B></TD></TR>\n      <TR><TD ALIGN=\"LEFT\">Warmup / recovery</TD><TD ALIGN=\"RIGHT\">2m</TD><TD ALIGN=\"RIGHT\">25</TD><TD ALIGN=\"RIGHT\">100</TD><TD ALIGN=\"RIGHT\">15</TD><TD ALIGN=\"RIGHT\">5</TD><TD ALIGN=\"RIGHT\">25</TD></TR>\n      <TR><TD ALIGN=\"LEFT\">Ramp to spike 1</TD><TD ALIGN=\"RIGHT\">30s</TD><TD ALIGN=\"RIGHT\">100</TD><TD ALIGN=\"RIGHT\">up to 400 at target</TD><TD ALIGN=\"RIGHT\">60</TD><TD ALIGN=\"RIGHT\">20</TD><TD ALIGN=\"RIGHT\">100</TD></TR>\n      <TR><TD ALIGN=\"LEFT\">Hold spike 1</TD><TD ALIGN=\"RIGHT\">2m</TD><TD ALIGN=\"RIGHT\">100</TD><TD ALIGN=\"RIGHT\">400 per wave</TD><TD ALIGN=\"RIGHT\">60</TD><TD ALIGN=\"RIGHT\">20</TD><TD ALIGN=\"RIGHT\">100</TD></TR>\n      <TR><TD ALIGN=\"LEFT\">Recovery</TD><TD ALIGN=\"RIGHT\">1m30s</TD><TD ALIGN=\"RIGHT\">25</TD><TD ALIGN=\"RIGHT\">100 per wave</TD><TD ALIGN=\"RIGHT\">15</TD><TD ALIGN=\"RIGHT\">5</TD><TD ALIGN=\"RIGHT\">25</TD></TR>\n      <TR><TD ALIGN=\"LEFT\">Ramp to spike 2</TD><TD ALIGN=\"RIGHT\">30s</TD><TD ALIGN=\"RIGHT\">200</TD><TD ALIGN=\"RIGHT\">up to 800 at target</TD><TD ALIGN=\"RIGHT\">120</TD><TD ALIGN=\"RIGHT\">40</TD><TD ALIGN=\"RIGHT\">200</TD></TR>\n      <TR><TD ALIGN=\"LEFT\">Hold spike 2</TD><TD ALIGN=\"RIGHT\">2m</TD><TD ALIGN=\"RIGHT\">200</TD><TD ALIGN=\"RIGHT\">800 per wave</TD><TD ALIGN=\"RIGHT\">120</TD><TD ALIGN=\"RIGHT\">40</TD><TD ALIGN=\"RIGHT\">200</TD></TR>\n      <TR><TD ALIGN=\"LEFT\">Recovery</TD><TD ALIGN=\"RIGHT\">1m30s</TD><TD ALIGN=\"RIGHT\">25</TD><TD ALIGN=\"RIGHT\">100 per wave</TD><TD ALIGN=\"RIGHT\">15</TD><TD ALIGN=\"RIGHT\">5</TD><TD ALIGN=\"RIGHT\">25</TD></TR>\n      <TR><TD ALIGN=\"LEFT\">Ramp to spike 3</TD><TD ALIGN=\"RIGHT\">30s</TD><TD ALIGN=\"RIGHT\">400</TD><TD ALIGN=\"RIGHT\">up to 1600 at target</TD><TD ALIGN=\"RIGHT\">240</TD><TD ALIGN=\"RIGHT\">80</TD><TD ALIGN=\"RIGHT\">400</TD></TR>\n      <TR><TD ALIGN=\"LEFT\">Hold spike 3</TD><TD ALIGN=\"RIGHT\">2m</TD><TD ALIGN=\"RIGHT\">400</TD><TD ALIGN=\"RIGHT\">1600 per wave</TD><TD ALIGN=\"RIGHT\">240</TD><TD ALIGN=\"RIGHT\">80</TD><TD ALIGN=\"RIGHT\">400</TD></TR>\n      <TR><TD ALIGN=\"LEFT\">Ramp down</TD><TD ALIGN=\"RIGHT\">2m30s</TD><TD ALIGN=\"RIGHT\">0</TD><TD ALIGN=\"RIGHT\">decreasing to 0</TD><TD ALIGN=\"RIGHT\">decreasing</TD><TD ALIGN=\"RIGHT\">decreasing</TD><TD ALIGN=\"RIGHT\">decreasing</TD></TR></TABLE>\n  >];\n  parallel_table [label=<\n    <TABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"7\" COLOR=\"#334155\"><TR><TD COLSPAN=\"3\" BGCOLOR=\"#f3e8ff\"><B>Parallel scenarios in the combined script</B></TD></TR><TR><TD BGCOLOR=\"#f1f5f9\"><B>Scenario</B></TD><TD BGCOLOR=\"#f1f5f9\"><B>Load</B></TD><TD BGCOLOR=\"#f1f5f9\"><B>Request model</B></TD></TR><TR><TD ALIGN=\"LEFT\"><FONT FACE=\"Courier\">regional_shoppers</FONT></TD><TD ALIGN=\"RIGHT\">30 VUs</TD><TD ALIGN=\"LEFT\">About 120 requests per completed wave</TD></TR><TR><TD ALIGN=\"LEFT\"><FONT FACE=\"Courier\">api_request_rate</FONT></TD><TD ALIGN=\"RIGHT\">8 requests/sec</TD><TD ALIGN=\"LEFT\">Constant-arrival-rate protocol load for 15m</TD></TR><TR><TD ALIGN=\"LEFT\"><FONT FACE=\"Courier\">storefront_actions</FONT></TD><TD ALIGN=\"RIGHT\">ramp to 5 browser VUs / 15m</TD><TD ALIGN=\"LEFT\">Generates Faro UI actions and browser metrics; standard http_reqs may be n/a</TD></TR></TABLE>\n  >];\n\n  caveat -> persona_table -> stage_table -> parallel_table;\n}\n",
-          "edgeOverrides": [],
-          "inputMode": "code",
-          "layoutEngine": "dot",
-          "namedThresholds": [],
-          "nodeOverrides": [],
-          "rankDirection": "TB",
-          "splineType": "ortho"
-        },
-        "targets": [],
-        "transparent": false
-      },
-      {
-        "id": 8,
-        "type": "grafana-graphviz-panel",
-        "title": "Traffic Spike Requests Only",
-        "description": "Source: docs/graphviz/traffic-spike-requests-only.dot",
-        "gridPos": {
-          "h": 12,
-          "w": 12,
-          "x": 12,
-          "y": 36
-        },
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {},
-          "overrides": []
-        },
-        "options": {
-          "dotDiagram": "digraph traffic_spike_requests_only {\n  graph [rankdir=LR, labelloc=t, label=\"Traffic Spike Requests per Completed Wave\", fontsize=20, fontname=\"Helvetica\", nodesep=0.28, ranksep=0.45, splines=polyline, outputorder=edgesfirst];\n  node [shape=record, style=\"rounded,filled\", fontname=\"Helvetica\", fontsize=11, color=\"#334155\", fillcolor=\"#f8fafc\", margin=\"0.08,0.05\"];\n  edge [color=\"#475569\", arrowsize=0.7, penwidth=1.2, fontname=\"Helvetica\", fontsize=10];\n\n  note [shape=note, fillcolor=\"#fff7ed\", color=\"#f97316\", label=\"Estimates assume each active VU completes one iteration.\\nActual request totals vary with latency, sleeps, and loop count.\"];\n\n  subgraph cluster_persona_math {\n    label=\"Per iteration request mix\"; color=\"#cbd5e1\"; style=\"rounded,dashed\"; fontsize=13; fontname=\"Helvetica\";\n    p_browser [label=\"{browser|3 req}\"];\n    p_cart [label=\"{cart_builder|4 req}\"];\n    p_account [label=\"{account_manager|4 req}\"];\n    p_sale [label=\"{sale_hunter|4 req}\"];\n    p_checkout [label=\"{checkout|5 req}\"];\n    p_avg [label=\"{avg|4 req / VU wave}\", fillcolor=\"#ecfeff\", color=\"#0891b2\"];\n    p_browser -> p_cart -> p_account -> p_sale -> p_checkout -> p_avg [style=invis];\n  }\n\n  subgraph cluster_stage_flow {\n    label=\"traffic_spikes stage model\"; color=\"#cbd5e1\"; style=\"rounded,dashed\"; fontsize=13; fontname=\"Helvetica\";\n    warmup [label=\"{Warmup|2m|25 VUs|~100 req}\", fillcolor=\"#f1f5f9\"];\n    ramp1 [label=\"{Ramp 1|30s|100 VUs|up to ~400 req}\", fillcolor=\"#dbeafe\"];\n    hold1 [label=\"{Hold 1|2m|100 VUs|~400 req/wave}\", fillcolor=\"#bfdbfe\"];\n    rec1 [label=\"{Recover|1m30s|25 VUs|~100 req/wave}\", fillcolor=\"#f1f5f9\"];\n    ramp2 [label=\"{Ramp 2|30s|200 VUs|up to ~800 req}\", fillcolor=\"#fde68a\"];\n    hold2 [label=\"{Hold 2|2m|200 VUs|~800 req/wave}\", fillcolor=\"#fcd34d\"];\n    rec2 [label=\"{Recover|1m30s|25 VUs|~100 req/wave}\", fillcolor=\"#f1f5f9\"];\n    ramp3 [label=\"{Ramp 3|30s|400 VUs|up to ~1600 req}\", fillcolor=\"#fecaca\"];\n    hold3 [label=\"{Hold 3|2m|400 VUs|~1600 req/wave}\", fillcolor=\"#fca5a5\"];\n    down [label=\"{Ramp down|2m30s|0 VUs|→ 0 req}\", fillcolor=\"#e2e8f0\"];\n    warmup -> ramp1 -> hold1 -> rec1 -> ramp2 -> hold2 -> rec2 -> ramp3 -> hold3 -> down;\n  }\n\n  subgraph cluster_parallel {\n    label=\"Parallel request load\"; color=\"#cbd5e1\"; style=\"rounded,dashed\"; fontsize=13; fontname=\"Helvetica\";\n    regional [label=\"{regional_shoppers|30 VUs|~120 req/wave}\", fillcolor=\"#ecfdf5\"];\n    api_rate [label=\"{api_request_rate|8 requests/sec|constant arrival for 15m}\", fillcolor=\"#e0f2fe\"];\n    browser_actions [label=\"{storefront_actions|ramp to 5 browser VUs × 15m|browser requests vary; Faro actions targeted}\", fillcolor=\"#faf5ff\"];\n  }\n\n  note -> p_avg [label=\"basis\"];\n  p_avg -> warmup [label=\"× target VUs\"];\n  p_avg -> regional [label=\"30 × 4\"];\n  p_avg -> api_rate [label=\"steady protocol load\"];\n}\n",
-          "edgeOverrides": [],
-          "inputMode": "code",
-          "layoutEngine": "dot",
-          "namedThresholds": [],
-          "nodeOverrides": [],
-          "rankDirection": "TB",
-          "splineType": "ortho"
-        },
-        "targets": [],
-        "transparent": false
-      },
-      {
-        "id": 9,
-        "type": "grafana-graphviz-panel",
-        "title": "Traffic Spike Target Heatmap Dark",
-        "description": "Source: docs/graphviz/traffic-spike-target-heatmap-dark.dot",
-        "gridPos": {
-          "h": 10,
-          "w": 12,
-          "x": 0,
-          "y": 48
-        },
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {},
-          "overrides": []
-        },
-        "options": {
-          "dotDiagram": "digraph traffic_spike_target_heatmap_dark {\n  graph [rankdir=TB, labelloc=t, label=\"Traffic Spike Test Targets\", bgcolor=\"#0b1220\", fontcolor=\"#f8fafc\", fontsize=22, fontname=\"Helvetica\", nodesep=0.35, ranksep=0.4];\n  node [shape=plain, fontname=\"Helvetica\", fontcolor=\"#f8fafc\"];\n  edge [style=invis];\n\n  target_heatmap [label=<\n    <TABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"7\" COLOR=\"#475569\">\n      <TR><TD BGCOLOR=\"#1e3a5f\"><FONT COLOR=\"#f8fafc\"><B>Stage</B></FONT></TD><TD BGCOLOR=\"#1e3a5f\"><FONT COLOR=\"#f8fafc\"><B>VUs</B></FONT></TD><TD BGCOLOR=\"#1e3a5f\"><FONT COLOR=\"#f8fafc\"><B>Requests / wave</B></FONT></TD><TD BGCOLOR=\"#14532d\"><FONT COLOR=\"#f8fafc\"><B>Cart updates</B></FONT></TD><TD BGCOLOR=\"#713f12\"><FONT COLOR=\"#f8fafc\"><B>Checkout attempts</B></FONT></TD><TD BGCOLOR=\"#1e40af\"><FONT COLOR=\"#f8fafc\"><B>Region changes</B></FONT></TD></TR>\n      <TR><TD ALIGN=\"LEFT\" BGCOLOR=\"#111827\"><FONT COLOR=\"#f8fafc\">Warmup / Recovery</FONT></TD><TD BGCOLOR=\"#111827\"><FONT COLOR=\"#f8fafc\"><B>25</B></FONT></TD><TD BGCOLOR=\"#334155\"><FONT COLOR=\"#f8fafc\">100</FONT></TD><TD BGCOLOR=\"#166534\"><FONT COLOR=\"#f8fafc\">15</FONT></TD><TD BGCOLOR=\"#854d0e\"><FONT COLOR=\"#f8fafc\">5</FONT></TD><TD BGCOLOR=\"#1d4ed8\"><FONT COLOR=\"#f8fafc\">25</FONT></TD></TR>\n      <TR><TD ALIGN=\"LEFT\" BGCOLOR=\"#111827\"><FONT COLOR=\"#f8fafc\">Spike 1</FONT></TD><TD BGCOLOR=\"#111827\"><FONT COLOR=\"#f8fafc\"><B>100</B></FONT></TD><TD BGCOLOR=\"#2563eb\"><FONT COLOR=\"#f8fafc\"><B>400</B></FONT></TD><TD BGCOLOR=\"#15803d\"><FONT COLOR=\"#f8fafc\"><B>60</B></FONT></TD><TD BGCOLOR=\"#a16207\"><FONT COLOR=\"#f8fafc\"><B>20</B></FONT></TD><TD BGCOLOR=\"#2563eb\"><FONT COLOR=\"#f8fafc\"><B>100</B></FONT></TD></TR>\n      <TR><TD ALIGN=\"LEFT\" BGCOLOR=\"#111827\"><FONT COLOR=\"#f8fafc\">Spike 2</FONT></TD><TD BGCOLOR=\"#111827\"><FONT COLOR=\"#f8fafc\"><B>200</B></FONT></TD><TD BGCOLOR=\"#1e40af\"><FONT COLOR=\"#f8fafc\"><B>800</B></FONT></TD><TD BGCOLOR=\"#15803d\"><FONT COLOR=\"#f8fafc\"><B>120</B></FONT></TD><TD BGCOLOR=\"#92400e\"><FONT COLOR=\"#f8fafc\"><B>40</B></FONT></TD><TD BGCOLOR=\"#1e40af\"><FONT COLOR=\"#f8fafc\"><B>200</B></FONT></TD></TR>\n      <TR><TD ALIGN=\"LEFT\" BGCOLOR=\"#111827\"><FONT COLOR=\"#f8fafc\">Spike 3</FONT></TD><TD BGCOLOR=\"#111827\"><FONT COLOR=\"#f8fafc\"><B>400</B></FONT></TD><TD BGCOLOR=\"#1e3a8a\"><FONT COLOR=\"#f8fafc\"><B>1600</B></FONT></TD><TD BGCOLOR=\"#166534\"><FONT COLOR=\"#f8fafc\"><B>240</B></FONT></TD><TD BGCOLOR=\"#713f12\"><FONT COLOR=\"#f8fafc\"><B>80</B></FONT></TD><TD BGCOLOR=\"#1e3a8a\"><FONT COLOR=\"#f8fafc\"><B>400</B></FONT></TD></TR>\n    </TABLE>\n  >];\n\n  target_note [label=<\n    <TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLSPACING=\"0\" CELLPADDING=\"4\">\n      <TR><TD ALIGN=\"LEFT\"><FONT COLOR=\"#f8fafc\"><B>Readout:</B> brighter cells mean more target pressure per completed wave.</FONT></TD></TR>\n      <TR><TD ALIGN=\"LEFT\"><FONT COLOR=\"#f8fafc\">Config: base=100, multiplier=2.</FONT></TD></TR>\n      <TR><TD ALIGN=\"LEFT\"><FONT COLOR=\"#f8fafc\">Regional shoppers: 30 VUs.</FONT></TD></TR>\n      <TR><TD ALIGN=\"LEFT\"><FONT COLOR=\"#f8fafc\">Steady API load: 8 requests/sec.</FONT></TD></TR>\n      <TR><TD ALIGN=\"LEFT\"><FONT COLOR=\"#f8fafc\">Storefront actions: ramp to 5 browser VUs.</FONT></TD></TR>\n      <TR><TD ALIGN=\"LEFT\"><FONT COLOR=\"#f8fafc\">Duration: 15m.</FONT></TD></TR>\n    </TABLE>\n  >];\n\n  target_heatmap -> target_note;\n}\n",
-          "edgeOverrides": [],
-          "inputMode": "code",
-          "layoutEngine": "dot",
-          "namedThresholds": [],
-          "nodeOverrides": [],
-          "rankDirection": "TB",
-          "splineType": "ortho"
-        },
-        "targets": [],
-        "transparent": false
-      },
-      {
-        "id": 10,
-        "type": "grafana-graphviz-panel",
-        "title": "Traffic Spike Target Heatmap",
-        "description": "Source: docs/graphviz/traffic-spike-target-heatmap.dot",
-        "gridPos": {
-          "h": 10,
-          "w": 12,
-          "x": 12,
-          "y": 48
-        },
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {},
-          "overrides": []
-        },
-        "options": {
-          "dotDiagram": "digraph traffic_spike_target_heatmap {\n  graph [rankdir=TB, labelloc=t, label=\"Traffic Spike Test Targets\", fontsize=22, fontname=\"Helvetica\", nodesep=0.35, ranksep=0.4];\n  node [shape=plain, fontname=\"Helvetica\"];\n  edge [style=invis];\n\n  target_heatmap [label=<\n    <TABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"7\" COLOR=\"#334155\">\n      <TR><TD BGCOLOR=\"#e0f2fe\"><B>Stage</B></TD><TD BGCOLOR=\"#e0f2fe\"><B>VUs</B></TD><TD BGCOLOR=\"#e0f2fe\"><B>Requests / wave</B></TD><TD BGCOLOR=\"#dcfce7\"><B>Cart updates</B></TD><TD BGCOLOR=\"#fef3c7\"><B>Checkout attempts</B></TD><TD BGCOLOR=\"#dbeafe\"><B>Region changes</B></TD></TR>\n      <TR><TD ALIGN=\"LEFT\">Warmup / Recovery</TD><TD><B>25</B></TD><TD BGCOLOR=\"#e2e8f0\">100</TD><TD BGCOLOR=\"#bbf7d0\">15</TD><TD BGCOLOR=\"#fde68a\">5</TD><TD BGCOLOR=\"#bfdbfe\">25</TD></TR>\n      <TR><TD ALIGN=\"LEFT\">Spike 1</TD><TD><B>100</B></TD><TD BGCOLOR=\"#93c5fd\"><B>400</B></TD><TD BGCOLOR=\"#4ade80\"><B>60</B></TD><TD BGCOLOR=\"#facc15\"><B>20</B></TD><TD BGCOLOR=\"#60a5fa\"><B>100</B></TD></TR>\n      <TR><TD ALIGN=\"LEFT\">Spike 2</TD><TD><B>200</B></TD><TD BGCOLOR=\"#3b82f6\"><FONT COLOR=\"white\"><B>800</B></FONT></TD><TD BGCOLOR=\"#22c55e\"><B>120</B></TD><TD BGCOLOR=\"#eab308\"><B>40</B></TD><TD BGCOLOR=\"#3b82f6\"><FONT COLOR=\"white\"><B>200</B></FONT></TD></TR>\n      <TR><TD ALIGN=\"LEFT\">Spike 3</TD><TD><B>400</B></TD><TD BGCOLOR=\"#1d4ed8\"><FONT COLOR=\"white\"><B>1600</B></FONT></TD><TD BGCOLOR=\"#15803d\"><FONT COLOR=\"white\"><B>240</B></FONT></TD><TD BGCOLOR=\"#a16207\"><FONT COLOR=\"white\"><B>80</B></FONT></TD><TD BGCOLOR=\"#1d4ed8\"><FONT COLOR=\"white\"><B>400</B></FONT></TD></TR>\n    </TABLE>\n  >];\n\n  target_note [label=<\n    <TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLSPACING=\"0\" CELLPADDING=\"4\">\n      <TR><TD ALIGN=\"LEFT\"><B>Readout:</B> darker cells mean more target pressure per completed wave.</TD></TR>\n      <TR><TD ALIGN=\"LEFT\">Current config: BASE_SPIKE_USERS=100, SPIKE_MULTIPLIER=2, regional_shoppers=30 VUs, api_request_rate=8 requests/sec, storefront_actions=ramp to 5 browser VUs over 3m, hold 10m, ramp down 2m.</TD></TR>\n    </TABLE>\n  >];\n\n  target_heatmap -> target_note;\n}\n\n",
-          "edgeOverrides": [],
-          "inputMode": "code",
-          "layoutEngine": "dot",
-          "namedThresholds": [],
-          "nodeOverrides": [],
-          "rankDirection": "TB",
-          "splineType": "ortho"
-        },
-        "targets": [],
-        "transparent": false
-      },
-      {
-        "id": 11,
-        "type": "grafana-graphviz-panel",
-        "title": "Traffic Spike",
-        "description": "Source: docs/graphviz/traffic-spike.dot",
-        "gridPos": {
-          "h": 12,
-          "w": 12,
-          "x": 0,
-          "y": 60
-        },
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {},
-          "overrides": []
-        },
-        "options": {
-          "dotDiagram": "digraph traffic_spike {\n  graph [\n    rankdir=LR,\n    labelloc=t,\n    label=\"Traffic Spike Config: BASE_SPIKE_USERS=100, SPIKE_MULTIPLIER=2\",\n    fontsize=20,\n    fontname=\"Helvetica\",\n    nodesep=0.35,\n    ranksep=0.55\n  ];\n\n  node [shape=box, style=\"rounded,filled\", fontname=\"Helvetica\", color=\"#334155\", fillcolor=\"#f8fafc\"];\n  edge [color=\"#475569\", arrowsize=0.8, fontname=\"Helvetica\", fontsize=10];\n\n  warmup [label=\"Warmup\\n2m → 25 VUs\\n~100 req/wave\", fillcolor=\"#f1f5f9\"];\n  spike1 [label=\"Spike 1\\n30s ramp → 100 VUs\\n2m hold\\n~400 req/wave\", fillcolor=\"#bfdbfe\"];\n  recovery1 [label=\"Recovery\\n1m30s → 25 VUs\\n~100 req/wave\", fillcolor=\"#f1f5f9\"];\n  spike2 [label=\"Spike 2\\n30s ramp → 200 VUs\\n2m hold\\n~800 req/wave\", fillcolor=\"#fde68a\"];\n  recovery2 [label=\"Recovery\\n1m30s → 25 VUs\\n~100 req/wave\", fillcolor=\"#f1f5f9\"];\n  spike3 [label=\"Spike 3\\n30s ramp → 400 VUs\\n2m hold\\n~1600 req/wave\", fillcolor=\"#fecaca\"];\n  rampdown [label=\"Ramp down\\n2m30s → 0 VUs\", fillcolor=\"#e2e8f0\"];\n\n  warmup -> spike1 -> recovery1 -> spike2 -> recovery2 -> spike3 -> rampdown;\n}\n\n",
-          "edgeOverrides": [],
-          "inputMode": "code",
-          "layoutEngine": "dot",
-          "namedThresholds": [],
-          "nodeOverrides": [],
-          "rankDirection": "TB",
-          "splineType": "ortho"
-        },
-        "targets": [],
-        "transparent": false
-      }
-    ]
+    "title": "Ensemble Graphviz Diagrams",
+    "variables": []
   },
-  "folderUid": "ensemble-diagrams",
-  "message": "Publish Ensemble Graphviz diagrams",
-  "overwrite": true
+  "status": {
+    "conversion": {
+      "failed": false,
+      "storedVersion": "v0alpha1"
+    }
+  }
 }

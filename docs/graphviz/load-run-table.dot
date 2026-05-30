@@ -1,0 +1,232 @@
+digraph load_run_table {
+  graph [
+    rankdir=TB,
+    bgcolor="#ffffff",
+    pad="0.35",
+    nodesep="0.35",
+    ranksep="0.45",
+    fontname="Arial",
+    labelloc="t",
+    label="Ensemble-Grafana k6 Traffic Spike Run History"
+  ];
+
+  node [
+    shape=plain,
+    fontname="Arial"
+  ];
+
+  runs [
+    label=<
+      <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="7" COLOR="#d1d5db">
+        <TR>
+          <TD BGCOLOR="#111827"><FONT COLOR="#ffffff"><B>Started</B></FONT></TD>
+          <TD BGCOLOR="#111827"><FONT COLOR="#ffffff"><B>Run</B></FONT></TD>
+          <TD BGCOLOR="#111827"><FONT COLOR="#ffffff"><B>Result</B></FONT></TD>
+          <TD BGCOLOR="#111827"><FONT COLOR="#ffffff"><B>Duration</B></FONT></TD>
+          <TD BGCOLOR="#111827"><FONT COLOR="#ffffff"><B>Total VUH</B></FONT></TD>
+          <TD BGCOLOR="#111827"><FONT COLOR="#ffffff"><B>Protocol</B></FONT></TD>
+          <TD BGCOLOR="#111827"><FONT COLOR="#ffffff"><B>Browser</B></FONT></TD>
+        </TR>
+        <TR>
+          <TD>05/30/2026 18:27</TD>
+          <TD><FONT POINT-SIZE="11">7648780</FONT></TD>
+          <TD BGCOLOR="#dcfce7"><FONT COLOR="#166534"><B>PASS</B></FONT></TD>
+          <TD>15.0m</TD>
+          <TD>129.00</TD>
+          <TD>117.16</TD>
+          <TD>11.84</TD>
+        </TR>
+        <TR>
+          <TD>05/30/2026 18:01</TD>
+          <TD><FONT POINT-SIZE="11">7648612</FONT></TD>
+          <TD BGCOLOR="#fee2e2"><FONT COLOR="#991b1b"><B>FAIL</B></FONT></TD>
+          <TD>15.0m</TD>
+          <TD>129.00</TD>
+          <TD>117.16</TD>
+          <TD>11.84</TD>
+        </TR>
+        <TR>
+          <TD>05/30/2026 17:43</TD>
+          <TD><FONT POINT-SIZE="11">7648492</FONT></TD>
+          <TD BGCOLOR="#fee2e2"><FONT COLOR="#991b1b"><B>FAIL</B></FONT></TD>
+          <TD>15.0m</TD>
+          <TD>225.99</TD>
+          <TD>94.35</TD>
+          <TD>131.64</TD>
+        </TR>
+        <TR>
+          <TD>05/30/2026 17:37</TD>
+          <TD><FONT POINT-SIZE="11">7648480</FONT></TD>
+          <TD BGCOLOR="#fef3c7"><FONT COLOR="#92400e"><B>ERROR</B></FONT></TD>
+          <TD>1.8m</TD>
+          <TD>30.05</TD>
+          <TD>12.55</TD>
+          <TD>17.50</TD>
+        </TR>
+        <TR>
+          <TD>05/30/2026 17:36</TD>
+          <TD><FONT POINT-SIZE="11">7648472</FONT></TD>
+          <TD BGCOLOR="#fef3c7"><FONT COLOR="#92400e"><B>ERROR</B></FONT></TD>
+          <TD>0.5m</TD>
+          <TD>7.73</TD>
+          <TD>3.23</TD>
+          <TD>4.50</TD>
+        </TR>
+        <TR>
+          <TD>05/30/2026 16:55</TD>
+          <TD><FONT POINT-SIZE="11">7648337</FONT></TD>
+          <TD BGCOLOR="#dcfce7"><FONT COLOR="#166534"><B>PASS</B></FONT></TD>
+          <TD>10.0m</TD>
+          <TD>80.01</TD>
+          <TD>71.67</TD>
+          <TD>8.34</TD>
+        </TR>
+        <TR>
+          <TD>05/30/2026 16:50</TD>
+          <TD><FONT POINT-SIZE="11">7648323</FONT></TD>
+          <TD BGCOLOR="#fef3c7"><FONT COLOR="#92400e"><B>ERROR</B></FONT></TD>
+          <TD>1.6m</TD>
+          <TD>12.41</TD>
+          <TD>11.11</TD>
+          <TD>1.30</TD>
+        </TR>
+        <TR>
+          <TD>05/30/2026 16:45</TD>
+          <TD><FONT POINT-SIZE="11">7648315</FONT></TD>
+          <TD BGCOLOR="#fef3c7"><FONT COLOR="#92400e"><B>ERROR</B></FONT></TD>
+          <TD>1.4m</TD>
+          <TD>15.24</TD>
+          <TD>10.40</TD>
+          <TD>4.84</TD>
+        </TR>
+        <TR>
+          <TD>05/30/2026 16:23</TD>
+          <TD><FONT POINT-SIZE="11">7648249</FONT></TD>
+          <TD BGCOLOR="#fee2e2"><FONT COLOR="#991b1b"><B>FAIL</B></FONT></TD>
+          <TD>10.0m</TD>
+          <TD>157.34</TD>
+          <TD>65.69</TD>
+          <TD>91.65</TD>
+        </TR>
+        <TR>
+          <TD>05/30/2026 16:20</TD>
+          <TD><FONT POINT-SIZE="11">7648230</FONT></TD>
+          <TD BGCOLOR="#fef3c7"><FONT COLOR="#92400e"><B>ERROR</B></FONT></TD>
+          <TD>0.5m</TD>
+          <TD>7.73</TD>
+          <TD>3.23</TD>
+          <TD>4.50</TD>
+        </TR>
+        <TR>
+          <TD>05/30/2026 15:46</TD>
+          <TD><FONT POINT-SIZE="11">7648063</FONT></TD>
+          <TD BGCOLOR="#fee2e2"><FONT COLOR="#991b1b"><B>FAIL</B></FONT></TD>
+          <TD>10.0m</TD>
+          <TD>157.34</TD>
+          <TD>65.69</TD>
+          <TD>91.65</TD>
+        </TR>
+        <TR>
+          <TD>05/30/2026 14:56</TD>
+          <TD><FONT POINT-SIZE="11">7647787</FONT></TD>
+          <TD BGCOLOR="#dcfce7"><FONT COLOR="#166534"><B>PASS</B></FONT></TD>
+          <TD>10.0m</TD>
+          <TD>73.34</TD>
+          <TD>71.67</TD>
+          <TD>1.67</TD>
+        </TR>
+        <TR>
+          <TD>05/30/2026 14:40</TD>
+          <TD><FONT POINT-SIZE="11">7647743</FONT></TD>
+          <TD BGCOLOR="#dcfce7"><FONT COLOR="#166534"><B>PASS</B></FONT></TD>
+          <TD>10.0m</TD>
+          <TD>18.01</TD>
+          <TD>16.34</TD>
+          <TD>1.67</TD>
+        </TR>
+        <TR>
+          <TD>05/30/2026 10:55</TD>
+          <TD><FONT POINT-SIZE="11">7646958</FONT></TD>
+          <TD BGCOLOR="#dcfce7"><FONT COLOR="#166534"><B>PASS</B></FONT></TD>
+          <TD>8.5m</TD>
+          <TD>12.75</TD>
+          <TD>12.75</TD>
+          <TD>0.00</TD>
+        </TR>
+        <TR>
+          <TD>05/30/2026 10:29</TD>
+          <TD><FONT POINT-SIZE="11">7646874</FONT></TD>
+          <TD BGCOLOR="#dcfce7"><FONT COLOR="#166534"><B>PASS</B></FONT></TD>
+          <TD>8.5m</TD>
+          <TD>6.38</TD>
+          <TD>6.38</TD>
+          <TD>0.00</TD>
+        </TR>
+        <TR>
+          <TD>05/27/2026 13:05</TD>
+          <TD><FONT POINT-SIZE="11">7627516</FONT></TD>
+          <TD BGCOLOR="#fee2e2"><FONT COLOR="#991b1b"><B>FAIL</B></FONT></TD>
+          <TD>8.5m</TD>
+          <TD>6.38</TD>
+          <TD>6.38</TD>
+          <TD>0.00</TD>
+        </TR>
+        <TR>
+          <TD>05/27/2026 12:41</TD>
+          <TD><FONT POINT-SIZE="11">7627390</FONT></TD>
+          <TD BGCOLOR="#fee2e2"><FONT COLOR="#991b1b"><B>FAIL</B></FONT></TD>
+          <TD>8.5m</TD>
+          <TD>6.38</TD>
+          <TD>6.38</TD>
+          <TD>0.00</TD>
+        </TR>
+        <TR>
+          <TD>05/27/2026 12:06</TD>
+          <TD><FONT POINT-SIZE="11">7627249</FONT></TD>
+          <TD BGCOLOR="#dcfce7"><FONT COLOR="#166534"><B>PASS</B></FONT></TD>
+          <TD>8.5m</TD>
+          <TD>6.38</TD>
+          <TD>6.38</TD>
+          <TD>0.00</TD>
+        </TR>
+        <TR>
+          <TD>05/25/2026 08:58</TD>
+          <TD><FONT POINT-SIZE="11">7612573</FONT></TD>
+          <TD BGCOLOR="#dcfce7"><FONT COLOR="#166534"><B>PASS</B></FONT></TD>
+          <TD>8.5m</TD>
+          <TD>6.38</TD>
+          <TD>6.38</TD>
+          <TD>0.00</TD>
+        </TR>
+        <TR>
+          <TD>05/25/2026 08:57</TD>
+          <TD><FONT POINT-SIZE="11">7612567</FONT></TD>
+          <TD BGCOLOR="#fef3c7"><FONT COLOR="#92400e"><B>ERROR</B></FONT></TD>
+          <TD>0.6m</TD>
+          <TD>1.00</TD>
+          <TD>1.00</TD>
+          <TD>0.00</TD>
+        </TR>
+      </TABLE>
+    >
+  ];
+
+  summary [
+    label=<
+      <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#d1d5db">
+        <TR><TD BGCOLOR="#f3f4f6"><B>Summary</B></TD></TR>
+        <TR><TD ALIGN="LEFT">Runs: 20</TD></TR>
+        <TR><TD ALIGN="LEFT">Passed: 8</TD></TR>
+        <TR><TD ALIGN="LEFT">Failed: 6</TD></TR>
+        <TR><TD ALIGN="LEFT">Errors: 6</TD></TR>
+        <TR><TD ALIGN="LEFT">Pass rate: 40%</TD></TR>
+        <TR><TD ALIGN="LEFT">Latest passing 400-VU run: 7648780</TD></TR>
+      </TABLE>
+    >
+  ];
+
+  summary -> runs [
+    style=invis,
+    weight=2
+  ];
+}
