@@ -26,6 +26,8 @@ const regions = [
   { code: 'UK', label: 'UK', flag: '🇬🇧', locale: 'en-GB', language: 'British English', copyKey: 'enGB' }
 ];
 
+const grafanaStackUrl = 'https://orenlion.grafana.net/';
+
 function regionConfigFor(code) {
   return regions.find(item => item.code === code) || regions[0];
 }
@@ -392,6 +394,31 @@ function GrafanaLogoMark() {
       <path fill="#fff" d="M42 50a6 6 0 1 1 12 0 6 6 0 0 1-12 0Z" />
       <path fill="#111412" fillOpacity=".16" d="M48 6a42 42 0 1 1 0 84 42 42 0 0 0 0-84Z" />
     </svg>
+  );
+}
+
+function CheckoutTraceCopy({ copyText, onGrafanaClick }) {
+  const grafanaLabel = 'Grafana';
+  const grafanaIndex = copyText.indexOf(grafanaLabel);
+
+  if (grafanaIndex === -1) {
+    return <>{copyText}</>;
+  }
+
+  return (
+    <>
+      {copyText.slice(0, grafanaIndex)}
+      <a
+        href={grafanaStackUrl}
+        target="_blank"
+        rel="noreferrer"
+        onClick={onGrafanaClick}
+        data-faro-user-action-name="navigate-checkout:grafana"
+      >
+        {grafanaLabel}
+      </a>
+      {copyText.slice(grafanaIndex + grafanaLabel.length)}
+    </>
   );
 }
 
@@ -815,6 +842,14 @@ export default function App() {
     setCheckoutDialogOpen(false);
   }
 
+  function trackCheckoutGrafanaLink() {
+    trackAppAction('navigate-checkout:grafana', {
+      targetUrl: grafanaStackUrl
+    }, {
+      triggerName: 'click'
+    });
+  }
+
   function updateQuantity(key, quantity) {
     const item = enrichedCart.find(candidate => candidate.key === key) || cart.find(candidate => candidate.key === key);
     trackAppAction(quantity <= 0
@@ -1143,7 +1178,9 @@ export default function App() {
             <div>
               <p className="eyebrow">Grafana</p>
               <h2 id="checkout-dialog-title">{t.checkoutDialogTitle}</h2>
-              <p>{t.checkoutConfirmed}</p>
+              <p>
+                <CheckoutTraceCopy copyText={t.checkoutConfirmed} onGrafanaClick={trackCheckoutGrafanaLink} />
+              </p>
               <button type="button" onClick={closeCheckoutDialog} data-faro-user-action-name="checkout-dialog:close">{t.close}</button>
             </div>
           </section>

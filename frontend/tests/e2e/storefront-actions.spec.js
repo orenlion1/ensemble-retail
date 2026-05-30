@@ -77,6 +77,9 @@ test.describe('storefront browser behavior', () => {
     const checkoutDialog = page.getByRole('dialog', { name: 'Grafana trace ready' });
     await expect(checkoutDialog).toBeVisible();
     await expect(checkoutDialog.getByRole('img', { name: 'Grafana logo' })).toBeVisible();
+    const grafanaLink = checkoutDialog.getByRole('link', { name: 'Grafana' });
+    await expect(grafanaLink).toHaveAttribute('href', 'https://orenlion.grafana.net/');
+    await expectActionAttribute(grafanaLink, 'navigate-checkout:grafana');
     const closeCheckoutDialog = checkoutDialog.getByRole('button', { name: 'Close' });
     await expectActionAttribute(closeCheckoutDialog, 'checkout-dialog:close');
     await closeCheckoutDialog.click();

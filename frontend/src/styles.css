@@ -445,6 +445,13 @@ select {
   margin: 0 0 1rem;
 }
 
+.checkoutDialog a {
+  color: #c84d00;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.14em;
+}
+
 .grafanaLogo {
   display: block;
   height: 88px;
