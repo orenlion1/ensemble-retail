@@ -44,7 +44,7 @@ node scripts/report-load-tests.mjs
 - Use `BASE_SPIKE_USERS=<value>` to override the first spike for one run.
 - Use `SPIKE_MULTIPLIER=<value>` to override the spike growth factor for one run.
 - The default `API_BASE_URL` is `https://ensemble-grafana.com` so `/api/*` traffic exercises CloudFront API routing. Override it with `https://api.ensemble-grafana.com` only when testing the ALB/API origin directly.
-- The default browser-action scenario uses `BROWSER_ACTION_VUS=5`, `BROWSER_ACTION_DURATION=10m`, and `USER_ACTION_TARGET_RPS=0.25` so every expected Faro user-action family must reach at least 0.25 events/second.
-- The default combined benchmark peaks at 435 VUs. Increase the project quota or lower `BASE_SPIKE_USERS`, `REGIONAL_SHOPPER_VUS`, or `BROWSER_ACTION_VUS` for quota-constrained validation runs.
+- The default browser-action scenario uses `BROWSER_ACTION_VUS=60`, `BROWSER_ACTION_DURATION=15m`, and `USER_ACTION_TARGET_RPS=8` so every expected Faro user-action family must reach at least 8 events/second.
+- The default combined benchmark peaks at 490 VUs. Increase the project quota or lower `BASE_SPIKE_USERS`, `REGIONAL_SHOPPER_VUS`, or `BROWSER_ACTION_VUS` for quota-constrained validation runs.
 - Use local `k6 run` only when explicitly debugging a script or when Grafana Cloud k6 is unavailable.
 - Keep generated raw k6 JSON ignored; commit only intentional report artifacts when the user asks to persist them.

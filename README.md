@@ -500,7 +500,7 @@ The spike benchmark is `load-tests/grafana-cloud-traffic-spikes.js`. It uses the
 - Spike 2: `200` VUs.
 - Spike 3: `400` VUs.
 
-Each spike ramps quickly, holds for one minute, and then returns to a low recovery load before the next spike. Requests are tagged by `spike`, `region`, `persona`, and endpoint name. The traffic spike script is now the combined benchmark entrypoint: it runs the three-spike API benchmark, the regional shopper load scenario, and a sustained browser-action scenario that repeatedly executes the full storefront journey so Faro receives high-volume user-action events during the load window.
+Each spike ramps quickly, holds for two minutes, and then returns to a low recovery load before the next spike. The default combined run lasts 15 minutes: a 15-minute API spike profile, 15 minutes of regional shoppers, and 15 minutes of sustained browser actions. Requests are tagged by `spike`, `region`, `persona`, and endpoint name. The traffic spike script is now the combined benchmark entrypoint: it runs the three-spike API benchmark, the regional shopper load scenario, and a sustained browser-action scenario that repeatedly executes the full storefront journey so Faro receives high-volume user-action events during the load window.
 
 Run in Grafana Cloud k6:
 
@@ -539,11 +539,11 @@ API_BASE_URL=https://ensemble-grafana.com \
 k6 cloud run load-tests/grafana-cloud-traffic-spikes.js
 ```
 
-The default combined benchmark peaks at 435 VUs: 400 traffic-spike VUs, 30 regional shoppers, and 5 browser-action VUs. Increase the project VU quota before running the default benchmark in Cloud k6, or temporarily lower `BASE_SPIKE_USERS`, `REGIONAL_SHOPPER_VUS`, or `BROWSER_ACTION_VUS` for quota-constrained validation runs.
+The default combined benchmark peaks at 490 VUs: 400 traffic-spike VUs, 30 regional shoppers, and 60 browser-action VUs. Increase the project VU quota before running the default benchmark in Cloud k6, or temporarily lower `BASE_SPIKE_USERS`, `REGIONAL_SHOPPER_VUS`, or `BROWSER_ACTION_VUS` for quota-constrained validation runs.
 
-The browser-action scenario uses sustained browser VUs rather than a single shared iteration. Its default target is at least 0.25 user-action events per second for every expected action family. The script publishes a tagged `storefront_user_action_events` counter with `action_family` labels and fails the run when any expected action family is below `USER_ACTION_TARGET_RPS`. Browser-action load is intentionally much lower than protocol API load because the full synthetic journey launches Chromium and captures Faro actions. Browser navigation waits for the storefront app shell instead of global network idle so background Faro or image requests do not fail the benchmark before the UI is usable.
+The browser-action scenario uses sustained browser VUs rather than a single shared iteration. Its default target is at least 8 user-action events per second for every expected action family, which is the browser/Faro proxy for the requested 8 requests per second user-action load. The script publishes a tagged `storefront_user_action_events` counter with `action_family` labels and fails the run when any expected action family is below `USER_ACTION_TARGET_RPS`. Browser-action load is intentionally lower than protocol API load because the full synthetic journey launches Chromium and captures Faro actions. Browser navigation waits for the storefront app shell instead of global network idle so background Faro or image requests do not fail the benchmark before the UI is usable.
 
-Graphviz traffic-spike diagrams live under `docs/graphviz/` and are generated from the current default benchmark profile: `BASE_SPIKE_USERS=100`, `SPIKE_MULTIPLIER=2`, `REGIONAL_SHOPPER_VUS=30`, and `BROWSER_ACTION_VUS=5`. The Grafana dashboard `Ensemble Traffic Spike Graphviz Model` uses the dark heatmap DOT from `docs/graphviz/traffic-spike-target-heatmap-dark.dot` and the HTML heatmap from `docs/graphviz/traffic-spike-target-heatmap.html`; update it with `gcx dashboards update ensemble-traffic-spike-graphviz -f observability/grafana/dashboards/traffic-spike-graphviz.json` after refreshing the dashboard manifest with `gcx dashboards get ensemble-traffic-spike-graphviz -o json`. Dashboard URL: `https://orenlion.grafana.net/d/6d68e547-2aac-4f8c-bc87-73139bff4816/ensemble-traffic-spike-graphviz-model`.
+Graphviz traffic-spike diagrams live under `docs/graphviz/` and are generated from the current default benchmark profile: `BASE_SPIKE_USERS=100`, `SPIKE_MULTIPLIER=2`, `REGIONAL_SHOPPER_VUS=30`, and `BROWSER_ACTION_VUS=60`. The Grafana dashboard `Ensemble Traffic Spike Graphviz Model` uses the dark heatmap DOT from `docs/graphviz/traffic-spike-target-heatmap-dark.dot` and the HTML heatmap from `docs/graphviz/traffic-spike-target-heatmap.html`; update it with `gcx dashboards update ensemble-traffic-spike-graphviz -f observability/grafana/dashboards/traffic-spike-graphviz.json` after refreshing the dashboard manifest with `gcx dashboards get ensemble-traffic-spike-graphviz -o json`. Dashboard URL: `https://orenlion.grafana.net/d/6d68e547-2aac-4f8c-bc87-73139bff4816/ensemble-traffic-spike-graphviz-model`.
 
 The Grafana folder `Diagrams` contains the dashboard `Ensemble Graphviz Diagrams`, which embeds every current Graphviz DOT source from `docs/diagrams/` and `docs/graphviz/`. Folder URL: `https://orenlion.grafana.net/dashboards/f/ensemble-diagrams/diagrams`. Dashboard URL: `https://orenlion.grafana.net/d/ensemble-graphviz-diagrams/ensemble-graphviz-diagrams`. Recreate or update it with:
 
@@ -556,9 +556,9 @@ Optional knobs for the combined scenarios:
 
 - `REGIONAL_SHOPPER_VUS`: regional API shopper load, default `30`.
 - `SPIKE_MULTIPLIER`: traffic spike growth multiplier, default `2`.
-- `USER_ACTION_TARGET_RPS`: minimum target rate for every expected browser user-action family, default `0.25`.
-- `BROWSER_ACTION_VUS`: concurrent browser VUs that repeatedly execute the full user-action journey, default `5`.
-- `BROWSER_ACTION_DURATION`: duration for sustained browser user-action load, default `TEST_DURATION` or `10m`.
+- `USER_ACTION_TARGET_RPS`: minimum target rate for every expected browser user-action family, default `8`.
+- `BROWSER_ACTION_VUS`: concurrent browser VUs that repeatedly execute the full user-action journey, default `60`.
+- `BROWSER_ACTION_DURATION`: duration for sustained browser user-action load, default `TEST_DURATION` or `15m`.
 
 The browser action check covers:
 

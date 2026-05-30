@@ -10,9 +10,10 @@ const spikeMultiplier = Number(__ENV.SPIKE_MULTIPLIER || 2);
 const spikeTwoUsers = Math.ceil(baseSpikeUsers * spikeMultiplier);
 const spikeThreeUsers = Math.ceil(spikeTwoUsers * spikeMultiplier);
 const regionalShopperVus = Number(__ENV.REGIONAL_SHOPPER_VUS || 30);
-const userActionTargetRps = Number(__ENV.USER_ACTION_TARGET_RPS || 0.25);
-const browserActionVus = Number(__ENV.BROWSER_ACTION_VUS || 5);
-const browserActionDuration = __ENV.BROWSER_ACTION_DURATION || __ENV.TEST_DURATION || '10m';
+const userActionTargetRps = Number(__ENV.USER_ACTION_TARGET_RPS || 8);
+const browserActionVus = Number(__ENV.BROWSER_ACTION_VUS || 60);
+const benchmarkDuration = __ENV.TEST_DURATION || '15m';
+const browserActionDuration = __ENV.BROWSER_ACTION_DURATION || benchmarkDuration;
 const userActionRateThresholds = Object.fromEntries(
   USER_ACTION_RATE_FAMILIES.map(actionFamily => [
     `storefront_user_action_events{action_family:${actionFamily}}`,
@@ -29,16 +30,16 @@ export const options = {
       exec: 'trafficSpikeJourney',
       executor: 'ramping-vus',
       stages: [
-        { duration: '1m', target: Math.ceil(baseSpikeUsers * 0.25) },
+        { duration: '2m', target: Math.ceil(baseSpikeUsers * 0.25) },
         { duration: '30s', target: baseSpikeUsers },
-        { duration: '1m', target: baseSpikeUsers },
-        { duration: '1m', target: Math.ceil(baseSpikeUsers * 0.25) },
+        { duration: '2m', target: baseSpikeUsers },
+        { duration: '1m30s', target: Math.ceil(baseSpikeUsers * 0.25) },
         { duration: '30s', target: spikeTwoUsers },
-        { duration: '1m', target: spikeTwoUsers },
-        { duration: '1m', target: Math.ceil(baseSpikeUsers * 0.25) },
+        { duration: '2m', target: spikeTwoUsers },
+        { duration: '1m30s', target: Math.ceil(baseSpikeUsers * 0.25) },
         { duration: '30s', target: spikeThreeUsers },
-        { duration: '1m', target: spikeThreeUsers },
-        { duration: '1m', target: 0 }
+        { duration: '2m', target: spikeThreeUsers },
+        { duration: '2m30s', target: 0 }
       ],
       gracefulRampDown: '30s'
     },
@@ -46,7 +47,7 @@ export const options = {
       exec: 'regionalJourneyScenario',
       executor: 'constant-vus',
       vus: regionalShopperVus,
-      duration: __ENV.TEST_DURATION || '10m',
+      duration: benchmarkDuration,
       gracefulStop: '30s'
     },
     storefront_actions: {
