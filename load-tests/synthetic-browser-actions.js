@@ -286,7 +286,7 @@ export default async function () {
     });
   } catch (error) {
     check(error, {
-      [`scripted storefront journey completed: ${error?.message || String(error)}`]: () => false
+      'scripted storefront journey completed': () => false
     });
     fail(error?.message || String(error));
   } finally {

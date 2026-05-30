@@ -6,8 +6,9 @@ import { summaryOutput } from './summary.js';
 import storefrontActions from './synthetic-browser-actions.js';
 
 const baseSpikeUsers = Number(__ENV.BASE_SPIKE_USERS || 100);
-const spikeTwoUsers = Math.ceil(baseSpikeUsers * 1.5);
-const spikeThreeUsers = Math.ceil(spikeTwoUsers * 1.5);
+const spikeMultiplier = Number(__ENV.SPIKE_MULTIPLIER || 2);
+const spikeTwoUsers = Math.ceil(baseSpikeUsers * spikeMultiplier);
+const spikeThreeUsers = Math.ceil(spikeTwoUsers * spikeMultiplier);
 const regionalShopperVus = Number(__ENV.REGIONAL_SHOPPER_VUS || 30);
 const browserActionIterations = Number(__ENV.BROWSER_ACTION_ITERATIONS || 1);
 
@@ -78,7 +79,8 @@ export const options = {
     test_type: 'traffic-spike-benchmark',
     spike_one_users: String(baseSpikeUsers),
     spike_two_users: String(spikeTwoUsers),
-    spike_three_users: String(spikeThreeUsers)
+    spike_three_users: String(spikeThreeUsers),
+    spike_multiplier: String(spikeMultiplier)
   }
 };
 
@@ -300,6 +302,7 @@ export function handleSummary(data) {
       spikeTwo: spikeTwoUsers,
       spikeThree: spikeThreeUsers
     },
+    spikeMultiplier,
     regionalShopperVus,
     browserActionIterations
   });

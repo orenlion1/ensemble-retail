@@ -140,8 +140,8 @@ Provide at least three k6 scripts:
 Recommended spike profile:
 
 - Spike 1 at baseline peak.
-- Spike 2 at 50% above spike 1.
-- Spike 3 at 50% above spike 2.
+- Spike 2 at 2x spike 1 for stress validation.
+- Spike 3 at 2x spike 2 for stress validation.
 - Add recovery windows between spikes.
 
 Required k6 environment:

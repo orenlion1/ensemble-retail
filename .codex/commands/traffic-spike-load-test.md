@@ -40,7 +40,9 @@ node scripts/report-load-tests.mjs
 ## Notes
 
 - The default traffic spike baseline is controlled by `BASE_SPIKE_USERS` in `load-tests/grafana-cloud-traffic-spikes.js`.
-- The current default spike sequence is `100`, `150`, and `225` VUs.
+- The current default spike sequence is `100`, `200`, and `400` VUs.
 - Use `BASE_SPIKE_USERS=<value>` to override the first spike for one run.
+- Use `SPIKE_MULTIPLIER=<value>` to override the spike growth factor for one run.
+- The default combined benchmark exceeds a 100 VU Grafana Cloud k6 project cap. Increase the project quota or lower `BASE_SPIKE_USERS` for quota-constrained validation runs.
 - Use local `k6 run` only when explicitly debugging a script or when Grafana Cloud k6 is unavailable.
 - Keep generated raw k6 JSON ignored; commit only intentional report artifacts when the user asks to persist them.

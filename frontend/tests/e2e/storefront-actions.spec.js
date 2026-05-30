@@ -179,6 +179,34 @@ test.describe('storefront browser behavior', () => {
     expect(brokenImages).toEqual([]);
   });
 
+  test('product imagery resizes with viewport changes', async ({ page }) => {
+    const shellCard = page.locator('.productCard', { has: page.getByRole('heading', { name: "Men's Alpine Shell Jacket" }) });
+    const cardImageButton = shellCard.locator('.imageButton');
+    const cardImage = shellCard.locator('img');
+
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await expect(cardImage).toBeVisible();
+    const desktopCardBox = await cardImageButton.boundingBox();
+    const desktopImageBox = await cardImage.boundingBox();
+    expect(desktopCardBox).not.toBeNull();
+    expect(desktopImageBox).not.toBeNull();
+    expect(Math.abs(desktopCardBox.width - desktopImageBox.width)).toBeLessThan(1);
+    expect(Math.abs(desktopCardBox.height - desktopImageBox.height)).toBeLessThan(1);
+
+    await shellCard.getByRole('button', { name: "View Men's Alpine Shell Jacket" }).click();
+    const detailImage = page.locator('.detail img');
+    await expect(detailImage).toBeVisible();
+    const wideDetailBox = await detailImage.boundingBox();
+
+    await page.setViewportSize({ width: 900, height: 900 });
+    const narrowDetailBox = await detailImage.boundingBox();
+
+    expect(wideDetailBox).not.toBeNull();
+    expect(narrowDetailBox).not.toBeNull();
+    expect(narrowDetailBox.width).toBeLessThan(wideDetailBox.width);
+    expect(Math.abs((narrowDetailBox.width / narrowDetailBox.height) - (16 / 11))).toBeLessThan(0.05);
+  });
+
   test('desktop and mobile layouts remain screenshot-stable', async ({ page }, testInfo) => {
     await page.addStyleTag({
       content: '*, *::before, *::after { transition: none !important; animation: none !important; }'

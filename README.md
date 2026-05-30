@@ -494,11 +494,11 @@ The report is written to `reports/load-tests/load-test-comparison.md`. Generate 
 
 Slash command alias: `/traffic-spike-load-test`. The repo-local command definition is `.codex/commands/traffic-spike-load-test.md` and points agents at `skills/observability/SKILLS.md` before running the benchmark and post-run reports.
 
-The spike benchmark is `load-tests/grafana-cloud-traffic-spikes.js`. It uses the same regional shopper personas as the regional test, but benchmarks three traffic spikes where each peak is 50% higher than the previous one. The default first spike is now 100 VUs:
+The spike benchmark is `load-tests/grafana-cloud-traffic-spikes.js`. It uses the same regional shopper personas as the regional test, but benchmarks three traffic spikes where each peak is 2x the previous one. The default first spike is now 100 VUs:
 
 - Spike 1: `100` VUs.
-- Spike 2: `150` VUs.
-- Spike 3: `225` VUs.
+- Spike 2: `200` VUs.
+- Spike 3: `400` VUs.
 
 Each spike ramps quickly, holds for one minute, and then returns to a low recovery load before the next spike. Requests are tagged by `spike`, `region`, `persona`, and endpoint name. The traffic spike script is now the combined benchmark entrypoint: it runs the three-spike API benchmark, the regional shopper load scenario, and the full browser-action synthetic journey that validates Faro user actions and region/language UI behavior.
 
@@ -525,7 +525,7 @@ API_BASE_URL=https://api.ensemble-grafana.com \
 k6 run load-tests/grafana-cloud-traffic-spikes.js
 ```
 
-Override the first spike size with `BASE_SPIKE_USERS`; the next two spikes remain 50% larger than the previous peak:
+Override the first spike size with `BASE_SPIKE_USERS`; the next two spikes remain 2x larger than the previous peak by default. Override the multiplier with `SPIKE_MULTIPLIER` only when debugging a different profile:
 
 ```sh
 set -a
@@ -533,14 +533,18 @@ source .env
 set +a
 API_TEST_KEY="$API_TEST_KEY" \
 BASE_SPIKE_USERS=60 \
+SPIKE_MULTIPLIER=2 \
 STOREFRONT_BASE_URL=https://ensemble-grafana.com \
 API_BASE_URL=https://api.ensemble-grafana.com \
 k6 cloud run load-tests/grafana-cloud-traffic-spikes.js
 ```
 
+The default combined benchmark now exceeds the current 100 VU Grafana Cloud k6 project cap because the spike scenario alone peaks at 400 VUs, before the 30 regional shoppers and 1 browser-action VU are added. Increase the project VU quota before running the default benchmark in Cloud k6, or temporarily lower `BASE_SPIKE_USERS` for quota-constrained validation runs.
+
 Optional knobs for the combined scenarios:
 
 - `REGIONAL_SHOPPER_VUS`: regional API shopper load, default `30`.
+- `SPIKE_MULTIPLIER`: traffic spike growth multiplier, default `2`.
 - `BROWSER_ACTION_ITERATIONS`: full browser-action synthetic iterations, default `1`.
 - `BROWSER_ACTION_MAX_DURATION`: max duration for the browser-action scenario, default `10m`.
 

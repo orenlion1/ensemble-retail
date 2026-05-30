@@ -260,7 +260,7 @@ select {
 .productGrid {
   display: grid;
   gap: 0.75rem;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, clamp(11rem, 23vw, 20rem)), 1fr));
 }
 
 .productCard {
@@ -268,22 +268,25 @@ select {
 }
 
 .imageButton {
+  aspect-ratio: 16 / 11;
   background: transparent;
   display: block;
+  overflow: hidden;
   padding: 0;
   width: 100%;
 }
 
 .productCard img {
-  aspect-ratio: 16 / 11;
   display: block;
+  height: 100%;
   object-fit: cover;
   width: 100%;
 }
 
 .productInfo {
   display: grid;
-  grid-template-rows: 1rem 3.25rem 2.7rem auto;
+  grid-template-rows: auto auto auto minmax(2.75rem, auto);
+  min-width: 0;
   padding: 0.85rem 1rem 1.25rem;
 }
 
@@ -303,7 +306,6 @@ select {
   margin: 0.25rem 0 0.75rem;
 }
 
-.productFooter,
 .checkout {
   align-items: center;
   display: flex;
@@ -311,7 +313,15 @@ select {
   gap: 1rem;
 }
 
+.productFooter {
+  align-items: start;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
 .productFooter button {
+  justify-self: end;
   min-width: 6.5rem;
 }
 
@@ -319,8 +329,10 @@ select {
 .regularPrice {
   align-items: baseline;
   display: flex;
+  flex-wrap: wrap;
   gap: 0.45rem;
   margin: 0;
+  min-width: 0;
 }
 
 .salePrice span {
@@ -382,11 +394,14 @@ select {
   color: white;
   display: grid;
   gap: 2rem;
-  grid-template-columns: minmax(320px, 58vw) 1fr;
+  grid-template-columns: minmax(18rem, min(58vw, 52rem)) minmax(0, 1fr);
 }
 
 .detail img {
   aspect-ratio: 16 / 11;
+  display: block;
+  height: auto;
+  max-width: 100%;
   object-fit: cover;
   width: 100%;
 }
@@ -524,10 +539,18 @@ label {
   display: grid;
   gap: 0.35rem;
   margin-bottom: 0.85rem;
+  position: relative;
 }
 
 label input {
   width: 100%;
+}
+
+form button[type="submit"] {
+  margin-top: 0.5rem;
+  position: relative;
+  width: 100%;
+  z-index: 1;
 }
 
 @media (max-width: 760px) {
@@ -603,18 +626,17 @@ label input {
     grid-template-columns: 1fr;
   }
 
-  .productGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .productCard img,
+  .imageButton,
   .detail img {
     aspect-ratio: 4 / 5;
   }
-}
 
-@media (min-width: 761px) and (max-width: 1080px) {
-  .productGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .productFooter {
+    grid-template-columns: 1fr;
+  }
+
+  .productFooter button {
+    justify-self: stretch;
+    width: 100%;
   }
 }
