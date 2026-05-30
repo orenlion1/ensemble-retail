@@ -142,6 +142,21 @@ For each backend service:
 - Prometheus scrape annotations or ServiceMonitor metadata.
 - Environment variables for service name, log level, auth, database, and telemetry.
 
+## Deployment Gate
+
+Before pushing changes to AWS, publish the exact code and infrastructure revision to GitHub and verify CI on that revision.
+
+Required order:
+
+1. Run the relevant local validation for the changed area.
+2. Commit the change.
+3. Push to GitHub.
+4. Poll the GitHub Actions run with `gh run list`, `gh run watch`, and, on failure, `gh run view --log-failed`.
+5. If CI fails, inspect the failing logs, fix the issue locally, rerun the matching validation, commit, push, and repeat until the pushed commit has a passing CI run.
+6. Push to AWS only after the GitHub Actions run for the deployed commit passes.
+
+AWS deployment must use the passing Git commit as the source of truth. If an emergency requires deploying before CI passes, document the exception, failed run URL, risk, and rollback plan before applying AWS changes.
+
 ## Domain And TLS
 
 Default public path:
