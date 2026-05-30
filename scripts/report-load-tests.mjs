@@ -2,6 +2,7 @@ import { mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 
 const reportsDir = path.resolve('reports/load-tests');
+const frontendReportsDir = path.resolve('reports/frontend-user-actions');
 const outputDir = path.join(reportsDir, 'comparison');
 const timezone = 'America/New_York';
 
@@ -14,6 +15,17 @@ function latestFile(prefix) {
     .filter(file => file.startsWith(prefix) && file.endsWith('.json'))
     .sort();
   return files.at(-1) ? path.join(reportsDir, files.at(-1)) : null;
+}
+
+function latestFileIn(dir, prefix) {
+  try {
+    const files = readdirSync(dir)
+      .filter(file => file.startsWith(prefix) && file.endsWith('.json'))
+      .sort();
+    return files.at(-1) ? path.join(dir, files.at(-1)) : null;
+  } catch {
+    return null;
+  }
 }
 
 function filesWithPrefix(prefix) {
@@ -146,6 +158,18 @@ function localSummariesFrom(files) {
       businessCounters: summary.businessCounters || {}
     };
   }).sort((a, b) => new Date(a.generatedAt) - new Date(b.generatedAt));
+}
+
+function faroTotalsFrom(file) {
+  if (!file) return null;
+  const report = readJson(file);
+  return {
+    file,
+    generatedAt: report.generatedAt,
+    since: report.since,
+    totalExecutions: report.totalExecutions,
+    rows: report.rows || []
+  };
 }
 
 function writeBarChart(file, title, rows, options = {}) {
@@ -314,6 +338,7 @@ function writeLocalCounterCsv(file, rows) {
 const summaryFile = latestFile('k6-summary-');
 const rawRunsFile = latestFile('k6-runs-');
 const localSummaryFiles = filesWithPrefix('k6-local-summary-');
+const faroTotalsFile = latestFileIn(frontendReportsDir, 'faro-user-action-totals-');
 
 if (!summaryFile) {
   console.error('No reports/load-tests/k6-summary-*.json file found.');
@@ -327,6 +352,7 @@ const rawRuns = rawRunsFile ? readJson(rawRunsFile) : { loadTests: [] };
 const runs = allRunsFrom(rawRuns);
 const latestTests = latestByTest(summary);
 const localSummaries = localSummariesFrom(localSummaryFiles);
+const faroTotals = faroTotalsFrom(faroTotalsFile);
 const generatedAt = new Date().toISOString();
 
 writeCsv('load-test-runs.csv', runs);
@@ -451,6 +477,13 @@ const localCounterRows = localSummaries.slice().reverse().map(summary => {
   ].join(' | ') + ' |';
 });
 
+const faroExecutionRows = faroTotals?.rows?.map(row => [
+  `| ${row.actionName}`,
+  row.importance,
+  row.severity,
+  row.executions
+].join(' | ') + ' |') || [];
+
 const markdown = `# k6 Load Test Comparison
 
 Generated: ${generatedAt}
@@ -458,6 +491,8 @@ Generated: ${generatedAt}
 Source summary: \`${path.relative('.', summaryFile)}\`
 
 Source run history: \`${rawRunsFile ? path.relative('.', rawRunsFile) : 'n/a'}\`
+
+Source Faro action totals: \`${faroTotalsFile ? path.relative('.', faroTotalsFile) : 'n/a'}\`
 
 ## Latest Runs
 
@@ -508,6 +543,16 @@ These totals come from local k6 summary files named \`reports/load-tests/k6-loca
 | Date | Generated | Test | HTTP Requests | HTTP Failures | HTTP Failure Rate | User Actions | Cart Adds Total | Add Item | Add Detail | Add Sale | Remove Item | Checkout | API Cart Updates | Checkout Attempts | Region Changes |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 ${localCounterRows.length ? localCounterRows.join('\n') : '| n/a | n/a | No local k6 summary files found | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |'}
+
+## Grafana Faro User Action Executions
+
+These totals come from the latest \`gcx logs query\` output under \`reports/frontend-user-actions/faro-user-action-totals-*.json\`. They use the latest sample from a rolling \`${faroTotals?.since || '6h'}\` \`count_over_time\` query to show what Grafana Cloud received after k6 browser-action runs.
+
+Total executions: ${faroTotals?.totalExecutions ?? 'n/a'}
+
+| Action | Importance | Severity | Executions |
+|---|---|---|---:|
+${faroExecutionRows.length ? faroExecutionRows.join('\n') : '| n/a | n/a | n/a | n/a |'}
 
 ## Run History
 

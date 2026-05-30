@@ -152,7 +152,15 @@ Required k6 environment:
 - Always use temporary local `.env` injection for k6 runs that require `API_TEST_KEY` (for example: `set -a && source .env && set +a && k6 cloud run -e API_TEST_KEY="$API_TEST_KEY" ...`), and keep `.env` gitignored.
 - If a run fails with missing/invalid API key errors (for example `API_TEST_KEY is required`), prompt the user to set or update `API_TEST_KEY` in `.env` and rerun.
 
-After each k6 browser-action run, validate Faro user-action telemetry in Grafana with `gcx logs query` and confirm expected `ensemble.user.action` and `faro.user.action` events are present for browser-based flows. For frontend deployments, generate a report in `reports/frontend-user-actions/` that includes total events, counts by action, counts by region/locale, Faro user-action durations, and missing required post-change actions.
+After each k6 browser-action run, validate Faro user-action telemetry in Grafana with `gcx logs query` and confirm expected `faro.user.action` events are present for browser-based flows. For frontend deployments and k6 load-test reporting, generate a report in `reports/frontend-user-actions/` using `node scripts/report-faro-user-actions.mjs`. The report must use the standard six-hour execution query:
+
+```logql
+sum by (action_name, event_data_userActionImportance, event_data_userActionSeverity) (
+  count_over_time({app_id="464", kind="event"} |= "event_name=faro.user.action" | logfmt | geo_country_iso=~"" or geo_country_iso=~".+" [6h])
+)
+```
+
+Use the latest sample returned by the GCX range query as the total executions for each action/importance/severity tuple.
 
 After any k6 load test concludes, update the load-test comparison artifacts:
 
@@ -160,7 +168,7 @@ After any k6 load test concludes, update the load-test comparison artifacts:
 node scripts/report-load-tests.mjs
 ```
 
-This produces `reports/load-tests/load-test-comparison.md`, `reports/load-tests/comparison/load-test-runs.csv`, and SVG charts for results by date, duration, VUH cost, latest HTTP failure rate, latest check pass rate, and latest HTTP p95. Run it for passed, failed, and error runs whenever Grafana/k6 returns usable run metadata. Keep raw `reports/load-tests/k6-*.json` pulls ignored because Grafana Cloud run payloads can include runtime token fields.
+This produces `reports/load-tests/load-test-comparison.md`, `reports/load-tests/comparison/load-test-runs.csv`, `reports/load-tests/comparison/load-test-counters.csv`, and SVG charts for results by date, duration, VUH cost, latest HTTP failure rate, latest check pass rate, latest HTTP p95, and latest user-action/cart totals. Run it for passed, failed, and error runs whenever Grafana/k6 returns usable run metadata. Keep raw `reports/load-tests/k6-*.json` pulls ignored because Grafana Cloud run payloads can include runtime token fields.
 
 Document uploaded k6 Cloud test URLs after upload.
 
