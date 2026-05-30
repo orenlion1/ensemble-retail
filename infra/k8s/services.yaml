@@ -33,7 +33,7 @@ spec:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 0
-      maxUnavailable: 1
+      maxUnavailable: 2
   selector:
     matchLabels:
       app: inventory-service
@@ -116,7 +116,7 @@ metadata:
   name: inventory-service
   namespace: ensemble-grafana
 spec:
-  minAvailable: 2
+  minAvailable: 1
   selector:
     matchLabels:
       app: inventory-service
@@ -132,7 +132,7 @@ spec:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 0
-      maxUnavailable: 1
+      maxUnavailable: 2
   selector:
     matchLabels:
       app: cart-service
@@ -217,7 +217,7 @@ metadata:
   name: cart-service
   namespace: ensemble-grafana
 spec:
-  minAvailable: 2
+  minAvailable: 1
   selector:
     matchLabels:
       app: cart-service
@@ -233,7 +233,7 @@ spec:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 0
-      maxUnavailable: 1
+      maxUnavailable: 2
   selector:
     matchLabels:
       app: account-service
@@ -318,7 +318,7 @@ metadata:
   name: account-service
   namespace: ensemble-grafana
 spec:
-  minAvailable: 2
+  minAvailable: 1
   selector:
     matchLabels:
       app: account-service
