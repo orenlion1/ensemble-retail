@@ -184,7 +184,7 @@ Playwright test expectations:
 - Verify Faro action payloads are emitted for cart add/remove/quantity/checkout, product detail, sale add, region/language changes, Google login, and account save.
 - Verify the cart delete icon removes the item and the cart returns to empty state.
 - Verify Google login starts the Cognito Hosted UI flow without reaching the real provider in tests.
-- Verify region and language changes for US, Canada, China, and UK, including British English retail terms such as `Basket` and `Trousers`.
+- Verify region and language changes for US, Canada, China, UK, and Sweden, including British English retail terms such as `Basket` and `Trousers`.
 - Verify no storefront images are broken.
 - Verify desktop and mobile screenshot baselines unless the layout change intentionally updates them.
 

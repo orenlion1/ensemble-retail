@@ -144,7 +144,7 @@ The Google OAuth client must allow the Cognito IdP redirect URI from `terraform 
 
 Grafana Faro is initialized with `@grafana/faro-react`, React Router instrumentation, and `@grafana/faro-web-tracing` so browser events, logs, web vitals, route changes, and frontend HTTP spans can flow to Grafana Cloud. The default collector is the Ensemble-Grafana Grafana Cloud endpoint; override it with `VITE_FARO_URL` and set `VITE_FARO_API_KEY` if your endpoint requires an API key. See `frontend/.env.example`.
 
-Faro user actions include region, locale, and language attributes. The storefront region picker currently maps `US` to American English (`en-US`), `CA` to French (`fr-CA`), `CN` to Mandarin (`zh-CN`), and `UK` to British English (`en-GB`). British English copy uses regional retail terms such as `Basket`, `Delivery`, `Colours`, and `Trousers`.
+Faro user actions include region, locale, and language attributes. The storefront region picker currently maps `US` to American English (`en-US`), `CA` to French (`fr-CA`), `CN` to Mandarin (`zh-CN`), `UK` to British English (`en-GB`), and `SE` to Swedish (`sv-SE`). British English copy uses regional retail terms such as `Basket`, `Delivery`, `Colours`, and `Trousers`.
 
 Once deployed, filter Faro exception events in Grafana with:
 
@@ -374,7 +374,7 @@ The regional load test simulates 20 concurrent users for 10 minutes with five sh
 - `sale_hunter`: browses discounted products and adds sale items to cart.
 - `checkout`: updates cart, saves account data, and records checkout attempts.
 
-Each virtual user cycles through `US`, `CA`, `CN`, and `UK`, sending `region`, `locale`, and `language` as request tags plus `X-Region`, `X-Locale`, and `X-Language`, and hitting the storefront with `?region=<region>`.
+Each virtual user cycles through `US`, `CA`, `CN`, `UK`, and `SE`, sending `region`, `locale`, and `language` as request tags plus `X-Region`, `X-Locale`, and `X-Language`, and hitting the storefront with `?region=<region>`.
 
 The API load scripts use low-cardinality group and request labels for Grafana Cloud reporting. Dynamic shopper IDs stay in the request path, but the k6 `name` tag is templated as values such as `PUT /api/cart/carts/:shopperId` and `PUT /api/account/accounts/:shopperId`. The scripts also import Grafana's Tempo HTTP instrumentation helper and propagate W3C trace context so Grafana Cloud k6 can correlate requests with backend traces when service traces are flowing to Grafana Cloud Traces.
 
@@ -501,8 +501,8 @@ The browser action check covers:
 
 - department/category selection.
 - product sorting and search.
-- region changes for US, Canada, China, and UK.
-- language changes for American English, French, Mandarin, and British English.
+- region changes for US, Canada, China, UK, and Sweden.
+- language changes for American English, French, Mandarin, British English, and Swedish.
 - product detail open/close.
 - add to cart from product grid, sale grid, and product detail.
 - cart quantity change, checkout, and item removal.

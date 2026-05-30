@@ -33,7 +33,8 @@ const regionLanguageExpectations = {
   US: { lang: 'en-US', language: 'American English', languageSlug: 'american-english', text: 'Cart' },
   CA: { lang: 'fr-CA', language: 'French', languageSlug: 'french', text: 'Panier' },
   CN: { lang: 'zh-CN', language: 'Mandarin', languageSlug: 'mandarin', text: '购物车' },
-  UK: { lang: 'en-GB', language: 'British English', languageSlug: 'british-english', text: 'Basket', secondaryText: 'Trousers', forbiddenTextPattern: '\\bPants?\\b' }
+  UK: { lang: 'en-GB', language: 'British English', languageSlug: 'british-english', text: 'Basket', secondaryText: 'Trousers', forbiddenTextPattern: '\\bPants?\\b' },
+  SE: { lang: 'sv-SE', language: 'Swedish', languageSlug: 'swedish', text: 'Varukorg', secondaryText: 'Herr' }
 };
 
 function byAction(name) {
@@ -52,7 +53,8 @@ async function recordUserActions(page) {
             US: 'american-english',
             CA: 'french',
             CN: 'mandarin',
-            UK: 'british-english'
+            UK: 'british-english',
+            SE: 'swedish'
           };
           actionName = `select-region:${event.target.value}`;
           window.__k6UserActions.push({
@@ -144,6 +146,15 @@ async function validateRegionLanguage(page, region) {
   }
 }
 
+async function loadRegionForLanguageValidation(page, region) {
+  // Reload per locale so full-page translation swaps do not pollute CLS thresholds.
+  await page.evaluate(nextRegion => {
+    localStorage.setItem('ensemble-region', nextRegion);
+  }, region);
+  await page.reload({ waitUntil: 'networkidle' });
+  await validateRegionLanguage(page, region);
+}
+
 async function fillField(page, selector, value) {
   const locator = page.locator(selector);
   await locator.waitFor({ state: 'visible', timeout: 10000 });
@@ -166,7 +177,18 @@ export default async function () {
       localStorage.setItem('ensemble-region', 'US');
     });
     await page.reload({ waitUntil: 'networkidle' });
+
+    await loadRegionForLanguageValidation(page, 'CA');
+    await loadRegionForLanguageValidation(page, 'CN');
+    await loadRegionForLanguageValidation(page, 'UK');
+    await loadRegionForLanguageValidation(page, 'SE');
+    await loadRegionForLanguageValidation(page, 'US');
+
     await recordUserActions(page);
+    await selectAction(page, '#region-selector', 'SE');
+    await validateRegionLanguage(page, 'SE');
+    await selectAction(page, '#region-selector', 'US');
+    await validateRegionLanguage(page, 'US');
 
     await clickAction(page, 'select-department:womens');
     await clickAction(page, 'select-department:mens');
@@ -187,14 +209,6 @@ export default async function () {
     await scrollTo(page, '#sale');
     await clickFirstMatchingAction(page, 'shopping-cart:add-sale-item:');
 
-    await selectAction(page, '#region-selector', 'CA');
-    await validateRegionLanguage(page, 'CA');
-    await selectAction(page, '#region-selector', 'CN');
-    await validateRegionLanguage(page, 'CN');
-    await selectAction(page, '#region-selector', 'UK');
-    await validateRegionLanguage(page, 'UK');
-    await selectAction(page, '#region-selector', 'US');
-    await validateRegionLanguage(page, 'US');
     await scrollTo(page, '#cart');
     await page.locator('#cart input[type="number"]').first().fill('2');
     await page.keyboard.press('Tab');
@@ -222,12 +236,8 @@ export default async function () {
       'select-category:mens-mid-layers',
       'sort-products:price-low',
       'search-products',
-      'select-region:CA',
-      'select-language:french',
-      'select-region:CN',
-      'select-language:mandarin',
-      'select-region:UK',
-      'select-language:british-english',
+      'select-region:SE',
+      'select-language:swedish',
       'select-region:US',
       'select-language:american-english',
       'shopping-cart:checkout',

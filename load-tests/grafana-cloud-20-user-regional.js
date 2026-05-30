@@ -54,12 +54,13 @@ export const options = {
 const storefrontBaseUrl = (__ENV.STOREFRONT_BASE_URL || __ENV.BASE_URL || 'https://ensemble-grafana.com').replace(/\/$/, '');
 const apiBaseUrl = (__ENV.API_BASE_URL || __ENV.BASE_URL || 'https://api.ensemble-grafana.com').replace(/\/$/, '');
 const apiKey = __ENV.API_TEST_KEY || '';
-const regions = ['US', 'CA', 'CN', 'UK'];
+const regions = ['US', 'CA', 'CN', 'UK', 'SE'];
 const regionProfiles = {
   US: { language: 'American English', locale: 'en-US', city: 'Denver', addressRegion: 'CO', postalCode: '80202' },
   CA: { language: 'French', locale: 'fr-CA', city: 'Montreal', addressRegion: 'QC', postalCode: 'H3B 1A7' },
   CN: { language: 'Mandarin', locale: 'zh-CN', city: 'Shanghai', addressRegion: 'SH', postalCode: '200001' },
-  UK: { language: 'British English', locale: 'en-GB', city: 'London', addressRegion: 'LND', postalCode: 'SW1A 1AA' }
+  UK: { language: 'British English', locale: 'en-GB', city: 'London', addressRegion: 'LND', postalCode: 'SW1A 1AA' },
+  SE: { language: 'Swedish', locale: 'sv-SE', city: 'Stockholm', addressRegion: 'AB', postalCode: '111 22' }
 };
 const personas = ['browser', 'cart_builder', 'account_manager', 'sale_hunter', 'checkout'];
 

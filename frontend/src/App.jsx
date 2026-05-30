@@ -23,7 +23,8 @@ const regions = [
   { code: 'US', label: 'US', flag: '🇺🇸', locale: 'en-US', language: 'American English', copyKey: 'en' },
   { code: 'CA', label: 'Canada', flag: '🇨🇦', locale: 'fr-CA', language: 'French', copyKey: 'fr' },
   { code: 'CN', label: 'China', flag: '🇨🇳', locale: 'zh-CN', language: 'Mandarin', copyKey: 'zh' },
-  { code: 'UK', label: 'UK', flag: '🇬🇧', locale: 'en-GB', language: 'British English', copyKey: 'enGB' }
+  { code: 'UK', label: 'UK', flag: '🇬🇧', locale: 'en-GB', language: 'British English', copyKey: 'enGB' },
+  { code: 'SE', label: 'Sweden', flag: '🇸🇪', locale: 'sv-SE', language: 'Swedish', copyKey: 'sv' }
 ];
 
 const grafanaStackUrl = 'https://orenlion.grafana.net/a/grafana-kowalski-app/apps/464/actions?var-Filters=';
@@ -268,6 +269,65 @@ const copy = {
     signInUnavailable: 'Google 登录未配置。',
     walletError: '钱包只能存储支付元数据。',
     all: '全部'
+  },
+  sv: {
+    brandFamilyLabel: 'Ensemble-kollektioner',
+    springSale: 'Vårkollektionsrea',
+    freeShipping: 'Fri frakt',
+    findStore: 'Hitta en butik',
+    regionSelector: 'Regionväljare',
+    help: 'Hjälp',
+    shop: 'Handla',
+    cart: 'Varukorg',
+    account: 'Konto',
+    heroEyebrow: 'Tekniska kläder för dagar från stad till topp',
+    heroTitle: 'Lagersystem för väder, rörelse och vardagens höjdskillnader.',
+    heroCta: 'Handla nyheter',
+    categories: 'Kategorier',
+    categoryTitle: 'Byggt för skiftande förhållanden',
+    searchPlaceholder: 'Sök utrustning',
+    sortProducts: 'Sortera produkter',
+    sortFeatured: 'Utvalt',
+    sortPriceLow: 'Pris lågt till högt',
+    sortPriceHigh: 'Pris högt till lågt',
+    sortRating: 'Högst betyg',
+    topLevelCategories: 'Huvudkategorier',
+    mens: 'Herr',
+    womens: 'Dam',
+    add: 'Lägg till',
+    viewProduct: name => `Visa ${name}`,
+    off: 'rabatt',
+    shopAll: 'Handla allt',
+    saleTitle: '15 % rabatt på utvalda system',
+    close: 'Stäng',
+    productDescription: 'Vädermedveten konstruktion, rena silhuetter och tekniska detaljer för återkommande användning i verkliga förhållanden.',
+    sizes: 'Storlekar',
+    colors: 'Färger',
+    addSelectedDefault: 'Lägg till valt standardval',
+    shoppingCart: 'Varukorg',
+    cartTitle: 'Redo när rutten ändras',
+    emptyCart: 'Din varukorg är tom.',
+    quantityFor: name => `Antal för ${name}`,
+    removeFromCart: name => `Ta bort ${name} från varukorgen`,
+    originalSubtotal: 'Ursprunglig delsumma',
+    saleDiscount: percent => `Vårrea (${percent} % rabatt)`,
+    subtotal: 'Delsumma',
+    mockCheckout: 'Simulerad kassa',
+    checkoutDialogTitle: 'Grafana-spårning klar',
+    checkoutConfirmed: 'Simulerad kassa bekräftad. Spåra denna order i Grafana.',
+    accountTitle: 'Leverans och plånbok',
+    name: 'Namn',
+    email: 'E-post',
+    address: 'Adress',
+    city: 'Stad',
+    wallet: 'Plånbok',
+    saveAccount: 'Spara konto',
+    signInWithGoogle: 'Logga in med Google',
+    signOut: 'Logga ut',
+    signedInAs: email => `Inloggad som ${email}`,
+    signInUnavailable: 'Google-inloggning är inte konfigurerad.',
+    walletError: 'Plånboken kan bara lagra betalningsmetadata.',
+    all: 'Alla'
   }
 };
 
@@ -371,6 +431,52 @@ const localizedCatalog = {
       'womens-softshell-hoody': '女士软壳连帽夹克',
       'womens-climb-pant': '女士攀岩裤',
       'womens-rain-cap': '女士 Rainline 帽'
+    }
+  },
+  sv: {
+    categories: {
+      All: 'Alla',
+      Shells: 'Skaljackor',
+      'Mid Layers': 'Mellanlager',
+      Pants: 'Byxor',
+      Packs: 'Ryggsäckar',
+      'Base Layers': 'Baslager',
+      Accessories: 'Accessoarer'
+    },
+    colors: {
+      Graphite: 'Grafit',
+      Lichen: 'Lav',
+      'Signal Red': 'Signalröd',
+      Pine: 'Tallgrön',
+      Black: 'Svart',
+      Ice: 'Isblå',
+      Basalt: 'Basalt',
+      Moss: 'Mossa',
+      Cobalt: 'Kobolt',
+      Clay: 'Lera',
+      Heather: 'Ljung',
+      Night: 'Natt',
+      Sage: 'Salvia',
+      Mineral: 'Mineral',
+      Juniper: 'En',
+      Olive: 'Oliv'
+    },
+    badges: {
+      'Storm ready': 'Redo för storm',
+      '15% off': '15 % rabatt',
+      'Online exclusive': 'Endast online',
+      'Warmth without bulk': 'Värme utan volym',
+      'Articulated fit': 'Ledad passform'
+    },
+    products: {
+      'mens-shell-alpha': 'Alpin skaljacka herr',
+      'mens-midlayer-grid': 'Grid-fleece mellanlager herr',
+      'mens-trail-pant': 'Traverse vandringsbyxa herr',
+      'mens-daypack-22': 'Route 22 ryggsäck herr',
+      'womens-base-merino': 'Merino baslager dam',
+      'womens-softshell-hoody': 'Softshell-hoodie dam',
+      'womens-climb-pant': 'Klätterbyxa dam',
+      'womens-rain-cap': 'Rainline keps dam'
     }
   }
 };

@@ -152,6 +152,13 @@ test.describe('storefront browser behavior', () => {
     await expect(page.locator('html')).toHaveAttribute('lang', 'en-GB');
     await expect(page.getByRole('link', { name: /Basket \(0\)/ })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Trousers', exact: true })).toBeVisible();
+
+    await page.getByLabel('Region selector').selectOption('SE');
+    await expectFaroAction(faroBodies, 'select-region:se');
+    await expectFaroAction(faroBodies, 'select-language:swedish');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'sv-SE');
+    await expect(page.getByRole('button', { name: 'Herr', exact: true })).toBeVisible();
+    await expect(page.getByRole('link', { name: /Varukorg \(0\)/ })).toBeVisible();
   });
 
   test('account save is instrumented', async ({ page, faroBodies }) => {
