@@ -37,6 +37,7 @@ Implementation guidance:
 - Add `data-faro-user-action-name` to user-action controls.
 - Use accessible labels on buttons, selects, and inputs.
 - Test for broken images.
+- For new storefront regions or languages, use `skills/coding/add-region-localization/SKILL.md`.
 
 ## Frontend Observability Hooks
 
