@@ -1,0 +1,63 @@
+{
+  "status": "success",
+  "data": {
+    "resultType": "streams",
+    "result": [
+      {
+        "stream": {
+          "cluster": "ensemble-grafana",
+          "detected_level": "error",
+          "instance": "ip-10-42-101-208.ec2.internal",
+          "job": "integrations/kubernetes/journal",
+          "k8s_cluster_name": "ensemble-grafana",
+          "level": "ERROR",
+          "service_name": "kubelet.service",
+          "source": "journal",
+          "unit": "kubelet.service"
+        },
+        "values": [
+          [
+            "1780238646508372000",
+            "E0531 14:44:06.508319    2212 log.go:32] \"ContainerStatus from runtime service failed\" err=\"rpc error: code = NotFound desc = an error occurred when try to find container \\\"5e3f368171f47a43262b9a64abfc7e453856169aa43dfa409f862a314312e44c\\\": not found\" containerID=\"5e3f368171f47a43262b9a64abfc7e453856169aa43dfa409f862a314312e44c\""
+          ],
+          [
+            "1780238646507748000",
+            "E0531 14:44:06.507703    2212 log.go:32] \"ContainerStatus from runtime service failed\" err=\"rpc error: code = NotFound desc = an error occurred when try to find container \\\"814c9548a6304d4d28c8f5adfeaec08d10ee32cc02a08885f034540edf5333f4\\\": not found\" containerID=\"814c9548a6304d4d28c8f5adfeaec08d10ee32cc02a08885f034540edf5333f4\""
+          ]
+        ]
+      },
+      {
+        "stream": {
+          "cluster": "ensemble-grafana",
+          "detected_level": "info",
+          "instance": "ip-10-42-101-208.ec2.internal",
+          "job": "integrations/kubernetes/journal",
+          "k8s_cluster_name": "ensemble-grafana",
+          "level": "INFO",
+          "service_name": "kubelet.service",
+          "source": "journal",
+          "unit": "kubelet.service"
+        },
+        "values": [
+          [
+            "1780238646508372000",
+            "I0531 14:44:06.508345    2212 pod_container_deletor.go:53] \"DeleteContainer returned error\" containerID={\"Type\":\"containerd\",\"ID\":\"5e3f368171f47a43262b9a64abfc7e453856169aa43dfa409f862a314312e44c\"} err=\"failed to get container status \\\"5e3f368171f47a43262b9a64abfc7e453856169aa43dfa409f862a314312e44c\\\": rpc error: code = NotFound desc = an error occurred when try to find container \\\"5e3f368171f47a43262b9a64abfc7e453856169aa43dfa409f862a314312e44c\\\": not found\""
+          ],
+          [
+            "1780238646507866000",
+            "I0531 14:44:06.507743    2212 pod_container_deletor.go:53] \"DeleteContainer returned error\" containerID={\"Type\":\"containerd\",\"ID\":\"814c9548a6304d4d28c8f5adfeaec08d10ee32cc02a08885f034540edf5333f4\"} err=\"failed to get container status \\\"814c9548a6304d4d28c8f5adfeaec08d10ee32cc02a08885f034540edf5333f4\\\": rpc error: code = NotFound desc = an error occurred when try to find container \\\"814c9548a6304d4d28c8f5adfeaec08d10ee32cc02a08885f034540edf5333f4\\\": not found\""
+          ]
+        ]
+      }
+    ],
+    "stats": {
+      "summary": {
+        "bytesProcessedPerSecond": 1060645,
+        "linesProcessedPerSecond": 4005,
+        "totalBytesProcessed": 15095,
+        "totalLinesProcessed": 57,
+        "execTime": 0.014232
+      }
+    }
+  }
+}
