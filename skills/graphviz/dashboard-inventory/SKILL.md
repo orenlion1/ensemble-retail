@@ -28,6 +28,7 @@ If a new diagram should appear in Grafana:
 3. Update the dashboard manifest for that one panel or tab.
 4. Push the dashboard with `gcx`.
 5. Fetch the dashboard back from Grafana and copy the returned JSON into the repo manifest.
+6. Validate the live dashboard through Grafana MCP before considering the dashboard change complete.
 
 If the changed diagram is not in the inventory and the task does not explicitly add it to Grafana, do not push the dashboard.
 
@@ -68,10 +69,18 @@ Copy the verified dashboard JSON back to:
 observability/grafana/dashboards/ensemble-graphviz-diagrams-api.json
 ```
 
+6. Validate the live dashboard with Grafana MCP:
+
+- Use `search_dashboards` to confirm `Ensemble Graphviz Diagrams` resolves to the expected UID.
+- Use `get_dashboard_by_uid` or `get_dashboard_property` to confirm the changed tab, panel ID, panel title, and Graphviz DOT source are present in the live dashboard.
+- For visual or layout-sensitive changes, use `get_panel_image` on the changed panel and confirm the rendered image is not blank and reflects the intended diagram.
+- Keep `gcx` for deterministic publishing and JSON snapshots; use Grafana MCP as the read-after-write semantic validation layer.
+
 ## Validation
 
 - The changed DOT renders to SVG and PNG.
 - The SVG is valid XML.
 - The source DOT is listed in the inventory before the Grafana push.
 - The fetched dashboard contains the expected tab, panel ID, panel title, and DOT source.
+- Grafana MCP validates the same live dashboard change after publish, including a panel image check when the change affects visual output.
 - README points to the inventory when diagram dashboard behavior changes.

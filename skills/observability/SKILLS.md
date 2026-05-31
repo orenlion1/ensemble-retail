@@ -220,6 +220,15 @@ Create starter dashboards for:
 - Profiles by service.
 - k6 load-test results by persona, region, endpoint, and spike.
 
+After every dashboard change, validate the live dashboard with Grafana MCP in addition to any `gcx` fetch/update checks:
+
+- Use `search_dashboards` to confirm the dashboard title and UID.
+- Use `get_dashboard_by_uid` or `get_dashboard_property` to confirm expected tabs, rows, panels, transformations, field overrides, variables, and query definitions.
+- Use `get_dashboard_panel_queries` for query wiring changes and confirm PromQL, LogQL, CloudWatch, or other datasource queries still target the expected labels and variables.
+- Use datasource tools such as `query_prometheus` or `query_loki_logs` when a changed panel should return data.
+- Use `get_panel_image` for visual validation of critical or layout-sensitive panels.
+- Keep `gcx` for deterministic publish/fetch snapshots and CI-friendly JSON assertions; use Grafana MCP for read-after-write semantic validation.
+
 Useful query reminders:
 
 - Faro exception filter: `{kind="exception", app_id="464"}`
@@ -235,5 +244,6 @@ Useful query reminders:
 - Profiles appear for Java services.
 - Synthetic checks are configured for HTTP, DNS, Ping, and TCP.
 - k6 scripts inspect cleanly and are uploaded to Grafana Cloud k6.
+- Dashboard changes are validated against the live Grafana dashboard with Grafana MCP after publish.
 - README records tokens needed without exposing values.
 - DIAGRAMS.md includes telemetry and load-test flows.
