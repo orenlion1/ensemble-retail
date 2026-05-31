@@ -11,6 +11,6 @@
 <text x="24" y="158" font-family="Arial, sans-serif" font-size="14" fill="#374151">Traffic spike benchmark</text>
 <rect x="268" y="134" width="40" height="40" rx="6" fill="#16a34a"/>
 <text x="288" y="159" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#ffffff">✓</text>
-<rect x="324" y="134" width="40" height="40" rx="6" fill="#dc2626"/>
-<text x="344" y="159" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#ffffff">×</text>
+<rect x="324" y="134" width="40" height="40" rx="6" fill="#16a34a"/>
+<text x="344" y="159" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#ffffff">✓</text>
 </svg>

@@ -170,6 +170,7 @@ const spikeNonJsonResponses = new Counter('spike_non_json_responses');
 const steadyProduct = {
   id: 'mens-midlayer-grid',
   name: "Men's Grid Fleece Midlayer",
+  category: 'mens-mid-layers',
   originalPrice: 128.00,
   price: 109.00,
   sizes: ['M'],
@@ -290,6 +291,10 @@ function buildCart(shopperId, product, quantity = 1) {
   };
 }
 
+function productCategoryTag(product) {
+  return String(product.category || 'uncategorized');
+}
+
 function saveAccount(region, persona, shopperId, spike) {
   const profile = regionProfiles[region] || regionProfiles.US;
   const account = putJson(`/api/account/accounts/${shopperId}`, {
@@ -377,7 +382,7 @@ export function trafficSpikeJourney() {
       'PUT /api/cart/carts/:shopperId',
       spike
     );
-    spikeCartUpdates.add(1, { region, persona, spike, product_category: product.category });
+    spikeCartUpdates.add(1, { region, persona, spike, product_category: productCategoryTag(product) });
     check(cart, {
       'cart saved during spike': response => response.status === 200
     }, { region, persona, spike });
