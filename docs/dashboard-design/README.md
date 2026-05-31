@@ -2,9 +2,16 @@
 
 This folder stores dashboard design references used by the Ensemble-Grafana observability work.
 
-## Tufte Threshold Color Standard
+## Tufte Color Standards
 
 Source: `The Tufte Aesthetic for Grafana Dashboard Design.pdf`, section 2, "Strategic Use of Color".
+
+Use muted blue as the neutral/default visualization color so bright colors remain meaningful:
+
+| Usage | Setting |
+|---|---:|
+| Neutral/default visualization color | `#437d9e` |
+| Stat/Singlestat background coloring | `colorMode: none` |
 
 Use bright colors only for meaningful goal states in dashboard thresholds:
 
@@ -14,5 +21,3 @@ Use bright colors only for meaningful goal states in dashboard thresholds:
 | Close to goal | `#f27d05` |
 | Significantly outside goal | `#bd362f` |
 | Text-only critical threshold | `#ff3a3a` |
-
-For neutral/non-threshold series, prefer the muted default blue `#437d9e` unless the panel has a stronger semantic reason.

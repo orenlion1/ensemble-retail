@@ -641,9 +641,14 @@ gcx api /api/folders -d '{"uid":"ensemble-diagrams","title":"Diagrams"}'
 gcx api /api/dashboards/db -d @observability/grafana/dashboards/ensemble-graphviz-diagrams-api.json
 ```
 
-### Grafana Threshold Color Standard
+### Grafana Dashboard Color Standard
 
-Dashboard threshold colors follow the Tufte-inspired strategic color standard documented in [docs/dashboard-design/README.md](docs/dashboard-design/README.md), based on [The Tufte Aesthetic for Grafana Dashboard Design.pdf](<docs/dashboard-design/The Tufte Aesthetic for Grafana Dashboard Design.pdf>), section 2, "Strategic Use of Color".
+Dashboard colors follow the Tufte-inspired strategic color standard documented in [docs/dashboard-design/README.md](docs/dashboard-design/README.md), based on [The Tufte Aesthetic for Grafana Dashboard Design.pdf](<docs/dashboard-design/The Tufte Aesthetic for Grafana Dashboard Design.pdf>), section 2, "Strategic Use of Color".
+
+| Usage | Setting |
+|---|---:|
+| Neutral/default visualization color | `#437d9e` |
+| Stat/Singlestat background coloring | `colorMode: none` |
 
 | State | Color |
 |---|---:|
@@ -666,6 +671,21 @@ done
 ```
 
 On May 31, 2026, this process scanned 74 dashboards, updated 60 editable dashboards, changed 1906 threshold color fields, skipped 11 non-editable/plugin-provisioned dashboards, and retried `ensemble-red-log-signals` after a version conflict. The run report is [reports/grafana-threshold-standardization/threshold-standardization-20260531.md](reports/grafana-threshold-standardization/threshold-standardization-20260531.md).
+
+To refresh neutral defaults and clean Stat/Singlestat backgrounds:
+
+```sh
+gcx dashboards list -o json > /tmp/ensemble-dashboard-neutral-list.json
+node scripts/standardize-grafana-neutral-colors.mjs \
+  --input /tmp/ensemble-dashboard-neutral-list.json \
+  --output-dir /tmp/ensemble-dashboard-neutral/standardized \
+  --report reports/grafana-threshold-standardization/neutral-defaults-YYYYMMDD.json
+for file in /tmp/ensemble-dashboard-neutral/standardized/*.json; do
+  gcx dashboards update "$(basename "$file" .json)" -f "$file"
+done
+```
+
+On May 31, 2026, this neutral pass scanned 74 dashboards, updated 61 editable dashboards, changed 1458 style fields, set 600 non-threshold color defaults to `#437d9e`, set 752 baseline/default threshold steps to `#437d9e`, and turned off 106 Stat/Singlestat background color modes. A fresh dashboard pull after publishing found zero editable Stat/Singlestat background color modes, zero non-threshold defaults outside `#437d9e`, and zero non-neutral baseline threshold steps. The run report is [reports/grafana-threshold-standardization/neutral-defaults-20260531.md](reports/grafana-threshold-standardization/neutral-defaults-20260531.md).
 
 Optional knobs for the combined scenarios:
 

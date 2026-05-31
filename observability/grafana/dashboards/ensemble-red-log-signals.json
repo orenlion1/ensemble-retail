@@ -8,16 +8,16 @@
       "grafana.app/message": "Add link to synthetics detail",
       "grafana.app/saved-from-ui": "Grafana Cloud",
       "grafana.app/updatedBy": "service-account:ffn1sscdjmscge",
-      "grafana.app/updatedTimestamp": "2026-05-31T16:02:08Z"
+      "grafana.app/updatedTimestamp": "2026-05-31T16:13:10Z"
     },
     "creationTimestamp": "2026-05-30T15:13:20Z",
-    "generation": 27,
+    "generation": 28,
     "labels": {
       "grafana.app/deprecatedInternalID": "2596326027239424"
     },
     "name": "ensemble-red-log-signals",
     "namespace": "stacks-1665320",
-    "resourceVersion": "2061116025973244775",
+    "resourceVersion": "2061118801822351713",
     "uid": "537a3e75-9a52-4596-818e-10d20f2f693c"
   },
   "spec": {
@@ -93,7 +93,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -219,7 +220,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -345,7 +347,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -471,7 +474,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -667,7 +671,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -798,7 +803,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -929,7 +935,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -1060,7 +1067,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -1191,7 +1199,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -1322,7 +1331,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -1980,7 +1990,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -2112,7 +2123,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -2244,7 +2256,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -2369,7 +2382,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -2594,7 +2608,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -3530,7 +3545,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -3656,7 +3672,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -3780,7 +3797,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -3902,7 +3920,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -4024,7 +4043,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -4146,7 +4166,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -4387,7 +4408,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -4581,7 +4603,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -4766,7 +4789,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -4951,7 +4975,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -5073,7 +5098,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -5195,7 +5221,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -5317,7 +5344,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -5441,7 +5469,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -5565,7 +5594,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -5853,7 +5883,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -6277,7 +6308,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -6403,7 +6435,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "palette-classic"
+                    "fixedColor": "#437d9e",
+                    "mode": "fixed"
                   },
                   "custom": {
                     "axisBorderShow": false,
