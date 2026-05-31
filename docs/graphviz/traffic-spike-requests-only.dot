@@ -34,7 +34,7 @@ digraph traffic_spike_requests_only {
   subgraph cluster_parallel {
     label="Parallel request load"; color="#cbd5e1"; style="rounded,dashed"; fontsize=13; fontname="Helvetica";
     regional [label="{regional_shoppers|30 VUs|~120 req/wave}", fillcolor="#ecfdf5"];
-    api_rate [label="{api_request_rate|15 requests/sec|constant arrival for 10m}", fillcolor="#e0f2fe"];
+    api_rate [label="{api_request_rate|60 requests/sec|constant arrival for 10m}", fillcolor="#e0f2fe"];
     browser_actions [label="{storefront_actions|ramp to 5 browser VUs × 10m|browser requests vary; Faro actions targeted}", fillcolor="#faf5ff"];
   }
 
