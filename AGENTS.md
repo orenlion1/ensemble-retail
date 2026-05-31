@@ -15,6 +15,7 @@ This repository treats infrastructure, deployment, and observability changes as 
 |------|-------|
 | Terraform, AWS, EKS, K8s | `skills/infrastructure/SKILLS.md` |
 | Grafana Cloud, Faro, Alloy, k6, dashboards | `skills/observability/SKILLS.md` |
+| Log investigation and RCA reports | `skills/observability/investigate-log/SKILL.md` |
 | IRM incidents and labels | `skills/observability/incident-creation/SKILL.md` |
 | Graphviz diagrams | `skills/graphviz/SKILL.md` |
 | Grafana diagram dashboard inventory | `skills/graphviz/dashboard-inventory/SKILL.md` |
@@ -51,6 +52,7 @@ For large cross-cutting changes (deploy + observability + app code), run `code-r
 |------|---------------|-------------------|
 | Terraform / K8s / deploy | `skills/infrastructure/SKILLS.md` | `security-auditor` |
 | Grafana / k6 / Faro / IRM | `skills/observability/SKILLS.md` (+ `incident-creation` for incidents) | `test-engineer` |
+| Log investigation and RCA reports | `skills/observability/investigate-log/SKILL.md` + relevant domain skill | `test-engineer` |
 | Graphviz diagram creation or generated diagram assets | `skills/graphviz/SKILL.md` | `test-engineer` |
 | Grafana diagram dashboard push | `skills/graphviz/SKILL.md` + `skills/graphviz/dashboard-inventory/SKILL.md` | `test-engineer` |
 | App or API behavior | `skills/coding/SKILLS.md` + `test-driven-development` | `code-reviewer` |

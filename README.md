@@ -95,6 +95,8 @@ scripts/kubernetes/apply-manifests.sh
 
 The checked-in Kubernetes service manifest is pinned to the deployed account `629513454417`, ECR service images, and the saturation-test profile of one replica per Spring Boot service. This profile is intentional: it makes CPU, memory, latency, queueing, pod restart, and throttling signals easier to observe in Grafana during k6 spike and regional-load tests. Rolling updates use `maxSurge: 1` and `maxUnavailable: 0`, with PodDisruptionBudgets set to `minAvailable: 1`, so a replacement pod is started before the only running pod is removed during routine rollouts. WAF rate limits are configured by the `edge-static` Terraform stack as `edge_rate_limit_per_ip` and `api_rate_limit_per_ip`, currently `200000` requests per source IP per 5-minute AWS WAF evaluation window, so repeated local 20-VU k6 smoke tests can run without being blocked by WAF. If deploying to another AWS account, replace the IRSA role annotations and image registry before applying `infra/k8s/services.yaml`.
 
+`inventory-service` probes are tuned for the observed kubelet probe-timeout RCA: readiness waits 60 seconds, then checks every 10 seconds with `timeoutSeconds: 5` and `failureThreshold: 5`; liveness waits 120 seconds before checking every 20 seconds with the same timeout and failure threshold. This keeps liveness less aggressive than readiness and gives the service room to recover from short Postgres or CPU/load stalls before kubelet restarts the pod.
+
 To apply or roll back the saturation-test replica profile:
 
 ```sh
@@ -112,6 +114,15 @@ kubectl -n ensemble-grafana scale deployment/account-service --replicas=3
 During saturation runs, watch Grafana for Kubernetes CPU/memory utilization, pod restart count, throttling, service RED metrics, k6 HTTP failure rate, p95/p99 latency, and Faro user-action timing. Run `node scripts/report-load-tests.mjs` after each k6 run so the load-test comparison report captures the saturation effect.
 
 To compare a local kubelet-log remediation plan with Grafana Assistant's remediation plan, use the repo alias `/compare-kubelet-resolution-plan`. The command definition is `.codex/commands/compare-kubelet-resolution-plan.md` and calls `gcx assistant prompt --context assistant-oauth` with the same kubelet ERROR-log analysis prompt used for the local Resolution Plan. The `assistant-oauth` context uses browser OAuth for Grafana Assistant, while the default `gcx` context remains the service-account context for dashboards, datasources, IRM, Synthetic Monitoring, and other automation. If Assistant returns `HTTP 401: invalid user`, rerun `gcx login assistant-oauth --server https://orenlion.grafana.net` and choose OAuth browser auth.
+
+The Grafana dashboard `Ensemble RED and Log Signals` includes a `kubelet` tab for probe-failure RCA. The tab is managed from `observability/grafana/dashboards/ensemble-red-log-signals.json` and was published with `gcx dashboards update ensemble-red-log-signals`. It includes Loki panels for kubelet probe failures grouped by service (`containerName`), pod, probe type, and node/instance, plus raw probe-failure details. To refresh and republish the dashboard manifest:
+
+```sh
+gcx dashboards get ensemble-red-log-signals -o json > observability/grafana/dashboards/ensemble-red-log-signals.json
+gcx dashboards update ensemble-red-log-signals -f observability/grafana/dashboards/ensemble-red-log-signals.json
+```
+
+The same dashboard also includes a `Frontend` tab for Faro behavior anomalies in user actions. The tab uses the Grafana Cloud Loki datasource and queries `{app_id="464", kind="event"}` Faro events with `event_name=faro.user.action`. It surfaces user-action volume by action, p95 action duration, critical/high-importance actions, region and locale mix, cart/checkout action volume, frontend exception/error signals, and raw user-action details.
 
 Detailed inputs and handoff outputs are documented in `infra/terraform/stacks/README.md`. Do not commit `.tfvars`, state files, generated `network.auto.tfvars.json`, or real secrets.
 
