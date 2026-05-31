@@ -1,8 +1,9 @@
 # Grafana Diagram Dashboard Inventory
 
-This inventory records the diagrams that are intentionally published to the Grafana dashboard `Ensemble Graphviz Diagrams`.
+This inventory records the diagrams that are intentionally published to Grafana dashboards from repo Graphviz sources.
 
-Dashboard URL: `https://orenlion.grafana.net/d/ensemble-graphviz-diagrams/ensemble-graphviz-diagrams`
+- Ensemble Graphviz Diagrams: `https://orenlion.grafana.net/d/ensemble-graphviz-diagrams/ensemble-graphviz-diagrams`
+- User Action Traffic: Real Users vs k6: `https://orenlion.grafana.net/d/or46lql/user-action-traffic3a-real-users-vs-k6`
 
 Last inventoried from Grafana: `2026-05-31`
 
@@ -14,15 +15,15 @@ Keep dashboard updates scoped to the affected inventory entry. Avoid rewriting u
 
 ## Inventory By Tab
 
-| Tab | Panel | Title | Source |
-|-----|-------|-------|--------|
-| Network | `panel-1` | Network Diagram | `docs/diagrams/network-diagram.dot` |
-| Network | `panel-3` | Request Flow Diagram | `docs/diagrams/request-flow-diagram.dot` |
-| Observability | `panel-11` | Observability Architecture | `docs/diagrams/observability-capabilities-flow.dot` |
-| Load Test | `panel-16` | Traffic Spike Target Heatmap Dark | `docs/graphviz/traffic-spike-target-heatmap-dark.dot` |
-| Load Run History | `panel-17` | Load Run History Table | `docs/graphviz/load-run-table.dot` |
-| Traffic Spike Design | `panel-18` | Traffic Spike User Action Fidelity | `docs/graphviz/traffic-spike-load-test-flow.dot` |
-| Frontend Observability | `panel-19` | Faro, k6, and Synthetic Monitoring Contract | `docs/graphviz/faro-k6-contract-relationships.dot` |
+| Dashboard | Tab | Panel | Title | Source |
+|-----------|-----|-------|-------|--------|
+| Ensemble Graphviz Diagrams | Network | `panel-1` | Network Diagram | `docs/diagrams/network-diagram.dot` |
+| Ensemble Graphviz Diagrams | Network | `panel-3` | Request Flow Diagram | `docs/diagrams/request-flow-diagram.dot` |
+| Ensemble Graphviz Diagrams | Observability | `panel-11` | Observability Architecture | `docs/diagrams/observability-capabilities-flow.dot` |
+| Ensemble Graphviz Diagrams | Load Test | `panel-16` | Traffic Spike Target Heatmap Dark | `docs/graphviz/traffic-spike-target-heatmap-dark.dot` |
+| Ensemble Graphviz Diagrams | Traffic Spike Design | `panel-18` | Traffic Spike User Action Fidelity | `docs/graphviz/traffic-spike-load-test-flow.dot` |
+| Ensemble Graphviz Diagrams | Frontend Observability | `panel-19` | Faro, k6, and Synthetic Monitoring Contract | `docs/graphviz/faro-k6-contract-relationships.dot` |
+| User Action Traffic: Real Users vs k6 | Load Run History | `panel-17` | Load Run History Table | `docs/graphviz/load-run-table.dot` |
 
 ## Refresh Command
 

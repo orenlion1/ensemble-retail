@@ -638,13 +638,13 @@ The current load-run history table is also available as Graphviz source and rend
 - `docs/graphviz/load-run-table.svg`
 - `docs/graphviz/load-run-table.png`
 
-After every traffic-spike run, update the `Load Run History` tab in the `Ensemble Graphviz Diagrams` dashboard with the refreshed `docs/graphviz/load-run-table.dot` source. Fetch the live dashboard first so the update carries the latest Grafana resource version, then update only `panel-17`:
+After every traffic-spike run, update the `Load Run History` tab in the `User Action Traffic: Real Users vs k6` dashboard with the refreshed `docs/graphviz/load-run-table.dot` source. Fetch the live dashboard first so the update carries the latest Grafana resource version, then update only `panel-17`:
 
 ```sh
-gcx dashboards get ensemble-graphviz-diagrams -o json > /tmp/ensemble-graphviz-diagrams-live.json
-node --input-type=module -e "import { readFileSync, writeFileSync } from 'node:fs'; const dashboard=JSON.parse(readFileSync('/tmp/ensemble-graphviz-diagrams-live.json','utf8')); dashboard.spec.elements['panel-17'].spec.vizConfig.spec.options.dotDiagram=readFileSync('docs/graphviz/load-run-table.dot','utf8'); writeFileSync('observability/grafana/dashboards/ensemble-graphviz-diagrams-api.json', JSON.stringify(dashboard, null, 2) + '\n');"
-gcx dashboards update ensemble-graphviz-diagrams -f observability/grafana/dashboards/ensemble-graphviz-diagrams-api.json
-gcx dashboards get ensemble-graphviz-diagrams -o json > observability/grafana/dashboards/ensemble-graphviz-diagrams-api.json
+gcx dashboards get or46lql -o json > /tmp/user-action-traffic-real-users-vs-k6-live.json
+node --input-type=module -e "import { readFileSync, writeFileSync } from 'node:fs'; const dashboard=JSON.parse(readFileSync('/tmp/user-action-traffic-real-users-vs-k6-live.json','utf8')); dashboard.spec.elements['panel-17'].spec.vizConfig.spec.options.dotDiagram=readFileSync('docs/graphviz/load-run-table.dot','utf8'); writeFileSync('observability/grafana/dashboards/user-action-traffic-real-users-vs-k6.json', JSON.stringify(dashboard, null, 2) + '\n');"
+gcx dashboards update or46lql -f observability/grafana/dashboards/user-action-traffic-real-users-vs-k6.json
+gcx dashboards get or46lql -o json > observability/grafana/dashboards/user-action-traffic-real-users-vs-k6.json
 ```
 
 The traffic-spike user-action fidelity model is available as:
@@ -659,7 +659,7 @@ The Faro, k6 load-test, and Synthetic Monitoring contract relationship model is 
 - `docs/graphviz/faro-k6-contract-relationships.svg`
 - `docs/graphviz/faro-k6-contract-relationships.png`
 
-The Grafana folder `Diagrams` contains the dashboard `Ensemble Graphviz Diagrams`, which embeds the key current Graphviz DOT sources from `docs/diagrams/` and `docs/graphviz/`. The `Load Test` tab includes the traffic-spike target heatmap. The `Load Run History` tab contains the load-run history table. The `Traffic Spike Design` tab contains the traffic-spike user-action fidelity model. The `Observability Architecture` tab includes the Faro, k6 load-test, and Synthetic Monitoring contract relationship model. The dashboard inventory is [docs/graphviz/grafana-dashboard-diagram-inventory.md](docs/graphviz/grafana-dashboard-diagram-inventory.md); only push Grafana diagram updates for sources listed there, adding new dashboard diagrams to the inventory first. Folder URL: `https://orenlion.grafana.net/dashboards/f/ensemble-diagrams/diagrams`. Dashboard URL: `https://orenlion.grafana.net/d/ensemble-graphviz-diagrams/ensemble-graphviz-diagrams`. Recreate or update it with:
+The Grafana folder `Diagrams` contains the dashboard `Ensemble Graphviz Diagrams`, which embeds the key current Graphviz DOT sources from `docs/diagrams/` and `docs/graphviz/`. The `Load Test` tab includes the traffic-spike target heatmap. The `Traffic Spike Design` tab contains the traffic-spike user-action fidelity model. The `Observability Architecture` tab includes the Faro, k6 load-test, and Synthetic Monitoring contract relationship model. The `User Action Traffic: Real Users vs k6` dashboard contains the load-run history table in its `Load Run History` tab. The dashboard inventory is [docs/graphviz/grafana-dashboard-diagram-inventory.md](docs/graphviz/grafana-dashboard-diagram-inventory.md); only push Grafana diagram updates for sources listed there, adding new dashboard diagrams to the inventory first. Folder URL: `https://orenlion.grafana.net/dashboards/f/ensemble-diagrams/diagrams`. Dashboard URL: `https://orenlion.grafana.net/d/ensemble-graphviz-diagrams/ensemble-graphviz-diagrams`. User action traffic dashboard URL: `https://orenlion.grafana.net/d/or46lql/user-action-traffic3a-real-users-vs-k6`. Recreate or update the Ensemble Graphviz dashboard with:
 
 ```sh
 gcx api /api/folders -d '{"uid":"ensemble-diagrams","title":"Diagrams"}'

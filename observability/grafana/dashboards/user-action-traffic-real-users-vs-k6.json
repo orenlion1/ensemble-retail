@@ -1,0 +1,2354 @@
+{
+  "apiVersion": "dashboard.grafana.app/v2",
+  "kind": "Dashboard",
+  "metadata": {
+    "annotations": {
+      "grafana.app/createdBy": "user:bfn1mps9ztzi8d",
+      "grafana.app/folder": "fn9nd7",
+      "grafana.app/message": "Axis labels\nhttps://orenlion.grafana.net/a/grafana-assistant-app/chats/shared/6643e6db-d600-4ce7-b7af-05be92e9d9b8",
+      "grafana.app/saved-from-ui": "Grafana Cloud",
+      "grafana.app/updatedBy": "service-account:ffn1sscdjmscge",
+      "grafana.app/updatedTimestamp": "2026-05-31T20:17:04Z"
+    },
+    "creationTimestamp": "2026-05-30T15:26:55Z",
+    "generation": 20,
+    "labels": {
+      "grafana.app/deprecatedInternalID": "2599742210564096"
+    },
+    "name": "or46lql",
+    "namespace": "stacks-1665320",
+    "resourceVersion": "2061180178989580799",
+    "uid": "4616f2a6-a2fc-4ff5-87cb-80b9911dc426"
+  },
+  "spec": {
+    "annotations": [
+      {
+        "kind": "AnnotationQuery",
+        "spec": {
+          "builtIn": true,
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations \u0026 Alerts",
+          "query": {
+            "datasource": {
+              "name": "-- Grafana --"
+            },
+            "group": "grafana",
+            "kind": "DataQuery",
+            "spec": {},
+            "version": "v0"
+          }
+        }
+      }
+    ],
+    "cursorSync": "Off",
+    "description": "Compares real-user and k6 browser-generated faro.user.action event volumes side by side.\nhttps://orenlion.grafana.net/a/grafana-assistant-app/chats/shared/3785e31b-4941-4504-9a72-0ee26dd772ac",
+    "editable": true,
+    "elements": {
+      "panel-10": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "group": "",
+                      "kind": "DataQuery",
+                      "spec": {},
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 10,
+          "links": [],
+          "title": "Traffic spike target heatmap",
+          "vizConfig": {
+            "group": "grafana-graphviz-panel",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
+              "options": {
+                "_assistantHelp": "",
+                "builderModeActions": {},
+                "dotDiagram": "digraph traffic_spike_target_heatmap_dark {\n  graph [rankdir=TB, labelloc=t, label=\"Traffic Spike Test Targets\", bgcolor=\"#0b1220\", fontcolor=\"#f8fafc\", fontsize=22, fontname=\"Helvetica\", nodesep=0.35, ranksep=0.4];\n  node [shape=plain, fontname=\"Helvetica\", fontcolor=\"#f8fafc\"];\n  edge [style=invis];\n\n  target_heatmap [label=\u003c\n    \u003cTABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"7\" COLOR=\"#475569\"\u003e\n      \u003cTR\u003e\u003cTD BGCOLOR=\"#1e3a5f\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eStage\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e3a5f\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eVUs\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e3a5f\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eRequests / wave\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#14532d\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eCart updates\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#713f12\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eCheckout attempts\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e40af\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eRegion changes\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n      \u003cTR\u003e\u003cTD ALIGN=\"LEFT\" BGCOLOR=\"#111827\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eWarmup / Recovery\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#111827\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e25\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#334155\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e100\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#166534\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e15\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#854d0e\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e5\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1d4ed8\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e25\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n      \u003cTR\u003e\u003cTD ALIGN=\"LEFT\" BGCOLOR=\"#111827\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eSpike 1\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#111827\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e100\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#2563eb\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e400\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#15803d\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e60\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#a16207\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e20\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#2563eb\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e100\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n      \u003cTR\u003e\u003cTD ALIGN=\"LEFT\" BGCOLOR=\"#111827\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eSpike 2\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#111827\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e200\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e40af\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e800\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#15803d\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e120\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#92400e\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e40\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e40af\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e200\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n      \u003cTR\u003e\u003cTD ALIGN=\"LEFT\" BGCOLOR=\"#111827\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eSpike 3\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#111827\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e400\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e3a8a\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e1600\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#166534\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e240\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#713f12\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e80\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e3a8a\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e400\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n    \u003c/TABLE\u003e\n  \u003e];\n\n  target_note [label=\u003c\n    \u003cTABLE BORDER=\"0\" CELLBORDER=\"0\" CELLSPACING=\"0\" CELLPADDING=\"4\"\u003e\n      \u003cTR\u003e\u003cTD ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eReadout:\u003c/B\u003e brighter cells mean more target pressure per completed wave.\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n      \u003cTR\u003e\u003cTD ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eCurrent config: BASE_SPIKE_USERS=100, SPIKE_MULTIPLIER=2, regional_shoppers=30 VUs.\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n      \u003cTR\u003e\u003cTD ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003estorefront_actions=60 browser VUs for 10m.\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n    \u003c/TABLE\u003e\n  \u003e];\n\n  target_heatmap -\u003e target_note;\n}\n",
+                "dotQueryConfig": {
+                  "fieldName": "dot_diagram"
+                },
+                "edgeOverrides": [],
+                "inputMode": "code",
+                "layoutEngine": "dot",
+                "namedThresholds": [],
+                "nodeOverrides": [],
+                "rankDirection": "LR",
+                "splineType": "true"
+              }
+            },
+            "version": "0.0.5"
+          }
+        }
+      },
+      "panel-17": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "group": "",
+                      "kind": "DataQuery",
+                      "spec": {},
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Source: docs/graphviz/load-run-table.dot, dark theme",
+          "id": 17,
+          "links": [],
+          "title": "Load Run History Table",
+          "vizConfig": {
+            "group": "grafana-graphviz-panel",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
+              "options": {
+                "_assistantHelp": "",
+                "builderModeActions": {},
+                "dotDiagram": "digraph load_run_table {\n  graph [\n    rankdir=TB,\n    bgcolor=\"#0b1220\",\n    fontcolor=\"#f8fafc\",\n    pad=\"0.35\",\n    nodesep=\"0.35\",\n    ranksep=\"0.45\",\n    fontname=\"Helvetica\",\n    fontsize=22,\n    labelloc=\"t\",\n    label=\"Ensemble-Grafana k6 Traffic Spike Run History\"\n  ];\n\n  node [\n    shape=plain,\n    fontname=\"Helvetica\",\n    fontcolor=\"#f8fafc\"\n  ];\n\n  runs [\n    label=\u003c\n      \u003cTABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"7\" COLOR=\"#475569\"\u003e\n        \u003cTR\u003e\n          \u003cTD BGCOLOR=\"#1e3a5f\" WIDTH=\"175\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eStarted\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e3a5f\" WIDTH=\"80\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eRun\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e3a5f\" WIDTH=\"70\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eResult\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e3a5f\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eDuration\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e3a5f\" WIDTH=\"105\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eRequest/sec\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e3a5f\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eTotal VUH\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e3a5f\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eProtocol\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e3a5f\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eBrowser\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD BGCOLOR=\"#111827\" WIDTH=\"175\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e05/31/2026, 15:45\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#111827\" WIDTH=\"80\"\u003e\u003cFONT COLOR=\"#bfdbfe\"\u003e7653359\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#166534\" WIDTH=\"70\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003ePASS\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#111827\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e10.0m\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"105\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e15\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e90.84\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e82.50\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e8.34\u003c/FONT\u003e\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD BGCOLOR=\"#182235\" WIDTH=\"175\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e05/31/2026, 15:23\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#182235\" WIDTH=\"80\"\u003e\u003cFONT COLOR=\"#bfdbfe\"\u003e7653277\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#166534\" WIDTH=\"70\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003ePASS\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#182235\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e10.0m\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"105\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e10\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e90.84\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e82.50\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e8.34\u003c/FONT\u003e\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD BGCOLOR=\"#111827\" WIDTH=\"175\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e05/31/2026, 14:41\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#111827\" WIDTH=\"80\"\u003e\u003cFONT COLOR=\"#bfdbfe\"\u003e7653107\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#166534\" WIDTH=\"70\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003ePASS\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#111827\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e10.0m\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"105\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e5\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e90.84\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e82.50\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e8.34\u003c/FONT\u003e\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD BGCOLOR=\"#182235\" WIDTH=\"175\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e05/31/2026, 13:42\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#182235\" WIDTH=\"80\"\u003e\u003cFONT COLOR=\"#bfdbfe\"\u003e7652889\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#7f1d1d\" WIDTH=\"70\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eFAIL\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#182235\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e15.0m\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"105\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e8\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e129.00\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e117.16\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e11.84\u003c/FONT\u003e\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD BGCOLOR=\"#111827\" WIDTH=\"175\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e05/31/2026, 12:41\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#111827\" WIDTH=\"80\"\u003e\u003cFONT COLOR=\"#bfdbfe\"\u003e7652683\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#166534\" WIDTH=\"70\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003ePASS\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#111827\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e0.3m\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"105\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003en/a\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e1.00\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e0.00\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e1.00\u003c/FONT\u003e\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD BGCOLOR=\"#182235\" WIDTH=\"175\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e05/31/2026, 06:44\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#182235\" WIDTH=\"80\"\u003e\u003cFONT COLOR=\"#bfdbfe\"\u003e7651472\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#7f1d1d\" WIDTH=\"70\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eFAIL\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#182235\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e15.0m\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"105\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e8\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e129.00\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e117.16\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e11.84\u003c/FONT\u003e\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD BGCOLOR=\"#111827\" WIDTH=\"175\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e05/30/2026, 18:27\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#111827\" WIDTH=\"80\"\u003e\u003cFONT COLOR=\"#bfdbfe\"\u003e7648780\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#166534\" WIDTH=\"70\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003ePASS\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#111827\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e15.0m\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"105\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003en/a\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e129.00\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e117.16\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e11.84\u003c/FONT\u003e\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD BGCOLOR=\"#182235\" WIDTH=\"175\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e05/30/2026, 18:01\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#182235\" WIDTH=\"80\"\u003e\u003cFONT COLOR=\"#bfdbfe\"\u003e7648612\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#7f1d1d\" WIDTH=\"70\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eFAIL\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#182235\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e15.0m\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"105\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003en/a\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e129.00\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e117.16\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e11.84\u003c/FONT\u003e\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD BGCOLOR=\"#111827\" WIDTH=\"175\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e05/30/2026, 17:43\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#111827\" WIDTH=\"80\"\u003e\u003cFONT COLOR=\"#bfdbfe\"\u003e7648492\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#7f1d1d\" WIDTH=\"70\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eFAIL\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#111827\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e15.0m\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"105\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003en/a\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e225.99\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e94.35\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e131.64\u003c/FONT\u003e\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD BGCOLOR=\"#182235\" WIDTH=\"175\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e05/30/2026, 17:37\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#182235\" WIDTH=\"80\"\u003e\u003cFONT COLOR=\"#bfdbfe\"\u003e7648480\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#854d0e\" WIDTH=\"70\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eERROR\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#182235\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e1.8m\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"105\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003en/a\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e30.05\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e12.55\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e17.50\u003c/FONT\u003e\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD BGCOLOR=\"#111827\" WIDTH=\"175\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e05/30/2026, 17:36\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#111827\" WIDTH=\"80\"\u003e\u003cFONT COLOR=\"#bfdbfe\"\u003e7648472\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#854d0e\" WIDTH=\"70\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eERROR\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#111827\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e0.5m\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"105\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003en/a\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e7.73\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e3.23\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e4.50\u003c/FONT\u003e\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD BGCOLOR=\"#182235\" WIDTH=\"175\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e05/30/2026, 16:55\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#182235\" WIDTH=\"80\"\u003e\u003cFONT COLOR=\"#bfdbfe\"\u003e7648337\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#166534\" WIDTH=\"70\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003ePASS\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#182235\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e10.0m\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"105\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003en/a\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e80.01\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e71.67\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e8.34\u003c/FONT\u003e\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD BGCOLOR=\"#111827\" WIDTH=\"175\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e05/30/2026, 16:50\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#111827\" WIDTH=\"80\"\u003e\u003cFONT COLOR=\"#bfdbfe\"\u003e7648323\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#854d0e\" WIDTH=\"70\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eERROR\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#111827\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e1.6m\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"105\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003en/a\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e12.41\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e11.11\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e1.30\u003c/FONT\u003e\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD BGCOLOR=\"#182235\" WIDTH=\"175\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e05/30/2026, 16:45\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#182235\" WIDTH=\"80\"\u003e\u003cFONT COLOR=\"#bfdbfe\"\u003e7648315\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#854d0e\" WIDTH=\"70\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eERROR\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#182235\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e1.4m\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"105\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003en/a\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e15.24\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e10.40\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e4.84\u003c/FONT\u003e\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD BGCOLOR=\"#111827\" WIDTH=\"175\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e05/30/2026, 16:23\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#111827\" WIDTH=\"80\"\u003e\u003cFONT COLOR=\"#bfdbfe\"\u003e7648249\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#7f1d1d\" WIDTH=\"70\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eFAIL\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#111827\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e10.0m\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"105\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003en/a\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e157.34\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e65.69\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e91.65\u003c/FONT\u003e\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD BGCOLOR=\"#182235\" WIDTH=\"175\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e05/30/2026, 16:20\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#182235\" WIDTH=\"80\"\u003e\u003cFONT COLOR=\"#bfdbfe\"\u003e7648230\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#854d0e\" WIDTH=\"70\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eERROR\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#182235\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e0.5m\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"105\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003en/a\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e7.73\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e3.23\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e4.50\u003c/FONT\u003e\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD BGCOLOR=\"#111827\" WIDTH=\"175\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e05/30/2026, 15:46\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#111827\" WIDTH=\"80\"\u003e\u003cFONT COLOR=\"#bfdbfe\"\u003e7648063\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#7f1d1d\" WIDTH=\"70\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eFAIL\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#111827\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e10.0m\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"105\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003en/a\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e157.34\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e65.69\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e91.65\u003c/FONT\u003e\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD BGCOLOR=\"#182235\" WIDTH=\"175\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e05/30/2026, 14:56\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#182235\" WIDTH=\"80\"\u003e\u003cFONT COLOR=\"#bfdbfe\"\u003e7647787\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#166534\" WIDTH=\"70\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003ePASS\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#182235\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e10.0m\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"105\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003en/a\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e73.34\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e71.67\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e1.67\u003c/FONT\u003e\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD BGCOLOR=\"#111827\" WIDTH=\"175\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e05/30/2026, 14:40\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#111827\" WIDTH=\"80\"\u003e\u003cFONT COLOR=\"#bfdbfe\"\u003e7647743\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#166534\" WIDTH=\"70\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003ePASS\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#111827\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e10.0m\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"105\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003en/a\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e18.01\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e16.34\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#1e293b\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e1.67\u003c/FONT\u003e\u003c/TD\u003e\n        \u003c/TR\u003e\n        \u003cTR\u003e\n          \u003cTD BGCOLOR=\"#182235\" WIDTH=\"175\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e05/30/2026, 10:55\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#182235\" WIDTH=\"80\"\u003e\u003cFONT COLOR=\"#bfdbfe\"\u003e7646958\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#166534\" WIDTH=\"70\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003ePASS\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#182235\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e8.5m\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"105\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003en/a\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e12.75\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e12.75\u003c/FONT\u003e\u003c/TD\u003e\n          \u003cTD BGCOLOR=\"#243044\" WIDTH=\"85\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e0.00\u003c/FONT\u003e\u003c/TD\u003e\n        \u003c/TR\u003e\n      \u003c/TABLE\u003e\n    \u003e\n  ];\n\n  summary [\n    label=\u003c\n      \u003cTABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"8\" COLOR=\"#475569\"\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#1e3a5f\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eSummary\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eRuns: 21\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#dcfce7\"\u003ePassed: 10\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#fecaca\"\u003eFailed: 6\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#fde68a\"\u003eErrors: 5\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003ePass rate: 48%\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#bfdbfe\"\u003eLatest run: 7653359 PASS\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#bfdbfe\"\u003eLatest passing 400-VU run: 7653359\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n      \u003c/TABLE\u003e\n    \u003e\n  ];\n\n  summary -\u003e runs [\n    style=invis,\n    weight=2\n  ];\n}\n",
+                "dotQueryConfig": {
+                  "fieldName": "dot_diagram"
+                },
+                "edgeOverrides": [],
+                "inputMode": "code",
+                "layoutEngine": "dot",
+                "namedThresholds": [],
+                "nodeOverrides": [],
+                "rankDirection": "TB",
+                "splineType": "ortho"
+              }
+            },
+            "version": "0.0.5"
+          }
+        }
+      },
+      "panel-26": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-prom"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "increase(aws_cloudfront_requests_sum{dimension_DistributionId=\"E1EEO3O6LPAE3X\"}[$__range])",
+                        "instant": true,
+                        "legendFormat": "Total Requests",
+                        "queryType": "instant",
+                        "range": false
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Total CloudFront requests over the selected time range",
+          "id": 26,
+          "links": [],
+          "title": "CloudFront Total Requests",
+          "vizConfig": {
+            "group": "stat",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "fixedColor": "blue",
+                    "mode": "fixed"
+                  },
+                  "decimals": 0,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "short"
+                },
+                "overrides": []
+              },
+              "options": {
+                "colorMode": "value",
+                "graphMode": "none",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+              }
+            },
+            "version": "13.1.0-26564065169"
+          }
+        }
+      },
+      "panel-27": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-prom"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "increase(aws_cloudfront_bytes_downloaded_sum{dimension_DistributionId=\"E1EEO3O6LPAE3X\"}[$__range])",
+                        "instant": true,
+                        "legendFormat": "Bytes Downloaded",
+                        "queryType": "instant",
+                        "range": false
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Total bytes downloaded via CloudFront over the selected time range",
+          "id": 27,
+          "links": [],
+          "title": "CloudFront Bytes Downloaded",
+          "vizConfig": {
+            "group": "stat",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "fixedColor": "green",
+                    "mode": "fixed"
+                  },
+                  "decimals": 1,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "bytes"
+                },
+                "overrides": []
+              },
+              "options": {
+                "colorMode": "value",
+                "graphMode": "none",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+              }
+            },
+            "version": "13.1.0-26564065169"
+          }
+        }
+      },
+      "panel-28": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-prom"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "avg_over_time(aws_cloudfront_4xx_error_rate_average{dimension_DistributionId=\"E1EEO3O6LPAE3X\"}[$__range])",
+                        "instant": true,
+                        "legendFormat": "4xx Rate",
+                        "queryType": "instant",
+                        "range": false
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Average 4xx error rate over the selected time range",
+          "id": 28,
+          "links": [],
+          "title": "CloudFront Avg 4xx Error Rate",
+          "vizConfig": {
+            "group": "stat",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "decimals": 1,
+                  "max": 100,
+                  "min": 0,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "orange",
+                        "value": 1
+                      },
+                      {
+                        "color": "red",
+                        "value": 5
+                      }
+                    ]
+                  },
+                  "unit": "percent"
+                },
+                "overrides": []
+              },
+              "options": {
+                "colorMode": "background",
+                "graphMode": "none",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+              }
+            },
+            "version": "13.1.0-26564065169"
+          }
+        }
+      },
+      "panel-29": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-prom"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "avg_over_time(aws_cloudfront_5xx_error_rate_average{dimension_DistributionId=\"E1EEO3O6LPAE3X\"}[$__range])",
+                        "instant": true,
+                        "legendFormat": "5xx Rate",
+                        "queryType": "instant",
+                        "range": false
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Average 5xx error rate over the selected time range",
+          "id": 29,
+          "links": [],
+          "title": "CloudFront Avg 5xx Error Rate",
+          "vizConfig": {
+            "group": "stat",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "decimals": 1,
+                  "max": 100,
+                  "min": 0,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "orange",
+                        "value": 0.5
+                      },
+                      {
+                        "color": "red",
+                        "value": 2
+                      }
+                    ]
+                  },
+                  "unit": "percent"
+                },
+                "overrides": []
+              },
+              "options": {
+                "colorMode": "background",
+                "graphMode": "none",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+              }
+            },
+            "version": "13.1.0-26564065169"
+          }
+        }
+      },
+      "panel-30": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-logs"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "sum by (action_name) (\n  rate({app_id=\"464\", kind=\"event\"} |= \"event_name=faro.user.action\" | logfmt | k6_isK6Browser=\"\" | label_format traffic_source=\"real\" | traffic_source=~\"$traffic_type\" [5m])\n)",
+                        "instant": false,
+                        "legendFormat": "real: {{action_name}}",
+                        "queryType": "range",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "RealUsers"
+                  }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-logs"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "sum by (action_name) (\n  rate({app_id=\"464\", kind=\"event\"} |= \"event_name=faro.user.action\" | logfmt | k6_isK6Browser=\"true\" | label_format traffic_source=\"k6\" | traffic_source=~\"$traffic_type\" [5m])\n)",
+                        "instant": false,
+                        "legendFormat": "k6: {{action_name}}",
+                        "queryType": "range",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "K6Traffic"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Compares faro.user.action event counts from real browser sessions (k6_isK6Browser empty) versus k6 browser load test traffic (k6_isK6Browser=true), broken down by action_name.",
+          "id": 30,
+          "links": [],
+          "title": "User Action Events: Real Users vs k6",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "Events/s",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 8,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 2,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "never",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "reqps"
+                },
+                "overrides": [
+                  {
+                    "matcher": {
+                      "id": "byRegexp",
+                      "options": "^real:.*"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "blue",
+                          "mode": "fixed"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byRegexp",
+                      "options": "^k6:.*"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "orange",
+                          "mode": "fixed"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [
+                    "max",
+                    "mean"
+                  ],
+                  "displayMode": "table",
+                  "enableFacetedFilter": false,
+                  "placement": "right",
+                  "showLegend": true,
+                  "sortBy": "Mean",
+                  "sortDesc": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "desc"
+                }
+              }
+            },
+            "version": "13.1.0-26564065169"
+          }
+        }
+      },
+      "panel-31": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-logs"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "avg by (action_name) (\n  rate({app_id=\"464\", kind=\"event\"} |= \"event_name=faro.user.action\" | logfmt | k6_isK6Browser=\"\" | label_format traffic_source=\"real\" | traffic_source=~\"$traffic_type\" | unwrap event_data_userActionDuration [5m])\n)",
+                        "instant": false,
+                        "legendFormat": "real: {{action_name}}",
+                        "queryType": "range",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "RealUsers"
+                  }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-logs"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "avg by (action_name) (\n  rate({app_id=\"464\", kind=\"event\"} |= \"event_name=faro.user.action\" | logfmt | k6_isK6Browser=\"true\" | label_format traffic_source=\"k6\" | traffic_source=~\"$traffic_type\" | unwrap event_data_userActionDuration [5m])\n)",
+                        "instant": false,
+                        "legendFormat": "k6: {{action_name}}",
+                        "queryType": "range",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "K6Traffic"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Average faro.user.action duration (seconds) from real browser sessions vs k6 browser load test traffic, broken down by action_name.",
+          "id": 31,
+          "links": [],
+          "title": "User Action Duration: Real Users vs k6",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "Avg Duration/s",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 8,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 2,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "never",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "s"
+                },
+                "overrides": [
+                  {
+                    "matcher": {
+                      "id": "byRegexp",
+                      "options": "^real:.*"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "blue",
+                          "mode": "fixed"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byRegexp",
+                      "options": "^k6:.*"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "orange",
+                          "mode": "fixed"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [
+                    "max",
+                    "mean"
+                  ],
+                  "displayMode": "table",
+                  "enableFacetedFilter": false,
+                  "placement": "right",
+                  "showLegend": true,
+                  "sortBy": "Mean",
+                  "sortDesc": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "desc"
+                }
+              }
+            },
+            "version": "13.1.0-26564065169"
+          }
+        }
+      },
+      "panel-32": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-prom"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "rate(aws_cloudfront_requests_sum{dimension_DistributionId=\"E1EEO3O6LPAE3X\"}[$__rate_interval])",
+                        "instant": false,
+                        "legendFormat": "Requests/s",
+                        "queryType": "range",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-prom"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "aws_cloudfront_4xx_error_rate_average{dimension_DistributionId=\"E1EEO3O6LPAE3X\"}",
+                        "instant": false,
+                        "legendFormat": "4xx Error Rate %",
+                        "queryType": "range",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "B"
+                  }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-prom"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "aws_cloudfront_5xx_error_rate_average{dimension_DistributionId=\"E1EEO3O6LPAE3X\"}",
+                        "instant": false,
+                        "legendFormat": "5xx Error Rate %",
+                        "queryType": "range",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "C"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "AWS CloudFront distribution: request rate and error rates. Source: CloudWatch metrics via Prometheus.",
+          "id": 32,
+          "links": [],
+          "title": "CloudFront Performance (E1EEO3O6LPAE3X)",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "Requests/s",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 8,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 2,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "never",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "reqps"
+                },
+                "overrides": [
+                  {
+                    "matcher": {
+                      "id": "byRegexp",
+                      "options": ".*Error Rate.*"
+                    },
+                    "properties": [
+                      {
+                        "id": "unit",
+                        "value": "percent"
+                      },
+                      {
+                        "id": "custom.axisPlacement",
+                        "value": "right"
+                      },
+                      {
+                        "id": "custom.axisLabel",
+                        "value": "Error Rate %"
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "4xx Error Rate %"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "orange",
+                          "mode": "fixed"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "5xx Error Rate %"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "red",
+                          "mode": "fixed"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "Bytes Downloaded/s"
+                    },
+                    "properties": [
+                      {
+                        "id": "unit",
+                        "value": "Bps"
+                      },
+                      {
+                        "id": "custom.axisPlacement",
+                        "value": "hidden"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [
+                    "mean",
+                    "max",
+                    "lastNotNull"
+                  ],
+                  "displayMode": "table",
+                  "enableFacetedFilter": false,
+                  "placement": "bottom",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "desc"
+                }
+              }
+            },
+            "version": "13.1.0-26564065169"
+          }
+        }
+      },
+      "panel-33": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-logs"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "sum by (action_name) (\n  count_over_time({app_id=\"464\", kind=\"event\"} |= \"event_name=faro.user.action\" | logfmt | k6_isK6Browser=\"\" [$__range])\n)",
+                        "instant": true,
+                        "legendFormat": "{{action_name}}",
+                        "queryType": "instant",
+                        "range": false
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-logs"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "sum by (action_name) (\n  count_over_time({app_id=\"464\", kind=\"event\"} |= \"event_name=faro.user.action\" | logfmt | k6_isK6Browser=\"true\" [$__range])\n)",
+                        "instant": true,
+                        "legendFormat": "{{action_name}}",
+                        "queryType": "instant",
+                        "range": false
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "B"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": [
+                {
+                  "group": "labelsToFields",
+                  "kind": "Transformation",
+                  "spec": {
+                    "options": {
+                      "mode": "columns"
+                    }
+                  }
+                },
+                {
+                  "group": "joinByField",
+                  "kind": "Transformation",
+                  "spec": {
+                    "options": {
+                      "byField": "action_name",
+                      "mode": "outer"
+                    }
+                  }
+                },
+                {
+                  "group": "organize",
+                  "kind": "Transformation",
+                  "spec": {
+                    "options": {
+                      "excludeByName": {
+                        "Time": true,
+                        "Time 1": true
+                      },
+                      "renameByName": {
+                        "Value": "Real Users",
+                        "Value #A": "Real Users",
+                        "Value #B": "k6",
+                        "Value 1": "k6"
+                      }
+                    }
+                  }
+                },
+                {
+                  "group": "calculateField",
+                  "kind": "Transformation",
+                  "spec": {
+                    "options": {
+                      "alias": "Total",
+                      "mode": "reduceRow",
+                      "reduce": {
+                        "reducer": "sum"
+                      },
+                      "replaceFields": false
+                    }
+                  }
+                },
+                {
+                  "group": "sortBy",
+                  "kind": "Transformation",
+                  "spec": {
+                    "options": {
+                      "fields": {},
+                      "sort": [
+                        {
+                          "desc": true,
+                          "displayName": "Total"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "description": "Accurate event counts per action over the selected time range.",
+          "id": 33,
+          "links": [],
+          "title": "User Action Totals: Real Users vs k6",
+          "vizConfig": {
+            "group": "table",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "custom": {
+                    "align": "auto",
+                    "cellOptions": {
+                      "type": "auto"
+                    },
+                    "footer": {
+                      "reducers": []
+                    },
+                    "inspect": false
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  }
+                },
+                "overrides": []
+              },
+              "options": {
+                "cellHeight": "sm",
+                "showHeader": true,
+                "sortBy": [
+                  {
+                    "desc": true,
+                    "displayName": "k6"
+                  }
+                ]
+              }
+            },
+            "version": "13.1.0-26564065169"
+          }
+        }
+      },
+      "panel-34": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-prom"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "aws_cloudfront_4xx_error_rate_average{dimension_DistributionId=\"E1EEO3O6LPAE3X\"}",
+                        "instant": false,
+                        "legendFormat": "4xx Error Rate",
+                        "queryType": "range",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-logs"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "avg by (page_url) (avg_over_time({app_id=\"464\", kind=\"measurement\"} | logfmt | k6_isK6Browser=\"true\" | type=\"web-vitals\" | unwrap value_ttfb [5m]))",
+                        "instant": false,
+                        "legendFormat": "k6 Avg TTFB (ms)",
+                        "queryType": "range",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "B"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Overlays CloudFront 4xx error rate with k6 Time-to-First-Byte (TTFB) from web-vitals measurements. TTFB spikes that correlate with 4xx peaks indicate origin/cache misses or slow upstream responses.",
+          "id": 34,
+          "links": [],
+          "title": "CloudFront 4xx Diagnostic: Error Rate vs TTFB (k6)",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "Error Rate / TTFB",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 8,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 2,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  }
+                },
+                "overrides": [
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "4xx Error Rate"
+                    },
+                    "properties": [
+                      {
+                        "id": "unit",
+                        "value": "percent"
+                      },
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "red",
+                          "mode": "fixed"
+                        }
+                      },
+                      {
+                        "id": "custom.axisPlacement",
+                        "value": "left"
+                      },
+                      {
+                        "id": "custom.axisLabel",
+                        "value": "4xx Error Rate (%)"
+                      },
+                      {
+                        "id": "thresholds",
+                        "value": {
+                          "mode": "absolute",
+                          "steps": [
+                            {
+                              "color": "green",
+                              "value": 0
+                            },
+                            {
+                              "color": "orange",
+                              "value": 5
+                            },
+                            {
+                              "color": "red",
+                              "value": 15
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "k6 Avg TTFB (ms)"
+                    },
+                    "properties": [
+                      {
+                        "id": "unit",
+                        "value": "ms"
+                      },
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "blue",
+                          "mode": "fixed"
+                        }
+                      },
+                      {
+                        "id": "custom.axisPlacement",
+                        "value": "right"
+                      },
+                      {
+                        "id": "custom.axisLabel",
+                        "value": "TTFB (ms)"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "enableFacetedFilter": false,
+                  "placement": "bottom",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "none"
+                }
+              }
+            },
+            "version": "13.1.0-26564065169"
+          }
+        }
+      },
+      "panel-39": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-logs"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "sum by(action_name) (count_over_time({app_id=\"464\", kind=\"event\"} |= \"event_name=faro.user.action\" | logfmt | k6_isK6Browser=\"true\" [$__auto]))",
+                        "instant": false,
+                        "legendFormat": "{{action_name}}",
+                        "queryType": "range",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Event rate per named user action step emitted by k6 browser scripted checks (k6_isK6Browser=true). Step-level volume drops indicate a broken user journey; spikes indicate retry storms or test misconfiguration.",
+          "id": 39,
+          "links": [],
+          "title": "k6 Scripted Check: User Action Volume by Step",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "Checks/s",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 8,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 2,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "never",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "short"
+                },
+                "overrides": []
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [
+                    "mean",
+                    "max"
+                  ],
+                  "displayMode": "table",
+                  "enableFacetedFilter": false,
+                  "placement": "right",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "desc"
+                }
+              }
+            },
+            "version": "13.1.0-26564065169"
+          }
+        }
+      },
+      "panel-40": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-logs"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "quantile_over_time(0.95, {app_id=\"464\", kind=\"event\"} |= \"event_name=faro.user.action\" | logfmt | k6_isK6Browser=\"true\" | unwrap event_data_userActionDuration [$__auto]) by (action_name)",
+                        "instant": false,
+                        "legendFormat": "{{action_name}} p95",
+                        "queryType": "range",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "P95 user action duration from k6 browser scripted checks, broken down by action_name. Steps exceeding SLO thresholds appear as sustained rises; compare against real-user p95 on the Frontend tab for regression fidelity.",
+          "id": 40,
+          "links": [],
+          "title": "k6 Scripted Check: Action Duration p95 by Step",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "p95 Duration (ms)",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 8,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 2,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "never",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "yellow",
+                        "value": 2000
+                      },
+                      {
+                        "color": "red",
+                        "value": 5000
+                      }
+                    ]
+                  },
+                  "unit": "ms"
+                },
+                "overrides": []
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [
+                    "mean",
+                    "max",
+                    "lastNotNull"
+                  ],
+                  "displayMode": "table",
+                  "enableFacetedFilter": false,
+                  "placement": "right",
+                  "showLegend": true,
+                  "sortBy": "Mean",
+                  "sortDesc": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "desc"
+                }
+              }
+            },
+            "version": "13.1.0-26564065169"
+          }
+        }
+      },
+      "panel-41": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-logs"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "sum by(action_name, event_data_userActionImportance) (count_over_time({app_id=\"464\", kind=\"event\"} |= \"event_name=faro.user.action\" | logfmt | k6_isK6Browser=\"true\" | event_data_userActionImportance=~\"critical|high\" [$__auto]))",
+                        "instant": false,
+                        "legendFormat": "{{action_name}} | {{event_data_userActionImportance}}",
+                        "queryType": "range",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Critical and high-importance user action steps from k6 scripted checks. These map to checkout, cart, and account-save flows — the actions most sensitive to performance regressions in user journeys.",
+          "id": 41,
+          "links": [],
+          "title": "k6 Scripted Check: Critical \u0026 High Importance Actions",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "Checks/s",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 10,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 2,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "never",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "short"
+                },
+                "overrides": []
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [
+                    "mean",
+                    "max"
+                  ],
+                  "displayMode": "table",
+                  "enableFacetedFilter": false,
+                  "placement": "right",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "desc"
+                }
+              }
+            },
+            "version": "13.1.0-26564065169"
+          }
+        }
+      },
+      "panel-42": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-logs"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "{app_id=\"464\", kind=\"event\"} |= \"event_name=faro.user.action\" | logfmt | k6_isK6Browser=\"true\"",
+                        "instant": false,
+                        "legendFormat": "",
+                        "queryType": "range",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Raw k6 browser user action events with all logfmt fields visible in log details (action_name, event_data_userActionDuration, event_data_userActionImportance, region, locale, session). Use for step-level debugging of failed or slow synthetic runs.",
+          "id": 42,
+          "links": [],
+          "title": "k6 Scripted Check: Recent Action Detail",
+          "vizConfig": {
+            "group": "logs",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
+              "options": {
+                "dedupStrategy": "none",
+                "enableInfiniteScrolling": false,
+                "enableLogDetails": true,
+                "prettifyLogMessage": false,
+                "showControls": false,
+                "showFieldSelector": false,
+                "showLabels": false,
+                "showLevel": true,
+                "showLogAttributes": true,
+                "showTime": true,
+                "sortOrder": "Descending",
+                "timestampResolution": "ms",
+                "unwrappedColumns": false,
+                "wrapLogMessage": false
+              }
+            },
+            "version": "13.1.0-26564065169"
+          }
+        }
+      },
+      "panel-9": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 9,
+          "links": [],
+          "title": "",
+          "vizConfig": {
+            "group": "text",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
+              "options": {
+                "code": {
+                  "language": "plaintext",
+                  "showLineNumbers": false,
+                  "showMiniMap": false
+                },
+                "content": "\u003cdiv style=\"padding:6px 12px;\"\u003e\n  \u003ca href=\"https://orenlion.grafana.net/a/k6-app/tests/1228496\" target=\"_blank\" style=\"display:inline-block;background:#1f3a5f;color:#60a5fa;border:1px solid #3b82f6;border-radius:5px;padding:5px 14px;font-size:13px;font-weight:500;text-decoration:none;\"\u003e\u0026#128279; k6 Load Test Detail \u0026rarr; Test #1228496\u003c/a\u003e\n\u003c/div\u003e",
+                "mode": "html"
+              }
+            },
+            "version": "13.1.0-26564065169"
+          }
+        }
+      }
+    },
+    "layout": {
+      "kind": "TabsLayout",
+      "spec": {
+        "tabs": [
+          {
+            "kind": "TabsLayoutTab",
+            "spec": {
+              "layout": {
+                "kind": "GridLayout",
+                "spec": {
+                  "items": [
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-26"
+                        },
+                        "height": 3,
+                        "width": 6,
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-27"
+                        },
+                        "height": 3,
+                        "width": 6,
+                        "x": 6,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-28"
+                        },
+                        "height": 3,
+                        "width": 6,
+                        "x": 12,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-29"
+                        },
+                        "height": 3,
+                        "width": 6,
+                        "x": 18,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-30"
+                        },
+                        "height": 6,
+                        "width": 24,
+                        "x": 0,
+                        "y": 3
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-31"
+                        },
+                        "height": 5,
+                        "width": 24,
+                        "x": 0,
+                        "y": 9
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-32"
+                        },
+                        "height": 7,
+                        "width": 12,
+                        "x": 0,
+                        "y": 14
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-34"
+                        },
+                        "height": 7,
+                        "width": 12,
+                        "x": 12,
+                        "y": 14
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-33"
+                        },
+                        "height": 10,
+                        "width": 24,
+                        "x": 0,
+                        "y": 21
+                      }
+                    }
+                  ]
+                }
+              },
+              "title": "Load Tests"
+            }
+          },
+          {
+            "kind": "TabsLayoutTab",
+            "spec": {
+              "layout": {
+                "kind": "GridLayout",
+                "spec": {
+                  "items": [
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-17"
+                        },
+                        "height": 24,
+                        "width": 24,
+                        "x": 0,
+                        "y": 0
+                      }
+                    }
+                  ]
+                }
+              },
+              "title": "Load Run History"
+            }
+          },
+          {
+            "kind": "TabsLayoutTab",
+            "spec": {
+              "layout": {
+                "kind": "GridLayout",
+                "spec": {
+                  "items": [
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-39"
+                        },
+                        "height": 7,
+                        "width": 12,
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-40"
+                        },
+                        "height": 7,
+                        "width": 12,
+                        "x": 12,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-41"
+                        },
+                        "height": 7,
+                        "width": 12,
+                        "x": 0,
+                        "y": 7
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-42"
+                        },
+                        "height": 7,
+                        "width": 12,
+                        "x": 12,
+                        "y": 7
+                      }
+                    }
+                  ]
+                }
+              },
+              "title": "Scripted Checks"
+            }
+          },
+          {
+            "kind": "TabsLayoutTab",
+            "spec": {
+              "layout": {
+                "kind": "GridLayout",
+                "spec": {
+                  "items": [
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-9"
+                        },
+                        "height": 2,
+                        "width": 24,
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-10"
+                        },
+                        "height": 12,
+                        "width": 24,
+                        "x": 0,
+                        "y": 2
+                      }
+                    }
+                  ]
+                }
+              },
+              "title": "Load Spec"
+            }
+          }
+        ]
+      }
+    },
+    "links": [
+      {
+        "asDropdown": false,
+        "icon": "dashboard",
+        "includeVars": false,
+        "keepTime": false,
+        "tags": [],
+        "targetBlank": true,
+        "title": "k6 Load Test Detail",
+        "tooltip": "",
+        "type": "link",
+        "url": "https://orenlion.grafana.net/a/k6-app/tests/1228496"
+      }
+    ],
+    "liveNow": false,
+    "preferences": {
+      "layout": {
+        "kind": "GridLayout",
+        "spec": {
+          "items": []
+        }
+      }
+    },
+    "preload": false,
+    "tags": [
+      "Frontend"
+    ],
+    "timeSettings": {
+      "autoRefresh": "",
+      "autoRefreshIntervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "fiscalYearStartMonth": 0,
+      "from": "now-3h",
+      "hideTimepicker": false,
+      "timezone": "browser",
+      "to": "now"
+    },
+    "title": "User Action Traffic: Real Users vs k6",
+    "variables": [
+      {
+        "kind": "CustomVariable",
+        "spec": {
+          "allValue": ".*",
+          "allowCustomValue": true,
+          "current": {
+            "text": "All",
+            "value": [
+              "$__all"
+            ]
+          },
+          "hide": "dontHide",
+          "includeAll": true,
+          "label": "Traffic Type",
+          "multi": true,
+          "name": "traffic_type",
+          "options": [],
+          "query": "real,k6",
+          "skipUrlSync": false,
+          "valuesFormat": "csv"
+        }
+      }
+    ]
+  },
+  "status": {}
+}

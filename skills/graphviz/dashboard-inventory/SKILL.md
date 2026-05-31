@@ -1,6 +1,6 @@
 ---
 name: grafana-diagram-dashboard-inventory
-description: Maintain and enforce the Ensemble-Grafana Graphviz dashboard inventory before pushing diagram updates to Grafana. Use when inventorying dashboard tabs, updating a diagram panel, adding a diagram to the dashboard, or deciding whether a Grafana diagram push is allowed.
+description: Maintain and enforce the Ensemble-Grafana Graphviz dashboard inventory before pushing diagram updates to Grafana. Use when inventorying dashboard tabs, updating a diagram panel, adding a diagram to a dashboard, or deciding whether a Grafana diagram push is allowed.
 ---
 
 # Grafana Diagram Dashboard Inventory
@@ -15,7 +15,7 @@ The dashboard inventory lives at:
 docs/graphviz/grafana-dashboard-diagram-inventory.md
 ```
 
-The inventory maps each Grafana dashboard tab and panel ID to the diagram source file that is allowed to update that panel.
+The inventory maps each Grafana dashboard, tab, and panel ID to the diagram source file that is allowed to update that panel.
 
 ## Rule
 
@@ -54,7 +54,7 @@ git diff --name-only -- docs/diagrams docs/graphviz
 
 4. Push only affected inventory panels.
 
-When modifying `observability/grafana/dashboards/ensemble-graphviz-diagrams-api.json`, start from the live dashboard JSON and update only the panel whose source file changed. Avoid broad JSON rewrites.
+When modifying a checked-in Grafana dashboard JSON file, start from the live dashboard JSON and update only the panel whose source file changed. Avoid broad JSON rewrites.
 
 5. Publish and verify:
 

@@ -179,7 +179,7 @@ node scripts/report-load-tests.mjs
 
 This produces `reports/load-tests/load-test-comparison.md`, `reports/load-tests/comparison/load-test-runs.csv`, `reports/load-tests/comparison/load-test-counters.csv`, SVG charts for results by date, duration, VUH cost, latest HTTP failure rate, latest check pass rate, latest HTTP p95, latest user-action/cart totals, and the Graphviz load-run history assets `docs/graphviz/load-run-table.{dot,svg,png}`. Run it for passed, failed, and error runs whenever Grafana/k6 returns usable run metadata. Keep raw `reports/load-tests/k6-*.json` pulls ignored because Grafana Cloud run payloads can include runtime token fields.
 
-After every traffic-spike load test, push the refreshed `docs/graphviz/load-run-table.dot` into the `Ensemble Graphviz Diagrams` dashboard `Load Test` tab, panel `panel-17`, following `skills/graphviz/dashboard-inventory/SKILL.md`. Always fetch the live dashboard first, update only `panel-17`, publish with `gcx dashboards update ensemble-graphviz-diagrams`, then fetch the dashboard back into `observability/grafana/dashboards/ensemble-graphviz-diagrams-api.json`.
+After every traffic-spike load test, push the refreshed `docs/graphviz/load-run-table.dot` into the `User Action Traffic: Real Users vs k6` dashboard `Load Run History` tab, panel `panel-17`, following `skills/graphviz/dashboard-inventory/SKILL.md`. Always fetch the live dashboard first, update only `panel-17`, publish with `gcx dashboards update or46lql`, then fetch the dashboard back into `observability/grafana/dashboards/user-action-traffic-real-users-vs-k6.json`.
 
 Document Grafana Cloud k6 run URLs after each cloud execution.
 
