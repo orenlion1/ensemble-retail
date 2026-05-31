@@ -641,6 +641,32 @@ gcx api /api/folders -d '{"uid":"ensemble-diagrams","title":"Diagrams"}'
 gcx api /api/dashboards/db -d @observability/grafana/dashboards/ensemble-graphviz-diagrams-api.json
 ```
 
+### Grafana Threshold Color Standard
+
+Dashboard threshold colors follow the Tufte-inspired strategic color standard documented in [docs/dashboard-design/README.md](docs/dashboard-design/README.md), based on [The Tufte Aesthetic for Grafana Dashboard Design.pdf](<docs/dashboard-design/The Tufte Aesthetic for Grafana Dashboard Design.pdf>), section 2, "Strategic Use of Color".
+
+| State | Color |
+|---|---:|
+| Meets goal | `#1eb16a` |
+| Close to goal | `#f27d05` |
+| Significantly outside goal | `#bd362f` |
+| Text-only critical threshold | `#ff3a3a` |
+
+To refresh dashboard threshold colors from Grafana and push the standard palette:
+
+```sh
+gcx dashboards list -o json > /tmp/ensemble-dashboard-doc/dashboards-list.json
+node scripts/standardize-grafana-threshold-colors.mjs \
+  --input /tmp/ensemble-dashboard-doc/dashboards-list.json \
+  --output-dir /tmp/ensemble-dashboard-doc/standardized \
+  --report reports/grafana-threshold-standardization/threshold-standardization-YYYYMMDD.json
+for file in /tmp/ensemble-dashboard-doc/standardized/*.json; do
+  gcx dashboards update "$(basename "$file" .json)" -f "$file"
+done
+```
+
+On May 31, 2026, this process scanned 74 dashboards, updated 60 editable dashboards, changed 1906 threshold color fields, skipped 11 non-editable/plugin-provisioned dashboards, and retried `ensemble-red-log-signals` after a version conflict. The run report is [reports/grafana-threshold-standardization/threshold-standardization-20260531.md](reports/grafana-threshold-standardization/threshold-standardization-20260531.md).
+
 Optional knobs for the combined scenarios:
 
 - `REGIONAL_SHOPPER_VUS`: regional API shopper load, default `30`.

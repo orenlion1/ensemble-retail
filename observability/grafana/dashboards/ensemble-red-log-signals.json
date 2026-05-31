@@ -5,19 +5,19 @@
     "annotations": {
       "grafana.app/createdBy": "service-account:bfn4sb0kofeo0b",
       "grafana.app/folder": "fn9nd7",
-      "grafana.app/message": "resize k8s events",
+      "grafana.app/message": "Add link to synthetics detail",
       "grafana.app/saved-from-ui": "Grafana Cloud",
       "grafana.app/updatedBy": "service-account:ffn1sscdjmscge",
-      "grafana.app/updatedTimestamp": "2026-05-31T14:21:08Z"
+      "grafana.app/updatedTimestamp": "2026-05-31T16:02:08Z"
     },
     "creationTimestamp": "2026-05-30T15:13:20Z",
-    "generation": 18,
+    "generation": 27,
     "labels": {
       "grafana.app/deprecatedInternalID": "2596326027239424"
     },
     "name": "ensemble-red-log-signals",
     "namespace": "stacks-1665320",
-    "resourceVersion": "2061090605517242699",
+    "resourceVersion": "2061116025973244775",
     "uid": "537a3e75-9a52-4596-818e-10d20f2f693c"
   },
   "spec": {
@@ -133,11 +133,11 @@
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green",
+                        "color": "#1eb16a",
                         "value": 0
                       },
                       {
-                        "color": "red",
+                        "color": "#bd362f",
                         "value": 1
                       }
                     ]
@@ -259,11 +259,11 @@
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green",
+                        "color": "#1eb16a",
                         "value": 0
                       },
                       {
-                        "color": "red",
+                        "color": "#bd362f",
                         "value": 1
                       }
                     ]
@@ -385,11 +385,11 @@
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green",
+                        "color": "#1eb16a",
                         "value": 0
                       },
                       {
-                        "color": "red",
+                        "color": "#bd362f",
                         "value": 1
                       }
                     ]
@@ -511,11 +511,11 @@
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green",
+                        "color": "#1eb16a",
                         "value": 0
                       },
                       {
-                        "color": "red",
+                        "color": "#bd362f",
                         "value": 1
                       }
                     ]
@@ -707,15 +707,15 @@
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green",
+                        "color": "#1eb16a",
                         "value": 0
                       },
                       {
-                        "color": "orange",
+                        "color": "#f27d05",
                         "value": 50
                       },
                       {
-                        "color": "red",
+                        "color": "#bd362f",
                         "value": 100
                       }
                     ]
@@ -838,15 +838,15 @@
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green",
+                        "color": "#1eb16a",
                         "value": 0
                       },
                       {
-                        "color": "orange",
+                        "color": "#f27d05",
                         "value": 50
                       },
                       {
-                        "color": "red",
+                        "color": "#bd362f",
                         "value": 100
                       }
                     ]
@@ -969,15 +969,15 @@
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green",
+                        "color": "#1eb16a",
                         "value": 0
                       },
                       {
-                        "color": "orange",
+                        "color": "#f27d05",
                         "value": 50
                       },
                       {
-                        "color": "red",
+                        "color": "#bd362f",
                         "value": 100
                       }
                     ]
@@ -1100,15 +1100,15 @@
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green",
+                        "color": "#1eb16a",
                         "value": 0
                       },
                       {
-                        "color": "orange",
+                        "color": "#f27d05",
                         "value": 50
                       },
                       {
-                        "color": "red",
+                        "color": "#bd362f",
                         "value": 100
                       }
                     ]
@@ -1231,15 +1231,15 @@
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green",
+                        "color": "#1eb16a",
                         "value": 0
                       },
                       {
-                        "color": "orange",
+                        "color": "#f27d05",
                         "value": 50
                       },
                       {
-                        "color": "red",
+                        "color": "#bd362f",
                         "value": 100
                       }
                     ]
@@ -1362,15 +1362,15 @@
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green",
+                        "color": "#1eb16a",
                         "value": 0
                       },
                       {
-                        "color": "orange",
+                        "color": "#f27d05",
                         "value": 50
                       },
                       {
-                        "color": "red",
+                        "color": "#bd362f",
                         "value": 100
                       }
                     ]
@@ -1469,6 +1469,1649 @@
                 "timestampResolution": "ms",
                 "unwrappedColumns": false,
                 "wrapLogMessage": true
+              }
+            },
+            "version": "13.1.0-26564065169"
+          }
+        }
+      },
+      "panel-138": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-prom"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "avg(avg_over_time(probe_success[$__range]))",
+                        "instant": true,
+                        "legendFormat": "Overall uptime",
+                        "queryType": "instant",
+                        "range": false
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-prom"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "avg(avg_over_time(probe_success{job=~\"ensemble-grafana-site-uptime-tls|ensemble-grafana-api-response-time\"}[$__range]))",
+                        "instant": true,
+                        "legendFormat": "User-facing checks",
+                        "queryType": "instant",
+                        "range": false
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "B"
+                  }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-prom"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "count(avg by(job, probe) (probe_success) \u003c 0.5) or vector(0)",
+                        "instant": true,
+                        "legendFormat": "Failing check series",
+                        "queryType": "instant",
+                        "range": false
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "C"
+                  }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-prom"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "avg(probe_duration_seconds{job=~\"ensemble-grafana-site-uptime-tls|ensemble-grafana-api-response-time\"})",
+                        "instant": true,
+                        "legendFormat": "Avg user-facing duration",
+                        "queryType": "instant",
+                        "range": false
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "D"
+                  }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-prom"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "count(count by(probe) (probe_success))",
+                        "instant": true,
+                        "legendFormat": "Probe locations active",
+                        "queryType": "instant",
+                        "range": false
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "E"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Synthetic check health snapshot across all probes and services.\n\n[→ View check details](https://grafana.com/docs/grafana-cloud/testing/synthetic-monitoring/)",
+          "id": 138,
+          "links": [],
+          "title": "Synthetics Health",
+          "vizConfig": {
+            "group": "bargauge",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "min": 0,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "#bd362f",
+                        "value": 0
+                      },
+                      {
+                        "color": "#1eb16a",
+                        "value": 0.99
+                      }
+                    ]
+                  }
+                },
+                "overrides": [
+                  {
+                    "matcher": {
+                      "id": "byFrameRefID",
+                      "options": "A"
+                    },
+                    "properties": [
+                      {
+                        "id": "displayName",
+                        "value": "Overall uptime"
+                      },
+                      {
+                        "id": "max",
+                        "value": 1
+                      },
+                      {
+                        "id": "unit",
+                        "value": "percentunit"
+                      },
+                      {
+                        "id": "thresholds",
+                        "value": {
+                          "mode": "absolute",
+                          "steps": [
+                            {
+                              "color": "#bd362f",
+                              "value": 0
+                            },
+                            {
+                              "color": "#f27d05",
+                              "value": 0.95
+                            },
+                            {
+                              "color": "#1eb16a",
+                              "value": 0.99
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "id": "mappings",
+                        "value": [
+                          {
+                            "options": {
+                              "from": 0,
+                              "result": {
+                                "color": "#bd362f",
+                                "text": "Degraded"
+                              },
+                              "to": 0.9499
+                            },
+                            "type": "range"
+                          },
+                          {
+                            "options": {
+                              "from": 0.95,
+                              "result": {
+                                "color": "orange",
+                                "text": "Partial"
+                              },
+                              "to": 0.9899
+                            },
+                            "type": "range"
+                          },
+                          {
+                            "options": {
+                              "from": 0.99,
+                              "result": {
+                                "color": "#1eb16a",
+                                "text": "Healthy"
+                              },
+                              "to": 1
+                            },
+                            "type": "range"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byFrameRefID",
+                      "options": "B"
+                    },
+                    "properties": [
+                      {
+                        "id": "displayName",
+                        "value": "User-facing checks"
+                      },
+                      {
+                        "id": "max",
+                        "value": 1
+                      },
+                      {
+                        "id": "unit",
+                        "value": "percentunit"
+                      },
+                      {
+                        "id": "thresholds",
+                        "value": {
+                          "mode": "absolute",
+                          "steps": [
+                            {
+                              "color": "#bd362f",
+                              "value": 0
+                            },
+                            {
+                              "color": "#f27d05",
+                              "value": 0.95
+                            },
+                            {
+                              "color": "#1eb16a",
+                              "value": 0.99
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "id": "mappings",
+                        "value": [
+                          {
+                            "options": {
+                              "from": 0,
+                              "result": {
+                                "color": "#bd362f",
+                                "text": "Down"
+                              },
+                              "to": 0.9499
+                            },
+                            "type": "range"
+                          },
+                          {
+                            "options": {
+                              "from": 0.95,
+                              "result": {
+                                "color": "orange",
+                                "text": "Partial"
+                              },
+                              "to": 0.9899
+                            },
+                            "type": "range"
+                          },
+                          {
+                            "options": {
+                              "from": 0.99,
+                              "result": {
+                                "color": "#1eb16a",
+                                "text": "Up"
+                              },
+                              "to": 1
+                            },
+                            "type": "range"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byFrameRefID",
+                      "options": "C"
+                    },
+                    "properties": [
+                      {
+                        "id": "displayName",
+                        "value": "Failing check series"
+                      },
+                      {
+                        "id": "max",
+                        "value": 15
+                      },
+                      {
+                        "id": "decimals",
+                        "value": 0
+                      },
+                      {
+                        "id": "thresholds",
+                        "value": {
+                          "mode": "absolute",
+                          "steps": [
+                            {
+                              "color": "#1eb16a",
+                              "value": 0
+                            },
+                            {
+                              "color": "#f27d05",
+                              "value": 1
+                            },
+                            {
+                              "color": "#bd362f",
+                              "value": 5
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byFrameRefID",
+                      "options": "D"
+                    },
+                    "properties": [
+                      {
+                        "id": "displayName",
+                        "value": "Avg user-facing duration"
+                      },
+                      {
+                        "id": "max",
+                        "value": 5
+                      },
+                      {
+                        "id": "unit",
+                        "value": "s"
+                      },
+                      {
+                        "id": "thresholds",
+                        "value": {
+                          "mode": "absolute",
+                          "steps": [
+                            {
+                              "color": "#1eb16a",
+                              "value": 0
+                            },
+                            {
+                              "color": "#f27d05",
+                              "value": 1
+                            },
+                            {
+                              "color": "#bd362f",
+                              "value": 3
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byFrameRefID",
+                      "options": "E"
+                    },
+                    "properties": [
+                      {
+                        "id": "displayName",
+                        "value": "Probe locations active"
+                      },
+                      {
+                        "id": "max",
+                        "value": 5
+                      },
+                      {
+                        "id": "thresholds",
+                        "value": {
+                          "mode": "absolute",
+                          "steps": [
+                            {
+                              "color": "#bd362f",
+                              "value": 0
+                            },
+                            {
+                              "color": "#f27d05",
+                              "value": 1
+                            },
+                            {
+                              "color": "#1eb16a",
+                              "value": 3
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "options": {
+                "displayMode": "basic",
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "placement": "bottom",
+                  "showLegend": false
+                },
+                "maxVizHeight": 300,
+                "minVizHeight": 16,
+                "minVizWidth": 8,
+                "namePlacement": "auto",
+                "orientation": "horizontal",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "showUnfilled": true,
+                "sizing": "auto",
+                "valueMode": "color"
+              }
+            },
+            "version": "13.1.0-26564065169"
+          }
+        }
+      },
+      "panel-139": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-prom"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "avg by(job) (probe_success)",
+                        "instant": false,
+                        "legendFormat": "{{job}}",
+                        "queryType": "range",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "1 = passing, 0 = failing. Drops indicate check outages. User-facing checks (site-uptime-tls, api-response-time) are most critical for UX fidelity.",
+          "id": 139,
+          "links": [],
+          "title": "Check Success Rate by Job",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 10,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 2,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "line"
+                    }
+                  },
+                  "max": 1,
+                  "min": 0,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "#bd362f",
+                        "value": 0
+                      },
+                      {
+                        "color": "#f27d05",
+                        "value": 0.8
+                      },
+                      {
+                        "color": "#1eb16a",
+                        "value": 1
+                      }
+                    ]
+                  },
+                  "unit": "short"
+                },
+                "overrides": []
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [
+                    "mean",
+                    "min",
+                    "lastNotNull"
+                  ],
+                  "displayMode": "table",
+                  "enableFacetedFilter": false,
+                  "placement": "right",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "asc"
+                }
+              }
+            },
+            "version": "13.1.0-26564065169"
+          }
+        }
+      },
+      "panel-140": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-prom"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "avg by(probe) (probe_success)",
+                        "instant": false,
+                        "legendFormat": "{{probe}}",
+                        "queryType": "range",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Regional breakdown of check success to detect location-specific outages or routing anomalies.",
+          "id": 140,
+          "links": [],
+          "title": "Check Success Rate by Probe Region",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 10,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 2,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "line"
+                    }
+                  },
+                  "max": 1,
+                  "min": 0,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "#bd362f",
+                        "value": 0
+                      },
+                      {
+                        "color": "#f27d05",
+                        "value": 0.8
+                      },
+                      {
+                        "color": "#1eb16a",
+                        "value": 1
+                      }
+                    ]
+                  },
+                  "unit": "short"
+                },
+                "overrides": []
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [
+                    "mean",
+                    "min",
+                    "lastNotNull"
+                  ],
+                  "displayMode": "table",
+                  "enableFacetedFilter": false,
+                  "placement": "right",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "asc"
+                }
+              }
+            },
+            "version": "13.1.0-26564065169"
+          }
+        }
+      },
+      "panel-141": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-prom"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "avg by(phase) (probe_http_duration_seconds)",
+                        "instant": false,
+                        "legendFormat": "{{phase}}",
+                        "queryType": "range",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "HTTP timing phases for user-facing HTTP checks. Processing spikes indicate backend slowness; connect/tls spikes indicate infrastructure issues upstream of the app.",
+          "id": 141,
+          "links": [],
+          "title": "HTTP Phase Duration (User-Facing Checks)",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 8,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 2,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "#1eb16a",
+                        "value": 0
+                      },
+                      {
+                        "color": "#bd362f",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "s"
+                },
+                "overrides": []
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [
+                    "mean",
+                    "max"
+                  ],
+                  "displayMode": "table",
+                  "enableFacetedFilter": false,
+                  "placement": "right",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "desc"
+                }
+              }
+            },
+            "version": "13.1.0-26564065169"
+          }
+        }
+      },
+      "panel-142": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-prom"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "avg by(job) (probe_http_status_code)",
+                        "instant": false,
+                        "legendFormat": "{{job}}",
+                        "queryType": "range",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "HTTP status codes returned by user-facing checks. Any non-2xx trend indicates a user action path failure.",
+          "id": 142,
+          "links": [],
+          "title": "HTTP Status Code by Check",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 8,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 2,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "decimals": 0,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "#1eb16a",
+                        "value": 0
+                      },
+                      {
+                        "color": "#bd362f",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "short"
+                },
+                "overrides": []
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "displayMode": "table",
+                  "enableFacetedFilter": false,
+                  "placement": "right",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "none"
+                }
+              }
+            },
+            "version": "13.1.0-26564065169"
+          }
+        }
+      },
+      "panel-143": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-prom"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "avg by(label_service) (probe_success * on(job, probe) group_left(label_service) sm_check_info)",
+                        "instant": true,
+                        "legendFormat": "{{label_service}}",
+                        "queryType": "instant",
+                        "range": false
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Uptime score per monitored service (joined from sm_check_info). Storefront and inventory-api reflect user action path health.",
+          "id": 143,
+          "links": [],
+          "title": "Uptime by Service",
+          "vizConfig": {
+            "group": "bargauge",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "max": 1,
+                  "min": 0,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "#bd362f",
+                        "value": 0
+                      },
+                      {
+                        "color": "#f27d05",
+                        "value": 0.9
+                      },
+                      {
+                        "color": "#1eb16a",
+                        "value": 0.99
+                      }
+                    ]
+                  },
+                  "unit": "percentunit"
+                },
+                "overrides": []
+              },
+              "options": {
+                "displayMode": "basic",
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "placement": "bottom",
+                  "showLegend": false
+                },
+                "maxVizHeight": 300,
+                "minVizHeight": 16,
+                "minVizWidth": 8,
+                "namePlacement": "auto",
+                "orientation": "horizontal",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "showUnfilled": true,
+                "sizing": "auto",
+                "valueMode": "color"
+              }
+            },
+            "version": "13.1.0-26564065169"
+          }
+        }
+      },
+      "panel-144": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-prom"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "avg by(job, probe) (probe_duration_seconds)",
+                        "instant": false,
+                        "legendFormat": "{{job}} / {{probe}}",
+                        "queryType": "range",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Full probe duration trend per job and probe location. Compare curves across regions to detect asymmetric latency — key for user action timing fidelity.",
+          "id": 144,
+          "links": [],
+          "title": "Probe Duration by Job \u0026 Region",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 5,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "#1eb16a",
+                        "value": 0
+                      },
+                      {
+                        "color": "#bd362f",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "s"
+                },
+                "overrides": []
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [
+                    "mean",
+                    "max"
+                  ],
+                  "displayMode": "table",
+                  "enableFacetedFilter": false,
+                  "placement": "right",
+                  "showLegend": true,
+                  "sortBy": "Mean",
+                  "sortDesc": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "desc"
+                }
+              }
+            },
+            "version": "13.1.0-26564065169"
+          }
+        }
+      },
+      "panel-147": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-ml-metrics"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "label_replace(adaptive_traces_forecast_account_service:anomalous{span_name=~\"http .*/api/.*\"}, \"service\", \"account-service\", \"\", \"\")",
+                        "instant": false,
+                        "legendFormat": "account-service — {{span_name}}",
+                        "queryType": "range",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-ml-metrics"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "label_replace(adaptive_traces_forecast_cart_service:anomalous{span_name=~\"http .*/api/.*\"}, \"service\", \"cart-service\", \"\", \"\")",
+                        "instant": false,
+                        "legendFormat": "cart-service — {{span_name}}",
+                        "queryType": "range",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "B"
+                  }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-ml-metrics"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "label_replace(adaptive_traces_forecast_inventory_service:anomalous{span_name=~\"http .*/api/.*\"}, \"service\", \"inventory-service\", \"\", \"\")",
+                        "instant": false,
+                        "legendFormat": "inventory-service — {{span_name}}",
+                        "queryType": "range",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "C"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Grafana Cloud ML adaptive anomaly detection for user-facing API endpoints. 1 = anomalous (outside predicted bounds), 0 = normal. Based on `adaptive_traces_forecast_*:anomalous` derived from trace span latency patterns.\n\nInventory products and categories show the most active anomaly signal. Cart shopperId endpoint shows sparse data — gaps do not mean healthy.",
+          "id": 147,
+          "links": [],
+          "title": "User Action Anomalies (ML Adaptive Detection)",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 30,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 2,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "area"
+                    }
+                  },
+                  "max": 1,
+                  "min": -0.1,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "#1eb16a",
+                        "value": 0
+                      },
+                      {
+                        "color": "#bd362f",
+                        "value": 0.5
+                      }
+                    ]
+                  },
+                  "unit": "short"
+                },
+                "overrides": []
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [
+                    "lastNotNull",
+                    "max"
+                  ],
+                  "displayMode": "table",
+                  "enableFacetedFilter": false,
+                  "placement": "right",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "desc"
+                }
+              }
+            },
+            "version": "13.1.0-26564065169"
+          }
+        }
+      },
+      "panel-148": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-ml-metrics"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "label_replace(adaptive_traces_forecast_account_service:anomalous{span_name=~\"http .*/api/.*\"}, \"service\", \"account-service\", \"\", \"\")",
+                        "instant": false,
+                        "legendFormat": "account-service — {{span_name}}",
+                        "queryType": "range",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-ml-metrics"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "label_replace(adaptive_traces_forecast_cart_service:anomalous{span_name=~\"http .*/api/.*\"}, \"service\", \"cart-service\", \"\", \"\")",
+                        "instant": false,
+                        "legendFormat": "cart-service — {{span_name}}",
+                        "queryType": "range",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "B"
+                  }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-ml-metrics"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "label_replace(adaptive_traces_forecast_inventory_service:anomalous{span_name=~\"http .*/api/.*\"}, \"service\", \"inventory-service\", \"\", \"\")",
+                        "instant": false,
+                        "legendFormat": "inventory-service — {{span_name}}",
+                        "queryType": "range",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "C"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Current anomaly state per user action endpoint. Anomalous = span latency has deviated beyond predicted upper/lower bounds. Use alongside the Synthetics Health panel to correlate external probe failures with internal user action degradation.",
+          "id": 148,
+          "links": [],
+          "title": "Current User Action Anomaly Status",
+          "vizConfig": {
+            "group": "bargauge",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "mappings": [
+                    {
+                      "options": {
+                        "from": -1,
+                        "result": {
+                          "color": "blue",
+                          "index": 0,
+                          "text": "No Data"
+                        },
+                        "to": -0.5
+                      },
+                      "type": "range"
+                    },
+                    {
+                      "options": {
+                        "0": {
+                          "color": "green",
+                          "index": 1,
+                          "text": "Normal"
+                        },
+                        "1": {
+                          "color": "red",
+                          "index": 2,
+                          "text": "Anomalous"
+                        }
+                      },
+                      "type": "value"
+                    }
+                  ],
+                  "max": 1,
+                  "min": -1,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "#1eb16a",
+                        "value": 0
+                      },
+                      {
+                        "color": "#bd362f",
+                        "value": 1
+                      }
+                    ]
+                  },
+                  "unit": "short"
+                },
+                "overrides": []
+              },
+              "options": {
+                "displayMode": "basic",
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "placement": "bottom",
+                  "showLegend": false
+                },
+                "maxVizHeight": 300,
+                "minVizHeight": 16,
+                "minVizWidth": 8,
+                "namePlacement": "auto",
+                "orientation": "horizontal",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "showUnfilled": true,
+                "sizing": "auto",
+                "valueMode": "color"
+              }
+            },
+            "version": "13.1.0-26564065169"
+          }
+        }
+      },
+      "panel-149": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-prom"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "label_replace(\n  (min by(job, instance) (probe_ssl_earliest_cert_expiry) - time()) / 86400,\n  \"check\", \"$1\", \"job\", \"ensemble-grafana-(.*)\"\n)",
+                        "instant": true,
+                        "legendFormat": "{{check}}",
+                        "queryType": "instant",
+                        "range": false
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Days remaining until the earliest TLS certificate expires per Synthetic Monitoring check. Yellow \u003c 30 days, Red \u003c 14 days.",
+          "id": 149,
+          "links": [],
+          "title": "TLS Certificate Expiry",
+          "vizConfig": {
+            "group": "bargauge",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "min": 0,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "#bd362f",
+                        "value": 0
+                      },
+                      {
+                        "color": "#f27d05",
+                        "value": 14
+                      },
+                      {
+                        "color": "#1eb16a",
+                        "value": 30
+                      }
+                    ]
+                  },
+                  "unit": "d"
+                },
+                "overrides": []
+              },
+              "options": {
+                "displayMode": "basic",
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "placement": "bottom",
+                  "showLegend": false
+                },
+                "maxVizHeight": 300,
+                "minVizHeight": 16,
+                "minVizWidth": 8,
+                "namePlacement": "auto",
+                "orientation": "horizontal",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "showUnfilled": true,
+                "sizing": "auto",
+                "valueMode": "color"
               }
             },
             "version": "13.1.0-26564065169"
@@ -1620,11 +3263,11 @@
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "red",
+                        "color": "#bd362f",
                         "value": 0
                       },
                       {
-                        "color": "green",
+                        "color": "#1eb16a",
                         "value": 0.9
                       }
                     ]
@@ -1694,11 +3337,11 @@
                           "mode": "absolute",
                           "steps": [
                             {
-                              "color": "red",
+                              "color": "#bd362f",
                               "value": 0
                             },
                             {
-                              "color": "green",
+                              "color": "#1eb16a",
                               "value": 1
                             }
                           ]
@@ -1726,11 +3369,11 @@
                           "mode": "absolute",
                           "steps": [
                             {
-                              "color": "red",
+                              "color": "#bd362f",
                               "value": 0
                             },
                             {
-                              "color": "green",
+                              "color": "#1eb16a",
                               "value": 1
                             }
                           ]
@@ -1762,15 +3405,15 @@
                           "mode": "absolute",
                           "steps": [
                             {
-                              "color": "green",
+                              "color": "#1eb16a",
                               "value": 0
                             },
                             {
-                              "color": "orange",
+                              "color": "#f27d05",
                               "value": 1
                             },
                             {
-                              "color": "red",
+                              "color": "#bd362f",
                               "value": 5
                             }
                           ]
@@ -1798,15 +3441,15 @@
                           "mode": "absolute",
                           "steps": [
                             {
-                              "color": "green",
+                              "color": "#1eb16a",
                               "value": 0
                             },
                             {
-                              "color": "orange",
+                              "color": "#f27d05",
                               "value": 1
                             },
                             {
-                              "color": "red",
+                              "color": "#bd362f",
                               "value": 3
                             }
                           ]
@@ -2784,11 +4427,11 @@
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green",
+                        "color": "#1eb16a",
                         "value": 0
                       },
                       {
-                        "color": "red",
+                        "color": "#bd362f",
                         "value": 80
                       }
                     ]
@@ -2978,11 +4621,11 @@
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green",
+                        "color": "#1eb16a",
                         "value": 0
                       },
                       {
-                        "color": "red",
+                        "color": "#bd362f",
                         "value": 80
                       }
                     ]
@@ -3163,11 +4806,11 @@
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green",
+                        "color": "#1eb16a",
                         "value": 0
                       },
                       {
-                        "color": "red",
+                        "color": "#bd362f",
                         "value": 80
                       }
                     ]
@@ -3348,11 +4991,11 @@
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green",
+                        "color": "#1eb16a",
                         "value": 0
                       },
                       {
-                        "color": "red",
+                        "color": "#bd362f",
                         "value": 80
                       }
                     ]
@@ -3470,11 +5113,11 @@
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green",
+                        "color": "#1eb16a",
                         "value": 0
                       },
                       {
-                        "color": "red",
+                        "color": "#bd362f",
                         "value": 80
                       }
                     ]
@@ -3592,11 +5235,11 @@
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green",
+                        "color": "#1eb16a",
                         "value": 0
                       },
                       {
-                        "color": "red",
+                        "color": "#bd362f",
                         "value": 80
                       }
                     ]
@@ -3716,11 +5359,11 @@
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green",
+                        "color": "#1eb16a",
                         "value": 0
                       },
                       {
-                        "color": "red",
+                        "color": "#bd362f",
                         "value": 80
                       }
                     ]
@@ -3840,11 +5483,11 @@
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green",
+                        "color": "#1eb16a",
                         "value": 0
                       },
                       {
-                        "color": "red",
+                        "color": "#bd362f",
                         "value": 80
                       }
                     ]
@@ -3962,11 +5605,11 @@
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green",
+                        "color": "#1eb16a",
                         "value": 0
                       },
                       {
-                        "color": "red",
+                        "color": "#bd362f",
                         "value": 80
                       }
                     ]
@@ -4091,11 +5734,11 @@
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green",
+                        "color": "#1eb16a",
                         "value": 0
                       },
                       {
-                        "color": "red",
+                        "color": "#bd362f",
                         "value": 80
                       }
                     ]
@@ -4250,11 +5893,11 @@
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green",
+                        "color": "#1eb16a",
                         "value": 0
                       },
                       {
-                        "color": "red",
+                        "color": "#bd362f",
                         "value": 80
                       }
                     ]
@@ -4408,11 +6051,11 @@
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green",
+                        "color": "#1eb16a",
                         "value": 0
                       },
                       {
-                        "color": "red",
+                        "color": "#bd362f",
                         "value": 1
                       }
                     ]
@@ -4467,15 +6110,15 @@
                           "mode": "absolute",
                           "steps": [
                             {
-                              "color": "green",
+                              "color": "#1eb16a",
                               "value": 0
                             },
                             {
-                              "color": "orange",
+                              "color": "#f27d05",
                               "value": 1
                             },
                             {
-                              "color": "red",
+                              "color": "#bd362f",
                               "value": 5
                             }
                           ]
@@ -4503,15 +6146,15 @@
                           "mode": "absolute",
                           "steps": [
                             {
-                              "color": "green",
+                              "color": "#1eb16a",
                               "value": 0
                             },
                             {
-                              "color": "orange",
+                              "color": "#f27d05",
                               "value": 1
                             },
                             {
-                              "color": "red",
+                              "color": "#bd362f",
                               "value": 20
                             }
                           ]
@@ -4539,15 +6182,15 @@
                           "mode": "absolute",
                           "steps": [
                             {
-                              "color": "green",
+                              "color": "#1eb16a",
                               "value": 0
                             },
                             {
-                              "color": "orange",
+                              "color": "#f27d05",
                               "value": 1
                             },
                             {
-                              "color": "red",
+                              "color": "#bd362f",
                               "value": 5
                             }
                           ]
@@ -4674,11 +6317,11 @@
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green",
+                        "color": "#1eb16a",
                         "value": 0
                       },
                       {
-                        "color": "red",
+                        "color": "#bd362f",
                         "value": 80
                       }
                     ]
@@ -4800,11 +6443,11 @@
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green",
+                        "color": "#1eb16a",
                         "value": 0
                       },
                       {
-                        "color": "red",
+                        "color": "#bd362f",
                         "value": 80
                       }
                     ]
@@ -5172,7 +6815,7 @@
                   ]
                 }
               },
-              "title": "RED \u0026 Log Signals"
+              "title": "RED Metrics \u0026 Log Signals"
             }
           },
           {
@@ -5187,9 +6830,9 @@
                       "spec": {
                         "element": {
                           "kind": "ElementReference",
-                          "name": "panel-46"
+                          "name": "panel-111"
                         },
-                        "height": 8,
+                        "height": 7,
                         "width": 12,
                         "x": 0,
                         "y": 0
@@ -5200,9 +6843,9 @@
                       "spec": {
                         "element": {
                           "kind": "ElementReference",
-                          "name": "panel-47"
+                          "name": "panel-112"
                         },
-                        "height": 8,
+                        "height": 7,
                         "width": 12,
                         "x": 12,
                         "y": 0
@@ -5213,12 +6856,12 @@
                       "spec": {
                         "element": {
                           "kind": "ElementReference",
-                          "name": "panel-48"
+                          "name": "panel-113"
                         },
-                        "height": 8,
+                        "height": 7,
                         "width": 12,
                         "x": 0,
-                        "y": 8
+                        "y": 7
                       }
                     },
                     {
@@ -5226,12 +6869,12 @@
                       "spec": {
                         "element": {
                           "kind": "ElementReference",
-                          "name": "panel-49"
+                          "name": "panel-114"
                         },
-                        "height": 8,
+                        "height": 7,
                         "width": 12,
                         "x": 12,
-                        "y": 8
+                        "y": 7
                       }
                     },
                     {
@@ -5239,18 +6882,44 @@
                       "spec": {
                         "element": {
                           "kind": "ElementReference",
-                          "name": "panel-50"
+                          "name": "panel-115"
                         },
-                        "height": 8,
+                        "height": 7,
+                        "width": 12,
+                        "x": 0,
+                        "y": 14
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-116"
+                        },
+                        "height": 7,
+                        "width": 12,
+                        "x": 12,
+                        "y": 14
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-117"
+                        },
+                        "height": 10,
                         "width": 24,
                         "x": 0,
-                        "y": 16
+                        "y": 21
                       }
                     }
                   ]
                 }
               },
-              "title": "Profiles"
+              "title": "Frontend"
             }
           },
           {
@@ -5538,9 +7207,9 @@
                       "spec": {
                         "element": {
                           "kind": "ElementReference",
-                          "name": "panel-111"
+                          "name": "panel-46"
                         },
-                        "height": 7,
+                        "height": 8,
                         "width": 12,
                         "x": 0,
                         "y": 0
@@ -5551,9 +7220,9 @@
                       "spec": {
                         "element": {
                           "kind": "ElementReference",
-                          "name": "panel-112"
+                          "name": "panel-47"
                         },
-                        "height": 7,
+                        "height": 8,
                         "width": 12,
                         "x": 12,
                         "y": 0
@@ -5564,12 +7233,12 @@
                       "spec": {
                         "element": {
                           "kind": "ElementReference",
-                          "name": "panel-113"
+                          "name": "panel-48"
                         },
-                        "height": 7,
+                        "height": 8,
                         "width": 12,
                         "x": 0,
-                        "y": 7
+                        "y": 8
                       }
                     },
                     {
@@ -5577,12 +7246,12 @@
                       "spec": {
                         "element": {
                           "kind": "ElementReference",
-                          "name": "panel-114"
+                          "name": "panel-49"
                         },
-                        "height": 7,
+                        "height": 8,
                         "width": 12,
                         "x": 12,
-                        "y": 7
+                        "y": 8
                       }
                     },
                     {
@@ -5590,50 +7259,217 @@
                       "spec": {
                         "element": {
                           "kind": "ElementReference",
-                          "name": "panel-115"
+                          "name": "panel-50"
                         },
-                        "height": 7,
-                        "width": 12,
-                        "x": 0,
-                        "y": 14
-                      }
-                    },
-                    {
-                      "kind": "GridLayoutItem",
-                      "spec": {
-                        "element": {
-                          "kind": "ElementReference",
-                          "name": "panel-116"
-                        },
-                        "height": 7,
-                        "width": 12,
-                        "x": 12,
-                        "y": 14
-                      }
-                    },
-                    {
-                      "kind": "GridLayoutItem",
-                      "spec": {
-                        "element": {
-                          "kind": "ElementReference",
-                          "name": "panel-117"
-                        },
-                        "height": 10,
+                        "height": 8,
                         "width": 24,
                         "x": 0,
-                        "y": 21
+                        "y": 16
                       }
                     }
                   ]
                 }
               },
-              "title": "Frontend"
+              "title": "Profiles"
+            }
+          },
+          {
+            "kind": "TabsLayoutTab",
+            "spec": {
+              "layout": {
+                "kind": "GridLayout",
+                "spec": {
+                  "items": [
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-138"
+                        },
+                        "height": 5,
+                        "width": 24,
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-139"
+                        },
+                        "height": 5,
+                        "width": 12,
+                        "x": 0,
+                        "y": 5
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-140"
+                        },
+                        "height": 5,
+                        "width": 12,
+                        "x": 12,
+                        "y": 5
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-141"
+                        },
+                        "height": 6,
+                        "width": 12,
+                        "x": 0,
+                        "y": 10
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-142"
+                        },
+                        "height": 6,
+                        "width": 12,
+                        "x": 12,
+                        "y": 10
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-143"
+                        },
+                        "height": 5,
+                        "width": 12,
+                        "x": 0,
+                        "y": 16
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-148"
+                        },
+                        "height": 5,
+                        "width": 12,
+                        "x": 12,
+                        "y": 16
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-144"
+                        },
+                        "height": 6,
+                        "width": 24,
+                        "x": 0,
+                        "y": 21
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-147"
+                        },
+                        "height": 6,
+                        "width": 24,
+                        "x": 0,
+                        "y": 27
+                      }
+                    }
+                  ]
+                }
+              },
+              "title": "Synthetics"
+            }
+          },
+          {
+            "kind": "TabsLayoutTab",
+            "spec": {
+              "layout": {
+                "kind": "GridLayout",
+                "spec": {
+                  "items": [
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-149"
+                        },
+                        "height": 4,
+                        "width": 24,
+                        "x": 0,
+                        "y": 0
+                      }
+                    }
+                  ]
+                }
+              },
+              "title": "Certificate Expiry"
             }
           }
         ]
       }
     },
-    "links": [],
+    "links": [
+      {
+        "asDropdown": false,
+        "icon": "external link",
+        "includeVars": false,
+        "keepTime": true,
+        "tags": [],
+        "targetBlank": true,
+        "title": "Front Observability Detail",
+        "tooltip": "",
+        "type": "link",
+        "url": "https://orenlion.grafana.net/a/grafana-kowalski-app/apps/464?var-Filters=\u0026from=1780151786457\u0026to=1780238186457\u0026timezone=browser"
+      },
+      {
+        "asDropdown": false,
+        "icon": "dashboard",
+        "includeVars": false,
+        "keepTime": true,
+        "tags": [],
+        "targetBlank": true,
+        "title": "K8s Detail",
+        "tooltip": "",
+        "type": "link",
+        "url": "https://orenlion.grafana.net/a/grafana-k8s-app/navigation/cluster/ensemble-grafana?var-datasource=grafanacloud-orenlion-prom\u0026from=now-6h\u0026to=now\u0026timezone=browser"
+      },
+      {
+        "asDropdown": false,
+        "icon": "dashboard",
+        "includeVars": false,
+        "keepTime": true,
+        "tags": [],
+        "targetBlank": true,
+        "title": "Synthetics Detail",
+        "tooltip": "",
+        "type": "link",
+        "url": "https://orenlion.grafana.net/a/grafana-synthetic-monitoring-app/home?from=now-3h\u0026to=now\u0026timezone=browser\u0026var-probe=$__all\u0026var-region=$__all\u0026var-check_type=$__all"
+      }
+    ],
     "liveNow": false,
     "preload": false,
     "tags": [

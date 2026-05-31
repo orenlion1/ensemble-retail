@@ -220,6 +220,17 @@ Create starter dashboards for:
 - Profiles by service.
 - k6 load-test results by persona, region, endpoint, and spike.
 
+### Dashboard Threshold Color Standard
+
+Use the Ensemble dashboard design note in `docs/dashboard-design/` for threshold color decisions. Apply bright colors only to meaningful goal states:
+
+- Meets goal: `#1eb16a`.
+- Close to goal: `#f27d05`.
+- Significantly outside goal: `#bd362f`.
+- Text-only critical threshold: `#ff3a3a`.
+
+When standardizing existing Grafana dashboards, pull dashboards with `gcx dashboards list -o json`, run `scripts/standardize-grafana-threshold-colors.mjs`, publish changed editable dashboards with `gcx dashboards update`, and write a report under `reports/grafana-threshold-standardization/`. Skip non-editable/plugin-provisioned dashboards unless the user explicitly asks to fork or replace vendor-managed content.
+
 After every dashboard change, validate the live dashboard with Grafana MCP in addition to any `gcx` fetch/update checks:
 
 - Use `search_dashboards` to confirm the dashboard title and UID.
