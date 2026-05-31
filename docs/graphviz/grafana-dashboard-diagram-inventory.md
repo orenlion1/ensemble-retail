@@ -20,8 +20,8 @@ Keep dashboard updates scoped to the affected inventory entry. Avoid rewriting u
 | Network | `panel-3` | Request Flow Diagram | `docs/diagrams/request-flow-diagram.dot` |
 | Observability | `panel-11` | Observability Architecture | `docs/diagrams/observability-capabilities-flow.dot` |
 | Load Test | `panel-16` | Traffic Spike Target Heatmap Dark | `docs/graphviz/traffic-spike-target-heatmap-dark.dot` |
-| Load Test | `panel-18` | Traffic Spike User Action Fidelity | `docs/graphviz/traffic-spike-load-test-flow.dot` |
 | Load Run History | `panel-17` | Load Run History Table | `docs/graphviz/load-run-table.dot` |
+| Traffic Spike Design | `panel-18` | Traffic Spike User Action Fidelity | `docs/graphviz/traffic-spike-load-test-flow.dot` |
 | Frontend Observability | `panel-19` | Faro, k6, and Synthetic Monitoring Contract | `docs/graphviz/faro-k6-contract-relationships.dot` |
 
 ## Refresh Command
