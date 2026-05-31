@@ -28,7 +28,7 @@ metadata:
   name: inventory-service
   namespace: ensemble-grafana
 spec:
-  replicas: 1
+  replicas: 3
   strategy:
     type: RollingUpdate
     rollingUpdate:
