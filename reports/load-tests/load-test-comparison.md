@@ -1,6 +1,6 @@
 # k6 Load Test Comparison
 
-Generated: 2026-05-31T11:03:50.371Z
+Generated: 2026-05-31T11:37:18.375Z
 
 Source summary: `reports/load-tests/k6-summary-20260531T110345Z.json`
 

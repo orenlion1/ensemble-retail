@@ -508,7 +508,7 @@ After every k6 load test concludes, pull or preserve the latest run data under `
 node scripts/report-load-tests.mjs
 ```
 
-The report is written to `reports/load-tests/load-test-comparison.md`. Generate it for passed, failed, and error runs whenever Grafana/k6 returns usable run metadata. Each run is identified by test name, run ID, and date. The generated `reports/load-tests/comparison/` folder includes:
+The report is written to `reports/load-tests/load-test-comparison.md`. Generate it for passed, failed, and error runs whenever Grafana/k6 returns usable run metadata. Each run is identified by test name, run ID, and date. The same command also refreshes the Graphviz load-run history table under `docs/graphviz/load-run-table.*`. The generated `reports/load-tests/comparison/` folder includes:
 
 - `load-test-runs.csv` for spreadsheet comparisons.
 - `load-test-counters.csv` for total HTTP requests, user actions, shopping cart add/remove actions, checkout actions, cart updates, checkout attempts, and region changes.
@@ -599,6 +599,15 @@ The current load-run history table is also available as Graphviz source and rend
 - `docs/graphviz/load-run-table.dot`
 - `docs/graphviz/load-run-table.svg`
 - `docs/graphviz/load-run-table.png`
+
+After every traffic-spike run, update the Load Test tab in the `Ensemble Graphviz Diagrams` dashboard with the refreshed `docs/graphviz/load-run-table.dot` source. Fetch the live dashboard first so the update carries the latest Grafana resource version, then update only `panel-17`:
+
+```sh
+gcx dashboards get ensemble-graphviz-diagrams -o json > /tmp/ensemble-graphviz-diagrams-live.json
+node --input-type=module -e "import { readFileSync, writeFileSync } from 'node:fs'; const dashboard=JSON.parse(readFileSync('/tmp/ensemble-graphviz-diagrams-live.json','utf8')); dashboard.spec.elements['panel-17'].spec.vizConfig.spec.options.dotDiagram=readFileSync('docs/graphviz/load-run-table.dot','utf8'); writeFileSync('observability/grafana/dashboards/ensemble-graphviz-diagrams-api.json', JSON.stringify(dashboard, null, 2) + '\n');"
+gcx dashboards update ensemble-graphviz-diagrams -f observability/grafana/dashboards/ensemble-graphviz-diagrams-api.json
+gcx dashboards get ensemble-graphviz-diagrams -o json > observability/grafana/dashboards/ensemble-graphviz-diagrams-api.json
+```
 
 The traffic-spike user-action fidelity model is available as:
 

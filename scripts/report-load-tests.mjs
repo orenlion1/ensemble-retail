@@ -1,9 +1,11 @@
+import { execFileSync } from 'node:child_process';
 import { mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 
 const reportsDir = path.resolve('reports/load-tests');
 const frontendReportsDir = path.resolve('reports/frontend-user-actions');
 const outputDir = path.join(reportsDir, 'comparison');
+const graphvizDir = path.resolve('docs/graphviz');
 const timezone = 'America/New_York';
 
 function readJson(file) {
@@ -72,6 +74,20 @@ function resultIcon(result) {
   if (result === 'failed') return '❌';
   if (result === 'error') return '⚠️';
   return '•';
+}
+
+function resultText(result) {
+  if (result === 'passed') return 'PASS';
+  if (result === 'failed') return 'FAIL';
+  if (result === 'error') return 'ERROR';
+  return 'UNKNOWN';
+}
+
+function resultColor(result) {
+  if (result === 'passed') return '#166534';
+  if (result === 'failed') return '#7f1d1d';
+  if (result === 'error') return '#854d0e';
+  return '#334155';
 }
 
 function escapeXml(value) {
@@ -335,6 +351,107 @@ function writeLocalCounterCsv(file, rows) {
   writeFileSync(path.join(outputDir, file), `${lines.join('\n')}\n`);
 }
 
+function graphvizCell(value, color = '#111827', options = {}) {
+  const align = options.align ? ` ALIGN="${options.align}"` : '';
+  const fontColor = options.fontColor || '#f8fafc';
+  const text = options.bold ? `<B>${escapeXml(value)}</B>` : escapeXml(value);
+  return `<TD BGCOLOR="${color}"${align}><FONT COLOR="${fontColor}">${text}</FONT></TD>`;
+}
+
+function loadRunTableDot(rows) {
+  const history = rows.slice().reverse().slice(0, 20);
+  const passed = rows.filter(row => row.result === 'passed').length;
+  const failed = rows.filter(row => row.result === 'failed').length;
+  const errors = rows.filter(row => row.result === 'error').length;
+  const total = passed + failed + errors;
+  const latestPassing400 = rows.slice().reverse().find(row => row.result === 'passed' && Number(row.maxVus) >= 400);
+  const latestRun = history[0];
+  const rowMarkup = history.map((run, index) => {
+    const base = index % 2 === 0 ? '#111827' : '#182235';
+    const metric = index % 2 === 0 ? '#1e293b' : '#243044';
+    return [
+      '        <TR>',
+      `          ${graphvizCell(formatDate(run.created), base)}`,
+      `          ${graphvizCell(run.runId, base, { fontColor: '#bfdbfe' })}`,
+      `          ${graphvizCell(resultText(run.result), resultColor(run.result), { bold: true })}`,
+      `          ${graphvizCell(`${number((run.durationSeconds || 0) / 60, 1)}m`, base)}`,
+      `          ${graphvizCell(number(run.totalVuh), metric)}`,
+      `          ${graphvizCell(number(run.protocolVuh), metric)}`,
+      `          ${graphvizCell(number(run.browserVuh), metric)}`,
+      '        </TR>'
+    ].join('\n');
+  }).join('\n');
+
+  return `digraph load_run_table {
+  graph [
+    rankdir=TB,
+    bgcolor="#0b1220",
+    fontcolor="#f8fafc",
+    pad="0.35",
+    nodesep="0.35",
+    ranksep="0.45",
+    fontname="Helvetica",
+    fontsize=22,
+    labelloc="t",
+    label="Ensemble-Grafana k6 Traffic Spike Run History"
+  ];
+
+  node [
+    shape=plain,
+    fontname="Helvetica",
+    fontcolor="#f8fafc"
+  ];
+
+  runs [
+    label=<
+      <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="7" COLOR="#475569">
+        <TR>
+          ${graphvizCell('Started', '#1e3a5f', { bold: true })}
+          ${graphvizCell('Run', '#1e3a5f', { bold: true })}
+          ${graphvizCell('Result', '#1e3a5f', { bold: true })}
+          ${graphvizCell('Duration', '#1e3a5f', { bold: true })}
+          ${graphvizCell('Total VUH', '#1e3a5f', { bold: true })}
+          ${graphvizCell('Protocol', '#1e3a5f', { bold: true })}
+          ${graphvizCell('Browser', '#1e3a5f', { bold: true })}
+        </TR>
+${rowMarkup}
+      </TABLE>
+    >
+  ];
+
+  summary [
+    label=<
+      <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#475569">
+        <TR>${graphvizCell('Summary', '#1e3a5f', { bold: true })}</TR>
+        <TR>${graphvizCell(`Runs: ${total}`, '#111827', { align: 'LEFT' })}</TR>
+        <TR>${graphvizCell(`Passed: ${passed}`, '#111827', { align: 'LEFT', fontColor: '#dcfce7' })}</TR>
+        <TR>${graphvizCell(`Failed: ${failed}`, '#111827', { align: 'LEFT', fontColor: '#fecaca' })}</TR>
+        <TR>${graphvizCell(`Errors: ${errors}`, '#111827', { align: 'LEFT', fontColor: '#fde68a' })}</TR>
+        <TR>${graphvizCell(`Pass rate: ${total ? Math.round((passed / total) * 100) : 0}%`, '#111827', { align: 'LEFT' })}</TR>
+        <TR>${graphvizCell(`Latest run: ${latestRun ? `${latestRun.runId} ${resultText(latestRun.result)}` : 'n/a'}`, '#111827', { align: 'LEFT', fontColor: '#bfdbfe' })}</TR>
+        <TR>${graphvizCell(`Latest passing 400-VU run: ${latestPassing400?.runId || 'n/a'}`, '#111827', { align: 'LEFT', fontColor: '#bfdbfe' })}</TR>
+      </TABLE>
+    >
+  ];
+
+  summary -> runs [
+    style=invis,
+    weight=2
+  ];
+}
+`;
+}
+
+function writeLoadRunGraphviz(rows) {
+  mkdirSync(graphvizDir, { recursive: true });
+  const dotFile = path.join(graphvizDir, 'load-run-table.dot');
+  const svgFile = path.join(graphvizDir, 'load-run-table.svg');
+  const pngFile = path.join(graphvizDir, 'load-run-table.png');
+  writeFileSync(dotFile, loadRunTableDot(rows));
+  execFileSync('dot', ['-Tsvg', dotFile, '-o', svgFile], { stdio: 'inherit' });
+  execFileSync('dot', ['-Tpng', dotFile, '-o', pngFile], { stdio: 'inherit' });
+}
+
 const summaryFile = latestFile('k6-summary-');
 const rawRunsFile = latestFile('k6-runs-');
 const localSummaryFiles = filesWithPrefix('k6-local-summary-');
@@ -357,6 +474,7 @@ const generatedAt = new Date().toISOString();
 
 writeCsv('load-test-runs.csv', runs);
 writeLocalCounterCsv('load-test-counters.csv', localSummaries);
+writeLoadRunGraphviz(runs);
 writeResultHeatmap('load-test-results-by-date.svg', runs);
 writeTimelineChart('load-test-duration-by-date.svg', 'Run Duration By Date', runs, 'durationSeconds', {
   format: value => `${Math.round(value / 60)}m`
