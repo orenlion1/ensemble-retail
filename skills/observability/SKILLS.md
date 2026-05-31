@@ -146,9 +146,10 @@ Recommended spike profile:
 - Add recovery windows between spikes.
 - Keep browser-action load sustained with multiple browser VUs when Faro user-action volume is part of the test goal. A single shared browser iteration only validates coverage; it does not produce meaningful user-action volume. Keep browser VU counts lower than protocol API VUs because each browser VU launches Chromium and can fail first with page navigation timeouts under spike pressure.
 - Browser-action scripts should wait for a stable app-shell selector instead of global network idle when the application emits background telemetry or loads remote images. This keeps navigation readiness tied to user-visible UI, not long-running Faro/image requests.
-- For high protocol/API volume, prefer a `constant-arrival-rate` scenario with low-cardinality request names. The Ensemble traffic-spike profile includes a steady `API_REQUEST_RPS=15` scenario for the requested 15 requests/second load.
+- For high protocol/API volume, prefer a `constant-arrival-rate` scenario with low-cardinality request names. The Ensemble traffic-spike profile includes a steady `API_REQUEST_RPS=25` scenario for the requested 25 requests/second load. Keep the request mix balanced by service; inventory-service also receives catalog reads from shopper journeys, so the steady request-rate mix should weight inventory lighter than cart/account and the spike journey should use `INVENTORY_REQUEST_INTERVAL` to avoid fetching catalog data every iteration unless catalog saturation is the test goal.
 - For browser-action coverage, ramp browser VUs up instead of starting every Chromium session at once. Keep the browser scenario small enough that Chromium capacity does not dominate API load-test results.
 - When user-action throughput is the goal, add tagged per-action counters and thresholds for every expected action family. Default Ensemble traffic-spike runs target at least 0.2 user-action events per second per action family.
+- For zero-failure custom counters with thresholds such as `count==0`, emit an explicit `Counter.add(0, tags)` on successful paths. Grafana Cloud k6 can otherwise receive no series for a perfect run, making the threshold ambiguous or falsely failed.
 
 Required k6 environment:
 

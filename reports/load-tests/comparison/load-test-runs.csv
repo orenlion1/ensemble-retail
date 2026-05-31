@@ -1,6 +1,4 @@
 date,created,testName,testId,runId,result,status,durationSeconds,requestRatePerSecond,totalVuh,protocolVuh,browserVuh,maxVus,maxBrowserVus,url
-"2026-05-30","2026-05-30T14:29:19.467392Z","Traffic spike benchmark","1228496","7646874","passed","completed","510","","6.38","6.38","0","45","0","https://orenlion.grafana.net/a/k6-app/runs/7646874"
-"2026-05-30","2026-05-30T14:55:25.588587Z","Traffic spike benchmark","1228496","7646958","passed","completed","510","","12.75","12.75","0","90","0","https://orenlion.grafana.net/a/k6-app/runs/7646958"
 "2026-05-30","2026-05-30T18:40:16.122675Z","Traffic spike benchmark","1228496","7647743","passed","completed","600","","18.01","16.34","1.67","68","1","https://orenlion.grafana.net/a/k6-app/runs/7647743"
 "2026-05-30","2026-05-30T18:56:34.908301Z","Traffic spike benchmark","1228496","7647787","passed","completed","600","","73.34","71.67","1.67","400","1","https://orenlion.grafana.net/a/k6-app/runs/7647787"
 "2026-05-30","2026-05-30T19:46:32.766139Z","Traffic spike benchmark","1228496","7648063","failed","completed","600","","157.34","65.69","91.65","400","60","https://orenlion.grafana.net/a/k6-app/runs/7648063"
@@ -20,3 +18,5 @@ date,created,testName,testId,runId,result,status,durationSeconds,requestRatePerS
 "2026-05-31","2026-05-31T18:41:20.641079Z","Traffic spike benchmark","1228496","7653107","passed","completed","600","5","90.84","82.5","8.34","400","0","https://orenlion.grafana.net/a/k6-app/runs/7653107"
 "2026-05-31","2026-05-31T19:23:44.741976Z","Traffic spike benchmark","1228496","7653277","passed","completed","600","10","90.84","82.5","8.34","400","0","https://orenlion.grafana.net/a/k6-app/runs/7653277"
 "2026-05-31","2026-05-31T19:45:42.677177Z","Traffic spike benchmark","1228496","7653359","passed","completed","600","15","90.84","82.5","8.34","400","0","https://orenlion.grafana.net/a/k6-app/runs/7653359"
+"2026-05-31","2026-05-31T20:17:45.538015Z","Traffic spike benchmark","1228496","7653496","failed","completed","600","25","90.84","82.5","8.34","400","0","https://orenlion.grafana.net/a/k6-app/runs/7653496"
+"2026-05-31","2026-05-31T20:52:32.158972Z","Traffic spike benchmark","1228496","7653610","failed","completed","600","30","90.84","82.5","8.34","400","0","https://orenlion.grafana.net/a/k6-app/runs/7653610"

@@ -9,6 +9,8 @@ const graphvizDir = path.resolve('docs/graphviz');
 const timezone = 'America/New_York';
 
 const requestRateByRunId = new Map([
+  [7653610, 30],
+  [7653496, 25],
   [7653359, 15],
   [7653277, 10],
   [7653107, 5],

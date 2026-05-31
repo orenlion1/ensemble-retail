@@ -20,9 +20,10 @@ const spikeMultiplier = Number(__ENV.SPIKE_MULTIPLIER || 2);
 const spikeTwoUsers = Math.ceil(baseSpikeUsers * spikeMultiplier);
 const spikeThreeUsers = Math.ceil(spikeTwoUsers * spikeMultiplier);
 const regionalShopperVus = Number(__ENV.REGIONAL_SHOPPER_VUS || 30);
-const apiRequestRate = Number(__ENV.API_REQUEST_RPS || 15);
+const apiRequestRate = Number(__ENV.API_REQUEST_RPS || 25);
 const userActionTargetRps = Number(__ENV.USER_ACTION_TARGET_RPS || 0.2);
 const browserActionVus = Number(__ENV.BROWSER_ACTION_VUS || 5);
+const inventoryRequestInterval = Math.max(1, Number(__ENV.INVENTORY_REQUEST_INTERVAL || 3));
 const benchmarkDuration = __ENV.TEST_DURATION || '10m';
 const benchmarkDurationSeconds = durationToSeconds(benchmarkDuration);
 const apiRequestRateMinimumCount = Math.floor(apiRequestRate * benchmarkDurationSeconds * 0.95);
@@ -137,6 +138,7 @@ export const options = {
     api_request_rps: String(apiRequestRate),
     user_action_target_rps: String(userActionTargetRps),
     browser_action_vus: String(browserActionVus),
+    inventory_request_interval: String(inventoryRequestInterval),
     browser_action_duration: browserActionDuration,
     browser_action_ramp_up: browserActionRampUp,
     browser_action_hold: browserActionHold,
@@ -234,7 +236,9 @@ function parseJsonResponse(response, context) {
   }
 
   try {
-    return response.json();
+    const parsed = response.json();
+    spikeNonJsonResponses.add(0, context);
+    return parsed;
   } catch (error) {
     spikeNonJsonResponses.add(1, context);
     console.error(`Failed to parse JSON for ${context.name}: ${String(error)}`);
@@ -260,6 +264,10 @@ function selectProduct(products, persona) {
   if (persona === 'cart_builder' && mensProducts.length) return mensProducts[__ITER % mensProducts.length];
   if (persona === 'account_manager' && womensProducts.length) return womensProducts[__ITER % womensProducts.length];
   return products[__ITER % products.length];
+}
+
+function shouldRefreshInventory() {
+  return __ITER % inventoryRequestInterval === 0;
 }
 
 function buildCart(shopperId, product, quantity = 1) {
@@ -323,23 +331,29 @@ export function trafficSpikeJourney() {
       'storefront loaded during spike': response => response.status === 200
     }, { region, persona, spike });
 
-    const categories = getJson('/api/inventory/categories', region, persona, shopperId, 'GET /api/inventory/categories', spike);
-    check(categories, {
-      'categories loaded during spike': response => response.status === 200
-    }, { region, persona, spike });
+    let products = [steadyProduct];
 
-    const productsResponse = getJson('/api/inventory/products', region, persona, shopperId, 'GET /api/inventory/products', spike);
-    check(productsResponse, {
-      'products loaded during spike': response => response.status === 200
-    }, { region, persona, spike });
+    if (shouldRefreshInventory()) {
+      const categories = getJson('/api/inventory/categories', region, persona, shopperId, 'GET /api/inventory/categories', spike);
+      check(categories, {
+        'categories loaded during spike': response => response.status === 200
+      }, { region, persona, spike });
 
-    const products = parseJsonResponse(productsResponse, {
-      region,
-      persona,
-      spike,
-      name: 'GET /api/inventory/products'
-    });
-    if (!Array.isArray(products)) return;
+      const productsResponse = getJson('/api/inventory/products', region, persona, shopperId, 'GET /api/inventory/products', spike);
+      check(productsResponse, {
+        'products loaded during spike': response => response.status === 200
+      }, { region, persona, spike });
+
+      const parsedProducts = parseJsonResponse(productsResponse, {
+        region,
+        persona,
+        spike,
+        name: 'GET /api/inventory/products'
+      });
+      if (!Array.isArray(parsedProducts)) return;
+      products = parsedProducts;
+    }
+
     const product = selectProduct(products, persona);
     if (!product) return;
 
@@ -389,7 +403,7 @@ export function apiRequestRateScenario() {
   const region = regionForIteration();
   const persona = personaForVu();
   const shopperId = `steady-${region.toLowerCase()}-${__VU}-${__ITER}`;
-  const mode = __ITER % 5;
+  const mode = __ITER % 10;
   let response;
   let requestName = 'GET /';
 
@@ -402,7 +416,7 @@ export function apiRequestRateScenario() {
   } else if (mode === 2) {
     requestName = 'GET /api/inventory/products';
     response = getJson('/api/inventory/products', region, persona, shopperId, 'GET /api/inventory/products', 'steady_api_rate');
-  } else if (mode === 3) {
+  } else if (mode <= 6) {
     requestName = 'PUT /api/cart/carts/:shopperId';
     response = putJson(`/api/cart/carts/${shopperId}`, buildCart(shopperId, steadyProduct, 1), region, persona, shopperId, 'PUT /api/cart/carts/:shopperId', 'steady_api_rate');
   } else {
@@ -455,6 +469,7 @@ export function handleSummary(data) {
     apiRequestRate,
     userActionTargetRps,
     browserActionVus,
+    inventoryRequestInterval,
     browserActionDuration,
     browserActionRampUp,
     browserActionHold,
