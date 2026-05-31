@@ -10,16 +10,17 @@ Use this command when the user asks to run the traffic spike benchmark, validate
 
 1. Follow `skills/observability/SKILLS.md`, especially the `k6 Load Testing` section.
 2. Confirm `API_TEST_KEY` is available from the local `.env` file or the current shell environment. Do not print the value.
-3. Run the traffic spike benchmark in Grafana Cloud k6:
+3. Run the traffic spike benchmark in Grafana Cloud k6. Use `-e` flags for values that must reach remote Grafana Cloud k6 workers:
 
 ```sh
 set -a
 source .env
 set +a
-STOREFRONT_BASE_URL="${STOREFRONT_BASE_URL:-https://ensemble-grafana.com}" \
-API_BASE_URL="${API_BASE_URL:-https://ensemble-grafana.com}" \
-API_TEST_KEY="$API_TEST_KEY" \
-k6 cloud run load-tests/grafana-cloud-traffic-spikes.js
+K6_CLOUD_TOKEN="$K6_CLOUD_TOKEN" k6 cloud run \
+  -e API_TEST_KEY="$API_TEST_KEY" \
+  -e STOREFRONT_BASE_URL="${STOREFRONT_BASE_URL:-https://ensemble-grafana.com}" \
+  -e API_BASE_URL="${API_BASE_URL:-https://ensemble-grafana.com}" \
+  load-tests/grafana-cloud-traffic-spikes.js
 ```
 
 4. After the run concludes, generate the standard comparison report:
