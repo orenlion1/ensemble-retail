@@ -638,7 +638,7 @@ The current load-run history table is also available as Graphviz source and rend
 - `docs/graphviz/load-run-table.svg`
 - `docs/graphviz/load-run-table.png`
 
-After every traffic-spike run, update the Load Test tab in the `Ensemble Graphviz Diagrams` dashboard with the refreshed `docs/graphviz/load-run-table.dot` source. Fetch the live dashboard first so the update carries the latest Grafana resource version, then update only `panel-17`:
+After every traffic-spike run, update the `Load Run History` tab in the `Ensemble Graphviz Diagrams` dashboard with the refreshed `docs/graphviz/load-run-table.dot` source. Fetch the live dashboard first so the update carries the latest Grafana resource version, then update only `panel-17`:
 
 ```sh
 gcx dashboards get ensemble-graphviz-diagrams -o json > /tmp/ensemble-graphviz-diagrams-live.json
@@ -659,7 +659,7 @@ The Faro, k6 load-test, and Synthetic Monitoring contract relationship model is 
 - `docs/graphviz/faro-k6-contract-relationships.svg`
 - `docs/graphviz/faro-k6-contract-relationships.png`
 
-The Grafana folder `Diagrams` contains the dashboard `Ensemble Graphviz Diagrams`, which embeds the key current Graphviz DOT sources from `docs/diagrams/` and `docs/graphviz/`. The `Load Test` tab includes the traffic-spike target heatmap, load-run history table, and traffic-spike user-action fidelity model. The `Observability Architecture` tab includes the Faro, k6 load-test, and Synthetic Monitoring contract relationship model. The dashboard inventory is [docs/graphviz/grafana-dashboard-diagram-inventory.md](docs/graphviz/grafana-dashboard-diagram-inventory.md); only push Grafana diagram updates for sources listed there, adding new dashboard diagrams to the inventory first. Folder URL: `https://orenlion.grafana.net/dashboards/f/ensemble-diagrams/diagrams`. Dashboard URL: `https://orenlion.grafana.net/d/ensemble-graphviz-diagrams/ensemble-graphviz-diagrams`. Recreate or update it with:
+The Grafana folder `Diagrams` contains the dashboard `Ensemble Graphviz Diagrams`, which embeds the key current Graphviz DOT sources from `docs/diagrams/` and `docs/graphviz/`. The `Load Test` tab includes the traffic-spike target heatmap and traffic-spike user-action fidelity model. The `Load Run History` tab contains the load-run history table. The `Observability Architecture` tab includes the Faro, k6 load-test, and Synthetic Monitoring contract relationship model. The dashboard inventory is [docs/graphviz/grafana-dashboard-diagram-inventory.md](docs/graphviz/grafana-dashboard-diagram-inventory.md); only push Grafana diagram updates for sources listed there, adding new dashboard diagrams to the inventory first. Folder URL: `https://orenlion.grafana.net/dashboards/f/ensemble-diagrams/diagrams`. Dashboard URL: `https://orenlion.grafana.net/d/ensemble-graphviz-diagrams/ensemble-graphviz-diagrams`. Recreate or update it with:
 
 ```sh
 gcx api /api/folders -d '{"uid":"ensemble-diagrams","title":"Diagrams"}'
