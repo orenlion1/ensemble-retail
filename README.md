@@ -111,6 +111,8 @@ kubectl -n ensemble-grafana scale deployment/account-service --replicas=3
 
 During saturation runs, watch Grafana for Kubernetes CPU/memory utilization, pod restart count, throttling, service RED metrics, k6 HTTP failure rate, p95/p99 latency, and Faro user-action timing. Run `node scripts/report-load-tests.mjs` after each k6 run so the load-test comparison report captures the saturation effect.
 
+To compare a local kubelet-log remediation plan with Grafana Assistant's remediation plan, use the repo alias `/compare-kubelet-resolution-plan`. The command definition is `.codex/commands/compare-kubelet-resolution-plan.md` and calls `gcx assistant prompt` with the same kubelet ERROR-log analysis prompt used for the local Resolution Plan. Current blocker: `gcx assistant prompt` returns `HTTP 401: invalid user` when the active `gcx` identity is not a user/OAuth Assistant identity; authenticate the Assistant path before rerunning the alias.
+
 Detailed inputs and handoff outputs are documented in `infra/terraform/stacks/README.md`. Do not commit `.tfvars`, state files, generated `network.auto.tfvars.json`, or real secrets.
 
 To enable Grafana Cloud AWS CloudWatch metrics scraping, apply the dedicated CloudWatch integration stack. The stack creates the AWS IAM role Grafana assumes and manages the Grafana Cloud AWS/RDS CloudWatch scrape job for stack `1665320` and AWS account resource `270`.
