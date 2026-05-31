@@ -209,18 +209,30 @@ test.describe('storefront browser behavior', () => {
 
   test('hero image scales when the viewport expands', async ({ page }) => {
     const hero = page.locator('.hero');
+    const heroCopy = page.locator('.hero > div');
 
     await page.setViewportSize({ width: 900, height: 900 });
     const compactHeroBox = await hero.boundingBox();
+    const compactCopyBox = await heroCopy.boundingBox();
 
     await page.setViewportSize({ width: 1600, height: 900 });
     const expandedHeroBox = await hero.boundingBox();
+    const expandedCopyBox = await heroCopy.boundingBox();
 
     expect(compactHeroBox).not.toBeNull();
+    expect(compactCopyBox).not.toBeNull();
     expect(expandedHeroBox).not.toBeNull();
+    expect(expandedCopyBox).not.toBeNull();
     expect(expandedHeroBox.width).toBeGreaterThan(compactHeroBox.width);
     expect(expandedHeroBox.height).toBeGreaterThan(compactHeroBox.height);
     expect(expandedHeroBox.height).toBeLessThanOrEqual(560);
+
+    for (const [heroBox, copyBox] of [[compactHeroBox, compactCopyBox], [expandedHeroBox, expandedCopyBox]]) {
+      expect(copyBox.x).toBeGreaterThanOrEqual(heroBox.x);
+      expect(copyBox.y).toBeGreaterThanOrEqual(heroBox.y);
+      expect(copyBox.x + copyBox.width).toBeLessThanOrEqual(heroBox.x + heroBox.width + 1);
+      expect(copyBox.y + copyBox.height).toBeLessThanOrEqual(heroBox.y + heroBox.height + 1);
+    }
   });
 
   test('desktop and mobile layouts remain screenshot-stable', async ({ page }, testInfo) => {
