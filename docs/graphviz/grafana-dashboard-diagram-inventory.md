@@ -19,7 +19,7 @@ Keep dashboard updates scoped to the affected inventory entry. Avoid rewriting u
 |-----------|-----|-------|-------|--------|
 | Ensemble Graphviz Diagrams | Network | `panel-1` | Network Diagram | `docs/diagrams/network-diagram.dot` |
 | Ensemble Graphviz Diagrams | Network | `panel-3` | Request Flow Diagram | `docs/diagrams/request-flow-diagram.dot` |
-| Ensemble Graphviz Diagrams | Observability | `panel-11` | Observability Architecture | `docs/diagrams/observability-capabilities-flow.dot` |
+| Ensemble Graphviz Diagrams | Observability | `panel-11` | Observability Architecture | `docs/diagrams/observability-capabilities-flow-presentation.dot` |
 | Ensemble Graphviz Diagrams | Load Test | `panel-16` | Traffic Spike Target Heatmap Dark | `docs/graphviz/traffic-spike-target-heatmap-dark.dot` |
 | Ensemble Graphviz Diagrams | Traffic Spike Design | `panel-18` | Traffic Spike User Action Fidelity | `docs/graphviz/traffic-spike-load-test-flow.dot` |
 | Ensemble Graphviz Diagrams | Frontend Observability | `panel-19` | Faro, k6, and Synthetic Monitoring Contract | `docs/graphviz/faro-k6-contract-relationships.dot` |

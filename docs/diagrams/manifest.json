@@ -26,5 +26,13 @@
     "file": "docs/diagrams/observability-capabilities-flow.dot",
     "svg": "docs/diagrams/observability-capabilities-flow.svg",
     "png": "docs/diagrams/observability-capabilities-flow.png"
+  },
+  {
+    "title": "Observability Capabilities Flow Presentation",
+    "slug": "observability-capabilities-flow-presentation",
+    "file": "docs/diagrams/observability-capabilities-flow-presentation.dot",
+    "svg": "docs/diagrams/observability-capabilities-flow-presentation.svg",
+    "png": "docs/diagrams/observability-capabilities-flow-presentation.png",
+    "slidePng": "docs/diagrams/observability-capabilities-flow-presentation-16x9.png"
   }
 ]
