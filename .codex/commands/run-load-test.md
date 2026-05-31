@@ -1,4 +1,4 @@
-# /traffic-spike-load-test
+# /run-load-test
 
 Run the Ensemble-Grafana traffic spike load-test workflow.
 

@@ -539,7 +539,7 @@ Latest saturation exercise:
 
 ### k6 Traffic Spike Benchmark
 
-Slash command alias: `/traffic-spike-load-test`. The repo-local command definition is `.codex/commands/traffic-spike-load-test.md` and points agents at `skills/observability/SKILLS.md` before running the benchmark and post-run reports.
+Slash command alias: `/run-load-test`. The repo-local command definition is `.codex/commands/run-load-test.md` and points agents at `skills/observability/SKILLS.md` before running the benchmark and post-run reports.
 
 The spike benchmark is `load-tests/grafana-cloud-traffic-spikes.js`. The alternate Grafana Cloud run entrypoint `load-tests/grafana-cloud-traffic-spikes-2.js` reuses the same scenarios and thresholds, but publishes the run under the Cloud k6 test name `ensemble-grafana-traffic-spikes-2`. It uses the same regional shopper personas as the regional test, but benchmarks three traffic spikes where each peak is 2x the previous one. The default first spike is now 100 VUs:
 
