@@ -28,12 +28,12 @@ metadata:
   name: inventory-service
   namespace: ensemble-grafana
 spec:
-  replicas: 3
+  replicas: 1
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 0
-      maxUnavailable: 2
+      maxSurge: 1
+      maxUnavailable: 0
   selector:
     matchLabels:
       app: inventory-service
@@ -127,12 +127,12 @@ metadata:
   name: cart-service
   namespace: ensemble-grafana
 spec:
-  replicas: 3
+  replicas: 1
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 0
-      maxUnavailable: 2
+      maxSurge: 1
+      maxUnavailable: 0
   selector:
     matchLabels:
       app: cart-service
@@ -228,12 +228,12 @@ metadata:
   name: account-service
   namespace: ensemble-grafana
 spec:
-  replicas: 3
+  replicas: 1
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 0
-      maxUnavailable: 2
+      maxSurge: 1
+      maxUnavailable: 0
   selector:
     matchLabels:
       app: account-service

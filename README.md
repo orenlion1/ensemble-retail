@@ -93,7 +93,23 @@ aws eks update-kubeconfig --name ensemble-grafana --region us-east-1 --profile e
 scripts/kubernetes/apply-manifests.sh
 ```
 
-The checked-in Kubernetes service manifest is pinned to the deployed account `629513454417`, ECR service images, and three replicas per Spring Boot service. Rolling updates use `maxSurge: 0` and `maxUnavailable: 2`, with PodDisruptionBudgets set to `minAvailable: 1`, so one pod remains available while the other two update. WAF rate limits are configured by the `edge-static` Terraform stack as `edge_rate_limit_per_ip` and `api_rate_limit_per_ip`, currently `200000` requests per source IP per 5-minute AWS WAF evaluation window, so repeated local 20-VU k6 smoke tests can run without being blocked by WAF. If deploying to another AWS account, replace the IRSA role annotations and image registry before applying `infra/k8s/services.yaml`.
+The checked-in Kubernetes service manifest is pinned to the deployed account `629513454417`, ECR service images, and the saturation-test profile of one replica per Spring Boot service. This profile is intentional: it makes CPU, memory, latency, queueing, pod restart, and throttling signals easier to observe in Grafana during k6 spike and regional-load tests. Rolling updates use `maxSurge: 1` and `maxUnavailable: 0`, with PodDisruptionBudgets set to `minAvailable: 1`, so a replacement pod is started before the only running pod is removed during routine rollouts. WAF rate limits are configured by the `edge-static` Terraform stack as `edge_rate_limit_per_ip` and `api_rate_limit_per_ip`, currently `200000` requests per source IP per 5-minute AWS WAF evaluation window, so repeated local 20-VU k6 smoke tests can run without being blocked by WAF. If deploying to another AWS account, replace the IRSA role annotations and image registry before applying `infra/k8s/services.yaml`.
+
+To apply or roll back the saturation-test replica profile:
+
+```sh
+kubectl apply -f infra/k8s/services.yaml
+kubectl -n ensemble-grafana rollout status deployment/inventory-service
+kubectl -n ensemble-grafana rollout status deployment/cart-service
+kubectl -n ensemble-grafana rollout status deployment/account-service
+
+# Roll back to the previous demo-HA profile if saturation testing is complete.
+kubectl -n ensemble-grafana scale deployment/inventory-service --replicas=3
+kubectl -n ensemble-grafana scale deployment/cart-service --replicas=3
+kubectl -n ensemble-grafana scale deployment/account-service --replicas=3
+```
+
+During saturation runs, watch Grafana for Kubernetes CPU/memory utilization, pod restart count, throttling, service RED metrics, k6 HTTP failure rate, p95/p99 latency, and Faro user-action timing. Run `node scripts/report-load-tests.mjs` after each k6 run so the load-test comparison report captures the saturation effect.
 
 Detailed inputs and handoff outputs are documented in `infra/terraform/stacks/README.md`. Do not commit `.tfvars`, state files, generated `network.auto.tfvars.json`, or real secrets.
 
