@@ -4,18 +4,18 @@
   "metadata": {
     "annotations": {
       "grafana.app/createdBy": "service-account:ffn1sscdjmscge",
-      "grafana.app/message": "Add traffic spike user action fidelity diagram to Load Test tab",
+      "grafana.app/message": "Add Faro k6 contract diagram to Observability Architecture tab",
       "grafana.app/updatedBy": "service-account:ffn1sscdjmscge",
-      "grafana.app/updatedTimestamp": "2026-05-31T09:24:01Z"
+      "grafana.app/updatedTimestamp": "2026-05-31T09:38:30Z"
     },
     "creationTimestamp": "2026-05-30T21:25:26Z",
-    "generation": 13,
+    "generation": 14,
     "labels": {
       "grafana.app/deprecatedInternalID": "2689969128804352"
     },
     "name": "ensemble-graphviz-diagrams",
     "namespace": "stacks-1665320",
-    "resourceVersion": "2061015833261376388",
+    "resourceVersion": "2061019481244696782",
     "uid": "2b774a56-5210-4abe-b58b-57f772616c4e"
   },
   "spec": {
@@ -328,6 +328,63 @@
           }
         }
       },
+      "panel-19": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "group": "",
+                      "kind": "DataQuery",
+                      "spec": {},
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Source: docs/graphviz/faro-k6-contract-relationships.dot",
+          "id": 19,
+          "links": [],
+          "title": "Faro, k6, and Synthetic Monitoring Contract",
+          "vizConfig": {
+            "group": "grafana-graphviz-panel",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
+              "options": {
+                "_assistantHelp": "",
+                "builderModeActions": {},
+                "dotDiagram": "digraph faro_k6_contract_relationships {\n  graph [\n    rankdir=LR,\n    bgcolor=\"#0b1220\",\n    fontcolor=\"#f8fafc\",\n    fontname=\"Helvetica\",\n    fontsize=22,\n    labelloc=t,\n    label=\"Faro User Action Contract, k6 Load Tests, and Synthetic Checks\",\n    pad=0.35,\n    nodesep=0.5,\n    ranksep=0.85,\n    splines=polyline\n  ];\n\n  node [\n    shape=box,\n    style=\"rounded,filled\",\n    fontname=\"Helvetica\",\n    fontsize=12,\n    color=\"#64748b\",\n    fillcolor=\"#111827\",\n    fontcolor=\"#f8fafc\",\n    margin=\"0.13,0.08\"\n  ];\n\n  edge [\n    color=\"#94a3b8\",\n    fontcolor=\"#f8fafc\",\n    fontname=\"Helvetica\",\n    fontsize=10,\n    arrowsize=0.75\n  ];\n\n  subgraph cluster_contract {\n    label=\"1. Frontend action contract\";\n    color=\"#475569\";\n    fontcolor=\"#f8fafc\";\n    style=\"rounded,dashed\";\n\n    app_js [\n      label=\"frontend/src/App.jsx\\ntrackAppAction()\\ndata-faro-user-action-name\",\n      fillcolor=\"#312e81\",\n      color=\"#a5b4fc\"\n    ];\n\n    action_taxonomy [\n      shape=plain,\n      label=\u003c\n        \u003cTABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"7\" COLOR=\"#475569\"\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#1e3a5f\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eStable action families\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003enavigation and sale banner\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003edepartment, category, sort, search\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eregion and language selection\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eproduct detail and sale views\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#dcfce7\"\u003ecart add, quantity, remove, checkout\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eaccount save and Google auth\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003c/TABLE\u003e\n      \u003e\n    ];\n\n    faro_attrs [\n      label=\"Faro action attributes\\nregion, locale, language,\\nproduct, cart, account,\\nimportance, severity\",\n      fillcolor=\"#581c87\",\n      color=\"#c084fc\"\n    ];\n  }\n\n  subgraph cluster_browser_check {\n    label=\"2. k6 synthetic browser action check\";\n    color=\"#475569\";\n    fontcolor=\"#f8fafc\";\n    style=\"rounded,dashed\";\n\n    synthetic_script [\n      label=\"load-tests/synthetic-browser-actions.js\\nChromium storefront journey\",\n      fillcolor=\"#713f12\",\n      color=\"#fbbf24\"\n    ];\n\n    dom_probe [\n      label=\"Reads action selectors\\nrecords window.__k6UserActions\\nvalidates localized UI copy\",\n      fillcolor=\"#78350f\",\n      color=\"#fbbf24\"\n    ];\n\n    synthetic_assertions [\n      shape=plain,\n      label=\u003c\n        \u003cTABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"7\" COLOR=\"#475569\"\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#1e3a5f\" COLSPAN=\"2\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eCoverage assertions\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eselectors\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e293b\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eevery expected button/action exists\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003ecart\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e293b\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eadd, remove, checkout, dialog close\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eregion\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e293b\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eUS, CA, CN, UK, SE language checks\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eweb vitals\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e293b\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eLCP and CLS thresholds\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003c/TABLE\u003e\n      \u003e\n    ];\n\n    synthetic_counters [\n      label=\"k6 counters\\nstorefront_user_actions\\nstorefront_user_action_events\\ncart add/remove/checkout totals\",\n      fillcolor=\"#78350f\",\n      color=\"#fbbf24\"\n    ];\n  }\n\n  subgraph cluster_load_test {\n    label=\"3. k6 load and traffic-spike benchmarks\";\n    color=\"#475569\";\n    fontcolor=\"#f8fafc\";\n    style=\"rounded,dashed\";\n\n    regional_load [\n      label=\"grafana-cloud-20-user-regional.js\\nAPI personas with regions\\nheaders: X-Region, X-Locale, X-Language\",\n      fillcolor=\"#7c2d12\",\n      color=\"#fb923c\"\n    ];\n\n    spike_load [\n      label=\"grafana-cloud-traffic-spikes.js\\ntraffic_spikes + regional_shoppers\\napi_request_rate + storefront_actions\",\n      fillcolor=\"#7c2d12\",\n      color=\"#fb923c\"\n    ];\n\n    load_thresholds [\n      label=\"Threshold contract\\nHTTP failure and latency\\nAPI request rate\\nper-action-family event rate\",\n      fillcolor=\"#7c2d12\",\n      color=\"#fb923c\"\n    ];\n  }\n\n  subgraph cluster_grafana_evidence {\n    label=\"4. Grafana evidence and reporting\";\n    color=\"#475569\";\n    fontcolor=\"#f8fafc\";\n    style=\"rounded,dashed\";\n\n    faro_cloud [\n      label=\"Grafana Faro collector\\nfaro.user.action events\\nfrontend sessions and errors\",\n      fillcolor=\"#6b21a8\",\n      color=\"#c084fc\"\n    ];\n\n    k6_cloud [\n      label=\"Grafana Cloud k6\\nrun metrics, thresholds,\\nchecks, trends, counters\",\n      fillcolor=\"#6b21a8\",\n      color=\"#c084fc\"\n    ];\n\n    synthetic_monitoring [\n      label=\"Grafana Synthetic Monitoring\\nHTTP, DNS, Ping, TCP checks\\nuptime, TLS, response, resolution\",\n      fillcolor=\"#6b21a8\",\n      color=\"#c084fc\"\n    ];\n\n    reports [\n      shape=plain,\n      label=\u003c\n        \u003cTABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"7\" COLOR=\"#475569\"\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#1e3a5f\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003ePost-run evidence\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003escripts/report-faro-user-actions.mjs\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003escripts/report-load-tests.mjs\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003ereports/frontend-user-actions/\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003ereports/load-tests/comparison/\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003c/TABLE\u003e\n      \u003e\n    ];\n  }\n\n  contract_rule [\n    label=\"Contract rule\\nFrontend emits named actions;\\nk6 validates the same names;\\nGrafana proves they arrived.\",\n    fillcolor=\"#164e63\",\n    color=\"#22d3ee\",\n    penwidth=2\n  ];\n\n  app_js -\u003e action_taxonomy [label=\"defines names\"];\n  action_taxonomy -\u003e faro_attrs [label=\"adds attributes\"];\n  faro_attrs -\u003e contract_rule [label=\"contract\"];\n\n  contract_rule -\u003e synthetic_script [label=\"selector coverage\"];\n  synthetic_script -\u003e dom_probe [label=\"browser executes UI\"];\n  dom_probe -\u003e synthetic_assertions [label=\"checks behavior\"];\n  dom_probe -\u003e synthetic_counters [label=\"counts observed actions\"];\n\n  contract_rule -\u003e regional_load [label=\"region and API context\"];\n  contract_rule -\u003e spike_load [label=\"browser action scenario\"];\n  synthetic_script -\u003e spike_load [label=\"imported as storefront_actions\"];\n  regional_load -\u003e load_thresholds [label=\"API behavior\"];\n  spike_load -\u003e load_thresholds [label=\"spike and action rates\"];\n  synthetic_counters -\u003e load_thresholds [label=\"per-action thresholds\"];\n\n  app_js -\u003e faro_cloud [label=\"pushEvent\"];\n  synthetic_assertions -\u003e k6_cloud [label=\"checks\"];\n  synthetic_counters -\u003e k6_cloud [label=\"custom metrics\"];\n  load_thresholds -\u003e k6_cloud [label=\"cloud run results\"];\n  synthetic_monitoring -\u003e reports [label=\"availability context\"];\n  faro_cloud -\u003e reports [label=\"LogQL action totals\"];\n  k6_cloud -\u003e reports [label=\"run summaries\"];\n\n  synthetic_monitoring -\u003e app_js [label=\"site/API reachable?\", style=dashed, color=\"#60a5fa\"];\n  reports -\u003e contract_rule [label=\"gaps drive contract updates\", style=dashed, color=\"#60a5fa\"];\n}\n",
+                "dotQueryConfig": {
+                  "fieldName": "dot_diagram"
+                },
+                "edgeOverrides": [],
+                "inputMode": "code",
+                "layoutEngine": "dot",
+                "namedThresholds": [],
+                "nodeOverrides": [],
+                "rankDirection": "LR",
+                "splineType": "polyline"
+              }
+            },
+            "version": "0.0.5"
+          }
+        }
+      },
       "panel-3": {
         "kind": "Panel",
         "spec": {
@@ -505,6 +562,32 @@
                 }
               },
               "title": "Load Test"
+            }
+          },
+          {
+            "kind": "TabsLayoutTab",
+            "spec": {
+              "layout": {
+                "kind": "GridLayout",
+                "spec": {
+                  "items": [
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-19"
+                        },
+                        "height": 20,
+                        "width": 24,
+                        "x": 0,
+                        "y": 0
+                      }
+                    }
+                  ]
+                }
+              },
+              "title": "Observability Architecture"
             }
           }
         ]

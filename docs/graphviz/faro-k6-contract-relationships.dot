@@ -1,0 +1,203 @@
+digraph faro_k6_contract_relationships {
+  graph [
+    rankdir=LR,
+    bgcolor="#0b1220",
+    fontcolor="#f8fafc",
+    fontname="Helvetica",
+    fontsize=22,
+    labelloc=t,
+    label="Faro User Action Contract, k6 Load Tests, and Synthetic Checks",
+    pad=0.35,
+    nodesep=0.5,
+    ranksep=0.85,
+    splines=polyline
+  ];
+
+  node [
+    shape=box,
+    style="rounded,filled",
+    fontname="Helvetica",
+    fontsize=12,
+    color="#64748b",
+    fillcolor="#111827",
+    fontcolor="#f8fafc",
+    margin="0.13,0.08"
+  ];
+
+  edge [
+    color="#94a3b8",
+    fontcolor="#f8fafc",
+    fontname="Helvetica",
+    fontsize=10,
+    arrowsize=0.75
+  ];
+
+  subgraph cluster_contract {
+    label="1. Frontend action contract";
+    color="#475569";
+    fontcolor="#f8fafc";
+    style="rounded,dashed";
+
+    app_js [
+      label="frontend/src/App.jsx\ntrackAppAction()\ndata-faro-user-action-name",
+      fillcolor="#312e81",
+      color="#a5b4fc"
+    ];
+
+    action_taxonomy [
+      shape=plain,
+      label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="7" COLOR="#475569">
+          <TR><TD BGCOLOR="#1e3a5f"><FONT COLOR="#f8fafc"><B>Stable action families</B></FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">navigation and sale banner</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">department, category, sort, search</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">region and language selection</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">product detail and sale views</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#dcfce7">cart add, quantity, remove, checkout</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">account save and Google auth</FONT></TD></TR>
+        </TABLE>
+      >
+    ];
+
+    faro_attrs [
+      label="Faro action attributes\nregion, locale, language,\nproduct, cart, account,\nimportance, severity",
+      fillcolor="#581c87",
+      color="#c084fc"
+    ];
+  }
+
+  subgraph cluster_browser_check {
+    label="2. k6 synthetic browser action check";
+    color="#475569";
+    fontcolor="#f8fafc";
+    style="rounded,dashed";
+
+    synthetic_script [
+      label="load-tests/synthetic-browser-actions.js\nChromium storefront journey",
+      fillcolor="#713f12",
+      color="#fbbf24"
+    ];
+
+    dom_probe [
+      label="Reads action selectors\nrecords window.__k6UserActions\nvalidates localized UI copy",
+      fillcolor="#78350f",
+      color="#fbbf24"
+    ];
+
+    synthetic_assertions [
+      shape=plain,
+      label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="7" COLOR="#475569">
+          <TR><TD BGCOLOR="#1e3a5f" COLSPAN="2"><FONT COLOR="#f8fafc"><B>Coverage assertions</B></FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">selectors</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">every expected button/action exists</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">cart</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">add, remove, checkout, dialog close</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">region</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">US, CA, CN, UK, SE language checks</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">web vitals</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">LCP and CLS thresholds</FONT></TD></TR>
+        </TABLE>
+      >
+    ];
+
+    synthetic_counters [
+      label="k6 counters\nstorefront_user_actions\nstorefront_user_action_events\ncart add/remove/checkout totals",
+      fillcolor="#78350f",
+      color="#fbbf24"
+    ];
+  }
+
+  subgraph cluster_load_test {
+    label="3. k6 load and traffic-spike benchmarks";
+    color="#475569";
+    fontcolor="#f8fafc";
+    style="rounded,dashed";
+
+    regional_load [
+      label="grafana-cloud-20-user-regional.js\nAPI personas with regions\nheaders: X-Region, X-Locale, X-Language",
+      fillcolor="#7c2d12",
+      color="#fb923c"
+    ];
+
+    spike_load [
+      label="grafana-cloud-traffic-spikes.js\ntraffic_spikes + regional_shoppers\napi_request_rate + storefront_actions",
+      fillcolor="#7c2d12",
+      color="#fb923c"
+    ];
+
+    load_thresholds [
+      label="Threshold contract\nHTTP failure and latency\nAPI request rate\nper-action-family event rate",
+      fillcolor="#7c2d12",
+      color="#fb923c"
+    ];
+  }
+
+  subgraph cluster_grafana_evidence {
+    label="4. Grafana evidence and reporting";
+    color="#475569";
+    fontcolor="#f8fafc";
+    style="rounded,dashed";
+
+    faro_cloud [
+      label="Grafana Faro collector\nfaro.user.action events\nfrontend sessions and errors",
+      fillcolor="#6b21a8",
+      color="#c084fc"
+    ];
+
+    k6_cloud [
+      label="Grafana Cloud k6\nrun metrics, thresholds,\nchecks, trends, counters",
+      fillcolor="#6b21a8",
+      color="#c084fc"
+    ];
+
+    synthetic_monitoring [
+      label="Grafana Synthetic Monitoring\nHTTP, DNS, Ping, TCP checks\nuptime, TLS, response, resolution",
+      fillcolor="#6b21a8",
+      color="#c084fc"
+    ];
+
+    reports [
+      shape=plain,
+      label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="7" COLOR="#475569">
+          <TR><TD BGCOLOR="#1e3a5f"><FONT COLOR="#f8fafc"><B>Post-run evidence</B></FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">scripts/report-faro-user-actions.mjs</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">scripts/report-load-tests.mjs</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">reports/frontend-user-actions/</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">reports/load-tests/comparison/</FONT></TD></TR>
+        </TABLE>
+      >
+    ];
+  }
+
+  contract_rule [
+    label="Contract rule\nFrontend emits named actions;\nk6 validates the same names;\nGrafana proves they arrived.",
+    fillcolor="#164e63",
+    color="#22d3ee",
+    penwidth=2
+  ];
+
+  app_js -> action_taxonomy [label="defines names"];
+  action_taxonomy -> faro_attrs [label="adds attributes"];
+  faro_attrs -> contract_rule [label="contract"];
+
+  contract_rule -> synthetic_script [label="selector coverage"];
+  synthetic_script -> dom_probe [label="browser executes UI"];
+  dom_probe -> synthetic_assertions [label="checks behavior"];
+  dom_probe -> synthetic_counters [label="counts observed actions"];
+
+  contract_rule -> regional_load [label="region and API context"];
+  contract_rule -> spike_load [label="browser action scenario"];
+  synthetic_script -> spike_load [label="imported as storefront_actions"];
+  regional_load -> load_thresholds [label="API behavior"];
+  spike_load -> load_thresholds [label="spike and action rates"];
+  synthetic_counters -> load_thresholds [label="per-action thresholds"];
+
+  app_js -> faro_cloud [label="pushEvent"];
+  synthetic_assertions -> k6_cloud [label="checks"];
+  synthetic_counters -> k6_cloud [label="custom metrics"];
+  load_thresholds -> k6_cloud [label="cloud run results"];
+  synthetic_monitoring -> reports [label="availability context"];
+  faro_cloud -> reports [label="LogQL action totals"];
+  k6_cloud -> reports [label="run summaries"];
+
+  synthetic_monitoring -> app_js [label="site/API reachable?", style=dashed, color="#60a5fa"];
+  reports -> contract_rule [label="gaps drive contract updates", style=dashed, color="#60a5fa"];
+}

@@ -60,13 +60,14 @@ xmllint --noout docs/graphviz/<name>.svg
 file docs/graphviz/<name>.png
 ```
 
-5. If the diagram is intended for Grafana, add or update a dashboard panel:
+5. If the diagram is intended for Grafana, first apply `skills/graphviz/dashboard-inventory/SKILL.md`, then add or update a dashboard panel:
 
 - Prefer the Grafana Graphviz panel when `grafana-graphviz-panel` is enabled.
 - Use Graphviz Code mode for static DOT.
 - Use Query mode only when a datasource returns a DataFrame with a DOT column.
 - For metrics panels next to the diagram, use datasource `grafanacloud-orenlion-prom`.
 - If Graphviz is not enabled, use the Infinity datasource or a standard text/table panel as a fallback.
+- Only push Grafana dashboard changes for diagram sources listed in `docs/graphviz/grafana-dashboard-diagram-inventory.md`. Add new dashboard diagrams to that inventory before pushing.
 
 6. Update documentation:
 
