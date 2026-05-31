@@ -90,7 +90,9 @@ digraph faro_k6_contract_relationships {
         <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="7" COLOR="#475569">
           <TR><TD BGCOLOR="#1e3a5f" COLSPAN="2"><FONT COLOR="#f8fafc"><B>Coverage assertions</B></FONT></TD></TR>
           <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">selectors</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">every expected button/action exists</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">navigation</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">brand, header, hero, utility, sale banner</FONT></TD></TR>
           <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">cart</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">add, remove, checkout, dialog close</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">auth</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">Google login control and checkout Grafana link</FONT></TD></TR>
           <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">region</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">US, CA, CN, UK, SE language checks</FONT></TD></TR>
           <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">web vitals</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">LCP and CLS thresholds</FONT></TD></TR>
         </TABLE>

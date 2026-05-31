@@ -1017,17 +1017,17 @@ export default function App() {
       <header>
         <div className="utilityBanner">
           <div className="brandFamily" aria-label={t.brandFamilyLabel}>
-            <a href="#shop" onClick={() => trackAppAction('navigate-brand-family:ensemble')}>Ensemble</a>
-            <a href="#shop" onClick={() => trackAppAction('navigate-brand-family:outlet')}>Outlet</a>
-            <a href="#shop" onClick={() => trackAppAction('navigate-brand-family:trail-lab')}>Trail Lab</a>
-            <a href="#shop" onClick={() => trackAppAction('navigate-brand-family:regear')}>Regear</a>
+            <a href="#shop" onClick={() => trackAppAction('navigate-brand-family:ensemble')} data-faro-user-action-name="navigate-brand-family:ensemble">Ensemble</a>
+            <a href="#shop" onClick={() => trackAppAction('navigate-brand-family:outlet')} data-faro-user-action-name="navigate-brand-family:outlet">Outlet</a>
+            <a href="#shop" onClick={() => trackAppAction('navigate-brand-family:trail-lab')} data-faro-user-action-name="navigate-brand-family:trail-lab">Trail Lab</a>
+            <a href="#shop" onClick={() => trackAppAction('navigate-brand-family:regear')} data-faro-user-action-name="navigate-brand-family:regear">Regear</a>
           </div>
           <p className="promoMessage">
-            <a href="#sale" onClick={() => trackAppAction('navigate-sale:spring-collection-sale')}><strong>{t.springSale}</strong></a>
+            <a href="#sale" onClick={() => trackAppAction('navigate-sale:spring-collection-sale')} data-faro-user-action-name="navigate-sale:spring-collection-sale"><strong>{t.springSale}</strong></a>
             <span>| {t.freeShipping}</span>
           </p>
           <div className="utilityLinks">
-            <a href="#account" onClick={() => trackAppAction('navigate-utility:find-store')}>{t.findStore}</a>
+            <a href="#account" onClick={() => trackAppAction('navigate-utility:find-store')} data-faro-user-action-name="navigate-utility:find-store">{t.findStore}</a>
             <label className="regionSelector">
               <span className="regionFlag" aria-hidden="true">{selectedRegion.flag}</span>
               <select id="region-selector" name="region" autoComplete="country" value={region} onChange={event => changeRegion(event.target.value)} aria-label={t.regionSelector} data-faro-user-action-name="open-region-selector">
@@ -1036,7 +1036,7 @@ export default function App() {
                 ))}
               </select>
             </label>
-            <a href="#account" onClick={() => trackAppAction('navigate-utility:help')}>{t.help}</a>
+            <a href="#account" onClick={() => trackAppAction('navigate-utility:help')} data-faro-user-action-name="navigate-utility:help">{t.help}</a>
           </div>
         </div>
 
@@ -1044,9 +1044,9 @@ export default function App() {
           <strong className="brand">Ensemble-Grafana</strong>
         <div className="headerActions">
           <nav>
-            <a href="#shop" onClick={() => trackAppAction('navigate-header:shop')}>{t.shop}</a>
-            <a href="#cart" onClick={() => trackAppAction('navigate-header:cart', { cartSize: cart.length })}>{t.cart} ({cart.length})</a>
-            <a href="#account" onClick={() => trackAppAction('navigate-header:account')}>{t.account}</a>
+            <a href="#shop" onClick={() => trackAppAction('navigate-header:shop')} data-faro-user-action-name="navigate-header:shop">{t.shop}</a>
+            <a href="#cart" onClick={() => trackAppAction('navigate-header:cart', { cartSize: cart.length })} data-faro-user-action-name="navigate-header:cart">{t.cart} ({cart.length})</a>
+            <a href="#account" onClick={() => trackAppAction('navigate-header:account')} data-faro-user-action-name="navigate-header:account">{t.account}</a>
           </nav>
         </div>
         </div>
@@ -1056,7 +1056,7 @@ export default function App() {
         <div>
           <p className="eyebrow">{t.heroEyebrow}</p>
           <h1>{t.heroTitle}</h1>
-          <a className="heroLink" href="#shop" onClick={() => trackAppAction('navigate-hero:shop-new-arrivals')}>{t.heroCta}</a>
+          <a className="heroLink" href="#shop" onClick={() => trackAppAction('navigate-hero:shop-new-arrivals')} data-faro-user-action-name="navigate-hero:shop-new-arrivals">{t.heroCta}</a>
         </div>
       </section>
 
@@ -1134,7 +1134,7 @@ export default function App() {
             <p className="eyebrow">{t.springSale}</p>
             <h2>{t.saleTitle}</h2>
           </div>
-          <a className="textButton" href="#shop" onClick={() => trackAppAction('navigate-sale:shop-all')}>{t.shopAll}</a>
+          <a className="textButton" href="#shop" onClick={() => trackAppAction('navigate-sale:shop-all')} data-faro-user-action-name="navigate-sale:shop-all">{t.shopAll}</a>
         </div>
 
         <div className="productGrid saleGrid">

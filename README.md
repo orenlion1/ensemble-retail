@@ -487,7 +487,7 @@ The load tests have been uploaded to Grafana Cloud k6 in stack `https://orenlion
 - API flow load test: `https://orenlion.grafana.net/a/k6-app/tests/1228494`
 - 30-user regional load test: `https://orenlion.grafana.net/a/k6-app/tests/1228490`
 - Traffic spike benchmark: `https://orenlion.grafana.net/a/k6-app/tests/1228496`
-- Browser action synthetic check: `https://orenlion.grafana.net/a/k6-app/tests/1228497`
+- Browser action synthetic check: `https://orenlion.grafana.net/a/k6-app/tests/1233226`
 
 Creating k6 load tests through `gcx` remains blocked until a Grafana Cloud token is available that both has `stacks:read` and is accepted by the k6 token exchange:
 
@@ -703,6 +703,7 @@ Optional knobs for the combined scenarios:
 
 The browser action check covers:
 
+- brand-family, sale-banner, header, hero, and utility navigation actions.
 - department/category selection.
 - product sorting and search.
 - region changes for US, Canada, China, UK, and Sweden.
@@ -710,6 +711,8 @@ The browser action check covers:
 - product detail open/close.
 - add to cart from product grid, sale grid, and product detail.
 - cart quantity change, checkout, and item removal.
+- checkout dialog Grafana trace link availability.
+- Google sign-in control availability.
 - account profile, shipping address, wallet metadata, and save account.
 
 Install k6 locally if needed:
@@ -756,6 +759,8 @@ The browser check records `data-faro-user-action-name` interactions plus change/
 ```sh
 DEBUG_ACTIONS=1 BASE_URL=https://ensemble-grafana.com k6 run load-tests/synthetic-browser-actions.js
 ```
+
+The current browser-action audit inventory is stored in `reports/k6-browser-action-audit/`. The May 31, 2026 audit confirmed the Synthetic Monitoring HTTP, DNS, Ping, and TCP checks exist in Grafana, while the standalone Grafana Cloud k6 browser-action check needed a fresh Cloud run after adding the navigation/sale-banner and auth-link coverage.
 
 The frontend also has Playwright browser regression tests for interactive UI behavior. These tests stub the Faro collector, verify emitted Faro action names for cart, checkout, region/language, Google login, and account save actions, check the cart delete icon, detect broken storefront images, and compare desktop/mobile screenshots.
 

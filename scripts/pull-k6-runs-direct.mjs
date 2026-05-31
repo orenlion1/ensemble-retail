@@ -10,7 +10,7 @@ const loadTests = [
   { id: 1228494, name: 'API flow load test' },
   { id: 1228490, name: '20-user regional load test' },
   { id: 1228496, name: 'Traffic spike benchmark' },
-  { id: 1228497, name: 'Browser action synthetic check' }
+  { id: 1233226, name: 'Browser action synthetic check' }
 ];
 
 if (!token) {

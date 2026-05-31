@@ -46,6 +46,18 @@ const regionLanguageExpectations = {
   SE: { lang: 'sv-SE', language: 'Swedish', languageSlug: 'swedish', text: 'Varukorg', secondaryText: 'Herr' }
 };
 export const USER_ACTION_RATE_FAMILIES = [
+  'navigate-brand-family:ensemble',
+  'navigate-brand-family:outlet',
+  'navigate-brand-family:trail-lab',
+  'navigate-brand-family:regear',
+  'navigate-sale:spring-collection-sale',
+  'navigate-utility:find-store',
+  'navigate-utility:help',
+  'navigate-header:shop',
+  'navigate-header:cart',
+  'navigate-header:account',
+  'navigate-hero:shop-new-arrivals',
+  'navigate-sale:shop-all',
   'select-department:womens',
   'select-department:mens',
   'select-category:mens-mid-layers',
@@ -168,6 +180,28 @@ async function domClickAction(page, actionName) {
   }, byAction(actionName));
 }
 
+async function actionState(page, actionName) {
+  return page.evaluate(selector => {
+    const element = document.querySelector(selector);
+    if (!element) {
+      return {
+        exists: false,
+        visible: false,
+        disabled: false,
+        href: ''
+      };
+    }
+
+    const style = window.getComputedStyle(element);
+    return {
+      exists: true,
+      visible: style.visibility !== 'hidden' && style.display !== 'none',
+      disabled: Boolean(element.disabled),
+      href: element.href || ''
+    };
+  }, byAction(actionName));
+}
+
 async function selectAction(page, selector, value) {
   const locator = page.locator(selector);
   await locator.waitFor({ state: 'visible', timeout: 10000 });
@@ -254,6 +288,21 @@ export default async function () {
     await loadRegionForLanguageValidation(page, 'US');
 
     await recordUserActions(page);
+    await clickAction(page, 'navigate-brand-family:ensemble');
+    await clickAction(page, 'navigate-brand-family:outlet');
+    await clickAction(page, 'navigate-brand-family:trail-lab');
+    await clickAction(page, 'navigate-brand-family:regear');
+    await clickAction(page, 'navigate-sale:spring-collection-sale');
+    await scrollTo(page, '#account');
+    await clickAction(page, 'navigate-utility:find-store');
+    await clickAction(page, 'navigate-utility:help');
+    await clickAction(page, 'navigate-header:shop');
+    await clickAction(page, 'navigate-header:cart');
+    await clickAction(page, 'navigate-header:account');
+    await clickAction(page, 'navigate-hero:shop-new-arrivals');
+    await scrollTo(page, '#sale');
+    await clickAction(page, 'navigate-sale:shop-all');
+
     await selectAction(page, '#region-selector', 'SE');
     await validateRegionLanguage(page, 'SE');
     await selectAction(page, '#region-selector', 'US');
@@ -283,8 +332,12 @@ export default async function () {
     await page.keyboard.press('Tab');
 
     await domClickAction(page, 'shopping-cart:checkout');
+    const grafanaTraceLink = await actionState(page, 'navigate-checkout:grafana');
     await clickAction(page, 'checkout-dialog:close');
     await clickFirstMatchingAction(page, 'shopping-cart:remove-item:');
+
+    await scrollTo(page, '#account');
+    const googleLoginState = await actionState(page, 'auth:google-login-start');
 
     await fillField(page, '#account-name', 'Synthetic Shopper');
     await fillField(page, '#account-email', 'synthetic.shopper@example.com');
@@ -301,6 +354,18 @@ export default async function () {
       console.log(JSON.stringify(actions));
     }
     const requiredExactActions = [
+      'navigate-brand-family:ensemble',
+      'navigate-brand-family:outlet',
+      'navigate-brand-family:trail-lab',
+      'navigate-brand-family:regear',
+      'navigate-sale:spring-collection-sale',
+      'navigate-utility:find-store',
+      'navigate-utility:help',
+      'navigate-header:shop',
+      'navigate-header:cart',
+      'navigate-header:account',
+      'navigate-hero:shop-new-arrivals',
+      'navigate-sale:shop-all',
       'select-department:womens',
       'select-department:mens',
       'select-category:mens-mid-layers',
@@ -332,9 +397,11 @@ export default async function () {
 
     const checkoutVisible = await page.locator(byAction('shopping-cart:checkout')).isVisible();
     const accountSaveVisible = await page.locator(byAction('save-account')).isVisible();
-    check({ checkoutVisible, accountSaveVisible }, {
+    check({ checkoutVisible, accountSaveVisible, grafanaTraceLink, googleLoginState }, {
       'checkout remains reachable': result => result.checkoutVisible === true,
-      'account save remains reachable': result => result.accountSaveVisible === true
+      'account save remains reachable': result => result.accountSaveVisible === true,
+      'checkout Grafana trace link exists': result => result.grafanaTraceLink.exists === true && result.grafanaTraceLink.href.includes('orenlion.grafana.net'),
+      'Google login action control exists': result => result.googleLoginState.exists === true && result.googleLoginState.visible === true
     });
   } catch (error) {
     check(error, {
