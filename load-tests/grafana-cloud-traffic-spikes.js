@@ -20,10 +20,11 @@ const spikeMultiplier = Number(__ENV.SPIKE_MULTIPLIER || 2);
 const spikeTwoUsers = Math.ceil(baseSpikeUsers * spikeMultiplier);
 const spikeThreeUsers = Math.ceil(spikeTwoUsers * spikeMultiplier);
 const regionalShopperVus = Number(__ENV.REGIONAL_SHOPPER_VUS || 30);
-const apiRequestRate = Number(__ENV.API_REQUEST_RPS || 25);
+const apiRequestRate = Number(__ENV.API_REQUEST_RPS || 40);
 const userActionTargetRps = Number(__ENV.USER_ACTION_TARGET_RPS || 0.2);
 const browserActionVus = Number(__ENV.BROWSER_ACTION_VUS || 5);
 const inventoryRequestInterval = Math.max(1, Number(__ENV.INVENTORY_REQUEST_INTERVAL || 3));
+const accountWriteInterval = Math.max(1, Number(__ENV.ACCOUNT_WRITE_INTERVAL || 3));
 const benchmarkDuration = __ENV.TEST_DURATION || '10m';
 const benchmarkDurationSeconds = durationToSeconds(benchmarkDuration);
 const apiRequestRateMinimumCount = Math.floor(apiRequestRate * benchmarkDurationSeconds * 0.95);
@@ -139,6 +140,7 @@ export const options = {
     user_action_target_rps: String(userActionTargetRps),
     browser_action_vus: String(browserActionVus),
     inventory_request_interval: String(inventoryRequestInterval),
+    account_write_interval: String(accountWriteInterval),
     browser_action_duration: browserActionDuration,
     browser_action_ramp_up: browserActionRampUp,
     browser_action_hold: browserActionHold,
@@ -271,6 +273,10 @@ function shouldRefreshInventory() {
   return __ITER % inventoryRequestInterval === 0;
 }
 
+function shouldWriteAccount() {
+  return __ITER % accountWriteInterval === 0;
+}
+
 function buildCart(shopperId, product, quantity = 1) {
   const size = product.sizes?.[0] || 'M';
   const color = product.colors?.[0] || 'Graphite';
@@ -368,7 +374,9 @@ export function trafficSpikeJourney() {
     }
 
     if (persona === 'account_manager') {
-      saveAccount(region, persona, shopperId, spike);
+      if (shouldWriteAccount()) {
+        saveAccount(region, persona, shopperId, spike);
+      }
       sleep(2);
       return;
     }
@@ -388,7 +396,9 @@ export function trafficSpikeJourney() {
     }, { region, persona, spike });
 
     if (persona === 'checkout') {
-      saveAccount(region, persona, shopperId, spike);
+      if (shouldWriteAccount()) {
+        saveAccount(region, persona, shopperId, spike);
+      }
       spikeCheckoutAttempts.add(1, { region, persona, spike });
     }
 
@@ -421,7 +431,7 @@ export function apiRequestRateScenario() {
   } else if (mode === 2) {
     requestName = 'GET /api/inventory/products';
     response = getJson('/api/inventory/products', region, persona, shopperId, 'GET /api/inventory/products', 'steady_api_rate');
-  } else if (mode <= 6) {
+  } else if (mode <= 8) {
     requestName = 'PUT /api/cart/carts/:shopperId';
     response = putJson(`/api/cart/carts/${shopperId}`, buildCart(shopperId, steadyProduct, 1), region, persona, shopperId, 'PUT /api/cart/carts/:shopperId', 'steady_api_rate');
   } else {
@@ -475,6 +485,7 @@ export function handleSummary(data) {
     userActionTargetRps,
     browserActionVus,
     inventoryRequestInterval,
+    accountWriteInterval,
     browserActionDuration,
     browserActionRampUp,
     browserActionHold,
