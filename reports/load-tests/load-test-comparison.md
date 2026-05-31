@@ -1,10 +1,10 @@
 # k6 Load Test Comparison
 
-Generated: 2026-05-30T23:12:30.271Z
+Generated: 2026-05-31T11:03:50.371Z
 
-Source summary: `reports/load-tests/k6-summary-20260530T231031Z.json`
+Source summary: `reports/load-tests/k6-summary-20260531T110345Z.json`
 
-Source run history: `reports/load-tests/k6-runs-20260530T231031Z.json`
+Source run history: `reports/load-tests/k6-runs-20260531T110345Z.json`
 
 Source Faro action totals: `reports/frontend-user-actions/faro-user-action-totals-20260530T210943Z.json`
 
@@ -14,7 +14,7 @@ Source Faro action totals: `reports/frontend-user-actions/faro-user-action-total
 |---:|---|---|---|---:|---:|---:|---:|---:|---:|
 | 1228494 | API flow load test | n/a | n/a | n/a | n/a | n/a | n/a | n/a | k6 API 404 for /cloud/v6/load_tests/1228494/test_runs?%24top=20&%24orderby=created+desc: {"error":{"message":"Resource matching query does not exist: '1228494'","code":"error"}} |
 | 1228490 | 20-user regional load test | n/a | n/a | n/a | n/a | n/a | n/a | n/a | k6 API 404 for /cloud/v6/load_tests/1228490/test_runs?%24top=20&%24orderby=created+desc: {"error":{"message":"Resource matching query does not exist: '1228490'","code":"error"}} |
-| 1228496 | Traffic spike benchmark | [7648780](https://orenlion.grafana.net/a/k6-app/runs/7648780) | 05/30/2026, 18:27 | ✅ | 15.0m | n/a | n/a | n/a | n/a |
+| 1228496 | Traffic spike benchmark | [7651472](https://orenlion.grafana.net/a/k6-app/runs/7651472) | 05/31/2026, 06:44 | ❌ | 15.0m | n/a | n/a | n/a | n/a |
 | 1228497 | Browser action synthetic check | n/a | n/a | n/a | n/a | n/a | n/a | n/a | k6 API 404 for /cloud/v6/load_tests/1228497/test_runs?%24top=20&%24orderby=created+desc: {"error":{"message":"Resource matching query does not exist: '1228497'","code":"error"}} |
 
 ## Visual Comparison
@@ -51,7 +51,7 @@ Source Faro action totals: `reports/frontend-user-actions/faro-user-action-total
 
 | Test | Runs | Passed | Failed | Errors | Pass Rate |
 |---|---:|---:|---:|---:|---:|
-| Traffic spike benchmark | 20 | 8 | 6 | 6 | 40.00% |
+| Traffic spike benchmark | 20 | 8 | 7 | 5 | 40.00% |
 
 ## Request And User Action Totals
 
@@ -124,6 +124,7 @@ Total executions: 26870
 
 | Date | Started | Test | Run | Result | Duration | Total VUH | Protocol VUH | Browser VUH |
 |---|---|---|---|---:|---:|---:|---:|---:|
+| 2026-05-31 | 05/31/2026, 06:44 | Traffic spike benchmark | [7651472](https://orenlion.grafana.net/a/k6-app/runs/7651472) | ❌ | 15.0m | 129.00 | 117.16 | 11.84 |
 | 2026-05-30 | 05/30/2026, 18:27 | Traffic spike benchmark | [7648780](https://orenlion.grafana.net/a/k6-app/runs/7648780) | ✅ | 15.0m | 129.00 | 117.16 | 11.84 |
 | 2026-05-30 | 05/30/2026, 18:01 | Traffic spike benchmark | [7648612](https://orenlion.grafana.net/a/k6-app/runs/7648612) | ❌ | 15.0m | 129.00 | 117.16 | 11.84 |
 | 2026-05-30 | 05/30/2026, 17:43 | Traffic spike benchmark | [7648492](https://orenlion.grafana.net/a/k6-app/runs/7648492) | ❌ | 15.0m | 225.99 | 94.35 | 131.64 |
@@ -143,7 +144,6 @@ Total executions: 26870
 | 2026-05-27 | 05/27/2026, 12:41 | Traffic spike benchmark | [7627390](https://orenlion.grafana.net/a/k6-app/runs/7627390) | ❌ | 8.5m | 6.38 | 6.38 | 0.00 |
 | 2026-05-27 | 05/27/2026, 12:06 | Traffic spike benchmark | [7627249](https://orenlion.grafana.net/a/k6-app/runs/7627249) | ✅ | 8.5m | 6.38 | 6.38 | 0.00 |
 | 2026-05-25 | 05/25/2026, 08:58 | Traffic spike benchmark | [7612573](https://orenlion.grafana.net/a/k6-app/runs/7612573) | ✅ | 8.5m | 6.38 | 6.38 | 0.00 |
-| 2026-05-25 | 05/25/2026, 08:57 | Traffic spike benchmark | [7612567](https://orenlion.grafana.net/a/k6-app/runs/7612567) | ⚠️ | 0.6m | 1.00 | 1.00 | 0.00 |
 
 ## Machine-Readable Comparison
 

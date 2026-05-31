@@ -518,6 +518,12 @@ The report is written to `reports/load-tests/load-test-comparison.md`. Generate 
 - `latest-http-failure-rate.svg`, `latest-check-pass-rate.svg`, and `latest-http-p95.svg` for latest-run health comparisons.
 - `latest-user-action-totals.svg` for comparing cart add, cart remove, and API cart update totals across recent local summary files.
 
+Latest saturation exercise:
+
+- `2026-05-31 06:44 EDT`: Grafana Cloud k6 traffic spike run `7651472` failed thresholds as expected for the one-replica saturation profile. URL: `https://orenlion.grafana.net/a/k6-app/runs/7651472`.
+- Kubernetes signal: `inventory-service` was OOMKilled and restarted during the high-load window, and liveness/readiness probes timed out while the pod recovered. This is the intended Grafana-observable saturation signal for CPU/memory/restart and RED-metric investigation.
+- k6 signal: the traffic-spike scenario received HTML for `/api/inventory/products` where JSON was expected, causing `invalid character '<' looking for beginning of value` at `load-tests/grafana-cloud-traffic-spikes.js:316`; treat that as an overload symptom when reviewing the run, not a passing benchmark.
+
 ### k6 Traffic Spike Benchmark
 
 Slash command alias: `/traffic-spike-load-test`. The repo-local command definition is `.codex/commands/traffic-spike-load-test.md` and points agents at `skills/observability/SKILLS.md` before running the benchmark and post-run reports.
