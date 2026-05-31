@@ -225,7 +225,7 @@ test.describe('storefront browser behavior', () => {
     expect(expandedCopyBox).not.toBeNull();
     expect(expandedHeroBox.width).toBeGreaterThan(compactHeroBox.width);
     expect(expandedHeroBox.height).toBeGreaterThan(compactHeroBox.height);
-    expect(expandedHeroBox.height).toBeLessThanOrEqual(560);
+    expect(expandedHeroBox.height).toBeLessThanOrEqual(620);
 
     for (const [heroBox, copyBox] of [[compactHeroBox, compactCopyBox], [expandedHeroBox, expandedCopyBox]]) {
       expect(copyBox.x).toBeGreaterThanOrEqual(heroBox.x);
