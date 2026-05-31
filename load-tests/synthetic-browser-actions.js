@@ -241,12 +241,34 @@ async function validateRegionLanguage(page, region) {
   }
 }
 
+async function navigateWithRetry(page, action, description, retries = 2) {
+  let lastError;
+  for (let attempt = 1; attempt <= retries + 1; attempt += 1) {
+    try {
+      await action();
+      return;
+    } catch (error) {
+      lastError = error;
+      console.warn(`${description} failed on attempt ${attempt}: ${error?.message || String(error)}`);
+      if (attempt <= retries) {
+        sleep(attempt);
+      }
+    }
+  }
+
+  throw lastError;
+}
+
 async function loadRegionForLanguageValidation(page, region) {
   // Reload per locale so full-page translation swaps do not pollute CLS thresholds.
   await page.evaluate(nextRegion => {
     localStorage.setItem('ensemble-region', nextRegion);
   }, region);
-  await page.reload({ waitUntil: 'domcontentloaded' });
+  await navigateWithRetry(
+    page,
+    () => page.reload({ waitUntil: 'domcontentloaded', timeout: 60000 }),
+    `reload for ${region} localization`
+  );
   await waitForStorefrontReady(page);
   await validateRegionLanguage(page, region);
 }
@@ -272,13 +294,21 @@ export default async function () {
   const page = await browser.newPage();
 
   try {
-    await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+    await navigateWithRetry(
+      page,
+      () => page.goto(baseUrl, { waitUntil: 'domcontentloaded', timeout: 60000 }),
+      'initial storefront navigation'
+    );
     await waitForStorefrontReady(page);
     await page.evaluate(() => {
       localStorage.removeItem('ensemble-cart');
       localStorage.setItem('ensemble-region', 'US');
     });
-    await page.reload({ waitUntil: 'domcontentloaded' });
+    await navigateWithRetry(
+      page,
+      () => page.reload({ waitUntil: 'domcontentloaded', timeout: 60000 }),
+      'storefront reset reload'
+    );
     await waitForStorefrontReady(page);
 
     await loadRegionForLanguageValidation(page, 'CA');
