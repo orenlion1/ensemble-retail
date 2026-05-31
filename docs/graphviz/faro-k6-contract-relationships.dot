@@ -7,9 +7,9 @@ digraph faro_k6_contract_relationships {
     fontsize=22,
     labelloc=t,
     label="Faro User Action Contract, k6 Load Tests, and Synthetic Checks",
-    pad=0.35,
-    nodesep=0.5,
-    ranksep=0.85,
+    pad=0.65,
+    nodesep=1.05,
+    ranksep=1.35,
     splines=polyline
   ];
 
@@ -21,15 +21,15 @@ digraph faro_k6_contract_relationships {
     color="#64748b",
     fillcolor="#111827",
     fontcolor="#f8fafc",
-    margin="0.13,0.08"
+    margin="0.22,0.13"
   ];
 
   edge [
     color="#94a3b8",
     fontcolor="#f8fafc",
     fontname="Helvetica",
-    fontsize=10,
-    arrowsize=0.75
+    fontsize=9,
+    arrowsize=0.7
   ];
 
   subgraph cluster_contract {
@@ -67,13 +67,13 @@ digraph faro_k6_contract_relationships {
   }
 
   subgraph cluster_browser_check {
-    label="2. k6 synthetic browser action check";
+    label="2. k6 browser-action and SM scripted checks";
     color="#475569";
     fontcolor="#f8fafc";
     style="rounded,dashed";
 
     synthetic_script [
-      label="load-tests/synthetic-browser-actions.js\nChromium storefront journey",
+      label="k6 browser-action check\nload-tests/synthetic-browser-actions.js\nChromium UI/Faro journey",
       fillcolor="#713f12",
       color="#fbbf24"
     ];
@@ -88,7 +88,7 @@ digraph faro_k6_contract_relationships {
       shape=plain,
       label=<
         <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="7" COLOR="#475569">
-          <TR><TD BGCOLOR="#1e3a5f" COLSPAN="2"><FONT COLOR="#f8fafc"><B>Coverage assertions</B></FONT></TD></TR>
+          <TR><TD BGCOLOR="#1e3a5f" COLSPAN="2"><FONT COLOR="#f8fafc"><B>UI/Faro coverage assertions</B></FONT></TD></TR>
           <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">selectors</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">every expected button/action exists</FONT></TD></TR>
           <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">navigation</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">brand, header, hero, utility, sale banner</FONT></TD></TR>
           <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">cart</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">add, remove, checkout, dialog close</FONT></TD></TR>
@@ -103,6 +103,25 @@ digraph faro_k6_contract_relationships {
       label="k6 counters\nstorefront_user_actions\nstorefront_user_action_events\ncart add/remove/checkout totals",
       fillcolor="#78350f",
       color="#fbbf24"
+    ];
+
+    sm_scripted [
+      label="SM scripted k6 check\nobservability/synthetic-monitoring/\nensemble-grafana-scripted-check.js",
+      fillcolor="#134e4a",
+      color="#5eead4"
+    ];
+
+    sm_assertions [
+      shape=plain,
+      label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="7" COLOR="#475569">
+          <TR><TD BGCOLOR="#155e75" COLSPAN="2"><FONT COLOR="#f8fafc"><B>HTTP transaction assertions</B></FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">runtime</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">1 VU, 1 iteration, no external data files</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">storefront</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">homepage 200 and duration threshold</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">inventory</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">product list and product detail JSON</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">security</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">cart API rejects unauthenticated request</FONT></TD></TR>
+        </TABLE>
+      >
     ];
   }
 
@@ -138,7 +157,7 @@ digraph faro_k6_contract_relationships {
     style="rounded,dashed";
 
     faro_cloud [
-      label="Grafana Faro collector\nfaro.user.action events\nfrontend sessions and errors",
+      label="Grafana Faro collector\ningests pushEvent()\nfaro.user.action events\nfrontend sessions and errors",
       fillcolor="#6b21a8",
       color="#c084fc"
     ];
@@ -150,7 +169,7 @@ digraph faro_k6_contract_relationships {
     ];
 
     synthetic_monitoring [
-      label="Grafana Synthetic Monitoring\nHTTP, DNS, Ping, TCP checks\nuptime, TLS, response, resolution",
+      label="Grafana Synthetic Monitoring\nHTTP, DNS, Ping, TCP, Scripted k6\nuptime, TLS, response, resolution,\nstorefront/API transaction",
       fillcolor="#6b21a8",
       color="#c084fc"
     ];
@@ -164,42 +183,67 @@ digraph faro_k6_contract_relationships {
           <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">scripts/report-load-tests.mjs</FONT></TD></TR>
           <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">reports/frontend-user-actions/</FONT></TD></TR>
           <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">reports/load-tests/comparison/</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#93c5fd">report gaps update the contract</FONT></TD></TR>
         </TABLE>
       >
     ];
   }
 
   contract_rule [
-    label="Contract rule\nFrontend emits named actions;\nk6 validates the same names;\nGrafana proves they arrived.",
+    label="Action contract\nname -> validate -> observe",
     fillcolor="#164e63",
     color="#22d3ee",
     penwidth=2
   ];
 
+  browser_contract [
+    label="Browser UI",
+    shape=ellipse,
+    fillcolor="#0f766e",
+    color="#5eead4"
+  ];
+
+  api_contract [
+    label="API checks",
+    shape=ellipse,
+    fillcolor="#0f766e",
+    color="#5eead4"
+  ];
+
+  load_contract [
+    label="Load tests",
+    shape=ellipse,
+    fillcolor="#0f766e",
+    color="#5eead4"
+  ];
+
   app_js -> action_taxonomy [label="defines names"];
   action_taxonomy -> faro_attrs [label="adds attributes"];
-  faro_attrs -> contract_rule [label="contract"];
+  faro_attrs -> contract_rule [label=""];
 
-  contract_rule -> synthetic_script [label="selector coverage"];
+  contract_rule -> browser_contract [label=""];
+  contract_rule -> api_contract [label=""];
+  contract_rule -> load_contract [label=""];
+
+  browser_contract -> synthetic_script [label="selectors"];
   synthetic_script -> dom_probe [label="browser executes UI"];
   dom_probe -> synthetic_assertions [label="checks behavior"];
   dom_probe -> synthetic_counters [label="counts observed actions"];
+  api_contract -> sm_scripted [label="transactions"];
+  sm_scripted -> sm_assertions [label="checks API behavior"];
 
-  contract_rule -> regional_load [label="region and API context"];
-  contract_rule -> spike_load [label="browser action scenario"];
+  load_contract -> regional_load [label="region/API"];
+  load_contract -> spike_load [label="browser actions"];
   synthetic_script -> spike_load [label="imported as storefront_actions"];
   regional_load -> load_thresholds [label="API behavior"];
   spike_load -> load_thresholds [label="spike and action rates"];
   synthetic_counters -> load_thresholds [label="per-action thresholds"];
 
-  app_js -> faro_cloud [label="pushEvent"];
   synthetic_assertions -> k6_cloud [label="checks"];
   synthetic_counters -> k6_cloud [label="custom metrics"];
+  sm_assertions -> synthetic_monitoring [label="scripted check"];
   load_thresholds -> k6_cloud [label="cloud run results"];
   synthetic_monitoring -> reports [label="availability context"];
   faro_cloud -> reports [label="LogQL action totals"];
   k6_cloud -> reports [label="run summaries"];
-
-  synthetic_monitoring -> app_js [label="site/API reachable?", style=dashed, color="#60a5fa"];
-  reports -> contract_rule [label="gaps drive contract updates", style=dashed, color="#60a5fa"];
 }

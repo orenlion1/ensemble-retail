@@ -79,7 +79,7 @@ Source design note: `docs/dashboard-design/The Tufte Aesthetic for Grafana Dashb
 | asserts-usMp0qg7z | Node Group KPI | 12 |
 | c0c599c3-b950-44cc-9b22-c1b9b55f5fb4 | Billing/Usage | 1 |
 | d2e206e1-f72b-448c-83d8-657831c2ea6d | Overview | 4 |
-| ensemble-red-log-signals | Ensemble RED and Log Signals | 114 |
+| ensemble-red-log-signals | Ensemble Performance | 114 |
 | f41e046e-928f-4c5e-9a12-cd1fbd79609e | Business Health | 11 |
 | fdkz6t5tcm7lse | Logs Demo Dashboard | 6 |
 | or46lql | User Action Traffic: Real Users vs k6 | 23 |

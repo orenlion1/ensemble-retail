@@ -22,7 +22,7 @@ Keep dashboard updates scoped to the affected inventory entry. Avoid rewriting u
 | Load Test | `panel-16` | Traffic Spike Target Heatmap Dark | `docs/graphviz/traffic-spike-target-heatmap-dark.dot` |
 | Load Test | `panel-17` | Load Run History Table | `docs/graphviz/load-run-table.dot` |
 | Load Test | `panel-18` | Traffic Spike User Action Fidelity | `docs/graphviz/traffic-spike-load-test-flow.dot` |
-| Observability Architecture | `panel-19` | Faro, k6, and Synthetic Monitoring Contract | `docs/graphviz/faro-k6-contract-relationships.dot` |
+| Frontend Observability | `panel-19` | Faro, k6, and Synthetic Monitoring Contract | `docs/graphviz/faro-k6-contract-relationships.dot` |
 
 ## Refresh Command
 

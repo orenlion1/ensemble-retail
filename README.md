@@ -115,7 +115,7 @@ During saturation runs, watch Grafana for Kubernetes CPU/memory utilization, pod
 
 To compare a local kubelet-log remediation plan with Grafana Assistant's remediation plan, use the repo alias `/compare-kubelet-resolution-plan`. The command definition is `.codex/commands/compare-kubelet-resolution-plan.md` and calls `gcx assistant prompt --context assistant-oauth` with the same kubelet ERROR-log analysis prompt used for the local Resolution Plan. The `assistant-oauth` context uses browser OAuth for Grafana Assistant, while the default `gcx` context remains the service-account context for dashboards, datasources, IRM, Synthetic Monitoring, and other automation. If Assistant returns `HTTP 401: invalid user`, rerun `gcx login assistant-oauth --server https://orenlion.grafana.net` and choose OAuth browser auth.
 
-The Grafana dashboard `Ensemble RED and Log Signals` includes a `kubelet` tab for probe-failure RCA. The tab is managed from `observability/grafana/dashboards/ensemble-red-log-signals.json` and was published with `gcx dashboards update ensemble-red-log-signals`. It includes Loki panels for kubelet probe failures grouped by service (`containerName`), pod, probe type, and node/instance, plus raw probe-failure details. To refresh and republish the dashboard manifest:
+The Grafana dashboard `Ensemble Performance` includes a `kubelet` tab for probe-failure RCA. The tab is managed from `observability/grafana/dashboards/ensemble-red-log-signals.json` and was published with `gcx dashboards update ensemble-red-log-signals`. It includes Loki panels for kubelet probe failures grouped by service (`containerName`), pod, probe type, and node/instance, plus raw probe-failure details. To refresh and republish the dashboard manifest:
 
 ```sh
 gcx dashboards get ensemble-red-log-signals -o json > observability/grafana/dashboards/ensemble-red-log-signals.json
@@ -306,12 +306,30 @@ Those private probe records are offline until their agents are deployed, so the 
 - DNS: `ensemble-grafana-dns-resolution` - check ID `2495`
 - Ping: `ensemble-grafana-ping-reachability` - check ID `2496`
 - TCP: `ensemble-grafana-tcp-tls-connectivity` - check ID `2497`
+- Scripted k6: `ensemble-grafana-scripted-storefront-api` - check ID `2545`
+
+The scripted k6 check follows Grafana Synthetic Monitoring requirements: one VU, one iteration, no external data files, and only standard k6 imports. It loads the storefront, validates the public inventory list, fetches one product detail by ID, and confirms the protected cart API rejects unauthenticated access. The source script is `observability/synthetic-monitoring/ensemble-grafana-scripted-check.js`; the check manifest is `observability/synthetic-monitoring/check-scripted-storefront-api.yaml`.
+
+Validate the scripted check locally before pushing changes:
+
+```sh
+k6 run observability/synthetic-monitoring/ensemble-grafana-scripted-check.js
+```
+
+`gcx synthetic-monitoring checks create` currently returns `failed to decode incoming check` for the `settings.scripted.script` manifest even though `gcx` can list and query the created check. Use the Grafana Terraform provider wrapper in `observability/synthetic-monitoring/terraform-scripted-check/` for creation/update until `gcx` supports scripted check manifests in this environment. Required provider environment variables are `GRAFANA_URL`, `GRAFANA_AUTH`, `GRAFANA_SM_URL`, `GRAFANA_SM_ACCESS_TOKEN`, and `GRAFANA_STACK_ID`. Because check ID `2545` was created before a repo-local Terraform state was committed, import it before managing updates from this wrapper:
+
+```sh
+terraform -chdir=observability/synthetic-monitoring/terraform-scripted-check init
+terraform -chdir=observability/synthetic-monitoring/terraform-scripted-check import grafana_synthetic_monitoring_check.scripted 2545
+terraform -chdir=observability/synthetic-monitoring/terraform-scripted-check apply
+```
 
 Useful `gcx` commands:
 
 ```sh
 gcx synthetic-monitoring probes list --limit 0
 gcx synthetic-monitoring checks list --job 'ensemble-grafana-*'
+gcx synthetic-monitoring checks list -o json --no-truncate | jq '[.[] | select(.spec.settings | has("scripted"))]'
 gcx synthetic-monitoring checks get 2493 -o yaml
 ```
 

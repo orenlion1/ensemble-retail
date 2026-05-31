@@ -5,19 +5,19 @@
     "annotations": {
       "grafana.app/createdBy": "service-account:bfn4sb0kofeo0b",
       "grafana.app/folder": "fn9nd7",
-      "grafana.app/message": "Add link to synthetics detail",
+      "grafana.app/message": "changed link name to Frontend Detail",
       "grafana.app/saved-from-ui": "Grafana Cloud",
       "grafana.app/updatedBy": "service-account:ffn1sscdjmscge",
-      "grafana.app/updatedTimestamp": "2026-05-31T16:13:10Z"
+      "grafana.app/updatedTimestamp": "2026-05-31T17:35:32Z"
     },
     "creationTimestamp": "2026-05-30T15:13:20Z",
-    "generation": 28,
+    "generation": 32,
     "labels": {
       "grafana.app/deprecatedInternalID": "2596326027239424"
     },
     "name": "ensemble-red-log-signals",
     "namespace": "stacks-1665320",
-    "resourceVersion": "2061118801822351713",
+    "resourceVersion": "2061139529695232919",
     "uid": "537a3e75-9a52-4596-818e-10d20f2f693c"
   },
   "spec": {
@@ -3127,6 +3127,455 @@
                 "showUnfilled": true,
                 "sizing": "auto",
                 "valueMode": "color"
+              }
+            },
+            "version": "13.1.0-26564065169"
+          }
+        }
+      },
+      "panel-158": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-logs"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "sum by(action_name) (count_over_time({app_id=\"464\", kind=\"event\"} |= \"event_name=faro.user.action\" | logfmt | k6_isK6Browser=\"true\" [$__auto]))",
+                        "instant": false,
+                        "legendFormat": "{{action_name}}",
+                        "queryType": "range",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Event rate per named user action step emitted by k6 browser scripted checks (k6_isK6Browser=true). Step-level volume drops indicate a broken user journey; spikes indicate retry storms or test misconfiguration.",
+          "id": 158,
+          "links": [],
+          "title": "k6 Scripted Check: User Action Volume by Step",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 8,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 2,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "never",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "short"
+                },
+                "overrides": []
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [
+                    "mean",
+                    "max"
+                  ],
+                  "displayMode": "table",
+                  "enableFacetedFilter": false,
+                  "placement": "right",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "desc"
+                }
+              }
+            },
+            "version": "13.1.0-26564065169"
+          }
+        }
+      },
+      "panel-159": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-logs"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "quantile_over_time(0.95, {app_id=\"464\", kind=\"event\"} |= \"event_name=faro.user.action\" | logfmt | k6_isK6Browser=\"true\" | unwrap event_data_userActionDuration [$__auto]) by (action_name)",
+                        "instant": false,
+                        "legendFormat": "{{action_name}} p95",
+                        "queryType": "range",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "P95 user action duration from k6 browser scripted checks, broken down by action_name. Steps exceeding SLO thresholds appear as sustained rises; compare against real-user p95 on the Frontend tab for regression fidelity.",
+          "id": 159,
+          "links": [],
+          "title": "k6 Scripted Check: Action Duration p95 by Step",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 8,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 2,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "never",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "yellow",
+                        "value": 2000
+                      },
+                      {
+                        "color": "red",
+                        "value": 5000
+                      }
+                    ]
+                  },
+                  "unit": "ms"
+                },
+                "overrides": []
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [
+                    "mean",
+                    "max",
+                    "lastNotNull"
+                  ],
+                  "displayMode": "table",
+                  "enableFacetedFilter": false,
+                  "placement": "right",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "desc"
+                }
+              }
+            },
+            "version": "13.1.0-26564065169"
+          }
+        }
+      },
+      "panel-160": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-logs"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "sum by(action_name, event_data_userActionImportance) (count_over_time({app_id=\"464\", kind=\"event\"} |= \"event_name=faro.user.action\" | logfmt | k6_isK6Browser=\"true\" | event_data_userActionImportance=~\"critical|high\" [$__auto]))",
+                        "instant": false,
+                        "legendFormat": "{{action_name}} | {{event_data_userActionImportance}}",
+                        "queryType": "range",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Critical and high-importance user action steps from k6 scripted checks. These map to checkout, cart, and account-save flows — the actions most sensitive to performance regressions in user journeys.",
+          "id": 160,
+          "links": [],
+          "title": "k6 Scripted Check: Critical \u0026 High Importance Actions",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 10,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 2,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "never",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "short"
+                },
+                "overrides": []
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [
+                    "mean",
+                    "max"
+                  ],
+                  "displayMode": "table",
+                  "enableFacetedFilter": false,
+                  "placement": "right",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "desc"
+                }
+              }
+            },
+            "version": "13.1.0-26564065169"
+          }
+        }
+      },
+      "panel-161": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "grafanacloud-logs"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "app": "grafana-assistant-app",
+                        "expr": "{app_id=\"464\", kind=\"event\"} |= \"event_name=faro.user.action\" | logfmt | k6_isK6Browser=\"true\"",
+                        "instant": false,
+                        "legendFormat": "",
+                        "queryType": "range",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Raw k6 browser user action events with all logfmt fields visible in log details (action_name, event_data_userActionDuration, event_data_userActionImportance, region, locale, session). Use for step-level debugging of failed or slow synthetic runs.",
+          "id": 161,
+          "links": [],
+          "title": "k6 Scripted Check: Recent Action Detail",
+          "vizConfig": {
+            "group": "logs",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
+              "options": {
+                "dedupStrategy": "none",
+                "enableInfiniteScrolling": false,
+                "enableLogDetails": true,
+                "prettifyLogMessage": false,
+                "showCommonLabels": false,
+                "showControls": false,
+                "showFieldSelector": false,
+                "showLabels": false,
+                "showLevel": true,
+                "showLogAttributes": true,
+                "showTime": true,
+                "sortOrder": "Descending",
+                "timestampResolution": "ms",
+                "unwrappedColumns": false,
+                "wrapLogMessage": false
               }
             },
             "version": "13.1.0-26564065169"
@@ -7448,6 +7897,71 @@
                       "spec": {
                         "element": {
                           "kind": "ElementReference",
+                          "name": "panel-158"
+                        },
+                        "height": 7,
+                        "width": 12,
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-159"
+                        },
+                        "height": 7,
+                        "width": 12,
+                        "x": 12,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-160"
+                        },
+                        "height": 7,
+                        "width": 12,
+                        "x": 0,
+                        "y": 7
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-161"
+                        },
+                        "height": 7,
+                        "width": 12,
+                        "x": 12,
+                        "y": 7
+                      }
+                    }
+                  ]
+                }
+              },
+              "title": "Scripted Checks"
+            }
+          },
+          {
+            "kind": "TabsLayoutTab",
+            "spec": {
+              "layout": {
+                "kind": "GridLayout",
+                "spec": {
+                  "items": [
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
                           "name": "panel-149"
                         },
                         "height": 4,
@@ -7473,7 +7987,7 @@
         "keepTime": true,
         "tags": [],
         "targetBlank": true,
-        "title": "Front Observability Detail",
+        "title": "Frontend Detail",
         "tooltip": "",
         "type": "link",
         "url": "https://orenlion.grafana.net/a/grafana-kowalski-app/apps/464?var-Filters=\u0026from=1780151786457\u0026to=1780238186457\u0026timezone=browser"
@@ -7531,7 +8045,7 @@
       "timezone": "browser",
       "to": "now"
     },
-    "title": "Ensemble RED and Log Signals",
+    "title": "Ensemble Performance",
     "variables": [
       {
         "kind": "CustomVariable",

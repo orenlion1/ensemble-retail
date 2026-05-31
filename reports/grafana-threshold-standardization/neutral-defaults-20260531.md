@@ -91,7 +91,7 @@ A fresh dashboard pull after publishing found:
 | asserts-xSc6TpPMk | Volume KPI | 5 | 0 | 0 | 5 |
 | c0c599c3-b950-44cc-9b22-c1b9b55f5fb4 | Billing/Usage | 64 | 2 | 62 | 128 |
 | d2e206e1-f72b-448c-83d8-657831c2ea6d | Overview | 4 | 4 | 0 | 8 |
-| ensemble-red-log-signals | Ensemble RED and Log Signals | 33 | 0 | 0 | 33 |
+| ensemble-red-log-signals | Ensemble Performance | 33 | 0 | 0 | 33 |
 | f41e046e-928f-4c5e-9a12-cd1fbd79609e | Business Health | 4 | 5 | 4 | 13 |
 | fdkz6t5tcm7lse | Logs Demo Dashboard | 8 | 4 | 0 | 12 |
 | or46lql | User Action Traffic: Real Users vs k6 | 6 | 0 | 2 | 8 |
