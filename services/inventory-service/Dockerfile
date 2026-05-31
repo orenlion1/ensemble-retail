@@ -5,4 +5,4 @@ COPY --chown=appuser:appuser ${JAR_FILE} /app/app.jar
 USER 10001
 WORKDIR /app
 EXPOSE 8081
-ENTRYPOINT ["java", "-XX:MaxRAMPercentage=75", "-jar", "/app/app.jar"]
+ENTRYPOINT ["java", "-XX:MaxRAMPercentage=60", "-XX:InitialRAMPercentage=30", "-jar", "/app/app.jar"]

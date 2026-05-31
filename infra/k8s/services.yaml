@@ -56,7 +56,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: inventory-service
-          image: 629513454417.dkr.ecr.us-east-1.amazonaws.com/inventory-service:0.1.0
+          image: 629513454417.dkr.ecr.us-east-1.amazonaws.com/inventory-service:0.1.1
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8081
@@ -78,14 +78,20 @@ spec:
             - name: OTEL_EXPORTER_OTLP_ENDPOINT
               value: http://alloy.ensemble-observability.svc.cluster.local:4318/v1/traces
             - name: JAVA_TOOL_OPTIONS
-              value: -XX:+UnlockDiagnosticVMOptions -XX:+DebugNonSafepoints
+              value: -XX:+UnlockDiagnosticVMOptions -XX:+DebugNonSafepoints -XX:+EnableDynamicAgentLoading
             - name: LOG_LEVEL
               value: INFO
+            - name: POSTGRES_MAX_POOL_SIZE
+              value: "4"
+            - name: POSTGRES_MIN_IDLE
+              value: "1"
+            - name: POSTGRES_CONNECTION_TIMEOUT_MS
+              value: "5000"
             - name: ALLOWED_CORS_ORIGINS
               valueFrom: { secretKeyRef: { name: ensemble-secrets, key: ALLOWED_CORS_ORIGINS } }
           resources:
-            requests: { cpu: 50m, memory: 128Mi }
-            limits: { cpu: 300m, memory: 384Mi }
+            requests: { cpu: 150m, memory: 384Mi }
+            limits: { cpu: 750m, memory: 768Mi }
           readinessProbe:
             httpGet: { path: /actuator/health/readiness, port: 8081 }
             initialDelaySeconds: 60

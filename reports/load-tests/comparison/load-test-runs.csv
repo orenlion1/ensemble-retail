@@ -1,5 +1,4 @@
 date,created,testName,testId,runId,result,status,durationSeconds,totalVuh,protocolVuh,browserVuh,maxVus,maxBrowserVus,url
-"2026-05-25","2026-05-25T12:58:12.359774Z","Traffic spike benchmark","1228496","7612573","passed","completed","510","6.38","6.38","0","45","0","https://orenlion.grafana.net/a/k6-app/runs/7612573"
 "2026-05-27","2026-05-27T16:06:25.021147Z","Traffic spike benchmark","1228496","7627249","passed","completed","510","6.38","6.38","0","45","0","https://orenlion.grafana.net/a/k6-app/runs/7627249"
 "2026-05-27","2026-05-27T16:41:54.635349Z","Traffic spike benchmark","1228496","7627390","failed","completed","510","6.38","6.38","0","45","0","https://orenlion.grafana.net/a/k6-app/runs/7627390"
 "2026-05-27","2026-05-27T17:05:14.727566Z","Traffic spike benchmark","1228496","7627516","failed","completed","510","6.38","6.38","0","45","0","https://orenlion.grafana.net/a/k6-app/runs/7627516"
@@ -20,3 +19,4 @@ date,created,testName,testId,runId,result,status,durationSeconds,totalVuh,protoc
 "2026-05-30","2026-05-30T22:27:23.551448Z","Traffic spike benchmark","1228496","7648780","passed","completed","900","129","117.16","11.84","400","0","https://orenlion.grafana.net/a/k6-app/runs/7648780"
 "2026-05-31","2026-05-31T10:44:39.611175Z","Traffic spike benchmark","1228496","7651472","failed","completed","900","129","117.16","11.84","400","0","https://orenlion.grafana.net/a/k6-app/runs/7651472"
 "2026-05-31","2026-05-31T16:41:09.714862Z","Browser action synthetic check","1233226","7652683","passed","completed","21","1","0","1","1","1","https://orenlion.grafana.net/a/k6-app/runs/7652683"
+"2026-05-31","2026-05-31T17:42:14.636203Z","Traffic spike benchmark","1228496","7652889","","processing_metrics","900","129","117.16","11.84","400","0","https://orenlion.grafana.net/a/k6-app/runs/7652889"

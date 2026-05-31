@@ -110,6 +110,7 @@ export const options = {
     spike_cart_updates: ['count>20'],
     spike_checkout_attempts: ['count>5'],
     spike_region_changes: ['count>30'],
+    spike_non_json_responses: ['count==0'],
     api_latency: ['p(95)<750'],
     cart_updates: ['count>20'],
     checkout_attempts: ['count>5'],
@@ -162,6 +163,7 @@ const apiRequestRateRequests = new Counter('api_request_rate_requests');
 const spikeCartUpdates = new Counter('spike_cart_updates');
 const spikeCheckoutAttempts = new Counter('spike_checkout_attempts');
 const spikeRegionChanges = new Counter('spike_region_changes');
+const spikeNonJsonResponses = new Counter('spike_non_json_responses');
 
 const steadyProduct = {
   id: 'mens-midlayer-grid',
@@ -220,6 +222,24 @@ function getJson(path, region, persona, shopperId, name, spike) {
   });
   spikeApiLatency.add(response.timings.duration, { region, persona, name, spike });
   return response;
+}
+
+function parseJsonResponse(response, context) {
+  const contentType = String(response.headers['Content-Type'] || response.headers['content-type'] || '');
+  if (response.status !== 200 || !contentType.includes('application/json')) {
+    spikeNonJsonResponses.add(1, context);
+    const bodyPrefix = String(response.body || '').slice(0, 120).replace(/\s+/g, ' ');
+    console.error(`Expected JSON for ${context.name}, got status=${response.status}, content_type=${contentType || 'unset'}, body_prefix=${bodyPrefix}`);
+    return null;
+  }
+
+  try {
+    return response.json();
+  } catch (error) {
+    spikeNonJsonResponses.add(1, context);
+    console.error(`Failed to parse JSON for ${context.name}: ${String(error)}`);
+    return null;
+  }
 }
 
 function putJson(path, body, region, persona, shopperId, name, spike) {
@@ -313,7 +333,13 @@ export function trafficSpikeJourney() {
       'products loaded during spike': response => response.status === 200
     }, { region, persona, spike });
 
-    const products = productsResponse.json();
+    const products = parseJsonResponse(productsResponse, {
+      region,
+      persona,
+      spike,
+      name: 'GET /api/inventory/products'
+    });
+    if (!Array.isArray(products)) return;
     const product = selectProduct(products, persona);
     if (!product) return;
 

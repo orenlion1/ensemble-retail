@@ -2,6 +2,7 @@ package com.ensemblegrafana.inventory;
 
 import java.util.Arrays;
 import java.util.List;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +14,7 @@ public class ProductRepository {
     this.jdbc = jdbc;
   }
 
+  @Cacheable("inventory-products")
   public List<Product> findAll() {
     return jdbc.sql("SELECT * FROM products ORDER BY department, category, name")
         .query((rs, rowNum) -> new Product(
@@ -31,6 +33,7 @@ public class ProductRepository {
         .list();
   }
 
+  @Cacheable("inventory-categories")
   public List<CategoryGroup> categories() {
     return jdbc.sql("SELECT department, category FROM products GROUP BY department, category ORDER BY department, category")
         .query((rs, rowNum) -> new CategoryRow(rs.getString("department"), rs.getString("category")))
