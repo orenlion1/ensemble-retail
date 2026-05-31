@@ -1,0 +1,191 @@
+digraph traffic_spike_user_action_fidelity {
+  graph [
+    rankdir=LR,
+    bgcolor="#0b1220",
+    fontcolor="#f8fafc",
+    fontname="Helvetica",
+    fontsize=22,
+    labelloc=t,
+    label="Traffic Spike Load Test: User Action Fidelity",
+    pad=0.35,
+    nodesep=0.5,
+    ranksep=0.8,
+    splines=ortho
+  ];
+
+  node [
+    shape=box,
+    style="rounded,filled",
+    fontname="Helvetica",
+    fontsize=12,
+    color="#64748b",
+    fillcolor="#111827",
+    fontcolor="#f8fafc",
+    margin="0.13,0.08"
+  ];
+
+  edge [
+    color="#94a3b8",
+    fontcolor="#f8fafc",
+    fontname="Helvetica",
+    fontsize=10,
+    arrowsize=0.75
+  ];
+
+  start [
+    label="Grafana Cloud k6\ntraffic spike benchmark\nstorefront_actions scenario",
+    fillcolor="#4c1d95",
+    color="#a78bfa"
+  ];
+
+  load_shape [
+    shape=plain,
+    label=<
+      <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="7" COLOR="#475569">
+        <TR><TD BGCOLOR="#1e3a5f" COLSPAN="2"><FONT COLOR="#f8fafc"><B>Load envelope</B></FONT></TD></TR>
+        <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">traffic_spikes</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">100 / 200 / 400 VU peaks</FONT></TD></TR>
+        <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">regional_shoppers</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">30 multi-region shoppers</FONT></TD></TR>
+        <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">api_request_rate</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">8 rps through CloudFront /api</FONT></TD></TR>
+        <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">storefront_actions</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">5 browser VUs for UI action fidelity</FONT></TD></TR>
+      </TABLE>
+    >
+  ];
+
+  browser [
+    label="Synthetic browser journey\nreal Chromium page\nrecords window.__k6UserActions",
+    fillcolor="#312e81",
+    color="#a5b4fc"
+  ];
+
+  subgraph cluster_region_language {
+    label="Region and localization actions";
+    color="#475569";
+    fontcolor="#f8fafc";
+    style="rounded,dashed";
+
+    locale_validation [
+      label="Validate localized page copy\nCA French, CN Mandarin,\nUK British English, SE Swedish,\nUS American English",
+      fillcolor="#164e63",
+      color="#22d3ee"
+    ];
+    region_actions [
+      shape=plain,
+      label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="7" COLOR="#475569">
+          <TR><TD BGCOLOR="#1e3a5f"><FONT COLOR="#f8fafc"><B>Required exact actions</B></FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#bfdbfe">select-region:SE</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#bfdbfe">select-language:swedish</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#bfdbfe">select-region:US</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#bfdbfe">select-language:american-english</FONT></TD></TR>
+        </TABLE>
+      >
+    ];
+  }
+
+  subgraph cluster_discovery {
+    label="Discovery and browsing actions";
+    color="#475569";
+    fontcolor="#f8fafc";
+    style="rounded,dashed";
+
+    discovery_actions [
+      shape=plain,
+      label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="7" COLOR="#475569">
+          <TR><TD BGCOLOR="#1e3a5f"><FONT COLOR="#f8fafc"><B>Required action families</B></FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">select-department:womens</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">select-department:mens</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">select-category:mens-mid-layers</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">sort-products:price-low</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">search-products</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">view-product:*</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">close-product-detail:*</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">view-sale-product:*</FONT></TD></TR>
+        </TABLE>
+      >
+    ];
+  }
+
+  subgraph cluster_cart_checkout {
+    label="Cart, checkout, and account actions";
+    color="#475569";
+    fontcolor="#f8fafc";
+    style="rounded,dashed";
+
+    cart_actions [
+      shape=plain,
+      label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="7" COLOR="#475569">
+          <TR><TD BGCOLOR="#1e3a5f"><FONT COLOR="#f8fafc"><B>Required action families</B></FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#dcfce7">shopping-cart:add-detail-item:*</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#dcfce7">shopping-cart:add-item:*</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#dcfce7">shopping-cart:add-sale-item:*</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#dcfce7">shopping-cart:change-quantity:*</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#dcfce7">shopping-cart:checkout</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#dcfce7">checkout-dialog:close</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#dcfce7">shopping-cart:remove-item:*</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#dcfce7">save-account</FONT></TD></TR>
+        </TABLE>
+      >
+    ];
+  }
+
+  subgraph cluster_instrumentation {
+    label="Instrumentation and validation";
+    color="#475569";
+    fontcolor="#f8fafc";
+    style="rounded,dashed";
+
+    app_attrs [
+      label="Frontend trackAppAction\nadds app context\nregion, locale, language,\ncart/product/account attributes",
+      fillcolor="#581c87",
+      color="#c084fc"
+    ];
+    faro [
+      label="Grafana Faro\nfaro.api.pushEvent\nfaro.user.action",
+      fillcolor="#6b21a8",
+      color="#c084fc"
+    ];
+    k6_counters [
+      shape=plain,
+      label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="7" COLOR="#475569">
+          <TR><TD BGCOLOR="#1e3a5f"><FONT COLOR="#f8fafc"><B>k6 counters and thresholds</B></FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">storefront_user_actions &gt; 300</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">storefront_user_action_events by action_family</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">each action_family rate &gt;= 0.2/sec</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">cart add/detail/sale/remove/checkout counters &gt; 10</FONT></TD></TR>
+        </TABLE>
+      >
+    ];
+    grafana [
+      label="Grafana Cloud\nFrontend Observability\nfilter faro.user.action",
+      fillcolor="#6b21a8",
+      color="#c084fc"
+    ];
+    report [
+      label="Post-run reports\nFaro action totals\nload-test comparison\nGraphviz run history",
+      fillcolor="#334155",
+      color="#94a3b8"
+    ];
+  }
+
+  start -> load_shape;
+  load_shape -> browser [color="#c4b5fd"];
+
+  browser -> locale_validation;
+  browser -> region_actions;
+  browser -> discovery_actions;
+  browser -> cart_actions;
+
+  region_actions -> app_attrs;
+  discovery_actions -> app_attrs;
+  cart_actions -> app_attrs;
+  locale_validation -> app_attrs;
+
+  app_attrs -> faro;
+  app_attrs -> k6_counters;
+  faro -> grafana;
+  k6_counters -> report;
+  grafana -> report;
+}

@@ -578,7 +578,13 @@ The current load-run history table is also available as Graphviz source and rend
 - `docs/graphviz/load-run-table.svg`
 - `docs/graphviz/load-run-table.png`
 
-The Grafana folder `Diagrams` contains the dashboard `Ensemble Graphviz Diagrams`, which embeds the key current Graphviz DOT sources from `docs/diagrams/` and `docs/graphviz/`. The `Load Test` tab includes the traffic-spike target heatmap and the load-run history table. Folder URL: `https://orenlion.grafana.net/dashboards/f/ensemble-diagrams/diagrams`. Dashboard URL: `https://orenlion.grafana.net/d/ensemble-graphviz-diagrams/ensemble-graphviz-diagrams`. Recreate or update it with:
+The traffic-spike user-action fidelity model is available as:
+
+- `docs/graphviz/traffic-spike-load-test-flow.dot`
+- `docs/graphviz/traffic-spike-load-test-flow.svg`
+- `docs/graphviz/traffic-spike-load-test-flow.png`
+
+The Grafana folder `Diagrams` contains the dashboard `Ensemble Graphviz Diagrams`, which embeds the key current Graphviz DOT sources from `docs/diagrams/` and `docs/graphviz/`. The `Load Test` tab includes the traffic-spike target heatmap, load-run history table, and traffic-spike user-action fidelity model. Folder URL: `https://orenlion.grafana.net/dashboards/f/ensemble-diagrams/diagrams`. Dashboard URL: `https://orenlion.grafana.net/d/ensemble-graphviz-diagrams/ensemble-graphviz-diagrams`. Recreate or update it with:
 
 ```sh
 gcx api /api/folders -d '{"uid":"ensemble-diagrams","title":"Diagrams"}'

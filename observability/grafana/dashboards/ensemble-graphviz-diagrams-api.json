@@ -4,18 +4,18 @@
   "metadata": {
     "annotations": {
       "grafana.app/createdBy": "service-account:ffn1sscdjmscge",
-      "grafana.app/message": "Darken load run history Graphviz table",
+      "grafana.app/message": "Add traffic spike user action fidelity diagram to Load Test tab",
       "grafana.app/updatedBy": "service-account:ffn1sscdjmscge",
-      "grafana.app/updatedTimestamp": "2026-05-30T23:55:02Z"
+      "grafana.app/updatedTimestamp": "2026-05-31T09:24:01Z"
     },
     "creationTimestamp": "2026-05-30T21:25:26Z",
-    "generation": 12,
+    "generation": 13,
     "labels": {
       "grafana.app/deprecatedInternalID": "2689969128804352"
     },
     "name": "ensemble-graphviz-diagrams",
     "namespace": "stacks-1665320",
-    "resourceVersion": "2060872643959063468",
+    "resourceVersion": "2061015833261376388",
     "uid": "2b774a56-5210-4abe-b58b-57f772616c4e"
   },
   "spec": {
@@ -271,6 +271,63 @@
           }
         }
       },
+      "panel-18": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "group": "",
+                      "kind": "DataQuery",
+                      "spec": {},
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Source: docs/graphviz/traffic-spike-load-test-flow.dot",
+          "id": 18,
+          "links": [],
+          "title": "Traffic Spike User Action Fidelity",
+          "vizConfig": {
+            "group": "grafana-graphviz-panel",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
+              "options": {
+                "_assistantHelp": "",
+                "builderModeActions": {},
+                "dotDiagram": "digraph traffic_spike_user_action_fidelity {\n  graph [\n    rankdir=LR,\n    bgcolor=\"#0b1220\",\n    fontcolor=\"#f8fafc\",\n    fontname=\"Helvetica\",\n    fontsize=22,\n    labelloc=t,\n    label=\"Traffic Spike Load Test: User Action Fidelity\",\n    pad=0.35,\n    nodesep=0.5,\n    ranksep=0.8,\n    splines=ortho\n  ];\n\n  node [\n    shape=box,\n    style=\"rounded,filled\",\n    fontname=\"Helvetica\",\n    fontsize=12,\n    color=\"#64748b\",\n    fillcolor=\"#111827\",\n    fontcolor=\"#f8fafc\",\n    margin=\"0.13,0.08\"\n  ];\n\n  edge [\n    color=\"#94a3b8\",\n    fontcolor=\"#f8fafc\",\n    fontname=\"Helvetica\",\n    fontsize=10,\n    arrowsize=0.75\n  ];\n\n  start [\n    label=\"Grafana Cloud k6\\ntraffic spike benchmark\\nstorefront_actions scenario\",\n    fillcolor=\"#4c1d95\",\n    color=\"#a78bfa\"\n  ];\n\n  load_shape [\n    shape=plain,\n    label=\u003c\n      \u003cTABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"7\" COLOR=\"#475569\"\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#1e3a5f\" COLSPAN=\"2\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eLoad envelope\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003etraffic_spikes\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e293b\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e100 / 200 / 400 VU peaks\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eregional_shoppers\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e293b\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e30 multi-region shoppers\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eapi_request_rate\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e293b\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e8 rps through CloudFront /api\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003estorefront_actions\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e293b\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e5 browser VUs for UI action fidelity\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n      \u003c/TABLE\u003e\n    \u003e\n  ];\n\n  browser [\n    label=\"Synthetic browser journey\\nreal Chromium page\\nrecords window.__k6UserActions\",\n    fillcolor=\"#312e81\",\n    color=\"#a5b4fc\"\n  ];\n\n  subgraph cluster_region_language {\n    label=\"Region and localization actions\";\n    color=\"#475569\";\n    fontcolor=\"#f8fafc\";\n    style=\"rounded,dashed\";\n\n    locale_validation [\n      label=\"Validate localized page copy\\nCA French, CN Mandarin,\\nUK British English, SE Swedish,\\nUS American English\",\n      fillcolor=\"#164e63\",\n      color=\"#22d3ee\"\n    ];\n    region_actions [\n      shape=plain,\n      label=\u003c\n        \u003cTABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"7\" COLOR=\"#475569\"\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#1e3a5f\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eRequired exact actions\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#bfdbfe\"\u003eselect-region:SE\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#bfdbfe\"\u003eselect-language:swedish\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#bfdbfe\"\u003eselect-region:US\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#bfdbfe\"\u003eselect-language:american-english\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003c/TABLE\u003e\n      \u003e\n    ];\n  }\n\n  subgraph cluster_discovery {\n    label=\"Discovery and browsing actions\";\n    color=\"#475569\";\n    fontcolor=\"#f8fafc\";\n    style=\"rounded,dashed\";\n\n    discovery_actions [\n      shape=plain,\n      label=\u003c\n        \u003cTABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"7\" COLOR=\"#475569\"\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#1e3a5f\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eRequired action families\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eselect-department:womens\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eselect-department:mens\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eselect-category:mens-mid-layers\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003esort-products:price-low\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003esearch-products\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eview-product:*\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eclose-product-detail:*\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eview-sale-product:*\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003c/TABLE\u003e\n      \u003e\n    ];\n  }\n\n  subgraph cluster_cart_checkout {\n    label=\"Cart, checkout, and account actions\";\n    color=\"#475569\";\n    fontcolor=\"#f8fafc\";\n    style=\"rounded,dashed\";\n\n    cart_actions [\n      shape=plain,\n      label=\u003c\n        \u003cTABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"7\" COLOR=\"#475569\"\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#1e3a5f\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eRequired action families\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#dcfce7\"\u003eshopping-cart:add-detail-item:*\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#dcfce7\"\u003eshopping-cart:add-item:*\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#dcfce7\"\u003eshopping-cart:add-sale-item:*\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#dcfce7\"\u003eshopping-cart:change-quantity:*\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#dcfce7\"\u003eshopping-cart:checkout\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#dcfce7\"\u003echeckout-dialog:close\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#dcfce7\"\u003eshopping-cart:remove-item:*\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#dcfce7\"\u003esave-account\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003c/TABLE\u003e\n      \u003e\n    ];\n  }\n\n  subgraph cluster_instrumentation {\n    label=\"Instrumentation and validation\";\n    color=\"#475569\";\n    fontcolor=\"#f8fafc\";\n    style=\"rounded,dashed\";\n\n    app_attrs [\n      label=\"Frontend trackAppAction\\nadds app context\\nregion, locale, language,\\ncart/product/account attributes\",\n      fillcolor=\"#581c87\",\n      color=\"#c084fc\"\n    ];\n    faro [\n      label=\"Grafana Faro\\nfaro.api.pushEvent\\nfaro.user.action\",\n      fillcolor=\"#6b21a8\",\n      color=\"#c084fc\"\n    ];\n    k6_counters [\n      shape=plain,\n      label=\u003c\n        \u003cTABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"7\" COLOR=\"#475569\"\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#1e3a5f\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003ek6 counters and thresholds\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003estorefront_user_actions \u0026gt; 300\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003estorefront_user_action_events by action_family\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eeach action_family rate \u0026gt;= 0.2/sec\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003ecart add/detail/sale/remove/checkout counters \u0026gt; 10\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003c/TABLE\u003e\n      \u003e\n    ];\n    grafana [\n      label=\"Grafana Cloud\\nFrontend Observability\\nfilter faro.user.action\",\n      fillcolor=\"#6b21a8\",\n      color=\"#c084fc\"\n    ];\n    report [\n      label=\"Post-run reports\\nFaro action totals\\nload-test comparison\\nGraphviz run history\",\n      fillcolor=\"#334155\",\n      color=\"#94a3b8\"\n    ];\n  }\n\n  start -\u003e load_shape;\n  load_shape -\u003e browser [color=\"#c4b5fd\"];\n\n  browser -\u003e locale_validation;\n  browser -\u003e region_actions;\n  browser -\u003e discovery_actions;\n  browser -\u003e cart_actions;\n\n  region_actions -\u003e app_attrs;\n  discovery_actions -\u003e app_attrs;\n  cart_actions -\u003e app_attrs;\n  locale_validation -\u003e app_attrs;\n\n  app_attrs -\u003e faro;\n  app_attrs -\u003e k6_counters;\n  faro -\u003e grafana;\n  k6_counters -\u003e report;\n  grafana -\u003e report;\n}\n",
+                "dotQueryConfig": {
+                  "fieldName": "dot_diagram"
+                },
+                "edgeOverrides": [],
+                "inputMode": "code",
+                "layoutEngine": "dot",
+                "namedThresholds": [],
+                "nodeOverrides": [],
+                "rankDirection": "LR",
+                "splineType": "ortho"
+              }
+            },
+            "version": "0.0.5"
+          }
+        }
+      },
       "panel-3": {
         "kind": "Panel",
         "spec": {
@@ -429,6 +486,19 @@
                         "width": 24,
                         "x": 0,
                         "y": 14
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-18"
+                        },
+                        "height": 20,
+                        "width": 24,
+                        "x": 0,
+                        "y": 38
                       }
                     }
                   ]
