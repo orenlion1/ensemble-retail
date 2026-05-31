@@ -366,9 +366,10 @@ function writeLocalCounterCsv(file, rows) {
 
 function graphvizCell(value, color = '#111827', options = {}) {
   const align = options.align ? ` ALIGN="${options.align}"` : '';
+  const width = options.width ? ` WIDTH="${options.width}"` : '';
   const fontColor = options.fontColor || '#f8fafc';
   const text = options.bold ? `<B>${escapeXml(value)}</B>` : escapeXml(value);
-  return `<TD BGCOLOR="${color}"${align}><FONT COLOR="${fontColor}">${text}</FONT></TD>`;
+  return `<TD BGCOLOR="${color}"${align}${width}><FONT COLOR="${fontColor}">${text}</FONT></TD>`;
 }
 
 function loadRunTableDot(rows) {
@@ -384,14 +385,14 @@ function loadRunTableDot(rows) {
     const metric = index % 2 === 0 ? '#1e293b' : '#243044';
     return [
       '        <TR>',
-      `          ${graphvizCell(formatDate(run.created), base)}`,
-      `          ${graphvizCell(run.runId, base, { fontColor: '#bfdbfe' })}`,
-      `          ${graphvizCell(resultText(run.result), resultColor(run.result), { bold: true })}`,
-      `          ${graphvizCell(`${number((run.durationSeconds || 0) / 60, 1)}m`, base)}`,
-      `          ${graphvizCell(wholeNumber(run.requestRatePerSecond), metric)}`,
-      `          ${graphvizCell(number(run.totalVuh), metric)}`,
-      `          ${graphvizCell(number(run.protocolVuh), metric)}`,
-      `          ${graphvizCell(number(run.browserVuh), metric)}`,
+      `          ${graphvizCell(formatDate(run.created), base, { width: 175 })}`,
+      `          ${graphvizCell(run.runId, base, { fontColor: '#bfdbfe', width: 80 })}`,
+      `          ${graphvizCell(resultText(run.result), resultColor(run.result), { bold: true, width: 70 })}`,
+      `          ${graphvizCell(`${number((run.durationSeconds || 0) / 60, 1)}m`, base, { width: 85 })}`,
+      `          ${graphvizCell(wholeNumber(run.requestRatePerSecond), metric, { width: 105 })}`,
+      `          ${graphvizCell(number(run.totalVuh), metric, { width: 85 })}`,
+      `          ${graphvizCell(number(run.protocolVuh), metric, { width: 85 })}`,
+      `          ${graphvizCell(number(run.browserVuh), metric, { width: 85 })}`,
       '        </TR>'
     ].join('\n');
   }).join('\n');
@@ -420,14 +421,14 @@ function loadRunTableDot(rows) {
     label=<
       <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="7" COLOR="#475569">
         <TR>
-          ${graphvizCell('Started', '#1e3a5f', { bold: true })}
-          ${graphvizCell('Run', '#1e3a5f', { bold: true })}
-          ${graphvizCell('Result', '#1e3a5f', { bold: true })}
-          ${graphvizCell('Duration', '#1e3a5f', { bold: true })}
-          ${graphvizCell('Request/sec', '#1e3a5f', { bold: true })}
-          ${graphvizCell('Total VUH', '#1e3a5f', { bold: true })}
-          ${graphvizCell('Protocol', '#1e3a5f', { bold: true })}
-          ${graphvizCell('Browser', '#1e3a5f', { bold: true })}
+          ${graphvizCell('Started', '#1e3a5f', { bold: true, width: 175 })}
+          ${graphvizCell('Run', '#1e3a5f', { bold: true, width: 80 })}
+          ${graphvizCell('Result', '#1e3a5f', { bold: true, width: 70 })}
+          ${graphvizCell('Duration', '#1e3a5f', { bold: true, width: 85 })}
+          ${graphvizCell('Request/sec', '#1e3a5f', { bold: true, width: 105 })}
+          ${graphvizCell('Total VUH', '#1e3a5f', { bold: true, width: 85 })}
+          ${graphvizCell('Protocol', '#1e3a5f', { bold: true, width: 85 })}
+          ${graphvizCell('Browser', '#1e3a5f', { bold: true, width: 85 })}
         </TR>
 ${rowMarkup}
       </TABLE>
