@@ -325,6 +325,8 @@ IRM setup notes live in `docs/grafana-irm.md`. The OnCall API URL is `https://in
 
 The business-hours on-call helper is `observability/irm/create-business-hours-oncall.sh` and creates `Ensemble-Grafana Business Hours`, assigning the current IRM user every day from `09:00` to `17:00` in `America/New_York`.
 
+The 24/7 SRE on-call helper is `observability/irm/create-sre-24x7-oncall.sh` and creates `Ensemble-Grafana SRE 24x7`, assigning user `orendroid` every day for a 24-hour recurrent shift in `America/New_York`, scoped to team `SRE`, and connected to Slack channel `#sre`.
+
 `gcx irm oncall` currently supports listing and inspecting OnCall schedules, shifts, and users. This installed gcx build does not expose create commands for OnCall shifts or schedules, so the helper uses the official IRM API for creation and `gcx` for current-user lookup/validation when a valid IRM token is configured.
 
 Required inputs:
@@ -338,6 +340,7 @@ Run:
 
 ```sh
 observability/irm/create-business-hours-oncall.sh
+observability/irm/create-sre-24x7-oncall.sh
 gcx irm oncall schedules list
 gcx irm oncall shifts list
 ```
@@ -346,6 +349,9 @@ Current IRM resources:
 
 - Schedule: `Ensemble-Grafana Business Hours`, ID `SP1JXJ6S48HAZ`.
 - Shift: `Ensemble-Grafana 9-5 Eastern`, ID `OHIRQE3JJ96RI`.
+- Schedule: `Ensemble-Grafana SRE 24x7`, ID `SG6C9816MEKQQ`, team `SRE` (`TWU2GNHZYST7U`), Slack channel `#sre` (`C0B6UFESQR5`).
+- Shift: `Ensemble-Grafana SRE 24x7`, ID `OTL337ZBLLAUC`, daily 24-hour recurrence starting `2026-05-31T00:00:00` in `America/New_York`.
+- Escalation chain: `SRE-Escalation`, ID `FXIJQB51CYLL3`; first policy `EQFWNRZQGD1DQ` uses `notify_on_call_from_schedule` with schedule `SG6C9816MEKQQ`, followed by a 15-minute wait and team-member fallback.
 - User: `orendroid`, ID `UGQ913U99XKYX`.
 - Severity levels: Level 1 `Sev-1: Critical Business Impact`; Level 2 `Sev-2: Significant Business Impact`; Level 3 `Sev-3: Medium Impact`; Level 4 `Low Impact`.
 - Incident label values: `client_impact`, `region`, `root_cause`, `service`, and cart/login `feature` values include the Ensemble-Grafana labels plus all additional label values extracted from the `Uptime SLA & RCA` dashboard transformations. `root_cause` includes `misconfiguration`; `service` includes `account`, `authentication`, `cart`, and `inventory`. Dashboard-derived keys now include `feature`, `hosting_type`, `impact_type`, `product`, and `serviceline`.

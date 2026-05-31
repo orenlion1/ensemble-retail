@@ -39,6 +39,50 @@ gcx irm oncall shifts list
 gcx irm oncall schedules final-shifts SP1JXJ6S48HAZ --start 2026-05-25 --end 2026-05-28
 ```
 
+## SRE 24/7 On-Call Schedule
+
+The 24/7/365 SRE schedule is `Ensemble-Grafana SRE 24x7`. It assigns `orendroid` (`UGQ913U99XKYX`) to a daily 24-hour recurrent shift, scoped to team `SRE` (`TWU2GNHZYST7U`) and connected to Slack channel `#sre` (`C0B6UFESQR5`).
+
+Use `observability/irm/create-sre-24x7-oncall.sh` to recreate it. The helper uses the OnCall API because this `gcx` build can list OnCall schedules and shifts but does not expose create commands.
+
+Required credentials and inputs:
+
+- `GRAFANA_IRM_API_URL`: defaults to `https://incident-prod-us-east-3.grafana.net/oncall`.
+- `GRAFANA_IRM_TOKEN`: a token with `grafana-irm-app.schedules:write` and `grafana-irm-app.user-settings:read`.
+- `GRAFANA_STACK_URL`: defaults to `https://orenlion.grafana.net`.
+- `USER_ID`: defaults to `UGQ913U99XKYX`.
+- `TEAM_ID`: defaults to `TWU2GNHZYST7U`.
+- `SLACK_CHANNEL_ID`: defaults to `C0B6UFESQR5`.
+
+Run:
+
+```sh
+GRAFANA_IRM_TOKEN=<irm-token> \
+observability/irm/create-sre-24x7-oncall.sh
+```
+
+Current created resources:
+
+- Schedule: `Ensemble-Grafana SRE 24x7`, ID `SG6C9816MEKQQ`.
+- Shift: `Ensemble-Grafana SRE 24x7`, ID `OTL337ZBLLAUC`.
+- Escalation chain: `SRE-Escalation`, ID `FXIJQB51CYLL3`.
+- Escalation policy: `EQFWNRZQGD1DQ`, position `0`, type `notify_on_call_from_schedule`, schedule `SG6C9816MEKQQ`, important notifications enabled.
+- Team: `SRE`, ID `TWU2GNHZYST7U`.
+- Slack channel: `#sre`, ID `C0B6UFESQR5`.
+- User: `orendroid`, ID `UGQ913U99XKYX`.
+- Time zone: `America/New_York`.
+- Start: `2026-05-31T00:00:00`.
+- Duration: `86400` seconds.
+
+Validate:
+
+```sh
+gcx irm oncall schedules get SG6C9816MEKQQ -o json
+gcx irm oncall shifts get OTL337ZBLLAUC -o json
+gcx irm oncall schedules final-shifts SG6C9816MEKQQ --start 2026-05-31 --end 2026-06-03 -o json
+gcx irm oncall escalation-policies get EQFWNRZQGD1DQ -o json
+```
+
 ## Labels
 
 Use these exact label keys and values on generated and real incidents:
