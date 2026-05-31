@@ -20,14 +20,14 @@ const spikeMultiplier = Number(__ENV.SPIKE_MULTIPLIER || 2);
 const spikeTwoUsers = Math.ceil(baseSpikeUsers * spikeMultiplier);
 const spikeThreeUsers = Math.ceil(spikeTwoUsers * spikeMultiplier);
 const regionalShopperVus = Number(__ENV.REGIONAL_SHOPPER_VUS || 30);
-const apiRequestRate = Number(__ENV.API_REQUEST_RPS || 8);
+const apiRequestRate = Number(__ENV.API_REQUEST_RPS || 15);
 const userActionTargetRps = Number(__ENV.USER_ACTION_TARGET_RPS || 0.2);
 const browserActionVus = Number(__ENV.BROWSER_ACTION_VUS || 5);
-const benchmarkDuration = __ENV.TEST_DURATION || '15m';
+const benchmarkDuration = __ENV.TEST_DURATION || '10m';
 const benchmarkDurationSeconds = durationToSeconds(benchmarkDuration);
 const apiRequestRateMinimumCount = Math.floor(apiRequestRate * benchmarkDurationSeconds * 0.95);
-const browserActionRampUp = __ENV.BROWSER_ACTION_RAMP_UP || '3m';
-const browserActionHold = __ENV.BROWSER_ACTION_HOLD || '10m';
+const browserActionRampUp = __ENV.BROWSER_ACTION_RAMP_UP || '2m';
+const browserActionHold = __ENV.BROWSER_ACTION_HOLD || '6m';
 const browserActionRampDown = __ENV.BROWSER_ACTION_RAMP_DOWN || '2m';
 const browserActionDuration = __ENV.BROWSER_ACTION_DURATION || benchmarkDuration;
 const userActionRateThresholds = Object.fromEntries(
@@ -39,7 +39,7 @@ const userActionRateThresholds = Object.fromEntries(
 
 function durationToSeconds(value) {
   const match = String(value).trim().match(/^(\d+(?:\.\d+)?)(ms|s|m|h)$/);
-  if (!match) return 900;
+  if (!match) return 600;
   const amount = Number(match[1]);
   const unit = match[2];
   if (unit === 'ms') return amount / 1000;
@@ -57,16 +57,16 @@ export const options = {
       exec: 'trafficSpikeJourney',
       executor: 'ramping-vus',
       stages: [
-        { duration: '2m', target: Math.ceil(baseSpikeUsers * 0.25) },
-        { duration: '30s', target: baseSpikeUsers },
-        { duration: '2m', target: baseSpikeUsers },
-        { duration: '1m30s', target: Math.ceil(baseSpikeUsers * 0.25) },
-        { duration: '30s', target: spikeTwoUsers },
-        { duration: '2m', target: spikeTwoUsers },
-        { duration: '1m30s', target: Math.ceil(baseSpikeUsers * 0.25) },
-        { duration: '30s', target: spikeThreeUsers },
-        { duration: '2m', target: spikeThreeUsers },
-        { duration: '2m30s', target: 0 }
+        { duration: '1m', target: Math.ceil(baseSpikeUsers * 0.25) },
+        { duration: '20s', target: baseSpikeUsers },
+        { duration: '1m20s', target: baseSpikeUsers },
+        { duration: '1m', target: Math.ceil(baseSpikeUsers * 0.25) },
+        { duration: '20s', target: spikeTwoUsers },
+        { duration: '1m20s', target: spikeTwoUsers },
+        { duration: '1m', target: Math.ceil(baseSpikeUsers * 0.25) },
+        { duration: '20s', target: spikeThreeUsers },
+        { duration: '1m20s', target: spikeThreeUsers },
+        { duration: '2m', target: 0 }
       ],
       gracefulRampDown: '30s'
     },

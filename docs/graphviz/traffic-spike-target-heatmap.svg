@@ -102,7 +102,7 @@
 <title>target_note</title>
 <text xml:space="preserve" text-anchor="start" x="4" y="-29.7" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="14.00">Readout:</text>
 <text xml:space="preserve" text-anchor="start" x="62.5" y="-29.7" font-family="Helvetica,sans-Serif" font-size="14.00"> darker cells mean more target pressure per completed wave.</text>
-<text xml:space="preserve" text-anchor="start" x="4" y="-7.75" font-family="Helvetica,sans-Serif" font-size="14.00">Current config: BASE_SPIKE_USERS=100, SPIKE_MULTIPLIER=2, regional_shoppers=30 VUs, api_request_rate=8 requests/sec, storefront_actions=ramp to 5 browser VUs over 3m, hold 10m, ramp down 2m.</text>
+<text xml:space="preserve" text-anchor="start" x="4" y="-7.75" font-family="Helvetica,sans-Serif" font-size="14.00">Current config: BASE_SPIKE_USERS=100, SPIKE_MULTIPLIER=2, regional_shoppers=30 VUs, api_request_rate=15 requests/sec, storefront_actions=ramp to 5 browser VUs over 2m, hold 6m, ramp down 2m.</text>
 </g>
 <!-- target_heatmap&#45;&gt;target_note -->
 </g>

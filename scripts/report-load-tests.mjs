@@ -8,6 +8,14 @@ const outputDir = path.join(reportsDir, 'comparison');
 const graphvizDir = path.resolve('docs/graphviz');
 const timezone = 'America/New_York';
 
+const requestRateByRunId = new Map([
+  [7653359, 15],
+  [7653277, 10],
+  [7653107, 5],
+  [7652889, 8],
+  [7651472, 8]
+]);
+
 function readJson(file) {
   return JSON.parse(readFileSync(file, 'utf8'));
 }
@@ -63,6 +71,10 @@ function dayKey(value) {
 
 function number(value, digits = 2) {
   return Number.isFinite(value) ? value.toFixed(digits) : 'n/a';
+}
+
+function wholeNumber(value) {
+  return Number.isFinite(value) ? String(Math.round(value)) : 'n/a';
 }
 
 function percent(value) {
@@ -121,7 +133,8 @@ function allRunsFrom(rawRuns) {
         browserVuh: run.cost?.breakdown?.browser_vuh ?? null,
         url: `https://orenlion.grafana.net/a/k6-app/runs/${run.id}`,
         maxVus: run.max_vus ?? null,
-        maxBrowserVus: run.max_browser_vus ?? null
+        maxBrowserVus: run.max_browser_vus ?? null,
+        requestRatePerSecond: requestRateByRunId.get(Number(run.id ?? run.runId)) ?? null
       });
     }
   }
@@ -292,7 +305,7 @@ function writeResultHeatmap(file, rows) {
 }
 
 function writeCsv(file, rows) {
-  const headers = ['date', 'created', 'testName', 'testId', 'runId', 'result', 'status', 'durationSeconds', 'totalVuh', 'protocolVuh', 'browserVuh', 'maxVus', 'maxBrowserVus', 'url'];
+  const headers = ['date', 'created', 'testName', 'testId', 'runId', 'result', 'status', 'durationSeconds', 'requestRatePerSecond', 'totalVuh', 'protocolVuh', 'browserVuh', 'maxVus', 'maxBrowserVus', 'url'];
   const lines = [headers.join(',')];
   rows.forEach(row => {
     lines.push(headers.map(header => {
@@ -375,6 +388,7 @@ function loadRunTableDot(rows) {
       `          ${graphvizCell(run.runId, base, { fontColor: '#bfdbfe' })}`,
       `          ${graphvizCell(resultText(run.result), resultColor(run.result), { bold: true })}`,
       `          ${graphvizCell(`${number((run.durationSeconds || 0) / 60, 1)}m`, base)}`,
+      `          ${graphvizCell(wholeNumber(run.requestRatePerSecond), metric)}`,
       `          ${graphvizCell(number(run.totalVuh), metric)}`,
       `          ${graphvizCell(number(run.protocolVuh), metric)}`,
       `          ${graphvizCell(number(run.browserVuh), metric)}`,
@@ -410,6 +424,7 @@ function loadRunTableDot(rows) {
           ${graphvizCell('Run', '#1e3a5f', { bold: true })}
           ${graphvizCell('Result', '#1e3a5f', { bold: true })}
           ${graphvizCell('Duration', '#1e3a5f', { bold: true })}
+          ${graphvizCell('Request/sec', '#1e3a5f', { bold: true })}
           ${graphvizCell('Total VUH', '#1e3a5f', { bold: true })}
           ${graphvizCell('Protocol', '#1e3a5f', { bold: true })}
           ${graphvizCell('Browser', '#1e3a5f', { bold: true })}
@@ -553,6 +568,7 @@ const historyRows = runs.slice().reverse().map(run => [
   `[${run.runId}](${run.url})`,
   resultIcon(run.result),
   `${number((run.durationSeconds || 0) / 60, 1)}m`,
+  wholeNumber(run.requestRatePerSecond),
   number(run.totalVuh),
   number(run.protocolVuh),
   number(run.browserVuh)
@@ -674,8 +690,8 @@ ${faroExecutionRows.length ? faroExecutionRows.join('\n') : '| n/a | n/a | n/a |
 
 ## Run History
 
-| Date | Started | Test | Run | Result | Duration | Total VUH | Protocol VUH | Browser VUH |
-|---|---|---|---|---:|---:|---:|---:|---:|
+| Date | Started | Test | Run | Result | Duration | Request/sec | Total VUH | Protocol VUH | Browser VUH |
+|---|---|---|---|---:|---:|---:|---:|---:|---:|
 ${historyRows.join('\n')}
 
 ## Machine-Readable Comparison

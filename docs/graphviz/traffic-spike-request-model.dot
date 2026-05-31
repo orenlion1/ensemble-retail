@@ -27,24 +27,24 @@ digraph traffic_spike_request_model {
 
   subgraph cluster_stages {
     label="Current k6 stages from grafana-cloud-traffic-spikes.js"; color="#cbd5e1"; style="rounded,dashed"; fontsize=16; fontname="Helvetica";
-    warmup [label="Warmup\n2m, 25 VUs\n~100 requests\n15 cart updates\n5 checkout attempts\n25 region changes", fillcolor="#f1f5f9"];
-    ramp1 [label="Ramp to Spike 1\n30s, 100 VUs\nup to ~400 requests\n60 cart updates\n20 checkout attempts\n100 region changes", fillcolor="#dbeafe"];
-    hold1 [label="Hold Spike 1\n2m, 100 VUs\n~400 requests / wave\n60 cart updates\n20 checkout attempts\n100 region changes", fillcolor="#bfdbfe"];
-    recovery1 [label="Recovery\n1m30s, 25 VUs\n~100 requests / wave\n15 cart updates\n5 checkout attempts\n25 region changes", fillcolor="#f1f5f9"];
-    ramp2 [label="Ramp to Spike 2\n30s, 200 VUs\nup to ~800 requests\n120 cart updates\n40 checkout attempts\n200 region changes", fillcolor="#fde68a"];
-    hold2 [label="Hold Spike 2\n2m, 200 VUs\n~800 requests / wave\n120 cart updates\n40 checkout attempts\n200 region changes", fillcolor="#fcd34d"];
-    recovery2 [label="Recovery\n1m30s, 25 VUs\n~100 requests / wave\n15 cart updates\n5 checkout attempts\n25 region changes", fillcolor="#f1f5f9"];
-    ramp3 [label="Ramp to Spike 3\n30s, 400 VUs\nup to ~1600 requests\n240 cart updates\n80 checkout attempts\n400 region changes", fillcolor="#fecaca"];
-    hold3 [label="Hold Spike 3\n2m, 400 VUs\n~1600 requests / wave\n240 cart updates\n80 checkout attempts\n400 region changes", fillcolor="#fca5a5"];
-    rampdown [label="Ramp down\n2m30s, 0 VUs\nrequests decrease to 0", fillcolor="#e2e8f0"];
+    warmup [label="Warmup\n1m, 25 VUs\n~100 requests\n15 cart updates\n5 checkout attempts\n25 region changes", fillcolor="#f1f5f9"];
+    ramp1 [label="Ramp to Spike 1\n20s, 100 VUs\nup to ~400 requests\n60 cart updates\n20 checkout attempts\n100 region changes", fillcolor="#dbeafe"];
+    hold1 [label="Hold Spike 1\n1m20s, 100 VUs\n~400 requests / wave\n60 cart updates\n20 checkout attempts\n100 region changes", fillcolor="#bfdbfe"];
+    recovery1 [label="Recovery\n1m, 25 VUs\n~100 requests / wave\n15 cart updates\n5 checkout attempts\n25 region changes", fillcolor="#f1f5f9"];
+    ramp2 [label="Ramp to Spike 2\n20s, 200 VUs\nup to ~800 requests\n120 cart updates\n40 checkout attempts\n200 region changes", fillcolor="#fde68a"];
+    hold2 [label="Hold Spike 2\n1m20s, 200 VUs\n~800 requests / wave\n120 cart updates\n40 checkout attempts\n200 region changes", fillcolor="#fcd34d"];
+    recovery2 [label="Recovery\n1m, 25 VUs\n~100 requests / wave\n15 cart updates\n5 checkout attempts\n25 region changes", fillcolor="#f1f5f9"];
+    ramp3 [label="Ramp to Spike 3\n20s, 400 VUs\nup to ~1600 requests\n240 cart updates\n80 checkout attempts\n400 region changes", fillcolor="#fecaca"];
+    hold3 [label="Hold Spike 3\n1m20s, 400 VUs\n~1600 requests / wave\n240 cart updates\n80 checkout attempts\n400 region changes", fillcolor="#fca5a5"];
+    rampdown [label="Ramp down\n2m, 0 VUs\nrequests decrease to 0", fillcolor="#e2e8f0"];
     warmup -> ramp1 -> hold1 -> recovery1 -> ramp2 -> hold2 -> recovery2 -> ramp3 -> hold3 -> rampdown;
   }
 
   subgraph cluster_parallel {
     label="Parallel scenarios in combined script"; color="#cbd5e1"; style="rounded,dashed"; fontsize=16; fontname="Helvetica";
-    regional [label="regional_shoppers\n30 VUs for TEST_DURATION/default 15m\n~120 requests per completed wave", fillcolor="#ecfdf5"];
-    api_rate [label="api_request_rate\nconstant arrival rate\n8 requests/sec for 15m", fillcolor="#e0f2fe"];
-    storefront [label="storefront_actions\nramp to 5 browser VUs over 3m, hold 10m, ramp down 2m\nFaro UI actions + browser metrics\nstandard http_reqs may be n/a", fillcolor="#faf5ff"];
+    regional [label="regional_shoppers\n30 VUs for TEST_DURATION/default 10m\n~120 requests per completed wave", fillcolor="#ecfdf5"];
+    api_rate [label="api_request_rate\nconstant arrival rate\n15 requests/sec for 10m", fillcolor="#e0f2fe"];
+    storefront [label="storefront_actions\nramp to 5 browser VUs over 2m, hold 6m, ramp down 2m\nFaro UI actions + browser metrics\nstandard http_reqs may be n/a", fillcolor="#faf5ff"];
   }
 
   note -> avg;

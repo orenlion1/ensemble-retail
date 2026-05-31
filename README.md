@@ -572,7 +572,7 @@ The spike benchmark is `load-tests/grafana-cloud-traffic-spikes.js`. The alterna
 - Spike 2: `200` VUs.
 - Spike 3: `400` VUs.
 
-Each spike ramps quickly, holds for two minutes, and then returns to a low recovery load before the next spike. The default combined run lasts 15 minutes: a 15-minute API spike profile, 15 minutes of regional shoppers, a steady 8 requests/second API scenario, and 15 minutes of browser actions for Faro validation. Requests are tagged by `spike`, `region`, `persona`, and endpoint name. The traffic spike script is now the combined benchmark entrypoint: it runs the three-spike API benchmark, the regional shopper load scenario, a constant-arrival-rate API scenario, and a browser-action scenario that repeatedly executes the full storefront journey so Faro receives user-action events during the load window.
+Each spike ramps quickly, holds for 1 minute 20 seconds, and then returns to a low recovery load before the next spike. The default combined run lasts 10 minutes: a 10-minute API spike profile, 10 minutes of regional shoppers, a steady 15 requests/second API scenario, and 10 minutes of browser actions for Faro validation. Requests are tagged by `spike`, `region`, `persona`, and endpoint name. The traffic spike script is now the combined benchmark entrypoint: it runs the three-spike API benchmark, the regional shopper load scenario, a constant-arrival-rate API scenario, and a browser-action scenario that repeatedly executes the full storefront journey so Faro receives user-action events during the load window.
 
 Run in Grafana Cloud k6:
 
@@ -628,7 +628,7 @@ K6_CLOUD_TOKEN="$K6_CLOUD_TOKEN" k6 cloud run \
 
 The default combined benchmark peaks at 500 VUs: 400 traffic-spike VUs, 30 regional shoppers, up to 65 steady API request-rate VUs, and 5 browser-action VUs. Increase the project VU quota before running the default benchmark in Cloud k6, or temporarily lower `BASE_SPIKE_USERS`, `REGIONAL_SHOPPER_VUS`, `API_REQUEST_MAX_VUS`, or `BROWSER_ACTION_VUS` for quota-constrained validation runs.
 
-The steady API scenario is the requested 8 requests/second load. It uses `constant-arrival-rate`, runs for 15 minutes, and rotates across storefront, inventory, cart, and account requests through CloudFront. The API-rate threshold validates at least 95% of the target request count so Grafana Cloud runner setup and shutdown time do not turn an otherwise healthy 8 rps scenario into a false failure. The traffic-spike shopper journey validates that inventory product responses are JSON before parsing; HTML or non-200 product responses increment `spike_non_json_responses` and fail the `count==0` threshold with a clear status/content-type/body-prefix log. The browser-action scenario uses sustained browser VUs rather than a single shared iteration. Its default target is at least 0.2 user-action events per second for every expected action family. Browser VUs ramp to the 5-VU target over 3 minutes, hold for 10 minutes, and ramp down for 2 minutes so Grafana Cloud does not launch every Chromium session in the same startup burst. The script publishes a tagged `storefront_user_action_events` counter with `action_family` labels and fails the run when any expected action family is below `USER_ACTION_TARGET_RPS`. Browser-action load is intentionally lower than protocol API load because the full synthetic journey launches Chromium and captures Faro actions. Browser navigation waits for the storefront app shell instead of global network idle so background Faro or image requests do not fail the benchmark before the UI is usable.
+The steady API scenario is the requested 15 requests/second load. It uses `constant-arrival-rate`, runs for 10 minutes, and rotates across storefront, inventory, cart, and account requests through CloudFront. The API-rate threshold validates at least 95% of the target request count so Grafana Cloud runner setup and shutdown time do not turn an otherwise healthy 15 rps scenario into a false failure. The traffic-spike shopper journey validates that inventory product responses are JSON before parsing; HTML or non-200 product responses increment `spike_non_json_responses` and fail the `count==0` threshold with a clear status/content-type/body-prefix log. The browser-action scenario uses sustained browser VUs rather than a single shared iteration. Its default target is at least 0.2 user-action events per second for every expected action family. Browser VUs ramp to the 5-VU target over 2 minutes, hold for 6 minutes, and ramp down for 2 minutes so Grafana Cloud does not launch every Chromium session in the same startup burst. The script publishes a tagged `storefront_user_action_events` counter with `action_family` labels and fails the run when any expected action family is below `USER_ACTION_TARGET_RPS`. Browser-action load is intentionally lower than protocol API load because the full synthetic journey launches Chromium and captures Faro actions. Browser navigation waits for the storefront app shell instead of global network idle so background Faro or image requests do not fail the benchmark before the UI is usable.
 
 Graphviz traffic-spike diagrams live under `docs/graphviz/` and are generated from the current default benchmark profile: `BASE_SPIKE_USERS=100`, `SPIKE_MULTIPLIER=2`, `REGIONAL_SHOPPER_VUS=30`, and `BROWSER_ACTION_VUS=5`. The Grafana dashboard `Ensemble Traffic Spike Graphviz Model` uses the dark heatmap DOT from `docs/graphviz/traffic-spike-target-heatmap-dark.dot` and the HTML heatmap from `docs/graphviz/traffic-spike-target-heatmap.html`; update it with `gcx dashboards update ensemble-traffic-spike-graphviz -f observability/grafana/dashboards/traffic-spike-graphviz.json` after refreshing the dashboard manifest with `gcx dashboards get ensemble-traffic-spike-graphviz -o json`. Dashboard URL: `https://orenlion.grafana.net/d/6d68e547-2aac-4f8c-bc87-73139bff4816/ensemble-traffic-spike-graphviz-model`.
 
@@ -716,14 +716,14 @@ Optional knobs for the combined scenarios:
 
 - `REGIONAL_SHOPPER_VUS`: regional API shopper load, default `30`.
 - `SPIKE_MULTIPLIER`: traffic spike growth multiplier, default `2`.
-- `API_REQUEST_RPS`: steady protocol/API request rate, default `8`.
+- `API_REQUEST_RPS`: steady protocol/API request rate, default `15`.
 - `API_REQUEST_PRE_ALLOCATED_VUS`: preallocated VUs for the steady request-rate scenario, default `20`.
 - `API_REQUEST_MAX_VUS`: max VUs for the steady request-rate scenario, default `65`.
 - `USER_ACTION_TARGET_RPS`: minimum target rate for every expected browser user-action family, default `0.2`.
 - `BROWSER_ACTION_VUS`: concurrent browser VUs that repeatedly execute the full user-action journey, default `5`.
-- `BROWSER_ACTION_DURATION`: duration for sustained browser user-action load, default `TEST_DURATION` or `15m`.
-- `BROWSER_ACTION_RAMP_UP`: browser-action ramp-up duration, default `3m`.
-- `BROWSER_ACTION_HOLD`: browser-action hold duration, default `10m`.
+- `BROWSER_ACTION_DURATION`: duration for sustained browser user-action load, default `TEST_DURATION` or `10m`.
+- `BROWSER_ACTION_RAMP_UP`: browser-action ramp-up duration, default `2m`.
+- `BROWSER_ACTION_HOLD`: browser-action hold duration, default `6m`.
 - `BROWSER_ACTION_RAMP_DOWN`: browser-action ramp-down duration, default `2m`.
 
 The browser action check covers:
