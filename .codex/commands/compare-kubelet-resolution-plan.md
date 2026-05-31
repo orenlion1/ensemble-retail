@@ -9,7 +9,7 @@ Use this command after querying kubelet error logs through Grafana MCP and draft
 ## Workflow
 
 1. Keep this read-only. Do not modify Kubernetes, Grafana, or repo files while running the comparison.
-2. Call Grafana Assistant through `gcx assistant prompt`.
+2. Call Grafana Assistant through `gcx assistant prompt --context assistant-oauth`.
 3. Use the same kubelet log-analysis prompt that produced the local `Resolution Plan`.
 4. Ask Grafana Assistant to return:
 
@@ -21,7 +21,7 @@ Use this command after querying kubelet error logs through Grafana MCP and draft
 ## Command
 
 ```sh
-gcx assistant prompt 'Use Grafana Cloud logs to analyze kubelet ERROR-level/error messages from the ensemble-grafana cluster. Use this selector as the base: {job="integrations/kubernetes/journal", k8s_cluster_name="ensemble-grafana", unit="kubelet.service"}. Filter for ERROR messages or error/failure/OOM/eviction patterns, but exclude generic warnings unless paired with error/fail/oom/evict/backoff/crash. Search the last 6 hours and return: top recurring error patterns, representative timestamps/messages, affected instance/node if present, and a concise remediation plan.
+gcx assistant prompt --context assistant-oauth 'Use Grafana Cloud logs to analyze kubelet ERROR-level/error messages from the ensemble-grafana cluster. Use this selector as the base: {job="integrations/kubernetes/journal", k8s_cluster_name="ensemble-grafana", unit="kubelet.service"}. Filter for ERROR messages or error/failure/OOM/eviction patterns, but exclude generic warnings unless paired with error/fail/oom/evict/backoff/crash. Search the last 6 hours and return: top recurring error patterns, representative timestamps/messages, affected instance/node if present, and a concise remediation plan.
 
 Compare your remediation plan with this local Resolution Plan:
 1. Inspect inventory-service around 2026-05-31T10:44Z-10:58Z: restarts, app logs, startup time, and /actuator/health/readiness.
@@ -36,5 +36,6 @@ Return a concise side-by-side comparison: agreements, differences, missing check
 ## Notes
 
 - Grafana Assistant requires OAuth/user auth; service account tokens may fail with `invalid user`.
+- Use the `assistant-oauth` `gcx` context for Assistant so the default service-account context remains available for dashboards, datasources, IRM, Synthetic Monitoring, and other automation.
 - Keep normal `gcx` flows isolated from Assistant auth. If needed, use a temporary shell override rather than changing the default `gcx` config token.
-- If `gcx assistant prompt` fails auth, run `grafana-assistant auth` or `codex mcp login grafana` as appropriate for the active tool path, then retry.
+- If `gcx assistant prompt --context assistant-oauth` fails auth, rerun `gcx login assistant-oauth --server https://orenlion.grafana.net` and choose OAuth browser auth.
