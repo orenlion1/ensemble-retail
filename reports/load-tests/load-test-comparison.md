@@ -1,12 +1,12 @@
 # k6 Load Test Comparison
 
-Generated: 2026-06-01T15:48:28.397Z
+Generated: 2026-06-01T19:38:07.421Z
 
-Source summary: `reports/load-tests/k6-summary-20260601T154824Z.json`
+Source summary: `reports/load-tests/k6-summary-20260601T193801Z.json`
 
-Source run history: `reports/load-tests/k6-runs-20260601T154824Z.json`
+Source run history: `reports/load-tests/k6-runs-20260601T193801Z.json`
 
-Source Faro action totals: `reports/frontend-user-actions/faro-user-action-totals-20260601T154826Z.json`
+Source Faro action totals: `reports/frontend-user-actions/faro-user-action-totals-20260601T193803Z.json`
 
 ## Latest Runs
 
@@ -14,7 +14,7 @@ Source Faro action totals: `reports/frontend-user-actions/faro-user-action-total
 |---:|---|---|---|---:|---:|---:|---:|---:|---:|
 | 1228494 | API flow load test | n/a | n/a | n/a | n/a | n/a | n/a | n/a | k6 API 404 for /cloud/v6/load_tests/1228494/test_runs?%24top=20&%24orderby=created+desc: {"error":{"message":"Resource matching query does not exist: '1228494'","code":"error"}} |
 | 1228490 | 20-user regional load test | n/a | n/a | n/a | n/a | n/a | n/a | n/a | k6 API 404 for /cloud/v6/load_tests/1228490/test_runs?%24top=20&%24orderby=created+desc: {"error":{"message":"Resource matching query does not exist: '1228490'","code":"error"}} |
-| 1228496 | Traffic spike benchmark | [7658832](https://orenlion.grafana.net/a/k6-app/runs/7658832) | 06/01/2026, 11:34 | ✅ | 10.0m | n/a | n/a | n/a | n/a |
+| 1228496 | Traffic spike benchmark | [7660054](https://orenlion.grafana.net/a/k6-app/runs/7660054) | 06/01/2026, 15:23 | ✅ | 10.0m | n/a | n/a | n/a | n/a |
 | 1233226 | Browser action synthetic check | [7652683](https://orenlion.grafana.net/a/k6-app/runs/7652683) | 05/31/2026, 12:41 | ✅ | 0.3m | n/a | n/a | n/a | n/a |
 
 ## Visual Comparison
@@ -52,7 +52,7 @@ Source Faro action totals: `reports/frontend-user-actions/faro-user-action-total
 | Test | Runs | Passed | Failed | Errors | Pass Rate |
 |---|---:|---:|---:|---:|---:|
 | Browser action synthetic check | 1 | 1 | 0 | 0 | 100.00% |
-| Traffic spike benchmark | 20 | 11 | 8 | 1 | 55.00% |
+| Traffic spike benchmark | 20 | 13 | 6 | 1 | 65.00% |
 
 ## Request And User Action Totals
 
@@ -60,6 +60,7 @@ These totals come from local k6 summary files named `reports/load-tests/k6-local
 
 | Date | Generated | Test | HTTP Requests | HTTP Failures | HTTP Failure Rate | User Actions | Cart Adds Total | Add Item | Add Detail | Add Sale | Remove Item | Checkout | API Cart Updates | Checkout Attempts | Region Changes |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 2026-06-01 | 06/01/2026, 12:05 | Browser action synthetic check | 123 | 14 | 11.38% | 43 | 4 | 1 | 2 | 1 | 1 | 1 | n/a | n/a | n/a |
 | 2026-05-31 | 05/31/2026, 19:30 | Browser action synthetic check | 140 | 14 | 10.00% | 43 | 4 | 1 | 2 | 1 | 1 | 1 | n/a | n/a | n/a |
 | 2026-05-31 | 05/31/2026, 19:26 | Browser action synthetic check | 218 | 0 | 0.00% | 43 | 4 | 1 | 2 | 1 | 1 | 1 | n/a | n/a | n/a |
 | 2026-05-31 | 05/31/2026, 12:40 | Browser action synthetic check | 140 | 14 | 10.00% | 43 | 4 | 1 | 2 | 1 | 1 | 1 | n/a | n/a | n/a |
@@ -82,83 +83,84 @@ These totals come from local k6 summary files named `reports/load-tests/k6-local
 
 These totals come from the latest `gcx logs query` output under `reports/frontend-user-actions/faro-user-action-totals-*.json`. They use the latest sample from a rolling `6h` `count_over_time` query to show what Grafana Cloud received after k6 browser-action runs.
 
-Total executions: 20459
+Total executions: 36069
 
 | Action | Importance | Severity | Executions |
 |---|---|---|---:|
-| search-products | normal | unset | 1196 |
-| select-language:swedish | normal | unset | 1002 |
-| close-product-detail:mens-midlayer-grid | normal | unset | 1000 |
-| select-language:american-english | normal | unset | 1000 |
-| shopping-cart:add-detail-item:mens-midlayer-grid | normal | unset | 1000 |
-| sort-products:price-low | normal | unset | 735 |
-| shopping-cart:add-sale-item:mens-midlayer-grid | normal | unset | 502 |
-| navigate-sale:spring-collection-sale | normal | unset | 501 |
-| select-region:se | normal | unset | 501 |
-| shopping-cart:remove-item:mens-midlayer-grid | normal | unset | 501 |
-| checkout-dialog:close | normal | unset | 500 |
-| edit-account-email | normal | unset | 500 |
-| edit-account-name | normal | unset | 500 |
-| edit-shipping-address | normal | unset | 500 |
-| navigate-brand-family:ensemble | normal | unset | 500 |
-| navigate-brand-family:outlet | normal | unset | 500 |
-| navigate-brand-family:regear | normal | unset | 500 |
-| navigate-brand-family:trail-lab | normal | unset | 500 |
-| navigate-header:account | normal | unset | 500 |
-| navigate-header:cart | normal | unset | 500 |
-| navigate-header:shop | normal | unset | 500 |
-| navigate-hero:shop-new-arrivals | normal | unset | 500 |
-| navigate-sale:shop-all | normal | unset | 500 |
-| navigate-utility:find-store | normal | unset | 500 |
-| navigate-utility:help | normal | unset | 500 |
-| save-account | critical | unset | 500 |
-| select-category:mens-mid-layers | normal | unset | 500 |
-| select-department:mens | normal | unset | 500 |
-| select-department:womens | normal | unset | 500 |
-| select-region:us | normal | unset | 500 |
-| shopping-cart:add-item:mens-midlayer-grid | normal | unset | 500 |
-| shopping-cart:change-quantity:mens-midlayer-grid | normal | unset | 500 |
-| shopping-cart:checkout | critical | unset | 500 |
-| view-product:product-grid-mens-midlayer-grid | normal | unset | 500 |
-| view-product:sale-grid-mens-midlayer-grid | normal | unset | 500 |
+| search-products | normal | unset | 2105 |
+| select-language:american-english | normal | unset | 1768 |
+| select-language:swedish | normal | unset | 1768 |
+| close-product-detail:mens-midlayer-grid | normal | unset | 1764 |
+| shopping-cart:add-detail-item:mens-midlayer-grid | normal | unset | 1764 |
+| sort-products:price-low | normal | unset | 1283 |
+| shopping-cart:add-sale-item:mens-midlayer-grid | normal | unset | 885 |
+| navigate-sale:spring-collection-sale | normal | unset | 884 |
+| select-region:se | normal | unset | 884 |
+| select-region:us | normal | unset | 884 |
+| select-department:womens | normal | unset | 883 |
+| shopping-cart:remove-item:mens-midlayer-grid | normal | unset | 883 |
+| checkout-dialog:close | normal | unset | 882 |
+| edit-account-email | normal | unset | 882 |
+| edit-account-name | normal | unset | 882 |
+| edit-shipping-address | normal | unset | 882 |
+| navigate-brand-family:ensemble | normal | unset | 882 |
+| navigate-brand-family:outlet | normal | unset | 882 |
+| navigate-brand-family:regear | normal | unset | 882 |
+| navigate-brand-family:trail-lab | normal | unset | 882 |
+| navigate-header:account | normal | unset | 882 |
+| navigate-header:cart | normal | unset | 882 |
+| navigate-header:shop | normal | unset | 882 |
+| navigate-hero:shop-new-arrivals | normal | unset | 882 |
+| navigate-sale:shop-all | normal | unset | 882 |
+| navigate-utility:find-store | normal | unset | 882 |
+| navigate-utility:help | normal | unset | 882 |
+| save-account | critical | unset | 882 |
+| select-category:mens-mid-layers | normal | unset | 882 |
+| select-department:mens | normal | unset | 882 |
+| shopping-cart:add-item:mens-midlayer-grid | normal | unset | 882 |
+| shopping-cart:change-quantity:mens-midlayer-grid | normal | unset | 882 |
+| shopping-cart:checkout | critical | unset | 882 |
+| view-product:product-grid-mens-midlayer-grid | normal | unset | 882 |
+| view-product:sale-grid-mens-midlayer-grid | normal | unset | 882 |
+| select-language:mandarin | normal | unset | 6 |
 | select-language:british-english | normal | unset | 4 |
-| select-language:mandarin | normal | unset | 4 |
-| select-language:french | normal | unset | 2 |
-| select-region:cn | normal | unset | 2 |
+| select-language:french | normal | unset | 4 |
+| select-region:cn | normal | unset | 3 |
+| select-region:ca | normal | unset | 2 |
 | select-region:uk | normal | unset | 2 |
 | auth:google-login-complete | normal | unset | 1 |
 | auth:google-login-start | normal | unset | 1 |
 | select-category:mens-pants | normal | unset | 1 |
-| select-region:ca | normal | unset | 1 |
 | shopping-cart:add-item:mens-daypack-22 | normal | unset | 1 |
 | shopping-cart:add-item:mens-shell-alpha | normal | unset | 1 |
 | shopping-cart:add-sale-item:mens-trail-pant | normal | unset | 1 |
+| shopping-cart:remove-item:mens-trail-pant | normal | unset | 1 |
 
 ## Run History
 
 | Date | Started | Test | Run | Result | Duration | Request/sec | Total VUH | Protocol VUH | Browser VUH |
 |---|---|---|---|---:|---:|---:|---:|---:|---:|
-| 2026-06-01 | 06/01/2026, 11:34 | Traffic spike benchmark | [7658832](https://orenlion.grafana.net/a/k6-app/runs/7658832) | ✅ | 10.0m | n/a | 90.84 | 82.50 | 8.34 |
-| 2026-06-01 | 06/01/2026, 10:10 | Traffic spike benchmark | [7658257](https://orenlion.grafana.net/a/k6-app/runs/7658257) | ✅ | 10.0m | n/a | 90.84 | 82.50 | 8.34 |
-| 2026-06-01 | 06/01/2026, 09:47 | Traffic spike benchmark | [7658132](https://orenlion.grafana.net/a/k6-app/runs/7658132) | ✅ | 10.0m | n/a | 90.84 | 82.50 | 8.34 |
-| 2026-06-01 | 06/01/2026, 08:25 | Traffic spike benchmark | [7657705](https://orenlion.grafana.net/a/k6-app/runs/7657705) | ✅ | 10.0m | n/a | 90.84 | 82.50 | 8.34 |
-| 2026-05-31 | 05/31/2026, 19:40 | Traffic spike benchmark | [7654225](https://orenlion.grafana.net/a/k6-app/runs/7654225) | ✅ | 10.0m | n/a | 90.84 | 82.50 | 8.34 |
+| 2026-06-01 | 06/01/2026, 15:23 | Traffic spike benchmark | [7660054](https://orenlion.grafana.net/a/k6-app/runs/7660054) | ✅ | 10.0m | 100 | 102.68 | 94.39 | 8.29 |
+| 2026-06-01 | 06/01/2026, 14:38 | Traffic spike benchmark | [7659799](https://orenlion.grafana.net/a/k6-app/runs/7659799) | ❌ | 10.0m | 120 | 108.01 | 99.82 | 8.19 |
+| 2026-06-01 | 06/01/2026, 14:23 | Traffic spike benchmark | [7659741](https://orenlion.grafana.net/a/k6-app/runs/7659741) | ✅ | 10.0m | 100 | 102.68 | 94.39 | 8.29 |
+| 2026-06-01 | 06/01/2026, 14:04 | Traffic spike benchmark | [7659609](https://orenlion.grafana.net/a/k6-app/runs/7659609) | ✅ | 10.0m | 80 | 96.68 | 88.34 | 8.34 |
+| 2026-06-01 | 06/01/2026, 11:34 | Traffic spike benchmark | [7658832](https://orenlion.grafana.net/a/k6-app/runs/7658832) | ✅ | 10.0m | 60 | 90.84 | 82.50 | 8.34 |
+| 2026-06-01 | 06/01/2026, 10:10 | Traffic spike benchmark | [7658257](https://orenlion.grafana.net/a/k6-app/runs/7658257) | ✅ | 10.0m | 70 | 90.84 | 82.50 | 8.34 |
+| 2026-06-01 | 06/01/2026, 09:47 | Traffic spike benchmark | [7658132](https://orenlion.grafana.net/a/k6-app/runs/7658132) | ✅ | 10.0m | 60 | 90.84 | 82.50 | 8.34 |
+| 2026-06-01 | 06/01/2026, 08:25 | Traffic spike benchmark | [7657705](https://orenlion.grafana.net/a/k6-app/runs/7657705) | ✅ | 10.0m | 60 | 90.84 | 82.50 | 8.34 |
+| 2026-05-31 | 05/31/2026, 19:40 | Traffic spike benchmark | [7654225](https://orenlion.grafana.net/a/k6-app/runs/7654225) | ✅ | 10.0m | 60 | 90.84 | 82.50 | 8.34 |
 | 2026-05-31 | 05/31/2026, 18:44 | Traffic spike benchmark | [7654030](https://orenlion.grafana.net/a/k6-app/runs/7654030) | ✅ | 10.0m | 60 | 90.84 | 82.50 | 8.34 |
 | 2026-05-31 | 05/31/2026, 18:28 | Traffic spike benchmark | [7653979](https://orenlion.grafana.net/a/k6-app/runs/7653979) | ❌ | 10.0m | 60 | 90.84 | 82.50 | 8.34 |
 | 2026-05-31 | 05/31/2026, 18:04 | Traffic spike benchmark | [7653899](https://orenlion.grafana.net/a/k6-app/runs/7653899) | ❌ | 10.0m | 60 | 90.84 | 82.50 | 8.34 |
 | 2026-05-31 | 05/31/2026, 17:43 | Traffic spike benchmark | [7653800](https://orenlion.grafana.net/a/k6-app/runs/7653800) | ❌ | 10.0m | 60 | 90.84 | 82.50 | 8.34 |
 | 2026-05-31 | 05/31/2026, 17:16 | Traffic spike benchmark | [7653715](https://orenlion.grafana.net/a/k6-app/runs/7653715) | ✅ | 10.0m | 40 | 90.84 | 82.50 | 8.34 |
-| 2026-05-31 | 05/31/2026, 17:14 | Traffic spike benchmark | [7653705](https://orenlion.grafana.net/a/k6-app/runs/7653705) | ⚠️ | 0.8m | n/a | 7.19 | 6.19 | 1.00 |
+| 2026-05-31 | 05/31/2026, 17:14 | Traffic spike benchmark | [7653705](https://orenlion.grafana.net/a/k6-app/runs/7653705) | ⚠️ | 0.8m | 40 | 7.19 | 6.19 | 1.00 |
 | 2026-05-31 | 05/31/2026, 16:52 | Traffic spike benchmark | [7653610](https://orenlion.grafana.net/a/k6-app/runs/7653610) | ❌ | 10.0m | 30 | 90.84 | 82.50 | 8.34 |
 | 2026-05-31 | 05/31/2026, 16:17 | Traffic spike benchmark | [7653496](https://orenlion.grafana.net/a/k6-app/runs/7653496) | ❌ | 10.0m | 25 | 90.84 | 82.50 | 8.34 |
 | 2026-05-31 | 05/31/2026, 15:45 | Traffic spike benchmark | [7653359](https://orenlion.grafana.net/a/k6-app/runs/7653359) | ✅ | 10.0m | 15 | 90.84 | 82.50 | 8.34 |
 | 2026-05-31 | 05/31/2026, 15:23 | Traffic spike benchmark | [7653277](https://orenlion.grafana.net/a/k6-app/runs/7653277) | ✅ | 10.0m | 10 | 90.84 | 82.50 | 8.34 |
 | 2026-05-31 | 05/31/2026, 14:41 | Traffic spike benchmark | [7653107](https://orenlion.grafana.net/a/k6-app/runs/7653107) | ✅ | 10.0m | 5 | 90.84 | 82.50 | 8.34 |
-| 2026-05-31 | 05/31/2026, 13:42 | Traffic spike benchmark | [7652889](https://orenlion.grafana.net/a/k6-app/runs/7652889) | ❌ | 15.0m | 8 | 129.00 | 117.16 | 11.84 |
-| 2026-05-31 | 05/31/2026, 12:41 | Browser action synthetic check | [7652683](https://orenlion.grafana.net/a/k6-app/runs/7652683) | ✅ | 0.3m | n/a | 1.00 | 0.00 | 1.00 |
-| 2026-05-31 | 05/31/2026, 06:44 | Traffic spike benchmark | [7651472](https://orenlion.grafana.net/a/k6-app/runs/7651472) | ❌ | 15.0m | 8 | 129.00 | 117.16 | 11.84 |
-| 2026-05-30 | 05/30/2026, 18:27 | Traffic spike benchmark | [7648780](https://orenlion.grafana.net/a/k6-app/runs/7648780) | ✅ | 15.0m | n/a | 129.00 | 117.16 | 11.84 |
-| 2026-05-30 | 05/30/2026, 18:01 | Traffic spike benchmark | [7648612](https://orenlion.grafana.net/a/k6-app/runs/7648612) | ❌ | 15.0m | n/a | 129.00 | 117.16 | 11.84 |
+| 2026-05-31 | 05/31/2026, 12:41 | Browser action synthetic check | [7652683](https://orenlion.grafana.net/a/k6-app/runs/7652683) | ✅ | 0.3m | 0 | 1.00 | 0.00 | 1.00 |
 
 ## Machine-Readable Comparison
 

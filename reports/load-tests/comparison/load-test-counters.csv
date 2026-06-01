@@ -16,3 +16,4 @@ date,generatedAt,testName,httpRequests,httpFailures,httpFailureRate,checksTotal,
 "2026-05-31","2026-05-31T16:40:59.432Z","Browser action synthetic check","140","14","0.1","31","1","43","1","2","1","1","1","","","","reports/load-tests/k6-local-summary-browser-actions-1780245659432.json"
 "2026-05-31","2026-05-31T23:26:54.556Z","Browser action synthetic check","218","0","0","31","1","43","1","2","1","1","1","","","","reports/load-tests/k6-local-summary-browser-actions-1780270014556.json"
 "2026-05-31","2026-05-31T23:30:01.783Z","Browser action synthetic check","140","14","0.1","31","1","43","1","2","1","1","1","","","","reports/load-tests/k6-local-summary-browser-actions-1780270201784.json"
+"2026-06-01","2026-06-01T16:05:51.474Z","Browser action synthetic check","123","14","0.11382113821138211","31","1","43","1","2","1","1","1","","","","reports/load-tests/k6-local-summary-browser-actions-1780329951474.json"
