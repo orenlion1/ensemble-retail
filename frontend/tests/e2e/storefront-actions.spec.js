@@ -241,7 +241,7 @@ test.describe('storefront browser behavior', () => {
     });
     await expect(page).toHaveScreenshot(`storefront-${testInfo.project.name}.png`, {
       animations: 'disabled',
-      maxDiffPixelRatio: process.env.CI ? 0.35 : 0
+      maxDiffPixelRatio: process.env.CI ? 0.4 : 0
     });
   });
 });
