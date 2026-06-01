@@ -19,6 +19,7 @@ This repository treats infrastructure, deployment, and observability changes as 
 | IRM incidents and labels | `skills/observability/incident-creation/SKILL.md` |
 | Graphviz diagrams | `skills/graphviz/SKILL.md` |
 | Grafana diagram dashboard inventory | `skills/graphviz/dashboard-inventory/SKILL.md` |
+| Codex/Cursor slash command sync | `skills/tooling/sync-slash-commands/SKILL.md` |
 | Frontend and Spring Boot services | `skills/coding/SKILLS.md` |
 | Storefront region/localization additions | `skills/coding/add-region-localization/SKILL.md` |
 | Toolchain install and validation | `skills/dependencies/SKILLS.md` |
@@ -58,6 +59,7 @@ For large cross-cutting changes (deploy + observability + app code), run `code-r
 | App or API behavior | `skills/coding/SKILLS.md` + `test-driven-development` | `code-reviewer` |
 | New storefront region or language | `skills/coding/add-region-localization/SKILL.md` + `frontend-ui-engineering` + `browser-testing-with-devtools` | `test-engineer` |
 | Tooling setup | `skills/dependencies/SKILLS.md` | — |
+| Add/edit a Codex or Cursor `/command` | `skills/tooling/sync-slash-commands/SKILL.md` | — |
 | Frontend UI change | `skills/coding/SKILLS.md` + `frontend-ui-engineering` + `browser-testing-with-devtools` | `test-engineer` |
 | Large cross-cutting PR | repo skills as needed | parallel: `code-reviewer`, `security-auditor`, `test-engineer` |
 

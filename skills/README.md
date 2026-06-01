@@ -10,5 +10,6 @@ This folder contains reusable `SKILLS.md` playbooks for replicating the Ensemble
 - `dependencies/SKILLS.md` - Workstation/runner dependency installation and validation for Java, Maven, Docker, Terraform, AWS, Kubernetes, Grafana `gcx`, k6, and browser testing.
 - `graphviz/SKILL.md` - Create Graphviz DOT diagrams, render local SVG/PNG assets, store them in the repo, and push diagram changes to GitHub.
 - `graphviz/dashboard-inventory/SKILL.md` - Inventory the Grafana diagram dashboard by tab and enforce inventory-scoped Grafana diagram pushes.
+- `tooling/sync-slash-commands/SKILL.md` - Keep Codex (`.codex/commands`) and Cursor (`.cursor/commands`) slash commands mirrored, with a portable sync/`--check` script.
 
 When adding new reusable knowledge from this repo, update the relevant skill and keep examples generic enough to apply to the next application.
