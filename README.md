@@ -561,10 +561,10 @@ The report is written to `reports/load-tests/load-test-comparison.md`. Generate 
 
 Latest saturation exercise:
 
-- `2026-05-31 06:44 EDT`: Grafana Cloud k6 traffic spike run `7651472` failed thresholds as expected for the one-replica saturation profile. URL: `https://orenlion.grafana.net/a/k6-app/runs/7651472`.
-- Kubernetes signal: `inventory-service` was OOMKilled and restarted during the high-load window, and liveness/readiness probes timed out while the pod recovered. This is the intended Grafana-observable saturation signal for CPU/memory/restart and RED-metric investigation.
-- k6 signal: the traffic-spike scenario received HTML for `/api/inventory/products` where JSON was expected, causing `invalid character '<' looking for beginning of value` at `load-tests/grafana-cloud-traffic-spikes.js:316`; treat that as an overload symptom when reviewing the run, not a passing benchmark.
-- Remediation: `inventory-service` now uses cached inventory reads, lightweight probe health groups, a larger pod memory/CPU budget, and a one-pod saturation profile for reproducible load-test signal. The traffic-spike script records `spike_non_json_responses` with a `count==0` threshold instead of crashing on `productsResponse.json()` when an overloaded edge/API path returns HTML.
+- `2026-06-01 11:34 EDT`: Grafana Cloud k6 traffic spike run `7658832` completed and passed the current 100/200/400 VU spike profile. URL: `https://orenlion.grafana.net/a/k6-app/runs/7658832`.
+- k6 signal: the direct k6 Cloud run-history pull recorded result `passed`, status `completed`, duration `600` seconds, max VUs `400`, and total cost `90.84` VUH. The refreshed comparison report is `reports/load-tests/load-test-comparison.md`.
+- Faro signal: `node scripts/report-faro-user-actions.mjs` recorded `20,459` user-action executions in the rolling six-hour Grafana Cloud log query window, with the per-action report under `reports/frontend-user-actions/`.
+- Dashboard signal: the refreshed `docs/graphviz/load-run-table.dot` was published to the `User Action Traffic: Real Users vs k6` dashboard `Load Run History` panel `panel-17`, then fetched back into `observability/grafana/dashboards/user-action-traffic-real-users-vs-k6.json`.
 
 ### k6 Traffic Spike Benchmark
 
