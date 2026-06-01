@@ -72,7 +72,24 @@ jobs:
         uses: grafana/setup-k6-action@v1
       - name: Inspect k6 frontend and regional scripts
         run: |
+          k6 inspect load-tests/ensemble-grafana.js
           k6 inspect load-tests/synthetic-browser-actions.js
           k6 inspect load-tests/grafana-cloud-20-user-regional.js
           k6 inspect load-tests/grafana-cloud-traffic-spikes.js
           k6 inspect load-tests/grafana-cloud-traffic-spikes-2.js
+
+  observability:
+    name: Observability checks
+    needs: security
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+      - name: Verify scripted synthetic check manifest is in sync
+        run: node observability/synthetic-monitoring/sync-scripted-check.mjs --check
+      - name: Install k6
+        uses: grafana/setup-k6-action@v1
+      - name: Inspect scripted synthetic check script
+        run: k6 inspect observability/synthetic-monitoring/ensemble-grafana-scripted-check.js

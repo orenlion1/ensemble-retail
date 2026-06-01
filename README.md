@@ -308,13 +308,17 @@ Those private probe records are offline until their agents are deployed, so the 
 - TCP: `ensemble-grafana-tcp-tls-connectivity` - check ID `2497`
 - Scripted k6: `ensemble-grafana-scripted-storefront-api` - check ID `2545`
 
-The scripted k6 check follows Grafana Synthetic Monitoring requirements: one VU, one iteration, no external data files, and only standard k6 imports. It loads the storefront, validates the public inventory list, fetches one product detail by ID, and confirms the protected cart API rejects unauthenticated access. The source script is `observability/synthetic-monitoring/ensemble-grafana-scripted-check.js`; the check manifest is `observability/synthetic-monitoring/check-scripted-storefront-api.yaml`.
+The scripted k6 check follows Grafana Synthetic Monitoring requirements: one VU, one iteration, no external data files, and only standard k6 imports. It loads the storefront, validates the public inventory list, fetches one product detail by ID, and confirms the protected cart API rejects unauthenticated access. The single source of truth is the script `observability/synthetic-monitoring/ensemble-grafana-scripted-check.js`. Terraform reads it via `file()`, and the YAML check manifest `observability/synthetic-monitoring/check-scripted-storefront-api.yaml` embeds it through a generator, so edit only the `.js` file.
 
-Validate the scripted check locally before pushing changes:
+Validate the scripted check locally, then regenerate and verify the manifest before pushing changes:
 
 ```sh
 k6 run observability/synthetic-monitoring/ensemble-grafana-scripted-check.js
+node observability/synthetic-monitoring/sync-scripted-check.mjs
+node observability/synthetic-monitoring/sync-scripted-check.mjs --check
 ```
+
+The `observability` job in `.github/workflows/build.yml` runs the `--check` mode and `k6 inspect` on the scripted source, so a stale manifest fails CI.
 
 `gcx synthetic-monitoring checks create` currently returns `failed to decode incoming check` for the `settings.scripted.script` manifest even though `gcx` can list and query the created check. Use the Grafana Terraform provider wrapper in `observability/synthetic-monitoring/terraform-scripted-check/` for creation/update until `gcx` supports scripted check manifests in this environment. Required provider environment variables are `GRAFANA_URL`, `GRAFANA_AUTH`, `GRAFANA_SM_URL`, `GRAFANA_SM_ACCESS_TOKEN`, and `GRAFANA_STACK_ID`. Because check ID `2545` was created before a repo-local Terraform state was committed, import it before managing updates from this wrapper:
 

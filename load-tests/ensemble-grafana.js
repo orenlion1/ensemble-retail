@@ -48,6 +48,15 @@ export default function () {
   check(products, { 'products loaded': response => response.status === 200 });
   const product = products.json()[__ITER % products.json().length];
 
+  const productDetail = http.get(`${baseUrl}/api/inventory/products/${product.id}`, {
+    headers,
+    tags: { name: 'GET /api/inventory/products/:id' }
+  });
+  check(productDetail, {
+    'product detail loaded': response => response.status === 200,
+    'product detail matches id': response => response.json().id === product.id
+  });
+
   const cart = http.put(`${baseUrl}/api/cart/carts/${shopperId}`, JSON.stringify({
     shopperId,
     items: [{
