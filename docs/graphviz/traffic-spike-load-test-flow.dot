@@ -45,7 +45,7 @@ digraph traffic_spike_user_action_fidelity {
         <TR><TD BGCOLOR="#1e3a5f" COLSPAN="2"><FONT COLOR="#f8fafc"><B>Load envelope</B></FONT></TD></TR>
         <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">traffic_spikes</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">100 / 200 / 400 VU peaks</FONT></TD></TR>
         <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">regional_shoppers</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">30 multi-region shoppers</FONT></TD></TR>
-        <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">api_request_rate</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">60 rps through CloudFront /api</FONT></TD></TR>
+        <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">api_request_rate</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">120 rps through CloudFront /api</FONT></TD></TR>
         <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">storefront_actions</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">5 browser VUs for UI action fidelity</FONT></TD></TR>
       </TABLE>
     >

@@ -54,8 +54,8 @@
 <!-- p_avg&#45;&gt;api_rate -->
 <g id="edge18" class="edge">
 <title>p_avg&#45;&gt;api_rate</title>
-<path fill="none" stroke="#475569" stroke-width="1.2" d="M1058.5,-79.2C1067.69,-77.18 1074.22,-75.75 1074.22,-75.75 1074.22,-75.75 1169.97,-64 1169.97,-64 1169.97,-64 1209.64,-59.34 1257.19,-53.76"/>
-<polygon fill="#475569" stroke="#475569" stroke-width="1.2" points="1257.36,-56.21 1264.03,-52.96 1256.79,-51.34 1257.36,-56.21"/>
+<path fill="none" stroke="#475569" stroke-width="1.2" d="M1058.5,-79.2C1067.69,-77.18 1074.22,-75.75 1074.22,-75.75 1074.22,-75.75 1169.97,-64 1169.97,-64 1169.97,-64 1207.86,-59.55 1253.96,-54.14"/>
+<polygon fill="#475569" stroke="#475569" stroke-width="1.2" points="1254.19,-56.58 1260.85,-53.33 1253.62,-51.71 1254.19,-56.58"/>
 <text xml:space="preserve" text-anchor="middle" x="1118.09" y="-77.5" font-family="Helvetica,sans-Serif" font-size="10.00">steady protocol load</text>
 </g>
 <!-- warmup&#45;&gt;ramp1 -->
@@ -302,12 +302,12 @@
 <!-- api_rate -->
 <g id="node19" class="node">
 <title>api_rate</title>
-<path fill="#e0f2fe" stroke="#334155" d="M1278.1,-17C1278.1,-17 1557.9,-17 1557.9,-17 1563.9,-17 1569.9,-23 1569.9,-29 1569.9,-29 1569.9,-41 1569.9,-41 1569.9,-47 1563.9,-53 1557.9,-53 1557.9,-53 1278.1,-53 1278.1,-53 1272.1,-53 1266.1,-47 1266.1,-41 1266.1,-41 1266.1,-29 1266.1,-29 1266.1,-23 1272.1,-17 1278.1,-17"/>
-<text xml:space="preserve" text-anchor="middle" x="1312.36" y="-30.95" font-family="Helvetica,sans-Serif" font-size="11.00">api_request_rate</text>
-<polyline fill="none" stroke="#334155" points="1358.62,-17.8 1358.62,-53"/>
-<text xml:space="preserve" text-anchor="middle" x="1402.25" y="-30.95" font-family="Helvetica,sans-Serif" font-size="11.00">60 requests/sec</text>
-<polyline fill="none" stroke="#334155" points="1445.88,-17.8 1445.88,-53"/>
-<text xml:space="preserve" text-anchor="middle" x="1507.89" y="-30.95" font-family="Helvetica,sans-Serif" font-size="11.00">constant arrival for 10m</text>
+<path fill="#e0f2fe" stroke="#334155" d="M1275.1,-17C1275.1,-17 1560.9,-17 1560.9,-17 1566.9,-17 1572.9,-23 1572.9,-29 1572.9,-29 1572.9,-41 1572.9,-41 1572.9,-47 1566.9,-53 1560.9,-53 1560.9,-53 1275.1,-53 1275.1,-53 1269.1,-53 1263.1,-47 1263.1,-41 1263.1,-41 1263.1,-29 1263.1,-29 1263.1,-23 1269.1,-17 1275.1,-17"/>
+<text xml:space="preserve" text-anchor="middle" x="1309.36" y="-30.95" font-family="Helvetica,sans-Serif" font-size="11.00">api_request_rate</text>
+<polyline fill="none" stroke="#334155" points="1355.62,-17.8 1355.62,-53"/>
+<text xml:space="preserve" text-anchor="middle" x="1402.25" y="-30.95" font-family="Helvetica,sans-Serif" font-size="11.00">120 requests/sec</text>
+<polyline fill="none" stroke="#334155" points="1448.88,-17.8 1448.88,-53"/>
+<text xml:space="preserve" text-anchor="middle" x="1510.89" y="-30.95" font-family="Helvetica,sans-Serif" font-size="11.00">constant arrival for 10m</text>
 </g>
 <!-- browser_actions -->
 <g id="node20" class="node">

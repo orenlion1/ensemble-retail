@@ -49,7 +49,7 @@ digraph network_diagram {
   cloudwatch [label="AWS CloudWatch\nRDS metrics", fillcolor="#334155"];
   cloudwatchScrape [label="Grafana Cloud Provider\nAWS/RDS scrape job", fillcolor="#581c87"];
   grafana [label="Grafana Cloud\nFaro, metrics, logs, traces, profiles", fillcolor="#6b21a8"];
-  k6 [label="Grafana Cloud k6\nload tests and browser checks", fillcolor="#6b21a8"];
+  k6 [label="Grafana Cloud k6\nload tests\n120 rps baseline + browser checks", fillcolor="#6b21a8"];
   accountBaseline [label="Terraform account-baseline stack\nSSM host-management setting", fillcolor="#334155"];
 
   subgraph cluster_eks {
@@ -88,7 +88,7 @@ digraph network_diagram {
   cloudwatchScrape -> grafana [label="CloudWatch metrics"];
   shopper -> grafana [label="Faro web telemetry"];
   accountBaseline -> beyla [label="SSM default role setting"];
-  k6 -> cloudfront [label="regional, spike, browser checks\nwith traceparent"];
+  k6 -> cloudfront [label="regional, spike,\n120 rps baseline,\nbrowser checks\nwith traceparent"];
   k6 -> grafana [label="test results + trace correlation"];
   beyla -> alloy [label="zero-code HTTP telemetry"];
   inventory -> alloy [label="OTel + Prometheus"];
