@@ -25,7 +25,7 @@ digraph traffic_spike_request_cards {
     <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#64748b"><TR><TD BGCOLOR="#f8fafc"><B>Ramp down</B></TD></TR><TR><TD><FONT POINT-SIZE="18"><B>0 VUs</B></FONT></TD></TR><TR><TD>decreasing</TD></TR><TR><TD><FONT POINT-SIZE="10">counters decrease with active VUs</FONT></TD></TR></TABLE>
   >];
   legend [label=<
-    <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4"><TR><TD ALIGN="LEFT"><B>Config:</B> base 100, multiplier 2, regional 30 VUs, steady API 40 req/sec, storefront actions ramp to 5 browser VUs over 2m, hold 6m, ramp down 2m</TD></TR><TR><TD ALIGN="LEFT"><FONT POINT-SIZE="10">browser 3 · cart_builder 4 · account_manager 4 · sale_hunter 4 · checkout 5; actual totals depend on completed iterations.</FONT></TD></TR></TABLE>
+    <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4"><TR><TD ALIGN="LEFT"><B>Config:</B> base 100, multiplier 2, regional 30 VUs, steady API 100 req/sec, storefront actions ramp to 5 browser VUs over 2m, hold 6m, ramp down 2m</TD></TR><TR><TD ALIGN="LEFT"><FONT POINT-SIZE="10">browser 3 · cart_builder 4 · account_manager 4 · sale_hunter 4 · checkout 5; actual totals depend on completed iterations.</FONT></TD></TR></TABLE>
   >];
 
   warmup -> spike1 -> recovery1 -> spike2 -> recovery2 -> spike3 -> rampdown;

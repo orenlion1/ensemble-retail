@@ -40,7 +40,18 @@ function maxBrowserVus(options) {
   const scenarios = Object.values(options?.scenarios || {});
   return scenarios
     .filter(scenario => scenario.options?.browser?.type)
-    .reduce((total, scenario) => total + (Number(scenario.vus) || 0), 0);
+    .reduce((total, scenario) => {
+      if (Number.isFinite(scenario.vus)) return total + scenario.vus;
+      if (Array.isArray(scenario.stages)) {
+        return total + Math.max(...scenario.stages.map(stage => Number(stage.target) || 0), 0);
+      }
+      return total;
+    }, 0);
+}
+
+function numericTag(options, name) {
+  const value = Number(options?.tags?.[name]);
+  return Number.isFinite(value) ? value : null;
 }
 
 function normalizeRun(run) {
@@ -58,6 +69,7 @@ function normalizeRun(run) {
     cost: run.cost,
     max_vus: maxProtocolVus(run.options),
     max_browser_vus: maxBrowserVus(run.options),
+    requestRatePerSecond: numericTag(run.options, 'api_request_rps'),
     url: `https://orenlion.grafana.net/a/k6-app/runs/${run.id}`
   };
 }

@@ -121,10 +121,20 @@ function slug(value) {
   return String(value).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 }
 
+function numericValue(value) {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
 function allRunsFrom(rawRuns) {
   const rows = [];
   for (const test of rawRuns.loadTests || []) {
     for (const run of test.runs || []) {
+      const requestRatePerSecond =
+        numericValue(run.requestRatePerSecond) ??
+        numericValue(run.options?.tags?.api_request_rps) ??
+        requestRateByRunId.get(Number(run.id ?? run.runId)) ??
+        null;
       rows.push({
         testId: test.id,
         testName: test.name,
@@ -141,7 +151,7 @@ function allRunsFrom(rawRuns) {
         url: `https://orenlion.grafana.net/a/k6-app/runs/${run.id}`,
         maxVus: run.max_vus ?? null,
         maxBrowserVus: run.max_browser_vus ?? null,
-        requestRatePerSecond: requestRateByRunId.get(Number(run.id ?? run.runId)) ?? null
+        requestRatePerSecond
       });
     }
   }

@@ -1,15 +1,23 @@
 import { fallbackProducts } from './data.js';
 
-const apiEnabled = import.meta.env.VITE_API_ENABLED === 'true' || (import.meta.env.PROD && import.meta.env.VITE_API_ENABLED !== 'false');
+const viteEnv = import.meta.env || {};
+
+function isApiEnabled() {
+  if (typeof globalThis.__ENSEMBLE_API_ENABLED_FOR_TESTS === 'boolean') {
+    return globalThis.__ENSEMBLE_API_ENABLED_FOR_TESTS;
+  }
+  return viteEnv.VITE_API_ENABLED === 'true' || (viteEnv.PROD && viteEnv.VITE_API_ENABLED !== 'false');
+}
 
 async function request(path, options) {
+  const { accessToken, headers = {}, ...fetchOptions } = options || {};
   const response = await fetch(path, {
+    ...fetchOptions,
     headers: {
       'Content-Type': 'application/json',
-      ...(options?.accessToken ? { Authorization: `Bearer ${options.accessToken}` } : {}),
-      ...(options?.headers || {})
-    },
-    ...options
+      ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+      ...headers
+    }
   });
 
   if (!response.ok) {
@@ -20,7 +28,7 @@ async function request(path, options) {
 }
 
 export async function loadProducts() {
-  if (!apiEnabled) return fallbackProducts;
+  if (!isApiEnabled()) return fallbackProducts;
   try {
     return await request('/api/inventory/products');
   } catch {
@@ -29,7 +37,7 @@ export async function loadProducts() {
 }
 
 export async function loadCategories() {
-  if (!apiEnabled) return fallbackCategories();
+  if (!isApiEnabled()) return fallbackCategories();
   try {
     return await request('/api/inventory/categories');
   } catch {
@@ -38,15 +46,15 @@ export async function loadCategories() {
 }
 
 export async function saveCart(cart, authSession) {
-  if (!apiEnabled) {
+  if (!isApiEnabled() || !hasRemoteAuthSession(authSession)) {
     localStorage.setItem('ensemble-cart', JSON.stringify(cart));
     return;
   }
   try {
-    const shopperId = authSession?.user?.id || 'demo-shopper';
+    const shopperId = authSession.user.id;
     await request(`/api/cart/carts/${encodeURIComponent(shopperId)}`, {
       method: 'PUT',
-      accessToken: authSession?.accessToken,
+      accessToken: authSession.accessToken,
       body: JSON.stringify({ shopperId, items: cart })
     });
   } catch {
@@ -58,21 +66,25 @@ export async function saveAccount(account, authSession) {
   if (containsFullCardNumber(account?.wallet?.label)) {
     throw new Error('Wallet may only store payment metadata.');
   }
-  if (!apiEnabled) {
+  if (!isApiEnabled() || !hasRemoteAuthSession(authSession)) {
     localStorage.setItem('ensemble-account', JSON.stringify(account));
     return account;
   }
   try {
-    const shopperId = authSession?.user?.id || account?.id || 'demo-shopper';
+    const shopperId = authSession.user.id;
     return await request(`/api/account/accounts/${encodeURIComponent(shopperId)}`, {
       method: 'PUT',
-      accessToken: authSession?.accessToken,
+      accessToken: authSession.accessToken,
       body: JSON.stringify(account)
     });
   } catch {
     localStorage.setItem('ensemble-account', JSON.stringify(account));
     return account;
   }
+}
+
+function hasRemoteAuthSession(authSession) {
+  return Boolean(authSession?.accessToken && authSession?.user?.id);
 }
 
 function containsFullCardNumber(value) {
