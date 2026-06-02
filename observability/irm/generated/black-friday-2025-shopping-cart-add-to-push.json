@@ -1,0 +1,23 @@
+[
+  {
+    "sequence": 1,
+    "file": "observability/irm/generated/incident-manifests/39-black-friday-2025-shopping-cart-add-availability.yaml",
+    "type": "black-friday",
+    "date": "2025-11-28",
+    "title": "Black Friday 2025 shopping cart add availability",
+    "region": "US",
+    "start": "2025-11-28T14:00:00Z",
+    "end": "2025-11-28T22:00:00Z",
+    "description": "Black Friday traffic spike affects shopping cart add availability for multiple US clients",
+    "resolution": "Black Friday traffic spike saturated cart add capacity; cart-service scaling policy requires calibration for extended retail peak windows.",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "US",
+      "feature": "shopping-cart-add",
+      "client_impact": "multiple-clients",
+      "impact_type": "availability",
+      "service": "cart",
+      "root_cause": "Scaling-Defect-Service"
+    }
+  }
+]
