@@ -20,8 +20,7 @@
 <circle cx="80" cy="427.05" r="5" fill="#2563eb"/>
 <rect x="976" y="59" width="14" height="14" fill="#2563eb"/>
 <text x="998" y="70" font-family="Arial, sans-serif" font-size="13" fill="#374151">Browser action synthetic check</text>
-<polyline points="80,412.25 80,70 80,70 80,70 80,70 80,70 80,70 510,70 510,70 510,70 510,70 510,70 510,70 510,70 510,70 510,70 510,70 940,70 940,70 940,70" fill="none" stroke="#dc2626" stroke-width="3"/>
-<circle cx="80" cy="412.25" r="5" fill="#dc2626"/>
+<polyline points="80,70 80,70 80,70 80,70 80,70 80,70 510,70 510,70 510,70 510,70 510,70 510,70 510,70 510,70 510,70 510,70 940,70 940,70 940,70 940,70" fill="none" stroke="#dc2626" stroke-width="3"/>
 <circle cx="80" cy="70" r="5" fill="#dc2626"/>
 <circle cx="80" cy="70" r="5" fill="#dc2626"/>
 <circle cx="80" cy="70" r="5" fill="#dc2626"/>
@@ -38,6 +37,7 @@
 <circle cx="510" cy="70" r="5" fill="#dc2626"/>
 <circle cx="510" cy="70" r="5" fill="#dc2626"/>
 <circle cx="510" cy="70" r="5" fill="#dc2626"/>
+<circle cx="940" cy="70" r="5" fill="#dc2626"/>
 <circle cx="940" cy="70" r="5" fill="#dc2626"/>
 <circle cx="940" cy="70" r="5" fill="#dc2626"/>
 <circle cx="940" cy="70" r="5" fill="#dc2626"/>
