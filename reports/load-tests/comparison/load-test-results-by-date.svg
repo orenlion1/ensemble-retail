@@ -1,9 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="488" height="252" viewBox="0 0 488 252" role="img" aria-label="Load test result heatmap">
+<svg xmlns="http://www.w3.org/2000/svg" width="544" height="252" viewBox="0 0 544 252" role="img" aria-label="Load test result heatmap">
 <rect width="100%" height="100%" fill="#ffffff"/>
 <text x="24" y="34" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#111827">Load Test Result By Date</text>
 <text x="288" y="56" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#374151">05-31</text>
 <text x="344" y="56" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#374151">06-01</text>
 <text x="400" y="56" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#374151">06-02</text>
+<text x="456" y="56" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#374151">06-03</text>
 <text x="24" y="102" font-family="Arial, sans-serif" font-size="14" fill="#374151">Browser action synthetic check</text>
 <rect x="268" y="78" width="40" height="40" rx="6" fill="#16a34a"/>
 <text x="288" y="103" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#ffffff">✓</text>
@@ -11,6 +12,8 @@
 <text x="344" y="103" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#ffffff">•</text>
 <rect x="380" y="78" width="40" height="40" rx="6" fill="#d1d5db"/>
 <text x="400" y="103" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#ffffff">•</text>
+<rect x="436" y="78" width="40" height="40" rx="6" fill="#d1d5db"/>
+<text x="456" y="103" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#ffffff">•</text>
 <text x="24" y="158" font-family="Arial, sans-serif" font-size="14" fill="#374151">Traffic spike benchmark</text>
 <rect x="268" y="134" width="40" height="40" rx="6" fill="#16a34a"/>
 <text x="288" y="159" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#ffffff">✓</text>
@@ -18,4 +21,6 @@
 <text x="344" y="159" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#ffffff">×</text>
 <rect x="380" y="134" width="40" height="40" rx="6" fill="#dc2626"/>
 <text x="400" y="159" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#ffffff">×</text>
+<rect x="436" y="134" width="40" height="40" rx="6" fill="#16a34a"/>
+<text x="456" y="159" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#ffffff">✓</text>
 </svg>
