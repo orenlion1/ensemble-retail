@@ -1,6 +1,5 @@
 date,created,testName,testId,runId,result,status,durationSeconds,requestRatePerSecond,totalVuh,protocolVuh,browserVuh,maxVus,maxBrowserVus,url
 "2026-05-31","2026-05-31T16:41:09.714862Z","Browser action synthetic check","1233226","7652683","passed","completed","21","0","1","0","1","1","1","https://orenlion.grafana.net/a/k6-app/runs/7652683"
-"2026-05-31","2026-05-31T21:43:47.111518Z","Traffic spike benchmark","1228496","7653800","failed","completed","600","60","90.84","82.5","8.34","400","5","https://orenlion.grafana.net/a/k6-app/runs/7653800"
 "2026-05-31","2026-05-31T22:04:18.151896Z","Traffic spike benchmark","1228496","7653899","failed","completed","600","60","90.84","82.5","8.34","400","5","https://orenlion.grafana.net/a/k6-app/runs/7653899"
 "2026-05-31","2026-05-31T22:28:20.757168Z","Traffic spike benchmark","1228496","7653979","failed","completed","600","60","90.84","82.5","8.34","400","5","https://orenlion.grafana.net/a/k6-app/runs/7653979"
 "2026-05-31","2026-05-31T22:44:16.659537Z","Traffic spike benchmark","1228496","7654030","passed","completed","600","60","90.84","82.5","8.34","400","5","https://orenlion.grafana.net/a/k6-app/runs/7654030"
@@ -20,3 +19,4 @@ date,created,testName,testId,runId,result,status,durationSeconds,requestRatePerS
 "2026-06-02","2026-06-02T21:58:16.715745Z","Traffic spike benchmark","1228496","7668454","passed","completed","600","120","108.01","99.82","8.19","400","5","https://orenlion.grafana.net/a/k6-app/runs/7668454"
 "2026-06-02","2026-06-02T22:20:54.818109Z","Traffic spike benchmark","1228496","7668610","failed","completed","600","120","108.01","99.82","8.19","400","5","https://orenlion.grafana.net/a/k6-app/runs/7668610"
 "2026-06-03","2026-06-03T12:19:39.071027Z","Traffic spike benchmark","1228496","7673849","passed","completed","600","120","108.01","99.82","8.19","400","5","https://orenlion.grafana.net/a/k6-app/runs/7673849"
+"2026-06-04","2026-06-04T12:43:06.642635Z","Traffic spike benchmark","1228496","7683642","passed","completed","600","120","108.01","99.82","8.19","400","5","https://orenlion.grafana.net/a/k6-app/runs/7683642"
