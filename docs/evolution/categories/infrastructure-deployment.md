@@ -1,0 +1,34 @@
+# Infrastructure and Deployment
+
+## Reconstructed Prompt Category
+
+> Build the AWS, Terraform, Kubernetes, security, and deployment path needed to run the demo like a real service.
+
+## Chronology
+
+| Date | Evidence | Evolution |
+| --- | --- | --- |
+| 2026-05-28 | `cd5a7df` Move SSM account controls into guarded baseline stack. | Sensitive account baseline settings moved behind a guarded Terraform path. |
+| 2026-05-29 | `0a1cdae` Normalize account baseline service setting ID | Infrastructure naming was stabilized. |
+| 2026-05-30 | `a422450` Document API test key rotation smoke test | Secret rotation gained a concrete validation path. |
+| 2026-05-30 | `be7ff4a` Allow two pods unavailable during service rollouts | Kubernetes rollout settings were tuned for service changes. |
+| 2026-05-30 | `6fcde97` Raise WAF rate limits for k6 smoke tests | Edge protection was adjusted for synthetic traffic. |
+| 2026-05-30 | `d2a8161` Update account service deployment tag | Deployed service versioning was updated. |
+| 2026-05-31 | `27dd368` Set backend services to saturation replica profile | Backend capacity was changed for saturation exercises. |
+| 2026-05-31 | `b1050df` Scale inventory service for spike traffic | Inventory service capacity was tuned under load. |
+| 2026-05-31 | `f15ee46` Reduce inventory service replicas to one | Capacity settings were tuned back after testing. |
+| 2026-05-31 | `64d3717` Balance traffic spike inventory load | Service load distribution was refined. |
+
+## What This Category Produced
+
+- Incremental Terraform stack structure for network, edge/static, auth, account-baseline, cluster, data, workload IAM, and Kubernetes.
+- Kubernetes manifests for services, rollout behavior, Alloy, Beyla, and API routing.
+- Concrete documentation for secret rotation, WAF limits, deployment commands, and validation.
+- Capacity profiles that support load-test exercises.
+
+## Current Artifacts
+
+- [infra/terraform/stacks](../../../infra/terraform/stacks)
+- [infra/k8s](../../../infra/k8s)
+- [docs/deployment.md](../../deployment.md)
+- [skills/infrastructure/SKILLS.md](../../../skills/infrastructure/SKILLS.md)

@@ -1,0 +1,119 @@
+digraph ensemble_evolution_timeline {
+  graph [
+    rankdir=TB,
+    bgcolor="#ffffff",
+    pad="0.35",
+    nodesep="0.42",
+    ranksep="0.46",
+    fontname="Helvetica",
+    fontsize=28,
+    labelloc="t",
+    label="Ensemble-Grafana Evolution: First Prompt to Latest Evidence"
+  ];
+
+  node [
+    shape=box,
+    style="rounded,filled",
+    fontname="Helvetica",
+    fontsize=16,
+    margin="0.11,0.08",
+    width=3.35,
+    color="#334155",
+    fontcolor="#0f172a"
+  ];
+
+  edge [
+    color="#64748b",
+    arrowsize=0.8,
+    penwidth=2,
+    fontname="Helvetica",
+    fontsize=12,
+    fontcolor="#334155"
+  ];
+
+  seed [
+    label="May 24-25\nProduct seed\nPromptable ecommerce platform\nREADME live demo framing",
+    fillcolor="#e0f2fe",
+    color="#0284c7"
+  ];
+
+  validate [
+    label="May 27-29\nValidation foundation\nGrafana dashboards\nGuarded baseline stack\nk6 Faro actions\nPlaywright regression",
+    fillcolor="#dcfce7",
+    color="#16a34a"
+  ];
+
+  app [
+    label="May 30\nStorefront maturity\nCheckout Grafana link\nSweden localization\nResponsive UI fixes\nPost-deploy reports",
+    fillcolor="#fef3c7",
+    color="#d97706"
+  ];
+
+  obs [
+    label="May 30\nTelemetry expansion\nCloudWatch discovery\nFaro action reports\nAlloy/Beyla runbooks\nDashboard conventions",
+    fillcolor="#ede9fe",
+    color="#7c3aed"
+  ];
+
+  load [
+    label="May 30-31\nLoad and resilience\nTraffic-spike model\nCloud k6 runs\nComparison charts\n40 rps then 60 rps baseline",
+    fillcolor="#fee2e2",
+    color="#dc2626"
+  ];
+
+  ops [
+    label="May 31\nOperations loop\nIRM on-call setup\nKubelet RCA reports\nGrafana Assistant comparison\nDashboard validation",
+    fillcolor="#e2e8f0",
+    color="#475569"
+  ];
+
+  skills [
+    label="May 30-Jun 1\nReusable agent policy\nRepo skills and personas\nSlash-command sync\nCI checks for guidance",
+    fillcolor="#ccfbf1",
+    color="#0d9488"
+  ];
+
+  latest [
+    label="Jun 2-8\nLatest evidence\n120 rps baseline docs\nBlack Friday cart incident\nLoad reports 7673849, 7683642, 7716954",
+    fillcolor="#fce7f3",
+    color="#db2777"
+  ];
+
+  end_to_end [
+    label=<
+      <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#334155">
+        <TR><TD BGCOLOR="#0f172a"><FONT COLOR="#f8fafc"><B>End-to-End System Shape</B></FONT></TD></TR>
+        <TR><TD BGCOLOR="#ffffff" ALIGN="LEFT"><FONT COLOR="#0f172a">Storefront journeys: browse, cart, checkout, account, region, language</FONT></TD></TR>
+        <TR><TD BGCOLOR="#ffffff" ALIGN="LEFT"><FONT COLOR="#0f172a">Spring Boot services: inventory, cart, account</FONT></TD></TR>
+        <TR><TD BGCOLOR="#ffffff" ALIGN="LEFT"><FONT COLOR="#0f172a">AWS and Kubernetes: edge, auth, data, EKS, rollout controls</FONT></TD></TR>
+        <TR><TD BGCOLOR="#ffffff" ALIGN="LEFT"><FONT COLOR="#0f172a">Grafana Cloud: Faro, Alloy, Beyla, dashboards, IRM, reports</FONT></TD></TR>
+        <TR><TD BGCOLOR="#ffffff" ALIGN="LEFT"><FONT COLOR="#0f172a">Verification: Playwright, k6 protocol, k6 browser actions, GCX queries</FONT></TD></TR>
+        <TR><TD BGCOLOR="#ffffff" ALIGN="LEFT"><FONT COLOR="#0f172a">Communication: Markdown runbooks plus Graphviz DOT, SVG, PNG</FONT></TD></TR>
+      </TABLE>
+    >,
+    shape=plain,
+    margin=0
+  ];
+
+  seed -> validate [label="make it testable"];
+  validate -> app [label="expand shopper behavior"];
+  validate -> obs [label="instrument telemetry"];
+  app -> obs [label="instrument user actions"];
+  obs -> load [label="exercise at scale"];
+  app -> load [label="validate journeys"];
+  load -> ops [label="turn failures into operations"];
+  ops -> skills [label="codify repeatability"];
+  skills -> latest [label="keep evidence current"];
+  latest -> end_to_end [label="current state"];
+
+  {
+    rank=same;
+    app;
+    obs;
+  }
+
+  {
+    rank=sink;
+    end_to_end;
+  }
+}

@@ -16,6 +16,7 @@ This is a training repo to explore the art of the "promptable". Original outdoor
 - `observability/` - Grafana Alloy config, k8s-monitoring Helm values, synthetic checks, and starter dashboards. See `observability/README.md`.
 - `load-tests/` - k6 API and browser scenarios covering users, categories, product browsing, cart, checkout, account, and synthetic button-action flows.
 - `docs/` - deployment, security, domain/TLS, and Grafana IRM runbooks.
+- `EVOLUTION.md` and `docs/evolution/` - source-backed chronology of how Ensemble-Grafana was built from first prompt category to latest committed evidence, including a high-resolution Graphviz timeline.
 - `docs/graviton-migration.md` - plan for migrating EKS workers and service images from x86 to AWS Graviton/ARM64.
 - `scripts/security/` - predeploy security checks for secrets, Kubernetes hardening, and IaC controls.
 - `.github/workflows/build.yml` - GitHub Actions security checks, Maven service packages, frontend build, Playwright browser checks, and k6 script inspection.
