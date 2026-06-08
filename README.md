@@ -562,9 +562,9 @@ The report is written to `reports/load-tests/load-test-comparison.md`. Generate 
 
 Latest saturation exercise:
 
-- `2026-06-02 11:14 EDT`: Grafana Cloud k6 traffic spike run `7666228` completed and passed the current 100/200/400 VU spike profile with the steady API request-rate scenario raised to `120` requests/second. URL: `https://orenlion.grafana.net/a/k6-app/runs/7666228`.
-- k6 signal: the direct k6 Cloud run-history pull recorded result `passed`, status `completed`, duration `600` seconds, request rate `120` requests/second, max protocol VUs `400`, max browser VUs `5`, and total cost `108.01` VUH. The refreshed comparison report is `reports/load-tests/load-test-comparison.md`.
-- Faro signal: `node scripts/report-faro-user-actions.mjs` recorded `10,525` user-action executions in the rolling six-hour Grafana Cloud log query window, with the per-action report under `reports/frontend-user-actions/`.
+- `2026-06-08 09:43 EDT`: Grafana Cloud k6 traffic spike run `7716954` completed and failed the current 100/200/400 VU spike profile with the steady API request-rate scenario at `120` requests/second. URL: `https://orenlion.grafana.net/a/k6-app/runs/7716954`.
+- k6 signal: the direct k6 Cloud run-history pull recorded result `failed`, status `completed`, duration `600` seconds, request rate `120` requests/second, max protocol VUs `400`, max browser VUs `5`, and total cost `108.01` VUH. The crossed thresholds were `http_req_failed` at `8.99%` against `<5%`, `http_req_duration p99` at `3276.8ms` against `<2000ms`, and `api_request_rate_requests` at `67,369` against `>=68,400`. The refreshed comparison report is `reports/load-tests/load-test-comparison.md`.
+- Faro signal: `node scripts/report-faro-user-actions.mjs` recorded `4,924` user-action executions in the rolling six-hour Grafana Cloud log query window, with the per-action report under `reports/frontend-user-actions/`.
 - Dashboard signal: the refreshed `docs/graphviz/load-run-table.dot` was published to the `User Action Traffic: Real Users vs k6` dashboard `Load Run History` panel `panel-17`, then fetched back into `observability/grafana/dashboards/user-action-traffic-real-users-vs-k6.json`.
 
 ### k6 Traffic Spike Benchmark
