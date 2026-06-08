@@ -31,6 +31,6 @@
 <text x="456" y="159" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#ffffff">✓</text>
 <rect x="492" y="134" width="40" height="40" rx="6" fill="#16a34a"/>
 <text x="512" y="159" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#ffffff">✓</text>
-<rect x="548" y="134" width="40" height="40" rx="6" fill="#dc2626"/>
-<text x="568" y="159" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#ffffff">×</text>
+<rect x="548" y="134" width="40" height="40" rx="6" fill="#16a34a"/>
+<text x="568" y="159" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#ffffff">✓</text>
 </svg>
