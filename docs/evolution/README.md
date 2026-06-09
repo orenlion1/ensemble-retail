@@ -8,6 +8,8 @@ The source material is the repo itself: commit chronology, documentation, report
 
 ![Ensemble-Grafana evolution timeline](diagrams/ensemble-evolution-timeline.png)
 
+The dark timeline source is also published to the `Evolution` tab of the Grafana dashboard `Ensemble Graphviz Diagrams`.
+
 Diagram files:
 
 - [diagrams/ensemble-evolution-timeline.dot](diagrams/ensemble-evolution-timeline.dot)

@@ -76,6 +76,7 @@ file docs/graphviz/<name>.png
 - `docs/graphviz/README.md` when adding reusable diagram conventions.
 - EVOLUTION.md plus the matching `docs/evolution/categories/` file when the diagram is a project-history/evolution artifact or represents a key milestone in how Ensemble-Grafana is explained.
 - For evolution timeline diagrams, keep the DOT, SVG, and high-resolution PNG in `docs/evolution/diagrams/` and regenerate all three from the DOT source in the same change.
+- For every evolution timeline update, publish `docs/evolution/diagrams/ensemble-evolution-timeline-dark.dot` to the `Evolution` tab / `panel-20` in the Grafana dashboard `Ensemble Graphviz Diagrams` after the source is listed in `docs/graphviz/grafana-dashboard-diagram-inventory.md`.
 
 7. Commit and push when the user asks to store or publish the graph:
 

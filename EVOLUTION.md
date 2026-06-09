@@ -17,6 +17,7 @@ For dark-background docs, slides, or Grafana-style presentation surfaces, use th
 - Dark SVG export: [docs/evolution/diagrams/ensemble-evolution-timeline-dark.svg](docs/evolution/diagrams/ensemble-evolution-timeline-dark.svg)
 - Graphviz DOT source: [docs/evolution/diagrams/ensemble-evolution-timeline.dot](docs/evolution/diagrams/ensemble-evolution-timeline.dot)
 - Dark Graphviz DOT source: [docs/evolution/diagrams/ensemble-evolution-timeline-dark.dot](docs/evolution/diagrams/ensemble-evolution-timeline-dark.dot)
+- Grafana dashboard tab: [Ensemble Graphviz Diagrams / Evolution](https://orenlion.grafana.net/d/ensemble-graphviz-diagrams/ensemble-graphviz-diagrams)
 
 ## Prompt Categories
 
@@ -163,6 +164,7 @@ Key evidence:
 - `AGENTS.md`: required documentation rules now call out `EVOLUTION.md`, matching category files, and evolution timeline regeneration.
 - `skills/graphviz/SKILL.md`: Graphviz workflow now includes evolution-history diagrams and the `docs/evolution/diagrams/` DOT/SVG/high-resolution PNG export set.
 - `docs/evolution/categories/agent-skills-automation.md`: agent policy and skill guidance now records evolution tracking as part of the repo operating model.
+- `docs/graphviz/grafana-dashboard-diagram-inventory.md` and `observability/grafana/dashboards/ensemble-graphviz-diagrams-api.json`: the dark evolution timeline is published to the `Evolution` tab of the Grafana dashboard `Ensemble Graphviz Diagrams`, and future evolution timeline updates must push that tab.
 
 ## End-to-End Shape
 

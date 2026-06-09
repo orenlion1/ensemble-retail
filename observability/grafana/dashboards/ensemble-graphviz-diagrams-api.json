@@ -8,16 +8,16 @@
       "grafana.app/message": "removed load test, moved to load test dashboard",
       "grafana.app/saved-from-ui": "Grafana Cloud",
       "grafana.app/updatedBy": "service-account:ffn1sscdjmscge",
-      "grafana.app/updatedTimestamp": "2026-06-02T15:31:05Z"
+      "grafana.app/updatedTimestamp": "2026-06-09T21:22:44Z"
     },
     "creationTimestamp": "2026-05-30T21:25:26Z",
-    "generation": 43,
+    "generation": 44,
     "labels": {
       "grafana.app/deprecatedInternalID": "2689969128804352"
     },
     "name": "ensemble-graphviz-diagrams",
     "namespace": "stacks-1665320",
-    "resourceVersion": "2061832987732870116",
+    "resourceVersion": "2064458198609298279",
     "uid": "2b774a56-5210-4abe-b58b-57f772616c4e"
   },
   "spec": {
@@ -273,6 +273,63 @@
           }
         }
       },
+      "panel-20": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "group": "",
+                      "kind": "DataQuery",
+                      "spec": {},
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Source: docs/evolution/diagrams/ensemble-evolution-timeline-dark.dot",
+          "id": 20,
+          "links": [],
+          "title": "Ensemble Evolution Timeline",
+          "vizConfig": {
+            "group": "grafana-graphviz-panel",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
+              "options": {
+                "_assistantHelp": "",
+                "builderModeActions": {},
+                "dotDiagram": "digraph ensemble_evolution_timeline_dark {\n  graph [\n    rankdir=TB,\n    bgcolor=\"#020617\",\n    pad=\"0.35\",\n    nodesep=\"0.42\",\n    ranksep=\"0.46\",\n    fontname=\"Helvetica\",\n    fontsize=28,\n    fontcolor=\"#f8fafc\",\n    labelloc=\"t\",\n    label=\"Ensemble-Grafana Evolution: First Prompt to Latest Evidence\"\n  ];\n\n  node [\n    shape=box,\n    style=\"rounded,filled\",\n    fontname=\"Helvetica\",\n    fontsize=16,\n    margin=\"0.11,0.08\",\n    width=3.35,\n    penwidth=2,\n    color=\"#475569\",\n    fontcolor=\"#f8fafc\"\n  ];\n\n  edge [\n    color=\"#94a3b8\",\n    arrowsize=0.8,\n    penwidth=2,\n    fontname=\"Helvetica\",\n    fontsize=12,\n    fontcolor=\"#cbd5e1\"\n  ];\n\n  seed [\n    label=\"May 24-25\\nProduct seed\\nPromptable ecommerce platform\\nREADME live demo framing\",\n    fillcolor=\"#0f2f4a\",\n    color=\"#38bdf8\"\n  ];\n\n  validate [\n    label=\"May 27-29\\nValidation foundation\\nGrafana dashboards\\nGuarded baseline stack\\nk6 Faro actions\\nPlaywright regression\",\n    fillcolor=\"#123524\",\n    color=\"#4ade80\"\n  ];\n\n  app [\n    label=\"May 30\\nStorefront maturity\\nCheckout Grafana link\\nSweden localization\\nResponsive UI fixes\\nPost-deploy reports\",\n    fillcolor=\"#422f10\",\n    color=\"#f59e0b\"\n  ];\n\n  obs [\n    label=\"May 30\\nTelemetry expansion\\nCloudWatch discovery\\nFaro action reports\\nAlloy/Beyla runbooks\\nDashboard conventions\",\n    fillcolor=\"#2e1f55\",\n    color=\"#a78bfa\"\n  ];\n\n  load [\n    label=\"May 30-31\\nLoad and resilience\\nTraffic-spike model\\nCloud k6 runs\\nComparison charts\\n40 rps then 60 rps baseline\",\n    fillcolor=\"#451a1a\",\n    color=\"#f87171\"\n  ];\n\n  ops [\n    label=\"May 31\\nOperations loop\\nIRM on-call setup\\nKubelet RCA reports\\nGrafana Assistant comparison\\nDashboard validation\",\n    fillcolor=\"#1e293b\",\n    color=\"#94a3b8\"\n  ];\n\n  skills [\n    label=\"May 30-Jun 1\\nReusable agent policy\\nRepo skills and personas\\nSlash-command sync\\nCI checks for guidance\",\n    fillcolor=\"#103c3c\",\n    color=\"#2dd4bf\"\n  ];\n\n  latest [\n    label=\"Jun 2-8\\nLatest evidence\\n120 rps baseline docs\\nBlack Friday cart incident\\nEvolution docs\\nLoad reports through 7718235\",\n    fillcolor=\"#4a1631\",\n    color=\"#f472b6\"\n  ];\n\n  policy [\n    label=\"Jun 9\\nEvolution policy\\nAGENTS.md documentation rule\\nGraphviz skill workflow\\nTimeline stays maintained\",\n    fillcolor=\"#321854\",\n    color=\"#c084fc\"\n  ];\n\n  end_to_end [\n    label=\u003c\n      \u003cTABLE BORDER=\"0\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"8\" COLOR=\"#64748b\"\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#0f172a\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eEnd-to-End System Shape\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eStorefront journeys: browse, cart, checkout, account, region, language\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eSpring Boot services: inventory, cart, account\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eAWS and Kubernetes: edge, auth, data, EKS, rollout controls\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eGrafana Cloud: Faro, Alloy, Beyla, dashboards, IRM, reports\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eVerification: Playwright, k6 protocol, k6 browser actions, GCX queries\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eCommunication: Markdown runbooks plus Graphviz DOT, SVG, PNG\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eMemory: EVOLUTION.md, category files, and agent policy keep milestones current\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n      \u003c/TABLE\u003e\n    \u003e,\n    shape=plain,\n    margin=0\n  ];\n\n  seed -\u003e validate [label=\"make it testable\"];\n  validate -\u003e app [label=\"expand shopper behavior\"];\n  validate -\u003e obs [label=\"instrument telemetry\"];\n  app -\u003e obs [label=\"instrument user actions\"];\n  obs -\u003e load [label=\"exercise at scale\"];\n  app -\u003e load [label=\"validate journeys\"];\n  load -\u003e ops [label=\"turn failures into operations\"];\n  ops -\u003e skills [label=\"codify repeatability\"];\n  skills -\u003e latest [label=\"keep evidence current\"];\n  latest -\u003e policy [label=\"protect the chronology\"];\n  policy -\u003e end_to_end [label=\"current state\"];\n\n  {\n    rank=same;\n    app;\n    obs;\n  }\n\n  {\n    rank=sink;\n    end_to_end;\n  }\n}\n",
+                "dotQueryConfig": {
+                  "fieldName": "dot_diagram"
+                },
+                "edgeOverrides": [],
+                "inputMode": "code",
+                "layoutEngine": "dot",
+                "namedThresholds": [],
+                "nodeOverrides": [],
+                "rankDirection": "TB",
+                "splineType": "polyline"
+              }
+            },
+            "version": "0.0.5"
+          }
+        }
+      },
       "panel-3": {
         "kind": "Panel",
         "spec": {
@@ -462,6 +519,32 @@
                 }
               },
               "title": "Observability"
+            }
+          },
+          {
+            "kind": "TabsLayoutTab",
+            "spec": {
+              "layout": {
+                "kind": "GridLayout",
+                "spec": {
+                  "items": [
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-20"
+                        },
+                        "height": 24,
+                        "width": 24,
+                        "x": 0,
+                        "y": 0
+                      }
+                    }
+                  ]
+                }
+              },
+              "title": "Evolution"
             }
           }
         ]

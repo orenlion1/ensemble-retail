@@ -19,12 +19,14 @@
 | 2026-05-31 | `bf2b610` Add presentation observability diagram | Presentation-ready observability imagery was added. |
 | 2026-06-08 | `a44cebe` Add Ensemble evolution timeline docs | Project evolution gained category docs, DOT source, SVG export, and high-resolution PNG timeline exports. |
 | 2026-06-09 | This change | Evolution timeline assets were refreshed after adding evolution-maintenance policy guidance. |
+| 2026-06-09 | This change | The dark evolution timeline was published to the `Evolution` tab of the Grafana dashboard `Ensemble Graphviz Diagrams`. |
 
 ## What This Category Produced
 
 - Architecture, request-flow, network, observability, traffic-spike, load-history, and project-evolution diagrams.
 - DOT sources committed beside rendered SVG and PNG exports.
 - Dashboard inventory rules for Graphviz panel pushes.
+- A Grafana `Evolution` tab that displays the dark project-evolution timeline from `docs/evolution/diagrams/ensemble-evolution-timeline-dark.dot`.
 - A communication layer for people who need to understand the platform quickly.
 
 ## Current Artifacts
