@@ -74,6 +74,8 @@ file docs/graphviz/<name>.png
 - README for user-facing commands and dashboard links.
 - DIAGRAMS.md when architecture, request flow, telemetry flow, or operational dependencies change.
 - `docs/graphviz/README.md` when adding reusable diagram conventions.
+- EVOLUTION.md plus the matching `docs/evolution/categories/` file when the diagram is a project-history/evolution artifact or represents a key milestone in how Ensemble-Grafana is explained.
+- For evolution timeline diagrams, keep the DOT, SVG, and high-resolution PNG in `docs/evolution/diagrams/` and regenerate all three from the DOT source in the same change.
 
 7. Commit and push when the user asks to store or publish the graph:
 

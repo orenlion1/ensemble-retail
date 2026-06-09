@@ -17,7 +17,8 @@
 | 2026-05-31 | `e461809` Add traffic spike user action Graphviz diagram | User-action traffic gained a dedicated Graphviz view. |
 | 2026-05-31 | `f8d67aa` Add Grafana diagram dashboard inventory | Diagram publishing gained inventory control. |
 | 2026-05-31 | `bf2b610` Add presentation observability diagram | Presentation-ready observability imagery was added. |
-| 2026-06-08 | This change | Project evolution gained DOT, SVG, and high-resolution PNG timeline exports. |
+| 2026-06-08 | `a44cebe` Add Ensemble evolution timeline docs | Project evolution gained category docs, DOT source, SVG export, and high-resolution PNG timeline exports. |
+| 2026-06-09 | This change | Evolution timeline assets were refreshed after adding evolution-maintenance policy guidance. |
 
 ## What This Category Produced
 

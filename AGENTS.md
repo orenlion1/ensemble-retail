@@ -69,6 +69,8 @@ For large cross-cutting changes (deploy + observability + app code), run `code-r
 - Document reusable `gcx` permission dependencies in `skills/observability/SKILLS.md`. Keep `README.md` focused on this deployment's concrete token locations, current auth blockers, stack URLs, command examples, and observed resource IDs.
 - Update `DIAGRAMS.md` whenever a change affects architecture, request flow, network boundaries, telemetry flow, data stores, identity/auth, CI/load testing, or operational dependencies.
 - Whenever `DIAGRAMS.md` changes, regenerate the Graphviz DOT sources plus SVG and PNG exports in `docs/diagrams/` so the rendered files stay in sync with the authoritative diagrams.
+- Update `EVOLUTION.md` and the matching `docs/evolution/categories/` file whenever a committed change becomes a key project milestone, changes the end-to-end build story, adds or revises repo policy/skills/personas, publishes major diagrams, changes CI/load-test baselines, records notable operational evidence, or otherwise changes how Ensemble should be explained from first prompt to current state.
+- Whenever `EVOLUTION.md` changes because of timeline content, update `docs/evolution/README.md` if the reading path changes, then regenerate `docs/evolution/diagrams/ensemble-evolution-timeline.{dot,svg,png}` when the visual chronology changes.
 - If no diagram update is needed, mention that in the work summary and explain why the existing diagrams still match the system.
 
 ## Documentation Quality Bar

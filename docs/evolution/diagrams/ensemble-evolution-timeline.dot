@@ -74,9 +74,15 @@ digraph ensemble_evolution_timeline {
   ];
 
   latest [
-    label="Jun 2-8\nLatest evidence\n120 rps baseline docs\nBlack Friday cart incident\nLoad reports 7673849, 7683642, 7716954",
+    label="Jun 2-8\nLatest evidence\n120 rps baseline docs\nBlack Friday cart incident\nEvolution docs\nLoad reports through 7718235",
     fillcolor="#fce7f3",
     color="#db2777"
+  ];
+
+  policy [
+    label="Jun 9\nEvolution policy\nAGENTS.md documentation rule\nGraphviz skill workflow\nTimeline stays maintained",
+    fillcolor="#f3e8ff",
+    color="#9333ea"
   ];
 
   end_to_end [
@@ -89,6 +95,7 @@ digraph ensemble_evolution_timeline {
         <TR><TD BGCOLOR="#ffffff" ALIGN="LEFT"><FONT COLOR="#0f172a">Grafana Cloud: Faro, Alloy, Beyla, dashboards, IRM, reports</FONT></TD></TR>
         <TR><TD BGCOLOR="#ffffff" ALIGN="LEFT"><FONT COLOR="#0f172a">Verification: Playwright, k6 protocol, k6 browser actions, GCX queries</FONT></TD></TR>
         <TR><TD BGCOLOR="#ffffff" ALIGN="LEFT"><FONT COLOR="#0f172a">Communication: Markdown runbooks plus Graphviz DOT, SVG, PNG</FONT></TD></TR>
+        <TR><TD BGCOLOR="#ffffff" ALIGN="LEFT"><FONT COLOR="#0f172a">Memory: EVOLUTION.md, category files, and agent policy keep milestones current</FONT></TD></TR>
       </TABLE>
     >,
     shape=plain,
@@ -104,7 +111,8 @@ digraph ensemble_evolution_timeline {
   load -> ops [label="turn failures into operations"];
   ops -> skills [label="codify repeatability"];
   skills -> latest [label="keep evidence current"];
-  latest -> end_to_end [label="current state"];
+  latest -> policy [label="protect the chronology"];
+  policy -> end_to_end [label="current state"];
 
   {
     rank=same;

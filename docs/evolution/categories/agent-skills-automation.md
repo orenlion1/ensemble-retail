@@ -16,6 +16,7 @@
 | 2026-05-31 | `c76bd07` Require GitHub push for skill and agent updates | Skill and persona changes became operational policy updates. |
 | 2026-05-31 | `b4a9e29` Rename load test command alias | Operational commands were refined. |
 | 2026-06-01 | `899353b` Add sync-slash-commands skill to mirror Codex and Cursor commands | Codex and Cursor command surfaces gained synchronization rules. |
+| 2026-06-09 | This change | `AGENTS.md` and the Graphviz skill now require key milestones to update `EVOLUTION.md`, category files, and evolution timeline assets when relevant. |
 
 ## What This Category Produced
 
@@ -23,6 +24,7 @@
 - Persona definitions for code review, security audit, and test engineering.
 - CI checks that keep skill and command guidance from drifting.
 - A rule that operational guidance changes must be committed, pushed, and validated in GitHub Actions.
+- A rule that key project milestones keep the evolution chronology current.
 
 ## Current Artifacts
 

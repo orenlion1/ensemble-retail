@@ -2,7 +2,7 @@
 
 This file summarizes how Ensemble-Grafana evolved from the initial promptable training repository into the latest operational state in this repo.
 
-The repository does not contain a literal transcript of every user prompt. This chronology is reconstructed from auditable project evidence: git commit subjects, dated reports, README and runbook updates, Graphviz assets, load-test history, and operational artifacts committed through June 8, 2026.
+The repository does not contain a literal transcript of every user prompt. This chronology is reconstructed from auditable project evidence: git commit subjects, dated reports, README and runbook updates, Graphviz assets, load-test history, policy and skill changes, and operational artifacts committed through June 9, 2026.
 
 ## At A Glance
 
@@ -127,19 +127,37 @@ Key evidence:
 - `f80bced`: Black Friday cart-add incident recorded.
 - `c35442f`: load-test docs aligned with the 120 rps baseline.
 
-### June 3-8, 2026: Latest Load-Test Evidence
+### June 3-8, 2026: Latest Load-Test Evidence and Evolution Publishing
 
-The latest visible evolution is continued load-test reporting. New run artifacts were committed on June 3, June 4, and June 8, preserving the current Grafana/k6 evidence trail.
+The latest visible evolution is continued load-test reporting plus the first committed evolution package. New run artifacts were committed on June 3, June 4, and June 8, preserving the current Grafana/k6 evidence trail. The project also gained a dedicated evolution narrative, category files, and a high-resolution Graphviz timeline so people can understand how Ensemble-Grafana was built end to end.
 
-Representative prompt category:
+Representative prompt categories:
 
 > Preserve the latest k6/Grafana run data and keep comparison reports current.
+
+> Explain how Ensemble-Grafana was built from first prompt to current state, with category files and a Graphviz timeline.
 
 Key evidence:
 
 - `d8d320c`: load-test report for run `7673849`.
 - `bdc102d`: load-test report for run `7683642`.
-- `b5273e4`: load-test report for run `7716954`, the latest commit in this reconstructed chronology.
+- `b5273e4`: load-test report for run `7716954`.
+- `a44cebe`: evolution docs, category files, DOT source, SVG export, and high-resolution PNG timeline were added.
+- `60de963`: load-test report for run `7718235`, the latest load-test evidence in this reconstructed chronology.
+
+### June 9, 2026: Make Evolution Tracking a Policy
+
+The project added explicit agent guidance so future key changes update the evolution story instead of letting the chronology drift. This turns `EVOLUTION.md` from a one-time retrospective into a maintained project artifact.
+
+Representative prompt category:
+
+> Keep the evolution history current whenever key project, policy, skill, diagram, CI, load-test, or operational milestones land.
+
+Key evidence:
+
+- `AGENTS.md`: required documentation rules now call out `EVOLUTION.md`, matching category files, and evolution timeline regeneration.
+- `skills/graphviz/SKILL.md`: Graphviz workflow now includes evolution-history diagrams and the `docs/evolution/diagrams/` DOT/SVG/high-resolution PNG export set.
+- `docs/evolution/categories/agent-skills-automation.md`: agent policy and skill guidance now records evolution tracking as part of the repo operating model.
 
 ## End-to-End Shape
 
@@ -151,7 +169,8 @@ The project now reads as an end-to-end operational application:
 4. Grafana Cloud, Faro, Alloy, Beyla, dashboards, IRM, and reports observe the system.
 5. k6 and Playwright validate both protocol and browser behavior.
 6. Graphviz diagrams and dashboard panels explain request paths, telemetry paths, load models, and now project evolution.
-7. Repo-local skills and personas preserve the working rules so future prompts can reproduce the same quality bar.
+7. `EVOLUTION.md` and `docs/evolution/categories/` preserve the build chronology by prompt category.
+8. Repo-local skills, personas, and `AGENTS.md` preserve the working rules so future prompts can reproduce the same quality bar.
 
 ## Verification Notes
 

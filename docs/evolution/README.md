@@ -2,7 +2,7 @@
 
 This directory explains how Ensemble-Grafana was built end to end, organized by reconstructed prompt category.
 
-The source material is the repo itself: commit chronology, documentation, reports, Graphviz artifacts, load-test outputs, and operational runbooks. Literal prompt transcripts are not stored in this repository, so prompt categories below are inferred from committed work.
+The source material is the repo itself: commit chronology, documentation, reports, Graphviz artifacts, load-test outputs, operational runbooks, and repo policy or skill changes. Literal prompt transcripts are not stored in this repository, so prompt categories below are inferred from committed work.
 
 ## Visual Timeline
 

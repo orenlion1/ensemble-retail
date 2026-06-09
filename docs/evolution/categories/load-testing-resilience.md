@@ -18,7 +18,8 @@
 | 2026-05-31 | `c99e3b4` Record passing 40 rps traffic spike run | A higher-confidence 40 rps run was documented. |
 | 2026-05-31 | `a3a5670` Set traffic spike baseline to 60 rps | Baseline increased. |
 | 2026-06-02 | `6daf6d7` Raise traffic spike load to 120 rps | Baseline increased again to 120 rps. |
-| 2026-06-08 | `b5273e4` Update load test report for run 7716954 | Latest visible load-test report was committed. |
+| 2026-06-08 | `b5273e4` Update load test report for run 7716954 | New load-test evidence was committed. |
+| 2026-06-08 | `60de963` Update load test report for run 7718235 | Latest visible load-test report was committed. |
 
 ## What This Category Produced
 
