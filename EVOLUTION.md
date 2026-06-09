@@ -6,12 +6,17 @@ The repository does not contain a literal transcript of every user prompt. This 
 
 ## At A Glance
 
-![Ensemble-Grafana evolution timeline](docs/evolution/diagrams/ensemble-evolution-timeline.png)
+![Ensemble-Grafana evolution timeline dark version](docs/evolution/diagrams/ensemble-evolution-timeline-dark.png)
+
+For dark-background docs, slides, or Grafana-style presentation surfaces, use the dark timeline export: [docs/evolution/diagrams/ensemble-evolution-timeline-dark.png](docs/evolution/diagrams/ensemble-evolution-timeline-dark.png).
 
 - Full evolution package: [docs/evolution/README.md](docs/evolution/README.md)
 - High-resolution PNG: [docs/evolution/diagrams/ensemble-evolution-timeline.png](docs/evolution/diagrams/ensemble-evolution-timeline.png)
+- Dark high-resolution PNG: [docs/evolution/diagrams/ensemble-evolution-timeline-dark.png](docs/evolution/diagrams/ensemble-evolution-timeline-dark.png)
 - SVG source export: [docs/evolution/diagrams/ensemble-evolution-timeline.svg](docs/evolution/diagrams/ensemble-evolution-timeline.svg)
+- Dark SVG export: [docs/evolution/diagrams/ensemble-evolution-timeline-dark.svg](docs/evolution/diagrams/ensemble-evolution-timeline-dark.svg)
 - Graphviz DOT source: [docs/evolution/diagrams/ensemble-evolution-timeline.dot](docs/evolution/diagrams/ensemble-evolution-timeline.dot)
+- Dark Graphviz DOT source: [docs/evolution/diagrams/ensemble-evolution-timeline-dark.dot](docs/evolution/diagrams/ensemble-evolution-timeline-dark.dot)
 
 ## Prompt Categories
 

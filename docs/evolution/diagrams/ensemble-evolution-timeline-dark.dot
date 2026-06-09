@@ -1,0 +1,129 @@
+digraph ensemble_evolution_timeline_dark {
+  graph [
+    rankdir=TB,
+    bgcolor="#020617",
+    pad="0.35",
+    nodesep="0.42",
+    ranksep="0.46",
+    fontname="Helvetica",
+    fontsize=28,
+    fontcolor="#f8fafc",
+    labelloc="t",
+    label="Ensemble-Grafana Evolution: First Prompt to Latest Evidence"
+  ];
+
+  node [
+    shape=box,
+    style="rounded,filled",
+    fontname="Helvetica",
+    fontsize=16,
+    margin="0.11,0.08",
+    width=3.35,
+    penwidth=2,
+    color="#475569",
+    fontcolor="#f8fafc"
+  ];
+
+  edge [
+    color="#94a3b8",
+    arrowsize=0.8,
+    penwidth=2,
+    fontname="Helvetica",
+    fontsize=12,
+    fontcolor="#cbd5e1"
+  ];
+
+  seed [
+    label="May 24-25\nProduct seed\nPromptable ecommerce platform\nREADME live demo framing",
+    fillcolor="#0f2f4a",
+    color="#38bdf8"
+  ];
+
+  validate [
+    label="May 27-29\nValidation foundation\nGrafana dashboards\nGuarded baseline stack\nk6 Faro actions\nPlaywright regression",
+    fillcolor="#123524",
+    color="#4ade80"
+  ];
+
+  app [
+    label="May 30\nStorefront maturity\nCheckout Grafana link\nSweden localization\nResponsive UI fixes\nPost-deploy reports",
+    fillcolor="#422f10",
+    color="#f59e0b"
+  ];
+
+  obs [
+    label="May 30\nTelemetry expansion\nCloudWatch discovery\nFaro action reports\nAlloy/Beyla runbooks\nDashboard conventions",
+    fillcolor="#2e1f55",
+    color="#a78bfa"
+  ];
+
+  load [
+    label="May 30-31\nLoad and resilience\nTraffic-spike model\nCloud k6 runs\nComparison charts\n40 rps then 60 rps baseline",
+    fillcolor="#451a1a",
+    color="#f87171"
+  ];
+
+  ops [
+    label="May 31\nOperations loop\nIRM on-call setup\nKubelet RCA reports\nGrafana Assistant comparison\nDashboard validation",
+    fillcolor="#1e293b",
+    color="#94a3b8"
+  ];
+
+  skills [
+    label="May 30-Jun 1\nReusable agent policy\nRepo skills and personas\nSlash-command sync\nCI checks for guidance",
+    fillcolor="#103c3c",
+    color="#2dd4bf"
+  ];
+
+  latest [
+    label="Jun 2-8\nLatest evidence\n120 rps baseline docs\nBlack Friday cart incident\nEvolution docs\nLoad reports through 7718235",
+    fillcolor="#4a1631",
+    color="#f472b6"
+  ];
+
+  policy [
+    label="Jun 9\nEvolution policy\nAGENTS.md documentation rule\nGraphviz skill workflow\nTimeline stays maintained",
+    fillcolor="#321854",
+    color="#c084fc"
+  ];
+
+  end_to_end [
+    label=<
+      <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#64748b">
+        <TR><TD BGCOLOR="#0f172a"><FONT COLOR="#f8fafc"><B>End-to-End System Shape</B></FONT></TD></TR>
+        <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">Storefront journeys: browse, cart, checkout, account, region, language</FONT></TD></TR>
+        <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">Spring Boot services: inventory, cart, account</FONT></TD></TR>
+        <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">AWS and Kubernetes: edge, auth, data, EKS, rollout controls</FONT></TD></TR>
+        <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">Grafana Cloud: Faro, Alloy, Beyla, dashboards, IRM, reports</FONT></TD></TR>
+        <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">Verification: Playwright, k6 protocol, k6 browser actions, GCX queries</FONT></TD></TR>
+        <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">Communication: Markdown runbooks plus Graphviz DOT, SVG, PNG</FONT></TD></TR>
+        <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">Memory: EVOLUTION.md, category files, and agent policy keep milestones current</FONT></TD></TR>
+      </TABLE>
+    >,
+    shape=plain,
+    margin=0
+  ];
+
+  seed -> validate [label="make it testable"];
+  validate -> app [label="expand shopper behavior"];
+  validate -> obs [label="instrument telemetry"];
+  app -> obs [label="instrument user actions"];
+  obs -> load [label="exercise at scale"];
+  app -> load [label="validate journeys"];
+  load -> ops [label="turn failures into operations"];
+  ops -> skills [label="codify repeatability"];
+  skills -> latest [label="keep evidence current"];
+  latest -> policy [label="protect the chronology"];
+  policy -> end_to_end [label="current state"];
+
+  {
+    rank=same;
+    app;
+    obs;
+  }
+
+  {
+    rank=sink;
+    end_to_end;
+  }
+}

@@ -13,6 +13,9 @@ Diagram files:
 - [diagrams/ensemble-evolution-timeline.dot](diagrams/ensemble-evolution-timeline.dot)
 - [diagrams/ensemble-evolution-timeline.svg](diagrams/ensemble-evolution-timeline.svg)
 - [diagrams/ensemble-evolution-timeline.png](diagrams/ensemble-evolution-timeline.png)
+- [diagrams/ensemble-evolution-timeline-dark.dot](diagrams/ensemble-evolution-timeline-dark.dot)
+- [diagrams/ensemble-evolution-timeline-dark.svg](diagrams/ensemble-evolution-timeline-dark.svg)
+- [diagrams/ensemble-evolution-timeline-dark.png](diagrams/ensemble-evolution-timeline-dark.png)
 
 ## Category Files
 
