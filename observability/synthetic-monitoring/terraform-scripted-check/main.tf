@@ -36,3 +36,30 @@ resource "grafana_synthetic_monitoring_check" "scripted" {
     }
   }
 }
+
+resource "grafana_synthetic_monitoring_check" "browser_user_actions" {
+  job       = "ensemble-grafana-browser-user-actions"
+  target    = "https://ensemble-grafana.com"
+  enabled   = true
+  frequency = 300000
+  timeout   = 180000
+
+  probes = [
+    data.grafana_synthetic_monitoring_probes.main.probes["Oregon"],
+    data.grafana_synthetic_monitoring_probes.main.probes["Montreal"],
+    data.grafana_synthetic_monitoring_probes.main.probes["London"],
+  ]
+
+  labels = {
+    environment = "production"
+    service     = "storefront"
+    check_type  = "browser"
+    coverage    = "user-actions"
+  }
+
+  settings {
+    browser {
+      script = file("${path.module}/../ensemble-grafana-browser-action-check.js")
+    }
+  }
+}

@@ -479,7 +479,7 @@ digraph observability_capabilities_flow {
   alloy [label="Grafana Alloy\nOTel collector", fillcolor="#6b21a8"];
   cloudwatch [label="AWS CloudWatch\nRDS metrics", fillcolor="#334155"];
   cloudwatchScrape [label="Grafana Cloud Provider\nAWS/RDS scrape job", fillcolor="#6b21a8"];
-  synth [label="Grafana Synthetic Monitoring\nHTTP, DNS, Ping, TCP", fillcolor="#6b21a8"];
+  synth [label="Grafana Synthetic Monitoring\nHTTP, DNS, Ping, TCP,\nscripted k6, k6 browser", fillcolor="#6b21a8"];
   k6 [label="Grafana Cloud k6\nregional load, spike benchmark,\n120 rps API baseline,\nbrowser actions", fillcolor="#6b21a8"];
   k6Tracing [label="k6 Tempo instrumentation\nW3C trace context", fillcolor="#6b21a8"];
   irm [label="Grafana IRM\nincidents, labels, on-call schedule", fillcolor="#6b21a8"];
@@ -490,7 +490,7 @@ digraph observability_capabilities_flow {
   prometheus [label="Metrics\nRED + infrastructure signals", fillcolor="#581c87"];
   loki [label="Logs\nnamespace + service labels", fillcolor="#581c87"];
   profiles [label="Profiles\nJava CPU profiles", fillcolor="#581c87"];
-  smResults [label="Synthetic results\nuptime, TLS, DNS, latency", fillcolor="#581c87"];
+  smResults [label="Synthetic results\nuptime, TLS, DNS,\nlatency, browser actions", fillcolor="#581c87"];
   k6Results [label="k6 results\nVUs, checks, thresholds", fillcolor="#581c87"];
   incidents [label="IRM workflows\nseverity, ownership, response", fillcolor="#581c87"];
 

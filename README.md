@@ -308,8 +308,11 @@ Those private probe records are offline until their agents are deployed, so the 
 - Ping: `ensemble-grafana-ping-reachability` - check ID `2496`
 - TCP: `ensemble-grafana-tcp-tls-connectivity` - check ID `2497`
 - Scripted k6: `ensemble-grafana-scripted-storefront-api` - check ID `2545`
+- k6 browser: `ensemble-grafana-browser-user-actions` - repo definition added for the same browser action journey used by the traffic-spike load test; live check ID is pending Terraform creation/import.
 
 The scripted k6 check follows Grafana Synthetic Monitoring requirements: one VU, one iteration, no external data files, and only standard k6 imports. It loads the storefront, validates the public inventory list, fetches one product detail by ID, and confirms the protected cart API rejects unauthenticated access. The single source of truth is the script `observability/synthetic-monitoring/ensemble-grafana-scripted-check.js`. Terraform reads it via `file()`, and the YAML check manifest `observability/synthetic-monitoring/check-scripted-storefront-api.yaml` embeds it through a generator, so edit only the `.js` file.
+
+The k6 browser check closes the Synthetic Monitoring gap for load-tested user actions. Its source of truth is the load-test browser journey `load-tests/synthetic-browser-actions.js`, which is also imported by `load-tests/grafana-cloud-traffic-spikes.js` as the `storefront_actions` scenario. The generator `observability/synthetic-monitoring/sync-browser-action-check.mjs` emits a standalone Synthetic Monitoring script at `observability/synthetic-monitoring/ensemble-grafana-browser-action-check.js` and embeds that script in `observability/synthetic-monitoring/check-browser-user-actions.yaml` under `settings.browser.script`. The check validates every exact and dynamic user-action family exercised by the load test: navigation, department/category selection, sort/search, US/Canada/China/UK/Sweden region and language changes, product detail open/close, grid/detail/sale cart adds, quantity change, checkout, checkout dialog close, item removal, Google sign-in control visibility, and account save.
 
 Validate the scripted check locally, then regenerate and verify the manifest before pushing changes:
 
@@ -317,15 +320,19 @@ Validate the scripted check locally, then regenerate and verify the manifest bef
 k6 run observability/synthetic-monitoring/ensemble-grafana-scripted-check.js
 node observability/synthetic-monitoring/sync-scripted-check.mjs
 node observability/synthetic-monitoring/sync-scripted-check.mjs --check
+node observability/synthetic-monitoring/sync-browser-action-check.mjs
+node observability/synthetic-monitoring/sync-browser-action-check.mjs --check
+k6 inspect observability/synthetic-monitoring/ensemble-grafana-browser-action-check.js
 ```
 
-The `observability` job in `.github/workflows/build.yml` runs the `--check` mode and `k6 inspect` on the scripted source, so a stale manifest fails CI.
+The `observability` job in `.github/workflows/build.yml` runs both sync checks and `k6 inspect` on the scripted and browser-check sources, so stale Synthetic Monitoring manifests fail CI.
 
-`gcx synthetic-monitoring checks create` currently returns `failed to decode incoming check` for the `settings.scripted.script` manifest even though `gcx` can list and query the created check. Use the Grafana Terraform provider wrapper in `observability/synthetic-monitoring/terraform-scripted-check/` for creation/update until `gcx` supports scripted check manifests in this environment. Required provider environment variables are `GRAFANA_URL`, `GRAFANA_AUTH`, `GRAFANA_SM_URL`, `GRAFANA_SM_ACCESS_TOKEN`, and `GRAFANA_STACK_ID`. Because check ID `2545` was created before a repo-local Terraform state was committed, import it before managing updates from this wrapper:
+`gcx synthetic-monitoring checks create` currently returns `failed to decode incoming check` for generated k6 script manifests even though `gcx` can list and query created checks. On June 10, 2026, the same error was observed for `observability/synthetic-monitoring/check-browser-user-actions.yaml`. Use the Grafana Terraform provider wrapper in `observability/synthetic-monitoring/terraform-scripted-check/` for k6 scripted and k6 browser creation/update. Required provider environment variables are `GRAFANA_URL`, `GRAFANA_AUTH`, `GRAFANA_SM_URL`, `GRAFANA_SM_ACCESS_TOKEN`, and `GRAFANA_STACK_ID`. Because check ID `2545` was created before a repo-local Terraform state was committed, import it before managing updates from this wrapper; after creating the browser check, import its live ID as `grafana_synthetic_monitoring_check.browser_user_actions`:
 
 ```sh
 terraform -chdir=observability/synthetic-monitoring/terraform-scripted-check init
 terraform -chdir=observability/synthetic-monitoring/terraform-scripted-check import grafana_synthetic_monitoring_check.scripted 2545
+terraform -chdir=observability/synthetic-monitoring/terraform-scripted-check import grafana_synthetic_monitoring_check.browser_user_actions <browser-check-id>
 terraform -chdir=observability/synthetic-monitoring/terraform-scripted-check apply
 ```
 
@@ -799,7 +806,7 @@ The browser check records `data-faro-user-action-name` interactions plus change/
 DEBUG_ACTIONS=1 BASE_URL=https://ensemble-grafana.com k6 run load-tests/synthetic-browser-actions.js
 ```
 
-The current browser-action audit inventory is stored in `reports/k6-browser-action-audit/`. The May 31, 2026 audit confirmed the Synthetic Monitoring HTTP, DNS, Ping, and TCP checks exist in Grafana, while the standalone Grafana Cloud k6 browser-action check needed a fresh Cloud run after adding the navigation/sale-banner and auth-link coverage.
+The current browser-action audit inventory is stored in `reports/k6-browser-action-audit/`. The May 31, 2026 audit confirmed the Synthetic Monitoring HTTP, DNS, Ping, and TCP checks exist in Grafana, while browser-action coverage lived in the standalone Grafana Cloud k6 run. The Synthetic Monitoring k6 browser check `ensemble-grafana-browser-user-actions` now uses the same generated browser journey so scheduled Synthetic Monitoring covers the load-tested navigation, cart, checkout, region/language, auth-control, and account-save actions as well.
 
 The frontend also has Playwright browser regression tests for interactive UI behavior. These tests stub the Faro collector, verify emitted Faro action names for cart, checkout, region/language, Google login, and account save actions, check the cart delete icon, detect broken storefront images, and compare desktop/mobile screenshots.
 

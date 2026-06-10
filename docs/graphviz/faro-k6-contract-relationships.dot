@@ -67,7 +67,7 @@ digraph faro_k6_contract_relationships {
   }
 
   subgraph cluster_browser_check {
-    label="2. k6 browser-action and SM scripted checks";
+    label="2. k6 browser-action and Synthetic Monitoring checks";
     color="#475569";
     fontcolor="#f8fafc";
     style="rounded,dashed";
@@ -107,6 +107,12 @@ digraph faro_k6_contract_relationships {
 
     sm_scripted [
       label="SM scripted k6 check\nobservability/synthetic-monitoring/\nensemble-grafana-scripted-check.js",
+      fillcolor="#134e4a",
+      color="#5eead4"
+    ];
+
+    sm_browser [
+      label="SM k6 browser check\nobservability/synthetic-monitoring/\nensemble-grafana-browser-action-check.js\ngenerated from load-tested journey",
       fillcolor="#134e4a",
       color="#5eead4"
     ];
@@ -169,7 +175,7 @@ digraph faro_k6_contract_relationships {
     ];
 
     synthetic_monitoring [
-      label="Grafana Synthetic Monitoring\nHTTP, DNS, Ping, TCP, Scripted k6\nuptime, TLS, response, resolution,\nstorefront/API transaction",
+      label="Grafana Synthetic Monitoring\nHTTP, DNS, Ping, TCP, Scripted k6,\nk6 browser user actions\nuptime, TLS, response, resolution,\nstorefront/API transaction, browser journey",
       fillcolor="#6b21a8",
       color="#c084fc"
     ];
@@ -231,6 +237,9 @@ digraph faro_k6_contract_relationships {
   dom_probe -> synthetic_counters [label="counts observed actions"];
   api_contract -> sm_scripted [label="transactions"];
   sm_scripted -> sm_assertions [label="checks API behavior"];
+  browser_contract -> sm_browser [label="same journey"];
+  sm_browser -> synthetic_assertions [label="checks UI behavior"];
+  sm_browser -> synthetic_counters [label="counts actions"];
 
   load_contract -> regional_load [label="region/API"];
   load_contract -> spike_load [label="browser actions"];
@@ -242,6 +251,8 @@ digraph faro_k6_contract_relationships {
   synthetic_assertions -> k6_cloud [label="checks"];
   synthetic_counters -> k6_cloud [label="custom metrics"];
   sm_assertions -> synthetic_monitoring [label="scripted check"];
+  synthetic_assertions -> synthetic_monitoring [label="browser check"];
+  synthetic_counters -> synthetic_monitoring [label="browser metrics"];
   load_thresholds -> k6_cloud [label="cloud run results"];
   synthetic_monitoring -> reports [label="availability context"];
   faro_cloud -> reports [label="LogQL action totals"];
