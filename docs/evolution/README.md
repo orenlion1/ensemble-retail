@@ -4,11 +4,11 @@ This directory explains how Ensemble-Grafana was built end to end, organized by 
 
 The source material is the repo itself: commit chronology, documentation, reports, Graphviz artifacts, load-test outputs, operational runbooks, and repo policy or skill changes. Literal prompt transcripts are not stored in this repository, so prompt categories below are inferred from committed work.
 
-## Visual Timeline
+## Dark Visual Timeline
 
-![Ensemble-Grafana evolution timeline](diagrams/ensemble-evolution-timeline.png)
+![Ensemble-Grafana evolution timeline dark version](diagrams/ensemble-evolution-timeline-dark.png)
 
-The dark timeline source is also published to the `Evolution` tab of the Grafana dashboard `Ensemble Graphviz Diagrams`.
+The dark timeline source is also published to the `Evolution` tab of the Grafana dashboard `Ensemble Graphviz Diagrams`. The light export remains available for white-background documents.
 
 Diagram files:
 
@@ -35,5 +35,5 @@ Diagram files:
 ## Reading Order
 
 1. Start with [../../EVOLUTION.md](../../EVOLUTION.md) for the full chronological overview.
-2. Use the visual timeline for the end-to-end build path.
+2. Use the dark visual timeline for the end-to-end build path.
 3. Open a category file when you want the prompt pattern, milestone trail, and source artifacts behind a particular part of the system.
