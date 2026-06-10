@@ -14,35 +14,36 @@
 <line x1="80" y1="70" x2="940" y2="70" stroke="#e5e7eb"/>
 <text x="70" y="74" text-anchor="end" font-family="Arial, sans-serif" font-size="12" fill="#6b7280">10m</text>
 <text x="80" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-05-31</text>
-<text x="252" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-01</text>
-<text x="424" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-02</text>
-<text x="596" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-03</text>
-<text x="768" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-04</text>
-<text x="940" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-08</text>
+<text x="223.33333333333331" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-01</text>
+<text x="366.66666666666663" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-02</text>
+<text x="510" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-03</text>
+<text x="653.3333333333333" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-04</text>
+<text x="796.6666666666667" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-08</text>
+<text x="940" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-10</text>
 <polyline points="80,427.05" fill="none" stroke="#2563eb" stroke-width="3"/>
 <circle cx="80" cy="427.05" r="5" fill="#2563eb"/>
 <rect x="976" y="59" width="14" height="14" fill="#2563eb"/>
 <text x="998" y="70" font-family="Arial, sans-serif" font-size="13" fill="#374151">Browser action synthetic check</text>
-<polyline points="80,70 80,70 252,70 252,70 252,70 252,70 252,70 252,70 252,70 252,70 252,70 252,70 424,70 424,70 424,70 424,70 596,70 768,70 940,70 940,70" fill="none" stroke="#dc2626" stroke-width="3"/>
+<polyline points="80,70 223.33333333333331,70 223.33333333333331,70 223.33333333333331,70 223.33333333333331,70 223.33333333333331,70 223.33333333333331,70 223.33333333333331,70 223.33333333333331,70 223.33333333333331,70 223.33333333333331,70 366.66666666666663,70 366.66666666666663,70 366.66666666666663,70 366.66666666666663,70 510,70 653.3333333333333,70 796.6666666666667,70 796.6666666666667,70 940,70" fill="none" stroke="#dc2626" stroke-width="3"/>
 <circle cx="80" cy="70" r="5" fill="#dc2626"/>
-<circle cx="80" cy="70" r="5" fill="#dc2626"/>
-<circle cx="252" cy="70" r="5" fill="#dc2626"/>
-<circle cx="252" cy="70" r="5" fill="#dc2626"/>
-<circle cx="252" cy="70" r="5" fill="#dc2626"/>
-<circle cx="252" cy="70" r="5" fill="#dc2626"/>
-<circle cx="252" cy="70" r="5" fill="#dc2626"/>
-<circle cx="252" cy="70" r="5" fill="#dc2626"/>
-<circle cx="252" cy="70" r="5" fill="#dc2626"/>
-<circle cx="252" cy="70" r="5" fill="#dc2626"/>
-<circle cx="252" cy="70" r="5" fill="#dc2626"/>
-<circle cx="252" cy="70" r="5" fill="#dc2626"/>
-<circle cx="424" cy="70" r="5" fill="#dc2626"/>
-<circle cx="424" cy="70" r="5" fill="#dc2626"/>
-<circle cx="424" cy="70" r="5" fill="#dc2626"/>
-<circle cx="424" cy="70" r="5" fill="#dc2626"/>
-<circle cx="596" cy="70" r="5" fill="#dc2626"/>
-<circle cx="768" cy="70" r="5" fill="#dc2626"/>
-<circle cx="940" cy="70" r="5" fill="#dc2626"/>
+<circle cx="223.33333333333331" cy="70" r="5" fill="#dc2626"/>
+<circle cx="223.33333333333331" cy="70" r="5" fill="#dc2626"/>
+<circle cx="223.33333333333331" cy="70" r="5" fill="#dc2626"/>
+<circle cx="223.33333333333331" cy="70" r="5" fill="#dc2626"/>
+<circle cx="223.33333333333331" cy="70" r="5" fill="#dc2626"/>
+<circle cx="223.33333333333331" cy="70" r="5" fill="#dc2626"/>
+<circle cx="223.33333333333331" cy="70" r="5" fill="#dc2626"/>
+<circle cx="223.33333333333331" cy="70" r="5" fill="#dc2626"/>
+<circle cx="223.33333333333331" cy="70" r="5" fill="#dc2626"/>
+<circle cx="223.33333333333331" cy="70" r="5" fill="#dc2626"/>
+<circle cx="366.66666666666663" cy="70" r="5" fill="#dc2626"/>
+<circle cx="366.66666666666663" cy="70" r="5" fill="#dc2626"/>
+<circle cx="366.66666666666663" cy="70" r="5" fill="#dc2626"/>
+<circle cx="366.66666666666663" cy="70" r="5" fill="#dc2626"/>
+<circle cx="510" cy="70" r="5" fill="#dc2626"/>
+<circle cx="653.3333333333333" cy="70" r="5" fill="#dc2626"/>
+<circle cx="796.6666666666667" cy="70" r="5" fill="#dc2626"/>
+<circle cx="796.6666666666667" cy="70" r="5" fill="#dc2626"/>
 <circle cx="940" cy="70" r="5" fill="#dc2626"/>
 <rect x="976" y="83" width="14" height="14" fill="#dc2626"/>
 <text x="998" y="94" font-family="Arial, sans-serif" font-size="13" fill="#374151">Traffic spike benchmark</text>
