@@ -166,6 +166,20 @@ Key evidence:
 - `docs/evolution/categories/agent-skills-automation.md`: agent policy and skill guidance now records evolution tracking as part of the repo operating model.
 - `docs/graphviz/grafana-dashboard-diagram-inventory.md` and `observability/grafana/dashboards/ensemble-graphviz-diagrams-api.json`: the dark evolution timeline is published to the `Evolution` tab of the Grafana dashboard `Ensemble Graphviz Diagrams`, and future evolution timeline updates must push that tab.
 
+### June 11, 2026: Dial the Steady Load Baseline Back to 100 rps
+
+After repeated 120 rps traffic-spike runs were preserved, the default steady API request-rate scenario was lowered to 100 rps. The traffic-spike VU shape remains `100/200/400`, but the constant-arrival-rate protocol baseline now targets 100 requests/second so routine validation keeps production pressure lower while browser/Faro action coverage stays in the combined benchmark.
+
+Representative prompt category:
+
+> Tune the standard traffic-spike benchmark to a lower routine operating baseline.
+
+Key evidence:
+
+- `load-tests/grafana-cloud-traffic-spikes.js`: `API_REQUEST_RPS` now defaults to `100`.
+- `README.md`, `.codex/commands/run-load-test.md`, and `skills/observability/SKILLS.md`: operational guidance now documents the 100 rps baseline.
+- `DIAGRAMS.md`, `docs/diagrams/`, `docs/graphviz/`, and `docs/evolution/diagrams/`: current diagrams now describe the 100 rps load-test baseline.
+
 ## End-to-End Shape
 
 The project now reads as an end-to-end operational application:
@@ -174,7 +188,7 @@ The project now reads as an end-to-end operational application:
 2. Spring Boot services own inventory, cart, and account data boundaries.
 3. Terraform and Kubernetes define AWS, EKS, edge, auth, data, workload, and rollout behavior.
 4. Grafana Cloud, Faro, Alloy, Beyla, dashboards, IRM, and reports observe the system.
-5. k6 and Playwright validate both protocol and browser behavior.
+5. k6 and Playwright validate both protocol and browser behavior, with the routine traffic-spike steady API baseline currently set to 100 rps.
 6. Graphviz diagrams and dashboard panels explain request paths, telemetry paths, load models, and now project evolution.
 7. `EVOLUTION.md` and `docs/evolution/categories/` preserve the build chronology by prompt category.
 8. Repo-local skills, personas, and `AGENTS.md` preserve the working rules so future prompts can reproduce the same quality bar.

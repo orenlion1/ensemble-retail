@@ -554,7 +554,7 @@
 <polygon fill="#713f12" stroke="#f59e0b" stroke-width="2" points="321.07,-60.64 198.68,-60.64 198.68,-16 321.07,-16 321.07,-60.64"/>
 <text xml:space="preserve" text-anchor="middle" x="259.88" y="-45.87" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#f8fafc">Grafana Cloud k6</text>
 <text xml:space="preserve" text-anchor="middle" x="259.88" y="-33.87" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#f8fafc">regional + spike</text>
-<text xml:space="preserve" text-anchor="middle" x="259.88" y="-21.87" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#f8fafc">120 rps API + browser</text>
+<text xml:space="preserve" text-anchor="middle" x="259.88" y="-21.87" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#f8fafc">100 rps API + browser</text>
 </g>
 <!-- k6_cf -->
 <g id="node38" class="node">

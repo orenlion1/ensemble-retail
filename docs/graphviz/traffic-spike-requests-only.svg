@@ -305,7 +305,7 @@
 <path fill="#e0f2fe" stroke="#334155" d="M1275.1,-17C1275.1,-17 1560.9,-17 1560.9,-17 1566.9,-17 1572.9,-23 1572.9,-29 1572.9,-29 1572.9,-41 1572.9,-41 1572.9,-47 1566.9,-53 1560.9,-53 1560.9,-53 1275.1,-53 1275.1,-53 1269.1,-53 1263.1,-47 1263.1,-41 1263.1,-41 1263.1,-29 1263.1,-29 1263.1,-23 1269.1,-17 1275.1,-17"/>
 <text xml:space="preserve" text-anchor="middle" x="1309.36" y="-30.95" font-family="Helvetica,sans-Serif" font-size="11.00">api_request_rate</text>
 <polyline fill="none" stroke="#334155" points="1355.62,-17.8 1355.62,-53"/>
-<text xml:space="preserve" text-anchor="middle" x="1402.25" y="-30.95" font-family="Helvetica,sans-Serif" font-size="11.00">120 requests/sec</text>
+<text xml:space="preserve" text-anchor="middle" x="1402.25" y="-30.95" font-family="Helvetica,sans-Serif" font-size="11.00">100 requests/sec</text>
 <polyline fill="none" stroke="#334155" points="1448.88,-17.8 1448.88,-53"/>
 <text xml:space="preserve" text-anchor="middle" x="1510.89" y="-30.95" font-family="Helvetica,sans-Serif" font-size="11.00">constant arrival for 10m</text>
 </g>

@@ -62,7 +62,7 @@
 <text xml:space="preserve" text-anchor="start" x="228.97" y="-536.88" font-family="Helvetica,sans-Serif" font-size="12.00" fill="#f8fafc">api_request_rate</text>
 <polygon fill="#1e293b" stroke="none" points="336.72,-525.88 336.72,-554.62 535.72,-554.62 535.72,-525.88 336.72,-525.88"/>
 <polygon fill="none" stroke="#475569" points="336.72,-525.88 336.72,-554.62 535.72,-554.62 535.72,-525.88 336.72,-525.88"/>
-<text xml:space="preserve" text-anchor="start" x="351.85" y="-536.88" font-family="Helvetica,sans-Serif" font-size="12.00" fill="#f8fafc">120 rps through CloudFront /api</text>
+<text xml:space="preserve" text-anchor="start" x="351.85" y="-536.88" font-family="Helvetica,sans-Serif" font-size="12.00" fill="#f8fafc">100 rps through CloudFront /api</text>
 <polygon fill="#111827" stroke="none" points="220.97,-497.12 220.97,-525.88 336.72,-525.88 336.72,-497.12 220.97,-497.12"/>
 <polygon fill="none" stroke="#475569" points="220.97,-497.12 220.97,-525.88 336.72,-525.88 336.72,-497.12 220.97,-497.12"/>
 <text xml:space="preserve" text-anchor="start" x="228.97" y="-508.12" font-family="Helvetica,sans-Serif" font-size="12.00" fill="#f8fafc">storefront_actions</text>

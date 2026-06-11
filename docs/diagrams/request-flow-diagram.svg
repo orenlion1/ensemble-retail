@@ -260,7 +260,7 @@
 <path fill="#6b21a8" stroke="#64748b" d="M102.78,-529.57C102.78,-529.57 24.75,-529.57 24.75,-529.57 18.75,-529.57 12.75,-523.57 12.75,-517.57 12.75,-517.57 12.75,-482.05 12.75,-482.05 12.75,-476.05 18.75,-470.05 24.75,-470.05 24.75,-470.05 102.78,-470.05 102.78,-470.05 108.78,-470.05 114.78,-476.05 114.78,-482.05 114.78,-482.05 114.78,-517.57 114.78,-517.57 114.78,-523.57 108.78,-529.57 102.78,-529.57"/>
 <text xml:space="preserve" text-anchor="middle" x="63.77" y="-513.36" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">Grafana Cloud k6</text>
 <text xml:space="preserve" text-anchor="middle" x="63.77" y="-501.36" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">regional, spike,</text>
-<text xml:space="preserve" text-anchor="middle" x="63.77" y="-489.36" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">120 rps baseline,</text>
+<text xml:space="preserve" text-anchor="middle" x="63.77" y="-489.36" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">100 rps baseline,</text>
 <text xml:space="preserve" text-anchor="middle" x="63.77" y="-477.36" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">browser checks</text>
 </g>
 <!-- k6&#45;&gt;wafEdge -->
@@ -269,7 +269,7 @@
 <path fill="none" stroke="#94a3b8" d="M115.18,-478.71C162.44,-458.6 227.2,-430.05 236.53,-420.81 255.04,-402.48 244.81,-387.78 261.53,-367.81 269.02,-358.86 278.6,-350.77 288.12,-343.94"/>
 <polygon fill="#94a3b8" stroke="#94a3b8" points="289.4,-346.03 293.77,-340.04 286.61,-342 289.4,-346.03"/>
 <text xml:space="preserve" text-anchor="middle" x="194.53" y="-491.98" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">Synthetic load</text>
-<text xml:space="preserve" text-anchor="middle" x="194.53" y="-482.23" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">120 rps baseline</text>
+<text xml:space="preserve" text-anchor="middle" x="194.53" y="-482.23" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">100 rps baseline</text>
 <text xml:space="preserve" text-anchor="middle" x="194.53" y="-472.48" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">HTTPS + /api/*</text>
 <text xml:space="preserve" text-anchor="middle" x="194.53" y="-462.73" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">with traceparent</text>
 </g>

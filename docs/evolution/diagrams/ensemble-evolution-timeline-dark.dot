@@ -82,7 +82,7 @@ digraph ensemble_evolution_timeline_dark {
   ];
 
   policy [
-    label="Jun 9\nEvolution policy\nAGENTS.md documentation rule\nGraphviz skill workflow\nTimeline stays maintained",
+    label="Jun 9-11\nEvolution policy\nAGENTS.md documentation rule\nGraphviz skill workflow\n100 rps routine baseline",
     fillcolor="#321854",
     color="#c084fc"
   ];

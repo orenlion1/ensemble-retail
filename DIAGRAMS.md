@@ -71,7 +71,7 @@ digraph network_diagram {
   cloudwatch [label="AWS CloudWatch\nRDS metrics", fillcolor="#334155"];
   cloudwatchScrape [label="Grafana Cloud Provider\nAWS/RDS scrape job", fillcolor="#581c87"];
   grafana [label="Grafana Cloud\nFaro, metrics, logs, traces, profiles", fillcolor="#6b21a8"];
-  k6 [label="Grafana Cloud k6\nload tests\n120 rps baseline + browser checks", fillcolor="#6b21a8"];
+  k6 [label="Grafana Cloud k6\nload tests\n100 rps baseline + browser checks", fillcolor="#6b21a8"];
   accountBaseline [label="Terraform account-baseline stack\nSSM host-management setting", fillcolor="#334155"];
 
   subgraph cluster_eks {
@@ -110,7 +110,7 @@ digraph network_diagram {
   cloudwatchScrape -> grafana [label="CloudWatch metrics"];
   shopper -> grafana [label="Faro web telemetry"];
   accountBaseline -> beyla [label="SSM default role setting"];
-  k6 -> cloudfront [label="regional, spike,\n120 rps baseline,\nbrowser checks\nwith traceparent"];
+  k6 -> cloudfront [label="regional, spike,\n100 rps baseline,\nbrowser checks\nwith traceparent"];
   k6 -> grafana [label="test results + trace correlation"];
   beyla -> alloy [label="zero-code HTTP telemetry"];
   inventory -> alloy [label="OTel + Prometheus"];
@@ -296,7 +296,7 @@ digraph sequence_dependency_diagram {
     color="#f59e0b";
     fontcolor="#fde68a";
     style="rounded,setlinewidth(2)";
-    k6_runner [label="Grafana Cloud k6\nregional + spike\n120 rps API + browser", fillcolor="#713f12", color="#f59e0b", group=c1];
+    k6_runner [label="Grafana Cloud k6\nregional + spike\n100 rps API + browser", fillcolor="#713f12", color="#f59e0b", group=c1];
     k6_cf [label="CloudFront\n/api/* + storefront", fillcolor="#164e63", color="#38bdf8", group=c2];
     k6_api [label="ALB / API\ntraceparent", fillcolor="#14532d", color="#22c55e", group=c3];
     k6_services [label="inventory / cart /\naccount services", fillcolor="#14532d", color="#22c55e", group=c4];
@@ -369,7 +369,7 @@ digraph request_flow_diagram {
   localState [label="Browser localStorage\nanonymous cart/account", fillcolor="#0f172a"];
   apiWaf [label="AWS WAF\nregional API rules", fillcolor="#7f1d1d"];
   ingress [label="EKS API ingress / ALB", fillcolor="#3730a3"];
-  k6 [label="Grafana Cloud k6\nregional, spike,\n120 rps baseline,\nbrowser checks", fillcolor="#6b21a8"];
+  k6 [label="Grafana Cloud k6\nregional, spike,\n100 rps baseline,\nbrowser checks", fillcolor="#6b21a8"];
   grafana [label="Grafana Cloud\nresults and telemetry", fillcolor="#6b21a8"];
 
   inventory [label="inventory-service\n/api/inventory/*", fillcolor="#14532d"];
@@ -388,7 +388,7 @@ digraph request_flow_diagram {
   cognito -> browser [label="Cognito JWTs"];
   browser -> localState [label="anonymous writes"];
   localState -> browser [label="restore local state"];
-  k6 -> wafEdge [label="Synthetic load\n120 rps baseline\nHTTPS + /api/*\nwith traceparent"];
+  k6 -> wafEdge [label="Synthetic load\n100 rps baseline\nHTTPS + /api/*\nwith traceparent"];
   wafEdge -> cf;
   cf -> apiPath;
   apiPath -> s3 [label="No: static route"];
@@ -480,7 +480,7 @@ digraph observability_capabilities_flow {
   cloudwatch [label="AWS CloudWatch\nRDS metrics", fillcolor="#334155"];
   cloudwatchScrape [label="Grafana Cloud Provider\nAWS/RDS scrape job", fillcolor="#6b21a8"];
   synth [label="Grafana Synthetic Monitoring\nHTTP, DNS, Ping, TCP,\nscripted k6, k6 browser", fillcolor="#6b21a8"];
-  k6 [label="Grafana Cloud k6\nregional load, spike benchmark,\n120 rps API baseline,\nbrowser actions", fillcolor="#6b21a8"];
+  k6 [label="Grafana Cloud k6\nregional load, spike benchmark,\n100 rps API baseline,\nbrowser actions", fillcolor="#6b21a8"];
   k6Tracing [label="k6 Tempo instrumentation\nW3C trace context", fillcolor="#6b21a8"];
   irm [label="Grafana IRM\nincidents, labels, on-call schedule", fillcolor="#6b21a8"];
 
@@ -531,7 +531,7 @@ digraph observability_capabilities_flow {
   synth -> cloudfront [label="checks production URL and API health"];
   synth -> grafana [label="check samples"];
   k6 -> k6Tracing;
-  k6Tracing -> cloudfront [label="load checks with traceparent\n120 rps API baseline"];
+  k6Tracing -> cloudfront [label="load checks with traceparent\n100 rps API baseline"];
   k6 -> grafana [label="test metrics + trace correlation"];
   irm -> grafana [label="incident and schedule state"];
   grafana -> frontendObs;

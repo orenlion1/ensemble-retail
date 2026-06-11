@@ -89,7 +89,7 @@
 <path fill="#e0f2fe" stroke="#334155" d="M1660.88,-62.12C1660.88,-62.12 1535.38,-62.12 1535.38,-62.12 1529.38,-62.12 1523.38,-56.12 1523.38,-50.12 1523.38,-50.12 1523.38,-27.88 1523.38,-27.88 1523.38,-21.88 1529.38,-15.88 1535.38,-15.88 1535.38,-15.88 1660.88,-15.88 1660.88,-15.88 1666.88,-15.88 1672.88,-21.88 1672.88,-27.88 1672.88,-27.88 1672.88,-50.12 1672.88,-50.12 1672.88,-56.12 1666.88,-62.12 1660.88,-62.12"/>
 <text xml:space="preserve" text-anchor="middle" x="1598.12" y="-46.73" font-family="Helvetica,sans-Serif" font-size="12.00">api_request_rate</text>
 <text xml:space="preserve" text-anchor="middle" x="1598.12" y="-33.98" font-family="Helvetica,sans-Serif" font-size="12.00">constant arrival rate</text>
-<text xml:space="preserve" text-anchor="middle" x="1598.12" y="-21.23" font-family="Helvetica,sans-Serif" font-size="12.00">120 requests/sec for 10m</text>
+<text xml:space="preserve" text-anchor="middle" x="1598.12" y="-21.23" font-family="Helvetica,sans-Serif" font-size="12.00">100 requests/sec for 10m</text>
 </g>
 <!-- avg&#45;&gt;api_rate -->
 <g id="edge17" class="edge">

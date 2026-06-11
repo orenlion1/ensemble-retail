@@ -290,7 +290,7 @@
 <polygon fill="none" stroke="#334155" points="1,-33.5 1,-66 165.5,-66 165.5,-33.5 1,-33.5"/>
 <text xml:space="preserve" text-anchor="start" x="9" y="-46" font-family="Courier,monospace" font-size="14.00">api_request_rate</text>
 <polygon fill="none" stroke="#334155" points="165.5,-33.5 165.5,-66 358.5,-66 358.5,-33.5 165.5,-33.5"/>
-<text xml:space="preserve" text-anchor="start" x="247.75" y="-46" font-family="Helvetica,sans-Serif" font-size="14.00">120 requests/sec</text>
+<text xml:space="preserve" text-anchor="start" x="247.75" y="-46" font-family="Helvetica,sans-Serif" font-size="14.00">100 requests/sec</text>
 <polygon fill="none" stroke="#334155" points="358.5,-33.5 358.5,-66 850.75,-66 850.75,-33.5 358.5,-33.5"/>
 <text xml:space="preserve" text-anchor="start" x="366.5" y="-46" font-family="Helvetica,sans-Serif" font-size="14.00">Constant&#45;arrival&#45;rate protocol load for 10m</text>
 <polygon fill="none" stroke="#334155" points="1,-1 1,-33.5 165.5,-33.5 165.5,-1 1,-1"/>

@@ -42,7 +42,7 @@ digraph request_flow_diagram {
   localState [label="Browser localStorage\nanonymous cart/account", fillcolor="#0f172a"];
   apiWaf [label="AWS WAF\nregional API rules", fillcolor="#7f1d1d"];
   ingress [label="EKS API ingress / ALB", fillcolor="#3730a3"];
-  k6 [label="Grafana Cloud k6\nregional, spike,\n120 rps baseline,\nbrowser checks", fillcolor="#6b21a8"];
+  k6 [label="Grafana Cloud k6\nregional, spike,\n100 rps baseline,\nbrowser checks", fillcolor="#6b21a8"];
   grafana [label="Grafana Cloud\nresults and telemetry", fillcolor="#6b21a8"];
 
   inventory [label="inventory-service\n/api/inventory/*", fillcolor="#14532d"];
@@ -61,7 +61,7 @@ digraph request_flow_diagram {
   cognito -> browser [label="Cognito JWTs"];
   browser -> localState [label="anonymous writes"];
   localState -> browser [label="restore local state"];
-  k6 -> wafEdge [label="Synthetic load\n120 rps baseline\nHTTPS + /api/*\nwith traceparent"];
+  k6 -> wafEdge [label="Synthetic load\n100 rps baseline\nHTTPS + /api/*\nwith traceparent"];
   wafEdge -> cf;
   cf -> apiPath;
   apiPath -> s3 [label="No: static route"];

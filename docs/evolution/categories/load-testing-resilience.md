@@ -20,6 +20,7 @@
 | 2026-06-02 | `6daf6d7` Raise traffic spike load to 120 rps | Baseline increased again to 120 rps. |
 | 2026-06-08 | `b5273e4` Update load test report for run 7716954 | New load-test evidence was committed. |
 | 2026-06-08 | `60de963` Update load test report for run 7718235 | Latest visible load-test report was committed. |
+| 2026-06-11 | Current baseline update | The steady API request-rate default was dialed down from 120 rps to 100 rps for routine traffic-spike validation. |
 
 ## What This Category Produced
 
@@ -27,6 +28,7 @@
 - A traffic-spike model with staged VU and request-pressure evolution.
 - Report generation for HTTP failure rate, check pass rate, p95 latency, user-action totals, and run comparisons.
 - A preserved run history across passing and failing exercises.
+- A current 100 rps steady API baseline for routine traffic-spike validation, while retaining the `100/200/400` spike VU profile.
 
 ## Current Artifacts
 
