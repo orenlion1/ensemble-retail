@@ -14,37 +14,38 @@
 <line x1="80" y1="70" x2="940" y2="70" stroke="#e5e7eb"/>
 <text x="70" y="74" text-anchor="end" font-family="Arial, sans-serif" font-size="12" fill="#6b7280">108.01</text>
 <text x="80" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-05-31</text>
-<text x="202.85714285714283" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-01</text>
-<text x="325.71428571428567" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-02</text>
-<text x="448.57142857142856" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-03</text>
-<text x="571.4285714285713" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-04</text>
-<text x="694.2857142857143" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-08</text>
-<text x="817.1428571428571" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-10</text>
-<text x="940" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-11</text>
+<text x="187.5" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-01</text>
+<text x="295" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-02</text>
+<text x="402.5" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-03</text>
+<text x="510" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-04</text>
+<text x="617.5" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-08</text>
+<text x="725" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-10</text>
+<text x="832.5" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-11</text>
+<text x="940" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-12</text>
 <polyline points="80,436.5743912600685" fill="none" stroke="#2563eb" stroke-width="3"/>
 <circle cx="80" cy="436.5743912600685" r="5" fill="#2563eb"/>
 <rect x="976" y="59" width="14" height="14" fill="#2563eb"/>
 <text x="998" y="70" font-family="Arial, sans-serif" font-size="13" fill="#374151">Browser action synthetic check</text>
-<polyline points="202.85714285714283,128.8177020646237 202.85714285714283,128.8177020646237 202.85714285714283,128.8177020646237 202.85714285714283,128.8177020646237 202.85714285714283,108.81214702342373 202.85714285714283,88.25849458383482 202.85714285714283,70 202.85714285714283,88.25849458383482 202.85714285714283,88.25849458383482 202.85714285714283,88.25849458383482 325.71428571428567,88.25849458383482 325.71428571428567,70 325.71428571428567,70 325.71428571428567,70 448.57142857142856,70 571.4285714285713,70 694.2857142857143,70 694.2857142857143,70 817.1428571428571,70 940,70" fill="none" stroke="#dc2626" stroke-width="3"/>
-<circle cx="202.85714285714283" cy="128.8177020646237" r="5" fill="#dc2626"/>
-<circle cx="202.85714285714283" cy="128.8177020646237" r="5" fill="#dc2626"/>
-<circle cx="202.85714285714283" cy="128.8177020646237" r="5" fill="#dc2626"/>
-<circle cx="202.85714285714283" cy="128.8177020646237" r="5" fill="#dc2626"/>
-<circle cx="202.85714285714283" cy="108.81214702342373" r="5" fill="#dc2626"/>
-<circle cx="202.85714285714283" cy="88.25849458383482" r="5" fill="#dc2626"/>
-<circle cx="202.85714285714283" cy="70" r="5" fill="#dc2626"/>
-<circle cx="202.85714285714283" cy="88.25849458383482" r="5" fill="#dc2626"/>
-<circle cx="202.85714285714283" cy="88.25849458383482" r="5" fill="#dc2626"/>
-<circle cx="202.85714285714283" cy="88.25849458383482" r="5" fill="#dc2626"/>
-<circle cx="325.71428571428567" cy="88.25849458383482" r="5" fill="#dc2626"/>
-<circle cx="325.71428571428567" cy="70" r="5" fill="#dc2626"/>
-<circle cx="325.71428571428567" cy="70" r="5" fill="#dc2626"/>
-<circle cx="325.71428571428567" cy="70" r="5" fill="#dc2626"/>
-<circle cx="448.57142857142856" cy="70" r="5" fill="#dc2626"/>
-<circle cx="571.4285714285713" cy="70" r="5" fill="#dc2626"/>
-<circle cx="694.2857142857143" cy="70" r="5" fill="#dc2626"/>
-<circle cx="694.2857142857143" cy="70" r="5" fill="#dc2626"/>
-<circle cx="817.1428571428571" cy="70" r="5" fill="#dc2626"/>
+<polyline points="187.5,128.8177020646237 187.5,128.8177020646237 187.5,128.8177020646237 187.5,108.81214702342373 187.5,88.25849458383482 187.5,70 187.5,88.25849458383482 187.5,88.25849458383482 187.5,88.25849458383482 295,88.25849458383482 295,70 295,70 295,70 402.5,70 510,70 617.5,70 617.5,70 725,70 832.5,70 940,70" fill="none" stroke="#dc2626" stroke-width="3"/>
+<circle cx="187.5" cy="128.8177020646237" r="5" fill="#dc2626"/>
+<circle cx="187.5" cy="128.8177020646237" r="5" fill="#dc2626"/>
+<circle cx="187.5" cy="128.8177020646237" r="5" fill="#dc2626"/>
+<circle cx="187.5" cy="108.81214702342373" r="5" fill="#dc2626"/>
+<circle cx="187.5" cy="88.25849458383482" r="5" fill="#dc2626"/>
+<circle cx="187.5" cy="70" r="5" fill="#dc2626"/>
+<circle cx="187.5" cy="88.25849458383482" r="5" fill="#dc2626"/>
+<circle cx="187.5" cy="88.25849458383482" r="5" fill="#dc2626"/>
+<circle cx="187.5" cy="88.25849458383482" r="5" fill="#dc2626"/>
+<circle cx="295" cy="88.25849458383482" r="5" fill="#dc2626"/>
+<circle cx="295" cy="70" r="5" fill="#dc2626"/>
+<circle cx="295" cy="70" r="5" fill="#dc2626"/>
+<circle cx="295" cy="70" r="5" fill="#dc2626"/>
+<circle cx="402.5" cy="70" r="5" fill="#dc2626"/>
+<circle cx="510" cy="70" r="5" fill="#dc2626"/>
+<circle cx="617.5" cy="70" r="5" fill="#dc2626"/>
+<circle cx="617.5" cy="70" r="5" fill="#dc2626"/>
+<circle cx="725" cy="70" r="5" fill="#dc2626"/>
+<circle cx="832.5" cy="70" r="5" fill="#dc2626"/>
 <circle cx="940" cy="70" r="5" fill="#dc2626"/>
 <rect x="976" y="83" width="14" height="14" fill="#dc2626"/>
 <text x="998" y="94" font-family="Arial, sans-serif" font-size="13" fill="#374151">Traffic spike benchmark</text>
