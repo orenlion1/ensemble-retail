@@ -1,0 +1,21 @@
+apiVersion: incident.ext.grafana.app/v1alpha1
+kind: Incident
+spec:
+  title: "Black Friday 2025 shopping cart add availability"
+  description: "Black Friday traffic spike affects shopping cart add availability for multiple US clients"
+  severity: "Sev-2: Significant Business Impact"
+  incidentStart: "2025-11-28T14:00:00Z"
+  incidentEnd: "2025-11-28T22:00:00Z"
+  labels:
+  - key: "region"
+    value: "US"
+  - key: "feature"
+    value: "shopping-cart-add"
+  - key: "client_impact"
+    value: "multiple-clients"
+  - key: "impact_type"
+    value: "availability"
+  - key: "service"
+    value: "cart"
+  - key: "root_cause"
+    value: "Scaling-Defect-Service"

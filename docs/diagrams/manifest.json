@@ -1,0 +1,38 @@
+[
+  {
+    "title": "Network Diagram",
+    "slug": "network-diagram",
+    "file": "docs/diagrams/network-diagram.dot",
+    "svg": "docs/diagrams/network-diagram.svg",
+    "png": "docs/diagrams/network-diagram.png"
+  },
+  {
+    "title": "Sequence Diagram",
+    "slug": "sequence-diagram",
+    "file": "docs/diagrams/sequence-diagram.dot",
+    "svg": "docs/diagrams/sequence-diagram.svg",
+    "png": "docs/diagrams/sequence-diagram.png"
+  },
+  {
+    "title": "Request Flow Diagram",
+    "slug": "request-flow-diagram",
+    "file": "docs/diagrams/request-flow-diagram.dot",
+    "svg": "docs/diagrams/request-flow-diagram.svg",
+    "png": "docs/diagrams/request-flow-diagram.png"
+  },
+  {
+    "title": "Observability Capabilities Flow",
+    "slug": "observability-capabilities-flow",
+    "file": "docs/diagrams/observability-capabilities-flow.dot",
+    "svg": "docs/diagrams/observability-capabilities-flow.svg",
+    "png": "docs/diagrams/observability-capabilities-flow.png"
+  },
+  {
+    "title": "Observability Capabilities Flow Presentation",
+    "slug": "observability-capabilities-flow-presentation",
+    "file": "docs/diagrams/observability-capabilities-flow-presentation.dot",
+    "svg": "docs/diagrams/observability-capabilities-flow-presentation.svg",
+    "png": "docs/diagrams/observability-capabilities-flow-presentation.png",
+    "slidePng": "docs/diagrams/observability-capabilities-flow-presentation-16x9.png"
+  }
+]

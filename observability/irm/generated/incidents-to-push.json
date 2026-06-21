@@ -1,0 +1,768 @@
+[
+  {
+    "sequence": 1,
+    "file": "observability/irm/generated/incident-manifests/01-holiday-2025-01-01-holiday-traffic-spike-new-year-s-day-2025.yaml",
+    "type": "holiday",
+    "date": "2025-01-01",
+    "title": "Holiday traffic spike - New Year's Day 2025",
+    "region": "US",
+    "start": "2025-01-01T14:00:00Z",
+    "end": "2025-01-01T14:30:00Z",
+    "description": "Holiday traffic spike results in shopping cart errors and order loss",
+    "resolution": "Traffic spike due to holiday, services OOM killed and restarting. Node and pod auto-scaling requires calibration.",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "US",
+      "feature": "shopping-cart-checkout",
+      "client_impact": "multiple-clients",
+      "impact_type": "availability",
+      "service": "cart",
+      "root_cause": "Scaling-Defect-Service"
+    }
+  },
+  {
+    "sequence": 2,
+    "file": "observability/irm/generated/incident-manifests/02-holiday-2025-01-20-holiday-traffic-spike-martin-luther-king-jr-day-2025.yaml",
+    "type": "holiday",
+    "date": "2025-01-20",
+    "title": "Holiday traffic spike - Martin Luther King Jr. Day 2025",
+    "region": "US",
+    "start": "2025-01-20T14:00:00Z",
+    "end": "2025-01-20T14:30:00Z",
+    "description": "Holiday traffic spike results in shopping cart errors and order loss",
+    "resolution": "Traffic spike due to holiday, services OOM killed and restarting. Node and pod auto-scaling requires calibration.",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "US",
+      "feature": "shopping-cart-checkout",
+      "client_impact": "multiple-clients",
+      "impact_type": "availability",
+      "service": "cart",
+      "root_cause": "Scaling-Defect-Service"
+    }
+  },
+  {
+    "sequence": 3,
+    "file": "observability/irm/generated/incident-manifests/03-holiday-2025-02-17-holiday-traffic-spike-washington-s-birthday-2025.yaml",
+    "type": "holiday",
+    "date": "2025-02-17",
+    "title": "Holiday traffic spike - Washington's Birthday 2025",
+    "region": "US",
+    "start": "2025-02-17T14:00:00Z",
+    "end": "2025-02-17T14:30:00Z",
+    "description": "Holiday traffic spike results in shopping cart errors and order loss",
+    "resolution": "Traffic spike due to holiday, services OOM killed and restarting. Node and pod auto-scaling requires calibration.",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "US",
+      "feature": "shopping-cart-checkout",
+      "client_impact": "multiple-clients",
+      "impact_type": "availability",
+      "service": "cart",
+      "root_cause": "Scaling-Defect-Service"
+    }
+  },
+  {
+    "sequence": 4,
+    "file": "observability/irm/generated/incident-manifests/04-holiday-2025-05-26-holiday-traffic-spike-memorial-day-2025.yaml",
+    "type": "holiday",
+    "date": "2025-05-26",
+    "title": "Holiday traffic spike - Memorial Day 2025",
+    "region": "US",
+    "start": "2025-05-26T14:00:00Z",
+    "end": "2025-05-26T14:30:00Z",
+    "description": "Holiday traffic spike results in shopping cart errors and order loss",
+    "resolution": "Traffic spike due to holiday, services OOM killed and restarting. Node and pod auto-scaling requires calibration.",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "US",
+      "feature": "shopping-cart-checkout",
+      "client_impact": "multiple-clients",
+      "impact_type": "availability",
+      "service": "cart",
+      "root_cause": "Scaling-Defect-Service"
+    }
+  },
+  {
+    "sequence": 5,
+    "file": "observability/irm/generated/incident-manifests/05-holiday-2025-06-19-holiday-traffic-spike-juneteenth-national-independence-day-2025.yaml",
+    "type": "holiday",
+    "date": "2025-06-19",
+    "title": "Holiday traffic spike - Juneteenth National Independence Day 2025",
+    "region": "US",
+    "start": "2025-06-19T14:00:00Z",
+    "end": "2025-06-19T14:30:00Z",
+    "description": "Holiday traffic spike results in shopping cart errors and order loss",
+    "resolution": "Traffic spike due to holiday, services OOM killed and restarting. Node and pod auto-scaling requires calibration.",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "US",
+      "feature": "shopping-cart-checkout",
+      "client_impact": "multiple-clients",
+      "impact_type": "availability",
+      "service": "cart",
+      "root_cause": "Scaling-Defect-Service"
+    }
+  },
+  {
+    "sequence": 6,
+    "file": "observability/irm/generated/incident-manifests/06-holiday-2025-07-04-holiday-traffic-spike-independence-day-2025.yaml",
+    "type": "holiday",
+    "date": "2025-07-04",
+    "title": "Holiday traffic spike - Independence Day 2025",
+    "region": "US",
+    "start": "2025-07-04T14:00:00Z",
+    "end": "2025-07-04T14:30:00Z",
+    "description": "Holiday traffic spike results in shopping cart errors and order loss",
+    "resolution": "Traffic spike due to holiday, services OOM killed and restarting. Node and pod auto-scaling requires calibration.",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "US",
+      "feature": "shopping-cart-checkout",
+      "client_impact": "multiple-clients",
+      "impact_type": "availability",
+      "service": "cart",
+      "root_cause": "Scaling-Defect-Service"
+    }
+  },
+  {
+    "sequence": 7,
+    "file": "observability/irm/generated/incident-manifests/07-holiday-2025-09-01-holiday-traffic-spike-labor-day-2025.yaml",
+    "type": "holiday",
+    "date": "2025-09-01",
+    "title": "Holiday traffic spike - Labor Day 2025",
+    "region": "US",
+    "start": "2025-09-01T14:00:00Z",
+    "end": "2025-09-01T14:30:00Z",
+    "description": "Holiday traffic spike results in shopping cart errors and order loss",
+    "resolution": "Traffic spike due to holiday, services OOM killed and restarting. Node and pod auto-scaling requires calibration.",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "US",
+      "feature": "shopping-cart-checkout",
+      "client_impact": "multiple-clients",
+      "impact_type": "availability",
+      "service": "cart",
+      "root_cause": "Scaling-Defect-Service"
+    }
+  },
+  {
+    "sequence": 8,
+    "file": "observability/irm/generated/incident-manifests/08-holiday-2025-10-13-holiday-traffic-spike-columbus-day-2025.yaml",
+    "type": "holiday",
+    "date": "2025-10-13",
+    "title": "Holiday traffic spike - Columbus Day 2025",
+    "region": "US",
+    "start": "2025-10-13T14:00:00Z",
+    "end": "2025-10-13T14:30:00Z",
+    "description": "Holiday traffic spike results in shopping cart errors and order loss",
+    "resolution": "Traffic spike due to holiday, services OOM killed and restarting. Node and pod auto-scaling requires calibration.",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "US",
+      "feature": "shopping-cart-checkout",
+      "client_impact": "multiple-clients",
+      "impact_type": "availability",
+      "service": "cart",
+      "root_cause": "Scaling-Defect-Service"
+    }
+  },
+  {
+    "sequence": 9,
+    "file": "observability/irm/generated/incident-manifests/09-holiday-2025-11-11-holiday-traffic-spike-veterans-day-2025.yaml",
+    "type": "holiday",
+    "date": "2025-11-11",
+    "title": "Holiday traffic spike - Veterans Day 2025",
+    "region": "US",
+    "start": "2025-11-11T14:00:00Z",
+    "end": "2025-11-11T14:30:00Z",
+    "description": "Holiday traffic spike results in shopping cart errors and order loss",
+    "resolution": "Traffic spike due to holiday, services OOM killed and restarting. Node and pod auto-scaling requires calibration.",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "US",
+      "feature": "shopping-cart-checkout",
+      "client_impact": "multiple-clients",
+      "impact_type": "availability",
+      "service": "cart",
+      "root_cause": "Scaling-Defect-Service"
+    }
+  },
+  {
+    "sequence": 10,
+    "file": "observability/irm/generated/incident-manifests/10-holiday-2025-11-27-holiday-traffic-spike-thanksgiving-day-2025.yaml",
+    "type": "holiday",
+    "date": "2025-11-27",
+    "title": "Holiday traffic spike - Thanksgiving Day 2025",
+    "region": "US",
+    "start": "2025-11-27T14:00:00Z",
+    "end": "2025-11-27T14:30:00Z",
+    "description": "Holiday traffic spike results in shopping cart errors and order loss",
+    "resolution": "Traffic spike due to holiday, services OOM killed and restarting. Node and pod auto-scaling requires calibration.",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "US",
+      "feature": "shopping-cart-checkout",
+      "client_impact": "multiple-clients",
+      "impact_type": "availability",
+      "service": "cart",
+      "root_cause": "Scaling-Defect-Service"
+    }
+  },
+  {
+    "sequence": 11,
+    "file": "observability/irm/generated/incident-manifests/11-holiday-2025-12-25-holiday-traffic-spike-christmas-day-2025.yaml",
+    "type": "holiday",
+    "date": "2025-12-25",
+    "title": "Holiday traffic spike - Christmas Day 2025",
+    "region": "US",
+    "start": "2025-12-25T14:00:00Z",
+    "end": "2025-12-25T14:30:00Z",
+    "description": "Holiday traffic spike results in shopping cart errors and order loss",
+    "resolution": "Traffic spike due to holiday, services OOM killed and restarting. Node and pod auto-scaling requires calibration.",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "US",
+      "feature": "shopping-cart-checkout",
+      "client_impact": "multiple-clients",
+      "impact_type": "availability",
+      "service": "cart",
+      "root_cause": "Scaling-Defect-Service"
+    }
+  },
+  {
+    "sequence": 12,
+    "file": "observability/irm/generated/incident-manifests/12-holiday-2025-01-01-holiday-traffic-spike-new-year-s-day-canada-2025.yaml",
+    "type": "holiday",
+    "date": "2025-01-01",
+    "title": "Holiday traffic spike - New Year's Day Canada 2025",
+    "region": "Canada",
+    "start": "2025-01-01T14:00:00Z",
+    "end": "2025-01-01T14:30:00Z",
+    "description": "Holiday traffic spike results in shopping cart errors and order loss",
+    "resolution": "Traffic spike due to holiday, services OOM killed and restarting. Node and pod auto-scaling requires calibration.",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Canada",
+      "feature": "shopping-cart-checkout",
+      "client_impact": "multiple-clients",
+      "impact_type": "availability",
+      "service": "cart",
+      "root_cause": "Scaling-Defect-Service"
+    }
+  },
+  {
+    "sequence": 13,
+    "file": "observability/irm/generated/incident-manifests/13-holiday-2025-04-18-holiday-traffic-spike-good-friday-canada-2025.yaml",
+    "type": "holiday",
+    "date": "2025-04-18",
+    "title": "Holiday traffic spike - Good Friday Canada 2025",
+    "region": "Canada",
+    "start": "2025-04-18T14:00:00Z",
+    "end": "2025-04-18T14:30:00Z",
+    "description": "Holiday traffic spike results in shopping cart errors and order loss",
+    "resolution": "Traffic spike due to holiday, services OOM killed and restarting. Node and pod auto-scaling requires calibration.",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Canada",
+      "feature": "shopping-cart-checkout",
+      "client_impact": "multiple-clients",
+      "impact_type": "availability",
+      "service": "cart",
+      "root_cause": "Scaling-Defect-Service"
+    }
+  },
+  {
+    "sequence": 14,
+    "file": "observability/irm/generated/incident-manifests/14-holiday-2025-05-19-holiday-traffic-spike-victoria-day-canada-2025.yaml",
+    "type": "holiday",
+    "date": "2025-05-19",
+    "title": "Holiday traffic spike - Victoria Day Canada 2025",
+    "region": "Canada",
+    "start": "2025-05-19T14:00:00Z",
+    "end": "2025-05-19T14:30:00Z",
+    "description": "Holiday traffic spike results in shopping cart errors and order loss",
+    "resolution": "Traffic spike due to holiday, services OOM killed and restarting. Node and pod auto-scaling requires calibration.",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Canada",
+      "feature": "shopping-cart-checkout",
+      "client_impact": "multiple-clients",
+      "impact_type": "availability",
+      "service": "cart",
+      "root_cause": "Scaling-Defect-Service"
+    }
+  },
+  {
+    "sequence": 15,
+    "file": "observability/irm/generated/incident-manifests/15-holiday-2025-07-01-holiday-traffic-spike-canada-day-2025.yaml",
+    "type": "holiday",
+    "date": "2025-07-01",
+    "title": "Holiday traffic spike - Canada Day 2025",
+    "region": "Canada",
+    "start": "2025-07-01T14:00:00Z",
+    "end": "2025-07-01T14:30:00Z",
+    "description": "Holiday traffic spike results in shopping cart errors and order loss",
+    "resolution": "Traffic spike due to holiday, services OOM killed and restarting. Node and pod auto-scaling requires calibration.",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Canada",
+      "feature": "shopping-cart-checkout",
+      "client_impact": "multiple-clients",
+      "impact_type": "availability",
+      "service": "cart",
+      "root_cause": "Scaling-Defect-Service"
+    }
+  },
+  {
+    "sequence": 16,
+    "file": "observability/irm/generated/incident-manifests/16-holiday-2025-09-01-holiday-traffic-spike-labour-day-canada-2025.yaml",
+    "type": "holiday",
+    "date": "2025-09-01",
+    "title": "Holiday traffic spike - Labour Day Canada 2025",
+    "region": "Canada",
+    "start": "2025-09-01T14:00:00Z",
+    "end": "2025-09-01T14:30:00Z",
+    "description": "Holiday traffic spike results in shopping cart errors and order loss",
+    "resolution": "Traffic spike due to holiday, services OOM killed and restarting. Node and pod auto-scaling requires calibration.",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Canada",
+      "feature": "shopping-cart-checkout",
+      "client_impact": "multiple-clients",
+      "impact_type": "availability",
+      "service": "cart",
+      "root_cause": "Scaling-Defect-Service"
+    }
+  },
+  {
+    "sequence": 17,
+    "file": "observability/irm/generated/incident-manifests/17-holiday-2025-09-30-holiday-traffic-spike-national-day-for-truth-and-reconciliation-canada-2025.yaml",
+    "type": "holiday",
+    "date": "2025-09-30",
+    "title": "Holiday traffic spike - National Day for Truth and Reconciliation Canada 2025",
+    "region": "Canada",
+    "start": "2025-09-30T14:00:00Z",
+    "end": "2025-09-30T14:30:00Z",
+    "description": "Holiday traffic spike results in shopping cart errors and order loss",
+    "resolution": "Traffic spike due to holiday, services OOM killed and restarting. Node and pod auto-scaling requires calibration.",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Canada",
+      "feature": "shopping-cart-checkout",
+      "client_impact": "multiple-clients",
+      "impact_type": "availability",
+      "service": "cart",
+      "root_cause": "Scaling-Defect-Service"
+    }
+  },
+  {
+    "sequence": 18,
+    "file": "observability/irm/generated/incident-manifests/18-holiday-2025-10-13-holiday-traffic-spike-thanksgiving-day-canada-2025.yaml",
+    "type": "holiday",
+    "date": "2025-10-13",
+    "title": "Holiday traffic spike - Thanksgiving Day Canada 2025",
+    "region": "Canada",
+    "start": "2025-10-13T14:00:00Z",
+    "end": "2025-10-13T14:30:00Z",
+    "description": "Holiday traffic spike results in shopping cart errors and order loss",
+    "resolution": "Traffic spike due to holiday, services OOM killed and restarting. Node and pod auto-scaling requires calibration.",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Canada",
+      "feature": "shopping-cart-checkout",
+      "client_impact": "multiple-clients",
+      "impact_type": "availability",
+      "service": "cart",
+      "root_cause": "Scaling-Defect-Service"
+    }
+  },
+  {
+    "sequence": 19,
+    "file": "observability/irm/generated/incident-manifests/19-holiday-2025-11-11-holiday-traffic-spike-remembrance-day-canada-2025.yaml",
+    "type": "holiday",
+    "date": "2025-11-11",
+    "title": "Holiday traffic spike - Remembrance Day Canada 2025",
+    "region": "Canada",
+    "start": "2025-11-11T14:00:00Z",
+    "end": "2025-11-11T14:30:00Z",
+    "description": "Holiday traffic spike results in shopping cart errors and order loss",
+    "resolution": "Traffic spike due to holiday, services OOM killed and restarting. Node and pod auto-scaling requires calibration.",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Canada",
+      "feature": "shopping-cart-checkout",
+      "client_impact": "multiple-clients",
+      "impact_type": "availability",
+      "service": "cart",
+      "root_cause": "Scaling-Defect-Service"
+    }
+  },
+  {
+    "sequence": 20,
+    "file": "observability/irm/generated/incident-manifests/20-holiday-2025-12-25-holiday-traffic-spike-christmas-day-canada-2025.yaml",
+    "type": "holiday",
+    "date": "2025-12-25",
+    "title": "Holiday traffic spike - Christmas Day Canada 2025",
+    "region": "Canada",
+    "start": "2025-12-25T14:00:00Z",
+    "end": "2025-12-25T14:30:00Z",
+    "description": "Holiday traffic spike results in shopping cart errors and order loss",
+    "resolution": "Traffic spike due to holiday, services OOM killed and restarting. Node and pod auto-scaling requires calibration.",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Canada",
+      "feature": "shopping-cart-checkout",
+      "client_impact": "multiple-clients",
+      "impact_type": "availability",
+      "service": "cart",
+      "root_cause": "Scaling-Defect-Service"
+    }
+  },
+  {
+    "sequence": 21,
+    "file": "observability/irm/generated/incident-manifests/21-holiday-2025-12-26-holiday-traffic-spike-boxing-day-canada-2025.yaml",
+    "type": "holiday",
+    "date": "2025-12-26",
+    "title": "Holiday traffic spike - Boxing Day Canada 2025",
+    "region": "Canada",
+    "start": "2025-12-26T14:00:00Z",
+    "end": "2025-12-26T14:30:00Z",
+    "description": "Holiday traffic spike results in shopping cart errors and order loss",
+    "resolution": "Traffic spike due to holiday, services OOM killed and restarting. Node and pod auto-scaling requires calibration.",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Canada",
+      "feature": "shopping-cart-checkout",
+      "client_impact": "multiple-clients",
+      "impact_type": "availability",
+      "service": "cart",
+      "root_cause": "Scaling-Defect-Service"
+    }
+  },
+  {
+    "sequence": 22,
+    "file": "observability/irm/generated/incident-manifests/22-placeholder-2025-01-01-placeholder-january-2025-no-action-needed.yaml",
+    "type": "placeholder",
+    "date": "2025-01-01",
+    "title": "[Placeholder] January 2025 No Action Needed",
+    "region": "US",
+    "start": "2025-01-01T04:01:00Z",
+    "end": "2025-01-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "US",
+      "client_impact": "multiple-clients",
+      "impact_type": "availability"
+    }
+  },
+  {
+    "sequence": 23,
+    "file": "observability/irm/generated/incident-manifests/23-placeholder-2025-02-01-placeholder-february-2025-no-action-needed.yaml",
+    "type": "placeholder",
+    "date": "2025-02-01",
+    "title": "[Placeholder] February 2025 No Action Needed",
+    "region": "US",
+    "start": "2025-02-01T04:01:00Z",
+    "end": "2025-02-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "US",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 24,
+    "file": "observability/irm/generated/incident-manifests/24-placeholder-2025-03-01-placeholder-march-2025-no-action-needed.yaml",
+    "type": "placeholder",
+    "date": "2025-03-01",
+    "title": "[Placeholder] March 2025 No Action Needed",
+    "region": "US",
+    "start": "2025-03-01T04:01:00Z",
+    "end": "2025-03-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "US",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 25,
+    "file": "observability/irm/generated/incident-manifests/25-placeholder-2025-04-01-placeholder-april-2025-no-action-needed.yaml",
+    "type": "placeholder",
+    "date": "2025-04-01",
+    "title": "[Placeholder] April 2025 No Action Needed",
+    "region": "US",
+    "start": "2025-04-01T04:01:00Z",
+    "end": "2025-04-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "US",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 26,
+    "file": "observability/irm/generated/incident-manifests/26-placeholder-2025-05-01-placeholder-may-2025-no-action-needed.yaml",
+    "type": "placeholder",
+    "date": "2025-05-01",
+    "title": "[Placeholder] May 2025 No Action Needed",
+    "region": "US",
+    "start": "2025-05-01T04:01:00Z",
+    "end": "2025-05-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "US",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 27,
+    "file": "observability/irm/generated/incident-manifests/27-placeholder-2025-06-01-placeholder-june-2025-no-action-needed.yaml",
+    "type": "placeholder",
+    "date": "2025-06-01",
+    "title": "[Placeholder] June 2025 No Action Needed",
+    "region": "US",
+    "start": "2025-06-01T04:01:00Z",
+    "end": "2025-06-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "US",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 28,
+    "file": "observability/irm/generated/incident-manifests/28-placeholder-2025-07-01-placeholder-july-2025-no-action-needed.yaml",
+    "type": "placeholder",
+    "date": "2025-07-01",
+    "title": "[Placeholder] July 2025 No Action Needed",
+    "region": "US",
+    "start": "2025-07-01T04:01:00Z",
+    "end": "2025-07-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "US",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 29,
+    "file": "observability/irm/generated/incident-manifests/29-placeholder-2025-08-01-placeholder-august-2025-no-action-needed.yaml",
+    "type": "placeholder",
+    "date": "2025-08-01",
+    "title": "[Placeholder] August 2025 No Action Needed",
+    "region": "US",
+    "start": "2025-08-01T04:01:00Z",
+    "end": "2025-08-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "US",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 30,
+    "file": "observability/irm/generated/incident-manifests/30-placeholder-2025-09-01-placeholder-september-2025-no-action-needed.yaml",
+    "type": "placeholder",
+    "date": "2025-09-01",
+    "title": "[Placeholder] September 2025 No Action Needed",
+    "region": "US",
+    "start": "2025-09-01T04:01:00Z",
+    "end": "2025-09-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "US",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 31,
+    "file": "observability/irm/generated/incident-manifests/31-placeholder-2025-10-01-placeholder-october-2025-no-action-needed.yaml",
+    "type": "placeholder",
+    "date": "2025-10-01",
+    "title": "[Placeholder] October 2025 No Action Needed",
+    "region": "US",
+    "start": "2025-10-01T04:01:00Z",
+    "end": "2025-10-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "US",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 32,
+    "file": "observability/irm/generated/incident-manifests/32-placeholder-2025-11-01-placeholder-november-2025-no-action-needed.yaml",
+    "type": "placeholder",
+    "date": "2025-11-01",
+    "title": "[Placeholder] November 2025 No Action Needed",
+    "region": "US",
+    "start": "2025-11-01T04:01:00Z",
+    "end": "2025-11-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "US",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 33,
+    "file": "observability/irm/generated/incident-manifests/33-placeholder-2025-12-01-placeholder-december-2025-no-action-needed.yaml",
+    "type": "placeholder",
+    "date": "2025-12-01",
+    "title": "[Placeholder] December 2025 No Action Needed",
+    "region": "US",
+    "start": "2025-12-01T04:01:00Z",
+    "end": "2025-12-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "US",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 34,
+    "file": "observability/irm/generated/incident-manifests/34-placeholder-2026-01-01-placeholder-january-2026-no-action-needed.yaml",
+    "type": "placeholder",
+    "date": "2026-01-01",
+    "title": "[Placeholder] January 2026 No Action Needed",
+    "region": "US",
+    "start": "2026-01-01T04:01:00Z",
+    "end": "2026-01-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "US",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 35,
+    "file": "observability/irm/generated/incident-manifests/35-placeholder-2026-02-01-placeholder-february-2026-no-action-needed.yaml",
+    "type": "placeholder",
+    "date": "2026-02-01",
+    "title": "[Placeholder] February 2026 No Action Needed",
+    "region": "US",
+    "start": "2026-02-01T04:01:00Z",
+    "end": "2026-02-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "US",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 36,
+    "file": "observability/irm/generated/incident-manifests/36-placeholder-2026-03-01-placeholder-march-2026-no-action-needed.yaml",
+    "type": "placeholder",
+    "date": "2026-03-01",
+    "title": "[Placeholder] March 2026 No Action Needed",
+    "region": "US",
+    "start": "2026-03-01T04:01:00Z",
+    "end": "2026-03-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "US",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 37,
+    "file": "observability/irm/generated/incident-manifests/37-placeholder-2026-04-01-placeholder-april-2026-no-action-needed.yaml",
+    "type": "placeholder",
+    "date": "2026-04-01",
+    "title": "[Placeholder] April 2026 No Action Needed",
+    "region": "US",
+    "start": "2026-04-01T04:01:00Z",
+    "end": "2026-04-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "US",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 38,
+    "file": "observability/irm/generated/incident-manifests/38-placeholder-2026-05-01-placeholder-may-2026-no-action-needed.yaml",
+    "type": "placeholder",
+    "date": "2026-05-01",
+    "title": "[Placeholder] May 2026 No Action Needed",
+    "region": "US",
+    "start": "2026-05-01T04:01:00Z",
+    "end": "2026-05-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "US",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 39,
+    "file": "observability/irm/generated/incident-manifests/40-placeholder-2026-06-01-placeholder-june-2026-no-action-needed.yaml",
+    "type": "placeholder",
+    "date": "2026-06-01",
+    "title": "[Placeholder] June 2026 No Action Needed",
+    "region": "US",
+    "start": "2026-06-01T04:01:00Z",
+    "end": "2026-06-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "US",
+      "detection": "call-in",
+      "client_impact": "multiple-clients",
+      "impact_type": "availability"
+    }
+  }
+]

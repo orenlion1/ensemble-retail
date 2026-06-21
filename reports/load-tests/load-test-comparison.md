@@ -1,0 +1,168 @@
+# k6 Load Test Comparison
+
+Generated: 2026-06-17T14:24:05.218Z
+
+Source summary: `reports/load-tests/k6-summary-20260617T142338Z.json`
+
+Source run history: `reports/load-tests/k6-runs-20260617T142338Z.json`
+
+Source Faro action totals: `reports/frontend-user-actions/faro-user-action-totals-20260617T142400Z.json`
+
+## Latest Runs
+
+| Test ID | Test | Latest Run | Date | Result | Duration | HTTP Requests | HTTP Failure Rate | HTTP p95 | Check Pass Rate |
+|---:|---|---|---|---:|---:|---:|---:|---:|---:|
+| 1228494 | API flow load test | n/a | n/a | n/a | n/a | n/a | n/a | n/a | k6 API 404 for /cloud/v6/load_tests/1228494/test_runs?%24top=20&%24orderby=created+desc: {"error":{"message":"Resource matching query does not exist: '1228494'","code":"error"}} |
+| 1228490 | 20-user regional load test | n/a | n/a | n/a | n/a | n/a | n/a | n/a | k6 API 404 for /cloud/v6/load_tests/1228490/test_runs?%24top=20&%24orderby=created+desc: {"error":{"message":"Resource matching query does not exist: '1228490'","code":"error"}} |
+| 1228496 | Traffic spike benchmark | [7797523](https://orenlion.grafana.net/a/k6-app/runs/7797523) | 06/17/2026, 10:07 | ✅ | 10.0m | n/a | n/a | n/a | n/a |
+| 1233226 | Browser action synthetic check | [7652683](https://orenlion.grafana.net/a/k6-app/runs/7652683) | 05/31/2026, 12:41 | ✅ | 0.3m | n/a | n/a | n/a | n/a |
+
+## Visual Comparison
+
+### Result By Date
+
+![Load test result by date](comparison/load-test-results-by-date.svg)
+
+### Duration By Date
+
+![Run duration by date](comparison/load-test-duration-by-date.svg)
+
+### VUH Cost By Date
+
+![VUH cost by date](comparison/load-test-vuh-by-date.svg)
+
+### Latest HTTP Failure Rate
+
+![Latest HTTP failure rate](comparison/latest-http-failure-rate.svg)
+
+### Latest Check Pass Rate
+
+![Latest check pass rate](comparison/latest-check-pass-rate.svg)
+
+### Latest HTTP p95
+
+![Latest HTTP p95](comparison/latest-http-p95.svg)
+
+### Latest User Action And Cart Totals
+
+![Latest user action and cart totals](comparison/latest-user-action-totals.svg)
+
+## Result Summary
+
+| Test | Runs | Passed | Failed | Errors | Pass Rate |
+|---|---:|---:|---:|---:|---:|
+| Browser action synthetic check | 1 | 1 | 0 | 0 | 100.00% |
+| Traffic spike benchmark | 20 | 16 | 4 | 0 | 80.00% |
+
+## Request And User Action Totals
+
+These totals come from local k6 summary files named `reports/load-tests/k6-local-summary-*.json`. Cloud run history still provides total HTTP requests for latest runs, but per-action counters such as shopping cart add/remove require these local summaries or equivalent exported metric data.
+
+| Date | Generated | Test | HTTP Requests | HTTP Failures | HTTP Failure Rate | User Actions | Cart Adds Total | Add Item | Add Detail | Add Sale | Remove Item | Checkout | API Cart Updates | Checkout Attempts | Region Changes |
+|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 2026-06-01 | 06/01/2026, 12:05 | Browser action synthetic check | 123 | 14 | 11.38% | 43 | 4 | 1 | 2 | 1 | 1 | 1 | n/a | n/a | n/a |
+| 2026-05-31 | 05/31/2026, 19:30 | Browser action synthetic check | 140 | 14 | 10.00% | 43 | 4 | 1 | 2 | 1 | 1 | 1 | n/a | n/a | n/a |
+| 2026-05-31 | 05/31/2026, 19:26 | Browser action synthetic check | 218 | 0 | 0.00% | 43 | 4 | 1 | 2 | 1 | 1 | 1 | n/a | n/a | n/a |
+| 2026-05-31 | 05/31/2026, 12:40 | Browser action synthetic check | 140 | 14 | 10.00% | 43 | 4 | 1 | 2 | 1 | 1 | 1 | n/a | n/a | n/a |
+| 2026-05-31 | 05/31/2026, 12:39 | Browser action synthetic check | 213 | 0 | 0.00% | 43 | 4 | 1 | 2 | 1 | 1 | 1 | n/a | n/a | n/a |
+| 2026-05-31 | 05/31/2026, 12:38 | Browser action synthetic check | 86 | 6 | 6.98% | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |
+| 2026-05-30 | 05/30/2026, 16:54 | Browser action synthetic check | 123 | 14 | 11.38% | 31 | 4 | 1 | 2 | 1 | 1 | 1 | n/a | n/a | n/a |
+| 2026-05-30 | 05/30/2026, 16:18 | Browser action synthetic check | 135 | 14 | 10.37% | 31 | 4 | 1 | 2 | 1 | 1 | 1 | n/a | n/a | n/a |
+| 2026-05-30 | 05/30/2026, 15:31 | Browser action synthetic check | 135 | 14 | 10.37% | 31 | 4 | 1 | 2 | 1 | 1 | 1 | n/a | n/a | n/a |
+| 2026-05-30 | 05/30/2026, 15:28 | Browser action synthetic check | 202 | 0 | 0.00% | 31 | 4 | 1 | 2 | 1 | 1 | 1 | n/a | n/a | n/a |
+| 2026-05-30 | 05/30/2026, 15:23 | Browser action synthetic check | 135 | 14 | 10.37% | 31 | 4 | 1 | 2 | 1 | 1 | 1 | n/a | n/a | n/a |
+| 2026-05-30 | 05/30/2026, 15:20 | Browser action synthetic check | 202 | 0 | 0.00% | 31 | 4 | 1 | 2 | 1 | 1 | 1 | n/a | n/a | n/a |
+| 2026-05-30 | 05/30/2026, 15:20 | Browser action synthetic check | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |
+| 2026-05-30 | 05/30/2026, 15:19 | Browser action synthetic check | 135 | 14 | 10.37% | 31 | 4 | 1 | 2 | 1 | 1 | 1 | n/a | n/a | n/a |
+| 2026-05-30 | 05/30/2026, 14:43 | Browser action synthetic check | 202 | 0 | 0.00% | 31 | 4 | 1 | 2 | 1 | 1 | 1 | n/a | n/a | n/a |
+| 2026-05-30 | 05/30/2026, 14:34 | Browser action synthetic check | 202 | 0 | 0.00% | 31 | 4 | 1 | 2 | 1 | 1 | 1 | n/a | n/a | n/a |
+| 2026-05-30 | 05/30/2026, 14:29 | Combined traffic spike, regional, and browser-action benchmark | 174425 | 2617 | 1.50% | 31 | 4 | 1 | 2 | 1 | 1 | 1 | 6174 | 1377 | 11586 |
+| 2026-05-30 | 05/30/2026, 10:58 | Browser action synthetic check | 135 | 14 | 10.37% | 31 | 4 | 1 | 2 | 1 | 1 | 1 | n/a | n/a | n/a |
+
+## Grafana Faro User Action Executions
+
+These totals come from the latest `gcx logs query` output under `reports/frontend-user-actions/faro-user-action-totals-*.json`. They use the latest sample from a rolling `6h` `count_over_time` query to show what Grafana Cloud received after k6 browser-action runs.
+
+Total executions: 5139
+
+| Action | Importance | Severity | Executions |
+|---|---|---|---:|
+| search-products | normal | unset | 352 |
+| select-language:swedish | normal | unset | 251 |
+| select-language:american-english | normal | unset | 250 |
+| close-product-detail:mens-midlayer-grid | normal | unset | 248 |
+| shopping-cart:add-detail-item:mens-midlayer-grid | normal | unset | 248 |
+| sort-products:price-low | normal | unset | 169 |
+| checkout-dialog:close | normal | unset | 125 |
+| navigate-header:cart | normal | unset | 125 |
+| navigate-sale:spring-collection-sale | normal | unset | 125 |
+| select-department:mens | normal | unset | 125 |
+| select-department:womens | normal | unset | 125 |
+| select-region:se | normal | unset | 125 |
+| select-region:us | normal | unset | 125 |
+| shopping-cart:add-sale-item:mens-midlayer-grid | normal | unset | 125 |
+| edit-account-email | normal | unset | 124 |
+| edit-account-name | normal | unset | 124 |
+| edit-shipping-address | normal | unset | 124 |
+| navigate-brand-family:ensemble | normal | unset | 124 |
+| navigate-brand-family:outlet | normal | unset | 124 |
+| navigate-brand-family:regear | normal | unset | 124 |
+| navigate-brand-family:trail-lab | normal | unset | 124 |
+| navigate-header:account | normal | unset | 124 |
+| navigate-header:shop | normal | unset | 124 |
+| navigate-hero:shop-new-arrivals | normal | unset | 124 |
+| navigate-sale:shop-all | normal | unset | 124 |
+| navigate-utility:find-store | normal | unset | 124 |
+| navigate-utility:help | normal | unset | 124 |
+| save-account | critical | unset | 124 |
+| select-category:mens-mid-layers | normal | unset | 124 |
+| shopping-cart:add-item:mens-midlayer-grid | normal | unset | 124 |
+| shopping-cart:change-quantity:mens-midlayer-grid | normal | unset | 124 |
+| shopping-cart:checkout | critical | unset | 124 |
+| shopping-cart:remove-item:mens-midlayer-grid | normal | unset | 124 |
+| view-product:product-grid-mens-midlayer-grid | normal | unset | 124 |
+| view-product:sale-grid-mens-midlayer-grid | normal | unset | 124 |
+| select-category:mens-pants | normal | unset | 2 |
+| select-language:british-english | normal | unset | 2 |
+| select-language:french | normal | unset | 2 |
+| select-language:mandarin | normal | unset | 2 |
+| shopping-cart:add-sale-item:womens-rain-cap | normal | unset | 2 |
+| auth:google-login-complete | normal | unset | 1 |
+| auth:google-login-start | critical | unset | 1 |
+| select-region:ca | normal | unset | 1 |
+| select-region:cn | normal | unset | 1 |
+| select-region:uk | normal | unset | 1 |
+| shopping-cart:checkout | normal | unset | 1 |
+| shopping-cart:remove-item:womens-rain-cap | normal | unset | 1 |
+
+## Run History
+
+| Date | Started | Test | Run | Result | Duration | Request/sec | Total VUH | Protocol VUH | Browser VUH |
+|---|---|---|---|---:|---:|---:|---:|---:|---:|
+| 2026-06-17 | 06/17/2026, 10:07 | Traffic spike benchmark | [7797523](https://orenlion.grafana.net/a/k6-app/runs/7797523) | ✅ | 10.0m | 100 | 108.01 | 99.82 | 8.19 |
+| 2026-06-12 | 06/12/2026, 14:27 | Traffic spike benchmark | [7756565](https://orenlion.grafana.net/a/k6-app/runs/7756565) | ✅ | 10.0m | 100 | 108.01 | 99.82 | 8.19 |
+| 2026-06-11 | 06/11/2026, 14:25 | Traffic spike benchmark | [7747809](https://orenlion.grafana.net/a/k6-app/runs/7747809) | ✅ | 10.0m | 120 | 108.01 | 99.82 | 8.19 |
+| 2026-06-10 | 06/10/2026, 10:22 | Traffic spike benchmark | [7736577](https://orenlion.grafana.net/a/k6-app/runs/7736577) | ✅ | 10.0m | 120 | 108.01 | 99.82 | 8.19 |
+| 2026-06-08 | 06/08/2026, 12:32 | Traffic spike benchmark | [7718235](https://orenlion.grafana.net/a/k6-app/runs/7718235) | ✅ | 10.0m | 120 | 108.01 | 99.82 | 8.19 |
+| 2026-06-08 | 06/08/2026, 09:43 | Traffic spike benchmark | [7716954](https://orenlion.grafana.net/a/k6-app/runs/7716954) | ❌ | 10.0m | 120 | 108.01 | 99.82 | 8.19 |
+| 2026-06-04 | 06/04/2026, 08:43 | Traffic spike benchmark | [7683642](https://orenlion.grafana.net/a/k6-app/runs/7683642) | ✅ | 10.0m | 120 | 108.01 | 99.82 | 8.19 |
+| 2026-06-03 | 06/03/2026, 08:19 | Traffic spike benchmark | [7673849](https://orenlion.grafana.net/a/k6-app/runs/7673849) | ✅ | 10.0m | 120 | 108.01 | 99.82 | 8.19 |
+| 2026-06-02 | 06/02/2026, 18:20 | Traffic spike benchmark | [7668610](https://orenlion.grafana.net/a/k6-app/runs/7668610) | ❌ | 10.0m | 120 | 108.01 | 99.82 | 8.19 |
+| 2026-06-02 | 06/02/2026, 17:58 | Traffic spike benchmark | [7668454](https://orenlion.grafana.net/a/k6-app/runs/7668454) | ✅ | 10.0m | 120 | 108.01 | 99.82 | 8.19 |
+| 2026-06-02 | 06/02/2026, 11:14 | Traffic spike benchmark | [7666228](https://orenlion.grafana.net/a/k6-app/runs/7666228) | ✅ | 10.0m | 120 | 108.01 | 99.82 | 8.19 |
+| 2026-06-02 | 06/02/2026, 10:35 | Traffic spike benchmark | [7666017](https://orenlion.grafana.net/a/k6-app/runs/7666017) | ✅ | 10.0m | 100 | 102.68 | 94.39 | 8.29 |
+| 2026-06-01 | 06/01/2026, 16:21 | Traffic spike benchmark | [7660460](https://orenlion.grafana.net/a/k6-app/runs/7660460) | ❌ | 10.0m | 100 | 102.68 | 94.39 | 8.29 |
+| 2026-06-01 | 06/01/2026, 15:54 | Traffic spike benchmark | [7660241](https://orenlion.grafana.net/a/k6-app/runs/7660241) | ✅ | 10.0m | 100 | 102.68 | 94.39 | 8.29 |
+| 2026-06-01 | 06/01/2026, 15:23 | Traffic spike benchmark | [7660054](https://orenlion.grafana.net/a/k6-app/runs/7660054) | ✅ | 10.0m | 100 | 102.68 | 94.39 | 8.29 |
+| 2026-06-01 | 06/01/2026, 14:38 | Traffic spike benchmark | [7659799](https://orenlion.grafana.net/a/k6-app/runs/7659799) | ❌ | 10.0m | 120 | 108.01 | 99.82 | 8.19 |
+| 2026-06-01 | 06/01/2026, 14:23 | Traffic spike benchmark | [7659741](https://orenlion.grafana.net/a/k6-app/runs/7659741) | ✅ | 10.0m | 100 | 102.68 | 94.39 | 8.29 |
+| 2026-06-01 | 06/01/2026, 14:04 | Traffic spike benchmark | [7659609](https://orenlion.grafana.net/a/k6-app/runs/7659609) | ✅ | 10.0m | 80 | 96.68 | 88.34 | 8.34 |
+| 2026-06-01 | 06/01/2026, 11:34 | Traffic spike benchmark | [7658832](https://orenlion.grafana.net/a/k6-app/runs/7658832) | ✅ | 10.0m | 60 | 90.84 | 82.50 | 8.34 |
+| 2026-06-01 | 06/01/2026, 10:10 | Traffic spike benchmark | [7658257](https://orenlion.grafana.net/a/k6-app/runs/7658257) | ✅ | 10.0m | 70 | 90.84 | 82.50 | 8.34 |
+| 2026-05-31 | 05/31/2026, 12:41 | Browser action synthetic check | [7652683](https://orenlion.grafana.net/a/k6-app/runs/7652683) | ✅ | 0.3m | 0 | 1.00 | 0.00 | 1.00 |
+
+## Machine-Readable Comparison
+
+- CSV: [comparison/load-test-runs.csv](comparison/load-test-runs.csv)
+- Counter CSV: [comparison/load-test-counters.csv](comparison/load-test-counters.csv)
+- SVG charts are stored under [comparison/](comparison/).

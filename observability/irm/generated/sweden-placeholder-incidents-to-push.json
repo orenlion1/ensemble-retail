@@ -1,0 +1,308 @@
+[
+  {
+    "sequence": 1,
+    "file": "observability/irm/generated/sweden-placeholder-manifests/01-placeholder-2025-01-01-sweden-january-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-01-01",
+    "title": "[Placeholder] Sweden January 2025 No Action Needed",
+    "region": "Sweden",
+    "start": "2025-01-01T04:01:00Z",
+    "end": "2025-01-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Sweden",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 2,
+    "file": "observability/irm/generated/sweden-placeholder-manifests/02-placeholder-2025-02-01-sweden-february-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-02-01",
+    "title": "[Placeholder] Sweden February 2025 No Action Needed",
+    "region": "Sweden",
+    "start": "2025-02-01T04:01:00Z",
+    "end": "2025-02-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Sweden",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 3,
+    "file": "observability/irm/generated/sweden-placeholder-manifests/03-placeholder-2025-03-01-sweden-march-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-03-01",
+    "title": "[Placeholder] Sweden March 2025 No Action Needed",
+    "region": "Sweden",
+    "start": "2025-03-01T04:01:00Z",
+    "end": "2025-03-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Sweden",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 4,
+    "file": "observability/irm/generated/sweden-placeholder-manifests/04-placeholder-2025-04-01-sweden-april-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-04-01",
+    "title": "[Placeholder] Sweden April 2025 No Action Needed",
+    "region": "Sweden",
+    "start": "2025-04-01T04:01:00Z",
+    "end": "2025-04-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Sweden",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 5,
+    "file": "observability/irm/generated/sweden-placeholder-manifests/05-placeholder-2025-05-01-sweden-may-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-05-01",
+    "title": "[Placeholder] Sweden May 2025 No Action Needed",
+    "region": "Sweden",
+    "start": "2025-05-01T04:01:00Z",
+    "end": "2025-05-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Sweden",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 6,
+    "file": "observability/irm/generated/sweden-placeholder-manifests/06-placeholder-2025-06-01-sweden-june-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-06-01",
+    "title": "[Placeholder] Sweden June 2025 No Action Needed",
+    "region": "Sweden",
+    "start": "2025-06-01T04:01:00Z",
+    "end": "2025-06-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Sweden",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 7,
+    "file": "observability/irm/generated/sweden-placeholder-manifests/07-placeholder-2025-07-01-sweden-july-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-07-01",
+    "title": "[Placeholder] Sweden July 2025 No Action Needed",
+    "region": "Sweden",
+    "start": "2025-07-01T04:01:00Z",
+    "end": "2025-07-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Sweden",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 8,
+    "file": "observability/irm/generated/sweden-placeholder-manifests/08-placeholder-2025-08-01-sweden-august-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-08-01",
+    "title": "[Placeholder] Sweden August 2025 No Action Needed",
+    "region": "Sweden",
+    "start": "2025-08-01T04:01:00Z",
+    "end": "2025-08-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Sweden",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 9,
+    "file": "observability/irm/generated/sweden-placeholder-manifests/09-placeholder-2025-09-01-sweden-september-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-09-01",
+    "title": "[Placeholder] Sweden September 2025 No Action Needed",
+    "region": "Sweden",
+    "start": "2025-09-01T04:01:00Z",
+    "end": "2025-09-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Sweden",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 10,
+    "file": "observability/irm/generated/sweden-placeholder-manifests/10-placeholder-2025-10-01-sweden-october-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-10-01",
+    "title": "[Placeholder] Sweden October 2025 No Action Needed",
+    "region": "Sweden",
+    "start": "2025-10-01T04:01:00Z",
+    "end": "2025-10-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Sweden",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 11,
+    "file": "observability/irm/generated/sweden-placeholder-manifests/11-placeholder-2025-11-01-sweden-november-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-11-01",
+    "title": "[Placeholder] Sweden November 2025 No Action Needed",
+    "region": "Sweden",
+    "start": "2025-11-01T04:01:00Z",
+    "end": "2025-11-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Sweden",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 12,
+    "file": "observability/irm/generated/sweden-placeholder-manifests/12-placeholder-2025-12-01-sweden-december-2025.yaml",
+    "type": "placeholder",
+    "date": "2025-12-01",
+    "title": "[Placeholder] Sweden December 2025 No Action Needed",
+    "region": "Sweden",
+    "start": "2025-12-01T04:01:00Z",
+    "end": "2025-12-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Sweden",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 13,
+    "file": "observability/irm/generated/sweden-placeholder-manifests/13-placeholder-2026-01-01-sweden-january-2026.yaml",
+    "type": "placeholder",
+    "date": "2026-01-01",
+    "title": "[Placeholder] Sweden January 2026 No Action Needed",
+    "region": "Sweden",
+    "start": "2026-01-01T04:01:00Z",
+    "end": "2026-01-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Sweden",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 14,
+    "file": "observability/irm/generated/sweden-placeholder-manifests/14-placeholder-2026-02-01-sweden-february-2026.yaml",
+    "type": "placeholder",
+    "date": "2026-02-01",
+    "title": "[Placeholder] Sweden February 2026 No Action Needed",
+    "region": "Sweden",
+    "start": "2026-02-01T04:01:00Z",
+    "end": "2026-02-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Sweden",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 15,
+    "file": "observability/irm/generated/sweden-placeholder-manifests/15-placeholder-2026-03-01-sweden-march-2026.yaml",
+    "type": "placeholder",
+    "date": "2026-03-01",
+    "title": "[Placeholder] Sweden March 2026 No Action Needed",
+    "region": "Sweden",
+    "start": "2026-03-01T04:01:00Z",
+    "end": "2026-03-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Sweden",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 16,
+    "file": "observability/irm/generated/sweden-placeholder-manifests/16-placeholder-2026-04-01-sweden-april-2026.yaml",
+    "type": "placeholder",
+    "date": "2026-04-01",
+    "title": "[Placeholder] Sweden April 2026 No Action Needed",
+    "region": "Sweden",
+    "start": "2026-04-01T04:01:00Z",
+    "end": "2026-04-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Sweden",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  },
+  {
+    "sequence": 17,
+    "file": "observability/irm/generated/sweden-placeholder-manifests/17-placeholder-2026-05-01-sweden-may-2026.yaml",
+    "type": "placeholder",
+    "date": "2026-05-01",
+    "title": "[Placeholder] Sweden May 2026 No Action Needed",
+    "region": "Sweden",
+    "start": "2026-05-01T04:01:00Z",
+    "end": "2026-05-01T04:02:00Z",
+    "description": "[Placeholder] No Action Needed",
+    "resolution": "[Placeholder] No Action Needed",
+    "severity": "Sev-2: Significant Business Impact",
+    "labels": {
+      "region": "Sweden",
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity"
+    }
+  }
+]

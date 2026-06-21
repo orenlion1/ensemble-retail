@@ -1,0 +1,62 @@
+{
+  "status": "success",
+  "data": {
+    "resultType": "matrix",
+    "result": [
+      {
+        "metric": {
+          "containerName": "inventory-service",
+          "instance": "ip-10-42-101-134.ec2.internal",
+          "pod": "ensemble-grafana/inventory-service-77c95f9b47-2mfc8",
+          "probeType": "Readiness"
+        },
+        "values": [
+          [
+            1780238580,
+            "1"
+          ],
+          [
+            1780238640,
+            "1"
+          ]
+        ]
+      },
+      {
+        "metric": {
+          "containerName": "inventory-service",
+          "instance": "ip-10-42-101-208.ec2.internal",
+          "pod": "ensemble-grafana/inventory-service-77c95f9b47-cbft7",
+          "probeType": "Liveness"
+        },
+        "values": [
+          [
+            1780238580,
+            "2"
+          ],
+          [
+            1780238640,
+            "2"
+          ]
+        ]
+      },
+      {
+        "metric": {
+          "containerName": "inventory-service",
+          "instance": "ip-10-42-101-208.ec2.internal",
+          "pod": "ensemble-grafana/inventory-service-77c95f9b47-cbft7",
+          "probeType": "Readiness"
+        },
+        "values": [
+          [
+            1780238580,
+            "7"
+          ],
+          [
+            1780238640,
+            "7"
+          ]
+        ]
+      }
+    ]
+  }
+}

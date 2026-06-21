@@ -1,0 +1,23 @@
+[
+  {
+    "sequence": 1,
+    "type": "black-friday",
+    "date": "2025-11-28",
+    "title": "Black Friday 2025 shopping cart add availability",
+    "id": "205",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-11-28T14:00:00Z",
+    "end": "2025-11-28T22:00:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "feature": "shopping-cart-add",
+      "impact_type": "availability",
+      "region": "US",
+      "root_cause": "Scaling-Defect-Service",
+      "service": "cart"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  }
+]

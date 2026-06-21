@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Codex vs Grafana Resolution Plan</title>
+<style>
+  @page { size: Letter landscape; margin: 0.45in; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; color: #111827; margin: 0; }
+  h1 { font-size: 24px; margin: 0 0 4px; }
+  .meta { color: #4b5563; font-size: 11px; margin-bottom: 18px; }
+  .summary { background: #eef6ff; border-left: 4px solid #2563eb; padding: 10px 12px; margin-bottom: 16px; font-size: 12px; }
+  table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 10.5px; }
+  th { background: #111827; color: white; text-align: left; padding: 7px; }
+  td { border: 1px solid #d1d5db; vertical-align: top; padding: 7px; line-height: 1.28; }
+  tr:nth-child(even) td { background: #f9fafb; }
+  th:nth-child(1), td:nth-child(1) { width: 15%; font-weight: 700; }
+  th:nth-child(2), td:nth-child(2) { width: 27%; }
+  th:nth-child(3), td:nth-child(3) { width: 33%; }
+  th:nth-child(4), td:nth-child(4) { width: 25%; }
+  h2 { margin: 18px 0 8px; font-size: 16px; }
+  ol { margin: 0; padding-left: 20px; font-size: 12px; }
+  li { margin-bottom: 5px; }
+  code { font-family: "SFMono-Regular", Consolas, monospace; background: #f3f4f6; padding: 1px 3px; border-radius: 3px; }
+</style>
+</head>
+<body>
+<h1>Codex vs Grafana Resolution Plans</h1>
+<div class="meta">Generated 2026-05-31T13:54:26.929Z | Scope: kubelet error-log investigation for ensemble-grafana</div>
+<div class="summary"><strong>Verdict:</strong> The plans agree on the primary issue: inventory-service probe failures during the 10:44-10:58 window. Grafana Assistant adds concrete pod names and probe tuning values; Codex adds broader resource, DB, and dashboard follow-up checks.</div>
+<table>
+<thead><tr><th>Area</th><th>Codex Resolution Plan</th><th>Grafana Assistant Resolution Plan</th><th>Difference</th></tr></thead>
+<tbody>
+<tr><td>Primary service</td><td>Investigate inventory-service</td><td>Investigate inventory-service</td><td>Same</td></tr>
+<tr><td>Time window</td><td>2026-05-31T10:44Z-10:58Z</td><td>10:44-10:58 primary activity window</td><td>Same window</td></tr>
+<tr><td>Affected pods</td><td>General inventory-service investigation</td><td>Names inventory-service-77c95f9b47-2mfc8 and inventory-service-77c95f9b47-cbft7</td><td>Grafana is more specific</td></tr>
+<tr><td>Probe failures</td><td>Check readiness/liveness probe behavior</td><td>Readiness timeouts, connection refused, and liveness/readiness probe tuning</td><td>Same, Grafana gives tuning values</td></tr>
+<tr><td>Probe tuning</td><td>Increase initialDelaySeconds, timeoutSeconds, or failureThreshold if startup is slow</td><td>Readiness: initialDelaySeconds 30+, timeoutSeconds 5+, failureThreshold 5+; delay liveness until readiness succeeds</td><td>Grafana adds concrete starting values</td></tr>
+<tr><td>Load/resource checks</td><td>Inspect CPU/memory, DB latency, request saturation</td><td>Inspect CPU/memory limits, DB connection pool saturation, query latency, inventory request rate</td><td>Same, Grafana expands DB check</td></tr>
+<tr><td>Containerd errors</td><td>Treat NotFound cleanup errors as noise unless recurring</td><td>Treat as cleanup noise because they occurred in a short two-second burst with no recurrence</td><td>Same, Grafana provides stronger evidence</td></tr>
+<tr><td>Dashboard follow-up</td><td>Add/confirm panels for kubelet probe failures by service/pod/node</td><td>Add kubelet probe failure panels grouped by pod, probe type, instance, service/node</td><td>Same, Grafana adds grouping detail</td></tr>
+<tr><td>OOM/eviction/backoff</td><td>No evidence in kubelet logs for OOM, eviction, backoff, crash loops</td><td>Did not identify these as active root causes</td><td>Same</td></tr>
+</tbody>
+</table>
+<h2>Recommended Combined Plan</h2>
+<ol><li>Inspect both named inventory-service pods and their app logs/restarts around 10:44-10:58.</li><li>Check CPU/memory, inventory request rate, DB latency, and DB pool saturation during the same window.</li><li>Tune readiness probes first: initialDelaySeconds 30+, timeoutSeconds 5+, failureThreshold 5+.</li><li>Ensure liveness starts later than readiness so slow startup does not cause avoidable restarts.</li><li>Treat containerd NotFound as transient cleanup noise unless it recurs.</li><li>Add dashboard panels for kubelet probe failures grouped by service, pod, probe type, and node/instance.</li></ol>
+</body>
+</html>

@@ -1,0 +1,122 @@
+digraph observability_capabilities_flow {
+  rankdir=LR;
+  label="Observability Capabilities Flow";
+
+  graph [
+    fontname="Helvetica",
+    fontsize=20,
+    labelloc=t,
+    bgcolor="#0b1220",
+    fontcolor="#f8fafc",
+    pad=0.25,
+    nodesep=0.45,
+    ranksep=0.7
+  ];
+  node [
+    shape=box,
+    style="rounded,filled",
+    fontname="Helvetica",
+    fontsize=11,
+    color="#64748b",
+    fillcolor="#111827",
+    fontcolor="#f8fafc",
+    margin="0.12,0.08"
+  ];
+  edge [
+    fontname="Helvetica",
+    fontsize=9,
+    color="#94a3b8",
+    fontcolor="#f8fafc",
+    arrowsize=0.7
+  ];
+
+
+  browser [label="Shopper browser\nReact storefront", fillcolor="#1e3a8a"];
+  faro [label="Grafana Faro SDK\nweb vitals, errors, logs, sessions, user actions", fillcolor="#6b21a8"];
+  tracing [label="Faro web tracing\ntrace context on fetch/XHR", fillcolor="#6b21a8"];
+  cloudfront [label="CloudFront\nstatic + /api/* routing", fillcolor="#1e3a8a"];
+  ingress [label="EKS API ingress / ALB", fillcolor="#3730a3"];
+  edgeLogs [label="S3 access logs\nCloudFront + ALB", fillcolor="#713f12"];
+
+  subgraph cluster_services {
+    label="Spring Boot services";
+    color="#64748b";
+    fontcolor="#f8fafc";
+    style="rounded,dashed";
+    inventory [label="inventory-service", fillcolor="#14532d"];
+    cart [label="cart-service", fillcolor="#14532d"];
+    account [label="account-service", fillcolor="#14532d"];
+  }
+
+  actuator [label="Spring Actuator\n/actuator/prometheus", fillcolor="#164e63"];
+  otel [label="Spring OpenTelemetry\ntraces + resource attrs", fillcolor="#164e63"];
+  logs [label="Kubernetes pod logs\nservice labels", fillcolor="#164e63"];
+  beyla [label="Grafana Beyla\nzero-code HTTP telemetry", fillcolor="#6b21a8"];
+  pyroscope [label="Pyroscope Alloy DaemonSet\nJVM profiles", fillcolor="#6b21a8"];
+  alloy [label="Grafana Alloy\nOTel collector", fillcolor="#6b21a8"];
+  cloudwatch [label="AWS CloudWatch\nRDS metrics", fillcolor="#334155"];
+  cloudwatchScrape [label="Grafana Cloud Provider\nAWS/RDS scrape job", fillcolor="#6b21a8"];
+  synth [label="Grafana Synthetic Monitoring\nHTTP, DNS, Ping, TCP,\nscripted k6, k6 browser", fillcolor="#6b21a8"];
+  k6 [label="Grafana Cloud k6\nregional load, spike benchmark,\n100 rps API baseline,\nbrowser actions", fillcolor="#6b21a8"];
+  k6Tracing [label="k6 Tempo instrumentation\nW3C trace context", fillcolor="#6b21a8"];
+  irm [label="Grafana IRM\nincidents, labels, on-call schedule", fillcolor="#6b21a8"];
+
+  grafana [label="Grafana Cloud stack\norenlion.grafana.net", fillcolor="#4c1d95"];
+  frontendObs [label="Frontend Observability\nFaro events and exceptions", fillcolor="#581c87"];
+  tempo [label="Traces\nfrontend-to-backend waterfalls", fillcolor="#581c87"];
+  prometheus [label="Metrics\nRED + infrastructure signals", fillcolor="#581c87"];
+  loki [label="Logs\nnamespace + service labels", fillcolor="#581c87"];
+  profiles [label="Profiles\nJava CPU profiles", fillcolor="#581c87"];
+  smResults [label="Synthetic results\nuptime, TLS, DNS,\nlatency, browser actions", fillcolor="#581c87"];
+  k6Results [label="k6 results\nVUs, checks, thresholds", fillcolor="#581c87"];
+  incidents [label="IRM workflows\nseverity, ownership, response", fillcolor="#581c87"];
+
+  browser -> faro [label="page views, errors, user actions"];
+  browser -> tracing [label="HTTP requests with traceparent"];
+  tracing -> cloudfront -> ingress;
+  cloudfront -> edgeLogs [label="standard access logs"];
+  ingress -> edgeLogs [label="ALB access logs"];
+  ingress -> inventory;
+  ingress -> cart;
+  ingress -> account;
+  faro -> grafana [label="collector endpoint"];
+  tracing -> grafana [label="frontend spans"];
+  inventory -> actuator;
+  cart -> actuator;
+  account -> actuator;
+  inventory -> otel;
+  cart -> otel;
+  account -> otel;
+  inventory -> logs;
+  cart -> logs;
+  account -> logs;
+  inventory -> beyla [label="HTTP telemetry"];
+  cart -> beyla [label="HTTP telemetry"];
+  account -> beyla [label="HTTP telemetry"];
+  inventory -> pyroscope [label="JVM attach"];
+  cart -> pyroscope [label="JVM attach"];
+  account -> pyroscope [label="JVM attach"];
+  actuator -> alloy [label="Prometheus scrape"];
+  otel -> alloy [label="OTLP traces"];
+  logs -> alloy [label="pod log collection"];
+  edgeLogs -> grafana [label="RCA source for edge/API status codes"];
+  beyla -> alloy [label="metrics + traces"];
+  pyroscope -> grafana [label="profiles write"];
+  alloy -> grafana [label="OTLP export"];
+  cloudwatchScrape -> cloudwatch [label="assume AWS role and scrape AWS/RDS metrics"];
+  cloudwatch -> grafana [label="RDS CloudWatch samples"];
+  synth -> cloudfront [label="checks production URL and API health"];
+  synth -> grafana [label="check samples"];
+  k6 -> k6Tracing;
+  k6Tracing -> cloudfront [label="load checks with traceparent\n100 rps API baseline"];
+  k6 -> grafana [label="test metrics + trace correlation"];
+  irm -> grafana [label="incident and schedule state"];
+  grafana -> frontendObs;
+  grafana -> tempo;
+  grafana -> prometheus;
+  grafana -> loki;
+  grafana -> profiles;
+  grafana -> smResults;
+  grafana -> k6Results;
+  grafana -> incidents;
+}

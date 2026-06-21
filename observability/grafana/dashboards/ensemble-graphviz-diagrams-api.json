@@ -1,0 +1,590 @@
+{
+  "apiVersion": "dashboard.grafana.app/v2",
+  "kind": "Dashboard",
+  "metadata": {
+    "annotations": {
+      "grafana.app/createdBy": "service-account:ffn1sscdjmscge",
+      "grafana.app/folder": "fn9nd7",
+      "grafana.app/message": "removed load test, moved to load test dashboard",
+      "grafana.app/saved-from-ui": "Grafana Cloud",
+      "grafana.app/updatedBy": "service-account:ffn1sscdjmscge",
+      "grafana.app/updatedTimestamp": "2026-06-18T18:53:50Z"
+    },
+    "creationTimestamp": "2026-05-30T21:25:26Z",
+    "generation": 47,
+    "labels": {
+      "grafana.app/deprecatedInternalID": "2689969128804352"
+    },
+    "name": "ensemble-graphviz-diagrams",
+    "namespace": "stacks-1665320",
+    "resourceVersion": "2067682214149095729",
+    "uid": "2b774a56-5210-4abe-b58b-57f772616c4e"
+  },
+  "spec": {
+    "annotations": [
+      {
+        "kind": "AnnotationQuery",
+        "spec": {
+          "builtIn": true,
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations \u0026 Alerts",
+          "query": {
+            "datasource": {
+              "name": "-- Grafana --"
+            },
+            "group": "grafana",
+            "kind": "DataQuery",
+            "spec": {},
+            "version": "v0"
+          }
+        }
+      }
+    ],
+    "cursorSync": "Off",
+    "editable": true,
+    "elements": {
+      "panel-1": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "group": "",
+                      "kind": "DataQuery",
+                      "spec": {},
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Source: docs/diagrams/network-diagram.dot",
+          "id": 1,
+          "links": [],
+          "title": "Network Diagram",
+          "vizConfig": {
+            "group": "grafana-graphviz-panel",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
+              "options": {
+                "_assistantHelp": "",
+                "builderModeActions": {},
+                "dotDiagram": "digraph network_diagram {\n  rankdir=LR;\n  label=\"Ensemble-Grafana Network Diagram\";\n\n  graph [\n    fontname=\"Helvetica\",\n    fontsize=20,\n    labelloc=t,\n    bgcolor=\"#0b1220\",\n    fontcolor=\"#f8fafc\",\n    pad=0.25,\n    nodesep=0.45,\n    ranksep=0.7\n  ];\n  node [\n    shape=box,\n    style=\"rounded,filled\",\n    fontname=\"Helvetica\",\n    fontsize=11,\n    color=\"#64748b\",\n    fillcolor=\"#111827\",\n    fontcolor=\"#f8fafc\",\n    margin=\"0.12,0.08\"\n  ];\n  edge [\n    fontname=\"Helvetica\",\n    fontsize=9,\n    color=\"#94a3b8\",\n    fontcolor=\"#f8fafc\",\n    arrowsize=0.7\n  ];\n\n\n  shopper [label=\"Shopper browser\", fillcolor=\"#1e3a8a\"];\n  registrar [label=\"Domain registrar\"];\n  route53 [label=\"Route53 hosted zone\\nensemble-grafana.com\", fillcolor=\"#164e63\"];\n  acm [label=\"ACM certificate\\nus-east-1 / ISSUED\", fillcolor=\"#155e75\"];\n  edgeWaf [label=\"AWS WAF\\nCloudFront scope\", fillcolor=\"#7f1d1d\"];\n  cloudfront [label=\"CloudFront distribution\\nensemble-grafana.com\", fillcolor=\"#1e3a8a\"];\n  staticS3 [label=\"S3 frontend bucket\\nprivate origin\", fillcolor=\"#713f12\"];\n  imageS3 [label=\"S3 inventory images bucket\", fillcolor=\"#713f12\"];\n  logsS3 [label=\"S3 edge/API logs bucket\\nCloudFront + ALB logs\", fillcolor=\"#713f12\"];\n  regionalWaf [label=\"AWS WAF\\nregional API scope\", fillcolor=\"#7f1d1d\"];\n  apiAlb [label=\"API ingress / ALB\\napi.ensemble-grafana.com\", fillcolor=\"#3730a3\"];\n  cognito [label=\"AWS Cognito\\nGoogle federation\", fillcolor=\"#4c1d95\"];\n  google [label=\"Google Identity Provider\", fillcolor=\"#4c1d95\"];\n  postgres [label=\"Postgres inventory DB\", shape=cylinder, fillcolor=\"#14532d\"];\n  dynamodb [label=\"DynamoDB\\ncart/account state\", shape=cylinder, fillcolor=\"#14532d\"];\n  cloudwatch [label=\"AWS CloudWatch\\nRDS metrics\", fillcolor=\"#334155\"];\n  cloudwatchScrape [label=\"Grafana Cloud Provider\\nAWS/RDS scrape job\", fillcolor=\"#581c87\"];\n  grafana [label=\"Grafana Cloud\\nFaro, metrics, logs, traces, profiles\", fillcolor=\"#6b21a8\"];\n  k6 [label=\"Grafana Cloud k6\\nload tests\\n100 rps baseline + browser checks\", fillcolor=\"#6b21a8\"];\n  accountBaseline [label=\"Terraform account-baseline stack\\nSSM host-management setting\", fillcolor=\"#334155\"];\n\n  subgraph cluster_eks {\n    label=\"EKS cluster\";\n    color=\"#64748b\";\n    fontcolor=\"#f8fafc\";\n    style=\"rounded,dashed\";\n    beyla [label=\"Grafana Beyla\", fillcolor=\"#581c87\"];\n    alloy [label=\"Grafana Alloy\\nOTel collector\", fillcolor=\"#581c87\"];\n    inventory [label=\"inventory-service\\nSpring Boot pods\", fillcolor=\"#14532d\"];\n    cart [label=\"cart-service\\nSpring Boot pods\", fillcolor=\"#14532d\"];\n    account [label=\"account-service\\nSpring Boot pods\", fillcolor=\"#14532d\"];\n  }\n\n  registrar -\u003e route53 [label=\"NS delegation\"];\n  route53 -\u003e cloudfront [label=\"A / AAAA alias\"];\n  acm -\u003e cloudfront [label=\"TLS certificate\"];\n  shopper -\u003e edgeWaf [label=\"HTTPS storefront\"];\n  edgeWaf -\u003e cloudfront;\n  shopper -\u003e cognito [label=\"Google sign-in\"];\n  cognito -\u003e google;\n  cloudfront -\u003e staticS3 [label=\"static assets\"];\n  cloudfront -\u003e imageS3 [label=\"inventory images\"];\n  cloudfront -\u003e logsS3 [label=\"standard access logs\"];\n  cloudfront -\u003e regionalWaf [label=\"/api/*\"];\n  regionalWaf -\u003e apiAlb;\n  apiAlb -\u003e logsS3 [label=\"ALB access logs\"];\n  apiAlb -\u003e inventory;\n  apiAlb -\u003e cart;\n  apiAlb -\u003e account;\n  inventory -\u003e postgres;\n  cart -\u003e dynamodb;\n  account -\u003e dynamodb;\n  postgres -\u003e cloudwatch [label=\"RDS metrics\"];\n  cloudwatchScrape -\u003e cloudwatch [label=\"assume AWS role\\nand scrape metrics\"];\n  cloudwatchScrape -\u003e grafana [label=\"CloudWatch metrics\"];\n  shopper -\u003e grafana [label=\"Faro web telemetry\"];\n  accountBaseline -\u003e beyla [label=\"SSM default role setting\"];\n  k6 -\u003e cloudfront [label=\"regional, spike,\\n100 rps baseline,\\nbrowser checks\\nwith traceparent\"];\n  k6 -\u003e grafana [label=\"test results + trace correlation\"];\n  beyla -\u003e alloy [label=\"zero-code HTTP telemetry\"];\n  inventory -\u003e alloy [label=\"OTel + Prometheus\"];\n  cart -\u003e alloy [label=\"OTel + Prometheus\"];\n  account -\u003e alloy [label=\"OTel + Prometheus\"];\n  alloy -\u003e grafana;\n}\n",
+                "dotQueryConfig": {
+                  "fieldName": "dot_diagram"
+                },
+                "edgeOverrides": [],
+                "inputMode": "code",
+                "layoutEngine": "dot",
+                "namedThresholds": [],
+                "nodeOverrides": [],
+                "rankDirection": "TB",
+                "splineType": "ortho"
+              }
+            },
+            "version": "0.0.5"
+          }
+        }
+      },
+      "panel-11": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "group": "",
+                      "kind": "DataQuery",
+                      "spec": {},
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Source: docs/diagrams/observability-capabilities-flow-presentation.dot",
+          "id": 11,
+          "links": [],
+          "title": "Observability Architecture",
+          "vizConfig": {
+            "group": "grafana-graphviz-panel",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
+              "options": {
+                "_assistantHelp": "",
+                "builderModeActions": {},
+                "dotDiagram": "digraph observability_capabilities_flow_presentation {\n  rankdir=LR;\n  label=\"Observability Capabilities Flow\";\n\n  graph [\n    fontname=\"Helvetica\",\n    fontsize=40,\n    labelloc=t,\n    bgcolor=\"#0b1220\",\n    fontcolor=\"#f8fafc\",\n    pad=0.45,\n    nodesep=0.65,\n    ranksep=0.9,\n    splines=ortho,\n    outputorder=edgesfirst\n  ];\n  node [\n    shape=box,\n    style=\"rounded,filled\",\n    fontname=\"Helvetica\",\n    fontsize=26,\n    color=\"#64748b\",\n    fillcolor=\"#111827\",\n    fontcolor=\"#f8fafc\",\n    margin=\"0.22,0.16\",\n    penwidth=2\n  ];\n  edge [\n    fontname=\"Helvetica\",\n    fontsize=18,\n    color=\"#94a3b8\",\n    fontcolor=\"#f8fafc\",\n    arrowsize=0.9,\n    penwidth=2\n  ];\n\n  subgraph cluster_sources {\n    label=\"Observed systems\";\n    color=\"#475569\";\n    fontcolor=\"#f8fafc\";\n    fontsize=28;\n    style=\"rounded,dashed\";\n\n    browser [label=\"Shopper browser\\nReact storefront\", fillcolor=\"#1e3a8a\"];\n    edgePath [label=\"CloudFront + ALB\\nstatic and /api routing\", fillcolor=\"#1e3a8a\"];\n    services [label=\"Spring Boot services\\ninventory, cart, account\", fillcolor=\"#14532d\"];\n    aws [label=\"AWS platform\\nEKS, RDS, logs\", fillcolor=\"#334155\"];\n    operators [label=\"Operators and tests\\nk6, Synthetic, IRM\", fillcolor=\"#6b21a8\"];\n  }\n\n  subgraph cluster_telemetry {\n    label=\"Telemetry produced\";\n    color=\"#475569\";\n    fontcolor=\"#f8fafc\";\n    fontsize=28;\n    style=\"rounded,dashed\";\n\n    frontendSignals [label=\"Frontend signals\\nFaro events, exceptions,\\nweb vitals, user actions\", fillcolor=\"#6b21a8\"];\n    traceSignals [label=\"Distributed traces\\ntraceparent from browser\\nto backend services\", fillcolor=\"#164e63\"];\n    serviceSignals [label=\"Service health\\nRED metrics, pod logs,\\nBeyla HTTP telemetry\", fillcolor=\"#164e63\"];\n    profileSignals [label=\"Runtime profiles\\nJava CPU profiles\\nfrom Pyroscope\", fillcolor=\"#6b21a8\"];\n    externalSignals [label=\"External signals\\nCloudWatch, k6,\\nSynthetic, IRM state\", fillcolor=\"#6b21a8\"];\n  }\n\n  subgraph cluster_collection {\n    label=\"Collection and routing\";\n    color=\"#475569\";\n    fontcolor=\"#f8fafc\";\n    fontsize=28;\n    style=\"rounded,dashed\";\n\n    faroCollector [label=\"Faro collector\\nfrontend events and spans\", fillcolor=\"#581c87\"];\n    alloy [label=\"Grafana Alloy\\nmetrics, logs, traces\", fillcolor=\"#581c87\"];\n    pyroscope [label=\"Pyroscope endpoint\\nprofile ingestion\", fillcolor=\"#581c87\"];\n    cloudIntegrations [label=\"Grafana Cloud integrations\\nCloudWatch scrape,\\nk6 and Synthetic samples\", fillcolor=\"#581c87\"];\n  }\n\n  grafana [label=\"Grafana Cloud stack\\norenlion.grafana.net\", fillcolor=\"#4c1d95\", fontsize=30];\n\n  subgraph cluster_outcomes {\n    label=\"Operational capabilities\";\n    color=\"#475569\";\n    fontcolor=\"#f8fafc\";\n    fontsize=28;\n    style=\"rounded,dashed\";\n\n    frontendObs [label=\"Frontend Observability\\nsessions, errors, actions\", fillcolor=\"#581c87\"];\n    tempo [label=\"Traces\\nfrontend-to-backend waterfalls\", fillcolor=\"#581c87\"];\n    prometheus [label=\"Metrics\\nRED + infrastructure\", fillcolor=\"#581c87\"];\n    loki [label=\"Logs\\nnamespace + service labels\", fillcolor=\"#581c87\"];\n    profiles [label=\"Profiles\\nJava CPU hotspots\", fillcolor=\"#581c87\"];\n    testResults [label=\"Synthetic + k6 results\\nuptime, DNS, TLS,\\nchecks and thresholds\", fillcolor=\"#581c87\"];\n    incidents [label=\"IRM workflows\\nseverity, labels,\\non-call ownership\", fillcolor=\"#581c87\"];\n  }\n\n  browser -\u003e frontendSignals;\n  browser -\u003e traceSignals;\n  edgePath -\u003e traceSignals;\n  services -\u003e traceSignals;\n  services -\u003e serviceSignals;\n  services -\u003e profileSignals;\n  aws -\u003e serviceSignals;\n  operators -\u003e externalSignals;\n\n  frontendSignals -\u003e faroCollector;\n  traceSignals -\u003e faroCollector;\n  traceSignals -\u003e alloy;\n  serviceSignals -\u003e alloy;\n  profileSignals -\u003e pyroscope;\n  externalSignals -\u003e cloudIntegrations;\n\n  faroCollector -\u003e grafana;\n  alloy -\u003e grafana;\n  pyroscope -\u003e grafana;\n  cloudIntegrations -\u003e grafana;\n\n  grafana -\u003e frontendObs;\n  grafana -\u003e tempo;\n  grafana -\u003e prometheus;\n  grafana -\u003e loki;\n  grafana -\u003e profiles;\n  grafana -\u003e testResults;\n  grafana -\u003e incidents;\n}\n",
+                "dotQueryConfig": {
+                  "fieldName": "dot_diagram"
+                },
+                "edgeOverrides": [],
+                "inputMode": "code",
+                "layoutEngine": "dot",
+                "namedThresholds": [],
+                "nodeOverrides": [],
+                "rankDirection": "TB",
+                "splineType": "ortho"
+              }
+            },
+            "version": "0.0.5"
+          }
+        }
+      },
+      "panel-18": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "group": "",
+                      "kind": "DataQuery",
+                      "spec": {},
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Source: docs/graphviz/traffic-spike-load-test-flow.dot",
+          "id": 18,
+          "links": [],
+          "title": "Traffic Spike User Action Fidelity",
+          "vizConfig": {
+            "group": "grafana-graphviz-panel",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
+              "options": {
+                "_assistantHelp": "",
+                "builderModeActions": {},
+                "dotDiagram": "digraph traffic_spike_user_action_fidelity {\n  graph [\n    rankdir=LR,\n    bgcolor=\"#0b1220\",\n    fontcolor=\"#f8fafc\",\n    fontname=\"Helvetica\",\n    fontsize=22,\n    labelloc=t,\n    label=\"Traffic Spike Load Test: User Action Fidelity\",\n    pad=0.35,\n    nodesep=0.5,\n    ranksep=0.8,\n    splines=ortho\n  ];\n\n  node [\n    shape=box,\n    style=\"rounded,filled\",\n    fontname=\"Helvetica\",\n    fontsize=12,\n    color=\"#64748b\",\n    fillcolor=\"#111827\",\n    fontcolor=\"#f8fafc\",\n    margin=\"0.13,0.08\"\n  ];\n\n  edge [\n    color=\"#94a3b8\",\n    fontcolor=\"#f8fafc\",\n    fontname=\"Helvetica\",\n    fontsize=10,\n    arrowsize=0.75\n  ];\n\n  start [\n    label=\"Grafana Cloud k6\\ntraffic spike benchmark\\nstorefront_actions scenario\",\n    fillcolor=\"#4c1d95\",\n    color=\"#a78bfa\"\n  ];\n\n  load_shape [\n    shape=plain,\n    label=\u003c\n      \u003cTABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"7\" COLOR=\"#475569\"\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#1e3a5f\" COLSPAN=\"2\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eLoad envelope\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003etraffic_spikes\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e293b\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e100 / 200 / 400 VU peaks\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eregional_shoppers\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e293b\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e30 multi-region shoppers\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eapi_request_rate\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e293b\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e100 rps through CloudFront /api\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003estorefront_actions\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e293b\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e5 browser VUs for UI action fidelity\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n      \u003c/TABLE\u003e\n    \u003e\n  ];\n\n  browser [\n    label=\"Synthetic browser journey\\nreal Chromium page\\nrecords window.__k6UserActions\",\n    fillcolor=\"#312e81\",\n    color=\"#a5b4fc\"\n  ];\n\n  subgraph cluster_region_language {\n    label=\"Region and localization actions\";\n    color=\"#475569\";\n    fontcolor=\"#f8fafc\";\n    style=\"rounded,dashed\";\n\n    locale_validation [\n      label=\"Validate localized page copy\\nCA French, CN Mandarin,\\nUK British English, SE Swedish,\\nUS American English\",\n      fillcolor=\"#164e63\",\n      color=\"#22d3ee\"\n    ];\n    region_actions [\n      shape=plain,\n      label=\u003c\n        \u003cTABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"7\" COLOR=\"#475569\"\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#1e3a5f\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eRequired exact actions\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#bfdbfe\"\u003eselect-region:SE\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#bfdbfe\"\u003eselect-language:swedish\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#bfdbfe\"\u003eselect-region:US\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#bfdbfe\"\u003eselect-language:american-english\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003c/TABLE\u003e\n      \u003e\n    ];\n  }\n\n  subgraph cluster_discovery {\n    label=\"Discovery and browsing actions\";\n    color=\"#475569\";\n    fontcolor=\"#f8fafc\";\n    style=\"rounded,dashed\";\n\n    discovery_actions [\n      shape=plain,\n      label=\u003c\n        \u003cTABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"7\" COLOR=\"#475569\"\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#1e3a5f\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eRequired action families\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eselect-department:womens\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eselect-department:mens\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eselect-category:mens-mid-layers\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003esort-products:price-low\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003esearch-products\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eview-product:*\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eclose-product-detail:*\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eview-sale-product:*\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003c/TABLE\u003e\n      \u003e\n    ];\n  }\n\n  subgraph cluster_cart_checkout {\n    label=\"Cart, checkout, and account actions\";\n    color=\"#475569\";\n    fontcolor=\"#f8fafc\";\n    style=\"rounded,dashed\";\n\n    cart_actions [\n      shape=plain,\n      label=\u003c\n        \u003cTABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"7\" COLOR=\"#475569\"\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#1e3a5f\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eRequired action families\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#dcfce7\"\u003eshopping-cart:add-detail-item:*\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#dcfce7\"\u003eshopping-cart:add-item:*\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#dcfce7\"\u003eshopping-cart:add-sale-item:*\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#dcfce7\"\u003eshopping-cart:change-quantity:*\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#dcfce7\"\u003eshopping-cart:checkout\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#dcfce7\"\u003echeckout-dialog:close\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#dcfce7\"\u003eshopping-cart:remove-item:*\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#dcfce7\"\u003esave-account\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003c/TABLE\u003e\n      \u003e\n    ];\n  }\n\n  subgraph cluster_instrumentation {\n    label=\"Instrumentation and validation\";\n    color=\"#475569\";\n    fontcolor=\"#f8fafc\";\n    style=\"rounded,dashed\";\n\n    app_attrs [\n      label=\"Frontend trackAppAction\\nadds app context\\nregion, locale, language,\\ncart/product/account attributes\",\n      fillcolor=\"#581c87\",\n      color=\"#c084fc\"\n    ];\n    faro [\n      label=\"Grafana Faro\\nfaro.api.pushEvent\\nfaro.user.action\",\n      fillcolor=\"#6b21a8\",\n      color=\"#c084fc\"\n    ];\n    k6_counters [\n      shape=plain,\n      label=\u003c\n        \u003cTABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"7\" COLOR=\"#475569\"\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#1e3a5f\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003ek6 counters and thresholds\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003estorefront_user_actions \u0026gt; 300\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003estorefront_user_action_events by action_family\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eeach action_family rate \u0026gt;= 0.18/sec\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003ecart add/detail/sale/remove/checkout counters \u0026gt; 10\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003c/TABLE\u003e\n      \u003e\n    ];\n    grafana [\n      label=\"Grafana Cloud\\nFrontend Observability\\nfilter faro.user.action\",\n      fillcolor=\"#6b21a8\",\n      color=\"#c084fc\"\n    ];\n    report [\n      label=\"Post-run reports\\nFaro action totals\\nload-test comparison\\nGraphviz run history\",\n      fillcolor=\"#334155\",\n      color=\"#94a3b8\"\n    ];\n  }\n\n  start -\u003e load_shape;\n  load_shape -\u003e browser [color=\"#c4b5fd\"];\n\n  browser -\u003e locale_validation;\n  browser -\u003e region_actions;\n  browser -\u003e discovery_actions;\n  browser -\u003e cart_actions;\n\n  region_actions -\u003e app_attrs;\n  discovery_actions -\u003e app_attrs;\n  cart_actions -\u003e app_attrs;\n  locale_validation -\u003e app_attrs;\n\n  app_attrs -\u003e faro;\n  app_attrs -\u003e k6_counters;\n  faro -\u003e grafana;\n  k6_counters -\u003e report;\n  grafana -\u003e report;\n}\n",
+                "dotQueryConfig": {
+                  "fieldName": "dot_diagram"
+                },
+                "edgeOverrides": [],
+                "inputMode": "code",
+                "layoutEngine": "dot",
+                "namedThresholds": [],
+                "nodeOverrides": [],
+                "rankDirection": "LR",
+                "splineType": "ortho"
+              }
+            },
+            "version": "0.0.5"
+          }
+        }
+      },
+      "panel-19": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "group": "",
+                      "kind": "DataQuery",
+                      "spec": {},
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Source: docs/graphviz/faro-k6-contract-relationships.dot",
+          "id": 19,
+          "links": [],
+          "title": "Faro, k6, and Synthetic Monitoring Contract",
+          "vizConfig": {
+            "group": "grafana-graphviz-panel",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
+              "options": {
+                "_assistantHelp": "",
+                "builderModeActions": {},
+                "dotDiagram": "digraph faro_k6_contract_relationships {\n  graph [\n    rankdir=LR,\n    bgcolor=\"#0b1220\",\n    fontcolor=\"#f8fafc\",\n    fontname=\"Helvetica\",\n    fontsize=22,\n    labelloc=t,\n    label=\"Faro User Action Contract, k6 Load Tests, and Synthetic Checks\",\n    pad=0.65,\n    nodesep=1.05,\n    ranksep=1.35,\n    splines=polyline\n  ];\n\n  node [\n    shape=box,\n    style=\"rounded,filled\",\n    fontname=\"Helvetica\",\n    fontsize=12,\n    color=\"#64748b\",\n    fillcolor=\"#111827\",\n    fontcolor=\"#f8fafc\",\n    margin=\"0.22,0.13\"\n  ];\n\n  edge [\n    color=\"#94a3b8\",\n    fontcolor=\"#f8fafc\",\n    fontname=\"Helvetica\",\n    fontsize=9,\n    arrowsize=0.7\n  ];\n\n  subgraph cluster_contract {\n    label=\"1. Frontend action contract\";\n    color=\"#475569\";\n    fontcolor=\"#f8fafc\";\n    style=\"rounded,dashed\";\n\n    app_js [\n      label=\"frontend/src/App.jsx\\ntrackAppAction()\\ndata-faro-user-action-name\",\n      fillcolor=\"#312e81\",\n      color=\"#a5b4fc\"\n    ];\n\n    action_taxonomy [\n      shape=plain,\n      label=\u003c\n        \u003cTABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"7\" COLOR=\"#475569\"\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#1e3a5f\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eStable action families\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003enavigation and sale banner\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003edepartment, category, sort, search\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eregion and language selection\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eproduct detail and sale views\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#dcfce7\"\u003ecart add, quantity, remove, checkout\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eaccount save and Google auth\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003c/TABLE\u003e\n      \u003e\n    ];\n\n    faro_attrs [\n      label=\"Faro action attributes\\nregion, locale, language,\\nproduct, cart, account,\\nimportance, severity\",\n      fillcolor=\"#581c87\",\n      color=\"#c084fc\"\n    ];\n  }\n\n  subgraph cluster_browser_check {\n    label=\"2. k6 browser-action and SM scripted checks\";\n    color=\"#475569\";\n    fontcolor=\"#f8fafc\";\n    style=\"rounded,dashed\";\n\n    synthetic_script [\n      label=\"k6 browser-action check\\nload-tests/synthetic-browser-actions.js\\nChromium UI/Faro journey\",\n      fillcolor=\"#713f12\",\n      color=\"#fbbf24\"\n    ];\n\n    dom_probe [\n      label=\"Reads action selectors\\nrecords window.__k6UserActions\\nvalidates localized UI copy\",\n      fillcolor=\"#78350f\",\n      color=\"#fbbf24\"\n    ];\n\n    synthetic_assertions [\n      shape=plain,\n      label=\u003c\n        \u003cTABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"7\" COLOR=\"#475569\"\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#1e3a5f\" COLSPAN=\"2\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eUI/Faro coverage assertions\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eselectors\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e293b\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eevery expected button/action exists\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003enavigation\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e293b\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003ebrand, header, hero, utility, sale banner\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003ecart\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e293b\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eadd, remove, checkout, dialog close\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eauth\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e293b\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eGoogle login control and checkout Grafana link\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eregion\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e293b\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eUS, CA, CN, UK, SE language checks\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eweb vitals\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e293b\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eLCP and CLS thresholds\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003c/TABLE\u003e\n      \u003e\n    ];\n\n    synthetic_counters [\n      label=\"k6 counters\\nstorefront_user_actions\\nstorefront_user_action_events\\ncart add/remove/checkout totals\",\n      fillcolor=\"#78350f\",\n      color=\"#fbbf24\"\n    ];\n\n    sm_scripted [\n      label=\"SM scripted k6 check\\nobservability/synthetic-monitoring/\\nensemble-grafana-scripted-check.js\",\n      fillcolor=\"#134e4a\",\n      color=\"#5eead4\"\n    ];\n\n    sm_assertions [\n      shape=plain,\n      label=\u003c\n        \u003cTABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"7\" COLOR=\"#475569\"\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#155e75\" COLSPAN=\"2\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eHTTP transaction assertions\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eruntime\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e293b\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e1 VU, 1 iteration, no external data files\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003estorefront\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e293b\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003ehomepage 200 and duration threshold\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003einventory\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e293b\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eproduct list and product detail JSON\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003esecurity\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e293b\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003ecart API rejects unauthenticated request\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003c/TABLE\u003e\n      \u003e\n    ];\n  }\n\n  subgraph cluster_load_test {\n    label=\"3. k6 load and traffic-spike benchmarks\";\n    color=\"#475569\";\n    fontcolor=\"#f8fafc\";\n    style=\"rounded,dashed\";\n\n    regional_load [\n      label=\"grafana-cloud-20-user-regional.js\\nAPI personas with regions\\nheaders: X-Region, X-Locale, X-Language\",\n      fillcolor=\"#7c2d12\",\n      color=\"#fb923c\"\n    ];\n\n    spike_load [\n      label=\"grafana-cloud-traffic-spikes.js\\ntraffic_spikes + regional_shoppers\\napi_request_rate + storefront_actions\",\n      fillcolor=\"#7c2d12\",\n      color=\"#fb923c\"\n    ];\n\n    load_thresholds [\n      label=\"Threshold contract\\nHTTP failure and latency\\nAPI request rate\\nper-action-family event rate\",\n      fillcolor=\"#7c2d12\",\n      color=\"#fb923c\"\n    ];\n  }\n\n  subgraph cluster_grafana_evidence {\n    label=\"4. Grafana evidence and reporting\";\n    color=\"#475569\";\n    fontcolor=\"#f8fafc\";\n    style=\"rounded,dashed\";\n\n    faro_cloud [\n      label=\"Grafana Faro collector\\ningests pushEvent()\\nfaro.user.action events\\nfrontend sessions and errors\",\n      fillcolor=\"#6b21a8\",\n      color=\"#c084fc\"\n    ];\n\n    k6_cloud [\n      label=\"Grafana Cloud k6\\nrun metrics, thresholds,\\nchecks, trends, counters\",\n      fillcolor=\"#6b21a8\",\n      color=\"#c084fc\"\n    ];\n\n    synthetic_monitoring [\n      label=\"Grafana Synthetic Monitoring\\nHTTP, DNS, Ping, TCP, Scripted k6\\nuptime, TLS, response, resolution,\\nstorefront/API transaction\",\n      fillcolor=\"#6b21a8\",\n      color=\"#c084fc\"\n    ];\n\n    reports [\n      shape=plain,\n      label=\u003c\n        \u003cTABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"7\" COLOR=\"#475569\"\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#1e3a5f\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003ePost-run evidence\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003escripts/report-faro-user-actions.mjs\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003escripts/report-load-tests.mjs\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003ereports/frontend-user-actions/\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003ereports/load-tests/comparison/\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n          \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#93c5fd\"\u003ereport gaps update the contract\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003c/TABLE\u003e\n      \u003e\n    ];\n  }\n\n  contract_rule [\n    label=\"Action contract\\nname -\u003e validate -\u003e observe\",\n    fillcolor=\"#164e63\",\n    color=\"#22d3ee\",\n    penwidth=2\n  ];\n\n  browser_contract [\n    label=\"Browser UI\",\n    shape=ellipse,\n    fillcolor=\"#0f766e\",\n    color=\"#5eead4\"\n  ];\n\n  api_contract [\n    label=\"API checks\",\n    shape=ellipse,\n    fillcolor=\"#0f766e\",\n    color=\"#5eead4\"\n  ];\n\n  load_contract [\n    label=\"Load tests\",\n    shape=ellipse,\n    fillcolor=\"#0f766e\",\n    color=\"#5eead4\"\n  ];\n\n  app_js -\u003e action_taxonomy [label=\"defines names\"];\n  action_taxonomy -\u003e faro_attrs [label=\"adds attributes\"];\n  faro_attrs -\u003e contract_rule [label=\"\"];\n\n  contract_rule -\u003e browser_contract [label=\"\"];\n  contract_rule -\u003e api_contract [label=\"\"];\n  contract_rule -\u003e load_contract [label=\"\"];\n\n  browser_contract -\u003e synthetic_script [label=\"selectors\"];\n  synthetic_script -\u003e dom_probe [label=\"browser executes UI\"];\n  dom_probe -\u003e synthetic_assertions [label=\"checks behavior\"];\n  dom_probe -\u003e synthetic_counters [label=\"counts observed actions\"];\n  api_contract -\u003e sm_scripted [label=\"transactions\"];\n  sm_scripted -\u003e sm_assertions [label=\"checks API behavior\"];\n\n  load_contract -\u003e regional_load [label=\"region/API\"];\n  load_contract -\u003e spike_load [label=\"browser actions\"];\n  synthetic_script -\u003e spike_load [label=\"imported as storefront_actions\"];\n  regional_load -\u003e load_thresholds [label=\"API behavior\"];\n  spike_load -\u003e load_thresholds [label=\"spike and action rates\"];\n  synthetic_counters -\u003e load_thresholds [label=\"per-action thresholds\"];\n\n  synthetic_assertions -\u003e k6_cloud [label=\"checks\"];\n  synthetic_counters -\u003e k6_cloud [label=\"custom metrics\"];\n  sm_assertions -\u003e synthetic_monitoring [label=\"scripted check\"];\n  load_thresholds -\u003e k6_cloud [label=\"cloud run results\"];\n  synthetic_monitoring -\u003e reports [label=\"availability context\"];\n  faro_cloud -\u003e reports [label=\"LogQL action totals\"];\n  k6_cloud -\u003e reports [label=\"run summaries\"];\n}\n",
+                "dotQueryConfig": {
+                  "fieldName": "dot_diagram"
+                },
+                "edgeOverrides": [],
+                "inputMode": "code",
+                "layoutEngine": "dot",
+                "namedThresholds": [],
+                "nodeOverrides": [],
+                "rankDirection": "LR",
+                "splineType": "polyline"
+              }
+            },
+            "version": "0.0.5"
+          }
+        }
+      },
+      "panel-20": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "group": "",
+                      "kind": "DataQuery",
+                      "spec": {},
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Source: docs/evolution/diagrams/ensemble-evolution-timeline-dark.dot",
+          "id": 20,
+          "links": [],
+          "title": "Ensemble Evolution Timeline",
+          "vizConfig": {
+            "group": "grafana-graphviz-panel",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
+              "options": {
+                "_assistantHelp": "",
+                "builderModeActions": {},
+                "dotDiagram": "digraph ensemble_evolution_timeline_dark {\n  graph [\n    rankdir=TB,\n    bgcolor=\"#020617\",\n    pad=\"0.35\",\n    nodesep=\"0.42\",\n    ranksep=\"0.46\",\n    fontname=\"Helvetica\",\n    fontsize=28,\n    fontcolor=\"#f8fafc\",\n    labelloc=\"t\",\n    label=\"Ensemble-Grafana Evolution: First Prompt to Latest Evidence\"\n  ];\n\n  node [\n    shape=box,\n    style=\"rounded,filled\",\n    fontname=\"Helvetica\",\n    fontsize=16,\n    margin=\"0.11,0.08\",\n    width=3.35,\n    penwidth=2,\n    color=\"#475569\",\n    fontcolor=\"#f8fafc\"\n  ];\n\n  edge [\n    color=\"#94a3b8\",\n    arrowsize=0.8,\n    penwidth=2,\n    fontname=\"Helvetica\",\n    fontsize=12,\n    fontcolor=\"#cbd5e1\"\n  ];\n\n  seed [\n    label=\"May 24-25\\nProduct seed\\nPromptable ecommerce platform\\nREADME live demo framing\",\n    fillcolor=\"#0f2f4a\",\n    color=\"#38bdf8\"\n  ];\n\n  validate [\n    label=\"May 27-29\\nValidation foundation\\nGrafana dashboards\\nGuarded baseline stack\\nk6 Faro actions\\nPlaywright regression\",\n    fillcolor=\"#123524\",\n    color=\"#4ade80\"\n  ];\n\n  app [\n    label=\"May 30\\nStorefront maturity\\nCheckout Grafana link\\nSweden localization\\nResponsive UI fixes\\nPost-deploy reports\",\n    fillcolor=\"#422f10\",\n    color=\"#f59e0b\"\n  ];\n\n  obs [\n    label=\"May 30\\nTelemetry expansion\\nCloudWatch discovery\\nFaro action reports\\nAlloy/Beyla runbooks\\nDashboard conventions\",\n    fillcolor=\"#2e1f55\",\n    color=\"#a78bfa\"\n  ];\n\n  load [\n    label=\"May 30-31\\nLoad and resilience\\nTraffic-spike model\\nCloud k6 runs\\nComparison charts\\n40 rps then 60 rps baseline\",\n    fillcolor=\"#451a1a\",\n    color=\"#f87171\"\n  ];\n\n  ops [\n    label=\"May 31\\nOperations loop\\nIRM on-call setup\\nKubelet RCA reports\\nGrafana Assistant comparison\\nDashboard validation\",\n    fillcolor=\"#1e293b\",\n    color=\"#94a3b8\"\n  ];\n\n  skills [\n    label=\"May 30-Jun 1\\nReusable agent policy\\nRepo skills and personas\\nSlash-command sync\\nCI checks for guidance\",\n    fillcolor=\"#103c3c\",\n    color=\"#2dd4bf\"\n  ];\n\n  latest [\n    label=\"Jun 2-8\\nLatest evidence\\n120 rps baseline docs\\nBlack Friday cart incident\\nEvolution docs\\nLoad reports through 7718235\",\n    fillcolor=\"#4a1631\",\n    color=\"#f472b6\"\n  ];\n\n  policy [\n    label=\"Jun 9-18\\nEvolution policy\\nAGENTS.md documentation rule\\nGraphviz skill workflow\\n100 rps routine baseline\\nIRM detection label required\\nContext hygiene audit\",\n    fillcolor=\"#321854\",\n    color=\"#c084fc\"\n  ];\n\n  end_to_end [\n    label=\u003c\n      \u003cTABLE BORDER=\"0\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"8\" COLOR=\"#64748b\"\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#0f172a\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eEnd-to-End System Shape\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eStorefront journeys: browse, cart, checkout, account, region, language\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eSpring Boot services: inventory, cart, account\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eAWS and Kubernetes: edge, auth, data, EKS, rollout controls\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eGrafana Cloud: Faro, Alloy, Beyla, dashboards, IRM, reports\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eVerification: Playwright, k6 protocol, k6 browser actions, GCX queries\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eCommunication: Markdown runbooks plus Graphviz DOT, SVG, PNG\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n        \u003cTR\u003e\u003cTD BGCOLOR=\"#111827\" ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eMemory: EVOLUTION.md, category files, agent policy, required IRM labels, context hygiene\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n      \u003c/TABLE\u003e\n    \u003e,\n    shape=plain,\n    margin=0\n  ];\n\n  seed -\u003e validate [label=\"make it testable\"];\n  validate -\u003e app [label=\"expand shopper behavior\"];\n  validate -\u003e obs [label=\"instrument telemetry\"];\n  app -\u003e obs [label=\"instrument user actions\"];\n  obs -\u003e load [label=\"exercise at scale\"];\n  app -\u003e load [label=\"validate journeys\"];\n  load -\u003e ops [label=\"turn failures into operations\"];\n  ops -\u003e skills [label=\"codify repeatability\"];\n  skills -\u003e latest [label=\"keep evidence current\"];\n  latest -\u003e policy [label=\"protect the chronology\"];\n  policy -\u003e end_to_end [label=\"current state\"];\n\n  {\n    rank=same;\n    app;\n    obs;\n  }\n\n  {\n    rank=sink;\n    end_to_end;\n  }\n}\n",
+                "dotQueryConfig": {
+                  "fieldName": "dot_diagram"
+                },
+                "edgeOverrides": [],
+                "inputMode": "code",
+                "layoutEngine": "dot",
+                "namedThresholds": [],
+                "nodeOverrides": [],
+                "rankDirection": "TB",
+                "splineType": "polyline"
+              }
+            },
+            "version": "0.0.5"
+          }
+        }
+      },
+      "panel-3": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "group": "",
+                      "kind": "DataQuery",
+                      "spec": {},
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Source: docs/diagrams/request-flow-diagram.dot",
+          "id": 3,
+          "links": [],
+          "title": "Request Flow Diagram",
+          "vizConfig": {
+            "group": "grafana-graphviz-panel",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
+              "options": {
+                "_assistantHelp": "",
+                "builderModeActions": {},
+                "dotDiagram": "digraph request_flow_diagram {\n  rankdir=LR;\n  label=\"Browser Request Flow Through Backend Services\";\n\n  graph [\n    fontname=\"Helvetica\",\n    fontsize=20,\n    labelloc=t,\n    bgcolor=\"#0b1220\",\n    fontcolor=\"#f8fafc\",\n    pad=0.25,\n    nodesep=0.45,\n    ranksep=0.7\n  ];\n  node [\n    shape=box,\n    style=\"rounded,filled\",\n    fontname=\"Helvetica\",\n    fontsize=11,\n    color=\"#64748b\",\n    fillcolor=\"#111827\",\n    fontcolor=\"#f8fafc\",\n    margin=\"0.12,0.08\"\n  ];\n  edge [\n    fontname=\"Helvetica\",\n    fontsize=9,\n    color=\"#94a3b8\",\n    fontcolor=\"#f8fafc\",\n    arrowsize=0.7\n  ];\n\n\n  browser [label=\"Browser\\nensemble-grafana.com\", fillcolor=\"#1e3a8a\"];\n  dns [label=\"Route53\\nA/AAAA alias\", fillcolor=\"#164e63\"];\n  wafEdge [label=\"AWS WAF\\nedge rules\", fillcolor=\"#7f1d1d\"];\n  cf [label=\"CloudFront\\nHTTPS + static/API routing\", fillcolor=\"#1e3a8a\"];\n  apiPath [label=\"/api/* ?\", shape=diamond, fillcolor=\"#7c2d12\"];\n  s3 [label=\"S3 frontend origin\\nindex.html, JS, CSS\", fillcolor=\"#713f12\"];\n  cognito [label=\"Cognito Hosted UI\\nGoogle federation\", fillcolor=\"#4c1d95\"];\n  google [label=\"Google IdP\", fillcolor=\"#4c1d95\"];\n  localState [label=\"Browser localStorage\\nanonymous cart/account\", fillcolor=\"#0f172a\"];\n  apiWaf [label=\"AWS WAF\\nregional API rules\", fillcolor=\"#7f1d1d\"];\n  ingress [label=\"EKS API ingress / ALB\", fillcolor=\"#3730a3\"];\n  k6 [label=\"Grafana Cloud k6\\nregional, spike,\\n100 rps baseline,\\nbrowser checks\", fillcolor=\"#6b21a8\"];\n  grafana [label=\"Grafana Cloud\\nresults and telemetry\", fillcolor=\"#6b21a8\"];\n\n  inventory [label=\"inventory-service\\n/api/inventory/*\", fillcolor=\"#14532d\"];\n  cart [label=\"cart-service\\n/api/cart/*\", fillcolor=\"#14532d\"];\n  account [label=\"account-service\\n/api/account/*\", fillcolor=\"#14532d\"];\n  postgres [label=\"Postgres\\ninventory catalog\", shape=cylinder, fillcolor=\"#166534\"];\n  dynamoCart [label=\"DynamoDB\\ncart state\", shape=cylinder, fillcolor=\"#166534\"];\n  dynamoAccount [label=\"DynamoDB\\naccount, address, wallet metadata\", shape=cylinder, fillcolor=\"#166534\"];\n\n  browser -\u003e dns [label=\"DNS lookup\"];\n  dns -\u003e browser [label=\"CloudFront target\"];\n  browser -\u003e wafEdge [label=\"HTTPS request\"];\n  browser -\u003e cognito [label=\"OAuth code + PKCE\"];\n  cognito -\u003e google [label=\"Google authentication\"];\n  google -\u003e cognito [label=\"identity claims\"];\n  cognito -\u003e browser [label=\"Cognito JWTs\"];\n  browser -\u003e localState [label=\"anonymous writes\"];\n  localState -\u003e browser [label=\"restore local state\"];\n  k6 -\u003e wafEdge [label=\"Synthetic load\\n100 rps baseline\\nHTTPS + /api/*\\nwith traceparent\"];\n  wafEdge -\u003e cf;\n  cf -\u003e apiPath;\n  apiPath -\u003e s3 [label=\"No: static route\"];\n  s3 -\u003e cf [label=\"HTML/assets\"];\n  cf -\u003e browser [label=\"Storefront response\"];\n\n  apiPath -\u003e apiWaf [label=\"Yes: /api/*\\nBearer JWT or API key\"];\n  apiWaf -\u003e ingress;\n  ingress -\u003e inventory [label=\"/api/inventory/*\"];\n  ingress -\u003e cart [label=\"/api/cart/*\"];\n  ingress -\u003e account [label=\"/api/account/*\"];\n  inventory -\u003e postgres [label=\"Read products, categories, stock, pricing\"];\n  postgres -\u003e inventory;\n  cart -\u003e dynamoCart [label=\"Read/write cart items\"];\n  dynamoCart -\u003e cart;\n  account -\u003e dynamoAccount [label=\"Read/write profile, shipping, wallet\"];\n  dynamoAccount -\u003e account;\n  inventory -\u003e ingress [label=\"JSON response\"];\n  cart -\u003e ingress [label=\"JSON response\"];\n  account -\u003e ingress [label=\"JSON response\"];\n  ingress -\u003e apiWaf -\u003e cf -\u003e browser;\n  k6 -\u003e grafana [label=\"k6 result metrics\\nand trace correlation\"];\n}\n",
+                "dotQueryConfig": {
+                  "fieldName": "dot_diagram"
+                },
+                "edgeOverrides": [],
+                "inputMode": "code",
+                "layoutEngine": "dot",
+                "namedThresholds": [],
+                "nodeOverrides": [],
+                "rankDirection": "TB",
+                "splineType": "ortho"
+              }
+            },
+            "version": "0.0.5"
+          }
+        }
+      }
+    },
+    "layout": {
+      "kind": "TabsLayout",
+      "spec": {
+        "tabs": [
+          {
+            "kind": "TabsLayoutTab",
+            "spec": {
+              "layout": {
+                "kind": "GridLayout",
+                "spec": {
+                  "items": [
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-1"
+                        },
+                        "height": 13,
+                        "width": 24,
+                        "x": 0,
+                        "y": 0
+                      }
+                    }
+                  ]
+                }
+              },
+              "title": "Network"
+            }
+          },
+          {
+            "kind": "TabsLayoutTab",
+            "spec": {
+              "layout": {
+                "kind": "AutoGridLayout",
+                "spec": {
+                  "columnWidthMode": "standard",
+                  "items": [
+                    {
+                      "kind": "AutoGridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-3"
+                        }
+                      }
+                    }
+                  ],
+                  "maxColumnCount": 3,
+                  "rowHeightMode": "standard"
+                }
+              },
+              "title": "Request Flow"
+            }
+          },
+          {
+            "kind": "TabsLayoutTab",
+            "spec": {
+              "layout": {
+                "kind": "GridLayout",
+                "spec": {
+                  "items": [
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-19"
+                        },
+                        "height": 20,
+                        "width": 24,
+                        "x": 0,
+                        "y": 0
+                      }
+                    }
+                  ]
+                }
+              },
+              "title": "Frontend Observability"
+            }
+          },
+          {
+            "kind": "TabsLayoutTab",
+            "spec": {
+              "layout": {
+                "kind": "GridLayout",
+                "spec": {
+                  "items": [
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-18"
+                        },
+                        "height": 20,
+                        "width": 24,
+                        "x": 0,
+                        "y": 0
+                      }
+                    }
+                  ]
+                }
+              },
+              "title": "Traffic Spike Design"
+            }
+          },
+          {
+            "kind": "TabsLayoutTab",
+            "spec": {
+              "layout": {
+                "kind": "GridLayout",
+                "spec": {
+                  "items": [
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-11"
+                        },
+                        "height": 19,
+                        "width": 24,
+                        "x": 0,
+                        "y": 0
+                      }
+                    }
+                  ]
+                }
+              },
+              "title": "Observability"
+            }
+          },
+          {
+            "kind": "TabsLayoutTab",
+            "spec": {
+              "layout": {
+                "kind": "GridLayout",
+                "spec": {
+                  "items": [
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-20"
+                        },
+                        "height": 24,
+                        "width": 24,
+                        "x": 0,
+                        "y": 0
+                      }
+                    }
+                  ]
+                }
+              },
+              "title": "Evolution"
+            }
+          }
+        ]
+      }
+    },
+    "links": [],
+    "liveNow": false,
+    "preload": false,
+    "tags": [
+      "ensemble-grafana",
+      "graphviz",
+      "diagrams"
+    ],
+    "timeSettings": {
+      "autoRefresh": "",
+      "autoRefreshIntervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "fiscalYearStartMonth": 0,
+      "from": "now-6h",
+      "hideTimepicker": false,
+      "timezone": "browser",
+      "to": "now"
+    },
+    "title": "Ensemble Graphviz Diagrams",
+    "variables": []
+  },
+  "status": {
+    "conversion": {
+      "failed": false,
+      "storedVersion": "v0alpha1"
+    }
+  }
+}

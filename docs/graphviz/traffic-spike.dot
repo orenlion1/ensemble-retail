@@ -1,0 +1,24 @@
+digraph traffic_spike {
+  graph [
+    rankdir=LR,
+    labelloc=t,
+    label="Traffic Spike Config: BASE_SPIKE_USERS=100, SPIKE_MULTIPLIER=2",
+    fontsize=20,
+    fontname="Helvetica",
+    nodesep=0.35,
+    ranksep=0.55
+  ];
+
+  node [shape=box, style="rounded,filled", fontname="Helvetica", color="#334155", fillcolor="#f8fafc"];
+  edge [color="#475569", arrowsize=0.8, fontname="Helvetica", fontsize=10];
+
+  warmup [label="Warmup\n1m → 25 VUs\n~100 req/wave", fillcolor="#f1f5f9"];
+  spike1 [label="Spike 1\n20s ramp → 100 VUs\n1m20s hold\n~400 req/wave", fillcolor="#bfdbfe"];
+  recovery1 [label="Recovery\n1m → 25 VUs\n~100 req/wave", fillcolor="#f1f5f9"];
+  spike2 [label="Spike 2\n20s ramp → 200 VUs\n1m20s hold\n~800 req/wave", fillcolor="#fde68a"];
+  recovery2 [label="Recovery\n1m → 25 VUs\n~100 req/wave", fillcolor="#f1f5f9"];
+  spike3 [label="Spike 3\n20s ramp → 400 VUs\n1m20s hold\n~1600 req/wave", fillcolor="#fecaca"];
+  rampdown [label="Ramp down\n2m → 0 VUs", fillcolor="#e2e8f0"];
+
+  warmup -> spike1 -> recovery1 -> spike2 -> recovery2 -> spike3 -> rampdown;
+}

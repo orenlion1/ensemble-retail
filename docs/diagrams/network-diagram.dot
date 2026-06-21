@@ -1,0 +1,98 @@
+digraph network_diagram {
+  rankdir=LR;
+  label="Ensemble-Grafana Network Diagram";
+
+  graph [
+    fontname="Helvetica",
+    fontsize=20,
+    labelloc=t,
+    bgcolor="#0b1220",
+    fontcolor="#f8fafc",
+    pad=0.25,
+    nodesep=0.45,
+    ranksep=0.7
+  ];
+  node [
+    shape=box,
+    style="rounded,filled",
+    fontname="Helvetica",
+    fontsize=11,
+    color="#64748b",
+    fillcolor="#111827",
+    fontcolor="#f8fafc",
+    margin="0.12,0.08"
+  ];
+  edge [
+    fontname="Helvetica",
+    fontsize=9,
+    color="#94a3b8",
+    fontcolor="#f8fafc",
+    arrowsize=0.7
+  ];
+
+
+  shopper [label="Shopper browser", fillcolor="#1e3a8a"];
+  registrar [label="Domain registrar"];
+  route53 [label="Route53 hosted zone\nensemble-grafana.com", fillcolor="#164e63"];
+  acm [label="ACM certificate\nus-east-1 / ISSUED", fillcolor="#155e75"];
+  edgeWaf [label="AWS WAF\nCloudFront scope", fillcolor="#7f1d1d"];
+  cloudfront [label="CloudFront distribution\nensemble-grafana.com", fillcolor="#1e3a8a"];
+  staticS3 [label="S3 frontend bucket\nprivate origin", fillcolor="#713f12"];
+  imageS3 [label="S3 inventory images bucket", fillcolor="#713f12"];
+  logsS3 [label="S3 edge/API logs bucket\nCloudFront + ALB logs", fillcolor="#713f12"];
+  regionalWaf [label="AWS WAF\nregional API scope", fillcolor="#7f1d1d"];
+  apiAlb [label="API ingress / ALB\napi.ensemble-grafana.com", fillcolor="#3730a3"];
+  cognito [label="AWS Cognito\nGoogle federation", fillcolor="#4c1d95"];
+  google [label="Google Identity Provider", fillcolor="#4c1d95"];
+  postgres [label="Postgres inventory DB", shape=cylinder, fillcolor="#14532d"];
+  dynamodb [label="DynamoDB\ncart/account state", shape=cylinder, fillcolor="#14532d"];
+  cloudwatch [label="AWS CloudWatch\nRDS metrics", fillcolor="#334155"];
+  cloudwatchScrape [label="Grafana Cloud Provider\nAWS/RDS scrape job", fillcolor="#581c87"];
+  grafana [label="Grafana Cloud\nFaro, metrics, logs, traces, profiles", fillcolor="#6b21a8"];
+  k6 [label="Grafana Cloud k6\nload tests\n100 rps baseline + browser checks", fillcolor="#6b21a8"];
+  accountBaseline [label="Terraform account-baseline stack\nSSM host-management setting", fillcolor="#334155"];
+
+  subgraph cluster_eks {
+    label="EKS cluster";
+    color="#64748b";
+    fontcolor="#f8fafc";
+    style="rounded,dashed";
+    beyla [label="Grafana Beyla", fillcolor="#581c87"];
+    alloy [label="Grafana Alloy\nOTel collector", fillcolor="#581c87"];
+    inventory [label="inventory-service\nSpring Boot pods", fillcolor="#14532d"];
+    cart [label="cart-service\nSpring Boot pods", fillcolor="#14532d"];
+    account [label="account-service\nSpring Boot pods", fillcolor="#14532d"];
+  }
+
+  registrar -> route53 [label="NS delegation"];
+  route53 -> cloudfront [label="A / AAAA alias"];
+  acm -> cloudfront [label="TLS certificate"];
+  shopper -> edgeWaf [label="HTTPS storefront"];
+  edgeWaf -> cloudfront;
+  shopper -> cognito [label="Google sign-in"];
+  cognito -> google;
+  cloudfront -> staticS3 [label="static assets"];
+  cloudfront -> imageS3 [label="inventory images"];
+  cloudfront -> logsS3 [label="standard access logs"];
+  cloudfront -> regionalWaf [label="/api/*"];
+  regionalWaf -> apiAlb;
+  apiAlb -> logsS3 [label="ALB access logs"];
+  apiAlb -> inventory;
+  apiAlb -> cart;
+  apiAlb -> account;
+  inventory -> postgres;
+  cart -> dynamodb;
+  account -> dynamodb;
+  postgres -> cloudwatch [label="RDS metrics"];
+  cloudwatchScrape -> cloudwatch [label="assume AWS role\nand scrape metrics"];
+  cloudwatchScrape -> grafana [label="CloudWatch metrics"];
+  shopper -> grafana [label="Faro web telemetry"];
+  accountBaseline -> beyla [label="SSM default role setting"];
+  k6 -> cloudfront [label="regional, spike,\n100 rps baseline,\nbrowser checks\nwith traceparent"];
+  k6 -> grafana [label="test results + trace correlation"];
+  beyla -> alloy [label="zero-code HTTP telemetry"];
+  inventory -> alloy [label="OTel + Prometheus"];
+  cart -> alloy [label="OTel + Prometheus"];
+  account -> alloy [label="OTel + Prometheus"];
+  alloy -> grafana;
+}

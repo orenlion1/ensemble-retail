@@ -1,0 +1,191 @@
+{
+  "apiVersion": "dashboard.grafana.app/v2",
+  "kind": "Dashboard",
+  "metadata": {
+    "annotations": {
+      "grafana.app/createdBy": "service-account:bfn4sb0kofeo0b",
+      "grafana.app/message": "Set steady 120 rps API scenario as traffic spike baseline",
+      "grafana.app/updatedBy": "service-account:ffn1sscdjmscge",
+      "grafana.app/updatedTimestamp": "2026-06-02T15:31:20Z"
+    },
+    "creationTimestamp": "2026-05-30T16:11:51Z",
+    "generation": 20,
+    "labels": {
+      "grafana.app/deprecatedInternalID": "2611049998929920"
+    },
+    "name": "ensemble-traffic-spike-graphviz",
+    "namespace": "stacks-1665320",
+    "resourceVersion": "2061833050689372227",
+    "uid": "6d68e547-2aac-4f8c-bc87-73139bff4816"
+  },
+  "spec": {
+    "annotations": [
+      {
+        "kind": "AnnotationQuery",
+        "spec": {
+          "builtIn": true,
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "legacyOptions": {
+            "type": "dashboard"
+          },
+          "name": "Annotations \u0026 Alerts",
+          "query": {
+            "datasource": {
+              "name": "-- Grafana --"
+            },
+            "group": "grafana",
+            "kind": "DataQuery",
+            "spec": {},
+            "version": "v0"
+          }
+        }
+      }
+    ],
+    "cursorSync": "Off",
+    "editable": true,
+    "elements": {
+      "panel-1": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Static Graphviz heatmap generated from load-tests/grafana-cloud-traffic-spikes.js defaults, using one WCAG AA-friendly off-white text color across darkened color-coded cells.",
+          "id": 1,
+          "links": [],
+          "title": "Traffic spike target heatmap - dark mode",
+          "vizConfig": {
+            "group": "grafana-graphviz-panel",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
+              "options": {
+                "dotDiagram": "digraph traffic_spike_target_heatmap_dark {\n  graph [rankdir=TB, labelloc=t, label=\"Traffic Spike Test Targets\", bgcolor=\"#0b1220\", fontcolor=\"#f8fafc\", fontsize=22, fontname=\"Helvetica\", nodesep=0.35, ranksep=0.4];\n  node [shape=plain, fontname=\"Helvetica\", fontcolor=\"#f8fafc\"];\n  edge [style=invis];\n\n  target_heatmap [label=\u003c\n    \u003cTABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"7\" COLOR=\"#475569\"\u003e\n      \u003cTR\u003e\u003cTD BGCOLOR=\"#1e3a5f\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eStage\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e3a5f\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eVUs\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e3a5f\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eRequests / wave\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#14532d\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eCart updates\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#713f12\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eCheckout attempts\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e40af\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eRegion changes\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n      \u003cTR\u003e\u003cTD ALIGN=\"LEFT\" BGCOLOR=\"#111827\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eWarmup / Recovery\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#111827\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e25\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#334155\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e100\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#166534\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e15\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#854d0e\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e5\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1d4ed8\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e25\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n      \u003cTR\u003e\u003cTD ALIGN=\"LEFT\" BGCOLOR=\"#111827\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eSpike 1\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#111827\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e100\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#2563eb\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e400\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#15803d\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e60\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#a16207\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e20\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#2563eb\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e100\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n      \u003cTR\u003e\u003cTD ALIGN=\"LEFT\" BGCOLOR=\"#111827\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eSpike 2\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#111827\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e200\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e40af\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e800\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#15803d\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e120\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#92400e\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e40\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e40af\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e200\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n      \u003cTR\u003e\u003cTD ALIGN=\"LEFT\" BGCOLOR=\"#111827\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eSpike 3\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#111827\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e400\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e3a8a\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e1600\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#166534\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e240\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#713f12\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e80\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003cTD BGCOLOR=\"#1e3a8a\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003e400\u003c/B\u003e\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n    \u003c/TABLE\u003e\n  \u003e];\n\n  target_note [label=\u003c\n    \u003cTABLE BORDER=\"0\" CELLBORDER=\"0\" CELLSPACING=\"0\" CELLPADDING=\"4\"\u003e\n      \u003cTR\u003e\u003cTD ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003e\u003cB\u003eReadout:\u003c/B\u003e brighter cells mean more target pressure per completed wave.\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n      \u003cTR\u003e\u003cTD ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eConfig: base=100, multiplier=2.\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n      \u003cTR\u003e\u003cTD ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eRegional shoppers: 30 VUs.\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n      \u003cTR\u003e\u003cTD ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eSteady API load: 120 requests/sec.\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n      \u003cTR\u003e\u003cTD ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eStorefront actions: ramp to 5 browser VUs.\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n      \u003cTR\u003e\u003cTD ALIGN=\"LEFT\"\u003e\u003cFONT COLOR=\"#f8fafc\"\u003eDuration: 10m.\u003c/FONT\u003e\u003c/TD\u003e\u003c/TR\u003e\n    \u003c/TABLE\u003e\n  \u003e];\n\n  target_heatmap -\u003e target_note;\n}\n",
+                "edgeOverrides": [],
+                "inputMode": "code",
+                "layoutEngine": "dot",
+                "namedThresholds": [],
+                "nodeOverrides": [],
+                "rankDirection": "TB",
+                "splineType": "ortho"
+              }
+            },
+            "version": ""
+          }
+        }
+      },
+      "panel-2": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Static HTML heatmap generated from the current traffic-spike k6 defaults, using one WCAG AA-friendly off-white text color across darkened color-coded cells.",
+          "id": 2,
+          "links": [],
+          "title": "Traffic spike target heatmap - HTML",
+          "vizConfig": {
+            "group": "text",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
+              "options": {
+                "content": "\u003c!doctype html\u003e\n\u003chtml lang=\"en\"\u003e\n\u003chead\u003e\n  \u003cmeta charset=\"utf-8\"\u003e\n  \u003ctitle\u003eTraffic Spike Target Heatmap\u003c/title\u003e\n  \u003cstyle\u003e\n    :root {\n      color-scheme: dark;\n      --bg: #0b1220;\n      --panel: #111827;\n      --line: #475569;\n      --text: #f8fafc;\n      --muted: #f8fafc;\n      --blue-1: #1d4ed8;\n      --blue-2: #2563eb;\n      --blue-3: #1e40af;\n      --blue-4: #1e3a8a;\n      --green-1: #166534;\n      --green-2: #15803d;\n      --green-3: #15803d;\n      --green-4: #166534;\n      --amber-1: #854d0e;\n      --amber-2: #a16207;\n      --amber-3: #92400e;\n      --amber-4: #713f12;\n    }\n    body {\n      margin: 0;\n      background: var(--bg);\n      color: var(--text);\n      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif;\n    }\n    .heatmap {\n      box-sizing: border-box;\n      width: 100%;\n      min-height: 100%;\n      padding: 18px;\n      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.18), transparent 34%), var(--bg);\n    }\n    h2 {\n      margin: 0 0 12px;\n      font-size: 22px;\n      font-weight: 700;\n      letter-spacing: 0;\n    }\n    table {\n      width: 100%;\n      border-collapse: collapse;\n      border: 1px solid var(--line);\n      background: rgba(17, 24, 39, 0.94);\n      box-shadow: 0 18px 46px rgba(0, 0, 0, 0.28);\n    }\n    th, td {\n      border: 1px solid var(--line);\n      padding: 10px 12px;\n      text-align: center;\n      vertical-align: middle;\n      font-size: 14px;\n    }\n    th {\n      background: #1e3a5f;\n      color: #f8fafc;\n      font-weight: 700;\n    }\n    td.stage {\n      text-align: left;\n      background: var(--panel);\n      font-weight: 650;\n      white-space: nowrap;\n    }\n    td.vus { background: var(--panel); font-weight: 700; }\n    td.requests.warmup { background: #334155; }\n    td.requests.s1 { background: var(--blue-2); color: #f8fafc; font-weight: 700; }\n    td.requests.s2 { background: var(--blue-3); color: #f8fafc; font-weight: 800; }\n    td.requests.s3 { background: var(--blue-4); color: #f8fafc; font-weight: 800; }\n    td.cart.warmup { background: var(--green-1); color: #f8fafc; }\n    td.cart.s1 { background: var(--green-2); color: #f8fafc; font-weight: 700; }\n    td.cart.s2 { background: var(--green-3); color: #f8fafc; font-weight: 800; }\n    td.cart.s3 { background: var(--green-4); color: #f8fafc; font-weight: 800; }\n    td.checkout.warmup { background: var(--amber-1); color: #f8fafc; }\n    td.checkout.s1 { background: var(--amber-2); color: #f8fafc; font-weight: 700; }\n    td.checkout.s2 { background: var(--amber-3); color: #f8fafc; font-weight: 800; }\n    td.checkout.s3 { background: var(--amber-4); color: #f8fafc; font-weight: 800; }\n    td.region.warmup { background: var(--blue-1); color: #f8fafc; }\n    td.region.s1 { background: var(--blue-2); color: #f8fafc; font-weight: 700; }\n    td.region.s2 { background: var(--blue-3); color: #f8fafc; font-weight: 800; }\n    td.region.s3 { background: var(--blue-4); color: #f8fafc; font-weight: 800; }\n    .note {\n      margin-top: 12px;\n      color: var(--muted);\n      font-size: 13px;\n      line-height: 1.45;\n      max-width: 920px;\n    }\n    .note strong { color: var(--text); }\n  \u003c/style\u003e\n\u003c/head\u003e\n\u003cbody\u003e\n  \u003csection class=\"heatmap\" aria-label=\"Traffic spike target heatmap\"\u003e\n    \u003ch2\u003eTraffic Spike Test Targets\u003c/h2\u003e\n    \u003ctable\u003e\n      \u003cthead\u003e\n        \u003ctr\u003e\n          \u003cth\u003eStage\u003c/th\u003e\n          \u003cth\u003eVUs\u003c/th\u003e\n          \u003cth\u003eRequests / wave\u003c/th\u003e\n          \u003cth\u003eCart updates\u003c/th\u003e\n          \u003cth\u003eCheckout attempts\u003c/th\u003e\n          \u003cth\u003eRegion changes\u003c/th\u003e\n        \u003c/tr\u003e\n      \u003c/thead\u003e\n      \u003ctbody\u003e\n        \u003ctr\u003e\n          \u003ctd class=\"stage\"\u003eWarmup / Recovery\u003c/td\u003e\n          \u003ctd class=\"vus\"\u003e25\u003c/td\u003e\n          \u003ctd class=\"requests warmup\"\u003e100\u003c/td\u003e\n          \u003ctd class=\"cart warmup\"\u003e15\u003c/td\u003e\n          \u003ctd class=\"checkout warmup\"\u003e5\u003c/td\u003e\n          \u003ctd class=\"region warmup\"\u003e25\u003c/td\u003e\n        \u003c/tr\u003e\n        \u003ctr\u003e\n          \u003ctd class=\"stage\"\u003eSpike 1\u003c/td\u003e\n          \u003ctd class=\"vus\"\u003e100\u003c/td\u003e\n          \u003ctd class=\"requests s1\"\u003e400\u003c/td\u003e\n          \u003ctd class=\"cart s1\"\u003e60\u003c/td\u003e\n          \u003ctd class=\"checkout s1\"\u003e20\u003c/td\u003e\n          \u003ctd class=\"region s1\"\u003e100\u003c/td\u003e\n        \u003c/tr\u003e\n        \u003ctr\u003e\n          \u003ctd class=\"stage\"\u003eSpike 2\u003c/td\u003e\n          \u003ctd class=\"vus\"\u003e200\u003c/td\u003e\n          \u003ctd class=\"requests s2\"\u003e800\u003c/td\u003e\n          \u003ctd class=\"cart s2\"\u003e120\u003c/td\u003e\n          \u003ctd class=\"checkout s2\"\u003e40\u003c/td\u003e\n          \u003ctd class=\"region s2\"\u003e200\u003c/td\u003e\n        \u003c/tr\u003e\n        \u003ctr\u003e\n          \u003ctd class=\"stage\"\u003eSpike 3\u003c/td\u003e\n          \u003ctd class=\"vus\"\u003e400\u003c/td\u003e\n          \u003ctd class=\"requests s3\"\u003e1600\u003c/td\u003e\n          \u003ctd class=\"cart s3\"\u003e240\u003c/td\u003e\n          \u003ctd class=\"checkout s3\"\u003e80\u003c/td\u003e\n          \u003ctd class=\"region s3\"\u003e400\u003c/td\u003e\n        \u003c/tr\u003e\n      \u003c/tbody\u003e\n    \u003c/table\u003e\n    \u003cp class=\"note\"\u003e\u003cstrong\u003eConfig:\u003c/strong\u003e base=100, multiplier=2.\u003cbr\u003eRegional shoppers: 30 VUs.\u003cbr\u003eSteady API load: 120 requests/sec.\u003cbr\u003eStorefront actions: ramp to 5 browser VUs.\u003cbr\u003eDuration: 10m. Brighter cells mean more target pressure per completed wave.\u003c/p\u003e\n  \u003c/section\u003e\n\u003c/body\u003e\n\u003c/html\u003e\n",
+                "mode": "html"
+              }
+            },
+            "version": ""
+          }
+        }
+      }
+    },
+    "layout": {
+      "kind": "GridLayout",
+      "spec": {
+        "items": [
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-1"
+              },
+              "height": 10,
+              "width": 24,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-2"
+              },
+              "height": 8,
+              "width": 24,
+              "x": 0,
+              "y": 10
+            }
+          }
+        ]
+      }
+    },
+    "links": [],
+    "liveNow": false,
+    "preload": false,
+    "tags": [
+      "ensemble-grafana",
+      "graphviz",
+      "k6",
+      "traffic-spike"
+    ],
+    "timeSettings": {
+      "autoRefresh": "",
+      "autoRefreshIntervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "fiscalYearStartMonth": 0,
+      "from": "now-6h",
+      "hideTimepicker": false,
+      "timezone": "browser",
+      "to": "now"
+    },
+    "title": "Ensemble Traffic Spike Graphviz Model",
+    "variables": []
+  },
+  "status": {
+    "conversion": {
+      "failed": false,
+      "storedVersion": "v0alpha1"
+    }
+  }
+}

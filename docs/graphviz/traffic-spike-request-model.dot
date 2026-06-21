@@ -1,0 +1,55 @@
+digraph traffic_spike_request_model {
+  graph [
+    rankdir=LR,
+    labelloc=t,
+    label="Traffic Spike Request and Counter Model",
+    fontsize=22,
+    fontname="Helvetica",
+    nodesep=0.45,
+    ranksep=0.75
+  ];
+
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=12, color="#334155", fillcolor="#f8fafc"];
+  edge [color="#475569", arrowsize=0.8, fontname="Helvetica", fontsize=11];
+
+  note [shape=note, fillcolor="#fff7ed", color="#f97316", label="ramping-vus loops each active VU.\nCounts below are per completed VU wave.\nActual totals depend on latency, sleeps, and iteration completion."];
+  avg [shape=component, fillcolor="#ecfeff", color="#0891b2", label="Average traffic_spikes iteration\n4 requests / VU wave"];
+
+  subgraph cluster_personas {
+    label="traffic_spikes persona mix"; color="#cbd5e1"; style="rounded,dashed"; fontsize=16; fontname="Helvetica";
+    browser [label="browser\n3 requests\nregion +1", fillcolor="#eef2ff"];
+    cart_builder [label="cart_builder\n4 requests\nregion +1\ncart updates +1", fillcolor="#f0fdf4"];
+    account_manager [label="account_manager\n4 requests\nregion +1", fillcolor="#f8fafc"];
+    sale_hunter [label="sale_hunter\n4 requests\nregion +1\ncart updates +1", fillcolor="#fefce8"];
+    checkout [label="checkout\n5 requests\nregion +1\ncart updates +1\ncheckout attempts +1", fillcolor="#fef2f2"];
+    browser -> cart_builder -> account_manager -> sale_hunter -> checkout [style=invis];
+  }
+
+  subgraph cluster_stages {
+    label="Current k6 stages from grafana-cloud-traffic-spikes.js"; color="#cbd5e1"; style="rounded,dashed"; fontsize=16; fontname="Helvetica";
+    warmup [label="Warmup\n1m, 25 VUs\n~100 requests\n15 cart updates\n5 checkout attempts\n25 region changes", fillcolor="#f1f5f9"];
+    ramp1 [label="Ramp to Spike 1\n20s, 100 VUs\nup to ~400 requests\n60 cart updates\n20 checkout attempts\n100 region changes", fillcolor="#dbeafe"];
+    hold1 [label="Hold Spike 1\n1m20s, 100 VUs\n~400 requests / wave\n60 cart updates\n20 checkout attempts\n100 region changes", fillcolor="#bfdbfe"];
+    recovery1 [label="Recovery\n1m, 25 VUs\n~100 requests / wave\n15 cart updates\n5 checkout attempts\n25 region changes", fillcolor="#f1f5f9"];
+    ramp2 [label="Ramp to Spike 2\n20s, 200 VUs\nup to ~800 requests\n120 cart updates\n40 checkout attempts\n200 region changes", fillcolor="#fde68a"];
+    hold2 [label="Hold Spike 2\n1m20s, 200 VUs\n~800 requests / wave\n120 cart updates\n40 checkout attempts\n200 region changes", fillcolor="#fcd34d"];
+    recovery2 [label="Recovery\n1m, 25 VUs\n~100 requests / wave\n15 cart updates\n5 checkout attempts\n25 region changes", fillcolor="#f1f5f9"];
+    ramp3 [label="Ramp to Spike 3\n20s, 400 VUs\nup to ~1600 requests\n240 cart updates\n80 checkout attempts\n400 region changes", fillcolor="#fecaca"];
+    hold3 [label="Hold Spike 3\n1m20s, 400 VUs\n~1600 requests / wave\n240 cart updates\n80 checkout attempts\n400 region changes", fillcolor="#fca5a5"];
+    rampdown [label="Ramp down\n2m, 0 VUs\nrequests decrease to 0", fillcolor="#e2e8f0"];
+    warmup -> ramp1 -> hold1 -> recovery1 -> ramp2 -> hold2 -> recovery2 -> ramp3 -> hold3 -> rampdown;
+  }
+
+  subgraph cluster_parallel {
+    label="Parallel scenarios in combined script"; color="#cbd5e1"; style="rounded,dashed"; fontsize=16; fontname="Helvetica";
+    regional [label="regional_shoppers\n30 VUs for TEST_DURATION/default 10m\n~120 requests per completed wave", fillcolor="#ecfdf5"];
+    api_rate [label="api_request_rate\nconstant arrival rate\n100 requests/sec for 10m", fillcolor="#e0f2fe"];
+    storefront [label="storefront_actions\nramp to 5 browser VUs over 2m, hold 6m, ramp down 2m\nFaro UI actions + browser metrics\nstandard http_reqs may be n/a", fillcolor="#faf5ff"];
+  }
+
+  note -> avg;
+  avg -> warmup [label="stage estimates"];
+  avg -> regional [label="parallel HTTP load"];
+  avg -> api_rate [label="steady API pressure"];
+  checkout -> avg [label="persona average"];
+}

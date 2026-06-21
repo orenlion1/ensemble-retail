@@ -1,0 +1,15 @@
+apiVersion: incident.ext.grafana.app/v1alpha1
+kind: Incident
+spec:
+  title: "[Placeholder] UK June 2025 No Action Needed"
+  description: "[Placeholder] No Action Needed"
+  severity: "Sev-2: Significant Business Impact"
+  incidentStart: "2025-06-01T04:01:00Z"
+  incidentEnd: "2025-06-01T04:02:00Z"
+  labels:
+  - key: "region"
+    value: "UK"
+  - key: "client_impact"
+    value: "multiple-clients"
+  - key: "impact_type"
+    value: "availablity"

@@ -1,0 +1,584 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ensemble-observability
+  labels:
+    app.kubernetes.io/part-of: ensemble-grafana
+    pod-security.kubernetes.io/enforce: privileged
+    pod-security.kubernetes.io/audit: restricted
+    pod-security.kubernetes.io/warn: restricted
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: alloy-config
+  namespace: ensemble-observability
+data:
+  config.alloy: |
+    discovery.kubernetes "spring_boot_metrics" {
+      role = "pod"
+
+      namespaces {
+        own_namespace = false
+        names         = ["ensemble-grafana"]
+      }
+    }
+
+    discovery.relabel "spring_boot_metrics" {
+      targets = discovery.kubernetes.spring_boot_metrics.targets
+
+      rule {
+        source_labels = ["__meta_kubernetes_pod_annotation_prometheus_io_scrape"]
+        action        = "keep"
+        regex         = "true"
+      }
+
+      rule {
+        source_labels = ["__meta_kubernetes_pod_annotation_prometheus_io_path"]
+        action        = "replace"
+        target_label  = "__metrics_path__"
+        regex         = "(.+)"
+      }
+
+      rule {
+        source_labels = ["__address__", "__meta_kubernetes_pod_annotation_prometheus_io_port"]
+        action        = "replace"
+        target_label  = "__address__"
+        regex         = "([^:]+)(?::\\d+)?;(\\d+)"
+        replacement   = "$1:$2"
+      }
+
+      rule {
+        source_labels = ["__meta_kubernetes_namespace"]
+        action        = "replace"
+        target_label  = "namespace"
+      }
+
+      rule {
+        source_labels = ["__meta_kubernetes_pod_name"]
+        action        = "replace"
+        target_label  = "pod"
+      }
+
+      rule {
+        source_labels = ["__meta_kubernetes_pod_container_name"]
+        action        = "replace"
+        target_label  = "container"
+      }
+
+      rule {
+        source_labels = ["__meta_kubernetes_pod_label_app"]
+        action        = "replace"
+        target_label  = "service_name"
+      }
+
+      rule {
+        source_labels = ["__meta_kubernetes_pod_label_app"]
+        action        = "replace"
+        target_label  = "service"
+      }
+
+      rule {
+        target_label = "cluster"
+        replacement  = "ensemble-grafana"
+      }
+
+      rule {
+        target_label = "deployment_environment"
+        replacement  = "production"
+      }
+    }
+
+    prometheus.scrape "spring_boot_metrics" {
+      targets         = discovery.relabel.spring_boot_metrics.output
+      scrape_interval = "30s"
+      forward_to      = [otelcol.receiver.prometheus.spring_boot_metrics.receiver]
+    }
+
+    otelcol.receiver.prometheus "spring_boot_metrics" {
+      output {
+        metrics = [otelcol.processor.batch.default.input]
+      }
+    }
+
+    discovery.kubernetes "pod_logs" {
+      role = "pod"
+
+      namespaces {
+        own_namespace = false
+        names         = ["ensemble-grafana"]
+      }
+    }
+
+    discovery.relabel "pod_logs" {
+      targets = discovery.kubernetes.pod_logs.targets
+
+      rule {
+        source_labels = ["__meta_kubernetes_namespace"]
+        action        = "keep"
+        regex         = "ensemble-grafana"
+      }
+
+      rule {
+        source_labels = ["__meta_kubernetes_namespace"]
+        action        = "replace"
+        target_label  = "namespace"
+      }
+
+      rule {
+        source_labels = ["__meta_kubernetes_pod_name"]
+        action        = "replace"
+        target_label  = "pod"
+      }
+
+      rule {
+        source_labels = ["__meta_kubernetes_pod_container_name"]
+        action        = "replace"
+        target_label  = "container"
+      }
+
+      rule {
+        source_labels = ["__meta_kubernetes_pod_label_app"]
+        action        = "replace"
+        target_label  = "service_name"
+      }
+
+      rule {
+        source_labels = ["__meta_kubernetes_pod_label_app"]
+        action        = "replace"
+        target_label  = "service"
+      }
+
+      rule {
+        target_label = "cluster"
+        replacement  = "ensemble-grafana"
+      }
+
+      rule {
+        target_label = "deployment_environment"
+        replacement  = "production"
+      }
+    }
+
+    loki.source.kubernetes "pod_logs" {
+      targets    = discovery.relabel.pod_logs.output
+      forward_to = [otelcol.receiver.loki.pod_logs.receiver]
+    }
+
+    otelcol.receiver.loki "pod_logs" {
+      output {
+        logs = [otelcol.processor.transform.log_labels.input]
+      }
+    }
+
+    otelcol.receiver.otlp "default" {
+      grpc { endpoint = "0.0.0.0:4317" }
+      http { endpoint = "0.0.0.0:4318" }
+      output {
+        metrics = [otelcol.processor.batch.default.input]
+        logs = [otelcol.processor.transform.log_labels.input]
+        traces = [otelcol.processor.batch.default.input]
+      }
+    }
+
+    otelcol.processor.transform "log_labels" {
+      error_mode = "ignore"
+
+      log_statements {
+        context = "resource"
+        statements = [
+          `set(attributes["service.name"], attributes["service_name"]) where attributes["service.name"] == nil and attributes["service_name"] != nil`,
+          `set(attributes["service.name"], attributes["service"]) where attributes["service.name"] == nil and attributes["service"] != nil`,
+          `set(attributes["service"], attributes["service.name"]) where attributes["service"] == nil and attributes["service.name"] != nil`,
+          `set(attributes["service_name"], attributes["service.name"]) where attributes["service_name"] == nil and attributes["service.name"] != nil`,
+          `set(attributes["service.namespace"], "ensemble-grafana") where attributes["service.namespace"] == nil`,
+          `set(attributes["k8s.namespace.name"], attributes["namespace"]) where attributes["k8s.namespace.name"] == nil and attributes["namespace"] != nil`,
+          `set(attributes["k8s.pod.name"], attributes["pod"]) where attributes["k8s.pod.name"] == nil and attributes["pod"] != nil`,
+          `set(attributes["k8s.container.name"], attributes["container"]) where attributes["k8s.container.name"] == nil and attributes["container"] != nil`,
+          `set(attributes["k8s.cluster.name"], attributes["cluster"]) where attributes["k8s.cluster.name"] == nil and attributes["cluster"] != nil`,
+          `set(attributes["deployment.environment.name"], attributes["deployment_environment"]) where attributes["deployment.environment.name"] == nil and attributes["deployment_environment"] != nil`,
+          `set(attributes["loki.resource.labels"], "service,service.name,service_name,service.namespace,k8s.namespace.name,k8s.container.name,k8s.cluster.name,deployment.environment.name")`,
+        ]
+      }
+
+      log_statements {
+        context = "log"
+        statements = [
+          `set(resource.attributes["service.name"], attributes["service_name"]) where resource.attributes["service.name"] == nil and attributes["service_name"] != nil`,
+          `set(resource.attributes["service.name"], attributes["service"]) where resource.attributes["service.name"] == nil and attributes["service"] != nil`,
+          `set(resource.attributes["service"], resource.attributes["service.name"]) where resource.attributes["service"] == nil and resource.attributes["service.name"] != nil`,
+          `set(resource.attributes["service_name"], resource.attributes["service.name"]) where resource.attributes["service_name"] == nil and resource.attributes["service.name"] != nil`,
+          `set(resource.attributes["service.namespace"], "ensemble-grafana") where resource.attributes["service.namespace"] == nil`,
+          `set(resource.attributes["k8s.namespace.name"], attributes["namespace"]) where resource.attributes["k8s.namespace.name"] == nil and attributes["namespace"] != nil`,
+          `set(resource.attributes["k8s.pod.name"], attributes["pod"]) where resource.attributes["k8s.pod.name"] == nil and attributes["pod"] != nil`,
+          `set(resource.attributes["k8s.container.name"], attributes["container"]) where resource.attributes["k8s.container.name"] == nil and attributes["container"] != nil`,
+          `set(resource.attributes["k8s.cluster.name"], attributes["cluster"]) where resource.attributes["k8s.cluster.name"] == nil and attributes["cluster"] != nil`,
+          `set(resource.attributes["deployment.environment.name"], attributes["deployment_environment"]) where resource.attributes["deployment.environment.name"] == nil and attributes["deployment_environment"] != nil`,
+          `set(resource.attributes["loki.resource.labels"], "service,service.name,service_name,service.namespace,k8s.namespace.name,k8s.container.name,k8s.cluster.name,deployment.environment.name")`,
+          `set(attributes["loki.attribute.labels"], "service,service_name,namespace,pod,container,cluster,deployment_environment")`,
+        ]
+      }
+
+      output {
+        logs = [otelcol.processor.batch.default.input]
+      }
+    }
+
+    otelcol.processor.batch "default" {
+      output {
+        metrics = [otelcol.exporter.otlphttp.grafana_cloud.input]
+        logs = [otelcol.exporter.otlphttp.grafana_cloud.input]
+        traces = [otelcol.exporter.otlphttp.grafana_cloud.input]
+      }
+    }
+
+    otelcol.exporter.otlphttp "grafana_cloud" {
+      client {
+        endpoint = sys.env("GRAFANA_CLOUD_OTLP_ENDPOINT")
+        auth = otelcol.auth.basic.grafana_cloud.handler
+      }
+    }
+
+    otelcol.auth.basic "grafana_cloud" {
+      username = sys.env("GRAFANA_CLOUD_INSTANCE_ID")
+      password = sys.env("GRAFANA_CLOUD_API_KEY")
+    }
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: ensemble-grafana-alloy
+rules:
+  - apiGroups: [""]
+    resources: ["endpoints", "namespaces", "nodes", "pods", "pods/log", "services"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["discovery.k8s.io"]
+    resources: ["endpointslices"]
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: ensemble-grafana-alloy
+subjects:
+  - kind: ServiceAccount
+    name: alloy
+    namespace: ensemble-observability
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: ensemble-grafana-alloy
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alloy
+  namespace: ensemble-observability
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: alloy
+  template:
+    metadata:
+      labels:
+        app: alloy
+    spec:
+      serviceAccountName: alloy
+      tolerations:
+        - key: node.kubernetes.io/memory-pressure
+          operator: Exists
+          effect: NoSchedule
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 473
+        runAsGroup: 473
+        fsGroup: 473
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: alloy
+          image: grafana/alloy:v1.5.1
+          args: ["run", "--storage.path=/var/lib/alloy", "/etc/alloy/config.alloy"]
+          ports:
+            - containerPort: 4317
+            - containerPort: 4318
+          envFrom:
+            - secretRef:
+                name: grafana-cloud-secrets
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+          volumeMounts:
+            - name: config
+              mountPath: /etc/alloy
+            - name: alloy-storage
+              mountPath: /var/lib/alloy
+          resources:
+            requests: { cpu: 100m, memory: 128Mi }
+            limits: { cpu: 500m, memory: 512Mi }
+      volumes:
+        - name: config
+          configMap:
+            name: alloy-config
+        - name: alloy-storage
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: alloy
+  namespace: ensemble-observability
+spec:
+  selector:
+    app: alloy
+  ports:
+    - name: otlp-grpc
+      port: 4317
+      targetPort: 4317
+    - name: otlp-http
+      port: 4318
+      targetPort: 4318
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: beyla
+  namespace: ensemble-observability
+spec:
+  selector:
+    matchLabels:
+      app: beyla
+  template:
+    metadata:
+      labels:
+        app: beyla
+    spec:
+      hostPID: true
+      serviceAccountName: beyla
+      containers:
+        - name: beyla
+          image: grafana/beyla:1.9.3
+          securityContext:
+            privileged: true
+          env:
+            - name: BEYLA_OPEN_PORT
+              value: "8081,8082,8083"
+            - name: BEYLA_SERVICE_NAMESPACE
+              value: ensemble-grafana
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: http://alloy.ensemble-observability.svc.cluster.local:4318
+          resources:
+            requests: { cpu: 100m, memory: 128Mi }
+            limits: { cpu: 500m, memory: 512Mi }
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pyroscope-alloy-config
+  namespace: ensemble-observability
+data:
+  config.alloy: |
+    discovery.kubernetes "local_pods" {
+      role = "pod"
+
+      selectors {
+        role  = "pod"
+        field = "spec.nodeName=" + sys.env("NODE_NAME")
+      }
+
+      namespaces {
+        own_namespace = false
+        names         = ["ensemble-grafana"]
+      }
+    }
+
+    discovery.process "all" {
+      refresh_interval = "30s"
+      join             = discovery.kubernetes.local_pods.targets
+
+      discover_config {
+        commandline  = true
+        container_id = true
+        exe          = true
+        uid          = true
+        username     = true
+      }
+    }
+
+    discovery.relabel "java_pods" {
+      targets = discovery.process.all.targets
+
+      rule {
+        source_labels = ["__meta_process_exe"]
+        action        = "keep"
+        regex         = ".*/java$"
+      }
+
+      rule {
+        source_labels = ["__meta_kubernetes_pod_phase"]
+        action        = "drop"
+        regex         = "Succeeded|Failed|Completed"
+      }
+
+      rule {
+        source_labels = ["__meta_kubernetes_namespace"]
+        action        = "keep"
+        regex         = "ensemble-grafana"
+      }
+
+      rule {
+        source_labels = ["__meta_kubernetes_pod_label_app"]
+        action        = "keep"
+        regex         = "(inventory-service|cart-service|account-service)"
+      }
+
+      rule {
+        source_labels = ["__meta_kubernetes_pod_label_app"]
+        action        = "replace"
+        target_label  = "service_name"
+      }
+
+      rule {
+        source_labels = ["__meta_kubernetes_namespace"]
+        action        = "replace"
+        target_label  = "namespace"
+      }
+
+      rule {
+        source_labels = ["__meta_kubernetes_pod_name"]
+        action        = "replace"
+        target_label  = "pod"
+      }
+
+      rule {
+        source_labels = ["__meta_kubernetes_pod_container_name"]
+        action        = "replace"
+        target_label  = "container"
+      }
+
+      rule {
+        source_labels = ["__meta_kubernetes_pod_node_name"]
+        action        = "replace"
+        target_label  = "node"
+      }
+
+      rule {
+        target_label = "cluster"
+        replacement  = "ensemble-grafana"
+      }
+
+      rule {
+        target_label = "deployment_environment"
+        replacement  = "production"
+      }
+    }
+
+    pyroscope.java "spring_boot" {
+      targets    = discovery.relabel.java_pods.output
+      tmp_dir    = "/tmp/pyroscope"
+      forward_to = [pyroscope.write.grafana_cloud.receiver]
+
+      profiling_config {
+        interval    = "60s"
+        cpu         = true
+        event       = "itimer"
+        sample_rate = 50
+      }
+    }
+
+    pyroscope.write "grafana_cloud" {
+      endpoint {
+        url = sys.env("GRAFANA_CLOUD_PROFILES_URL")
+
+        basic_auth {
+          username = sys.env("GRAFANA_CLOUD_INSTANCE_ID")
+          password = sys.env("GRAFANA_CLOUD_API_KEY")
+        }
+      }
+
+      external_labels = {
+        cluster                = "ensemble-grafana",
+        deployment_environment = "production",
+      }
+    }
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: pyroscope-alloy
+  namespace: ensemble-observability
+spec:
+  selector:
+    matchLabels:
+      app: pyroscope-alloy
+  template:
+    metadata:
+      labels:
+        app: pyroscope-alloy
+    spec:
+      hostPID: true
+      serviceAccountName: alloy
+      nodeSelector:
+        ensemble-grafana/profiling: "enabled"
+      initContainers:
+        - name: prepare-pyroscope-tmp
+          image: busybox:1.36
+          command: ["sh", "-c", "mkdir -p /tmp/pyroscope && chmod 0755 /tmp/pyroscope"]
+          securityContext:
+            runAsUser: 0
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+      containers:
+        - name: alloy
+          image: grafana/alloy:v1.5.1
+          args: ["run", "--storage.path=/var/lib/alloy", "/etc/alloy/config.alloy"]
+          env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+          envFrom:
+            - secretRef:
+                name: grafana-cloud-secrets
+          securityContext:
+            privileged: true
+            runAsUser: 0
+          volumeMounts:
+            - name: config
+              mountPath: /etc/alloy
+            - name: alloy-storage
+              mountPath: /var/lib/alloy
+            - name: tmp
+              mountPath: /tmp
+          resources:
+            requests: { cpu: 50m, memory: 128Mi }
+            limits: { cpu: 300m, memory: 384Mi }
+      volumes:
+        - name: config
+          configMap:
+            name: pyroscope-alloy-config
+        - name: alloy-storage
+          emptyDir: {}
+        - name: tmp
+          emptyDir: {}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: alloy
+  namespace: ensemble-observability
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: beyla
+  namespace: ensemble-observability

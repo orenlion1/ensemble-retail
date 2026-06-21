@@ -1,0 +1,893 @@
+{
+  "targetDate": "2026-05-25",
+  "timezone": "America/New_York",
+  "matchRule": "incidentStart or incidentEnd falls on targetDate in America/New_York",
+  "scannedIncidentIDs": "1-107",
+  "count": 1,
+  "incidents": [
+    {
+      "id": "1",
+      "title": "Login to account fails",
+      "status": "resolved",
+      "state": "resolved",
+      "severity": "Sev-2: Significant Business Impact",
+      "start": "2026-05-25T14:00:00Z",
+      "startEastern": "05/25/2026, 10:00:00 AM EDT",
+      "end": "2026-05-25T14:30:00Z",
+      "endEastern": "05/25/2026, 10:30:00 AM EDT",
+      "createdTime": "2026-05-25T14:58:10.79067Z",
+      "createdEastern": "05/25/2026, 10:58:10 AM EDT",
+      "closedTime": "2026-05-25T15:05:00.833097Z",
+      "closedEastern": "05/25/2026, 11:05:00 AM EDT",
+      "modifiedTime": "2026-05-25T15:19:17.140222Z",
+      "modifiedEastern": "05/25/2026, 11:19:17 AM EDT",
+      "statusModifiedTime": "2026-05-25T15:05:00.833097Z",
+      "durationSeconds": 3900,
+      "isDrill": false,
+      "incidentType": "internal",
+      "slug": "login-to-account-fails",
+      "overviewURL": "/a/grafana-irm-app/incidents/1/login-to-account-fails",
+      "version": 19,
+      "labels": [
+        {
+          "key": "client_impact",
+          "label": "multiple-clients",
+          "keyUUID": "0b3102e0-2a8b-460b-bb67-5a0f678e9fc5",
+          "labelUUID": "0b431cab-c866-4368-9ff3-8e2fb610e019"
+        },
+        {
+          "key": "feature",
+          "label": "login",
+          "keyUUID": "d28b6d00-ff75-458d-aaa4-703f2ba51551",
+          "labelUUID": "235497b6-812a-44e3-bb48-f0d9b1ed7b44"
+        },
+        {
+          "key": "region",
+          "label": "US",
+          "keyUUID": "d54fc640-4a5b-4986-be76-0fcc5120a6de",
+          "labelUUID": "63bb4362-fb79-47d8-bed4-314ca8a1c818"
+        },
+        {
+          "key": "root_cause",
+          "label": "misconfiguration",
+          "keyUUID": "68a2e3f8-a841-41b6-a6a7-461d6244ad5b",
+          "labelUUID": "6679d39c-70ef-492f-94de-352fd9b35334"
+        },
+        {
+          "key": "service",
+          "label": "authentication",
+          "keyUUID": "711b9301-0a38-4e05-89cb-e7c4e83ae06b",
+          "labelUUID": "5e8dd7f1-0325-46fe-955f-9885ce1dedb0"
+        }
+      ],
+      "raw": {
+        "apiVersion": "incident.ext.grafana.app/v1alpha1",
+        "kind": "Incident",
+        "metadata": {
+          "name": "1",
+          "namespace": "stacks-1665320"
+        },
+        "spec": {
+          "closedTime": "2026-05-25T15:05:00.833097Z",
+          "createdByUser": {
+            "chatbotUserID": "",
+            "email": "",
+            "grafanaLogin": "sa-1-ensemble-grafana-irm-service-account",
+            "msTeamsUserID": "",
+            "name": "Service Account: ensemble-grafana-irm-service-account",
+            "photoURL": "https://www.gravatar.com/avatar/7b582bb427b4aa1da4ccda7e9b718dca?s=512&d=retro",
+            "slackUserID": "",
+            "userID": "grafana-incident:user-6a1462ae9cff307ebc5141cf"
+          },
+          "createdTime": "2026-05-25T14:58:10.79067Z",
+          "descriptionModifiedTime": "2026-05-25T14:58:10.79067Z",
+          "descriptionUser": {
+            "chatbotUserID": "",
+            "email": "",
+            "grafanaLogin": "sa-1-ensemble-grafana-irm-service-account",
+            "msTeamsUserID": "",
+            "name": "Service Account: ensemble-grafana-irm-service-account",
+            "photoURL": "https://www.gravatar.com/avatar/7b582bb427b4aa1da4ccda7e9b718dca?s=512&d=retro",
+            "slackUserID": "",
+            "userID": "grafana-incident:user-6a1462ae9cff307ebc5141cf"
+          },
+          "durationSeconds": 3900,
+          "fieldGroupUUID": "41c3a2c2-57d4-11f1-89fe-02899da3cbe9",
+          "fieldValues": [
+            {
+              "fieldUUID": "0b3102e0-2a8b-460b-bb67-5a0f678e9fc5",
+              "value": "[\"0b431cab-c866-4368-9ff3-8e2fb610e019\"]"
+            },
+            {
+              "fieldUUID": "41c3cdda-57d4-11f1-89fe-02899da3cbe9",
+              "value": "41c436dc-57d4-11f1-89fe-02899da3cbe9"
+            },
+            {
+              "fieldUUID": "41c3d552-57d4-11f1-89fe-02899da3cbe9",
+              "value": ""
+            },
+            {
+              "fieldUUID": "68a2e3f8-a841-41b6-a6a7-461d6244ad5b",
+              "value": "[\"6679d39c-70ef-492f-94de-352fd9b35334\"]"
+            },
+            {
+              "fieldUUID": "711b9301-0a38-4e05-89cb-e7c4e83ae06b",
+              "value": "[\"5e8dd7f1-0325-46fe-955f-9885ce1dedb0\"]"
+            },
+            {
+              "fieldUUID": "d28b6d00-ff75-458d-aaa4-703f2ba51551",
+              "value": "[\"235497b6-812a-44e3-bb48-f0d9b1ed7b44\"]"
+            },
+            {
+              "fieldUUID": "d54fc640-4a5b-4986-be76-0fcc5120a6de",
+              "value": "[\"63bb4362-fb79-47d8-bed4-314ca8a1c818\"]"
+            }
+          ],
+          "incidentChannels": [
+            {
+              "channelID": "C0B60R7DUQJ",
+              "provider": "slack",
+              "teamID": "T0B5TT6BJQK"
+            }
+          ],
+          "incidentEnd": "2026-05-25T14:30:00Z",
+          "incidentHookRuns": {
+            "hookRuns": [
+              {
+                "enabledHookID": "enabled-hook-6a139dbab4d8196e3a9d94da",
+                "error": "",
+                "eventKind": "",
+                "eventName": "incidentCreated",
+                "hookID": "grate.irm.webhook",
+                "integrationID": "grate.irm.webhook",
+                "lastRun": "2026-05-25T14:58:12.399761Z",
+                "lastUpdate": "",
+                "metadata": {
+                  "explanation": "",
+                  "fields": [
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "incidentID",
+                      "secret": false,
+                      "type": "string",
+                      "value": "1"
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "orgID",
+                      "secret": false,
+                      "type": "string",
+                      "value": "1665320"
+                    }
+                  ],
+                  "title": "Login to account fails",
+                  "url": ""
+                },
+                "status": "success",
+                "updateError": "",
+                "updateStatus": "todo"
+              },
+              {
+                "enabledHookID": "enabled-hook-6a139dbaea64d095703a5f1b",
+                "error": "",
+                "eventKind": "addedLabel",
+                "eventName": "incidentUpdated",
+                "hookID": "grate.irm.webhook",
+                "integrationID": "grate.irm.webhook",
+                "lastRun": "2026-05-25T15:19:17.067905Z",
+                "lastUpdate": "",
+                "metadata": {
+                  "explanation": "",
+                  "fields": [
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "incidentID",
+                      "secret": false,
+                      "type": "string",
+                      "value": "1"
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "orgID",
+                      "secret": false,
+                      "type": "string",
+                      "value": "1665320"
+                    }
+                  ],
+                  "title": "Login to account fails",
+                  "url": ""
+                },
+                "status": "success",
+                "updateError": "",
+                "updateStatus": "todo"
+              },
+              {
+                "enabledHookID": "enabled-hook-6a144a42217b7a5c9db1e430",
+                "error": "",
+                "eventKind": "",
+                "eventName": "incidentCreated",
+                "hookID": "grate.irm.slack.createChannel",
+                "integrationID": "grate.irm.slack",
+                "lastRun": "2026-05-25T14:58:12.034206Z",
+                "lastUpdate": "",
+                "metadata": {
+                  "explanation": "",
+                  "fields": [
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "input.channelNameTemplate",
+                      "secret": false,
+                      "type": "string",
+                      "value": "{{ prefix }}-{{ date }}-{{ title }}"
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "input.incidentPrefix",
+                      "secret": false,
+                      "type": "string",
+                      "value": "incident"
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "input.incidentDate",
+                      "secret": false,
+                      "type": "string",
+                      "value": "2026-05-25"
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "input.incidentSlug",
+                      "secret": false,
+                      "type": "string",
+                      "value": "login-to-account-fails"
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "input.userEmail",
+                      "secret": false,
+                      "type": "string",
+                      "value": ""
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "input.bookmarks",
+                      "secret": false,
+                      "type": "string",
+                      "value": "[{\"Title\":\"Show in Grafana IRM\",\"URL\":\"https://orenlion.grafana.net/a/grafana-irm-app/incidents/1\"}]"
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "input.announcementChannelIDs",
+                      "secret": false,
+                      "type": "string",
+                      "value": "[\"C0B5TTYNH6X\"]"
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "incidentType",
+                      "secret": false,
+                      "type": "string",
+                      "value": "internal"
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "input.orgID",
+                      "secret": false,
+                      "type": "string",
+                      "value": "1665320"
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "input.incidentID",
+                      "secret": false,
+                      "type": "string",
+                      "value": "1"
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "welcomeMessageID",
+                      "secret": false,
+                      "type": "string",
+                      "value": "C0B60R7DUQJ"
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "channelID",
+                      "secret": false,
+                      "type": "string",
+                      "value": "C0B60R7DUQJ"
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "channelNameTemplate",
+                      "secret": false,
+                      "type": "string",
+                      "value": "{{ prefix }}-{{ date }}-{{ title }}"
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "channelName",
+                      "secret": false,
+                      "type": "string",
+                      "value": "incident-2026-05-25-login-to-account-fails"
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "oldName",
+                      "secret": false,
+                      "type": "string",
+                      "value": "incident-2026-05-25-login-to-account-fails"
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "bookmarks",
+                      "secret": false,
+                      "type": "string",
+                      "value": "[{\"Title\":\"Show in Grafana IRM\",\"URL\":\"https://orenlion.grafana.net/a/grafana-irm-app/incidents/1\"}]"
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "isChannelArchived",
+                      "secret": false,
+                      "type": "string",
+                      "value": "false"
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "channelPermalink",
+                      "secret": false,
+                      "type": "string",
+                      "value": ""
+                    }
+                  ],
+                  "title": "#incident-2026-05-25-login-to-account-fails",
+                  "url": "https://slack.com/app_redirect?channel=C0B60R7DUQJ&team=T0B5TT6BJQK"
+                },
+                "status": "success",
+                "updateError": "",
+                "updateStatus": "todo"
+              },
+              {
+                "enabledHookID": "enabled-hook-6a144a8f7c805fa4912d3af1",
+                "error": "",
+                "eventKind": "",
+                "eventName": "incidentCreated",
+                "hookID": "grate.irm.slack.announceIncident",
+                "integrationID": "grate.irm.slack",
+                "lastRun": "2026-05-25T14:58:12.24129Z",
+                "lastUpdate": "2026-05-25T15:19:17.128039Z",
+                "metadata": {
+                  "explanation": "",
+                  "fields": [
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "input.incidentID",
+                      "secret": false,
+                      "type": "string",
+                      "value": "1"
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "input.incidentURL",
+                      "secret": false,
+                      "type": "string",
+                      "value": "https://orenlion.grafana.net/a/grafana-irm-app/incidents/1"
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "input.channelCreated",
+                      "secret": false,
+                      "type": "string",
+                      "value": "#incident-2026-05-25-login-to-account-fails"
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "input.channelCreatedId",
+                      "secret": false,
+                      "type": "string",
+                      "value": "C0B60R7DUQJ"
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "input.type",
+                      "secret": false,
+                      "type": "string",
+                      "value": "nondrill"
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "input.message",
+                      "secret": false,
+                      "type": "string",
+                      "value": "Incident \"Login to account fails\"\n#incident-2026-05-25-login-to-account-fails\nhttps://orenlion.grafana.net/a/grafana-irm-app/incidents/1"
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "input.rolesHash",
+                      "secret": false,
+                      "type": "string",
+                      "value": "d41d8cd98f00b204e9800998ecf8427e"
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "input.status",
+                      "secret": false,
+                      "type": "string",
+                      "value": "resolved"
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "incidentType",
+                      "secret": false,
+                      "type": "string",
+                      "value": "internal"
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "input.severity",
+                      "secret": false,
+                      "type": "string",
+                      "value": "Sev-2: Significant Business Impact"
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "input.channelPermalink",
+                      "secret": false,
+                      "type": "string",
+                      "value": ""
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "channelID",
+                      "secret": false,
+                      "type": "string",
+                      "value": "C0B5TTYNH6X"
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "messageID",
+                      "secret": false,
+                      "type": "string",
+                      "value": "1779721092.166289"
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "type",
+                      "secret": false,
+                      "type": "string",
+                      "value": "nondrill"
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "rolesHash",
+                      "secret": false,
+                      "type": "string",
+                      "value": "d41d8cd98f00b204e9800998ecf8427e"
+                    },
+                    {
+                      "checked": false,
+                      "description": "",
+                      "hidden": false,
+                      "key": "incidentVersion",
+                      "secret": false,
+                      "type": "string",
+                      "value": "21"
+                    }
+                  ],
+                  "title": "Login to account fails",
+                  "url": ""
+                },
+                "status": "success",
+                "updateError": "",
+                "updateStatus": "success"
+              }
+            ]
+          },
+          "incidentMembership": {
+            "assignments": [
+              {
+                "role": {
+                  "archived": false,
+                  "createdAt": "",
+                  "description": "",
+                  "hidden": false,
+                  "important": false,
+                  "mandatory": false,
+                  "name": "",
+                  "orgID": "",
+                  "roleID": 0,
+                  "updatedAt": ""
+                },
+                "roleID": 0,
+                "user": {
+                  "chatbotUserID": "",
+                  "email": "",
+                  "grafanaLogin": "",
+                  "msTeamsUserID": "",
+                  "name": "",
+                  "photoURL": "",
+                  "slackUserID": "",
+                  "userID": ""
+                }
+              },
+              {
+                "role": {
+                  "archived": false,
+                  "createdAt": "",
+                  "description": "",
+                  "hidden": false,
+                  "important": false,
+                  "mandatory": false,
+                  "name": "",
+                  "orgID": "",
+                  "roleID": 0,
+                  "updatedAt": ""
+                },
+                "roleID": 0,
+                "user": {
+                  "chatbotUserID": "",
+                  "email": "",
+                  "grafanaLogin": "",
+                  "msTeamsUserID": "",
+                  "name": "",
+                  "photoURL": "",
+                  "slackUserID": "",
+                  "userID": ""
+                }
+              },
+              {
+                "role": {
+                  "archived": false,
+                  "createdAt": "",
+                  "description": "",
+                  "hidden": false,
+                  "important": false,
+                  "mandatory": false,
+                  "name": "",
+                  "orgID": "",
+                  "roleID": 0,
+                  "updatedAt": ""
+                },
+                "roleID": 0,
+                "user": {
+                  "chatbotUserID": "",
+                  "email": "",
+                  "grafanaLogin": "",
+                  "msTeamsUserID": "",
+                  "name": "",
+                  "photoURL": "",
+                  "slackUserID": "",
+                  "userID": ""
+                }
+              },
+              {
+                "role": {
+                  "archived": false,
+                  "createdAt": "",
+                  "description": "",
+                  "hidden": false,
+                  "important": false,
+                  "mandatory": false,
+                  "name": "",
+                  "orgID": "",
+                  "roleID": 0,
+                  "updatedAt": ""
+                },
+                "roleID": 0,
+                "user": {
+                  "chatbotUserID": "",
+                  "email": "",
+                  "grafanaLogin": "",
+                  "msTeamsUserID": "",
+                  "name": "",
+                  "photoURL": "",
+                  "slackUserID": "",
+                  "userID": ""
+                }
+              },
+              {
+                "role": {
+                  "archived": false,
+                  "createdAt": "",
+                  "description": "",
+                  "hidden": false,
+                  "important": false,
+                  "mandatory": false,
+                  "name": "",
+                  "orgID": "",
+                  "roleID": 0,
+                  "updatedAt": ""
+                },
+                "roleID": 0,
+                "user": {
+                  "chatbotUserID": "",
+                  "email": "",
+                  "grafanaLogin": "",
+                  "msTeamsUserID": "",
+                  "name": "",
+                  "photoURL": "",
+                  "slackUserID": "",
+                  "userID": ""
+                }
+              },
+              {
+                "role": {
+                  "archived": false,
+                  "createdAt": "",
+                  "description": "",
+                  "hidden": false,
+                  "important": false,
+                  "mandatory": false,
+                  "name": "",
+                  "orgID": "",
+                  "roleID": 0,
+                  "updatedAt": ""
+                },
+                "roleID": 0,
+                "user": {
+                  "chatbotUserID": "",
+                  "email": "",
+                  "grafanaLogin": "",
+                  "msTeamsUserID": "",
+                  "name": "",
+                  "photoURL": "",
+                  "slackUserID": "",
+                  "userID": ""
+                }
+              },
+              {
+                "role": {
+                  "archived": false,
+                  "createdAt": "",
+                  "description": "",
+                  "hidden": false,
+                  "important": false,
+                  "mandatory": false,
+                  "name": "",
+                  "orgID": "",
+                  "roleID": 0,
+                  "updatedAt": ""
+                },
+                "roleID": 0,
+                "user": {
+                  "chatbotUserID": "",
+                  "email": "",
+                  "grafanaLogin": "",
+                  "msTeamsUserID": "",
+                  "name": "",
+                  "photoURL": "",
+                  "slackUserID": "",
+                  "userID": ""
+                }
+              },
+              {
+                "role": {
+                  "archived": false,
+                  "createdAt": "",
+                  "description": "",
+                  "hidden": false,
+                  "important": false,
+                  "mandatory": false,
+                  "name": "",
+                  "orgID": "",
+                  "roleID": 0,
+                  "updatedAt": ""
+                },
+                "roleID": 0,
+                "user": {
+                  "chatbotUserID": "",
+                  "email": "",
+                  "grafanaLogin": "",
+                  "msTeamsUserID": "",
+                  "name": "",
+                  "photoURL": "",
+                  "slackUserID": "",
+                  "userID": ""
+                }
+              },
+              {
+                "role": {
+                  "archived": false,
+                  "createdAt": "",
+                  "description": "",
+                  "hidden": false,
+                  "important": false,
+                  "mandatory": false,
+                  "name": "",
+                  "orgID": "",
+                  "roleID": 0,
+                  "updatedAt": ""
+                },
+                "roleID": 0,
+                "user": {
+                  "chatbotUserID": "",
+                  "email": "",
+                  "grafanaLogin": "",
+                  "msTeamsUserID": "",
+                  "name": "",
+                  "photoURL": "",
+                  "slackUserID": "",
+                  "userID": ""
+                }
+              },
+              {
+                "role": {
+                  "archived": false,
+                  "createdAt": "",
+                  "description": "",
+                  "hidden": false,
+                  "important": false,
+                  "mandatory": false,
+                  "name": "",
+                  "orgID": "",
+                  "roleID": 0,
+                  "updatedAt": ""
+                },
+                "roleID": 0,
+                "user": {
+                  "chatbotUserID": "",
+                  "email": "",
+                  "grafanaLogin": "",
+                  "msTeamsUserID": "",
+                  "name": "",
+                  "photoURL": "",
+                  "slackUserID": "",
+                  "userID": ""
+                }
+              }
+            ],
+            "totalAssignments": 0,
+            "totalParticipants": 0
+          },
+          "incidentStart": "2026-05-25T14:00:00Z",
+          "incidentType": "internal",
+          "isDrill": false,
+          "labels": [
+            {
+              "colorHex": "#E0226E",
+              "description": "Multiple clients or shoppers are affected",
+              "key": "client_impact",
+              "keyUUID": "0b3102e0-2a8b-460b-bb67-5a0f678e9fc5",
+              "label": "multiple-clients",
+              "labelUUID": "0b431cab-c866-4368-9ff3-8e2fb610e019"
+            },
+            {
+              "colorHex": "#3871DC",
+              "description": "Imported from Uptime SLA & RCA dashboard transformations",
+              "key": "feature",
+              "keyUUID": "d28b6d00-ff75-458d-aaa4-703f2ba51551",
+              "label": "login",
+              "labelUUID": "235497b6-812a-44e3-bb48-f0d9b1ed7b44"
+            },
+            {
+              "colorHex": "#1B855E",
+              "description": "United States",
+              "key": "region",
+              "keyUUID": "d54fc640-4a5b-4986-be76-0fcc5120a6de",
+              "label": "US",
+              "labelUUID": "63bb4362-fb79-47d8-bed4-314ca8a1c818"
+            },
+            {
+              "colorHex": "#F79009",
+              "description": "Configuration or federation settings caused the incident",
+              "key": "root_cause",
+              "keyUUID": "68a2e3f8-a841-41b6-a6a7-461d6244ad5b",
+              "label": "misconfiguration",
+              "labelUUID": "6679d39c-70ef-492f-94de-352fd9b35334"
+            },
+            {
+              "colorHex": "#7A5AF8",
+              "description": "Authentication and identity provider integration",
+              "key": "service",
+              "keyUUID": "711b9301-0a38-4e05-89cb-e7c4e83ae06b",
+              "label": "authentication",
+              "labelUUID": "5e8dd7f1-0325-46fe-955f-9885ce1dedb0"
+            }
+          ],
+          "modifiedTime": "2026-05-25T15:19:17.140222Z",
+          "overviewURL": "/a/grafana-irm-app/incidents/1/login-to-account-fails",
+          "prefix": "incident",
+          "severity": "Sev-2: Significant Business Impact",
+          "severityID": "41c54036-57d4-11f1-89fe-02899da3cbe9",
+          "slug": "login-to-account-fails",
+          "state": "resolved",
+          "status": "resolved",
+          "statusID": "019e5ca0-1c09-750e-8f86-cc3547e06811",
+          "statusModifiedByUser": {
+            "chatbotUserID": "",
+            "email": "",
+            "grafanaLogin": "sa-1-ensemble-grafana-irm-service-account",
+            "msTeamsUserID": "",
+            "name": "Service Account: ensemble-grafana-irm-service-account",
+            "photoURL": "https://www.gravatar.com/avatar/7b582bb427b4aa1da4ccda7e9b718dca?s=512&d=retro",
+            "slackUserID": "",
+            "userID": "grafana-incident:user-6a1462ae9cff307ebc5141cf"
+          },
+          "statusModifiedTime": "2026-05-25T15:05:00.833097Z",
+          "taskList": {
+            "doneCount": 0,
+            "tasks": [],
+            "todoCount": 0,
+            "totalCount": 0
+          },
+          "title": "Login to account fails",
+          "version": 19
+        }
+      }
+    }
+  ]
+}

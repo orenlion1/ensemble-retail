@@ -1,0 +1,164 @@
+{
+  "status": "success",
+  "data": {
+    "resultType": "streams",
+    "result": [
+      {
+        "stream": {
+          "cluster": "ensemble-grafana",
+          "detected_level": "error",
+          "instance": "ip-10-42-101-208.ec2.internal",
+          "job": "integrations/kubernetes/journal",
+          "k8s_cluster_name": "ensemble-grafana",
+          "level": "ERROR",
+          "service_name": "kubelet.service",
+          "source": "journal",
+          "unit": "kubelet.service"
+        },
+        "values": [
+          [
+            "1780238646508372000",
+            "E0531 14:44:06.508319    2212 log.go:32] \"ContainerStatus from runtime service failed\" err=\"rpc error: code = NotFound desc = an error occurred when try to find container \\\"5e3f368171f47a43262b9a64abfc7e453856169aa43dfa409f862a314312e44c\\\": not found\" containerID=\"5e3f368171f47a43262b9a64abfc7e453856169aa43dfa409f862a314312e44c\""
+          ],
+          [
+            "1780238646507748000",
+            "E0531 14:44:06.507703    2212 log.go:32] \"ContainerStatus from runtime service failed\" err=\"rpc error: code = NotFound desc = an error occurred when try to find container \\\"814c9548a6304d4d28c8f5adfeaec08d10ee32cc02a08885f034540edf5333f4\\\": not found\" containerID=\"814c9548a6304d4d28c8f5adfeaec08d10ee32cc02a08885f034540edf5333f4\""
+          ],
+          [
+            "1780224255133184000",
+            "E0531 10:44:15.133147    2212 log.go:32] \"ContainerStatus from runtime service failed\" err=\"rpc error: code = NotFound desc = an error occurred when try to find container \\\"93685acc95b7511645299124f91e846fbad9cb03438fc709103679803b6ba2cb\\\": not found\" containerID=\"93685acc95b7511645299124f91e846fbad9cb03438fc709103679803b6ba2cb\""
+          ]
+        ]
+      },
+      {
+        "stream": {
+          "cluster": "ensemble-grafana",
+          "detected_level": "info",
+          "instance": "ip-10-42-101-208.ec2.internal",
+          "job": "integrations/kubernetes/journal",
+          "k8s_cluster_name": "ensemble-grafana",
+          "level": "INFO",
+          "service_name": "kubelet.service",
+          "source": "journal",
+          "unit": "kubelet.service"
+        },
+        "values": [
+          [
+            "1780238646508372000",
+            "I0531 14:44:06.508345    2212 pod_container_deletor.go:53] \"DeleteContainer returned error\" containerID={\"Type\":\"containerd\",\"ID\":\"5e3f368171f47a43262b9a64abfc7e453856169aa43dfa409f862a314312e44c\"} err=\"failed to get container status \\\"5e3f368171f47a43262b9a64abfc7e453856169aa43dfa409f862a314312e44c\\\": rpc error: code = NotFound desc = an error occurred when try to find container \\\"5e3f368171f47a43262b9a64abfc7e453856169aa43dfa409f862a314312e44c\\\": not found\""
+          ],
+          [
+            "1780238646507866000",
+            "I0531 14:44:06.507743    2212 pod_container_deletor.go:53] \"DeleteContainer returned error\" containerID={\"Type\":\"containerd\",\"ID\":\"814c9548a6304d4d28c8f5adfeaec08d10ee32cc02a08885f034540edf5333f4\"} err=\"failed to get container status \\\"814c9548a6304d4d28c8f5adfeaec08d10ee32cc02a08885f034540edf5333f4\\\": rpc error: code = NotFound desc = an error occurred when try to find container \\\"814c9548a6304d4d28c8f5adfeaec08d10ee32cc02a08885f034540edf5333f4\\\": not found\""
+          ],
+          [
+            "1780225089601586000",
+            "I0531 10:58:09.601172    2212 prober.go:122] \"Probe failed\" probeType=\"Readiness\" pod=\"ensemble-grafana/inventory-service-77c95f9b47-cbft7\" podUID=\"7ec84baf-d4ff-4aac-bb54-05ff31449616\" containerName=\"inventory-service\" probeResult=\"failure\" output=\"Get \\\"http://10.42.101.115:8081/actuator/health/readiness\\\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)\""
+          ],
+          [
+            "1780225084317895000",
+            "I0531 10:58:04.317821    2212 prober.go:122] \"Probe failed\" probeType=\"Liveness\" pod=\"ensemble-grafana/inventory-service-77c95f9b47-cbft7\" podUID=\"7ec84baf-d4ff-4aac-bb54-05ff31449616\" containerName=\"inventory-service\" probeResult=\"failure\" output=\"Get \\\"http://10.42.101.115:8081/actuator/health/liveness\\\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)\""
+          ],
+          [
+            "1780225069611467000",
+            "I0531 10:57:49.611020    2212 prober.go:122] \"Probe failed\" probeType=\"Readiness\" pod=\"ensemble-grafana/inventory-service-77c95f9b47-cbft7\" podUID=\"7ec84baf-d4ff-4aac-bb54-05ff31449616\" containerName=\"inventory-service\" probeResult=\"failure\" output=\"Get \\\"http://10.42.101.115:8081/actuator/health/readiness\\\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)\""
+          ],
+          [
+            "1780225064361289000",
+            "I0531 10:57:44.361227    2212 prober.go:122] \"Probe failed\" probeType=\"Liveness\" pod=\"ensemble-grafana/inventory-service-77c95f9b47-cbft7\" podUID=\"7ec84baf-d4ff-4aac-bb54-05ff31449616\" containerName=\"inventory-service\" probeResult=\"failure\" output=\"Get \\\"http://10.42.101.115:8081/actuator/health/liveness\\\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)\""
+          ],
+          [
+            "1780225059601204000",
+            "I0531 10:57:39.601148    2212 prober.go:122] \"Probe failed\" probeType=\"Readiness\" pod=\"ensemble-grafana/inventory-service-77c95f9b47-cbft7\" podUID=\"7ec84baf-d4ff-4aac-bb54-05ff31449616\" containerName=\"inventory-service\" probeResult=\"failure\" output=\"Get \\\"http://10.42.101.115:8081/actuator/health/readiness\\\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)\""
+          ],
+          [
+            "1780225058541703000",
+            "I0531 10:57:38.541183    2212 prober.go:122] \"Probe failed\" probeType=\"Readiness\" pod=\"ensemble-grafana/inventory-service-77c95f9b47-cbft7\" podUID=\"7ec84baf-d4ff-4aac-bb54-05ff31449616\" containerName=\"inventory-service\" probeResult=\"failure\" output=\"Get \\\"http://10.42.101.115:8081/actuator/health/readiness\\\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)\""
+          ],
+          [
+            "1780225048541122000",
+            "I0531 10:57:28.541043    2212 prober.go:122] \"Probe failed\" probeType=\"Readiness\" pod=\"ensemble-grafana/inventory-service-77c95f9b47-cbft7\" podUID=\"7ec84baf-d4ff-4aac-bb54-05ff31449616\" containerName=\"inventory-service\" probeResult=\"failure\" output=\"Get \\\"http://10.42.101.115:8081/actuator/health/readiness\\\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)\""
+          ],
+          [
+            "1780225038551675000",
+            "I0531 10:57:18.551082    2212 prober.go:122] \"Probe failed\" probeType=\"Readiness\" pod=\"ensemble-grafana/inventory-service-77c95f9b47-cbft7\" podUID=\"7ec84baf-d4ff-4aac-bb54-05ff31449616\" containerName=\"inventory-service\" probeResult=\"failure\" output=\"Get \\\"http://10.42.101.115:8081/actuator/health/readiness\\\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)\""
+          ],
+          [
+            "1780225026831124000",
+            "I0531 10:57:06.831059    2212 prober.go:122] \"Probe failed\" probeType=\"Readiness\" pod=\"ensemble-grafana/inventory-service-77c95f9b47-cbft7\" podUID=\"7ec84baf-d4ff-4aac-bb54-05ff31449616\" containerName=\"inventory-service\" probeResult=\"failure\" output=\"Get \\\"http://10.42.101.115:8081/actuator/health/readiness\\\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)\""
+          ],
+          [
+            "1780224255133303000",
+            "I0531 10:44:15.133187    2212 pod_container_deletor.go:53] \"DeleteContainer returned error\" containerID={\"Type\":\"containerd\",\"ID\":\"93685acc95b7511645299124f91e846fbad9cb03438fc709103679803b6ba2cb\"} err=\"failed to get container status \\\"93685acc95b7511645299124f91e846fbad9cb03438fc709103679803b6ba2cb\\\": rpc error: code = NotFound desc = an error occurred when try to find container \\\"93685acc95b7511645299124f91e846fbad9cb03438fc709103679803b6ba2cb\\\": not found\""
+          ]
+        ]
+      },
+      {
+        "stream": {
+          "cluster": "ensemble-grafana",
+          "detected_level": "error",
+          "instance": "ip-10-42-100-133.ec2.internal",
+          "job": "integrations/kubernetes/journal",
+          "k8s_cluster_name": "ensemble-grafana",
+          "level": "ERROR",
+          "service_name": "kubelet.service",
+          "source": "journal",
+          "unit": "kubelet.service"
+        },
+        "values": [
+          [
+            "1780224254472415000",
+            "E0531 10:44:14.472388    2213 log.go:32] \"ContainerStatus from runtime service failed\" err=\"rpc error: code = NotFound desc = an error occurred when try to find container \\\"1caf2f2ffdaf0b01858a9a904b0af77eede50cd6a144e818c59e2823658b04e0\\\": not found\" containerID=\"1caf2f2ffdaf0b01858a9a904b0af77eede50cd6a144e818c59e2823658b04e0\""
+          ]
+        ]
+      },
+      {
+        "stream": {
+          "cluster": "ensemble-grafana",
+          "detected_level": "info",
+          "instance": "ip-10-42-100-133.ec2.internal",
+          "job": "integrations/kubernetes/journal",
+          "k8s_cluster_name": "ensemble-grafana",
+          "level": "INFO",
+          "service_name": "kubelet.service",
+          "source": "journal",
+          "unit": "kubelet.service"
+        },
+        "values": [
+          [
+            "1780224254472553000",
+            "I0531 10:44:14.472432    2213 pod_container_deletor.go:53] \"DeleteContainer returned error\" containerID={\"Type\":\"containerd\",\"ID\":\"1caf2f2ffdaf0b01858a9a904b0af77eede50cd6a144e818c59e2823658b04e0\"} err=\"failed to get container status \\\"1caf2f2ffdaf0b01858a9a904b0af77eede50cd6a144e818c59e2823658b04e0\\\": rpc error: code = NotFound desc = an error occurred when try to find container \\\"1caf2f2ffdaf0b01858a9a904b0af77eede50cd6a144e818c59e2823658b04e0\\\": not found\""
+          ]
+        ]
+      },
+      {
+        "stream": {
+          "cluster": "ensemble-grafana",
+          "detected_level": "info",
+          "instance": "ip-10-42-101-134.ec2.internal",
+          "job": "integrations/kubernetes/journal",
+          "k8s_cluster_name": "ensemble-grafana",
+          "level": "INFO",
+          "service_name": "kubelet.service",
+          "source": "journal",
+          "unit": "kubelet.service"
+        },
+        "values": [
+          [
+            "1780224253842070000",
+            "I0531 10:44:13.842025    2208 prober.go:122] \"Probe failed\" probeType=\"Readiness\" pod=\"ensemble-grafana/inventory-service-77c95f9b47-2mfc8\" podUID=\"d4e220dd-b28a-471f-aea5-8bc73ebe0995\" containerName=\"inventory-service\" probeResult=\"failure\" output=\"Get \\\"http://10.42.101.24:8081/actuator/health/readiness\\\": dial tcp 10.42.101.24:8081: connect: connection refused\""
+          ]
+        ]
+      }
+    ],
+    "stats": {
+      "summary": {
+        "bytesProcessedPerSecond": 4662711,
+        "linesProcessedPerSecond": 15573,
+        "totalBytesProcessed": 61379,
+        "totalLinesProcessed": 205,
+        "execTime": 0.013164
+      }
+    }
+  }
+}

@@ -1,0 +1,87 @@
+digraph request_flow_diagram {
+  rankdir=LR;
+  label="Browser Request Flow Through Backend Services";
+
+  graph [
+    fontname="Helvetica",
+    fontsize=20,
+    labelloc=t,
+    bgcolor="#0b1220",
+    fontcolor="#f8fafc",
+    pad=0.25,
+    nodesep=0.45,
+    ranksep=0.7
+  ];
+  node [
+    shape=box,
+    style="rounded,filled",
+    fontname="Helvetica",
+    fontsize=11,
+    color="#64748b",
+    fillcolor="#111827",
+    fontcolor="#f8fafc",
+    margin="0.12,0.08"
+  ];
+  edge [
+    fontname="Helvetica",
+    fontsize=9,
+    color="#94a3b8",
+    fontcolor="#f8fafc",
+    arrowsize=0.7
+  ];
+
+
+  browser [label="Browser\nensemble-grafana.com", fillcolor="#1e3a8a"];
+  dns [label="Route53\nA/AAAA alias", fillcolor="#164e63"];
+  wafEdge [label="AWS WAF\nedge rules", fillcolor="#7f1d1d"];
+  cf [label="CloudFront\nHTTPS + static/API routing", fillcolor="#1e3a8a"];
+  apiPath [label="/api/* ?", shape=diamond, fillcolor="#7c2d12"];
+  s3 [label="S3 frontend origin\nindex.html, JS, CSS", fillcolor="#713f12"];
+  cognito [label="Cognito Hosted UI\nGoogle federation", fillcolor="#4c1d95"];
+  google [label="Google IdP", fillcolor="#4c1d95"];
+  localState [label="Browser localStorage\nanonymous cart/account", fillcolor="#0f172a"];
+  apiWaf [label="AWS WAF\nregional API rules", fillcolor="#7f1d1d"];
+  ingress [label="EKS API ingress / ALB", fillcolor="#3730a3"];
+  k6 [label="Grafana Cloud k6\nregional, spike,\n100 rps baseline,\nbrowser checks", fillcolor="#6b21a8"];
+  grafana [label="Grafana Cloud\nresults and telemetry", fillcolor="#6b21a8"];
+
+  inventory [label="inventory-service\n/api/inventory/*", fillcolor="#14532d"];
+  cart [label="cart-service\n/api/cart/*", fillcolor="#14532d"];
+  account [label="account-service\n/api/account/*", fillcolor="#14532d"];
+  postgres [label="Postgres\ninventory catalog", shape=cylinder, fillcolor="#166534"];
+  dynamoCart [label="DynamoDB\ncart state", shape=cylinder, fillcolor="#166534"];
+  dynamoAccount [label="DynamoDB\naccount, address, wallet metadata", shape=cylinder, fillcolor="#166534"];
+
+  browser -> dns [label="DNS lookup"];
+  dns -> browser [label="CloudFront target"];
+  browser -> wafEdge [label="HTTPS request"];
+  browser -> cognito [label="OAuth code + PKCE"];
+  cognito -> google [label="Google authentication"];
+  google -> cognito [label="identity claims"];
+  cognito -> browser [label="Cognito JWTs"];
+  browser -> localState [label="anonymous writes"];
+  localState -> browser [label="restore local state"];
+  k6 -> wafEdge [label="Synthetic load\n100 rps baseline\nHTTPS + /api/*\nwith traceparent"];
+  wafEdge -> cf;
+  cf -> apiPath;
+  apiPath -> s3 [label="No: static route"];
+  s3 -> cf [label="HTML/assets"];
+  cf -> browser [label="Storefront response"];
+
+  apiPath -> apiWaf [label="Yes: /api/*\nBearer JWT or API key"];
+  apiWaf -> ingress;
+  ingress -> inventory [label="/api/inventory/*"];
+  ingress -> cart [label="/api/cart/*"];
+  ingress -> account [label="/api/account/*"];
+  inventory -> postgres [label="Read products, categories, stock, pricing"];
+  postgres -> inventory;
+  cart -> dynamoCart [label="Read/write cart items"];
+  dynamoCart -> cart;
+  account -> dynamoAccount [label="Read/write profile, shipping, wallet"];
+  dynamoAccount -> account;
+  inventory -> ingress [label="JSON response"];
+  cart -> ingress [label="JSON response"];
+  account -> ingress [label="JSON response"];
+  ingress -> apiWaf -> cf -> browser;
+  k6 -> grafana [label="k6 result metrics\nand trace correlation"];
+}

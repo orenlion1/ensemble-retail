@@ -1,0 +1,26 @@
+apiVersion: syntheticmonitoring.ext.grafana.app/v1alpha1
+kind: Check
+metadata:
+  name: "ensemble-grafana-api-response-time-2494"
+spec:
+  job: ensemble-grafana-api-response-time
+  target: https://ensemble-grafana.com/api/inventory/products
+  frequency: 60000
+  timeout: 5000
+  enabled: true
+  labels:
+    - name: environment
+      value: production
+    - name: service
+      value: inventory-api
+    - name: check_type
+      value: response_time
+  probes:
+    - Oregon
+    - Montreal
+    - London
+  alertSensitivity: none
+  basicMetricsOnly: false
+  settings:
+    http:
+      method: GET

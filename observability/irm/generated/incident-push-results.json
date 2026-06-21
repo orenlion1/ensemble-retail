@@ -1,0 +1,749 @@
+[
+  {
+    "sequence": 1,
+    "type": "holiday",
+    "date": "2025-01-01",
+    "title": "Holiday traffic spike - New Year's Day 2025",
+    "id": "42",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-01-01T14:00:00Z",
+    "end": "2025-01-01T14:30:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "feature": "shopping-cart-checkout",
+      "impact_type": "availability",
+      "region": "US",
+      "root_cause": "Scaling-Defect-Service",
+      "service": "cart"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 2,
+    "type": "holiday",
+    "date": "2025-01-20",
+    "title": "Holiday traffic spike - Martin Luther King Jr. Day 2025",
+    "id": "43",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-01-20T14:00:00Z",
+    "end": "2025-01-20T14:30:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "feature": "shopping-cart-checkout",
+      "impact_type": "availability",
+      "region": "US",
+      "root_cause": "Scaling-Defect-Service",
+      "service": "cart"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 3,
+    "type": "holiday",
+    "date": "2025-02-17",
+    "title": "Holiday traffic spike - Washington's Birthday 2025",
+    "id": "44",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-02-17T14:00:00Z",
+    "end": "2025-02-17T14:30:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "feature": "shopping-cart-checkout",
+      "impact_type": "availability",
+      "region": "US",
+      "root_cause": "Scaling-Defect-Service",
+      "service": "cart"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 4,
+    "type": "holiday",
+    "date": "2025-05-26",
+    "title": "Holiday traffic spike - Memorial Day 2025",
+    "id": "45",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-05-26T14:00:00Z",
+    "end": "2025-05-26T14:30:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "feature": "shopping-cart-checkout",
+      "impact_type": "availability",
+      "region": "US",
+      "root_cause": "Scaling-Defect-Service",
+      "service": "cart"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 5,
+    "type": "holiday",
+    "date": "2025-06-19",
+    "title": "Holiday traffic spike - Juneteenth National Independence Day 2025",
+    "id": "46",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-06-19T14:00:00Z",
+    "end": "2025-06-19T14:30:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "feature": "shopping-cart-checkout",
+      "impact_type": "availability",
+      "region": "US",
+      "root_cause": "Scaling-Defect-Service",
+      "service": "cart"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 6,
+    "type": "holiday",
+    "date": "2025-07-04",
+    "title": "Holiday traffic spike - Independence Day 2025",
+    "id": "47",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-07-04T14:00:00Z",
+    "end": "2025-07-04T14:30:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "feature": "shopping-cart-checkout",
+      "impact_type": "availability",
+      "region": "US",
+      "root_cause": "Scaling-Defect-Service",
+      "service": "cart"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 7,
+    "type": "holiday",
+    "date": "2025-09-01",
+    "title": "Holiday traffic spike - Labor Day 2025",
+    "id": "48",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-09-01T14:00:00Z",
+    "end": "2025-09-01T14:30:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "feature": "shopping-cart-checkout",
+      "impact_type": "availability",
+      "region": "US",
+      "root_cause": "Scaling-Defect-Service",
+      "service": "cart"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 8,
+    "type": "holiday",
+    "date": "2025-10-13",
+    "title": "Holiday traffic spike - Columbus Day 2025",
+    "id": "49",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-10-13T14:00:00Z",
+    "end": "2025-10-13T14:30:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "feature": "shopping-cart-checkout",
+      "impact_type": "availability",
+      "region": "US",
+      "root_cause": "Scaling-Defect-Service",
+      "service": "cart"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 9,
+    "type": "holiday",
+    "date": "2025-11-11",
+    "title": "Holiday traffic spike - Veterans Day 2025",
+    "id": "50",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-11-11T14:00:00Z",
+    "end": "2025-11-11T14:30:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "feature": "shopping-cart-checkout",
+      "impact_type": "availability",
+      "region": "US",
+      "root_cause": "Scaling-Defect-Service",
+      "service": "cart"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 10,
+    "type": "holiday",
+    "date": "2025-11-27",
+    "title": "Holiday traffic spike - Thanksgiving Day 2025",
+    "id": "51",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-11-27T14:00:00Z",
+    "end": "2025-11-27T14:30:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "feature": "shopping-cart-checkout",
+      "impact_type": "availability",
+      "region": "US",
+      "root_cause": "Scaling-Defect-Service",
+      "service": "cart"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 11,
+    "type": "holiday",
+    "date": "2025-12-25",
+    "title": "Holiday traffic spike - Christmas Day 2025",
+    "id": "52",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-12-25T14:00:00Z",
+    "end": "2025-12-25T14:30:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "feature": "shopping-cart-checkout",
+      "impact_type": "availability",
+      "region": "US",
+      "root_cause": "Scaling-Defect-Service",
+      "service": "cart"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 12,
+    "type": "holiday",
+    "date": "2025-01-01",
+    "title": "Holiday traffic spike - New Year's Day Canada 2025",
+    "id": "53",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-01-01T14:00:00Z",
+    "end": "2025-01-01T14:30:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "feature": "shopping-cart-checkout",
+      "impact_type": "availability",
+      "region": "Canada",
+      "root_cause": "Scaling-Defect-Service",
+      "service": "cart"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 13,
+    "type": "holiday",
+    "date": "2025-04-18",
+    "title": "Holiday traffic spike - Good Friday Canada 2025",
+    "id": "54",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-04-18T14:00:00Z",
+    "end": "2025-04-18T14:30:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "feature": "shopping-cart-checkout",
+      "impact_type": "availability",
+      "region": "Canada",
+      "root_cause": "Scaling-Defect-Service",
+      "service": "cart"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 14,
+    "type": "holiday",
+    "date": "2025-05-19",
+    "title": "Holiday traffic spike - Victoria Day Canada 2025",
+    "id": "55",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-05-19T14:00:00Z",
+    "end": "2025-05-19T14:30:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "feature": "shopping-cart-checkout",
+      "impact_type": "availability",
+      "region": "Canada",
+      "root_cause": "Scaling-Defect-Service",
+      "service": "cart"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 15,
+    "type": "holiday",
+    "date": "2025-07-01",
+    "title": "Holiday traffic spike - Canada Day 2025",
+    "id": "56",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-07-01T14:00:00Z",
+    "end": "2025-07-01T14:30:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "feature": "shopping-cart-checkout",
+      "impact_type": "availability",
+      "region": "Canada",
+      "root_cause": "Scaling-Defect-Service",
+      "service": "cart"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 16,
+    "type": "holiday",
+    "date": "2025-09-01",
+    "title": "Holiday traffic spike - Labour Day Canada 2025",
+    "id": "57",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-09-01T14:00:00Z",
+    "end": "2025-09-01T14:30:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "feature": "shopping-cart-checkout",
+      "impact_type": "availability",
+      "region": "Canada",
+      "root_cause": "Scaling-Defect-Service",
+      "service": "cart"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 17,
+    "type": "holiday",
+    "date": "2025-09-30",
+    "title": "Holiday traffic spike - National Day for Truth and Reconciliation Canada 2025",
+    "id": "58",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-09-30T14:00:00Z",
+    "end": "2025-09-30T14:30:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "feature": "shopping-cart-checkout",
+      "impact_type": "availability",
+      "region": "Canada",
+      "root_cause": "Scaling-Defect-Service",
+      "service": "cart"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 18,
+    "type": "holiday",
+    "date": "2025-10-13",
+    "title": "Holiday traffic spike - Thanksgiving Day Canada 2025",
+    "id": "59",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-10-13T14:00:00Z",
+    "end": "2025-10-13T14:30:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "feature": "shopping-cart-checkout",
+      "impact_type": "availability",
+      "region": "Canada",
+      "root_cause": "Scaling-Defect-Service",
+      "service": "cart"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 19,
+    "type": "holiday",
+    "date": "2025-11-11",
+    "title": "Holiday traffic spike - Remembrance Day Canada 2025",
+    "id": "60",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-11-11T14:00:00Z",
+    "end": "2025-11-11T14:30:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "feature": "shopping-cart-checkout",
+      "impact_type": "availability",
+      "region": "Canada",
+      "root_cause": "Scaling-Defect-Service",
+      "service": "cart"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 20,
+    "type": "holiday",
+    "date": "2025-12-25",
+    "title": "Holiday traffic spike - Christmas Day Canada 2025",
+    "id": "61",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-12-25T14:00:00Z",
+    "end": "2025-12-25T14:30:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "feature": "shopping-cart-checkout",
+      "impact_type": "availability",
+      "region": "Canada",
+      "root_cause": "Scaling-Defect-Service",
+      "service": "cart"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 21,
+    "type": "holiday",
+    "date": "2025-12-26",
+    "title": "Holiday traffic spike - Boxing Day Canada 2025",
+    "id": "62",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-12-26T14:00:00Z",
+    "end": "2025-12-26T14:30:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "feature": "shopping-cart-checkout",
+      "impact_type": "availability",
+      "region": "Canada",
+      "root_cause": "Scaling-Defect-Service",
+      "service": "cart"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 22,
+    "type": "placeholder",
+    "date": "2025-01-01",
+    "title": "[Placeholder] January 2025 No Action Needed",
+    "id": "63",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-01-01T04:01:00Z",
+    "end": "2025-01-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "US"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 23,
+    "type": "placeholder",
+    "date": "2025-02-01",
+    "title": "[Placeholder] February 2025 No Action Needed",
+    "id": "64",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-02-01T04:01:00Z",
+    "end": "2025-02-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "US"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 24,
+    "type": "placeholder",
+    "date": "2025-03-01",
+    "title": "[Placeholder] March 2025 No Action Needed",
+    "id": "65",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-03-01T04:01:00Z",
+    "end": "2025-03-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "US"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 25,
+    "type": "placeholder",
+    "date": "2025-04-01",
+    "title": "[Placeholder] April 2025 No Action Needed",
+    "id": "66",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-04-01T04:01:00Z",
+    "end": "2025-04-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "US"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 26,
+    "type": "placeholder",
+    "date": "2025-05-01",
+    "title": "[Placeholder] May 2025 No Action Needed",
+    "id": "67",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-05-01T04:01:00Z",
+    "end": "2025-05-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "US"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 27,
+    "type": "placeholder",
+    "date": "2025-06-01",
+    "title": "[Placeholder] June 2025 No Action Needed",
+    "id": "68",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-06-01T04:01:00Z",
+    "end": "2025-06-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "US"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 28,
+    "type": "placeholder",
+    "date": "2025-07-01",
+    "title": "[Placeholder] July 2025 No Action Needed",
+    "id": "69",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-07-01T04:01:00Z",
+    "end": "2025-07-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "US"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 29,
+    "type": "placeholder",
+    "date": "2025-08-01",
+    "title": "[Placeholder] August 2025 No Action Needed",
+    "id": "70",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-08-01T04:01:00Z",
+    "end": "2025-08-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "US"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 30,
+    "type": "placeholder",
+    "date": "2025-09-01",
+    "title": "[Placeholder] September 2025 No Action Needed",
+    "id": "71",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-09-01T04:01:00Z",
+    "end": "2025-09-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "US"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 31,
+    "type": "placeholder",
+    "date": "2025-10-01",
+    "title": "[Placeholder] October 2025 No Action Needed",
+    "id": "72",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-10-01T04:01:00Z",
+    "end": "2025-10-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "US"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 32,
+    "type": "placeholder",
+    "date": "2025-11-01",
+    "title": "[Placeholder] November 2025 No Action Needed",
+    "id": "73",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-11-01T04:01:00Z",
+    "end": "2025-11-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "US"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 33,
+    "type": "placeholder",
+    "date": "2025-12-01",
+    "title": "[Placeholder] December 2025 No Action Needed",
+    "id": "74",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2025-12-01T04:01:00Z",
+    "end": "2025-12-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "US"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 34,
+    "type": "placeholder",
+    "date": "2026-01-01",
+    "title": "[Placeholder] January 2026 No Action Needed",
+    "id": "75",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2026-01-01T04:01:00Z",
+    "end": "2026-01-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "US"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 35,
+    "type": "placeholder",
+    "date": "2026-02-01",
+    "title": "[Placeholder] February 2026 No Action Needed",
+    "id": "76",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2026-02-01T04:01:00Z",
+    "end": "2026-02-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "US"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 36,
+    "type": "placeholder",
+    "date": "2026-03-01",
+    "title": "[Placeholder] March 2026 No Action Needed",
+    "id": "77",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2026-03-01T04:01:00Z",
+    "end": "2026-03-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "US"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 37,
+    "type": "placeholder",
+    "date": "2026-04-01",
+    "title": "[Placeholder] April 2026 No Action Needed",
+    "id": "78",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2026-04-01T04:01:00Z",
+    "end": "2026-04-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "US"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  },
+  {
+    "sequence": 38,
+    "type": "placeholder",
+    "date": "2026-05-01",
+    "title": "[Placeholder] May 2026 No Action Needed",
+    "id": "79",
+    "status": "resolved",
+    "severity": "Sev-2: Significant Business Impact",
+    "start": "2026-05-01T04:01:00Z",
+    "end": "2026-05-01T04:02:00Z",
+    "labels": {
+      "client_impact": "multiple-clients",
+      "impact_type": "availablity",
+      "region": "US"
+    },
+    "validation": "passed",
+    "validationErrors": []
+  }
+]

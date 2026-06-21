@@ -1,0 +1,54 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Kubelet Resolution Comparison</title>
+<style>
+body{font-family:Inter,Arial,sans-serif;margin:36px;color:#172033;line-height:1.45}h1{margin-bottom:4px}h2{border-bottom:1px solid #d8dee9;padding-bottom:6px;margin-top:28px}.meta{color:#667085;margin-bottom:20px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.card{border:1px solid #d8dee9;border-radius:8px;padding:14px;background:#fbfcfe}table{width:100%;border-collapse:collapse;margin:10px 0 18px}th,td{border:1px solid #d8dee9;padding:7px;vertical-align:top;font-size:12px}th{background:#eef2f7;text-align:left}.callout{background:#eef8ff;border-left:4px solid #2563eb;padding:12px;margin:16px 0}code{background:#f2f4f7;padding:2px 4px;border-radius:4px}pre{white-space:pre-wrap;background:#111827;color:#f9fafb;padding:12px;border-radius:8px;font-size:11px}</style>
+</head><body>
+<h1>Kubelet Resolution Comparison Report</h1>
+<div class="meta">Generated 2026-05-31T14:45:44.277Z | Scope: post-remediation kubelet analysis for ensemble-grafana</div>
+<div class="callout"><strong>Bottom line:</strong> The inventory-service probe tuning is deployed and the short post-change window shows <code>0</code> probe failures. Remaining kubelet findings are containerd/kubelet <code>NotFound</code> cleanup messages on <code>ip-10-42-101-208</code>, which should be monitored for recurrence.</div>
+<h2>Implemented Change</h2>
+<table><thead><tr><th>Probe</th><th>Before</th><th>After</th></tr></thead><tbody>
+<tr><td>Readiness</td><td>initialDelay=60s, period=10s, default timeout/failure threshold</td><td>initialDelay=60s, period=10s, timeout=5s, failureThreshold=5</td></tr>
+<tr><td>Liveness</td><td>initialDelay=90s, period=20s, default timeout/failure threshold</td><td>initialDelay=120s, period=20s, timeout=5s, failureThreshold=5</td></tr>
+</tbody></table>
+<h2>Query Results</h2>
+<div class="grid"><div class="card"><h3>Six-Hour Error/Failure Scan</h3><p>18 matching kubelet log samples across 5 streams.</p><table><thead><tr><th>Category</th><th>Count</th></tr></thead><tbody><tr><td>Probe failed</td><td>10</td></tr>
+<tr><td>ContainerStatus NotFound</td><td>4</td></tr>
+<tr><td>DeleteContainer NotFound</td><td>4</td></tr></tbody></table></div><div class="card"><h3>Post-Change Window</h3><p>4 matching samples.</p><table><thead><tr><th>Signal</th><th>Count</th></tr></thead><tbody><tr><td>Probe failed</td><td>0</td></tr><tr><td>Runtime/container NotFound</td><td>4</td></tr></tbody></table></div></div>
+<h2>Probe Failure Grouping (Six-Hour Window)</h2>
+<table><thead><tr><th>Service</th><th>Pod</th><th>Probe</th><th>Node</th><th>Count</th></tr></thead><tbody><tr><td>inventory-service</td><td>ensemble-grafana/inventory-service-77c95f9b47-2mfc8</td><td>Readiness</td><td>ip-10-42-101-134.ec2.internal</td><td>1</td></tr>
+<tr><td>inventory-service</td><td>ensemble-grafana/inventory-service-77c95f9b47-cbft7</td><td>Liveness</td><td>ip-10-42-101-208.ec2.internal</td><td>2</td></tr>
+<tr><td>inventory-service</td><td>ensemble-grafana/inventory-service-77c95f9b47-cbft7</td><td>Readiness</td><td>ip-10-42-101-208.ec2.internal</td><td>7</td></tr></tbody></table>
+<h2>Codex Resolution Plan</h2><ul><li>Implemented inventory-service probe tuning: readiness timeoutSeconds=5, failureThreshold=5; liveness initialDelaySeconds=120, timeoutSeconds=5, failureThreshold=5.</li><li>Rollout completed successfully and the current inventory-service pod is Ready with 0 restarts.</li><li>Post-change window has 0 kubelet probe failures; inventory-service probe failures are not recurring immediately after the rollout.</li><li>Residual kubelet samples are 4 container runtime NotFound/DeleteContainer cleanup events on ip-10-42-101-208.</li><li>Next action is monitoring rather than another app probe change: check whether containerd NotFound recurs during future rollouts/load tests and correlate with node/runtime logs.</li></ul>
+<h2>Grafana Assistant Resolution Plan</h2><div class="card"><p>I'll analyze the kubelet ERROR-level messages from your ensemble-grafana cluster to assess the current state after inventory-service probe tuning.</p>
+<h3>Resolution Plan</h3>
+<p><strong>Current State</strong>: Probe tuning successful. No inventory-service probe failures in 3-hour window post-rollout.</p>
+<p><strong>Active Root Cause</strong>: Container lifecycle mismatch between kubelet and containerd runtime on node `ip-10-42-101-208.ec2.internal` at 10:44:06 EDT. Kubelet queried 2 containers already removed from containerd.</p>
+<p><strong>Resolution Steps</strong>:</p>
+<p>1. <strong>Verify probe tuning success</strong> ✓ — No liveness/readiness failures detected; inventory-service probe issue resolved</p>
+<p>2. <strong>Investigate containerd sync</strong> — Check containerd logs on `ip-10-42-101-208` around 10:44:06 for premature garbage collection</p>
+<p>3. <strong>Review pod evictions</strong> — Confirm if affected containers belonged to terminated pods; verify grace period settings</p>
+<p>4. <strong>Monitor pattern</strong> — Track if container-not-found errors recur; isolated timestamp suggests transient event</p>
+<p><strong>Assessment</strong>: inventory-service probe failures <strong>no longer appear</strong> after tuning. Current issue is unrelated runtime cleanup timing on single node.</p></div>
+<h2>Side-by-Side Comparison</h2>
+<table><thead><tr><th>Area</th><th>Codex</th><th>Grafana Assistant</th><th>Readout</th></tr></thead><tbody>
+<tr><td>Probe tuning result</td><td>No post-change probe failures in the short window</td><td>Probe tuning successful; no inventory-service probe failures detected post-rollout</td><td>Aligned.</td></tr>
+<tr><td>Current active signal</td><td>Runtime NotFound cleanup events on ip-10-42-101-208</td><td>Container lifecycle mismatch between kubelet and containerd on ip-10-42-101-208</td><td>Aligned.</td></tr>
+<tr><td>Next action</td><td>Monitor recurrence and correlate with rollouts/load before node/runtime changes</td><td>Check containerd logs, review evictions, monitor pattern</td><td>Aligned; Codex recommends monitoring first due isolated burst.</td></tr>
+</tbody></table>
+<h2>Recommended Next Actions</h2><ul><li>Keep the inventory-service probe tuning deployed.</li><li>Run the next traffic/load test and watch the dashboard kubelet tab for fresh Probe failed series by service/pod/probe/node.</li><li>If only containerd NotFound events recur, investigate node ip-10-42-101-208 containerd/kubelet logs and pod termination timing around rollout windows.</li><li>Escalate to kubelet/containerd GC or node replacement only if NotFound bursts recur independently of normal pod deletion.</li></ul>
+<h2>Post-Change Samples</h2>
+<table><thead><tr><th>Time</th><th>Node</th><th>Pod</th><th>Container</th><th>Probe</th><th>Output</th></tr></thead><tbody><tr><td>2026-05-31T14:44:06.507Z</td><td>ip-10-42-101-208.ec2.internal</td><td></td><td></td><td></td><td>E0531 14:44:06.507703    2212 log.go:32] "ContainerStatus from runtime service failed" err="rpc error: code = NotFound desc = an error occurred when try to find container \"814c9548a6304d4d28c8f5adfeaec08d10ee32cc02a08885f034540edf5333f4\": not found" containerID="814c9548a6304d4d28c8f5adfeaec08d10ee32cc02a08885f034540edf5333f4"</td></tr>
+<tr><td>2026-05-31T14:44:06.507Z</td><td>ip-10-42-101-208.ec2.internal</td><td></td><td></td><td></td><td>I0531 14:44:06.507743    2212 pod_container_deletor.go:53] "DeleteContainer returned error" containerID={"Type":"containerd","ID":"814c9548a6304d4d28c8f5adfeaec08d10ee32cc02a08885f034540edf5333f4"} err="failed to get container status \"814c9548a6304d4d28c8f5adfeaec08d10ee32cc02a08885f034540edf5333f4\": rpc error: code = NotFound desc = an error occurred when try to find container \"814c9548a6304d4d28c8f5adfeaec08d10ee32cc02a08885f034540edf5333f4\": not found"</td></tr>
+<tr><td>2026-05-31T14:44:06.508Z</td><td>ip-10-42-101-208.ec2.internal</td><td></td><td></td><td></td><td>E0531 14:44:06.508319    2212 log.go:32] "ContainerStatus from runtime service failed" err="rpc error: code = NotFound desc = an error occurred when try to find container \"5e3f368171f47a43262b9a64abfc7e453856169aa43dfa409f862a314312e44c\": not found" containerID="5e3f368171f47a43262b9a64abfc7e453856169aa43dfa409f862a314312e44c"</td></tr>
+<tr><td>2026-05-31T14:44:06.508Z</td><td>ip-10-42-101-208.ec2.internal</td><td></td><td></td><td></td><td>I0531 14:44:06.508345    2212 pod_container_deletor.go:53] "DeleteContainer returned error" containerID={"Type":"containerd","ID":"5e3f368171f47a43262b9a64abfc7e453856169aa43dfa409f862a314312e44c"} err="failed to get container status \"5e3f368171f47a43262b9a64abfc7e453856169aa43dfa409f862a314312e44c\": rpc error: code = NotFound desc = an error occurred when try to find container \"5e3f368171f47a43262b9a64abfc7e453856169aa43dfa409f862a314312e44c\": not found"</td></tr></tbody></table>
+<h2>Commands</h2>
+<pre>kubectl apply -f infra/k8s/services.yaml
+kubectl -n ensemble-grafana rollout status deployment/inventory-service --timeout=180s
+
+gcx logs query -d grafanacloud-logs '{job="integrations/kubernetes/journal", k8s_cluster_name="ensemble-grafana", unit="kubelet.service"} |~ "(?i)error|warning|failed|evict|oom|backoff|crash"' --since 6h -o json --limit 100 --no-truncate
+
+gcx logs query -d grafanacloud-logs '{job="integrations/kubernetes/journal", k8s_cluster_name="ensemble-grafana", unit="kubelet.service"} |~ "(?i)error|warning|failed|evict|oom|backoff|crash"' --since 15m -o json --limit 100 --no-truncate
+
+gcx assistant prompt --context assistant-oauth --timeout 300 'Use Grafana Cloud logs to analyze kubelet ERROR-level/error messages for cluster ensemble-grafana after tuning inventory-service readiness/liveness probes. Query: {job="integrations/kubernetes/journal", k8s_cluster_name="ensemble-grafana", unit="kubelet.service"} |~ "(?i)error|warning|failed|evict|oom|backoff|crash". Determine current root causes and produce a concise Resolution Plan, noting whether inventory-service probe failures still appear after the probe-tuning rollout.'</pre>
+</body></html>

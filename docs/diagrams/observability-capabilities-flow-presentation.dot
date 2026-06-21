@@ -1,0 +1,124 @@
+digraph observability_capabilities_flow_presentation {
+  rankdir=LR;
+  label="Observability Capabilities Flow";
+
+  graph [
+    fontname="Helvetica",
+    fontsize=40,
+    labelloc=t,
+    bgcolor="#0b1220",
+    fontcolor="#f8fafc",
+    pad=0.45,
+    nodesep=0.65,
+    ranksep=0.9,
+    splines=ortho,
+    outputorder=edgesfirst
+  ];
+  node [
+    shape=box,
+    style="rounded,filled",
+    fontname="Helvetica",
+    fontsize=26,
+    color="#64748b",
+    fillcolor="#111827",
+    fontcolor="#f8fafc",
+    margin="0.22,0.16",
+    penwidth=2
+  ];
+  edge [
+    fontname="Helvetica",
+    fontsize=18,
+    color="#94a3b8",
+    fontcolor="#f8fafc",
+    arrowsize=0.9,
+    penwidth=2
+  ];
+
+  subgraph cluster_sources {
+    label="Observed systems";
+    color="#475569";
+    fontcolor="#f8fafc";
+    fontsize=28;
+    style="rounded,dashed";
+
+    browser [label="Shopper browser\nReact storefront", fillcolor="#1e3a8a"];
+    edgePath [label="CloudFront + ALB\nstatic and /api routing", fillcolor="#1e3a8a"];
+    services [label="Spring Boot services\ninventory, cart, account", fillcolor="#14532d"];
+    aws [label="AWS platform\nEKS, RDS, logs", fillcolor="#334155"];
+    operators [label="Operators and tests\nk6, Synthetic, IRM", fillcolor="#6b21a8"];
+  }
+
+  subgraph cluster_telemetry {
+    label="Telemetry produced";
+    color="#475569";
+    fontcolor="#f8fafc";
+    fontsize=28;
+    style="rounded,dashed";
+
+    frontendSignals [label="Frontend signals\nFaro events, exceptions,\nweb vitals, user actions", fillcolor="#6b21a8"];
+    traceSignals [label="Distributed traces\ntraceparent from browser\nto backend services", fillcolor="#164e63"];
+    serviceSignals [label="Service health\nRED metrics, pod logs,\nBeyla HTTP telemetry", fillcolor="#164e63"];
+    profileSignals [label="Runtime profiles\nJava CPU profiles\nfrom Pyroscope", fillcolor="#6b21a8"];
+    externalSignals [label="External signals\nCloudWatch, k6,\nSynthetic, IRM state", fillcolor="#6b21a8"];
+  }
+
+  subgraph cluster_collection {
+    label="Collection and routing";
+    color="#475569";
+    fontcolor="#f8fafc";
+    fontsize=28;
+    style="rounded,dashed";
+
+    faroCollector [label="Faro collector\nfrontend events and spans", fillcolor="#581c87"];
+    alloy [label="Grafana Alloy\nmetrics, logs, traces", fillcolor="#581c87"];
+    pyroscope [label="Pyroscope endpoint\nprofile ingestion", fillcolor="#581c87"];
+    cloudIntegrations [label="Grafana Cloud integrations\nCloudWatch scrape,\nk6 and Synthetic samples", fillcolor="#581c87"];
+  }
+
+  grafana [label="Grafana Cloud stack\norenlion.grafana.net", fillcolor="#4c1d95", fontsize=30];
+
+  subgraph cluster_outcomes {
+    label="Operational capabilities";
+    color="#475569";
+    fontcolor="#f8fafc";
+    fontsize=28;
+    style="rounded,dashed";
+
+    frontendObs [label="Frontend Observability\nsessions, errors, actions", fillcolor="#581c87"];
+    tempo [label="Traces\nfrontend-to-backend waterfalls", fillcolor="#581c87"];
+    prometheus [label="Metrics\nRED + infrastructure", fillcolor="#581c87"];
+    loki [label="Logs\nnamespace + service labels", fillcolor="#581c87"];
+    profiles [label="Profiles\nJava CPU hotspots", fillcolor="#581c87"];
+    testResults [label="Synthetic + k6 results\nuptime, DNS, TLS,\nchecks and thresholds", fillcolor="#581c87"];
+    incidents [label="IRM workflows\nseverity, labels,\non-call ownership", fillcolor="#581c87"];
+  }
+
+  browser -> frontendSignals;
+  browser -> traceSignals;
+  edgePath -> traceSignals;
+  services -> traceSignals;
+  services -> serviceSignals;
+  services -> profileSignals;
+  aws -> serviceSignals;
+  operators -> externalSignals;
+
+  frontendSignals -> faroCollector;
+  traceSignals -> faroCollector;
+  traceSignals -> alloy;
+  serviceSignals -> alloy;
+  profileSignals -> pyroscope;
+  externalSignals -> cloudIntegrations;
+
+  faroCollector -> grafana;
+  alloy -> grafana;
+  pyroscope -> grafana;
+  cloudIntegrations -> grafana;
+
+  grafana -> frontendObs;
+  grafana -> tempo;
+  grafana -> prometheus;
+  grafana -> loki;
+  grafana -> profiles;
+  grafana -> testResults;
+  grafana -> incidents;
+}

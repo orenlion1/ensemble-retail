@@ -1,0 +1,104 @@
+{
+  "generatedAt": "2026-05-31T16:45:08.940Z",
+  "source": "gcx synthetic-monitoring + k6 direct API",
+  "syntheticMonitoring": [
+    {
+      "job": "ensemble-grafana-site-uptime-tls",
+      "type": "http",
+      "target": "https://ensemble-grafana.com",
+      "probes": [
+        "Oregon",
+        "London",
+        "Montreal"
+      ],
+      "status": "NODATA"
+    },
+    {
+      "job": "ensemble-grafana-api-response-time",
+      "type": "http",
+      "target": "https://ensemble-grafana.com/api/inventory/products",
+      "probes": [
+        "Oregon",
+        "London",
+        "Montreal"
+      ],
+      "status": "NODATA"
+    },
+    {
+      "job": "ensemble-grafana-dns-resolution",
+      "type": "dns",
+      "target": "ensemble-grafana.com",
+      "probes": [
+        "Oregon",
+        "London",
+        "Montreal"
+      ],
+      "status": "NODATA"
+    },
+    {
+      "job": "ensemble-grafana-ping-reachability",
+      "type": "ping",
+      "target": "ensemble-grafana.com",
+      "probes": [
+        "Oregon",
+        "London",
+        "Montreal"
+      ],
+      "status": "NODATA"
+    },
+    {
+      "job": "ensemble-grafana-tcp-tls-connectivity",
+      "type": "tcp",
+      "target": "ensemble-grafana.com:443",
+      "probes": [
+        "Oregon",
+        "London",
+        "Montreal"
+      ],
+      "status": "NODATA"
+    }
+  ],
+  "k6Cloud": [
+    {
+      "name": "API flow load test",
+      "id": 1228494,
+      "runs": 0,
+      "latestStatus": "no runs",
+      "latestRunId": null,
+      "latestUrl": null,
+      "error": "k6 API 404 for /cloud/v6/load_tests/1228494/test_runs?%24top=20&%24orderby=created+desc: {\"error\":{\"message\":\"Resource matching query does not exist: '1228494'\",\"code\":\"error\"}}"
+    },
+    {
+      "name": "20-user regional load test",
+      "id": 1228490,
+      "runs": 0,
+      "latestStatus": "no runs",
+      "latestRunId": null,
+      "latestUrl": null,
+      "error": "k6 API 404 for /cloud/v6/load_tests/1228490/test_runs?%24top=20&%24orderby=created+desc: {\"error\":{\"message\":\"Resource matching query does not exist: '1228490'\",\"code\":\"error\"}}"
+    },
+    {
+      "name": "Traffic spike benchmark",
+      "id": 1228496,
+      "runs": 20,
+      "latestStatus": "completed/failed",
+      "latestRunId": 7651472,
+      "latestUrl": "https://orenlion.grafana.net/a/k6-app/runs/7651472",
+      "error": null
+    },
+    {
+      "name": "Browser action synthetic check",
+      "id": 1233226,
+      "runs": 1,
+      "latestStatus": "completed/passed",
+      "latestRunId": 7652683,
+      "latestUrl": "https://orenlion.grafana.net/a/k6-app/runs/7652683",
+      "error": null
+    }
+  ],
+  "findings": [
+    "Grafana Synthetic Monitoring contains the expected HTTP uptime/TLS, API response, DNS, Ping, and TCP/TLS checks.",
+    "The browser-action k6 Cloud check now exists as test 1233226 and latest run 7652683 passed.",
+    "The browser-action script now covers navigation/sale-banner actions plus Google login control and checkout Grafana link assertions."
+  ]
+}

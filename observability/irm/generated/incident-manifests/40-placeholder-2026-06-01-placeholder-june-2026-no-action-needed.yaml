@@ -1,0 +1,17 @@
+apiVersion: incident.ext.grafana.app/v1alpha1
+kind: Incident
+spec:
+  title: "[Placeholder] June 2026 No Action Needed"
+  description: "[Placeholder] No Action Needed"
+  severity: "Sev-2: Significant Business Impact"
+  incidentStart: "2026-06-01T04:01:00Z"
+  incidentEnd: "2026-06-01T04:02:00Z"
+  labels:
+  - key: "region"
+    value: "US"
+  - key: "detection"
+    value: "call-in"
+  - key: "client_impact"
+    value: "multiple-clients"
+  - key: "impact_type"
+    value: "availability"

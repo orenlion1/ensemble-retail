@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-label="VUH Cost By Date">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="24" y="34" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#111827">VUH Cost By Date</text>
+<line x1="80" y1="440" x2="940" y2="440" stroke="#9ca3af"/>
+<line x1="80" y1="70" x2="80" y2="440" stroke="#9ca3af"/>
+<line x1="80" y1="440" x2="940" y2="440" stroke="#e5e7eb"/>
+<text x="70" y="444" text-anchor="end" font-family="Arial, sans-serif" font-size="12" fill="#6b7280">0.00</text>
+<line x1="80" y1="347.5" x2="940" y2="347.5" stroke="#e5e7eb"/>
+<text x="70" y="351.5" text-anchor="end" font-family="Arial, sans-serif" font-size="12" fill="#6b7280">27.00</text>
+<line x1="80" y1="255" x2="940" y2="255" stroke="#e5e7eb"/>
+<text x="70" y="259" text-anchor="end" font-family="Arial, sans-serif" font-size="12" fill="#6b7280">54.01</text>
+<line x1="80" y1="162.5" x2="940" y2="162.5" stroke="#e5e7eb"/>
+<text x="70" y="166.5" text-anchor="end" font-family="Arial, sans-serif" font-size="12" fill="#6b7280">81.01</text>
+<line x1="80" y1="70" x2="940" y2="70" stroke="#e5e7eb"/>
+<text x="70" y="74" text-anchor="end" font-family="Arial, sans-serif" font-size="12" fill="#6b7280">108.01</text>
+<text x="80" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-05-31</text>
+<text x="175.55555555555554" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-01</text>
+<text x="271.1111111111111" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-02</text>
+<text x="366.66666666666663" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-03</text>
+<text x="462.22222222222223" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-04</text>
+<text x="557.7777777777778" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-08</text>
+<text x="653.3333333333333" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-10</text>
+<text x="748.8888888888889" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-11</text>
+<text x="844.4444444444445" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-12</text>
+<text x="940" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#374151">2026-06-17</text>
+<polyline points="80,436.5743912600685" fill="none" stroke="#2563eb" stroke-width="3"/>
+<circle cx="80" cy="436.5743912600685" r="5" fill="#2563eb"/>
+<rect x="976" y="59" width="14" height="14" fill="#2563eb"/>
+<text x="998" y="70" font-family="Arial, sans-serif" font-size="13" fill="#374151">Browser action synthetic check</text>
+<polyline points="175.55555555555554,128.8177020646237 175.55555555555554,128.8177020646237 175.55555555555554,108.81214702342373 175.55555555555554,88.25849458383482 175.55555555555554,70 175.55555555555554,88.25849458383482 175.55555555555554,88.25849458383482 175.55555555555554,88.25849458383482 271.1111111111111,88.25849458383482 271.1111111111111,70 271.1111111111111,70 271.1111111111111,70 366.66666666666663,70 462.22222222222223,70 557.7777777777778,70 557.7777777777778,70 653.3333333333333,70 748.8888888888889,70 844.4444444444445,70 940,70" fill="none" stroke="#dc2626" stroke-width="3"/>
+<circle cx="175.55555555555554" cy="128.8177020646237" r="5" fill="#dc2626"/>
+<circle cx="175.55555555555554" cy="128.8177020646237" r="5" fill="#dc2626"/>
+<circle cx="175.55555555555554" cy="108.81214702342373" r="5" fill="#dc2626"/>
+<circle cx="175.55555555555554" cy="88.25849458383482" r="5" fill="#dc2626"/>
+<circle cx="175.55555555555554" cy="70" r="5" fill="#dc2626"/>
+<circle cx="175.55555555555554" cy="88.25849458383482" r="5" fill="#dc2626"/>
+<circle cx="175.55555555555554" cy="88.25849458383482" r="5" fill="#dc2626"/>
+<circle cx="175.55555555555554" cy="88.25849458383482" r="5" fill="#dc2626"/>
+<circle cx="271.1111111111111" cy="88.25849458383482" r="5" fill="#dc2626"/>
+<circle cx="271.1111111111111" cy="70" r="5" fill="#dc2626"/>
+<circle cx="271.1111111111111" cy="70" r="5" fill="#dc2626"/>
+<circle cx="271.1111111111111" cy="70" r="5" fill="#dc2626"/>
+<circle cx="366.66666666666663" cy="70" r="5" fill="#dc2626"/>
+<circle cx="462.22222222222223" cy="70" r="5" fill="#dc2626"/>
+<circle cx="557.7777777777778" cy="70" r="5" fill="#dc2626"/>
+<circle cx="557.7777777777778" cy="70" r="5" fill="#dc2626"/>
+<circle cx="653.3333333333333" cy="70" r="5" fill="#dc2626"/>
+<circle cx="748.8888888888889" cy="70" r="5" fill="#dc2626"/>
+<circle cx="844.4444444444445" cy="70" r="5" fill="#dc2626"/>
+<circle cx="940" cy="70" r="5" fill="#dc2626"/>
+<rect x="976" y="83" width="14" height="14" fill="#dc2626"/>
+<text x="998" y="94" font-family="Arial, sans-serif" font-size="13" fill="#374151">Traffic spike benchmark</text>
+</svg>

@@ -1,0 +1,28 @@
+digraph traffic_spike_target_heatmap_dark {
+  graph [rankdir=TB, labelloc=t, label="Traffic Spike Test Targets", bgcolor="#0b1220", fontcolor="#f8fafc", fontsize=22, fontname="Helvetica", nodesep=0.35, ranksep=0.4];
+  node [shape=plain, fontname="Helvetica", fontcolor="#f8fafc"];
+  edge [style=invis];
+
+  target_heatmap [label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="7" COLOR="#475569">
+      <TR><TD BGCOLOR="#1e3a5f"><FONT COLOR="#f8fafc"><B>Stage</B></FONT></TD><TD BGCOLOR="#1e3a5f"><FONT COLOR="#f8fafc"><B>VUs</B></FONT></TD><TD BGCOLOR="#1e3a5f"><FONT COLOR="#f8fafc"><B>Requests / wave</B></FONT></TD><TD BGCOLOR="#14532d"><FONT COLOR="#f8fafc"><B>Cart updates</B></FONT></TD><TD BGCOLOR="#713f12"><FONT COLOR="#f8fafc"><B>Checkout attempts</B></FONT></TD><TD BGCOLOR="#1e40af"><FONT COLOR="#f8fafc"><B>Region changes</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#111827"><FONT COLOR="#f8fafc">Warmup / Recovery</FONT></TD><TD BGCOLOR="#111827"><FONT COLOR="#f8fafc"><B>25</B></FONT></TD><TD BGCOLOR="#334155"><FONT COLOR="#f8fafc">100</FONT></TD><TD BGCOLOR="#166534"><FONT COLOR="#f8fafc">15</FONT></TD><TD BGCOLOR="#854d0e"><FONT COLOR="#f8fafc">5</FONT></TD><TD BGCOLOR="#1d4ed8"><FONT COLOR="#f8fafc">25</FONT></TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#111827"><FONT COLOR="#f8fafc">Spike 1</FONT></TD><TD BGCOLOR="#111827"><FONT COLOR="#f8fafc"><B>100</B></FONT></TD><TD BGCOLOR="#2563eb"><FONT COLOR="#f8fafc"><B>400</B></FONT></TD><TD BGCOLOR="#15803d"><FONT COLOR="#f8fafc"><B>60</B></FONT></TD><TD BGCOLOR="#a16207"><FONT COLOR="#f8fafc"><B>20</B></FONT></TD><TD BGCOLOR="#2563eb"><FONT COLOR="#f8fafc"><B>100</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#111827"><FONT COLOR="#f8fafc">Spike 2</FONT></TD><TD BGCOLOR="#111827"><FONT COLOR="#f8fafc"><B>200</B></FONT></TD><TD BGCOLOR="#1e40af"><FONT COLOR="#f8fafc"><B>800</B></FONT></TD><TD BGCOLOR="#15803d"><FONT COLOR="#f8fafc"><B>120</B></FONT></TD><TD BGCOLOR="#92400e"><FONT COLOR="#f8fafc"><B>40</B></FONT></TD><TD BGCOLOR="#1e40af"><FONT COLOR="#f8fafc"><B>200</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#111827"><FONT COLOR="#f8fafc">Spike 3</FONT></TD><TD BGCOLOR="#111827"><FONT COLOR="#f8fafc"><B>400</B></FONT></TD><TD BGCOLOR="#1e3a8a"><FONT COLOR="#f8fafc"><B>1600</B></FONT></TD><TD BGCOLOR="#166534"><FONT COLOR="#f8fafc"><B>240</B></FONT></TD><TD BGCOLOR="#713f12"><FONT COLOR="#f8fafc"><B>80</B></FONT></TD><TD BGCOLOR="#1e3a8a"><FONT COLOR="#f8fafc"><B>400</B></FONT></TD></TR>
+    </TABLE>
+  >];
+
+  target_note [label=<
+    <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
+      <TR><TD ALIGN="LEFT"><FONT COLOR="#f8fafc"><B>Readout:</B> brighter cells mean more target pressure per completed wave.</FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><FONT COLOR="#f8fafc">Config: base=100, multiplier=2.</FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><FONT COLOR="#f8fafc">Regional shoppers: 30 VUs.</FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><FONT COLOR="#f8fafc">Steady API load: 100 requests/sec.</FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><FONT COLOR="#f8fafc">Storefront actions: ramp to 5 browser VUs.</FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><FONT COLOR="#f8fafc">Duration: 10m.</FONT></TD></TR>
+    </TABLE>
+  >];
+
+  target_heatmap -> target_note;
+}

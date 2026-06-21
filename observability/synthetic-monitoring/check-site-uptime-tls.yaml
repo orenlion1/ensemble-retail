@@ -1,0 +1,26 @@
+apiVersion: syntheticmonitoring.ext.grafana.app/v1alpha1
+kind: Check
+metadata:
+  name: "ensemble-grafana-site-uptime-tls-2493"
+spec:
+  job: ensemble-grafana-site-uptime-tls
+  target: https://ensemble-grafana.com
+  frequency: 60000
+  timeout: 10000
+  enabled: true
+  labels:
+    - name: environment
+      value: production
+    - name: service
+      value: storefront
+    - name: check_type
+      value: uptime
+  probes:
+    - Oregon
+    - Montreal
+    - London
+  alertSensitivity: none
+  basicMetricsOnly: false
+  settings:
+    http:
+      method: GET
