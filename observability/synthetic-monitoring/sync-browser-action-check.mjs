@@ -75,7 +75,7 @@ spec:
   target: https://ensemble-grafana.com
   frequency: 300000
   timeout: 180000
-  enabled: true
+  enabled: false
   labels:
     - name: environment
       value: production

@@ -7,7 +7,7 @@ spec:
   target: ensemble-grafana.com
   frequency: 120000
   timeout: 10000
-  enabled: true
+  enabled: false
   labels:
     - name: environment
       value: production

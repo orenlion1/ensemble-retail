@@ -42,7 +42,7 @@
 </g>
 <g id="clust7" class="cluster">
 <title>cluster_k6</title>
-<path fill="#0b1220" stroke="#f59e0b" stroke-width="2" d="M202.88,-8C202.88,-8 848.88,-8 848.88,-8 854.88,-8 860.88,-14 860.88,-20 860.88,-20 860.88,-117.64 860.88,-117.64 860.88,-123.64 854.88,-129.64 848.88,-129.64 848.88,-129.64 202.87,-129.64 202.87,-129.64 196.88,-129.64 190.88,-123.64 190.88,-117.64 190.88,-117.64 190.88,-20 190.88,-20 190.88,-14 196.88,-8 202.88,-8"/>
+<path fill="#0b1220" stroke="#f59e0b" stroke-width="2" d="M208.88,-8C208.88,-8 842.88,-8 842.88,-8 848.88,-8 854.88,-14 854.88,-20 854.88,-20 854.88,-117.64 854.88,-117.64 854.88,-123.64 848.88,-129.64 842.88,-129.64 842.88,-129.64 208.87,-129.64 208.87,-129.64 202.88,-129.64 196.88,-123.64 196.88,-117.64 196.88,-117.64 196.88,-20 196.88,-20 196.88,-14 202.88,-8 208.88,-8"/>
 <text xml:space="preserve" text-anchor="middle" x="525.88" y="-104.74" font-family="Helvetica,Arial,sans-serif" font-size="22.00" fill="#fde68a">7. k6 load and browser checks</text>
 </g>
 <!-- key&#45;&gt;start -->
@@ -246,29 +246,29 @@
 <!-- k6_runner&#45;&gt;k6_cf -->
 <g id="edge29" class="edge">
 <title>k6_runner&#45;&gt;k6_cf</title>
-<path fill="none" stroke="#94a3b8" stroke-width="2" d="M284.35,-60.92C313.38,-87.72 357.88,-128.79 357.88,-128.79 357.88,-128.79 493.88,-128.79 493.88,-128.79 493.88,-128.79 519.43,-90.26 537.18,-63.49"/>
-<polygon fill="#94a3b8" stroke="#94a3b8" stroke-width="2" points="538.62,-64.8 540.06,-59.15 535.42,-62.67 538.62,-64.8"/>
-<text xml:space="preserve" text-anchor="middle" x="412.88" y="-148.59" font-family="Helvetica,Arial,sans-serif" font-size="9.00" fill="#f8fafc">regional, spike,</text>
-<text xml:space="preserve" text-anchor="middle" x="412.88" y="-138.84" font-family="Helvetica,Arial,sans-serif" font-size="9.00" fill="#f8fafc">browser actions</text>
+<path fill="none" stroke="#94a3b8" stroke-width="2" d="M282.62,-60.68C309.86,-87.48 351.88,-128.79 351.88,-128.79 351.88,-128.79 487.88,-128.79 487.88,-128.79 487.88,-128.79 513.43,-90.26 531.18,-63.49"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" stroke-width="2" points="532.62,-64.8 534.06,-59.15 529.42,-62.67 532.62,-64.8"/>
+<text xml:space="preserve" text-anchor="middle" x="406.88" y="-148.59" font-family="Helvetica,Arial,sans-serif" font-size="9.00" fill="#f8fafc">regional, spike,</text>
+<text xml:space="preserve" text-anchor="middle" x="406.88" y="-138.84" font-family="Helvetica,Arial,sans-serif" font-size="9.00" fill="#f8fafc">browser actions</text>
 </g>
 <!-- k6_runner&#45;&gt;k6_grafana -->
 <g id="edge32" class="edge">
 <title>k6_runner&#45;&gt;k6_grafana</title>
-<path fill="none" stroke="#94a3b8" stroke-width="2" d="M321.22,-38.32C334.02,-38.32 347.56,-38.32 360.51,-38.32"/>
-<polygon fill="#94a3b8" stroke="#94a3b8" stroke-width="2" points="360.38,-40.25 365.88,-38.32 360.38,-36.4 360.38,-40.25"/>
-<text xml:space="preserve" text-anchor="middle" x="345.12" y="-42.52" font-family="Helvetica,Arial,sans-serif" font-size="9.00" fill="#f8fafc">results</text>
+<path fill="none" stroke="#94a3b8" stroke-width="2" d="M315.39,-38.32C327.97,-38.32 341.45,-38.32 354.41,-38.32"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" stroke-width="2" points="354.31,-40.25 359.81,-38.32 354.31,-36.4 354.31,-40.25"/>
+<text xml:space="preserve" text-anchor="middle" x="339.12" y="-42.52" font-family="Helvetica,Arial,sans-serif" font-size="9.00" fill="#f8fafc">results</text>
 </g>
 <!-- k6_cf&#45;&gt;k6_api -->
 <g id="edge30" class="edge">
 <title>k6_cf&#45;&gt;k6_api</title>
-<path fill="none" stroke="#94a3b8" stroke-width="2" d="M603.2,-38.32C612.12,-38.32 627.27,-38.32 637.5,-38.32"/>
-<polygon fill="#94a3b8" stroke="#94a3b8" stroke-width="2" points="637.39,-40.25 642.89,-38.32 637.39,-36.4 637.39,-40.25"/>
+<path fill="none" stroke="#94a3b8" stroke-width="2" d="M597.2,-38.32C606.12,-38.32 621.27,-38.32 631.5,-38.32"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" stroke-width="2" points="631.39,-40.25 636.89,-38.32 631.39,-36.4 631.39,-40.25"/>
 </g>
 <!-- k6_api&#45;&gt;k6_services -->
 <g id="edge31" class="edge">
 <title>k6_api&#45;&gt;k6_services</title>
-<path fill="none" stroke="#94a3b8" stroke-width="2" d="M715.66,-38.32C719.77,-38.32 722.54,-38.32 722.54,-38.32 722.54,-38.32 738.37,-38.32 750.51,-38.32"/>
-<polygon fill="#94a3b8" stroke="#94a3b8" stroke-width="2" points="750.23,-40.25 755.73,-38.32 750.23,-36.4 750.23,-40.25"/>
+<path fill="none" stroke="#94a3b8" stroke-width="2" d="M709.66,-38.32C713.77,-38.32 716.54,-38.32 716.54,-38.32 716.54,-38.32 732.37,-38.32 744.51,-38.32"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" stroke-width="2" points="744.23,-40.25 749.73,-38.32 744.23,-36.4 744.23,-40.25"/>
 </g>
 <!-- key -->
 <g id="node1" class="node">
@@ -551,38 +551,38 @@
 <!-- k6_runner -->
 <g id="node37" class="node">
 <title>k6_runner</title>
-<polygon fill="#713f12" stroke="#f59e0b" stroke-width="2" points="321.07,-60.64 198.68,-60.64 198.68,-16 321.07,-16 321.07,-60.64"/>
+<polygon fill="#713f12" stroke="#f59e0b" stroke-width="2" points="315.07,-60.64 204.67,-60.64 204.67,-16 315.07,-16 315.07,-60.64"/>
 <text xml:space="preserve" text-anchor="middle" x="259.88" y="-45.87" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#f8fafc">Grafana Cloud k6</text>
 <text xml:space="preserve" text-anchor="middle" x="259.88" y="-33.87" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#f8fafc">regional + spike</text>
-<text xml:space="preserve" text-anchor="middle" x="259.88" y="-21.87" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#f8fafc">100 rps API + browser</text>
+<text xml:space="preserve" text-anchor="middle" x="259.88" y="-21.87" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#f8fafc">5 rps API + browser</text>
 </g>
 <!-- k6_cf -->
 <g id="node38" class="node">
 <title>k6_cf</title>
-<polygon fill="#164e63" stroke="#38bdf8" stroke-width="2" points="602.7,-56.32 505.05,-56.32 505.05,-20.32 602.7,-20.32 602.7,-56.32"/>
-<text xml:space="preserve" text-anchor="middle" x="553.88" y="-39.87" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#f8fafc">CloudFront</text>
-<text xml:space="preserve" text-anchor="middle" x="553.88" y="-27.87" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#f8fafc">/api/* + storefront</text>
+<polygon fill="#164e63" stroke="#38bdf8" stroke-width="2" points="596.7,-56.32 499.05,-56.32 499.05,-20.32 596.7,-20.32 596.7,-56.32"/>
+<text xml:space="preserve" text-anchor="middle" x="547.88" y="-39.87" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#f8fafc">CloudFront</text>
+<text xml:space="preserve" text-anchor="middle" x="547.88" y="-27.87" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#f8fafc">/api/* + storefront</text>
 </g>
 <!-- k6_api -->
 <g id="node39" class="node">
 <title>k6_api</title>
-<polygon fill="#14532d" stroke="#22c55e" stroke-width="2" points="715.45,-56.32 646.3,-56.32 646.3,-20.32 715.45,-20.32 715.45,-56.32"/>
-<text xml:space="preserve" text-anchor="middle" x="680.88" y="-39.87" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#f8fafc">ALB / API</text>
-<text xml:space="preserve" text-anchor="middle" x="680.88" y="-27.87" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#f8fafc">traceparent</text>
+<polygon fill="#14532d" stroke="#22c55e" stroke-width="2" points="709.45,-56.32 640.3,-56.32 640.3,-20.32 709.45,-20.32 709.45,-56.32"/>
+<text xml:space="preserve" text-anchor="middle" x="674.88" y="-39.87" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#f8fafc">ALB / API</text>
+<text xml:space="preserve" text-anchor="middle" x="674.88" y="-27.87" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#f8fafc">traceparent</text>
 </g>
 <!-- k6_services -->
 <g id="node40" class="node">
 <title>k6_services</title>
-<polygon fill="#14532d" stroke="#22c55e" stroke-width="2" points="852.83,-56.32 758.92,-56.32 758.92,-20.32 852.83,-20.32 852.83,-56.32"/>
-<text xml:space="preserve" text-anchor="middle" x="805.88" y="-39.87" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#f8fafc">inventory / cart /</text>
-<text xml:space="preserve" text-anchor="middle" x="805.88" y="-27.87" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#f8fafc">account services</text>
+<polygon fill="#14532d" stroke="#22c55e" stroke-width="2" points="846.83,-56.32 752.92,-56.32 752.92,-20.32 846.83,-20.32 846.83,-56.32"/>
+<text xml:space="preserve" text-anchor="middle" x="799.88" y="-39.87" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#f8fafc">inventory / cart /</text>
+<text xml:space="preserve" text-anchor="middle" x="799.88" y="-27.87" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#f8fafc">account services</text>
 </g>
 <!-- k6_grafana -->
 <g id="node41" class="node">
 <title>k6_grafana</title>
-<polygon fill="#6b21a8" stroke="#c084fc" stroke-width="2" points="482.57,-56.32 369.18,-56.32 369.18,-20.32 482.57,-20.32 482.57,-56.32"/>
-<text xml:space="preserve" text-anchor="middle" x="425.88" y="-39.87" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#f8fafc">Grafana Cloud</text>
-<text xml:space="preserve" text-anchor="middle" x="425.88" y="-27.87" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#f8fafc">run metrics + checks</text>
+<polygon fill="#6b21a8" stroke="#c084fc" stroke-width="2" points="476.57,-56.32 363.18,-56.32 363.18,-20.32 476.57,-20.32 476.57,-56.32"/>
+<text xml:space="preserve" text-anchor="middle" x="419.88" y="-39.87" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#f8fafc">Grafana Cloud</text>
+<text xml:space="preserve" text-anchor="middle" x="419.88" y="-27.87" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#f8fafc">run metrics + checks</text>
 </g>
 </g>
 </svg>

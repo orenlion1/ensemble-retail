@@ -82,7 +82,7 @@ digraph ensemble_evolution_timeline_dark {
   ];
 
   policy [
-    label="Jun 9-18\nEvolution policy\nAGENTS.md documentation rule\nGraphviz skill workflow\n100 rps routine baseline\nIRM detection label required\nContext hygiene audit",
+    label="Jun 9-26\nEvolution policy\nAGENTS.md documentation rule\nGraphviz skill workflow\n5 rps routine baseline\nSynthetic checks disabled\nIRM detection + context hygiene",
     fillcolor="#321854",
     color="#c084fc"
   ];

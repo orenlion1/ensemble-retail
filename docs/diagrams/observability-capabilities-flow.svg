@@ -396,7 +396,7 @@
 <path fill="#6b21a8" stroke="#64748b" d="M156.78,-125.76C156.78,-125.76 12,-125.76 12,-125.76 6,-125.76 0,-119.76 0,-113.76 0,-113.76 0,-78.24 0,-78.24 0,-72.24 6,-66.24 12,-66.24 12,-66.24 156.78,-66.24 156.78,-66.24 162.78,-66.24 168.78,-72.24 168.78,-78.24 168.78,-78.24 168.78,-113.76 168.78,-113.76 168.78,-119.76 162.78,-125.76 156.78,-125.76"/>
 <text xml:space="preserve" text-anchor="middle" x="84.39" y="-109.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">Grafana Cloud k6</text>
 <text xml:space="preserve" text-anchor="middle" x="84.39" y="-97.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">regional load, spike benchmark,</text>
-<text xml:space="preserve" text-anchor="middle" x="84.39" y="-85.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">100 rps API baseline,</text>
+<text xml:space="preserve" text-anchor="middle" x="84.39" y="-85.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">5 rps API baseline,</text>
 <text xml:space="preserve" text-anchor="middle" x="84.39" y="-73.55" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">browser actions</text>
 </g>
 <!-- k6Tracing -->
@@ -425,7 +425,7 @@
 <path fill="none" stroke="#94a3b8" d="M535.85,-280.02C605.85,-288.12 713.14,-300.53 781.63,-308.46"/>
 <polygon fill="#94a3b8" stroke="#94a3b8" points="781.04,-310.85 788.28,-309.23 781.61,-305.99 781.04,-310.85"/>
 <text xml:space="preserve" text-anchor="middle" x="686.68" y="-317.45" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">load checks with traceparent</text>
-<text xml:space="preserve" text-anchor="middle" x="686.68" y="-307.7" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">100 rps API baseline</text>
+<text xml:space="preserve" text-anchor="middle" x="686.68" y="-307.7" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">5 rps API baseline</text>
 </g>
 <!-- irm -->
 <g id="node21" class="node">

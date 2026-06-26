@@ -162,13 +162,13 @@
 <g id="node9" class="node">
 <title>policy</title>
 <path fill="#321854" stroke="#c084fc" stroke-width="2" d="M503.05,-449.77C503.05,-449.77 276.45,-449.77 276.45,-449.77 270.45,-449.77 264.45,-443.77 264.45,-437.77 264.45,-437.77 264.45,-334.75 264.45,-334.75 264.45,-328.75 270.45,-322.75 276.45,-322.75 276.45,-322.75 503.05,-322.75 503.05,-322.75 509.05,-322.75 515.05,-328.75 515.05,-334.75 515.05,-334.75 515.05,-437.77 515.05,-437.77 515.05,-443.77 509.05,-449.77 503.05,-449.77"/>
-<text xml:space="preserve" text-anchor="middle" x="389.75" y="-428.81" font-family="Helvetica,sans-Serif" font-size="16.00" fill="#f8fafc">Jun 9&#45;18</text>
+<text xml:space="preserve" text-anchor="middle" x="389.75" y="-428.81" font-family="Helvetica,sans-Serif" font-size="16.00" fill="#f8fafc">Jun 9&#45;26</text>
 <text xml:space="preserve" text-anchor="middle" x="389.75" y="-412.31" font-family="Helvetica,sans-Serif" font-size="16.00" fill="#f8fafc">Evolution policy</text>
 <text xml:space="preserve" text-anchor="middle" x="389.75" y="-395.81" font-family="Helvetica,sans-Serif" font-size="16.00" fill="#f8fafc">AGENTS.md documentation rule</text>
 <text xml:space="preserve" text-anchor="middle" x="389.75" y="-379.31" font-family="Helvetica,sans-Serif" font-size="16.00" fill="#f8fafc">Graphviz skill workflow</text>
-<text xml:space="preserve" text-anchor="middle" x="389.75" y="-362.81" font-family="Helvetica,sans-Serif" font-size="16.00" fill="#f8fafc">100 rps routine baseline</text>
-<text xml:space="preserve" text-anchor="middle" x="389.75" y="-346.31" font-family="Helvetica,sans-Serif" font-size="16.00" fill="#f8fafc">IRM detection label required</text>
-<text xml:space="preserve" text-anchor="middle" x="389.75" y="-329.81" font-family="Helvetica,sans-Serif" font-size="16.00" fill="#f8fafc">Context hygiene audit</text>
+<text xml:space="preserve" text-anchor="middle" x="389.75" y="-362.81" font-family="Helvetica,sans-Serif" font-size="16.00" fill="#f8fafc">5 rps routine baseline</text>
+<text xml:space="preserve" text-anchor="middle" x="389.75" y="-346.31" font-family="Helvetica,sans-Serif" font-size="16.00" fill="#f8fafc">Synthetic checks disabled</text>
+<text xml:space="preserve" text-anchor="middle" x="389.75" y="-329.81" font-family="Helvetica,sans-Serif" font-size="16.00" fill="#f8fafc">IRM detection + context hygiene</text>
 </g>
 <!-- latest&#45;&gt;policy -->
 <g id="edge10" class="edge">

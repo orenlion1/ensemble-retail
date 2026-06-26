@@ -21,6 +21,7 @@
 | 2026-06-08 | `b5273e4` Update load test report for run 7716954 | New load-test evidence was committed. |
 | 2026-06-08 | `60de963` Update load test report for run 7718235 | Latest visible load-test report was committed. |
 | 2026-06-11 | Current baseline update | The steady API request-rate default was dialed down from 120 rps to 100 rps for routine traffic-spike validation. |
+| 2026-06-26 | Current cost-control baseline | The steady API request-rate default was reduced from 100 rps to 5 rps, and Synthetic Monitoring checks were disabled while preserving their code definitions. |
 
 ## What This Category Produced
 
@@ -28,7 +29,8 @@
 - A traffic-spike model with staged VU and request-pressure evolution.
 - Report generation for HTTP failure rate, check pass rate, p95 latency, user-action totals, and run comparisons.
 - A preserved run history across passing and failing exercises.
-- A current 100 rps steady API baseline for routine traffic-spike validation, while retaining the `100/200/400` spike VU profile.
+- A current 5 rps steady API baseline for routine traffic-spike validation, while retaining the `100/200/400` spike VU profile.
+- Disabled-by-default Synthetic Monitoring check definitions that preserve uptime, API, DNS, ping, TCP, scripted k6, and browser-action coverage as code without continuous check execution cost.
 
 ## Current Artifacts
 

@@ -14,7 +14,7 @@ data "grafana_synthetic_monitoring_probes" "main" {}
 resource "grafana_synthetic_monitoring_check" "scripted" {
   job       = "ensemble-grafana-scripted-storefront-api"
   target    = "https://ensemble-grafana.com"
-  enabled   = true
+  enabled   = false
   frequency = 60000
   timeout   = 10000
 
@@ -40,7 +40,7 @@ resource "grafana_synthetic_monitoring_check" "scripted" {
 resource "grafana_synthetic_monitoring_check" "browser_user_actions" {
   job       = "ensemble-grafana-browser-user-actions"
   target    = "https://ensemble-grafana.com"
-  enabled   = true
+  enabled   = false
   frequency = 300000
   timeout   = 180000
 

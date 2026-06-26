@@ -20,7 +20,7 @@ const spikeMultiplier = Number(__ENV.SPIKE_MULTIPLIER || 2);
 const spikeTwoUsers = Math.ceil(baseSpikeUsers * spikeMultiplier);
 const spikeThreeUsers = Math.ceil(spikeTwoUsers * spikeMultiplier);
 const regionalShopperVus = Number(__ENV.REGIONAL_SHOPPER_VUS || 30);
-const apiRequestRate = Number(__ENV.API_REQUEST_RPS || 100);
+const apiRequestRate = Number(__ENV.API_REQUEST_RPS || 5);
 const userActionTargetRps = Number(__ENV.USER_ACTION_TARGET_RPS || 0.18);
 const browserActionVus = Number(__ENV.BROWSER_ACTION_VUS || 5);
 const inventoryRequestInterval = Math.max(1, Number(__ENV.INVENTORY_REQUEST_INTERVAL || 3));
@@ -85,8 +85,8 @@ export const options = {
       rate: apiRequestRate,
       timeUnit: '1s',
       duration: benchmarkDuration,
-      preAllocatedVUs: Number(__ENV.API_REQUEST_PRE_ALLOCATED_VUS || 60),
-      maxVUs: Number(__ENV.API_REQUEST_MAX_VUS || 180),
+      preAllocatedVUs: Number(__ENV.API_REQUEST_PRE_ALLOCATED_VUS || 5),
+      maxVUs: Number(__ENV.API_REQUEST_MAX_VUS || 20),
       gracefulStop: '30s'
     },
     storefront_actions: {

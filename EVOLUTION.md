@@ -209,6 +209,21 @@ Key evidence:
 - `scripts/audit-codex-token-context.mjs`: Codex JSONL session logs can now be audited for input-token growth, cached-input share, largest tool outputs, and largest serialized messages.
 - `docs/evolution/categories/agent-skills-automation.md`: agent policy chronology now records context hygiene as part of the reusable operating model.
 
+### June 26, 2026: Reduce Validation Cost
+
+The routine steady API request-rate baseline was lowered again, from 100 rps to 5 rps, so the default traffic-spike profile remains useful for script and telemetry validation without generating routine production pressure. Synthetic Monitoring code and manifests remain in the repo, but the live `ensemble-grafana-*` checks are disabled by default to stop ongoing Grafana Cloud check execution cost.
+
+Representative prompt category:
+
+> Preserve validation coverage as code while reducing routine cloud execution cost.
+
+Key evidence:
+
+- `load-tests/grafana-cloud-traffic-spikes.js`: `API_REQUEST_RPS` now defaults to `5`, with the steady request-rate VU pool reduced to `5/20`.
+- `observability/synthetic-monitoring/`: Synthetic Monitoring check manifests and the Terraform wrapper now set `enabled: false` while keeping the scripted and browser-check code.
+- `README.md`, `.codex/commands/run-load-test.md`, and `skills/observability/SKILLS.md`: operational guidance now documents the 5 rps baseline and disabled Synthetic Monitoring posture.
+- `DIAGRAMS.md`, `docs/diagrams/`, `docs/graphviz/`, and `docs/evolution/diagrams/`: current diagrams now describe the 5 rps load-test baseline.
+
 ## End-to-End Shape
 
 The project now reads as an end-to-end operational application:
@@ -217,7 +232,7 @@ The project now reads as an end-to-end operational application:
 2. Spring Boot services own inventory, cart, and account data boundaries.
 3. Terraform and Kubernetes define AWS, EKS, edge, auth, data, workload, and rollout behavior.
 4. Grafana Cloud, Faro, Alloy, Beyla, dashboards, IRM, and reports observe the system.
-5. k6 and Playwright validate both protocol and browser behavior, with the routine traffic-spike steady API baseline currently set to 100 rps.
+5. k6 and Playwright validate both protocol and browser behavior, with the routine traffic-spike steady API baseline currently set to 5 rps and Synthetic Monitoring checks preserved as disabled code by default.
 6. Graphviz diagrams and dashboard panels explain request paths, telemetry paths, load models, and now project evolution.
 7. `EVOLUTION.md` and `docs/evolution/categories/` preserve the build chronology by prompt category.
 8. Repo-local skills, personas, and `AGENTS.md` preserve the working rules so future prompts can reproduce the same quality bar, including required IRM labels for `region`, `feature`, `service`, and `detection`, plus bounded tool-output handling for agent context hygiene.

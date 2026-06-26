@@ -86,16 +86,16 @@
 <!-- api_rate -->
 <g id="node19" class="node">
 <title>api_rate</title>
-<path fill="#e0f2fe" stroke="#334155" d="M1660.88,-62.12C1660.88,-62.12 1535.38,-62.12 1535.38,-62.12 1529.38,-62.12 1523.38,-56.12 1523.38,-50.12 1523.38,-50.12 1523.38,-27.88 1523.38,-27.88 1523.38,-21.88 1529.38,-15.88 1535.38,-15.88 1535.38,-15.88 1660.88,-15.88 1660.88,-15.88 1666.88,-15.88 1672.88,-21.88 1672.88,-27.88 1672.88,-27.88 1672.88,-50.12 1672.88,-50.12 1672.88,-56.12 1666.88,-62.12 1660.88,-62.12"/>
+<path fill="#e0f2fe" stroke="#334155" d="M1654.12,-62.12C1654.12,-62.12 1542.12,-62.12 1542.12,-62.12 1536.12,-62.12 1530.12,-56.12 1530.12,-50.12 1530.12,-50.12 1530.12,-27.88 1530.12,-27.88 1530.12,-21.88 1536.12,-15.88 1542.12,-15.88 1542.12,-15.88 1654.12,-15.88 1654.12,-15.88 1660.12,-15.88 1666.12,-21.88 1666.12,-27.88 1666.12,-27.88 1666.12,-50.12 1666.12,-50.12 1666.12,-56.12 1660.12,-62.12 1654.12,-62.12"/>
 <text xml:space="preserve" text-anchor="middle" x="1598.12" y="-46.73" font-family="Helvetica,sans-Serif" font-size="12.00">api_request_rate</text>
 <text xml:space="preserve" text-anchor="middle" x="1598.12" y="-33.98" font-family="Helvetica,sans-Serif" font-size="12.00">constant arrival rate</text>
-<text xml:space="preserve" text-anchor="middle" x="1598.12" y="-21.23" font-family="Helvetica,sans-Serif" font-size="12.00">100 requests/sec for 10m</text>
+<text xml:space="preserve" text-anchor="middle" x="1598.12" y="-21.23" font-family="Helvetica,sans-Serif" font-size="12.00">5 requests/sec for 10m</text>
 </g>
 <!-- avg&#45;&gt;api_rate -->
 <g id="edge17" class="edge">
 <title>avg&#45;&gt;api_rate</title>
-<path fill="none" stroke="#475569" d="M1289.32,-99.5C1356.54,-86.28 1448.13,-68.28 1513.89,-55.36"/>
-<polygon fill="#475569" stroke="#475569" points="1514.2,-58.15 1521.51,-53.86 1513.12,-52.66 1514.2,-58.15"/>
+<path fill="none" stroke="#475569" d="M1289.32,-99.5C1358.84,-85.83 1454.4,-67.05 1520.52,-54.05"/>
+<polygon fill="#475569" stroke="#475569" points="1520.86,-56.84 1528.17,-52.55 1519.78,-51.35 1520.86,-56.84"/>
 <text xml:space="preserve" text-anchor="middle" x="1364.38" y="-95.5" font-family="Helvetica,sans-Serif" font-size="11.00">steady API pressure</text>
 </g>
 <!-- browser -->

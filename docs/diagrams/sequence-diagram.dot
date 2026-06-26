@@ -167,7 +167,7 @@ digraph sequence_dependency_diagram {
     color="#f59e0b";
     fontcolor="#fde68a";
     style="rounded,setlinewidth(2)";
-    k6_runner [label="Grafana Cloud k6\nregional + spike\n100 rps API + browser", fillcolor="#713f12", color="#f59e0b", group=c1];
+    k6_runner [label="Grafana Cloud k6\nregional + spike\n5 rps API + browser", fillcolor="#713f12", color="#f59e0b", group=c1];
     k6_cf [label="CloudFront\n/api/* + storefront", fillcolor="#164e63", color="#38bdf8", group=c2];
     k6_api [label="ALB / API\ntraceparent", fillcolor="#14532d", color="#22c55e", group=c3];
     k6_services [label="inventory / cart /\naccount services", fillcolor="#14532d", color="#22c55e", group=c4];

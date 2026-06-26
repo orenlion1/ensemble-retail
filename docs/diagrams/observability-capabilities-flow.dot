@@ -57,7 +57,7 @@ digraph observability_capabilities_flow {
   cloudwatch [label="AWS CloudWatch\nRDS metrics", fillcolor="#334155"];
   cloudwatchScrape [label="Grafana Cloud Provider\nAWS/RDS scrape job", fillcolor="#6b21a8"];
   synth [label="Grafana Synthetic Monitoring\nHTTP, DNS, Ping, TCP,\nscripted k6, k6 browser", fillcolor="#6b21a8"];
-  k6 [label="Grafana Cloud k6\nregional load, spike benchmark,\n100 rps API baseline,\nbrowser actions", fillcolor="#6b21a8"];
+  k6 [label="Grafana Cloud k6\nregional load, spike benchmark,\n5 rps API baseline,\nbrowser actions", fillcolor="#6b21a8"];
   k6Tracing [label="k6 Tempo instrumentation\nW3C trace context", fillcolor="#6b21a8"];
   irm [label="Grafana IRM\nincidents, labels, on-call schedule", fillcolor="#6b21a8"];
 
@@ -108,7 +108,7 @@ digraph observability_capabilities_flow {
   synth -> cloudfront [label="checks production URL and API health"];
   synth -> grafana [label="check samples"];
   k6 -> k6Tracing;
-  k6Tracing -> cloudfront [label="load checks with traceparent\n100 rps API baseline"];
+  k6Tracing -> cloudfront [label="load checks with traceparent\n5 rps API baseline"];
   k6 -> grafana [label="test metrics + trace correlation"];
   irm -> grafana [label="incident and schedule state"];
   grafana -> frontendObs;
