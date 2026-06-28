@@ -52,8 +52,8 @@ export const options = {
   }
 };
 
-const storefrontBaseUrl = (__ENV.STOREFRONT_BASE_URL || __ENV.BASE_URL || 'https://ensemble-grafana.com').replace(/\/$/, '');
-const apiBaseUrl = (__ENV.API_BASE_URL || __ENV.BASE_URL || 'https://api.ensemble-grafana.com').replace(/\/$/, '');
+const storefrontBaseUrl = (__ENV.STOREFRONT_BASE_URL || __ENV.BASE_URL || 'https://ensemble-retail.com').replace(/\/$/, '');
+const apiBaseUrl = (__ENV.API_BASE_URL || __ENV.BASE_URL || 'https://ensemble-retail.com').replace(/\/$/, '');
 const apiKey = __ENV.API_TEST_KEY || '';
 const regions = ['US', 'CA', 'CN', 'UK', 'SE'];
 const regionProfiles = {

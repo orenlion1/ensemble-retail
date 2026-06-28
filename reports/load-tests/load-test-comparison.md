@@ -1,12 +1,12 @@
 # k6 Load Test Comparison
 
-Generated: 2026-06-17T14:24:05.218Z
+Generated: 2026-06-28T19:19:31.601Z
 
 Source summary: `reports/load-tests/k6-summary-20260617T142338Z.json`
 
 Source run history: `reports/load-tests/k6-runs-20260617T142338Z.json`
 
-Source Faro action totals: `reports/frontend-user-actions/faro-user-action-totals-20260617T142400Z.json`
+Source Faro action totals: `reports/frontend-user-actions/faro-user-action-totals-20260628T191929Z.json`
 
 ## Latest Runs
 
@@ -60,6 +60,9 @@ These totals come from local k6 summary files named `reports/load-tests/k6-local
 
 | Date | Generated | Test | HTTP Requests | HTTP Failures | HTTP Failure Rate | User Actions | Cart Adds Total | Add Item | Add Detail | Add Sale | Remove Item | Checkout | API Cart Updates | Checkout Attempts | Region Changes |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 2026-06-28 | 06/28/2026, 15:19 | Browser action synthetic check | 123 | 0 | 0.00% | 43 | 4 | 1 | 2 | 1 | 1 | 1 | n/a | n/a | n/a |
+| 2026-06-28 | 06/28/2026, 15:07 | Browser action synthetic check | 127 | 0 | 0.00% | 43 | 4 | 1 | 2 | 1 | 1 | 1 | n/a | n/a | n/a |
+| 2026-06-28 | 06/28/2026, 15:00 | Browser action synthetic check | 127 | 0 | 0.00% | 43 | 4 | 1 | 2 | 1 | 1 | 1 | n/a | n/a | n/a |
 | 2026-06-01 | 06/01/2026, 12:05 | Browser action synthetic check | 123 | 14 | 11.38% | 43 | 4 | 1 | 2 | 1 | 1 | 1 | n/a | n/a | n/a |
 | 2026-05-31 | 05/31/2026, 19:30 | Browser action synthetic check | 140 | 14 | 10.00% | 43 | 4 | 1 | 2 | 1 | 1 | 1 | n/a | n/a | n/a |
 | 2026-05-31 | 05/31/2026, 19:26 | Browser action synthetic check | 218 | 0 | 0.00% | 43 | 4 | 1 | 2 | 1 | 1 | 1 | n/a | n/a | n/a |
@@ -83,57 +86,45 @@ These totals come from local k6 summary files named `reports/load-tests/k6-local
 
 These totals come from the latest `gcx logs query` output under `reports/frontend-user-actions/faro-user-action-totals-*.json`. They use the latest sample from a rolling `6h` `count_over_time` query to show what Grafana Cloud received after k6 browser-action runs.
 
-Total executions: 5139
+Total executions: 5711
 
 | Action | Importance | Severity | Executions |
 |---|---|---|---:|
-| search-products | normal | unset | 352 |
-| select-language:swedish | normal | unset | 251 |
-| select-language:american-english | normal | unset | 250 |
-| close-product-detail:mens-midlayer-grid | normal | unset | 248 |
-| shopping-cart:add-detail-item:mens-midlayer-grid | normal | unset | 248 |
-| sort-products:price-low | normal | unset | 169 |
-| checkout-dialog:close | normal | unset | 125 |
-| navigate-header:cart | normal | unset | 125 |
-| navigate-sale:spring-collection-sale | normal | unset | 125 |
-| select-department:mens | normal | unset | 125 |
-| select-department:womens | normal | unset | 125 |
-| select-region:se | normal | unset | 125 |
-| select-region:us | normal | unset | 125 |
-| shopping-cart:add-sale-item:mens-midlayer-grid | normal | unset | 125 |
-| edit-account-email | normal | unset | 124 |
-| edit-account-name | normal | unset | 124 |
-| edit-shipping-address | normal | unset | 124 |
-| navigate-brand-family:ensemble | normal | unset | 124 |
-| navigate-brand-family:outlet | normal | unset | 124 |
-| navigate-brand-family:regear | normal | unset | 124 |
-| navigate-brand-family:trail-lab | normal | unset | 124 |
-| navigate-header:account | normal | unset | 124 |
-| navigate-header:shop | normal | unset | 124 |
-| navigate-hero:shop-new-arrivals | normal | unset | 124 |
-| navigate-sale:shop-all | normal | unset | 124 |
-| navigate-utility:find-store | normal | unset | 124 |
-| navigate-utility:help | normal | unset | 124 |
-| save-account | critical | unset | 124 |
-| select-category:mens-mid-layers | normal | unset | 124 |
-| shopping-cart:add-item:mens-midlayer-grid | normal | unset | 124 |
-| shopping-cart:change-quantity:mens-midlayer-grid | normal | unset | 124 |
-| shopping-cart:checkout | critical | unset | 124 |
-| shopping-cart:remove-item:mens-midlayer-grid | normal | unset | 124 |
-| view-product:product-grid-mens-midlayer-grid | normal | unset | 124 |
-| view-product:sale-grid-mens-midlayer-grid | normal | unset | 124 |
-| select-category:mens-pants | normal | unset | 2 |
-| select-language:british-english | normal | unset | 2 |
-| select-language:french | normal | unset | 2 |
-| select-language:mandarin | normal | unset | 2 |
-| shopping-cart:add-sale-item:womens-rain-cap | normal | unset | 2 |
-| auth:google-login-complete | normal | unset | 1 |
-| auth:google-login-start | critical | unset | 1 |
-| select-region:ca | normal | unset | 1 |
-| select-region:cn | normal | unset | 1 |
-| select-region:uk | normal | unset | 1 |
-| shopping-cart:checkout | normal | unset | 1 |
-| shopping-cart:remove-item:womens-rain-cap | normal | unset | 1 |
+| search-products | normal | unset | 435 |
+| select-language:swedish | normal | unset | 278 |
+| close-product-detail:mens-midlayer-grid | normal | unset | 276 |
+| select-language:american-english | normal | unset | 276 |
+| shopping-cart:add-detail-item:mens-midlayer-grid | normal | unset | 276 |
+| sort-products:price-low | normal | unset | 168 |
+| checkout-dialog:close | normal | unset | 138 |
+| edit-account-email | normal | unset | 138 |
+| edit-account-name | normal | unset | 138 |
+| edit-shipping-address | normal | unset | 138 |
+| navigate-brand-family:ensemble | normal | unset | 138 |
+| navigate-brand-family:outlet | normal | unset | 138 |
+| navigate-brand-family:regear | normal | unset | 138 |
+| navigate-brand-family:trail-lab | normal | unset | 138 |
+| navigate-header:account | normal | unset | 138 |
+| navigate-header:cart | normal | unset | 138 |
+| navigate-header:shop | normal | unset | 138 |
+| navigate-hero:shop-new-arrivals | normal | unset | 138 |
+| navigate-sale:shop-all | normal | unset | 138 |
+| navigate-sale:spring-collection-sale | normal | unset | 138 |
+| navigate-utility:find-store | normal | unset | 138 |
+| navigate-utility:help | normal | unset | 138 |
+| save-account | critical | unset | 138 |
+| select-category:mens-mid-layers | normal | unset | 138 |
+| select-department:mens | normal | unset | 138 |
+| select-department:womens | normal | unset | 138 |
+| select-region:se | normal | unset | 138 |
+| select-region:us | normal | unset | 138 |
+| shopping-cart:add-item:mens-midlayer-grid | normal | unset | 138 |
+| shopping-cart:add-sale-item:mens-midlayer-grid | normal | unset | 138 |
+| shopping-cart:change-quantity:mens-midlayer-grid | normal | unset | 138 |
+| shopping-cart:checkout | critical | unset | 138 |
+| shopping-cart:remove-item:mens-midlayer-grid | normal | unset | 138 |
+| view-product:product-grid-mens-midlayer-grid | normal | unset | 138 |
+| view-product:sale-grid-mens-midlayer-grid | normal | unset | 138 |
 
 ## Run History
 

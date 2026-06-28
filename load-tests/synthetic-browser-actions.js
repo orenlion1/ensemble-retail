@@ -30,7 +30,7 @@ export const options = {
   }
 };
 
-const baseUrl = __ENV.BASE_URL || 'https://ensemble-grafana.com';
+const baseUrl = __ENV.BASE_URL || 'https://ensemble-retail.com';
 const storefrontUserActions = new Counter('storefront_user_actions');
 const storefrontUserActionEvents = new Counter('storefront_user_action_events');
 const shoppingCartAddItems = new Counter('shopping_cart_add_items');

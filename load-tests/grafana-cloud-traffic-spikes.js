@@ -9,8 +9,8 @@ import storefrontActions, { USER_ACTION_RATE_FAMILIES } from './synthetic-browse
 //   set -a && source .env && set +a
 //   K6_CLOUD_TOKEN="$K6_CLOUD_TOKEN" k6 cloud run \
 //     -e API_TEST_KEY="$API_TEST_KEY" \
-//     -e STOREFRONT_BASE_URL=https://ensemble-grafana.com \
-//     -e API_BASE_URL=https://ensemble-grafana.com \
+//     -e STOREFRONT_BASE_URL=https://ensemble-retail.com \
+//     -e API_BASE_URL=https://ensemble-retail.com \
 //     load-tests/grafana-cloud-traffic-spikes.js
 // Plain shell env assignments before `k6 cloud run` authenticate the uploader, but
 // `-e` is what injects protected app env vars into the remote cloud workers.
@@ -148,8 +148,8 @@ export const options = {
   }
 };
 
-const storefrontBaseUrl = (__ENV.STOREFRONT_BASE_URL || __ENV.BASE_URL || 'https://ensemble-grafana.com').replace(/\/$/, '');
-const apiBaseUrl = (__ENV.API_BASE_URL || __ENV.STOREFRONT_BASE_URL || __ENV.BASE_URL || 'https://ensemble-grafana.com').replace(/\/$/, '');
+const storefrontBaseUrl = (__ENV.STOREFRONT_BASE_URL || __ENV.BASE_URL || 'https://ensemble-retail.com').replace(/\/$/, '');
+const apiBaseUrl = (__ENV.API_BASE_URL || __ENV.STOREFRONT_BASE_URL || __ENV.BASE_URL || 'https://ensemble-retail.com').replace(/\/$/, '');
 const apiKey = __ENV.API_TEST_KEY || '';
 const regions = ['US', 'CA', 'CN', 'UK', 'SE'];
 const regionProfiles = {

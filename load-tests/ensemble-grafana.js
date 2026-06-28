@@ -25,7 +25,7 @@ export const options = {
   }
 };
 
-const baseUrl = (__ENV.API_BASE_URL || __ENV.BASE_URL || 'http://localhost:5173').replace(/\/$/, '');
+const baseUrl = (__ENV.API_BASE_URL || __ENV.BASE_URL || 'https://ensemble-retail.com').replace(/\/$/, '');
 const apiKey = __ENV.API_TEST_KEY || 'local-dev';
 const categoriesSeen = new Trend('categories_seen');
 

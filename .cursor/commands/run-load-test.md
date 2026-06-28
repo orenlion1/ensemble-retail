@@ -18,8 +18,8 @@ source .env
 set +a
 K6_CLOUD_TOKEN="$K6_CLOUD_TOKEN" k6 cloud run \
   -e API_TEST_KEY="$API_TEST_KEY" \
-  -e STOREFRONT_BASE_URL="${STOREFRONT_BASE_URL:-https://ensemble-grafana.com}" \
-  -e API_BASE_URL="${API_BASE_URL:-https://ensemble-grafana.com}" \
+  -e STOREFRONT_BASE_URL="${STOREFRONT_BASE_URL:-https://ensemble-retail.com}" \
+  -e API_BASE_URL="${API_BASE_URL:-https://ensemble-retail.com}" \
   load-tests/grafana-cloud-traffic-spikes.js
 ```
 
@@ -84,10 +84,10 @@ gh run watch <run-id> --exit-status
 - The current default spike sequence is `100`, `200`, and `400` VUs.
 - Use `BASE_SPIKE_USERS=<value>` to override the first spike for one run.
 - Use `SPIKE_MULTIPLIER=<value>` to override the spike growth factor for one run.
-- The default `API_BASE_URL` is `https://ensemble-grafana.com` so `/api/*` traffic exercises CloudFront API routing. Override it with `https://api.ensemble-grafana.com` only when testing the ALB/API origin directly.
-- The default steady API scenario uses `API_REQUEST_RPS=120`, `API_REQUEST_PRE_ALLOCATED_VUS=60`, and `API_REQUEST_MAX_VUS=180` for the current 120 requests/second protocol baseline.
+- The default `API_BASE_URL` is `https://ensemble-retail.com` so `/api/*` traffic exercises CloudFront API routing. Override it with `https://api.ensemble-retail.com` only when testing the ALB/API origin directly.
+- The default steady API scenario uses `API_REQUEST_RPS=5`, `API_REQUEST_PRE_ALLOCATED_VUS=5`, and `API_REQUEST_MAX_VUS=20` for the current 5 requests/second protocol baseline.
 - The default steady API scenario weights inventory and account lighter than cart, spike shopper journeys use `INVENTORY_REQUEST_INTERVAL=3` so inventory-service does not receive catalog reads on every iteration, and they use `ACCOUNT_WRITE_INTERVAL=3` so account-service does not receive account writes on every account or checkout iteration.
 - The default browser-action scenario uses `BROWSER_ACTION_VUS=5`, `BROWSER_ACTION_RAMP_UP=2m`, `BROWSER_ACTION_HOLD=6m`, `BROWSER_ACTION_RAMP_DOWN=2m`, and `USER_ACTION_TARGET_RPS=0.18` so Faro actions are still validated without making Chromium capacity the bottleneck.
-- The default combined benchmark peaks at 615 VUs. Increase the project quota or lower `BASE_SPIKE_USERS`, `REGIONAL_SHOPPER_VUS`, `API_REQUEST_MAX_VUS`, or `BROWSER_ACTION_VUS` for quota-constrained validation runs.
+- The default combined benchmark peaks at 455 VUs. Increase the project quota or lower `BASE_SPIKE_USERS`, `REGIONAL_SHOPPER_VUS`, `API_REQUEST_MAX_VUS`, or `BROWSER_ACTION_VUS` for quota-constrained validation runs.
 - Use local `k6 run` only when explicitly debugging a script or when Grafana Cloud k6 is unavailable.
 - Keep generated raw k6 JSON ignored. Commit the Markdown/CSV/SVG/Graphviz dashboard artifacts produced by the standard report workflow after each run.

@@ -446,14 +446,14 @@ Each virtual user cycles through `US`, `CA`, `CN`, `UK`, and `SE`, sending `regi
 
 The API load scripts use low-cardinality group and request labels for Grafana Cloud reporting. Dynamic shopper IDs stay in the request path, but the k6 `name` tag is templated as values such as `PUT /api/cart/carts/:shopperId` and `PUT /api/account/accounts/:shopperId`. The scripts also import Grafana's Tempo HTTP instrumentation helper and propagate W3C trace context so Grafana Cloud k6 can correlate requests with backend traces when service traces are flowing to Grafana Cloud Traces.
 
-Use `STOREFRONT_BASE_URL` and `API_BASE_URL` when the static site and API are routed through different origins. The current production API origin is `https://api.ensemble-grafana.com`.
+Use `STOREFRONT_BASE_URL` and `API_BASE_URL` when the static site and API are routed through different origins. Load tests default to `https://ensemble-retail.com` so both storefront and `/api/*` traffic traverse CloudFront. The direct production API origin is `https://api.ensemble-retail.com` and should be used only when intentionally bypassing CloudFront.
 
 Run the 30-user regional test locally:
 
 ```sh
 API_TEST_KEY=<api-test-key> \
-STOREFRONT_BASE_URL=https://ensemble-grafana.com \
-API_BASE_URL=https://api.ensemble-grafana.com \
+STOREFRONT_BASE_URL=https://ensemble-retail.com \
+API_BASE_URL=https://ensemble-retail.com \
 k6 run load-tests/grafana-cloud-20-user-regional.js
 ```
 
@@ -462,8 +462,8 @@ Override regional load with `REGIONAL_SHOPPER_VUS` when benchmarking a different
 ```sh
 REGIONAL_SHOPPER_VUS=45 \
 API_TEST_KEY=<api-test-key> \
-STOREFRONT_BASE_URL=https://ensemble-grafana.com \
-API_BASE_URL=https://api.ensemble-grafana.com \
+STOREFRONT_BASE_URL=https://ensemble-retail.com \
+API_BASE_URL=https://ensemble-retail.com \
 k6 run load-tests/grafana-cloud-20-user-regional.js
 ```
 
@@ -493,8 +493,8 @@ Run a short smoke version:
 ```sh
 API_TEST_KEY=<api-test-key> \
 TEST_DURATION=30s \
-STOREFRONT_BASE_URL=https://ensemble-grafana.com \
-API_BASE_URL=https://api.ensemble-grafana.com \
+STOREFRONT_BASE_URL=https://ensemble-retail.com \
+API_BASE_URL=https://ensemble-retail.com \
 k6 run load-tests/grafana-cloud-20-user-regional.js
 ```
 
@@ -595,8 +595,8 @@ source .env
 set +a
 K6_CLOUD_TOKEN="$K6_CLOUD_TOKEN" k6 cloud run \
   -e API_TEST_KEY="$API_TEST_KEY" \
-  -e STOREFRONT_BASE_URL=https://ensemble-grafana.com \
-  -e API_BASE_URL=https://ensemble-grafana.com \
+  -e STOREFRONT_BASE_URL=https://ensemble-retail.com \
+  -e API_BASE_URL=https://ensemble-retail.com \
   load-tests/grafana-cloud-traffic-spikes.js
 ```
 
@@ -608,19 +608,19 @@ source .env
 set +a
 K6_CLOUD_TOKEN="$K6_CLOUD_TOKEN" k6 cloud run \
   -e API_TEST_KEY="$API_TEST_KEY" \
-  -e STOREFRONT_BASE_URL=https://ensemble-grafana.com \
-  -e API_BASE_URL=https://ensemble-grafana.com \
+  -e STOREFRONT_BASE_URL=https://ensemble-retail.com \
+  -e API_BASE_URL=https://ensemble-retail.com \
   load-tests/grafana-cloud-traffic-spikes-2.js
 ```
 
-The command uploads the execution to Grafana Cloud k6 and returns a run URL. `K6_CLOUD_TOKEN` authenticates the upload from the local shell. The `-e` flags inject `API_TEST_KEY`, `STOREFRONT_BASE_URL`, and `API_BASE_URL` into the remote Grafana Cloud k6 workers; do not rely on plain shell variable assignments for protected application values. `API_TEST_KEY` can come from the local `.env` injection above or from the Grafana Cloud k6 project environment. The default `API_BASE_URL` is the storefront domain so `/api/*` requests traverse CloudFront and the edge WAF before reaching the API origin. Set `API_BASE_URL=https://api.ensemble-grafana.com` only when intentionally testing the ALB/API origin directly.
+The command uploads the execution to Grafana Cloud k6 and returns a run URL. `K6_CLOUD_TOKEN` authenticates the upload from the local shell. The `-e` flags inject `API_TEST_KEY`, `STOREFRONT_BASE_URL`, and `API_BASE_URL` into the remote Grafana Cloud k6 workers; do not rely on plain shell variable assignments for protected application values. `API_TEST_KEY` can come from the local `.env` injection above or from the Grafana Cloud k6 project environment. The default `API_BASE_URL` is `https://ensemble-retail.com`, so `/api/*` requests traverse CloudFront and the edge WAF before reaching the API origin. Set `API_BASE_URL=https://api.ensemble-retail.com` only when intentionally testing the ALB/API origin directly.
 
 Local execution is only for script debugging:
 
 ```sh
 API_TEST_KEY=<api-test-key> \
-STOREFRONT_BASE_URL=https://ensemble-grafana.com \
-API_BASE_URL=https://ensemble-grafana.com \
+STOREFRONT_BASE_URL=https://ensemble-retail.com \
+API_BASE_URL=https://ensemble-retail.com \
 k6 run load-tests/grafana-cloud-traffic-spikes.js
 ```
 
@@ -634,8 +634,8 @@ K6_CLOUD_TOKEN="$K6_CLOUD_TOKEN" k6 cloud run \
   -e API_TEST_KEY="$API_TEST_KEY" \
   -e BASE_SPIKE_USERS=60 \
   -e SPIKE_MULTIPLIER=2 \
-  -e STOREFRONT_BASE_URL=https://ensemble-grafana.com \
-  -e API_BASE_URL=https://ensemble-grafana.com \
+  -e STOREFRONT_BASE_URL=https://ensemble-retail.com \
+  -e API_BASE_URL=https://ensemble-retail.com \
   load-tests/grafana-cloud-traffic-spikes.js
 ```
 
@@ -770,7 +770,7 @@ brew install k6
 Run the scripted browser check against production:
 
 ```sh
-BASE_URL=https://ensemble-grafana.com k6 run load-tests/synthetic-browser-actions.js
+BASE_URL=https://ensemble-retail.com k6 run load-tests/synthetic-browser-actions.js
 ```
 
 Run this production check after every frontend deployment, after the S3 sync and CloudFront invalidation have completed. It validates the deployed site still emits all expected Faro user actions and that cart, checkout, account save, and region/language flows work at the public URL.
@@ -803,7 +803,7 @@ BASE_URL=http://localhost:5173 k6 run ../load-tests/synthetic-browser-actions.js
 The browser check records `data-faro-user-action-name` interactions plus change/submit actions, then fails if required actions are missing. Enable action debugging with:
 
 ```sh
-DEBUG_ACTIONS=1 BASE_URL=https://ensemble-grafana.com k6 run load-tests/synthetic-browser-actions.js
+DEBUG_ACTIONS=1 BASE_URL=https://ensemble-retail.com k6 run load-tests/synthetic-browser-actions.js
 ```
 
 The current browser-action audit inventory is stored in `reports/k6-browser-action-audit/`. The May 31, 2026 audit confirmed the Synthetic Monitoring HTTP, DNS, Ping, and TCP checks exist in Grafana, while browser-action coverage lived in the standalone Grafana Cloud k6 run. The Synthetic Monitoring k6 browser check `ensemble-grafana-browser-user-actions` now uses the same generated browser journey so scheduled Synthetic Monitoring covers the load-tested navigation, cart, checkout, region/language, auth-control, and account-save actions as well.
