@@ -735,11 +735,11 @@ Optional knobs for the combined scenarios:
 
 - `REGIONAL_SHOPPER_VUS`: regional API shopper load, default `30`.
 - `SPIKE_MULTIPLIER`: traffic spike growth multiplier, default `2`.
-- `API_REQUEST_RPS`: steady protocol/API request rate, default `100`.
+- `API_REQUEST_RPS`: steady protocol/API request rate, default `5`.
 - `INVENTORY_REQUEST_INTERVAL`: spike-journey catalog refresh interval, default `3`.
 - `ACCOUNT_WRITE_INTERVAL`: spike-journey account write interval, default `3`.
-- `API_REQUEST_PRE_ALLOCATED_VUS`: preallocated VUs for the steady request-rate scenario, default `60`.
-- `API_REQUEST_MAX_VUS`: max VUs for the steady request-rate scenario, default `180`.
+- `API_REQUEST_PRE_ALLOCATED_VUS`: preallocated VUs for the steady request-rate scenario, default `5`.
+- `API_REQUEST_MAX_VUS`: max VUs for the steady request-rate scenario, default `20`.
 - `USER_ACTION_TARGET_RPS`: minimum target rate for every expected browser user-action family, default `0.18`.
 - `BROWSER_ACTION_VUS`: concurrent browser VUs that repeatedly execute the full user-action journey, default `5`.
 - `BROWSER_ACTION_DURATION`: duration for sustained browser user-action load, default `TEST_DURATION` or `10m`.
