@@ -31,7 +31,28 @@ echo "$alloy_out" | grep -qE 'configmap/pyroscope-alloy-config (configured|creat
 
 kubectl apply -f "$manifest_dir/services.yaml"
 kubectl apply -f "$manifest_dir/policies/network-policies.yaml"
-kubectl apply -f "$manifest_dir/ingress.yaml"
+
+# Ingress carries placeholders (ACM cert ARN, regional WAF ARN, log-bucket account id) that
+# must be substituted with live values before apply — otherwise the ALB controller fails to
+# reconcile (e.g. "S3Bucket: ensemble-grafana-logs-ACCOUNT_ID does not exist").
+region="${AWS_REGION:-us-east-1}"
+acct="$(aws sts get-caller-identity --query Account --output text)"
+# Dual-domain edge cert (covers api.ensemble-grafana.com + api.ensemble-retail.com SANs).
+cert_arn="$(aws acm list-certificates --region "$region" --query "CertificateSummaryList[?DomainName=='ensemble-grafana.com'].CertificateArn | [0]" --output text)"
+waf_arn="$(aws wafv2 list-web-acls --scope REGIONAL --region "$region" --query "WebACLs[?Name=='ensemble-grafana-api'].ARN | [0]" --output text)"
+for v in acct cert_arn waf_arn; do
+  case "${!v}" in ""|None) echo "ERROR: could not resolve $v for ingress render" >&2; exit 1 ;; esac
+done
+rendered_ingress="$(mktemp)"
+sed -e "s#ACM_CERTIFICATE_ARN#${cert_arn}#g" \
+    -e "s#WAFV2_REGIONAL_ACL_ARN#${waf_arn}#g" \
+    -e "s#ensemble-grafana-logs-ACCOUNT_ID#ensemble-grafana-logs-${acct}#g" \
+    "$manifest_dir/ingress.yaml" > "$rendered_ingress"
+if grep -qE 'ACM_CERTIFICATE_ARN|WAFV2_REGIONAL_ACL_ARN|logs-ACCOUNT_ID' "$rendered_ingress"; then
+  echo "ERROR: unresolved placeholders remain in rendered ingress" >&2; rm -f "$rendered_ingress"; exit 1
+fi
+kubectl apply -f "$rendered_ingress"
+rm -f "$rendered_ingress"
 
 # Roll the collectors only as needed by config/secret changes. A ConfigMap edit or an
 # envFrom secret change does not reach a running pod until it restarts.
