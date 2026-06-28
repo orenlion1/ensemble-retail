@@ -1,6 +1,6 @@
-# Ensemble-Grafana
+# Ensemble-Retail
 
-Ensemble-Grafana is a demo ecommerce storefront for technical clothing, shopping cart flows, account metadata, and Grafana observability integration.
+Ensemble-Retail is a demo ecommerce storefront for technical clothing, shopping cart flows, account metadata, and Grafana observability integration.
 
 ## Core Pages
 

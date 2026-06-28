@@ -5,7 +5,7 @@ import { loadCategories, loadProducts, saveAccount, saveCart } from './api.js';
 const emptyAccount = {
   id: 'demo-shopper',
   name: 'Demo Shopper',
-  email: 'shopper@ensemble-grafana.test',
+  email: 'shopper@ensemble-retail.test',
   shippingAddress: {
     line1: '120 Summit Way',
     city: 'Denver',
@@ -1041,7 +1041,7 @@ export default function App() {
         </div>
 
         <div className="topbar">
-          <strong className="brand">Ensemble-Grafana</strong>
+          <strong className="brand">Ensemble-Retail</strong>
         <div className="headerActions">
           <nav>
             <a href="#shop" onClick={() => trackAppAction('navigate-header:shop')} data-faro-user-action-name="navigate-header:shop">{t.shop}</a>

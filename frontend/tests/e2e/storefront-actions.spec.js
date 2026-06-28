@@ -43,6 +43,8 @@ test.describe('storefront browser behavior', () => {
     });
 
     await page.goto('/');
+    await expect(page).toHaveTitle('Ensemble-Retail');
+    await expect(page.locator('.brand')).toHaveText('Ensemble-Retail');
     await expect(page.getByRole('heading', { name: /Layered systems|Layering systems/i })).toBeVisible();
   });
 
@@ -163,6 +165,7 @@ test.describe('storefront browser behavior', () => {
 
   test('account save is instrumented', async ({ page, faroBodies }) => {
     await page.getByRole('link', { name: 'Account' }).click();
+    await expect(page.getByLabel('Email')).toHaveValue('shopper@ensemble-retail.test');
     const save = page.getByRole('button', { name: 'Save account' });
     await expectActionAttribute(save, actionNames.saveAccount);
     await save.click();
