@@ -14,6 +14,12 @@ variable "api_origin_domain_name" {
   default     = "api.ensemble-grafana.com"
 }
 
+variable "secondary_domain_name" {
+  type        = string
+  description = "Additional apex domain served by the same CloudFront distribution / cert. Empty disables."
+  default     = "ensemble-retail.com"
+}
+
 variable "cognito_domain_prefix" {
   type        = string
   description = "AWS-managed Cognito hosted UI domain prefix used by frontend OAuth token exchange."

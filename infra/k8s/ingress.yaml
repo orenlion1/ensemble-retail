@@ -40,3 +40,29 @@ spec:
                 name: account-service
                 port:
                   number: 80
+    # Same backends served for the secondary domain. The ALB cert (certificate-arn)
+    # must include api.ensemble-retail.com as a SAN for HTTPS on this host to work.
+    - host: api.ensemble-retail.com
+      http:
+        paths:
+          - path: /api/inventory
+            pathType: Prefix
+            backend:
+              service:
+                name: inventory-service
+                port:
+                  number: 80
+          - path: /api/cart
+            pathType: Prefix
+            backend:
+              service:
+                name: cart-service
+                port:
+                  number: 80
+          - path: /api/account
+            pathType: Prefix
+            backend:
+              service:
+                name: account-service
+                port:
+                  number: 80
