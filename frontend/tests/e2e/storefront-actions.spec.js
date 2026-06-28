@@ -76,12 +76,12 @@ test.describe('storefront browser behavior', () => {
     await expectActionAttribute(checkout, actionNames.checkout);
     await checkout.click();
     await expectFaroAction(faroBodies, actionNames.checkout);
-    const checkoutDialog = page.getByRole('dialog', { name: 'Grafana trace ready' });
+    const checkoutDialog = page.getByRole('dialog', { name: 'Ensemble Retail order ready' });
     await expect(checkoutDialog).toBeVisible();
-    await expect(checkoutDialog.getByRole('img', { name: 'Grafana logo' })).toBeVisible();
-    const grafanaLink = checkoutDialog.getByRole('link', { name: 'Grafana' });
-    await expect(grafanaLink).toHaveAttribute('href', 'https://orenlion.grafana.net/a/grafana-kowalski-app/apps/464/actions?var-Filters=');
-    await expectActionAttribute(grafanaLink, 'navigate-checkout:grafana');
+    await expect(checkoutDialog.getByRole('img', { name: 'Ensemble Retail logo' })).toBeVisible();
+    const ensembleRetailLink = checkoutDialog.getByRole('link', { name: 'Ensemble Retail' });
+    await expect(ensembleRetailLink).toHaveAttribute('href', 'https://ensemble-retail.com');
+    await expectActionAttribute(ensembleRetailLink, 'navigate-checkout:ensemble-retail');
     const closeCheckoutDialog = checkoutDialog.getByRole('button', { name: 'Close' });
     await expectActionAttribute(closeCheckoutDialog, 'checkout-dialog:close');
     await closeCheckoutDialog.click();

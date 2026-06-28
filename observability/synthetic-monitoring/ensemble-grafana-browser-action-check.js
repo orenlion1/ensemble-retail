@@ -355,7 +355,7 @@ export default async function () {
     await page.keyboard.press('Tab');
 
     await domClickAction(page, 'shopping-cart:checkout');
-    const grafanaTraceLink = await actionState(page, 'navigate-checkout:grafana');
+    const ensembleRetailLink = await actionState(page, 'navigate-checkout:ensemble-retail');
     await clickAction(page, 'checkout-dialog:close');
     await clickFirstMatchingAction(page, 'shopping-cart:remove-item:');
 
@@ -420,10 +420,10 @@ export default async function () {
 
     const checkoutVisible = await page.locator(byAction('shopping-cart:checkout')).isVisible();
     const accountSaveVisible = await page.locator(byAction('save-account')).isVisible();
-    check({ checkoutVisible, accountSaveVisible, grafanaTraceLink, googleLoginState }, {
+    check({ checkoutVisible, accountSaveVisible, ensembleRetailLink, googleLoginState }, {
       'checkout remains reachable': result => result.checkoutVisible === true,
       'account save remains reachable': result => result.accountSaveVisible === true,
-      'checkout Grafana trace link exists': result => result.grafanaTraceLink.exists === true && result.grafanaTraceLink.href.includes('orenlion.grafana.net'),
+      'checkout Ensemble Retail link exists': result => result.ensembleRetailLink.exists === true && result.ensembleRetailLink.href === 'https://ensemble-retail.com/',
       'Google login action control exists': result => result.googleLoginState.exists === true && result.googleLoginState.visible === true
     });
   } catch (error) {

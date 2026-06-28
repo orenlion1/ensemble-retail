@@ -1,6 +1,6 @@
 # k6 Load Test Comparison
 
-Generated: 2026-06-28T19:19:31.601Z
+Generated: 2026-06-28T19:31:41.509Z
 
 Source summary: `reports/load-tests/k6-summary-20260617T142338Z.json`
 
@@ -60,6 +60,7 @@ These totals come from local k6 summary files named `reports/load-tests/k6-local
 
 | Date | Generated | Test | HTTP Requests | HTTP Failures | HTTP Failure Rate | User Actions | Cart Adds Total | Add Item | Add Detail | Add Sale | Remove Item | Checkout | API Cart Updates | Checkout Attempts | Region Changes |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 2026-06-28 | 06/28/2026, 15:31 | Browser action synthetic check | 215 | 0 | 0.00% | 43 | 4 | 1 | 2 | 1 | 1 | 1 | n/a | n/a | n/a |
 | 2026-06-28 | 06/28/2026, 15:19 | Browser action synthetic check | 123 | 0 | 0.00% | 43 | 4 | 1 | 2 | 1 | 1 | 1 | n/a | n/a | n/a |
 | 2026-06-28 | 06/28/2026, 15:07 | Browser action synthetic check | 127 | 0 | 0.00% | 43 | 4 | 1 | 2 | 1 | 1 | 1 | n/a | n/a | n/a |
 | 2026-06-28 | 06/28/2026, 15:00 | Browser action synthetic check | 127 | 0 | 0.00% | 43 | 4 | 1 | 2 | 1 | 1 | 1 | n/a | n/a | n/a |

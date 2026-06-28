@@ -757,7 +757,7 @@ The browser action check covers:
 - product detail open/close.
 - add to cart from product grid, sale grid, and product detail.
 - cart quantity change, checkout, and item removal.
-- checkout dialog Grafana trace link availability.
+- checkout dialog Ensemble Retail link availability.
 - Google sign-in control availability.
 - account profile, shipping address, wallet metadata, and save account.
 

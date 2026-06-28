@@ -27,7 +27,7 @@ const regions = [
   { code: 'SE', label: 'Sweden', flag: '🇸🇪', locale: 'sv-SE', language: 'Swedish', copyKey: 'sv' }
 ];
 
-const grafanaStackUrl = 'https://orenlion.grafana.net/a/grafana-kowalski-app/apps/464/actions?var-Filters=';
+const ensembleRetailUrl = 'https://ensemble-retail.com';
 
 function regionConfigFor(code) {
   return regions.find(item => item.code === code) || regions[0];
@@ -77,8 +77,8 @@ const copy = {
     saleDiscount: percent => `Spring sale discount (${percent}% off)`,
     subtotal: 'Subtotal',
     mockCheckout: 'Mock checkout',
-    checkoutDialogTitle: 'Grafana trace ready',
-    checkoutConfirmed: 'Mock checkout confirmed. Trace this order in Grafana.',
+    checkoutDialogTitle: 'Ensemble Retail order ready',
+    checkoutConfirmed: 'Mock checkout confirmed. Continue shopping with Ensemble Retail.',
     accountTitle: 'Shipping and wallet',
     name: 'Name',
     email: 'Email',
@@ -136,8 +136,8 @@ const copy = {
     saleDiscount: percent => `Rabais des soldes du printemps (${percent} % de rabais)`,
     subtotal: 'Sous-total',
     mockCheckout: 'Simuler le paiement',
-    checkoutDialogTitle: 'Trace Grafana prête',
-    checkoutConfirmed: 'Paiement simulé confirmé. Suivez cette commande dans Grafana.',
+    checkoutDialogTitle: 'Commande Ensemble Retail prête',
+    checkoutConfirmed: 'Paiement simulé confirmé. Continuez vos achats avec Ensemble Retail.',
     accountTitle: 'Livraison et portefeuille',
     name: 'Nom',
     email: 'Courriel',
@@ -195,8 +195,8 @@ const copy = {
     saleDiscount: percent => `Spring sale discount (${percent}% off)`,
     subtotal: 'Subtotal',
     mockCheckout: 'Mock checkout',
-    checkoutDialogTitle: 'Grafana trace ready',
-    checkoutConfirmed: 'Mock checkout confirmed. Trace this order in Grafana.',
+    checkoutDialogTitle: 'Ensemble Retail order ready',
+    checkoutConfirmed: 'Mock checkout confirmed. Continue shopping with Ensemble Retail.',
     accountTitle: 'Delivery and wallet',
     name: 'Name',
     email: 'Email',
@@ -254,8 +254,8 @@ const copy = {
     saleDiscount: percent => `春季特卖折扣（${percent}% 优惠）`,
     subtotal: '小计',
     mockCheckout: '模拟结账',
-    checkoutDialogTitle: 'Grafana 追踪已就绪',
-    checkoutConfirmed: '模拟结账已确认。请在 Grafana 中追踪此订单。',
+    checkoutDialogTitle: 'Ensemble Retail 订单已就绪',
+    checkoutConfirmed: '模拟结账已确认。继续在 Ensemble Retail 购物。',
     accountTitle: '配送和钱包',
     name: '姓名',
     email: '电子邮件',
@@ -313,8 +313,8 @@ const copy = {
     saleDiscount: percent => `Vårrea (${percent} % rabatt)`,
     subtotal: 'Delsumma',
     mockCheckout: 'Simulerad kassa',
-    checkoutDialogTitle: 'Grafana-spårning klar',
-    checkoutConfirmed: 'Simulerad kassa bekräftad. Spåra denna order i Grafana.',
+    checkoutDialogTitle: 'Ensemble Retail-order klar',
+    checkoutConfirmed: 'Simulerad kassa bekräftad. Fortsätt handla hos Ensemble Retail.',
     accountTitle: 'Leverans och plånbok',
     name: 'Namn',
     email: 'E-post',
@@ -492,38 +492,36 @@ function localizeUkRetailTerms(value) {
     .replace(/\bPant\b/g, 'Trouser');
 }
 
-function GrafanaLogoMark() {
+function EnsembleRetailLogoMark() {
   return (
-    <svg className="grafanaLogo" viewBox="0 0 96 96" role="img" aria-label="Grafana logo">
-      <circle cx="48" cy="48" r="42" fill="#f46800" />
-      <path fill="#fff" d="M48 18c-6 0-11 2-16 5l5 9c3-2 7-3 11-3 12 0 22 10 22 22 0 10-7 19-17 21v-9c5-2 9-7 9-13 0-8-6-14-14-14s-14 6-14 14c0 2 .4 4 1.3 6l-8 4A23 23 0 0 1 25 50c0-13 10-24 23-24 2 0 4 .3 6 .8l2-9A32 32 0 0 0 48 18Z" />
-      <path fill="#fff" d="M42 50a6 6 0 1 1 12 0 6 6 0 0 1-12 0Z" />
-      <path fill="#111412" fillOpacity=".16" d="M48 6a42 42 0 1 1 0 84 42 42 0 0 0 0-84Z" />
+    <svg className="ensembleRetailLogo" viewBox="0 0 96 96" role="img" aria-label="Ensemble Retail logo">
+      <circle cx="48" cy="48" r="42" fill="#111412" />
+      <text x="48" y="58" fill="#fff" fontFamily="Arial, sans-serif" fontSize="30" fontWeight="700" textAnchor="middle">ER</text>
     </svg>
   );
 }
 
-function CheckoutTraceCopy({ copyText, onGrafanaClick }) {
-  const grafanaLabel = 'Grafana';
-  const grafanaIndex = copyText.indexOf(grafanaLabel);
+function CheckoutConfirmationCopy({ copyText, onEnsembleRetailClick }) {
+  const ensembleRetailLabel = 'Ensemble Retail';
+  const ensembleRetailIndex = copyText.indexOf(ensembleRetailLabel);
 
-  if (grafanaIndex === -1) {
+  if (ensembleRetailIndex === -1) {
     return <>{copyText}</>;
   }
 
   return (
     <>
-      {copyText.slice(0, grafanaIndex)}
+      {copyText.slice(0, ensembleRetailIndex)}
       <a
-        href={grafanaStackUrl}
+        href={ensembleRetailUrl}
         target="_blank"
         rel="noreferrer"
-        onClick={onGrafanaClick}
-        data-faro-user-action-name="navigate-checkout:grafana"
+        onClick={onEnsembleRetailClick}
+        data-faro-user-action-name="navigate-checkout:ensemble-retail"
       >
-        {grafanaLabel}
+        {ensembleRetailLabel}
       </a>
-      {copyText.slice(grafanaIndex + grafanaLabel.length)}
+      {copyText.slice(ensembleRetailIndex + ensembleRetailLabel.length)}
     </>
   );
 }
@@ -968,9 +966,9 @@ export default function App() {
     setCheckoutDialogOpen(false);
   }
 
-  function trackCheckoutGrafanaLink() {
-    trackAppAction('navigate-checkout:grafana', {
-      targetUrl: grafanaStackUrl
+  function trackCheckoutEnsembleRetailLink() {
+    trackAppAction('navigate-checkout:ensemble-retail', {
+      targetUrl: ensembleRetailUrl
     }, {
       triggerName: 'click'
     });
@@ -1300,12 +1298,12 @@ export default function App() {
       {checkoutDialogOpen && (
         <div className="checkoutDialogBackdrop" role="presentation">
           <section className="checkoutDialog" role="dialog" aria-modal="true" aria-labelledby="checkout-dialog-title">
-            <GrafanaLogoMark />
+            <EnsembleRetailLogoMark />
             <div>
-              <p className="eyebrow">Grafana</p>
+              <p className="eyebrow">Ensemble Retail</p>
               <h2 id="checkout-dialog-title">{t.checkoutDialogTitle}</h2>
               <p>
-                <CheckoutTraceCopy copyText={t.checkoutConfirmed} onGrafanaClick={trackCheckoutGrafanaLink} />
+                <CheckoutConfirmationCopy copyText={t.checkoutConfirmed} onEnsembleRetailClick={trackCheckoutEnsembleRetailLink} />
               </p>
               <button type="button" onClick={closeCheckoutDialog} data-faro-user-action-name="checkout-dialog:close">{t.close}</button>
             </div>
