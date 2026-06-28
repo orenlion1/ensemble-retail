@@ -555,7 +555,8 @@ const authStateKey = 'ensemble-auth-state';
 const cognitoHostedUiDomain = (import.meta.env.VITE_COGNITO_HOSTED_UI_DOMAIN || 'https://ensemble-grafana.auth.us-east-1.amazoncognito.com').replace(/\/$/, '');
 const cognitoClientId = import.meta.env.VITE_COGNITO_CLIENT_ID || '7a4vi9r6gjqjjoughnrq21l07t';
 // Always derive the OAuth redirect from the current origin so login works on every domain
-// served by this frontend (e.g. ensemble-grafana.com and ensemble-retail.com). Each origin's
+// served by this frontend (the canonical ensemble-retail.com domain and legacy
+// ensemble-grafana.com alias). Each origin's
 // callback must be registered on the Cognito app client. An explicit env override is honored
 // only for non-browser/test contexts where window.location.origin is unavailable.
 const cognitoRedirectUri = (typeof window !== 'undefined' && window.location && window.location.origin)

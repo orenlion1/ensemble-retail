@@ -1,6 +1,6 @@
 # Infrastructure Replication Skill
 
-Use this skill when creating a new application from the Ensemble-Grafana infrastructure pattern. The goal is to make cloud deployment incremental, independently runnable, and easy to validate before workloads are exposed.
+Use this skill when creating a new application from the Ensemble-Retail infrastructure pattern. The goal is to make cloud deployment incremental, independently runnable, and easy to validate before workloads are exposed.
 
 ## Core Pattern
 

@@ -15,7 +15,7 @@ export default defineConfig(({ mode }) => {
     plugins: [
       react(),
       faroSourceMapConfigured && faroUploader({
-        appName: 'ensemble-grafana',
+        appName: 'ensemble-retail',
         endpoint: env.FARO_SOURCEMAP_ENDPOINT,
         apiKey: env.FARO_SOURCEMAP_API_KEY,
         appId: env.FARO_APP_ID,

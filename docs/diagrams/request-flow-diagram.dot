@@ -31,7 +31,7 @@ digraph request_flow_diagram {
   ];
 
 
-  browser [label="Browser\nensemble-grafana.com", fillcolor="#1e3a8a"];
+  browser [label="Browser\nensemble-retail.com", fillcolor="#1e3a8a"];
   dns [label="Route53\nA/AAAA alias", fillcolor="#164e63"];
   wafEdge [label="AWS WAF\nedge rules", fillcolor="#7f1d1d"];
   cf [label="CloudFront\nHTTPS + static/API routing", fillcolor="#1e3a8a"];

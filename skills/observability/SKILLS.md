@@ -1,6 +1,6 @@
 # Observability Replication Skill
 
-Use this skill when adding the Ensemble-Grafana observability pattern to a new application. The goal is end-to-end visibility from browser action to backend service, database calls, load tests, incidents, logs, metrics, traces, and profiles.
+Use this skill when adding the Ensemble-Retail observability pattern to a new application. The goal is end-to-end visibility from browser action to backend service, database calls, load tests, incidents, logs, metrics, traces, and profiles.
 
 ## Core Pattern
 

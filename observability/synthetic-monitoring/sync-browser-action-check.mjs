@@ -15,7 +15,7 @@ import { fileURLToPath } from 'node:url';
 const here = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(here, '..', '..');
 const sourcePath = join(repoRoot, 'load-tests', 'synthetic-browser-actions.js');
-const scriptPath = join(here, 'ensemble-grafana-browser-action-check.js');
+const scriptPath = join(here, 'ensemble-retail-browser-action-check.js');
 const manifestPath = join(here, 'check-browser-user-actions.yaml');
 const SCRIPT_INDENT = ' '.repeat(8);
 
@@ -46,7 +46,7 @@ function stripExportedFunction(source, functionName) {
 function buildSyntheticScript() {
   let script = readFileSync(sourcePath, 'utf8').replace(/\n+$/, '\n');
   script = script.replace("import { summaryOutput } from './summary.js';\n", '');
-  script = script.replace(/\n  cloud: \{\n    name: 'ensemble-grafana-faro-user-actions-browser'\n  \},/, '');
+  script = script.replace(/\n  cloud: \{\n    name: 'ensemble-retail-faro-user-actions-browser'\n  \},/, '');
   script = script.replace(/,\n  thresholds: \{\n    checks: \['rate==1\.0'\],\n    browser_web_vital_lcp: \['p\(95\)<4000'\],\n    browser_web_vital_cls: \['p\(95\)<0\.1'\]\n  \},/, '');
   script = script.replace(/\n  tags: \{/, ',\n  tags: {');
   script = stripExportedFunction(script, 'handleSummary');

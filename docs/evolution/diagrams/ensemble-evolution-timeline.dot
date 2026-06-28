@@ -8,7 +8,7 @@ digraph ensemble_evolution_timeline {
     fontname="Helvetica",
     fontsize=28,
     labelloc="t",
-    label="Ensemble-Grafana Evolution: First Prompt to Latest Evidence"
+    label="Ensemble-Retail Evolution: First Prompt to Latest Evidence"
   ];
 
   node [
@@ -85,6 +85,12 @@ digraph ensemble_evolution_timeline {
     color="#9333ea"
   ];
 
+  rename [
+    label="Jun 28\nSafe repository rename\nEnsemble-Retail identity\nCanonical retail domain\nLegacy resource IDs retained",
+    fillcolor="#dbeafe",
+    color="#2563eb"
+  ];
+
   end_to_end [
     label=<
       <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#334155">
@@ -112,7 +118,8 @@ digraph ensemble_evolution_timeline {
   ops -> skills [label="codify repeatability"];
   skills -> latest [label="keep evidence current"];
   latest -> policy [label="protect the chronology"];
-  policy -> end_to_end [label="current state"];
+  policy -> rename [label="rename safely"];
+  rename -> end_to_end [label="current state"];
 
   {
     rank=same;

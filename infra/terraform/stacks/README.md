@@ -33,7 +33,7 @@ terraform apply
 terraform output
 ```
 
-Registrar delegation for `ensemble-grafana.com` is complete. The registrar points to the `route53_name_servers` output for this hosted zone, so a normal `terraform apply` can validate the ACM certificate in `us-east-1`, attach it to CloudFront, and create apex and `www` Route53 alias records for `https://ensemble-grafana.com`.
+The canonical storefront is `https://ensemble-retail.com`, while this stack intentionally retains the legacy `ensemble-grafana.com` hosted zone, Terraform defaults, and resource identifiers. Do not rename these state-backed resources during the repository rename; the legacy domain remains a compatibility alias on the existing CloudFront distribution.
 
 ## 3. Auth
 
@@ -56,7 +56,7 @@ Pass these public outputs to the frontend build:
 ```bash
 export VITE_COGNITO_HOSTED_UI_DOMAIN="$(terraform output -raw cognito_hosted_ui_domain)"
 export VITE_COGNITO_CLIENT_ID="$(terraform output -raw cognito_client_id)"
-export VITE_COGNITO_REDIRECT_URI="https://ensemble-grafana.com/auth/callback"
+export VITE_COGNITO_REDIRECT_URI="https://ensemble-retail.com/auth/callback"
 ```
 
 The frontend exchanges the Cognito authorization code with PKCE. Do not provide the Google client secret to the frontend build.

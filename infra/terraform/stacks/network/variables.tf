@@ -5,7 +5,7 @@ variable "aws_region" {
 
 variable "vpc_cidr" {
   type        = string
-  description = "CIDR block for the Ensemble-Grafana VPC."
+  description = "CIDR block for the Ensemble-Retail VPC."
   default     = "10.42.0.0/16"
 }
 

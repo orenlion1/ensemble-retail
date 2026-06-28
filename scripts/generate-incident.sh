@@ -17,7 +17,7 @@ curl -sS -X POST "$GRAFANA_IRM_URL/api/v1/incidents" \
   -H "Authorization: Bearer $GRAFANA_IRM_TOKEN" \
   -H "Content-Type: application/json" \
   -d "{
-    \"title\": \"Ensemble-Grafana test checkout degradation\",
+    \"title\": \"Ensemble Retail test checkout degradation\",
     \"severity\": \"$SEVERITY\",
     \"labels\": {
       \"region\": \"$REGION\",

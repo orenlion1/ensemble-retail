@@ -1,12 +1,12 @@
-# Ensemble-Grafana Evolution
+# Ensemble-Retail Evolution
 
-This directory explains how Ensemble-Grafana was built end to end, organized by reconstructed prompt category.
+This directory explains how Ensemble-Retail evolved from the original Ensemble-Grafana project, organized by reconstructed prompt category.
 
 The source material is the repo itself: commit chronology, documentation, reports, Graphviz artifacts, load-test outputs, operational runbooks, and repo policy or skill changes. Literal prompt transcripts are not stored in this repository, so prompt categories below are inferred from committed work.
 
 ## Dark Visual Timeline
 
-![Ensemble-Grafana evolution timeline dark version](diagrams/ensemble-evolution-timeline-dark.png)
+![Ensemble-Retail evolution timeline dark version](diagrams/ensemble-evolution-timeline-dark.png)
 
 The dark timeline source is also published to the `Evolution` tab of the Grafana dashboard `Ensemble Graphviz Diagrams`. The light export remains available for white-background documents.
 

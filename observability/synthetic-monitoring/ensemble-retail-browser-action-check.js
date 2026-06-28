@@ -18,7 +18,7 @@ export const options = {
     }
   },
   tags: {
-    app: 'ensemble-grafana',
+    app: 'ensemble-retail',
     test_type: 'faro-user-actions-browser'
   }
 };

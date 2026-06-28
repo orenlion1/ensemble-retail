@@ -1,6 +1,6 @@
 ---
 name: add-region-localization
-description: Add or update an Ensemble-Grafana storefront region, language, locale, and localized catalog copy. Use when a user asks to add a region such as Sweden, Germany, EU, or Japan; change region picker behavior; add page localization; update Faro region/language actions; or extend Playwright/k6 validation for a new storefront locale.
+description: Add or update an Ensemble-Retail storefront region, language, locale, and localized catalog copy. Use when a user asks to add a region such as Sweden, Germany, EU, or Japan; change region picker behavior; add page localization; update Faro region/language actions; or extend Playwright/k6 validation for a new storefront locale.
 ---
 
 # Add Region Localization
@@ -126,7 +126,7 @@ BASE_URL=http://localhost:5173 k6 run load-tests/synthetic-browser-actions.js
 Deploy frontend changes through the existing S3/CloudFront path, wait for invalidation, then run:
 
 ```sh
-BASE_URL=https://ensemble-grafana.com k6 run load-tests/synthetic-browser-actions.js
+BASE_URL=https://ensemble-retail.com k6 run load-tests/synthetic-browser-actions.js
 ```
 
 After the production k6 browser action test, run a `gcx` Faro user-action query and create a report under `reports/frontend-user-actions/`:

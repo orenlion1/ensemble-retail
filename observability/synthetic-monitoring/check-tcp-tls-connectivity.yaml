@@ -4,7 +4,7 @@ metadata:
   name: "ensemble-grafana-tcp-tls-connectivity-2497"
 spec:
   job: ensemble-grafana-tcp-tls-connectivity
-  target: ensemble-grafana.com:443
+  target: ensemble-retail.com:443
   frequency: 60000
   timeout: 10000
   enabled: false

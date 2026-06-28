@@ -1,6 +1,6 @@
 # Graviton Migration Plan
 
-This plan describes how to migrate the Ensemble-Grafana EKS workloads from x86 nodes to AWS Graviton/ARM64 nodes.
+This plan describes how to migrate the Ensemble-Retail EKS workloads from x86 nodes to AWS Graviton/ARM64 nodes. The EKS cluster and node labels retain their legacy `ensemble-grafana` identifiers.
 
 ## Goal
 

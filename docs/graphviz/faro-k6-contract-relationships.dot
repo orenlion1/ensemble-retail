@@ -92,7 +92,7 @@ digraph faro_k6_contract_relationships {
           <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">selectors</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">every expected button/action exists</FONT></TD></TR>
           <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">navigation</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">brand, header, hero, utility, sale banner</FONT></TD></TR>
           <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">cart</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">add, remove, checkout, dialog close</FONT></TD></TR>
-          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">auth</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">Google login control and checkout Grafana link</FONT></TD></TR>
+          <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">auth</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">Google login control and checkout Ensemble Retail link</FONT></TD></TR>
           <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">region</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">US, CA, CN, UK, SE language checks</FONT></TD></TR>
           <TR><TD BGCOLOR="#111827" ALIGN="LEFT"><FONT COLOR="#f8fafc">web vitals</FONT></TD><TD BGCOLOR="#1e293b"><FONT COLOR="#f8fafc">LCP and CLS thresholds</FONT></TD></TR>
         </TABLE>
@@ -106,13 +106,13 @@ digraph faro_k6_contract_relationships {
     ];
 
     sm_scripted [
-      label="SM scripted k6 check\nobservability/synthetic-monitoring/\nensemble-grafana-scripted-check.js",
+      label="SM scripted k6 check\nobservability/synthetic-monitoring/\nensemble-retail-scripted-check.js",
       fillcolor="#134e4a",
       color="#5eead4"
     ];
 
     sm_browser [
-      label="SM k6 browser check\nobservability/synthetic-monitoring/\nensemble-grafana-browser-action-check.js\ngenerated from load-tested journey",
+      label="SM k6 browser check\nobservability/synthetic-monitoring/\nensemble-retail-browser-action-check.js\ngenerated from load-tested journey",
       fillcolor="#134e4a",
       color="#5eead4"
     ];

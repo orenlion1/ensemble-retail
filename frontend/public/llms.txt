@@ -4,6 +4,6 @@ Ensemble-Retail is a demo ecommerce storefront for technical clothing, shopping 
 
 ## Core Pages
 
-- [Storefront](https://ensemble-grafana.com/)
-- [Spring Collection Sale](https://ensemble-grafana.com/#sale)
-- [Account](https://ensemble-grafana.com/#account)
+- [Storefront](https://ensemble-retail.com/)
+- [Spring Collection Sale](https://ensemble-retail.com/#sale)
+- [Account](https://ensemble-retail.com/#account)

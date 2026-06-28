@@ -1,6 +1,6 @@
 ---
 name: incident-placeholder-template
-description: Use when creating Grafana IRM monthly placeholder incidents for Ensemble-Grafana. This template intentionally bypasses the standard incident-creation requirement for feature and service labels, and creates low-signal placeholder incidents with region, client_impact, and hosting_type labels.
+description: Use when creating Grafana IRM monthly placeholder incidents for Ensemble-Retail. This template intentionally bypasses the standard incident-creation requirement for feature and service labels, and creates low-signal placeholder incidents with region, client_impact, and hosting_type labels.
 ---
 
 # Incident Placeholder Template

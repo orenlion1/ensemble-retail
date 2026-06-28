@@ -4,7 +4,7 @@ metadata:
   name: ensemble-grafana-dns-resolution
 spec:
   job: ensemble-grafana-dns-resolution
-  target: ensemble-grafana.com
+  target: ensemble-retail.com
   frequency: 120000
   timeout: 10000
   enabled: false

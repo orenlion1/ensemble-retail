@@ -40,6 +40,6 @@ Use the remaining chunks in this order where possible: network, edge/static, clu
 
 ## Domain And TLS
 
-Use Route53 for `ensemble-grafana.com`. Public edge TLS is provisioned with ACM in `us-east-1` for CloudFront and API aliases. Domain purchase remains a manual account/registrar step; after ownership is established, point registrar name servers to the Terraform-created Route53 hosted zone.
+Use `ensemble-retail.com` as the canonical public domain. Public edge TLS is provisioned with ACM in `us-east-1` for CloudFront and API aliases. The existing Terraform state and AWS resources retain legacy `ensemble-grafana` identifiers; do not rename or recreate them as part of the repository rename. `ensemble-grafana.com` remains a compatibility alias.
 
 Use Let's Encrypt only for direct in-cluster TLS endpoints that bypass CloudFront/ACM. For that case, install cert-manager in EKS and issue certificates using a DNS-01 Route53 solver.

@@ -72,7 +72,7 @@ jobs:
         uses: grafana/setup-k6-action@v1
       - name: Inspect k6 frontend and regional scripts
         run: |
-          k6 inspect load-tests/ensemble-grafana.js
+          k6 inspect load-tests/ensemble-retail.js
           k6 inspect load-tests/synthetic-browser-actions.js
           k6 inspect load-tests/grafana-cloud-20-user-regional.js
           k6 inspect load-tests/grafana-cloud-traffic-spikes.js
@@ -94,6 +94,6 @@ jobs:
       - name: Install k6
         uses: grafana/setup-k6-action@v1
       - name: Inspect scripted synthetic check script
-        run: k6 inspect observability/synthetic-monitoring/ensemble-grafana-scripted-check.js
+        run: k6 inspect observability/synthetic-monitoring/ensemble-retail-scripted-check.js
       - name: Inspect browser action synthetic check script
-        run: k6 inspect observability/synthetic-monitoring/ensemble-grafana-browser-action-check.js
+        run: k6 inspect observability/synthetic-monitoring/ensemble-retail-browser-action-check.js

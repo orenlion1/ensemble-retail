@@ -52,7 +52,7 @@ function durationToSeconds(value) {
 
 export const options = {
   cloud: {
-    name: 'ensemble-grafana-traffic-spikes'
+    name: 'ensemble-retail-traffic-spikes'
   },
   scenarios: {
     traffic_spikes: {
@@ -130,7 +130,7 @@ export const options = {
     browser_web_vital_cls: ['p(95)<0.1']
   },
   tags: {
-    app: 'ensemble-grafana',
+    app: 'ensemble-retail',
     test_type: 'traffic-spike-benchmark',
     spike_one_users: String(baseSpikeUsers),
     spike_two_users: String(spikeTwoUsers),

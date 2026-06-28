@@ -9,7 +9,7 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(18 868.17)">
 <title>network_diagram</title>
 <polygon fill="#0b1220" stroke="none" points="-18,18 -18,-868.17 2121.74,-868.17 2121.74,18 -18,18"/>
-<text xml:space="preserve" text-anchor="middle" x="1051.87" y="-827.17" font-family="Helvetica,sans-Serif" font-size="20.00" fill="#f8fafc">Ensemble&#45;Grafana Network Diagram</text>
+<text xml:space="preserve" text-anchor="middle" x="1051.87" y="-827.17" font-family="Helvetica,sans-Serif" font-size="20.00" fill="#f8fafc">Ensemble&#45;Retail Network Diagram</text>
 <g id="clust1" class="cluster">
 <title>cluster_eks</title>
 <path fill="#0b1220" stroke="#64748b" stroke-dasharray="5,2" d="M1389.27,-192.42C1389.27,-192.42 1762.46,-192.42 1762.46,-192.42 1768.46,-192.42 1774.46,-198.42 1774.46,-204.42 1774.46,-204.42 1774.46,-465.42 1774.46,-465.42 1774.46,-471.42 1768.46,-477.42 1762.46,-477.42 1762.46,-477.42 1389.27,-477.42 1389.27,-477.42 1383.27,-477.42 1377.27,-471.42 1377.27,-465.42 1377.27,-465.42 1377.27,-204.42 1377.27,-204.42 1377.27,-198.42 1383.27,-192.42 1389.27,-192.42"/>
@@ -72,29 +72,29 @@
 <!-- route53 -->
 <g id="node3" class="node">
 <title>route53</title>
-<path fill="#164e63" stroke="#64748b" d="M357.93,-546.42C357.93,-546.42 254.4,-546.42 254.4,-546.42 248.4,-546.42 242.4,-540.42 242.4,-534.42 242.4,-534.42 242.4,-522.42 242.4,-522.42 242.4,-516.42 248.4,-510.42 254.4,-510.42 254.4,-510.42 357.93,-510.42 357.93,-510.42 363.93,-510.42 369.93,-516.42 369.93,-522.42 369.93,-522.42 369.93,-534.42 369.93,-534.42 369.93,-540.42 363.93,-546.42 357.93,-546.42"/>
-<text xml:space="preserve" text-anchor="middle" x="306.17" y="-529.97" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">Route53 hosted zone</text>
-<text xml:space="preserve" text-anchor="middle" x="306.17" y="-517.97" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">ensemble&#45;grafana.com</text>
+<path fill="#164e63" stroke="#64748b" d="M352.31,-546.42C352.31,-546.42 260.03,-546.42 260.03,-546.42 254.03,-546.42 248.03,-540.42 248.03,-534.42 248.03,-534.42 248.03,-522.42 248.03,-522.42 248.03,-516.42 254.03,-510.42 260.03,-510.42 260.03,-510.42 352.31,-510.42 352.31,-510.42 358.31,-510.42 364.31,-516.42 364.31,-522.42 364.31,-522.42 364.31,-534.42 364.31,-534.42 364.31,-540.42 358.31,-546.42 352.31,-546.42"/>
+<text xml:space="preserve" text-anchor="middle" x="306.17" y="-529.97" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">Route53 public DNS</text>
+<text xml:space="preserve" text-anchor="middle" x="306.17" y="-517.97" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">ensemble&#45;retail.com</text>
 </g>
 <!-- registrar&#45;&gt;route53 -->
 <g id="edge1" class="edge">
 <title>registrar&#45;&gt;route53</title>
-<path fill="none" stroke="#94a3b8" d="M99.32,-528.42C137.2,-528.42 190.59,-528.42 233.51,-528.42"/>
-<polygon fill="#94a3b8" stroke="#94a3b8" points="233.43,-530.87 240.43,-528.42 233.43,-525.97 233.43,-530.87"/>
+<path fill="none" stroke="#94a3b8" d="M99.32,-528.42C139.03,-528.42 195.8,-528.42 239.67,-528.42"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="239.47,-530.87 246.47,-528.42 239.47,-525.97 239.47,-530.87"/>
 <text xml:space="preserve" text-anchor="middle" x="160.4" y="-529.62" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">NS delegation</text>
 </g>
 <!-- cloudfront -->
 <g id="node6" class="node">
 <title>cloudfront</title>
-<path fill="#1e3a8a" stroke="#64748b" d="M625.46,-553.42C625.46,-553.42 521.93,-553.42 521.93,-553.42 515.93,-553.42 509.93,-547.42 509.93,-541.42 509.93,-541.42 509.93,-529.42 509.93,-529.42 509.93,-523.42 515.93,-517.42 521.93,-517.42 521.93,-517.42 625.46,-517.42 625.46,-517.42 631.46,-517.42 637.46,-523.42 637.46,-529.42 637.46,-529.42 637.46,-541.42 637.46,-541.42 637.46,-547.42 631.46,-553.42 625.46,-553.42"/>
+<path fill="#1e3a8a" stroke="#64748b" d="M624.71,-553.42C624.71,-553.42 522.68,-553.42 522.68,-553.42 516.68,-553.42 510.68,-547.42 510.68,-541.42 510.68,-541.42 510.68,-529.42 510.68,-529.42 510.68,-523.42 516.68,-517.42 522.68,-517.42 522.68,-517.42 624.71,-517.42 624.71,-517.42 630.71,-517.42 636.71,-523.42 636.71,-529.42 636.71,-529.42 636.71,-541.42 636.71,-541.42 636.71,-547.42 630.71,-553.42 624.71,-553.42"/>
 <text xml:space="preserve" text-anchor="middle" x="573.7" y="-536.97" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">CloudFront distribution</text>
-<text xml:space="preserve" text-anchor="middle" x="573.7" y="-524.97" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">ensemble&#45;grafana.com</text>
+<text xml:space="preserve" text-anchor="middle" x="573.7" y="-524.97" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">ensemble&#45;retail.com</text>
 </g>
 <!-- route53&#45;&gt;cloudfront -->
 <g id="edge2" class="edge">
 <title>route53&#45;&gt;cloudfront</title>
-<path fill="none" stroke="#94a3b8" d="M370.42,-527.4C403.73,-527.14 445.24,-527.26 482.31,-528.67 488.5,-528.91 494.93,-529.23 501.37,-529.61"/>
-<polygon fill="#94a3b8" stroke="#94a3b8" points="500.87,-532.03 508.01,-530.02 501.17,-527.14 500.87,-532.03"/>
+<path fill="none" stroke="#94a3b8" d="M364.77,-527.44C398.95,-527.13 443.11,-527.18 482.31,-528.67 488.72,-528.91 495.39,-529.25 502.06,-529.65"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="501.84,-532.09 508.98,-530.08 502.15,-527.2 501.84,-532.09"/>
 <text xml:space="preserve" text-anchor="middle" x="449.68" y="-529.87" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">A / AAAA alias</text>
 </g>
 <!-- acm -->
@@ -107,15 +107,15 @@
 <!-- acm&#45;&gt;cloudfront -->
 <g id="edge3" class="edge">
 <title>acm&#45;&gt;cloudfront</title>
-<path fill="none" stroke="#94a3b8" d="M363.19,-476.12C397.57,-485.77 442.5,-498.4 482.31,-509.67 488.49,-511.42 494.91,-513.24 501.35,-515.07"/>
-<polygon fill="#94a3b8" stroke="#94a3b8" points="500.63,-517.41 508.04,-516.97 501.97,-512.7 500.63,-517.41"/>
+<path fill="none" stroke="#94a3b8" d="M363.19,-476.12C397.57,-485.77 442.5,-498.4 482.31,-509.67 488.86,-511.52 495.67,-513.45 502.48,-515.39"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="501.61,-517.69 509.01,-517.25 502.95,-512.98 501.61,-517.69"/>
 <text xml:space="preserve" text-anchor="middle" x="449.68" y="-510.87" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">TLS certificate</text>
 </g>
 <!-- edgeWaf&#45;&gt;cloudfront -->
 <g id="edge5" class="edge">
 <title>edgeWaf&#45;&gt;cloudfront</title>
-<path fill="none" stroke="#94a3b8" d="M358.05,-584.73C398.82,-575.36 456.5,-562.12 501.8,-551.71"/>
-<polygon fill="#94a3b8" stroke="#94a3b8" points="502.07,-554.16 508.34,-550.21 500.97,-549.39 502.07,-554.16"/>
+<path fill="none" stroke="#94a3b8" d="M358.05,-584.73C398.97,-575.33 456.9,-562.02 502.27,-551.6"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="502.55,-554.05 508.82,-550.09 501.45,-549.27 502.55,-554.05"/>
 </g>
 <!-- staticS3 -->
 <g id="node7" class="node">
@@ -127,8 +127,8 @@
 <!-- cloudfront&#45;&gt;staticS3 -->
 <g id="edge8" class="edge">
 <title>cloudfront&#45;&gt;staticS3</title>
-<path fill="none" stroke="#94a3b8" d="M637.67,-553.43C678.63,-565.14 731.76,-580.33 772.35,-591.94"/>
-<polygon fill="#94a3b8" stroke="#94a3b8" points="771.43,-594.22 778.83,-593.79 772.78,-589.51 771.43,-594.22"/>
+<path fill="none" stroke="#94a3b8" d="M637.01,-553.24C677.95,-564.95 731.28,-580.2 772.04,-591.85"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="771.16,-594.15 778.56,-593.72 772.51,-589.44 771.16,-594.15"/>
 <text xml:space="preserve" text-anchor="middle" x="699.96" y="-580.25" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">static assets</text>
 </g>
 <!-- imageS3 -->
@@ -140,8 +140,8 @@
 <!-- cloudfront&#45;&gt;imageS3 -->
 <g id="edge9" class="edge">
 <title>cloudfront&#45;&gt;imageS3</title>
-<path fill="none" stroke="#94a3b8" d="M637.67,-536.88C671.89,-537.67 714.61,-538.66 751.4,-539.52"/>
-<polygon fill="#94a3b8" stroke="#94a3b8" points="751.08,-541.96 758.13,-539.67 751.19,-537.06 751.08,-541.96"/>
+<path fill="none" stroke="#94a3b8" d="M637.01,-536.86C671.36,-537.66 714.41,-538.66 751.46,-539.52"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="751.19,-541.96 758.24,-539.68 751.3,-537.06 751.19,-541.96"/>
 <text xml:space="preserve" text-anchor="middle" x="699.96" y="-540.16" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">inventory images</text>
 </g>
 <!-- logsS3 -->
@@ -154,7 +154,7 @@
 <!-- cloudfront&#45;&gt;logsS3 -->
 <g id="edge10" class="edge">
 <title>cloudfront&#45;&gt;logsS3</title>
-<path fill="none" stroke="#94a3b8" d="M637.85,-523.56C673.52,-517.45 719,-510.61 759.84,-507.42 976.74,-490.46 1234.06,-496.01 1358.97,-500.33"/>
+<path fill="none" stroke="#94a3b8" d="M637,-523.71C672.79,-517.55 718.68,-510.64 759.84,-507.42 976.74,-490.46 1234.06,-496.01 1358.97,-500.33"/>
 <polygon fill="#94a3b8" stroke="#94a3b8" points="1358.78,-502.77 1365.86,-500.57 1358.95,-497.87 1358.78,-502.77"/>
 <text xml:space="preserve" text-anchor="middle" x="977.24" y="-499.44" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">standard access logs</text>
 </g>
@@ -175,20 +175,20 @@
 <!-- apiAlb -->
 <g id="node11" class="node">
 <title>apiAlb</title>
-<path fill="#3730a3" stroke="#64748b" d="M1193.52,-341.42C1193.52,-341.42 1072.74,-341.42 1072.74,-341.42 1066.74,-341.42 1060.74,-335.42 1060.74,-329.42 1060.74,-329.42 1060.74,-317.42 1060.74,-317.42 1060.74,-311.42 1066.74,-305.42 1072.74,-305.42 1072.74,-305.42 1193.52,-305.42 1193.52,-305.42 1199.52,-305.42 1205.52,-311.42 1205.52,-317.42 1205.52,-317.42 1205.52,-329.42 1205.52,-329.42 1205.52,-335.42 1199.52,-341.42 1193.52,-341.42"/>
+<path fill="#3730a3" stroke="#64748b" d="M1186.77,-341.42C1186.77,-341.42 1079.49,-341.42 1079.49,-341.42 1073.49,-341.42 1067.49,-335.42 1067.49,-329.42 1067.49,-329.42 1067.49,-317.42 1067.49,-317.42 1067.49,-311.42 1073.49,-305.42 1079.49,-305.42 1079.49,-305.42 1186.77,-305.42 1186.77,-305.42 1192.77,-305.42 1198.77,-311.42 1198.77,-317.42 1198.77,-317.42 1198.77,-329.42 1198.77,-329.42 1198.77,-335.42 1192.77,-341.42 1186.77,-341.42"/>
 <text xml:space="preserve" text-anchor="middle" x="1133.13" y="-324.97" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">API ingress / ALB</text>
-<text xml:space="preserve" text-anchor="middle" x="1133.13" y="-312.97" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">api.ensemble&#45;grafana.com</text>
+<text xml:space="preserve" text-anchor="middle" x="1133.13" y="-312.97" font-family="Helvetica,sans-Serif" font-size="11.00" fill="#f8fafc">api.ensemble&#45;retail.com</text>
 </g>
 <!-- regionalWaf&#45;&gt;apiAlb -->
 <g id="edge12" class="edge">
 <title>regionalWaf&#45;&gt;apiAlb</title>
-<path fill="none" stroke="#94a3b8" d="M888.52,-375.16C934,-365.5 1000.21,-351.44 1052.13,-340.41"/>
-<polygon fill="#94a3b8" stroke="#94a3b8" points="1052.51,-342.83 1058.85,-338.98 1051.49,-338.04 1052.51,-342.83"/>
+<path fill="none" stroke="#94a3b8" d="M888.52,-375.16C935.97,-365.08 1006,-350.21 1058.81,-338.99"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="1059.32,-341.39 1065.66,-337.54 1058.3,-336.6 1059.32,-341.39"/>
 </g>
 <!-- apiAlb&#45;&gt;logsS3 -->
 <g id="edge13" class="edge">
 <title>apiAlb&#45;&gt;logsS3</title>
-<path fill="none" stroke="#94a3b8" d="M1205.87,-340.75C1258.26,-354.76 1323.37,-375.41 1342.65,-395.67 1368.19,-422.52 1343.79,-449.1 1366.18,-478.76"/>
+<path fill="none" stroke="#94a3b8" d="M1199.21,-338.99C1252.6,-352.99 1322.55,-374.54 1342.65,-395.67 1368.19,-422.52 1343.79,-449.1 1366.18,-478.76"/>
 <polygon fill="#94a3b8" stroke="#94a3b8" points="1364.28,-480.31 1370.71,-484 1367.98,-477.1 1364.28,-480.31"/>
 <text xml:space="preserve" text-anchor="middle" x="1294.27" y="-396.87" font-family="Helvetica,sans-Serif" font-size="9.00" fill="#f8fafc">ALB access logs</text>
 </g>
@@ -202,7 +202,7 @@
 <!-- apiAlb&#45;&gt;inventory -->
 <g id="edge14" class="edge">
 <title>apiAlb&#45;&gt;inventory</title>
-<path fill="none" stroke="#94a3b8" d="M1205.56,-330.47C1245.83,-334.48 1297.06,-339.64 1342.65,-344.42 1353.69,-345.58 1365.48,-346.84 1376.81,-348.07"/>
+<path fill="none" stroke="#94a3b8" d="M1198.96,-329.81C1240.12,-333.91 1294.52,-339.38 1342.65,-344.42 1353.69,-345.58 1365.48,-346.84 1376.81,-348.07"/>
 <polygon fill="#94a3b8" stroke="#94a3b8" points="1376.22,-350.47 1383.45,-348.79 1376.75,-345.6 1376.22,-350.47"/>
 </g>
 <!-- cart -->
@@ -215,8 +215,8 @@
 <!-- apiAlb&#45;&gt;cart -->
 <g id="edge15" class="edge">
 <title>apiAlb&#45;&gt;cart</title>
-<path fill="none" stroke="#94a3b8" d="M1205.71,-314.6C1258.04,-308.16 1328.11,-299.53 1376.87,-293.52"/>
-<polygon fill="#94a3b8" stroke="#94a3b8" points="1376.96,-295.98 1383.6,-292.69 1376.36,-291.12 1376.96,-295.98"/>
+<path fill="none" stroke="#94a3b8" d="M1198.95,-315.44C1251.89,-308.92 1326.01,-299.79 1376.9,-293.52"/>
+<polygon fill="#94a3b8" stroke="#94a3b8" points="1377.03,-295.97 1383.68,-292.68 1376.43,-291.11 1377.03,-295.97"/>
 </g>
 <!-- account -->
 <g id="node25" class="node">

@@ -132,7 +132,7 @@ resource "aws_wafv2_web_acl" "edge" {
   provider    = aws.use1
   name        = "ensemble-grafana-edge"
   scope       = "CLOUDFRONT"
-  description = "WAF for Ensemble-Grafana CloudFront distribution"
+  description = "WAF for Ensemble-Retail CloudFront distribution"
 
   default_action {
     allow {}
@@ -224,7 +224,7 @@ resource "aws_wafv2_web_acl" "edge" {
 resource "aws_wafv2_web_acl" "api_regional" {
   name        = "ensemble-grafana-api"
   scope       = "REGIONAL"
-  description = "Regional WAF for Ensemble-Grafana API ALB"
+  description = "Regional WAF for Ensemble-Retail API ALB"
 
   default_action {
     allow {}

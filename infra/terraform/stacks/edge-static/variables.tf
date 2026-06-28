@@ -4,7 +4,8 @@ variable "aws_region" {
 }
 
 variable "domain_name" {
-  type    = string
+  type = string
+  # Retained as the state-backed primary identifier; ensemble-retail.com is canonical publicly.
   default = "ensemble-grafana.com"
 }
 
@@ -16,7 +17,7 @@ variable "api_origin_domain_name" {
 
 variable "secondary_domain_name" {
   type        = string
-  description = "Additional apex domain served by the same CloudFront distribution / cert. Empty disables."
+  description = "Canonical Ensemble-Retail apex domain served by the existing CloudFront distribution and certificate. Empty disables."
   default     = "ensemble-retail.com"
 }
 

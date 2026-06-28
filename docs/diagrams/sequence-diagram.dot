@@ -57,7 +57,7 @@ digraph sequence_dependency_diagram {
     color="#38bdf8";
     fontcolor="#bae6fd";
     style="rounded,setlinewidth(2)";
-    static_browser [label="Open\nensemble-grafana.com", fillcolor="#1e3a8a", color="#1e3a8a", group=c1];
+    static_browser [label="Open\nensemble-retail.com", fillcolor="#1e3a8a", color="#1e3a8a", group=c1];
     static_dns [label="Route53\nDNS alias", fillcolor="#164e63", color="#38bdf8", group=c2];
     static_cf [label="CloudFront\n+ edge WAF", fillcolor="#164e63", color="#38bdf8", group=c3];
     static_s3 [label="S3\nstatic origin", fillcolor="#713f12", color="#f59e0b", group=c4];

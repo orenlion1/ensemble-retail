@@ -4,7 +4,7 @@ metadata:
   name: "ensemble-grafana-ping-reachability-2496"
 spec:
   job: ensemble-grafana-ping-reachability
-  target: ensemble-grafana.com
+  target: ensemble-retail.com
   frequency: 120000
   timeout: 10000
   enabled: false

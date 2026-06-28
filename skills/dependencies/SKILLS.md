@@ -1,6 +1,6 @@
 # Dependencies Replication Skill
 
-Use this skill when preparing a new workstation, CI runner, or bootstrap script for an Ensemble-Grafana-style application. The goal is to install and verify the tools needed for Java/Spring services, JavaScript frontend work, AWS/Terraform infrastructure, Kubernetes deployment, Grafana observability, k6 testing, and local development.
+Use this skill when preparing a new workstation, CI runner, or bootstrap script for an Ensemble-Retail-style application. The goal is to install and verify the tools needed for Java/Spring services, JavaScript frontend work, AWS/Terraform infrastructure, Kubernetes deployment, Grafana observability, k6 testing, and local development.
 
 ## Core Pattern
 

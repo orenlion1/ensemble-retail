@@ -1,6 +1,6 @@
-# Ensemble-Grafana Skills
+# Ensemble-Retail Skills
 
-This folder contains reusable `SKILLS.md` playbooks for replicating the Ensemble-Grafana platform pattern in future applications.
+This folder contains reusable `SKILLS.md` playbooks for replicating the Ensemble-Retail platform pattern in future applications.
 
 - `infrastructure/SKILLS.md` - Terraform stack decomposition, AWS/EKS deployment, domain/TLS, WAF, IAM, and Kubernetes baseline.
 - `observability/SKILLS.md` - Grafana Cloud, Faro, Alloy, Beyla, Pyroscope, Synthetic Monitoring, k6, dashboards, and IRM.

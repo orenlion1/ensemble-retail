@@ -1,6 +1,6 @@
 # Coding Replication Skill
 
-Use this skill when recreating the Ensemble-Grafana application pattern for a future app. The goal is a demonstrable ecommerce-style platform with clear frontend behavior, service boundaries, data ownership, security, and testability.
+Use this skill when recreating the Ensemble-Retail application pattern for a future app. The goal is a demonstrable ecommerce-style platform with clear frontend behavior, service boundaries, data ownership, security, and testability.
 
 ## Application Shape
 
@@ -196,13 +196,13 @@ Browser action test expectations:
 - It should assert required action names fired.
 - It should include checkout and add/remove cart flows.
 - It should fail clearly when required actions are missing.
-- Run it after every frontend deployment against the deployed URL once CloudFront invalidation or cache refresh completes: `BASE_URL=https://ensemble-grafana.com k6 run load-tests/synthetic-browser-actions.js`.
+- Run it after every frontend deployment against the deployed URL once CloudFront invalidation or cache refresh completes: `BASE_URL=https://ensemble-retail.com k6 run load-tests/synthetic-browser-actions.js`.
 - After every frontend deployment, run `gcx` Faro user-action queries and generate a report in `reports/frontend-user-actions/` summarizing action counts, region/locale counts, user-action durations, and missing required actions.
 
 Scripted synthetic monitoring expectations:
 
 - For every frontend change that adds, removes, or alters a user-facing flow, route, region/locale contract, or storefront response shape, add or update the scripted Grafana Synthetic Monitoring check so the probe exercises the changed behavior.
-- The k6 script is the single source of truth: `observability/synthetic-monitoring/ensemble-grafana-scripted-check.js`. Edit only this file.
+- The k6 script is the single source of truth: `observability/synthetic-monitoring/ensemble-retail-scripted-check.js`. Edit only this file.
 - Both consumers derive from it automatically, so never hand-edit the script copy:
   - Terraform reads it via `file()` in `observability/synthetic-monitoring/terraform-scripted-check/main.tf`.
   - The YAML manifest `observability/synthetic-monitoring/check-scripted-storefront-api.yaml` embeds it via the generator `observability/synthetic-monitoring/sync-scripted-check.mjs`.
@@ -210,16 +210,16 @@ Scripted synthetic monitoring expectations:
   - `node observability/synthetic-monitoring/sync-scripted-check.mjs`
   - `node observability/synthetic-monitoring/sync-scripted-check.mjs --check` (use in CI to fail on drift)
 - The scripted check must continue to assert homepage shell load, inventory product list and detail, region/locale headers, and that write APIs (cart) reject unauthenticated requests; extend these assertions when a frontend change introduces new critical paths.
-- Validate the script locally before regenerating the manifest: `k6 run observability/synthetic-monitoring/ensemble-grafana-scripted-check.js`.
+- Validate the script locally before regenerating the manifest: `k6 run observability/synthetic-monitoring/ensemble-retail-scripted-check.js`.
 - Apply the updated check via `observability/synthetic-monitoring/terraform-scripted-check/` (or `create-synthetic-monitoring.sh`), and record the run/upload status in the change summary.
 
 k6 load test expectations:
 
 - Every change to a storefront flow, API route, request/response contract, or region/locale behavior must be reflected in the k6 load tests so load coverage never lags behind the app.
-- Keep the primary API-flow load test aligned with the live contract: `load-tests/ensemble-grafana.js` should exercise categories, product list, product detail, cart save, and account save, mirroring the scripted synthetic check.
+- Keep the primary API-flow load test aligned with the live contract: `load-tests/ensemble-retail.js` should exercise categories, product list, product detail, cart save, and account save, mirroring the scripted synthetic check.
 - When a change adds or alters a regional/locale path or a traffic pattern, update the matching Cloud tests: `load-tests/grafana-cloud-20-user-regional.js` and the traffic-spike tests (`load-tests/grafana-cloud-traffic-spikes*.js`).
 - Validate every k6 test parses before committing: `k6 inspect load-tests/<file>.js`.
-- Run the relevant load test and capture the run/upload status or summary output in the change summary, for example `BASE_URL=https://ensemble-grafana.com k6 run load-tests/ensemble-grafana.js`.
+- Run the relevant load test and capture the run/upload status or summary output in the change summary, for example `BASE_URL=https://ensemble-retail.com k6 run load-tests/ensemble-retail.js`.
 
 ## Security And Config
 
@@ -252,9 +252,9 @@ When coding changes affect infrastructure, observability, API flow, or user-visi
 
 - Frontend builds.
 - Playwright e2e tests pass after frontend changes: `cd frontend && npm run test:e2e`.
-- k6 browser-action validation passes after each frontend deployment: `BASE_URL=https://ensemble-grafana.com k6 run load-tests/synthetic-browser-actions.js`.
-- Scripted synthetic monitoring check is added/updated for the frontend change and passes locally: `k6 run observability/synthetic-monitoring/ensemble-grafana-scripted-check.js`, and the generated manifest is regenerated and in sync: `node observability/synthetic-monitoring/sync-scripted-check.mjs --check`.
-- k6 load tests reflect the change and parse cleanly (`k6 inspect load-tests/<file>.js`); `load-tests/ensemble-grafana.js` still mirrors the storefront contract (categories, product list, product detail, cart, account).
+- k6 browser-action validation passes after each frontend deployment: `BASE_URL=https://ensemble-retail.com k6 run load-tests/synthetic-browser-actions.js`.
+- Scripted synthetic monitoring check is added/updated for the frontend change and passes locally: `k6 run observability/synthetic-monitoring/ensemble-retail-scripted-check.js`, and the generated manifest is regenerated and in sync: `node observability/synthetic-monitoring/sync-scripted-check.mjs --check`.
+- k6 load tests reflect the change and parse cleanly (`k6 inspect load-tests/<file>.js`); `load-tests/ensemble-retail.js` still mirrors the storefront contract (categories, product list, product detail, cart, account).
 - Local app can load categories/products.
 - Cart add/remove/checkout path works.
 - Account save path works.

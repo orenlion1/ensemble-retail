@@ -6,7 +6,7 @@ export const options = {
   iterations: 1,
 };
 
-const baseUrl = 'https://ensemble-grafana.com';
+const baseUrl = 'https://ensemble-retail.com';
 http.setResponseCallback(http.expectedStatuses({ min: 200, max: 399 }, 401, 403));
 
 function safeJson(response) {
@@ -25,7 +25,7 @@ export default function () {
   check(res, {
     'homepage status 200': (r) => r.status === 200,
     'homepage loads fast': (r) => r.timings.duration < 3000,
-    'homepage serves storefront shell': (r) => r.body.includes('Ensemble-Grafana') || r.body.includes('root'),
+    'homepage serves storefront shell': (r) => r.body.includes('Ensemble Retail') || r.body.includes('root'),
   });
 
   sleep(1);

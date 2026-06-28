@@ -12,10 +12,11 @@
 | 2026-05-25 | `39b5092` Initial commit: Ensemble-Grafana ecommerce observability platform. | The project became an ecommerce observability platform rather than a generic scaffold. |
 | 2026-05-25 | `33e5f67` Document that the repo is a promptable training exercise. | README framed the repo as a promptable learning and replication exercise. |
 | 2026-05-25 | `c801411` Invite readers to try the live mock storefront in the README. | The project gained a user-facing entry point and live demo posture. |
+| 2026-06-28 | Repository-safe rename to Ensemble-Retail. | GitHub, package, workflow, source, documentation, and canonical-domain names moved to Ensemble-Retail while deployed legacy identifiers were retained. |
 
 ## What This Category Produced
 
-- A named project identity: Ensemble-Grafana.
+- A current project identity: Ensemble-Retail, evolved from the original Ensemble-Grafana name.
 - An outdoor-inspired ecommerce scenario.
 - A training repo explicitly designed to be driven by prompts and reusable agent skills.
 - A README entry point that explains the live mock storefront and repository layout.

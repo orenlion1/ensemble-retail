@@ -13,7 +13,7 @@ data "grafana_synthetic_monitoring_probes" "main" {}
 
 resource "grafana_synthetic_monitoring_check" "scripted" {
   job       = "ensemble-grafana-scripted-storefront-api"
-  target    = "https://ensemble-grafana.com"
+  target    = "https://ensemble-retail.com"
   enabled   = false
   frequency = 60000
   timeout   = 10000
@@ -32,14 +32,14 @@ resource "grafana_synthetic_monitoring_check" "scripted" {
 
   settings {
     scripted {
-      script = file("${path.module}/../ensemble-grafana-scripted-check.js")
+      script = file("${path.module}/../ensemble-retail-scripted-check.js")
     }
   }
 }
 
 resource "grafana_synthetic_monitoring_check" "browser_user_actions" {
   job       = "ensemble-grafana-browser-user-actions"
-  target    = "https://ensemble-grafana.com"
+  target    = "https://ensemble-retail.com"
   enabled   = false
   frequency = 300000
   timeout   = 180000
@@ -59,7 +59,7 @@ resource "grafana_synthetic_monitoring_check" "browser_user_actions" {
 
   settings {
     browser {
-      script = file("${path.module}/../ensemble-grafana-browser-action-check.js")
+      script = file("${path.module}/../ensemble-retail-browser-action-check.js")
     }
   }
 }

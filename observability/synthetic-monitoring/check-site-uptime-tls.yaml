@@ -4,7 +4,7 @@ metadata:
   name: "ensemble-grafana-site-uptime-tls-2493"
 spec:
   job: ensemble-grafana-site-uptime-tls
-  target: https://ensemble-grafana.com
+  target: https://ensemble-retail.com
   frequency: 60000
   timeout: 10000
   enabled: false

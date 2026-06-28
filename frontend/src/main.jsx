@@ -21,7 +21,7 @@ if (faroUrl) {
     url: faroUrl,
     apiKey: faroApiKey,
     app: {
-      name: 'ensemble-grafana',
+      name: 'ensemble-retail',
       version: '1.0.0',
       environment: import.meta.env.VITE_FARO_ENVIRONMENT || 'production'
     },

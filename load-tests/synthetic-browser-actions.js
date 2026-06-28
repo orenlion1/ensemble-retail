@@ -5,7 +5,7 @@ import { summaryOutput } from './summary.js';
 
 export const options = {
   cloud: {
-    name: 'ensemble-grafana-faro-user-actions-browser'
+    name: 'ensemble-retail-faro-user-actions-browser'
   },
   scenarios: {
     storefront_actions: {
@@ -25,7 +25,7 @@ export const options = {
     browser_web_vital_cls: ['p(95)<0.1']
   },
   tags: {
-    app: 'ensemble-grafana',
+    app: 'ensemble-retail',
     test_type: 'faro-user-actions-browser'
   }
 };

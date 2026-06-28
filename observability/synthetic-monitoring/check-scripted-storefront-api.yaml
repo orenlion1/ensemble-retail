@@ -1,5 +1,5 @@
 # The settings.scripted.script block below is generated from
-# ensemble-grafana-scripted-check.js. Do not edit it by hand.
+# ensemble-retail-scripted-check.js. Do not edit it by hand.
 # Regenerate with: node observability/synthetic-monitoring/sync-scripted-check.mjs
 apiVersion: syntheticmonitoring.ext.grafana.app/v1alpha1
 kind: Check
@@ -7,7 +7,7 @@ metadata:
   name: "ensemble-grafana-scripted-storefront-api"
 spec:
   job: ensemble-grafana-scripted-storefront-api
-  target: https://ensemble-grafana.com
+  target: https://ensemble-retail.com
   frequency: 60000
   timeout: 10000
   enabled: false
@@ -35,7 +35,7 @@ spec:
           iterations: 1,
         };
 
-        const baseUrl = 'https://ensemble-grafana.com';
+        const baseUrl = 'https://ensemble-retail.com';
         http.setResponseCallback(http.expectedStatuses({ min: 200, max: 399 }, 401, 403));
 
         function safeJson(response) {
@@ -54,7 +54,7 @@ spec:
           check(res, {
             'homepage status 200': (r) => r.status === 200,
             'homepage loads fast': (r) => r.timings.duration < 3000,
-            'homepage serves storefront shell': (r) => r.body.includes('Ensemble-Grafana') || r.body.includes('root'),
+            'homepage serves storefront shell': (r) => r.body.includes('Ensemble Retail') || r.body.includes('root'),
           });
 
           sleep(1);

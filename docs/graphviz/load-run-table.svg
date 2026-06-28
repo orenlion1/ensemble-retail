@@ -9,7 +9,7 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(25.2 1006.7)">
 <title>load_run_table</title>
 <polygon fill="#0b1220" stroke="none" points="-25.2,25.2 -25.2,-1006.7 797.2,-1006.7 797.2,25.2 -25.2,25.2"/>
-<text xml:space="preserve" text-anchor="middle" x="386" y="-956.6" font-family="Helvetica,sans-Serif" font-size="22.00" fill="#f8fafc">Ensemble&#45;Grafana k6 Traffic Spike Run History</text>
+<text xml:space="preserve" text-anchor="middle" x="386" y="-956.6" font-family="Helvetica,sans-Serif" font-size="22.00" fill="#f8fafc">Ensemble Retail k6 Traffic Spike Run History</text>
 <!-- runs -->
 <g id="node1" class="node">
 <title>runs</title>

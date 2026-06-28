@@ -1,6 +1,6 @@
 # /run-load-test
 
-Run the Ensemble-Grafana traffic spike load-test workflow.
+Run the Ensemble-Retail traffic spike load-test workflow.
 
 ## Intent
 

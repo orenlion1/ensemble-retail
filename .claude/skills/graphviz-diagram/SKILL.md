@@ -1,6 +1,6 @@
 ---
 name: graphviz-diagram
-description: Create, render, store, and publish Graphviz DOT diagrams for Ensemble-Grafana, and document structural changes. Use when a user asks to create a Graphviz graph locally, generate SVG/PNG diagram assets, store them in the repo, push diagram changes to GitHub, prepare a Graphviz diagram for a Grafana Graphviz panel, or when an architecture/request-flow/telemetry-flow/dependency change needs to be reflected in DIAGRAMS.md.
+description: Create, render, store, and publish Graphviz DOT diagrams for Ensemble-Retail, and document structural changes. Use when a user asks to create a Graphviz graph locally, generate SVG/PNG diagram assets, store them in the repo, push diagram changes to GitHub, prepare a Graphviz diagram for a Grafana Graphviz panel, or when an architecture/request-flow/telemetry-flow/dependency change needs to be reflected in DIAGRAMS.md.
 ---
 
 # Graphviz Diagram
@@ -75,7 +75,7 @@ file docs/graphviz/<name>.png
 - README for user-facing commands and dashboard links.
 - DIAGRAMS.md when architecture, request flow, telemetry flow, or operational dependencies change.
 - `docs/graphviz/README.md` when adding reusable diagram conventions.
-- EVOLUTION.md plus the matching `docs/evolution/categories/` file when the diagram is a project-history/evolution artifact or represents a key milestone in how Ensemble-Grafana is explained.
+- EVOLUTION.md plus the matching `docs/evolution/categories/` file when the diagram is a project-history/evolution artifact or represents a key milestone in how Ensemble-Retail is explained.
 - For evolution timeline diagrams, keep the DOT, SVG, and high-resolution PNG in `docs/evolution/diagrams/` and regenerate all three from the DOT source in the same change.
 - For every evolution timeline update, publish `docs/evolution/diagrams/ensemble-evolution-timeline-dark.dot` to the `Evolution` tab / `panel-20` in the Grafana dashboard `Ensemble Graphviz Diagrams` after the source is listed in `docs/graphviz/grafana-dashboard-diagram-inventory.md`.
 

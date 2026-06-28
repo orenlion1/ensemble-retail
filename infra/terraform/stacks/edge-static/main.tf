@@ -31,9 +31,9 @@ resource "aws_acm_certificate" "edge" {
 resource "aws_route53_record" "edge_certificate_validation" {
   for_each = {
     for option in aws_acm_certificate.edge.domain_validation_options : option.domain_name => {
-      name    = option.resource_record_name
-      record  = option.resource_record_value
-      type    = option.resource_record_type
+      name   = option.resource_record_name
+      record = option.resource_record_value
+      type   = option.resource_record_type
       # Route each validation record into the zone that owns its domain.
       zone_id = (var.secondary_domain_name != "" && endswith(trimsuffix(option.domain_name, "."), var.secondary_domain_name)) ? aws_route53_zone.secondary.zone_id : aws_route53_zone.primary.zone_id
     }
@@ -207,7 +207,7 @@ resource "aws_wafv2_web_acl" "edge" {
   provider    = aws.use1
   name        = "ensemble-grafana-edge"
   scope       = "CLOUDFRONT"
-  description = "WAF for Ensemble-Grafana CloudFront distribution"
+  description = "WAF for Ensemble-Retail CloudFront distribution"
 
   default_action {
     allow {}
@@ -299,7 +299,7 @@ resource "aws_wafv2_web_acl" "edge" {
 resource "aws_wafv2_web_acl" "api_regional" {
   name        = "ensemble-grafana-api"
   scope       = "REGIONAL"
-  description = "Regional WAF for Ensemble-Grafana API ALB"
+  description = "Regional WAF for Ensemble-Retail API ALB"
 
   default_action {
     allow {}
@@ -409,8 +409,8 @@ resource "aws_cloudfront_distribution" "frontend" {
     var.secondary_domain_name,
     var.secondary_domain_name != "" ? "www.${var.secondary_domain_name}" : "",
   ])
-  web_acl_id          = aws_wafv2_web_acl.edge.arn
-  depends_on          = [aws_acm_certificate_validation.edge]
+  web_acl_id = aws_wafv2_web_acl.edge.arn
+  depends_on = [aws_acm_certificate_validation.edge]
 
   logging_config {
     bucket          = aws_s3_bucket.logs.bucket_domain_name

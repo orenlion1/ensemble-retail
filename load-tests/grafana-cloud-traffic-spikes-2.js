@@ -20,7 +20,7 @@ export const options = {
   ...baseOptions,
   cloud: {
     ...(baseOptions.cloud || {}),
-    name: 'ensemble-grafana-traffic-spikes-2'
+    name: 'ensemble-retail-traffic-spikes-2'
   }
 };
 

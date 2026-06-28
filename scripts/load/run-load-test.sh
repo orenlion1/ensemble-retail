@@ -26,7 +26,7 @@ resolve() {
     spikes2)  echo "$ld/grafana-cloud-traffic-spikes-2.js" ;;
     regional) echo "$ld/grafana-cloud-20-user-regional.js" ;;
     browser)  echo "$ld/synthetic-browser-actions.js" ;;
-    api)      echo "$ld/ensemble-grafana.js" ;;
+    api)      echo "$ld/ensemble-retail.js" ;;
     *) if [ -f "$1" ]; then echo "$1"; elif [ -f "$ld/$1" ]; then echo "$ld/$1"; else echo ""; fi ;;
   esac
 }

@@ -1,6 +1,6 @@
 # Observability
 
-Grafana Cloud telemetry assets for Ensemble-Grafana. Application OTLP, logs, and profiles are collected by Alloy in `ensemble-observability` (see `infra/k8s/` and `observability/alloy/config.alloy`). Cluster-level metrics, node logs, events, and cost data are collected by the [Grafana k8s-monitoring](https://github.com/grafana/k8s-monitoring-helm) chart in the `grafana` namespace.
+Grafana Cloud telemetry assets for Ensemble-Retail. Application OTLP, logs, and profiles are collected by Alloy in `ensemble-observability` (see `infra/k8s/` and `observability/alloy/config.alloy`). Cluster-level metrics, node logs, events, and cost data are collected by the [Grafana k8s-monitoring](https://github.com/grafana/k8s-monitoring-helm) chart in the `grafana` namespace. The live cluster and telemetry labels retain the legacy `ensemble-grafana` identifier for continuity.
 
 ## Layout
 

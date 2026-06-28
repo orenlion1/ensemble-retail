@@ -1,4 +1,4 @@
 interface:
   display_name: "Add Region Localization"
   short_description: "Add a new storefront region and locale."
-  default_prompt: "Use this skill to add a new region, language, and locale to the Ensemble-Grafana storefront with tests, k6 coverage, Faro validation, and docs."
+  default_prompt: "Use this skill to add a new region, language, and locale to the Ensemble-Retail storefront with tests, k6 coverage, Faro validation, and docs."

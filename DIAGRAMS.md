@@ -1,6 +1,6 @@
-# Ensemble-Grafana Diagrams
+# Ensemble-Retail Diagrams
 
-Architecture diagrams for the Ensemble-Grafana ecommerce platform.
+Architecture diagrams for the Ensemble-Retail ecommerce platform. Deployed AWS, Kubernetes, and Grafana resource identifiers remain legacy-named where renaming would recreate resources.
 
 Graphviz DOT sources are authoritative for the diagrams. The diagrams use dark-mode styling with high-contrast text. Rendered SVG and PNG exports are stored in `docs/diagrams/`.
 
@@ -22,7 +22,7 @@ Rendered: [SVG](docs/diagrams/network-diagram.svg) · [PNG](docs/diagrams/networ
 ```dot
 digraph network_diagram {
   rankdir=LR;
-  label="Ensemble-Grafana Network Diagram";
+  label="Ensemble-Retail Network Diagram";
 
   graph [
     fontname="Helvetica",
@@ -55,15 +55,15 @@ digraph network_diagram {
 
   shopper [label="Shopper browser", fillcolor="#1e3a8a"];
   registrar [label="Domain registrar"];
-  route53 [label="Route53 hosted zone\nensemble-grafana.com", fillcolor="#164e63"];
+  route53 [label="Route53 public DNS\nensemble-retail.com", fillcolor="#164e63"];
   acm [label="ACM certificate\nus-east-1 / ISSUED", fillcolor="#155e75"];
   edgeWaf [label="AWS WAF\nCloudFront scope", fillcolor="#7f1d1d"];
-  cloudfront [label="CloudFront distribution\nensemble-grafana.com", fillcolor="#1e3a8a"];
+  cloudfront [label="CloudFront distribution\nensemble-retail.com", fillcolor="#1e3a8a"];
   staticS3 [label="S3 frontend bucket\nprivate origin", fillcolor="#713f12"];
   imageS3 [label="S3 inventory images bucket", fillcolor="#713f12"];
   logsS3 [label="S3 edge/API logs bucket\nCloudFront + ALB logs", fillcolor="#713f12"];
   regionalWaf [label="AWS WAF\nregional API scope", fillcolor="#7f1d1d"];
-  apiAlb [label="API ingress / ALB\napi.ensemble-grafana.com", fillcolor="#3730a3"];
+  apiAlb [label="API ingress / ALB\napi.ensemble-retail.com", fillcolor="#3730a3"];
   cognito [label="AWS Cognito\nGoogle federation", fillcolor="#4c1d95"];
   google [label="Google Identity Provider", fillcolor="#4c1d95"];
   postgres [label="Postgres inventory DB", shape=cylinder, fillcolor="#14532d"];
@@ -186,7 +186,7 @@ digraph sequence_dependency_diagram {
     color="#38bdf8";
     fontcolor="#bae6fd";
     style="rounded,setlinewidth(2)";
-    static_browser [label="Open\nensemble-grafana.com", fillcolor="#1e3a8a", color="#1e3a8a", group=c1];
+    static_browser [label="Open\nensemble-retail.com", fillcolor="#1e3a8a", color="#1e3a8a", group=c1];
     static_dns [label="Route53\nDNS alias", fillcolor="#164e63", color="#38bdf8", group=c2];
     static_cf [label="CloudFront\n+ edge WAF", fillcolor="#164e63", color="#38bdf8", group=c3];
     static_s3 [label="S3\nstatic origin", fillcolor="#713f12", color="#f59e0b", group=c4];
@@ -358,7 +358,7 @@ digraph request_flow_diagram {
   ];
 
 
-  browser [label="Browser\nensemble-grafana.com", fillcolor="#1e3a8a"];
+  browser [label="Browser\nensemble-retail.com", fillcolor="#1e3a8a"];
   dns [label="Route53\nA/AAAA alias", fillcolor="#164e63"];
   wafEdge [label="AWS WAF\nedge rules", fillcolor="#7f1d1d"];
   cf [label="CloudFront\nHTTPS + static/API routing", fillcolor="#1e3a8a"];

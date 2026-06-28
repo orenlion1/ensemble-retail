@@ -13,7 +13,7 @@ const enableFaroBrowserActions = (__ENV.ENABLE_FARO_BROWSER_ACTIONS || '1') !== 
 
 export const options = {
   cloud: {
-    name: 'ensemble-grafana-30-user-regional'
+    name: 'ensemble-retail-30-user-regional'
   },
   scenarios: {
     regional_shoppers: {
@@ -47,7 +47,7 @@ export const options = {
     region_changes: ['count>20']
   },
   tags: {
-    app: 'ensemble-grafana',
+    app: 'ensemble-retail',
     test_type: 'regional-shopping-load'
   }
 };

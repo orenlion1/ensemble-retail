@@ -1,6 +1,6 @@
 ---
 name: incident-creation
-description: Use when creating Grafana IRM incidents for Ensemble-Grafana or a replicated application. Ensures every incident includes required labels for region, feature, service, and detection, and validates label values against the documented IRM taxonomy before creating or scripting incidents.
+description: Use when creating Grafana IRM incidents for Ensemble-Retail or a replicated application. Ensures every incident includes required labels for region, feature, service, and detection, and validates label values against the documented IRM taxonomy before creating or scripting incidents.
 ---
 
 # Incident Creation
@@ -18,7 +18,7 @@ Every incident must include these label keys:
 
 Do not create an incident without all four. If the user omitted one, infer a reasonable value from the incident context when safe; otherwise ask for the missing value.
 
-## Ensemble-Grafana Values
+## Ensemble-Retail Values
 
 Use the current IRM taxonomy unless the target application has its own documented labels:
 
@@ -44,7 +44,7 @@ gcx api /api/plugins/grafana-irm-app/resources/api/v1/FieldsService.GetFields -d
 
 ## Project Script Pattern
 
-For Ensemble-Grafana, prefer:
+For Ensemble-Retail, prefer:
 
 ```sh
 REGION=US \

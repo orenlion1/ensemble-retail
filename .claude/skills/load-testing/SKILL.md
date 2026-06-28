@@ -1,9 +1,9 @@
 ---
 name: load-testing
-description: Run k6 load, spike, and browser-action tests for Ensemble-Grafana against Grafana Cloud k6, validate Faro user-action telemetry, and refresh load-test comparison reports and dashboards. Use when running a load test, spike benchmark, regional/persona test, or k6 cloud run; setting k6 env (API_TEST_KEY, base URLs, k6 cloud login); or generating/updating load-test reports and the Load Run History dashboard panel.
+description: Run k6 load, spike, and browser-action tests for Ensemble-Retail against Grafana Cloud k6, validate Faro user-action telemetry, and refresh load-test comparison reports and dashboards. Use when running a load test, spike benchmark, regional/persona test, or k6 cloud run; setting k6 env (API_TEST_KEY, base URLs, k6 cloud login); or generating/updating load-test reports and the Load Run History dashboard panel.
 ---
 
-# k6 Load Testing (Ensemble-Grafana)
+# k6 Load Testing (Ensemble-Retail)
 
 Pulled from the `ensemble-observability-gcx` Codex skill's k6 section. Run load tests in
 Grafana Cloud k6 by default; use local `k6 run` only for script debugging.

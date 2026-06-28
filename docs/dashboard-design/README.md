@@ -1,6 +1,6 @@
 # Dashboard Design Notes
 
-This folder stores dashboard design references used by the Ensemble-Grafana observability work.
+This folder stores dashboard design references used by the Ensemble-Retail observability work.
 
 ## Tufte Color Standards
 

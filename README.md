@@ -1,8 +1,10 @@
-# Ensemble-Grafana
+# Ensemble-Retail
 
-This is a training repo to explore the art of the "promptable". Original outdoor-inspired ecommerce platform for Ensemble-grafana. The repo contains a shopper-facing JavaScript storefront, three Spring Boot microservices, AWS deployment assets, and Grafana observability configuration.
+This is a training repo to explore the art of the "promptable" through Ensemble-Retail, an outdoor-inspired ecommerce platform. The repo contains a shopper-facing JavaScript storefront, three Spring Boot microservices, AWS deployment assets, and Grafana observability configuration.
 
-**Try the mock site:** [https://ensemble-grafana.com/](https://ensemble-grafana.com/) — browse products, use the cart and checkout flows, switch regions, and sign in with Google via Cognito to explore account features.
+**Try the mock site:** [https://ensemble-retail.com/](https://ensemble-retail.com/) — browse products, use the cart and checkout flows, switch regions, and sign in with Google via Cognito to explore account features.
+
+The repository and application are named `ensemble-retail`. Existing deployed AWS, Kubernetes, Cognito, Grafana, and Terraform resources intentionally retain their `ensemble-grafana` identifiers to avoid destructive recreation. Commands below therefore continue to use legacy resource names such as the `ensemble-grafana` Kubernetes namespace, AWS profile, EKS cluster, Synthetic Monitoring jobs, and IRM schedules.
 
 ## Project Layout
 
@@ -16,7 +18,7 @@ This is a training repo to explore the art of the "promptable". Original outdoor
 - `observability/` - Grafana Alloy config, k8s-monitoring Helm values, synthetic checks, and starter dashboards. See `observability/README.md`.
 - `load-tests/` - k6 API and browser scenarios covering users, categories, product browsing, cart, checkout, account, and synthetic button-action flows.
 - `docs/` - deployment, security, domain/TLS, and Grafana IRM runbooks.
-- `EVOLUTION.md` and `docs/evolution/` - source-backed chronology of how Ensemble-Grafana was built from first prompt category to latest committed evidence, including a high-resolution Graphviz timeline.
+- `EVOLUTION.md` and `docs/evolution/` - source-backed chronology of how Ensemble-Retail was built from first prompt category to latest committed evidence, including a high-resolution Graphviz timeline.
 - `docs/graviton-migration.md` - plan for migrating EKS workers and service images from x86 to AWS Graviton/ARM64.
 - `scripts/security/` - predeploy security checks for secrets, Kubernetes hardening, and IaC controls.
 - `.github/workflows/build.yml` - GitHub Actions security checks, Maven service packages, frontend build, Playwright browser checks, and k6 script inspection.
@@ -167,14 +169,14 @@ Public frontend build variables:
 ```sh
 VITE_COGNITO_HOSTED_UI_DOMAIN=https://ensemble-grafana.auth.us-east-1.amazoncognito.com
 VITE_COGNITO_CLIENT_ID=<cognito-app-client-id>
-VITE_COGNITO_REDIRECT_URI=https://ensemble-grafana.com/auth/callback
+VITE_COGNITO_REDIRECT_URI=https://ensemble-retail.com/auth/callback
 ```
 
 The Google OAuth client must allow the Cognito IdP redirect URI from `terraform output google_oauth_redirect_uri`. Do not expose or commit the Google client secret; only the Cognito app client ID is a browser value.
 
 ## Frontend Observability
 
-Grafana Faro is initialized with `@grafana/faro-react`, React Router instrumentation, and `@grafana/faro-web-tracing` so browser events, logs, web vitals, route changes, and frontend HTTP spans can flow to Grafana Cloud. The default collector is the Ensemble-Grafana Grafana Cloud endpoint; override it with `VITE_FARO_URL` and set `VITE_FARO_API_KEY` if your endpoint requires an API key. See `frontend/.env.example`.
+Grafana Faro is initialized with `@grafana/faro-react`, React Router instrumentation, and `@grafana/faro-web-tracing` so browser events, logs, web vitals, route changes, and frontend HTTP spans can flow to Grafana Cloud. The default collector is the Ensemble-Retail Grafana Cloud endpoint; override it with `VITE_FARO_URL` and set `VITE_FARO_API_KEY` if your endpoint requires an API key. See `frontend/.env.example`.
 
 Faro user actions include region, locale, and language attributes. The storefront region picker currently maps `US` to American English (`en-US`), `CA` to French (`fr-CA`), `CN` to Mandarin (`zh-CN`), `UK` to British English (`en-GB`), and `SE` to Swedish (`sv-SE`). British English copy uses regional retail terms such as `Basket`, `Delivery`, `Colours`, and `Trousers`.
 
@@ -253,9 +255,9 @@ Pyroscope profiles should appear under service names such as `inventory-service`
 
 ## Production Shape
 
-Static frontend assets and inventory images are deployed to S3 and served through CloudFront. API calls are routed separately under `/api/*` to EKS-hosted Spring Boot services. Public HTTPS for `https://ensemble-grafana.com` is terminated with an ACM certificate at the CloudFront edge, protected by AWS WAF. The `edge-static` Terraform stack creates the Route53 hosted zone, ACM DNS validation records, apex/`www` alias records, the shared edge/API logs bucket, CloudFront standard access logging, and the S3 policy needed for ALB access log delivery.
+Static frontend assets and inventory images are deployed to S3 and served through CloudFront. API calls are routed separately under `/api/*` to EKS-hosted Spring Boot services. The canonical public URL is `https://ensemble-retail.com`; `https://ensemble-grafana.com` remains a legacy alias on the same CloudFront distribution. HTTPS is terminated with ACM at the CloudFront edge and protected by AWS WAF. The existing `edge-static` Terraform stack and its resource identifiers remain legacy-named to prevent replacement of stateful or edge resources.
 
-Registrar delegation for `ensemble-grafana.com` has been completed. The registrar now points to the Route53 hosted zone name servers:
+The retained legacy `ensemble-grafana.com` Route53 hosted zone uses these name servers:
 
 ```text
 ns-1673.awsdns-17.co.uk
@@ -310,19 +312,19 @@ Those private probe records are offline until their agents are deployed. To cont
 - Scripted k6: `ensemble-grafana-scripted-storefront-api` - check ID `2545`
 - k6 browser: `ensemble-grafana-browser-user-actions` - repo definition added for the same browser action journey used by the traffic-spike load test; live check ID is pending Terraform creation/import.
 
-The scripted k6 check follows Grafana Synthetic Monitoring requirements: one VU, one iteration, no external data files, and only standard k6 imports. It loads the storefront, validates the public inventory list, fetches one product detail by ID, and confirms the protected cart API rejects unauthenticated access. The single source of truth is the script `observability/synthetic-monitoring/ensemble-grafana-scripted-check.js`. Terraform reads it via `file()`, and the YAML check manifest `observability/synthetic-monitoring/check-scripted-storefront-api.yaml` embeds it through a generator, so edit only the `.js` file.
+The scripted k6 check follows Grafana Synthetic Monitoring requirements: one VU, one iteration, no external data files, and only standard k6 imports. It loads the storefront, validates the public inventory list, fetches one product detail by ID, and confirms the protected cart API rejects unauthenticated access. The single source of truth is the script `observability/synthetic-monitoring/ensemble-retail-scripted-check.js`. Terraform reads it via `file()`, and the YAML check manifest `observability/synthetic-monitoring/check-scripted-storefront-api.yaml` embeds it through a generator, so edit only the `.js` file.
 
-The k6 browser check closes the Synthetic Monitoring gap for load-tested user actions. Its source of truth is the load-test browser journey `load-tests/synthetic-browser-actions.js`, which is also imported by `load-tests/grafana-cloud-traffic-spikes.js` as the `storefront_actions` scenario. The generator `observability/synthetic-monitoring/sync-browser-action-check.mjs` emits a standalone Synthetic Monitoring script at `observability/synthetic-monitoring/ensemble-grafana-browser-action-check.js` and embeds that script in `observability/synthetic-monitoring/check-browser-user-actions.yaml` under `settings.browser.script`. The check validates every exact and dynamic user-action family exercised by the load test: navigation, department/category selection, sort/search, US/Canada/China/UK/Sweden region and language changes, product detail open/close, grid/detail/sale cart adds, quantity change, checkout, checkout dialog close, item removal, Google sign-in control visibility, and account save.
+The k6 browser check closes the Synthetic Monitoring gap for load-tested user actions. Its source of truth is the load-test browser journey `load-tests/synthetic-browser-actions.js`, which is also imported by `load-tests/grafana-cloud-traffic-spikes.js` as the `storefront_actions` scenario. The generator `observability/synthetic-monitoring/sync-browser-action-check.mjs` emits a standalone Synthetic Monitoring script at `observability/synthetic-monitoring/ensemble-retail-browser-action-check.js` and embeds that script in `observability/synthetic-monitoring/check-browser-user-actions.yaml` under `settings.browser.script`. The check validates every exact and dynamic user-action family exercised by the load test: navigation, department/category selection, sort/search, US/Canada/China/UK/Sweden region and language changes, product detail open/close, grid/detail/sale cart adds, quantity change, checkout, checkout dialog close, item removal, Google sign-in control visibility, and account save.
 
 Validate the scripted check locally, then regenerate and verify the manifest before pushing changes. These commands inspect code and manifests only; they do not enable the live Synthetic Monitoring checks:
 
 ```sh
-k6 run observability/synthetic-monitoring/ensemble-grafana-scripted-check.js
+k6 run observability/synthetic-monitoring/ensemble-retail-scripted-check.js
 node observability/synthetic-monitoring/sync-scripted-check.mjs
 node observability/synthetic-monitoring/sync-scripted-check.mjs --check
 node observability/synthetic-monitoring/sync-browser-action-check.mjs
 node observability/synthetic-monitoring/sync-browser-action-check.mjs --check
-k6 inspect observability/synthetic-monitoring/ensemble-grafana-browser-action-check.js
+k6 inspect observability/synthetic-monitoring/ensemble-retail-browser-action-check.js
 ```
 
 The `observability` job in `.github/workflows/build.yml` runs both sync checks and `k6 inspect` on the scripted and browser-check sources, so stale Synthetic Monitoring manifests fail CI. CI keeps the disabled check code healthy without driving live Synthetic Monitoring execution cost.
@@ -384,7 +386,7 @@ Current IRM resources:
 - Escalation chain: `SRE-Escalation`, ID `FXIJQB51CYLL3`; first policy `EQFWNRZQGD1DQ` uses `notify_on_call_from_schedule` with schedule `SG6C9816MEKQQ`, followed by a 15-minute wait and team-member fallback.
 - User: `orendroid`, ID `UGQ913U99XKYX`.
 - Severity levels: Level 1 `Sev-1: Critical Business Impact`; Level 2 `Sev-2: Significant Business Impact`; Level 3 `Sev-3: Medium Impact`; Level 4 `Low Impact`.
-- Incident label values: `client_impact`, `detection`, `region`, `root_cause`, `service`, and cart/login `feature` values include the Ensemble-Grafana labels plus all additional label values extracted from the `Uptime SLA & RCA` dashboard transformations. `detection` includes `manual`, `synthetic-monitoring`, `grafana-alert`, `k6-load-test`, `customer-report`, and `call-in`; `root_cause` includes `misconfiguration`; `service` includes `account`, `authentication`, `cart`, and `inventory`. Dashboard-derived keys now include `feature`, `hosting_type`, `impact_type`, `product`, and `serviceline`.
+- Incident label values: `client_impact`, `detection`, `region`, `root_cause`, `service`, and cart/login `feature` values retain the legacy Ensemble-Grafana labels plus all additional label values extracted from the `Uptime SLA & RCA` dashboard transformations. `detection` includes `manual`, `synthetic-monitoring`, `grafana-alert`, `k6-load-test`, `customer-report`, and `call-in`; `root_cause` includes `misconfiguration`; `service` includes `account`, `authentication`, `cart`, and `inventory`. Dashboard-derived keys now include `feature`, `hosting_type`, `impact_type`, `product`, and `serviceline`.
 - Incident creation policy lives in `skills/observability/incident-creation/SKILL.md`; every incident must include `region`, `feature`, `service`, and `detection` labels. The default generated incident uses `region=US`, `feature=shopping-cart-checkout`, `service=cart`, and `detection=manual`.
 - 2025 holiday traffic-spike incident exercise: created and resolved incidents `2` through `22`, then pushed the reviewed set again as incidents `42` through `62`, for US federal holidays and Canadian federal statutory holidays. Each uses severity `Sev-2: Significant Business Impact`, `feature=shopping-cart-checkout`, `client_impact=multiple-clients`, `impact_type=availability`, `service=cart`, and `root_cause=Scaling-Defect-Service`; US holidays use `region=US` and Canadian holidays use `region=Canada`.
 - Holiday traffic-spike incident plan: `observability/irm/holiday-traffic-spike-incidents-review.md` stages the 2025 US federal and Canadian federal statutory holiday incidents. The latest push results are in `observability/irm/generated/incident-push-summary.md` and `observability/irm/generated/incident-push-results.json`.
@@ -407,7 +409,7 @@ The token configured from `infra/k8s/observability-secrets.yaml` line 18 is vali
 
 ## k6 Load Tests
 
-The API-oriented k6 load test is `load-tests/ensemble-grafana.js`. The Grafana Cloud k6 regional load test is `load-tests/grafana-cloud-20-user-regional.js`. The traffic spike benchmark is `load-tests/grafana-cloud-traffic-spikes.js`. The scripted browser check is `load-tests/synthetic-browser-actions.js` and validates the storefront user actions that should also appear in Faro.
+The API-oriented k6 load test is `load-tests/ensemble-retail.js`. The Grafana Cloud k6 regional load test is `load-tests/grafana-cloud-20-user-regional.js`. The traffic spike benchmark is `load-tests/grafana-cloud-traffic-spikes.js`. The scripted browser check is `load-tests/synthetic-browser-actions.js` and validates the storefront user actions that should also appear in Faro.
 
 Important distinction for Faro validation: `grafana-cloud-20-user-regional.js` is an HTTP/API test, so it does not execute browser JavaScript and cannot emit Faro user-action events. Use `synthetic-browser-actions.js` when validating Faro user-action request counts.
 
@@ -531,7 +533,7 @@ Creating k6 load tests through `gcx` remains blocked until a Grafana Cloud token
 ```sh
 gcx k6 projects list
 gcx k6 load-tests create \
-  --name ensemble-grafana-30-user-regional \
+  --name ensemble-retail-30-user-regional \
   --project-id <k6-project-id> \
   --script load-tests/grafana-cloud-20-user-regional.js
 ```
@@ -579,7 +581,7 @@ Latest saturation exercise:
 
 Slash command alias: `/run-load-test`. The repo-local command definition is `.codex/commands/run-load-test.md` and points agents at `skills/observability/SKILLS.md` before running the benchmark and post-run reports.
 
-The spike benchmark is `load-tests/grafana-cloud-traffic-spikes.js`. The alternate Grafana Cloud run entrypoint `load-tests/grafana-cloud-traffic-spikes-2.js` reuses the same scenarios and thresholds, but publishes the run under the Cloud k6 test name `ensemble-grafana-traffic-spikes-2`. It uses the same regional shopper personas as the regional test, but benchmarks three traffic spikes where each peak is 2x the previous one. The default first spike is now 100 VUs:
+The spike benchmark is `load-tests/grafana-cloud-traffic-spikes.js`. The alternate Grafana Cloud run entrypoint `load-tests/grafana-cloud-traffic-spikes-2.js` reuses the same scenarios and thresholds, but publishes the run under the Cloud k6 test name `ensemble-retail-traffic-spikes-2`. It uses the same regional shopper personas as the regional test, but benchmarks three traffic spikes where each peak is 2x the previous one. The default first spike is now 100 VUs:
 
 - Spike 1: `100` VUs.
 - Spike 2: `200` VUs.

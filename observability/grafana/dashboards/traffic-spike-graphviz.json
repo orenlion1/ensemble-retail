@@ -6,16 +6,16 @@
       "grafana.app/createdBy": "service-account:bfn4sb0kofeo0b",
       "grafana.app/message": "Set steady 120 rps API scenario as traffic spike baseline",
       "grafana.app/updatedBy": "service-account:ffn1sscdjmscge",
-      "grafana.app/updatedTimestamp": "2026-06-02T15:31:20Z"
+      "grafana.app/updatedTimestamp": "2026-06-28T19:57:51Z"
     },
     "creationTimestamp": "2026-05-30T16:11:51Z",
-    "generation": 20,
+    "generation": 21,
     "labels": {
       "grafana.app/deprecatedInternalID": "2611049998929920"
     },
     "name": "ensemble-traffic-spike-graphviz",
     "namespace": "stacks-1665320",
-    "resourceVersion": "2061833050689372227",
+    "resourceVersion": "2071322206524146538",
     "uid": "6d68e547-2aac-4f8c-bc87-73139bff4816"
   },
   "spec": {
@@ -154,7 +154,7 @@
     "liveNow": false,
     "preload": false,
     "tags": [
-      "ensemble-grafana",
+      "ensemble-retail",
       "graphviz",
       "k6",
       "traffic-spike"

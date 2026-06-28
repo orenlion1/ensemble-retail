@@ -1,6 +1,6 @@
 # Agent Personas
 
-Specialist personas for Ensemble-Grafana. Each file is a role with a single perspective and output format. The user (or main agent) orchestrates them; personas do not invoke other personas.
+Specialist personas for Ensemble-Retail. Each file is a role with a single perspective and output format. The user (or main agent) orchestrates them; personas do not invoke other personas.
 
 | Persona | File | Best for |
 |---------|------|----------|

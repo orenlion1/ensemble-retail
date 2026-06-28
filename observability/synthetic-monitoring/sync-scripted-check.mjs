@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Single source of truth for the scripted storefront check is
-// ensemble-grafana-scripted-check.js. This script regenerates the inline
+// ensemble-retail-scripted-check.js. This script regenerates the inline
 // `script:` block of check-scripted-storefront-api.yaml from that file so the
 // k6 source, the YAML manifest, and the Terraform `file()` reference never drift.
 //
@@ -13,7 +13,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const here = dirname(fileURLToPath(import.meta.url));
-const scriptPath = join(here, 'ensemble-grafana-scripted-check.js');
+const scriptPath = join(here, 'ensemble-retail-scripted-check.js');
 const manifestPath = join(here, 'check-scripted-storefront-api.yaml');
 const SCRIPT_INDENT = ' '.repeat(8);
 const MARKER = '      script: |';
@@ -37,7 +37,7 @@ const next = `${header}\n${indented.replace(/\n+$/, '')}\n`;
 if (process.argv.includes('--check')) {
   if (next !== manifest) {
     console.error(
-      'check-scripted-storefront-api.yaml is out of sync with ensemble-grafana-scripted-check.js.\n' +
+      'check-scripted-storefront-api.yaml is out of sync with ensemble-retail-scripted-check.js.\n' +
         'Run: node observability/synthetic-monitoring/sync-scripted-check.mjs'
     );
     process.exit(1);

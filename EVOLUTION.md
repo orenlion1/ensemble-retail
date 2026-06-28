@@ -1,12 +1,12 @@
-# Ensemble-Grafana Evolution
+# Ensemble-Retail Evolution
 
-This file summarizes how Ensemble-Grafana evolved from the initial promptable training repository into the latest operational state in this repo.
+This file summarizes how Ensemble-Retail evolved from the original Ensemble-Grafana promptable training repository into the latest operational state in this repo.
 
 The repository does not contain a literal transcript of every user prompt. This chronology is reconstructed from auditable project evidence: git commit subjects, dated reports, README and runbook updates, Graphviz assets, load-test history, policy and skill changes, and operational artifacts committed through June 9, 2026.
 
 ## At A Glance
 
-![Ensemble-Grafana evolution timeline dark version](docs/evolution/diagrams/ensemble-evolution-timeline-dark.png)
+![Ensemble-Retail evolution timeline dark version](docs/evolution/diagrams/ensemble-evolution-timeline-dark.png)
 
 For dark-background docs, slides, or Grafana-style presentation surfaces, use the dark timeline export: [docs/evolution/diagrams/ensemble-evolution-timeline-dark.png](docs/evolution/diagrams/ensemble-evolution-timeline-dark.png).
 
@@ -224,6 +224,21 @@ Key evidence:
 - `README.md`, `.codex/commands/run-load-test.md`, and `skills/observability/SKILLS.md`: operational guidance now documents the 5 rps baseline and disabled Synthetic Monitoring posture.
 - `DIAGRAMS.md`, `docs/diagrams/`, `docs/graphviz/`, and `docs/evolution/diagrams/`: current diagrams now describe the 5 rps load-test baseline.
 
+### June 28, 2026: Rename the Repository to Ensemble-Retail
+
+The project-facing identity, GitHub repository, package metadata, test source names, workflow references, current documentation, and canonical domain moved from Ensemble-Grafana to Ensemble-Retail. The migration deliberately preserves existing AWS, Kubernetes, Cognito, Grafana, IRM, and Terraform identifiers that would otherwise require resource recreation or disrupt telemetry continuity.
+
+Representative prompt category:
+
+> Rename the repository and application safely while retaining deployed legacy resource identifiers.
+
+Key evidence:
+
+- `frontend/package.json`, Faro initialization, k6 run metadata, and renamed `ensemble-retail` test sources now use the current project identity.
+- `.github/workflows/build.yml`, repo-local skills, and runbooks reference the renamed source files and canonical `https://ensemble-retail.com` domain.
+- `README.md` documents the legacy-resource boundary explicitly; Terraform defaults, the `ensemble-grafana` Kubernetes namespace, Cognito domain, Synthetic Monitoring job names, and IRM resource names remain unchanged.
+- `DIAGRAMS.md`, `docs/diagrams/`, and the evolution timeline record the canonical-domain and repository identity transition.
+
 ## End-to-End Shape
 
 The project now reads as an end-to-end operational application:
@@ -235,9 +250,9 @@ The project now reads as an end-to-end operational application:
 5. k6 and Playwright validate both protocol and browser behavior, with the routine traffic-spike steady API baseline currently set to 5 rps and Synthetic Monitoring checks preserved as disabled code by default.
 6. Graphviz diagrams and dashboard panels explain request paths, telemetry paths, load models, and now project evolution.
 7. `EVOLUTION.md` and `docs/evolution/categories/` preserve the build chronology by prompt category.
-8. Repo-local skills, personas, and `AGENTS.md` preserve the working rules so future prompts can reproduce the same quality bar, including required IRM labels for `region`, `feature`, `service`, and `detection`, plus bounded tool-output handling for agent context hygiene.
+8. Repo-local skills, personas, and `AGENTS.md` preserve the working rules so future prompts can reproduce the same quality bar, including the boundary between the Ensemble-Retail identity and retained `ensemble-grafana` infrastructure identifiers.
 
 ## Verification Notes
 
-- The evolution diagram is documentation-only and does not change architecture, request flow, telemetry flow, network boundaries, or operational dependencies. `DIAGRAMS.md` was not updated because the existing system diagrams still match the live system.
+- The repository rename updates canonical-domain labels but does not change the underlying architecture, request flow, telemetry flow, network boundaries, or retained deployed resource identifiers.
 - The high-resolution image was generated from Graphviz DOT and committed with the DOT and SVG sources under `docs/evolution/diagrams/`.

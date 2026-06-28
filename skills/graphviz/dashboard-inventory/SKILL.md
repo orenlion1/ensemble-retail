@@ -1,6 +1,6 @@
 ---
 name: grafana-diagram-dashboard-inventory
-description: Maintain and enforce the Ensemble-Grafana Graphviz dashboard inventory before pushing diagram updates to Grafana. Use when inventorying dashboard tabs, updating a diagram panel, adding a diagram to a dashboard, or deciding whether a Grafana diagram push is allowed.
+description: Maintain and enforce the Ensemble-Retail Graphviz dashboard inventory before pushing diagram updates to Grafana. Use when inventorying dashboard tabs, updating a diagram panel, adding a diagram to a dashboard, or deciding whether a Grafana diagram push is allowed.
 ---
 
 # Grafana Diagram Dashboard Inventory

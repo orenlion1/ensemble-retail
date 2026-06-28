@@ -425,7 +425,7 @@ function loadRunTableDot(rows) {
     fontname="Helvetica",
     fontsize=22,
     labelloc="t",
-    label="Ensemble-Grafana k6 Traffic Spike Run History"
+    label="Ensemble Retail k6 Traffic Spike Run History"
   ];
 
   node [
