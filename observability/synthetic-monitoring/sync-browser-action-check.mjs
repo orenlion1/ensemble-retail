@@ -72,7 +72,7 @@ metadata:
   name: "ensemble-grafana-browser-user-actions"
 spec:
   job: ensemble-grafana-browser-user-actions
-  target: https://ensemble-grafana.com
+  target: https://ensemble-retail.com
   frequency: 300000
   timeout: 180000
   enabled: false
