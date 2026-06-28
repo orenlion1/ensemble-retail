@@ -5,7 +5,7 @@ import { loadCategories, loadProducts, saveAccount, saveCart } from './api.js';
 const emptyAccount = {
   id: 'demo-shopper',
   name: 'Demo Shopper',
-  email: 'shopper@ensemble-retail.test',
+  email: 'shopper@ensemble-retail.com',
   shippingAddress: {
     line1: '120 Summit Way',
     city: 'Denver',
@@ -537,6 +537,20 @@ function readStoredJson(key, fallback) {
   }
 }
 
+const legacyDemoAccountEmails = new Set([
+  'shopper@ensemble-grafana.test',
+  'shopper@ensemble-retail.test'
+]);
+
+function readStoredAccount() {
+  const account = readStoredJson('ensemble-account', emptyAccount);
+  if (!legacyDemoAccountEmails.has(account?.email)) return account;
+
+  const migratedAccount = { ...account, email: emptyAccount.email };
+  localStorage.setItem('ensemble-account', JSON.stringify(migratedAccount));
+  return migratedAccount;
+}
+
 const authStorageKey = 'ensemble-auth-session';
 const authVerifierKey = 'ensemble-auth-code-verifier';
 const authStateKey = 'ensemble-auth-state';
@@ -716,7 +730,7 @@ export default function App() {
     return regionConfigFor(urlRegion || storedRegion).code;
   });
   const [cart, setCart] = useState(() => readStoredJson('ensemble-cart', []));
-  const [account, setAccount] = useState(() => readStoredJson('ensemble-account', emptyAccount));
+  const [account, setAccount] = useState(readStoredAccount);
   const [authSession, setAuthSession] = useState(readStoredAuthSession);
   const [authError, setAuthError] = useState('');
   const [selectedProduct, setSelectedProduct] = useState(null);

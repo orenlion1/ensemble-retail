@@ -165,11 +165,33 @@ test.describe('storefront browser behavior', () => {
 
   test('account save is instrumented', async ({ page, faroBodies }) => {
     await page.getByRole('link', { name: 'Account' }).click();
-    await expect(page.getByLabel('Email')).toHaveValue('shopper@ensemble-retail.test');
+    await expect(page.getByLabel('Email')).toHaveValue('shopper@ensemble-retail.com');
     const save = page.getByRole('button', { name: 'Save account' });
     await expectActionAttribute(save, actionNames.saveAccount);
     await save.click();
     await expectFaroAction(faroBodies, actionNames.saveAccount);
+  });
+
+  test('legacy demo account emails migrate to the Ensemble-Retail domain', async ({ page }) => {
+    await page.evaluate(() => {
+      localStorage.setItem('ensemble-account', JSON.stringify({
+        id: 'demo-shopper',
+        name: 'Demo Shopper',
+        email: 'shopper@ensemble-grafana.test',
+        shippingAddress: {
+          line1: '120 Summit Way',
+          city: 'Denver',
+          country: 'US'
+        },
+        wallet: {
+          label: 'Visa ending 4242',
+          billingPostalCode: '80202'
+        }
+      }));
+    });
+
+    await page.reload();
+    await expect(page.getByLabel('Email')).toHaveValue('shopper@ensemble-retail.com');
   });
 
   test('no storefront images are broken', async ({ page }) => {
