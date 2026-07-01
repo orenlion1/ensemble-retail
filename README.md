@@ -50,7 +50,32 @@ The frontend dev server proxies `/api/inventory`, `/api/cart`, and `/api/account
 
 ## Automated Deployment (GitHub Actions)
 
-Merges to `main` auto-deploy: after the `Build` workflow passes, the `Deploy` workflow builds and pushes the service images to ECR (tagged with the commit short SHA), rolls out the EKS deployments, syncs the storefront build to the frontend S3 bucket, and invalidates CloudFront — always for the exact CI-passing commit. It authenticates with GitHub OIDC via the repository secrets `AWS_ACCOUNT_ID`, `AWS_DEPLOY_ROLE_ARN`, `EKS_CLUSTER_NAME`, `FRONTEND_BUCKET`, and `CLOUDFRONT_DISTRIBUTION_ID`; no static AWS keys are stored in GitHub. Manifest/secret/infra changes remain operator-applied via `scripts/kubernetes/apply-manifests.sh` and Terraform (see `docs/deployment.md`).
+Every change that reaches `main` deploys to AWS automatically. The deployment gate is CI itself: the `Deploy` workflow (`.github/workflows/deploy.yml`) is triggered by `workflow_run` only when the `Build` workflow completes successfully for a push to `main`, and it always checks out and ships the exact CI-passing commit.
+
+```
+push / merge to main
+        |
+        v
+  Build workflow (security, backend, frontend + Playwright, observability checks)
+        |  success only
+        v
+  Deploy workflow (GitHub OIDC -> IAM role ensemble-retail-deploy)
+        |
+        +--> backend, per service (inventory | cart | account):
+        |      mvn package -> docker build (linux/amd64) -> push to ECR :<short-sha>
+        |      -> kubectl set image -> rollout status (namespace ensemble-grafana)
+        |
+        +--> frontend:
+               npm run build -> aws s3 sync frontend/dist -> CloudFront invalidation /*
+```
+
+Key properties of the pattern:
+
+- **No static AWS credentials in GitHub.** The workflow's `id-token: write` permission lets it assume the deploy IAM role via the GitHub OIDC provider; the role's trust policy is scoped to this repository's `main` branch and `production` environment.
+- **Least privilege on both sides.** The IAM role can only push the three service ECR repositories, describe the EKS cluster, write the frontend bucket, and create CloudFront invalidations. In-cluster, `infra/k8s/deploy-rbac.yaml` limits the role's `ensemble-retail-deployers` group to deployment patch/watch plus replicaset/pod reads in the `ensemble-grafana` namespace (mapped via the operator-managed `aws-auth` ConfigMap).
+- **Placeholders stay in git, real identifiers stay in secrets.** Committed manifests keep the placeholder account/registry values; the workflow reads `AWS_ACCOUNT_ID`, `AWS_DEPLOY_ROLE_ARN`, `EKS_CLUSTER_NAME`, `FRONTEND_BUCKET`, and `CLOUDFRONT_DISTRIBUTION_ID` from repository secrets.
+- **Traceable images.** Service images are tagged with the commit short SHA, so the running image tag identifies the deployed source revision (`kubectl -n ensemble-grafana get deployment -o wide`).
+- **Bounded scope.** Only service images and the storefront deploy automatically. Kubernetes manifest, secret, ingress, and Terraform changes remain operator-applied via `scripts/kubernetes/apply-manifests.sh` and the Terraform stacks (see `docs/deployment.md`); `scripts/ci/poll-and-deploy.sh` remains as the local manifest-apply gate.
 
 ## Terraform Deployment
 
