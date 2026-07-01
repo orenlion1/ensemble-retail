@@ -15,3 +15,17 @@
 - AWS: `aws sts get-caller-identity` (account `629513454417`, user `ensemble-grafana`, `us-east-1`).
 - Grafana: `gcx api /api/user` against the `ensemble` context.
 - GitHub: `ssh -T git@github.com`.
+
+## Deployment
+- **Code changes ship themselves — do not deploy manually.** Every push/merge to `main` runs the
+  `Build` workflow; on success the `Deploy` workflow automatically ships the exact CI-passing
+  commit via GitHub OIDC (service images to ECR + EKS rollout, storefront to S3 + CloudFront
+  invalidation). Land the change on `main` and let the pipeline run.
+- **Deploys are change-scoped.** The workflow diffs against the last deployed commit:
+  `services/<name>/**` deploys only that service, `frontend/**` deploys only the storefront,
+  and documentation-only changes deploy nothing. A `deploy.yml` change redeploys everything.
+- **Operator-only surface.** Kubernetes manifests, secrets, ingress, and Terraform are NOT
+  applied by CI — use `scripts/kubernetes/apply-manifests.sh` and the Terraform stacks locally.
+- Real resource identifiers live in GitHub repository secrets (`AWS_ACCOUNT_ID`,
+  `AWS_DEPLOY_ROLE_ARN`, `EKS_CLUSTER_NAME`, `FRONTEND_BUCKET`, `CLOUDFRONT_DISTRIBUTION_ID`);
+  committed files keep placeholder values. See `docs/deployment.md` for the full runbook.

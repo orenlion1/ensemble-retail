@@ -9,25 +9,77 @@ on:
 permissions:
   contents: read
   id-token: write
+  actions: read
 
 concurrency:
   group: deploy-ensemble-retail
   cancel-in-progress: false
 
 jobs:
-  backend:
-    name: Backend (${{ matrix.service }})
-    # Only deploy the exact commit that just passed Build on main.
+  changes:
+    name: Detect changed components
+    # Only consider the exact commit that just passed Build on main.
     if: >-
       github.event.workflow_run.conclusion == 'success' &&
       github.event.workflow_run.event == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      services: ${{ steps.filter.outputs.services }}
+      frontend: ${{ steps.filter.outputs.frontend }}
+    steps:
+      - name: Check out the CI-tested commit
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          fetch-depth: 0
+
+      - name: Diff against the last deployed commit
+        id: filter
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          # Base = head of the most recent successful Deploy run. Diffing a
+          # range (base..head) instead of HEAD^ keeps multi-commit pushes and
+          # skipped docs-only deploys accounted for. No base -> deploy all.
+          base="$(gh run list --workflow Deploy --status success --branch main --limit 1             --json headSha --jq '.[0].headSha // empty')"
+          if [ -z "$base" ] || ! git cat-file -e "$base" 2>/dev/null; then
+            echo "No usable previous deploy base; deploying everything."
+            changed="__ALL__"
+          else
+            changed="$(git diff --name-only "$base" "$HEAD_SHA")"
+            echo "Changed files since $base:"; echo "$changed"
+          fi
+          services='[]'; frontend=false
+          if [ "$changed" = "__ALL__" ] || echo "$changed" | grep -q '^\.github/workflows/deploy\.yml$'; then
+            services='["inventory-service","cart-service","account-service"]'
+            frontend=true
+          else
+            svcs=""
+            for s in inventory-service cart-service account-service; do
+              if echo "$changed" | grep -q "^services/$s/"; then
+                svcs="$svcs\"$s\","
+              fi
+            done
+            services="[${svcs%,}]"
+            echo "$changed" | grep -q '^frontend/' && frontend=true
+          fi
+          echo "services=$services" >> "$GITHUB_OUTPUT"
+          echo "frontend=$frontend" >> "$GITHUB_OUTPUT"
+          echo "Will deploy services=$services frontend=$frontend"
+
+  backend:
+    name: Backend (${{ matrix.service }})
+    needs: changes
+    if: needs.changes.outputs.services != '[]'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     environment: production
     strategy:
       fail-fast: false
       matrix:
-        service: [inventory-service, cart-service, account-service]
+        service: ${{ fromJson(needs.changes.outputs.services) }}
     env:
       AWS_REGION: us-east-1
       NAMESPACE: ensemble-grafana
@@ -85,9 +137,8 @@ jobs:
 
   frontend:
     name: Frontend
-    if: >-
-      github.event.workflow_run.conclusion == 'success' &&
-      github.event.workflow_run.event == 'push'
+    needs: changes
+    if: needs.changes.outputs.frontend == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     environment: production
