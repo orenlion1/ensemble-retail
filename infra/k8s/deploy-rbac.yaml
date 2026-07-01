@@ -1,0 +1,33 @@
+# RBAC for the GitHub Actions deploy IAM role (ensemble-retail-deploy). The
+# role is mapped to the ensemble-retail-deployers group in the kube-system
+# aws-auth ConfigMap (operator-managed) and may only update and watch the
+# service deployments in this namespace.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: ensemble-retail-deployer
+  namespace: ensemble-grafana
+rules:
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["get", "list", "watch", "patch"]
+  - apiGroups: ["apps"]
+    resources: ["replicasets"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: ensemble-retail-deployer
+  namespace: ensemble-grafana
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: ensemble-retail-deployer
+subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: ensemble-retail-deployers

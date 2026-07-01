@@ -1,5 +1,16 @@
 # Deployment Runbook
 
+## Automated CI -> AWS Deployment (default path)
+
+Every push or merge to `main` runs the `Build` workflow. When it succeeds, the `Deploy` workflow (`.github/workflows/deploy.yml`) is triggered via `workflow_run` and deploys the exact CI-passing commit:
+
+1. Backend: packages each Spring Boot service, builds and pushes its image to ECR tagged with the short commit SHA, then runs `kubectl set image` and waits for rollout status in the `ensemble-grafana` namespace.
+2. Frontend: builds the storefront, syncs `frontend/dist/` to the frontend S3 bucket with `--delete`, and creates a CloudFront invalidation for `/*`.
+
+Authentication uses GitHub OIDC to assume the deploy IAM role; no static AWS keys exist in GitHub. Required repository secrets: `AWS_ACCOUNT_ID`, `AWS_DEPLOY_ROLE_ARN`, `EKS_CLUSTER_NAME`, `FRONTEND_BUCKET`, `CLOUDFRONT_DISTRIBUTION_ID`. Kubernetes access is limited by `infra/k8s/deploy-rbac.yaml` plus an operator-managed `aws-auth` mapping to the `ensemble-retail-deployers` group.
+
+Manifest, secret, ingress, and Terraform changes are NOT applied by the automated workflow; they stay on the operator paths below (`scripts/kubernetes/apply-manifests.sh`, Terraform stacks). `scripts/ci/poll-and-deploy.sh` remains available as a local manifest-apply gate.
+
 ## Static Assets
 
 1. Build the storefront with `npm run build` from `frontend/`.

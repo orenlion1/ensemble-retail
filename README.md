@@ -48,6 +48,10 @@ cd frontend && npm install && npm run dev
 
 The frontend dev server proxies `/api/inventory`, `/api/cart`, and `/api/account` to the local services.
 
+## Automated Deployment (GitHub Actions)
+
+Merges to `main` auto-deploy: after the `Build` workflow passes, the `Deploy` workflow builds and pushes the service images to ECR (tagged with the commit short SHA), rolls out the EKS deployments, syncs the storefront build to the frontend S3 bucket, and invalidates CloudFront — always for the exact CI-passing commit. It authenticates with GitHub OIDC via the repository secrets `AWS_ACCOUNT_ID`, `AWS_DEPLOY_ROLE_ARN`, `EKS_CLUSTER_NAME`, `FRONTEND_BUCKET`, and `CLOUDFRONT_DISTRIBUTION_ID`; no static AWS keys are stored in GitHub. Manifest/secret/infra changes remain operator-applied via `scripts/kubernetes/apply-manifests.sh` and Terraform (see `docs/deployment.md`).
+
 ## Terraform Deployment
 
 Terraform is split into smaller independently runnable stacks. Run them in order so each stack can pass outputs to the next one:

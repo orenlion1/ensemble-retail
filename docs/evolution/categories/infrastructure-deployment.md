@@ -18,6 +18,7 @@
 | 2026-05-31 | `b1050df` Scale inventory service for spike traffic | Inventory service capacity was tuned under load. |
 | 2026-05-31 | `f15ee46` Reduce inventory service replicas to one | Capacity settings were tuned back after testing. |
 | 2026-05-31 | `64d3717` Balance traffic spike inventory load | Service load distribution was refined. |
+| 2026-07-01 | `.github/workflows/deploy.yml`, `infra/k8s/deploy-rbac.yaml` | AWS deployment became automatic: on Build success on `main`, GitHub Actions builds/pushes service images, rolls out EKS, syncs the frontend to S3, and invalidates CloudFront via a GitHub OIDC deploy role. |
 
 ## What This Category Produced
 
@@ -30,5 +31,6 @@
 
 - [infra/terraform/stacks](../../../infra/terraform/stacks)
 - [infra/k8s](../../../infra/k8s)
+- [.github/workflows/deploy.yml](../../../.github/workflows/deploy.yml)
 - [docs/deployment.md](../../deployment.md)
 - [skills/infrastructure/SKILLS.md](../../../skills/infrastructure/SKILLS.md)

@@ -239,6 +239,21 @@ Key evidence:
 - `README.md` documents the legacy-resource boundary explicitly; Terraform defaults, the `ensemble-grafana` Kubernetes namespace, Cognito domain, Synthetic Monitoring job names, and IRM resource names remain unchanged.
 - `DIAGRAMS.md`, `docs/diagrams/`, and the evolution timeline record the canonical-domain and repository identity transition.
 
+### July 1, 2026: Automate AWS Deployment From CI
+
+Deployment moved from the local `scripts/ci/poll-and-deploy.sh` gate to an automated GitHub Actions `Deploy` workflow. When `Build` completes successfully for a push to `main`, the `Deploy` workflow builds and pushes each Spring Boot service image to ECR tagged with the CI-passing commit's short SHA and rolls out the EKS deployments, then builds the storefront, syncs `frontend/dist/` to the frontend S3 bucket, and invalidates CloudFront. Authentication uses GitHub OIDC to assume a least-privilege IAM deploy role; no static AWS credentials are stored in GitHub. Manifest/secret/infra bootstrap (`scripts/kubernetes/apply-manifests.sh`, Terraform) remains a local operator path.
+
+Representative prompt category:
+
+> Move the push-to-AWS step from a local script into GitHub Actions so every CI-green change on main deploys automatically.
+
+Key evidence:
+
+- `.github/workflows/deploy.yml`: `workflow_run`-triggered rollout of the exact CI-passing commit — backend image build/push/`kubectl set image` per service plus frontend S3 sync and CloudFront invalidation, authenticated via GitHub OIDC (`id-token: write`).
+- `infra/k8s/deploy-rbac.yaml`: namespace-scoped `Role`/`RoleBinding` limiting the deploy role's `ensemble-retail-deployers` group to deployment patch/watch plus replicaset and pod reads; the IAM role is mapped in the `kube-system` `aws-auth` ConfigMap by operators.
+- Repository secrets `AWS_ACCOUNT_ID`, `AWS_DEPLOY_ROLE_ARN`, `EKS_CLUSTER_NAME`, `FRONTEND_BUCKET`, and `CLOUDFRONT_DISTRIBUTION_ID` carry the real resource identifiers so committed files keep placeholder values.
+- `docs/deployment.md` and `README.md`: document the automated path and the retained operator bootstrap path.
+
 ## End-to-End Shape
 
 The project now reads as an end-to-end operational application:
