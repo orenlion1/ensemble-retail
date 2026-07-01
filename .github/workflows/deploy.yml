@@ -1,0 +1,131 @@
+name: Deploy
+
+on:
+  workflow_run:
+    workflows: ["Build"]
+    types: [completed]
+    branches: [main]
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: deploy-ensemble-retail
+  cancel-in-progress: false
+
+jobs:
+  backend:
+    name: Backend (${{ matrix.service }})
+    # Only deploy the exact commit that just passed Build on main.
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: production
+    strategy:
+      fail-fast: false
+      matrix:
+        service: [inventory-service, cart-service, account-service]
+    env:
+      AWS_REGION: us-east-1
+      NAMESPACE: ensemble-grafana
+      AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+      EKS_CLUSTER_NAME: ${{ secrets.EKS_CLUSTER_NAME }}
+      HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+    steps:
+      - name: Check out the CI-tested commit
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ env.HEAD_SHA }}
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: Package Spring Boot service
+        working-directory: services/${{ matrix.service }}
+        run: mvn -B -ntp package -DskipTests
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Build and push image
+        id: image
+        run: |
+          registry="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com"
+          tag="${HEAD_SHA:0:7}"
+          image="$registry/${{ matrix.service }}:$tag"
+          jar="$(ls services/${{ matrix.service }}/target/*.jar | grep -v '\.original$' | head -n 1)"
+          jar_rel="target/$(basename "$jar")"
+          aws ecr get-login-password --region "$AWS_REGION" \
+            | docker login --username AWS --password-stdin "$registry" >/dev/null
+          docker build --platform linux/amd64 \
+            --build-arg "JAR_FILE=$jar_rel" \
+            -t "$image" \
+            -f "services/${{ matrix.service }}/Dockerfile" \
+            "services/${{ matrix.service }}"
+          docker push "$image"
+          echo "image=$image" >> "$GITHUB_OUTPUT"
+
+      - name: Update kubeconfig
+        run: aws eks update-kubeconfig --name "$EKS_CLUSTER_NAME" --region "$AWS_REGION"
+
+      - name: Roll out deployment
+        run: |
+          kubectl -n "$NAMESPACE" set image "deployment/${{ matrix.service }}" \
+            "${{ matrix.service }}=${{ steps.image.outputs.image }}"
+          kubectl -n "$NAMESPACE" rollout status "deployment/${{ matrix.service }}" --timeout=300s
+
+  frontend:
+    name: Frontend
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: production
+    env:
+      AWS_REGION: us-east-1
+      HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+    steps:
+      - name: Check out the CI-tested commit
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ env.HEAD_SHA }}
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        working-directory: frontend
+        run: npm ci
+
+      - name: Build storefront
+        working-directory: frontend
+        run: npm run build
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Sync to S3
+        run: aws s3 sync frontend/dist "s3://${{ secrets.FRONTEND_BUCKET }}" --delete
+
+      - name: Invalidate CloudFront
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id "${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}" \
+            --paths "/*" >/dev/null
+          echo "Invalidation submitted for /*"

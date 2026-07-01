@@ -6,6 +6,7 @@ manifest_dir="$root_dir/infra/k8s"
 obs_ns="ensemble-observability"
 
 kubectl apply -f "$manifest_dir/namespace.yaml"
+kubectl apply -f "$manifest_dir/deploy-rbac.yaml"
 
 # App secrets: validate the template only (the real secret is applied out of band).
 kubectl apply -f "$manifest_dir/secrets.example.yaml" --dry-run=client
