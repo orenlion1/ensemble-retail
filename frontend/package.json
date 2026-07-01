@@ -25,5 +25,8 @@
     "@grafana/faro-rollup-plugin": "^0.10.1",
     "@playwright/test": "^1.60.0",
     "@rolldown/pluginutils": "^1.0.1"
+  },
+  "overrides": {
+    "@opentelemetry/core": "^2.8.0"
   }
 }
