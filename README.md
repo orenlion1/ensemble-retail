@@ -294,6 +294,13 @@ traces/logs are now sampled to 20% via a new `otelcol.processor.probabilistic_sa
 stage; Grafana Cloud keeps full fidelity. See `observability/README.md#honeycomb-burst-protection-2026-07-04`
 for how to apply, tune the sampling rate, or revert to full fan-out.
 
+Applying that ConfigMap change to the live cluster no longer strictly requires local
+`kubectl`/AWS credentials: the guarded `.github/workflows/observability-apply.yml`
+(`workflow_dispatch`) diffs and applies just the two Alloy ConfigMaps via GitHub OIDC, gated by
+an `observability-apply` environment reviewer, same pattern as the Terraform-apply workflow
+below. It needs a one-time bootstrap first — see `infra/terraform/stacks/README.md` section 11
+and `TODO.md`.
+
 ## Production Shape
 
 Static frontend assets and inventory images are deployed to S3 and served through CloudFront. API calls are routed separately under `/api/*` to EKS-hosted Spring Boot services. The canonical public URL is `https://ensemble-retail.com`; `https://ensemble-grafana.com` remains a legacy alias on the same CloudFront distribution. HTTPS is terminated with ACM at the CloudFront edge and protected by AWS WAF. The existing `edge-static` Terraform stack and its resource identifiers remain legacy-named to prevent replacement of stateful or edge resources.

@@ -221,6 +221,52 @@ scripts/kubernetes/apply-manifests.sh
 
 The script dry-runs example secret schemas and applies namespace, observability, services, network policies, and ingress manifests. Replace placeholders in `infra/k8s/*.yaml` before applying to a real cluster.
 
+## 11. Observability Apply (guarded OIDC)
+
+A narrower sibling of section 9's pattern, but for a Kubernetes manifest instead of a Terraform
+stack: `.github/workflows/observability-apply.yml` applies just the `alloy-config` /
+`pyroscope-alloy-config` ConfigMaps out of `infra/k8s/alloy-beyla.yaml` via GitHub OIDC, so a fix
+like the Honeycomb burst-protection change (see `observability/README.md`) can ship without an
+operator running `scripts/kubernetes/apply-manifests.sh` locally.
+
+**One-time setup:** run the bootstrap script locally with real AWS and kubectl credentials
+against the live cluster, and an authenticated `gh` CLI:
+
+```bash
+scripts/terraform/bootstrap-ci-observability-apply.sh
+```
+
+It is idempotent and does everything the workflow needs, in order:
+
+1. Applies `stacks/ci-observability-apply`, which owns the two OIDC IAM roles
+   (`ensemble-grafana-observability-plan` / `-apply`). Like `stacks/ci-terraform-apply`, this
+   stack keeps *local* state on purpose — it's a bootstrap root of trust for its own workflow.
+2. Applies `infra/k8s/observability-apply-rbac.yaml`: a Role/RoleBinding pair scoped to
+   get/list/watch (planner) or get/list/watch/patch (applier) on exactly the two ConfigMaps and
+   the `alloy` Deployment / `pyroscope-alloy` DaemonSet in the `ensemble-observability` namespace
+   — nothing else in the cluster.
+3. Maps both IAM roles into the `kube-system/aws-auth` ConfigMap to the
+   `ensemble-observability-planners` / `ensemble-observability-appliers` Kubernetes groups
+   (additive — existing mappings such as `ensemble-retail-deployers` are untouched).
+4. Creates the `observability-apply` GitHub environment with the current `gh` user as required
+   reviewer, restricted to `main`. As with the Terraform-apply role, the apply IAM role's trust
+   policy only allows `AssumeRoleWithWebIdentity` from jobs running under that exact environment
+   name, so the reviewer approval *is* the credential gate.
+5. Sets the `OBSERVABILITY_PLAN_ROLE_ARN` / `OBSERVABILITY_APPLY_ROLE_ARN` secrets the workflow
+   reads (it reuses the existing `EKS_CLUSTER_NAME` secret from the Deploy workflow).
+
+**Running it:** trigger "Observability Apply" from the Actions tab, leave `apply` unchecked to
+get a `kubectl diff`-only run (posted to the job summary), then re-run with `apply` checked once
+the diff looks right — the `apply` job sits pending until an `observability-apply` environment
+reviewer approves it, then patches the ConfigMap(s) and rolls only the workloads whose config
+actually changed.
+
+The IAM roles (`ensemble-grafana-observability-plan`/`-apply`) only grant `eks:DescribeCluster`
+— enough for `aws eks update-kubeconfig`, nothing else. All real authorization is Kubernetes
+RBAC via step 2 above; the roles cannot reach anything outside the two ConfigMaps and their
+owning workloads. See `infra/terraform/stacks/ci-observability-apply/main.tf` and
+`infra/k8s/observability-apply-rbac.yaml`.
+
 ## Chunk Summary
 
 Use deployment states in this order:
