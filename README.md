@@ -283,6 +283,16 @@ http_server_requests_seconds_count{namespace="ensemble-grafana"}
 
 Pyroscope profiles should appear under service names such as `inventory-service`, `cart-service`, and `account-service`.
 
+### Honeycomb burst protection (2026-07-04)
+
+Alloy also fans traces/logs/metrics out to Honeycomb in parallel with Grafana Cloud (see
+`infra/k8s/alloy-beyla.yaml`, mirrored in `observability/alloy/config.alloy`). Full
+duplication of the metrics scraped every 30s tripped Honeycomb's burst protection (>2x
+daily event target). Metrics no longer fan out to Honeycomb at all, and Honeycomb-bound
+traces/logs are now sampled to 20% via a new `otelcol.processor.probabilistic_sampler`
+stage; Grafana Cloud keeps full fidelity. See `observability/README.md#honeycomb-burst-protection-2026-07-04`
+for how to apply, tune the sampling rate, or revert to full fan-out.
+
 ## Production Shape
 
 Static frontend assets and inventory images are deployed to S3 and served through CloudFront. API calls are routed separately under `/api/*` to EKS-hosted Spring Boot services. The canonical public URL is `https://ensemble-retail.com`; `https://ensemble-grafana.com` remains a legacy alias on the same CloudFront distribution. HTTPS is terminated with ACM at the CloudFront edge and protected by AWS WAF. The existing `edge-static` Terraform stack and its resource identifiers remain legacy-named to prevent replacement of stateful or edge resources.

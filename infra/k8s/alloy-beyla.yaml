@@ -226,9 +226,9 @@ data:
 
     otelcol.processor.batch "default" {
       output {
-        metrics = [otelcol.exporter.otlphttp.grafana_cloud.input, otelcol.exporter.otlphttp.honeycomb.input]
-        logs = [otelcol.exporter.otlphttp.grafana_cloud.input, otelcol.exporter.otlphttp.honeycomb.input]
-        traces = [otelcol.exporter.otlphttp.grafana_cloud.input, otelcol.exporter.otlphttp.honeycomb.input]
+        metrics = [otelcol.exporter.otlphttp.grafana_cloud.input]
+        logs = [otelcol.exporter.otlphttp.grafana_cloud.input, otelcol.processor.probabilistic_sampler.honeycomb.input]
+        traces = [otelcol.exporter.otlphttp.grafana_cloud.input, otelcol.processor.probabilistic_sampler.honeycomb.input]
       }
     }
 
@@ -244,8 +244,21 @@ data:
       password = sys.env("GRAFANA_CLOUD_API_KEY")
     }
 
-    // Honeycomb fan-out: same batched metrics/logs/traces, sent in parallel with Grafana Cloud.
-    // Traces/logs route to datasets by service.name; OTLP metrics use the x-honeycomb-dataset header.
+    // Honeycomb burst-protection mitigation (2026-07-04): metrics no longer fan out to
+    // Honeycomb at all (continuous 30s Spring Boot scrapes were the single largest
+    // contributor to daily event volume), and traces/logs are sampled down to 20%
+    // before export. Grafana Cloud above is untouched and keeps full-fidelity
+    // metrics/logs/traces. See observability/README.md for how to adjust or revert.
+    otelcol.processor.probabilistic_sampler "honeycomb" {
+      sampling_percentage = 20
+
+      output {
+        traces = [otelcol.exporter.otlphttp.honeycomb.input]
+        logs = [otelcol.exporter.otlphttp.honeycomb.input]
+      }
+    }
+
+    // Honeycomb fan-out: sampled traces/logs only, sent in parallel with Grafana Cloud.
     otelcol.exporter.otlphttp "honeycomb" {
       client {
         endpoint = "https://api.honeycomb.io"
