@@ -24,6 +24,7 @@ The repository and application are named `ensemble-retail`. Existing deployed AW
 - `.github/workflows/build.yml` - GitHub Actions security checks, Maven service packages, frontend build, Playwright browser checks, and k6 script inspection.
 - `.github/workflows/account-baseline-guard.yml` - Guardrail workflow for account-baseline Terraform validation and manual-approval apply path.
 - `skills/` - reusable `SKILLS.md` playbooks for replicating the dependency, infrastructure, observability, and coding patterns in future applications.
+- `TODO.md` - pending operator actions against the live cluster/AWS account (steps CI intentionally doesn't perform).
 
 ## CI (GitHub Actions)
 
