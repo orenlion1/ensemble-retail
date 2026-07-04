@@ -153,3 +153,51 @@ cp .env.example .env   # fill tokens locally; do not commit
 ## IRM
 
 Business-hours on-call helper: `observability/irm/create-business-hours-oncall.sh`. See `docs/grafana-irm.md`.
+
+## Honeycomb burst protection (2026-07-04)
+
+Honeycomb's `orenlion-gettingstarted` team tripped burst protection after sending more
+than double its daily event target (657,895 events/day, from a 20M/month quota). Cause:
+`ensemble-observability`'s Alloy fanned out **every** metric, log, and trace to Honeycomb
+in full, in parallel with Grafana Cloud — including Spring Boot metrics scraped every
+30s across all pods, which is by far the highest-volume signal.
+
+**What changed** (`infra/k8s/alloy-beyla.yaml` ConfigMap `alloy-config`, mirrored in the
+reference copy `observability/alloy/config.alloy`):
+
+- Metrics no longer fan out to Honeycomb at all — `otelcol.processor.batch.default` now
+  sends metrics only to `otelcol.exporter.otlphttp.grafana_cloud`.
+- Traces and logs headed to Honeycomb now pass through a new
+  `otelcol.processor.probabilistic_sampler "honeycomb"` (`sampling_percentage = 20`)
+  before export, so Honeycomb receives roughly a fifth of trace/log volume.
+- Grafana Cloud's pipeline is untouched — it still receives full-fidelity metrics, logs,
+  and traces.
+
+**Apply the change** (this ConfigMap is operator-applied, not auto-deployed by CI):
+
+```sh
+./scripts/kubernetes/apply-manifests.sh
+```
+
+The script diffs the rendered ConfigMap and only restarts `deployment/alloy` when it
+actually changed.
+
+**Adjust the sampling rate:** edit `sampling_percentage` in the
+`otelcol.processor.probabilistic_sampler "honeycomb"` block in both files (keep them in
+sync), then re-run `apply-manifests.sh`.
+
+**Revert to full fan-out:** in both `infra/k8s/alloy-beyla.yaml` and
+`observability/alloy/config.alloy`, restore `otelcol.processor.batch.default`'s output to
+send `metrics`, `logs`, and `traces` directly to
+`[otelcol.exporter.otlphttp.grafana_cloud.input, otelcol.exporter.otlphttp.honeycomb.input]`,
+and delete the `otelcol.processor.probabilistic_sampler "honeycomb"` block. Then re-run
+`apply-manifests.sh` to roll the change out. `git log` on both files (commit
+"fix(observability): cut Honeycomb ingest volume to clear burst protection") shows the
+exact prior state if you'd rather revert with `git revert`.
+
+**Reducing Honeycomb usage further, or dropping ingested history:** lowering
+`sampling_percentage` further reduces ingest going forward. Deleting already-ingested
+event history is a Honeycomb-side action (Environment settings → Manage Datasets, or
+deleting/recreating the `ensemble-metrics`/service datasets) — it isn't config in this
+repo, requires Honeycomb account access, and is destructive/irreversible, so do it
+directly in the Honeycomb UI rather than through this repo.
