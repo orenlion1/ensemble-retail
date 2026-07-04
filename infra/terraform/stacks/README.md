@@ -242,9 +242,10 @@ It is idempotent and does everything the workflow needs, in order:
    (`ensemble-grafana-observability-plan` / `-apply`). Like `stacks/ci-terraform-apply`, this
    stack keeps *local* state on purpose — it's a bootstrap root of trust for its own workflow.
 2. Applies `infra/k8s/observability-apply-rbac.yaml`: a Role/RoleBinding pair scoped to
-   get/list/watch (planner) or get/list/watch/patch (applier) on exactly the two ConfigMaps and
-   the `alloy` Deployment / `pyroscope-alloy` DaemonSet in the `ensemble-observability` namespace
-   — nothing else in the cluster.
+   get/list/watch/patch (planner, where `patch` is needed because `kubectl diff` uses
+   server-side apply dry-run) or get/list/watch/update/patch (applier) on exactly the two
+   ConfigMaps and the `alloy` Deployment / `pyroscope-alloy` DaemonSet in the
+   `ensemble-observability` namespace — nothing else in the cluster.
 3. Maps both IAM roles into the `kube-system/aws-auth` ConfigMap to the
    `ensemble-observability-planners` / `ensemble-observability-appliers` Kubernetes groups
    (additive — existing mappings such as `ensemble-retail-deployers` are untouched).

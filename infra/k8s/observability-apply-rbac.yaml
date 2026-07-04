@@ -3,8 +3,9 @@
 # infra/terraform/stacks/ci-observability-apply). The roles are mapped to the
 # ensemble-observability-planners / ensemble-observability-appliers groups in the kube-system
 # aws-auth ConfigMap (operator-managed, see scripts/terraform/bootstrap-ci-observability-apply.sh).
-# The applier may only read/patch the two Alloy ConfigMaps and restart the alloy Deployment /
-# pyroscope-alloy DaemonSet in this namespace -- it cannot touch the Namespace, ClusterRole,
+# The planner may read/patch the two Alloy ConfigMaps because `kubectl diff` uses server-side
+# apply dry-run semantics. The applier may read/patch those ConfigMaps and restart the alloy
+# Deployment / pyroscope-alloy DaemonSet in this namespace -- it cannot touch the Namespace, ClusterRole,
 # ClusterRoleBinding, or Beyla DaemonSet also defined in infra/k8s/alloy-beyla.yaml, which remain
 # operator-applied only via scripts/kubernetes/apply-manifests.sh.
 apiVersion: rbac.authorization.k8s.io/v1
@@ -16,7 +17,8 @@ rules:
   - apiGroups: [""]
     resources: ["configmaps"]
     resourceNames: ["alloy-config", "pyroscope-alloy-config"]
-    verbs: ["get", "list", "watch"]
+    # kubectl diff uses server-side apply dry-run and needs patch on target objects.
+    verbs: ["get", "list", "watch", "patch"]
   - apiGroups: ["apps"]
     resources: ["deployments"]
     resourceNames: ["alloy"]
