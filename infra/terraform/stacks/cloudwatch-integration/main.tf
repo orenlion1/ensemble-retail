@@ -72,17 +72,15 @@ resource "grafana_cloud_provider_aws_cloudwatch_scrape_job" "rds" {
   export_tags             = true
 
   service {
-    name                    = "AWS/RDS"
-    scrape_interval_seconds = 300
+    name = "AWS/RDS"
+    # 900s (15 min) is plenty for capacity dashboards and cuts GetMetricData request volume
+    # 3x versus the previous 300s interval, which was pushing the account over its CloudWatch
+    # API request free tier.
+    scrape_interval_seconds = 900
 
-    metric {
-      name       = "AuroraGlobalDBDataTransferBytes"
-      statistics = ["p95", "Maximum"]
-    }
-    metric {
-      name       = "AuroraGlobalDBProgressLag"
-      statistics = ["Maximum", "p95"]
-    }
+    # AuroraGlobalDBDataTransferBytes/AuroraGlobalDBProgressLag are Global Database metrics; the
+    # "ensemble-inventory" cluster is a single-region Aurora cluster, so those queries always
+    # returned empty and were pure wasted CloudWatch API requests. Removed.
     metric {
       name       = "BurstBalance"
       statistics = ["Average"]
