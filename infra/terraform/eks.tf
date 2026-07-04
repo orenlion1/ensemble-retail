@@ -15,15 +15,24 @@ resource "aws_iam_role_policy_attachment" "eks_cluster" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
 }
 
+resource "aws_cloudwatch_log_group" "eks_cluster" {
+  name              = "/aws/eks/ensemble-grafana/cluster"
+  retention_in_days = 14
+}
+
 resource "aws_eks_cluster" "main" {
-  name                      = "ensemble-grafana"
-  role_arn                  = aws_iam_role.eks_cluster.arn
-  enabled_cluster_log_types = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
+  name     = "ensemble-grafana"
+  role_arn = aws_iam_role.eks_cluster.arn
+  # Only "api"/"audit" are used (docs/security.md requires audit logging); the other control-plane
+  # log types produced continuous, unused chatter that ate into the CloudWatch Logs free tier.
+  enabled_cluster_log_types = ["api", "audit"]
   vpc_config {
     subnet_ids              = concat(local.private_subnet_ids, local.public_subnet_ids)
     endpoint_private_access = true
     endpoint_public_access  = true
   }
+
+  depends_on = [aws_cloudwatch_log_group.eks_cluster]
 }
 
 data "tls_certificate" "eks_oidc" {

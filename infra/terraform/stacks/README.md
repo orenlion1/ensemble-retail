@@ -90,6 +90,16 @@ terraform plan \
   -var='public_subnet_ids=["subnet-public-a","subnet-public-b"]'
 ```
 
+Only `api`/`audit` control-plane log types are enabled (the other three produced continuous,
+unused CloudWatch Logs volume). The `/aws/eks/<cluster_name>/cluster` log group is now
+Terraform-managed with a 14-day retention so it stops growing forever. If the cluster was already
+applied under the old config, EKS auto-created that log group with "Never Expire" retention —
+import it before re-applying so Terraform doesn't try to create a duplicate:
+
+```bash
+terraform import aws_cloudwatch_log_group.eks_cluster /aws/eks/ensemble-grafana/cluster
+```
+
 ## 6. Data
 
 `stacks/data` owns DynamoDB, Aurora/Postgres, the database security group, and the runtime Secrets Manager placeholder. Pass network outputs plus the EKS cluster security group from `stacks/cluster`.
@@ -122,6 +132,11 @@ terraform plan \
 ## 8. CloudWatch Integration
 
 `stacks/cloudwatch-integration` owns the IAM role and inline policy that Grafana Cloud assumes to scrape AWS CloudWatch metrics. It also manages the Grafana Cloud AWS/RDS CloudWatch scrape job associated with stack `1665320` and AWS account resource `270`. The `external_id` is the value shown in the Grafana Cloud AWS integration setup; this deployment uses `3254864`.
+
+The RDS scrape job polls every 900s (15 min) rather than 300s to cut `GetMetricData` request
+volume 3x, and no longer requests the `AuroraGlobalDB*` metrics since `ensemble-inventory` is a
+single-region Aurora cluster (those queries always returned empty). Both changes were made to
+keep the account under its CloudWatch API request free tier.
 
 ```bash
 cd infra/terraform/stacks/cloudwatch-integration
