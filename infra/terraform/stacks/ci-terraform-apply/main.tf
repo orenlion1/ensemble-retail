@@ -18,7 +18,11 @@ locals {
   eks_cluster_role_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${var.cluster_name}-eks-cluster"
   eks_nodes_role_arn   = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${var.cluster_name}-eks-nodes"
   eks_oidc_provider_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/oidc.eks.${var.aws_region}.amazonaws.com/id/*"
-  eks_log_group_arn    = "arn:aws:logs:${var.aws_region}:${data.aws_caller_identity.current.account_id}:log-group:/aws/eks/${var.cluster_name}/cluster*"
+  eks_log_group_arn = "arn:aws:logs:${var.aws_region}:${data.aws_caller_identity.current.account_id}:log-group:/aws/eks/${var.cluster_name}/cluster*"
+  # logs:DescribeLogGroups is a list API: IAM evaluates it against log-group:* rather than the
+  # log group named in the request, so it cannot be scoped tighter than this. It only exposes
+  # log-group metadata (names/retention), never log contents.
+  log_group_describe_arn = "arn:aws:logs:${var.aws_region}:${data.aws_caller_identity.current.account_id}:log-group:*"
 
   # stacks/cloudwatch-integration's own resource.
   grafana_role_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/GrafanaLabsCloudWatchIntegration"
@@ -155,12 +159,15 @@ resource "aws_iam_role_policy" "terraform_plan" {
         Resource = local.eks_oidc_provider_arn
       },
       {
-        Sid    = "CloudWatchLogGroupRead"
-        Effect = "Allow"
-        Action = [
-          "logs:DescribeLogGroups",
-          "logs:ListTagsForResource"
-        ]
+        Sid      = "CloudWatchLogGroupDescribe"
+        Effect   = "Allow"
+        Action   = ["logs:DescribeLogGroups"]
+        Resource = local.log_group_describe_arn
+      },
+      {
+        Sid      = "CloudWatchLogGroupRead"
+        Effect   = "Allow"
+        Action   = ["logs:ListTagsForResource"]
         Resource = local.eks_log_group_arn
       },
       {
@@ -296,12 +303,17 @@ resource "aws_iam_role_policy" "terraform_apply" {
         Resource = local.eks_oidc_provider_arn
       },
       {
+        Sid      = "CloudWatchLogGroupDescribe"
+        Effect   = "Allow"
+        Action   = ["logs:DescribeLogGroups"]
+        Resource = local.log_group_describe_arn
+      },
+      {
         Sid    = "CloudWatchLogGroup"
         Effect = "Allow"
         Action = [
           "logs:CreateLogGroup",
           "logs:DeleteLogGroup",
-          "logs:DescribeLogGroups",
           "logs:PutRetentionPolicy",
           "logs:ListTagsForResource",
           "logs:TagResource",
