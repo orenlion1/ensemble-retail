@@ -298,8 +298,9 @@ Applying that ConfigMap change to the live cluster no longer strictly requires l
 `kubectl`/AWS credentials: the guarded `.github/workflows/observability-apply.yml`
 (`workflow_dispatch`) diffs and applies just the two Alloy ConfigMaps via GitHub OIDC, gated by
 an `observability-apply` environment reviewer, same pattern as the Terraform-apply workflow
-below. It needs a one-time bootstrap first — see `infra/terraform/stacks/README.md` section 11
-and `TODO.md`.
+below. Because the workflow uses `kubectl diff` server-side dry-run, the planner RBAC includes
+`patch` on those two ConfigMaps. It needs a one-time bootstrap first — see
+`infra/terraform/stacks/README.md` section 11 and `TODO.md`.
 
 ## Production Shape
 

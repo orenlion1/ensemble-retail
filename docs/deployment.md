@@ -22,6 +22,8 @@ enforced by Kubernetes RBAC (`infra/k8s/observability-apply-rbac.yaml`) scoped t
 ConfigMaps and their owning Deployment/DaemonSet, and the apply step requires an
 `observability-apply` GitHub environment reviewer to approve it. See
 `infra/terraform/stacks/README.md` (section 11) for one-time setup and usage.
+The planner role also carries `patch` on those two ConfigMaps because `kubectl diff` performs
+server-side apply dry-run requests that require patch authorization.
 
 ## Static Assets
 
