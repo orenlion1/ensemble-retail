@@ -171,44 +171,38 @@ block so state can be shared between local operator runs and CI, and `.github/wo
 provides a manual, guarded `workflow_dispatch` path that applies either stack via GitHub OIDC
 instead of static AWS keys.
 
-**One-time setup (do this before the workflow can run):**
+**One-time setup:** run the bootstrap script locally with real AWS credentials and an
+authenticated `gh` CLI:
 
-1. Create (or point at an existing) S3 bucket + DynamoDB lock table for Terraform state, if one
-   doesn't already exist for this account.
-2. If either stack currently has *local* state from a prior manual apply, migrate it first:
-   ```bash
-   cd infra/terraform/stacks/cluster   # or stacks/cloudwatch-integration
-   terraform init \
-     -backend-config="bucket=<state-bucket>" \
-     -backend-config="key=cluster/terraform.tfstate" \
-     -backend-config="region=us-east-1" \
-     -backend-config="dynamodb_table=<lock-table>" \
-     -migrate-state
-   ```
-   If there's no local state yet (fresh stack), a plain `terraform init` with the same
-   `-backend-config` flags is enough.
-3. Bootstrap `stacks/ci-terraform-apply` once, locally, with real AWS credentials — this stack
-   creates the two IAM roles the workflow assumes, so it can't bootstrap itself via CI:
-   ```bash
-   cd infra/terraform/stacks/ci-terraform-apply
-   terraform init
-   terraform plan
-   terraform apply
-   terraform output terraform_plan_role_arn
-   terraform output terraform_apply_role_arn
-   ```
-4. In the GitHub repo settings, create an environment named `terraform-apply` with required
-   reviewers configured. The apply IAM role's trust policy only allows
-   `AssumeRoleWithWebIdentity` from jobs running under that exact environment name — without the
-   environment (and its reviewer gate) existing, the apply job can't authenticate to AWS at all.
-5. Add repository secrets: `TERRAFORM_PLAN_ROLE_ARN`, `TERRAFORM_APPLY_ROLE_ARN` (the two outputs
-   above), and, for the `cloudwatch-integration` stack only, `GRAFANA_CLOUD_PROVIDER_ACCESS_TOKEN`
-   and `GRAFANA_CLOUD_EXTERNAL_ID` (`3254864`, per section 8 above).
+```bash
+scripts/terraform/bootstrap-ci-terraform-apply.sh
+```
 
-**Running it:** trigger "Terraform Apply" from the Actions tab, pick the stack and state backend
-location, leave `apply` unchecked to get a plan-only run (posted to the job summary), then re-run
-with `apply` checked once the plan looks right — the `apply` job will sit pending until a
-`terraform-apply` environment reviewer approves it.
+It is idempotent and does everything the workflow needs, in order:
+
+1. Applies `stacks/ci-terraform-apply`, which owns the shared state backend
+   (`ensemble-grafana-tf-state-<account-id>` S3 bucket + `ensemble-grafana-tf-locks` DynamoDB
+   table) and the two OIDC IAM roles. This stack keeps *local* state on purpose — it is the
+   bootstrap root of trust and can't depend on the backend it creates.
+2. Migrates any local `stacks/cluster` / `stacks/cloudwatch-integration` state into S3 under
+   `stacks/<stack>/terraform.tfstate` (local copies are renamed `terraform.tfstate.migrated-backup`).
+3. Imports the EKS-auto-created `/aws/eks/ensemble-grafana/cluster` log group into the cluster
+   state so the retention change manages it instead of colliding with it.
+4. Creates the `terraform-apply` GitHub environment with the current `gh` user as required
+   reviewer, restricted to `main`. The apply IAM role's trust policy only allows
+   `AssumeRoleWithWebIdentity` from jobs running under that exact environment name, so the
+   reviewer approval *is* the credential gate.
+5. Sets the `TERRAFORM_PLAN_ROLE_ARN` / `TERRAFORM_APPLY_ROLE_ARN` secrets and the
+   `TF_BACKEND_BUCKET` / `TF_BACKEND_DYNAMODB_TABLE` / `CLUSTER_PRIVATE_SUBNET_IDS` /
+   `CLUSTER_PUBLIC_SUBNET_IDS` repository variables the workflow reads, and warns if the
+   `GRAFANA_CLOUD_PROVIDER_ACCESS_TOKEN` / `GRAFANA_CLOUD_EXTERNAL_ID` secrets (`3254864`, per
+   section 8 above) are missing.
+
+**Running it:** trigger "Terraform Apply" from the Actions tab, pick the stack, leave `apply`
+unchecked to get a plan-only run (posted to the job summary), then re-run with `apply` checked
+once the plan looks right — the `apply` job sits pending until a `terraform-apply` environment
+reviewer approves it. Backend location comes from the repository variables; the `backend_*`
+inputs exist only to override them for a one-off run against different state.
 
 The IAM roles themselves (`ensemble-grafana-terraform-plan`, `ensemble-grafana-terraform-apply`)
 are scoped only to `eks:DescribeCluster`/`UpdateClusterConfig` on the `ensemble-grafana` cluster,

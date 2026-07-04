@@ -7,6 +7,11 @@ name: Terraform Apply
 # approve it. The AWS IAM role it applies with (see infra/terraform/stacks/ci-terraform-apply) is
 # scoped to just the EKS cluster logging config and the Grafana CloudWatch integration role — it
 # cannot touch anything else in the account.
+#
+# Backend and cluster-variable values normally come from repository variables set by
+# scripts/terraform/bootstrap-ci-terraform-apply.sh (TF_BACKEND_BUCKET,
+# TF_BACKEND_DYNAMODB_TABLE, CLUSTER_PRIVATE_SUBNET_IDS, CLUSTER_PUBLIC_SUBNET_IDS); the
+# backend_* inputs exist only to override them for a one-off run against different state.
 on:
   workflow_dispatch:
     inputs:
@@ -18,17 +23,20 @@ on:
           - cluster
           - cloudwatch-integration
       backend_bucket:
-        description: "S3 bucket holding this stack's Terraform state"
+        description: "Override the TF_BACKEND_BUCKET repository variable"
         type: string
-        required: true
+        required: false
+        default: ""
       backend_key:
-        description: "State object key within the bucket (e.g. cluster/terraform.tfstate)"
+        description: "Override the default state key (stacks/<stack>/terraform.tfstate)"
         type: string
-        required: true
+        required: false
+        default: ""
       backend_dynamodb_table:
-        description: "DynamoDB table used for state locking"
+        description: "Override the TF_BACKEND_DYNAMODB_TABLE repository variable"
         type: string
-        required: true
+        required: false
+        default: ""
       backend_region:
         description: "Region for the state bucket/lock table"
         type: string
@@ -64,6 +72,36 @@ jobs:
         with:
           terraform_version: "1.9.8"
 
+      - name: Resolve backend config
+        env:
+          IN_BUCKET: ${{ inputs.backend_bucket }}
+          IN_KEY: ${{ inputs.backend_key }}
+          IN_TABLE: ${{ inputs.backend_dynamodb_table }}
+          IN_REGION: ${{ inputs.backend_region }}
+          VAR_BUCKET: ${{ vars.TF_BACKEND_BUCKET }}
+          VAR_TABLE: ${{ vars.TF_BACKEND_DYNAMODB_TABLE }}
+          VAR_PRIV: ${{ vars.CLUSTER_PRIVATE_SUBNET_IDS }}
+          VAR_PUB: ${{ vars.CLUSTER_PUBLIC_SUBNET_IDS }}
+          STACK: ${{ inputs.stack }}
+        run: |
+          bucket="${IN_BUCKET:-$VAR_BUCKET}"
+          table="${IN_TABLE:-$VAR_TABLE}"
+          key="${IN_KEY:-stacks/$STACK/terraform.tfstate}"
+          if [ -z "$bucket" ] || [ -z "$table" ]; then
+            echo "::error::No backend configured. Set the TF_BACKEND_BUCKET and TF_BACKEND_DYNAMODB_TABLE repository variables (scripts/terraform/bootstrap-ci-terraform-apply.sh does this) or pass the backend_* inputs."
+            exit 1
+          fi
+          if [ "$STACK" = "cluster" ] && { [ -z "$VAR_PRIV" ] || [ -z "$VAR_PUB" ]; }; then
+            echo "::error::The cluster stack needs the CLUSTER_PRIVATE_SUBNET_IDS and CLUSTER_PUBLIC_SUBNET_IDS repository variables (JSON lists of subnet IDs); the bootstrap script sets them from the network stack outputs."
+            exit 1
+          fi
+          {
+            echo "TF_BACKEND_BUCKET=$bucket"
+            echo "TF_BACKEND_KEY=$key"
+            echo "TF_BACKEND_TABLE=$table"
+            echo "TF_BACKEND_REGION=${IN_REGION:-us-east-1}"
+          } >> "$GITHUB_ENV"
+
       - name: Configure AWS credentials (read-only plan role)
         uses: aws-actions/configure-aws-credentials@v6
         with:
@@ -74,16 +112,18 @@ jobs:
         working-directory: ${{ env.STACK_DIR }}
         run: |
           terraform init \
-            -backend-config="bucket=${{ inputs.backend_bucket }}" \
-            -backend-config="key=${{ inputs.backend_key }}" \
-            -backend-config="region=${{ inputs.backend_region }}" \
-            -backend-config="dynamodb_table=${{ inputs.backend_dynamodb_table }}"
+            -backend-config="bucket=$TF_BACKEND_BUCKET" \
+            -backend-config="key=$TF_BACKEND_KEY" \
+            -backend-config="region=$TF_BACKEND_REGION" \
+            -backend-config="dynamodb_table=$TF_BACKEND_TABLE"
 
       - name: Terraform plan
         working-directory: ${{ env.STACK_DIR }}
         env:
           GRAFANA_CLOUD_PROVIDER_ACCESS_TOKEN: ${{ secrets.GRAFANA_CLOUD_PROVIDER_ACCESS_TOKEN }}
           TF_VAR_external_id: ${{ secrets.GRAFANA_CLOUD_EXTERNAL_ID }}
+          TF_VAR_private_subnet_ids: ${{ vars.CLUSTER_PRIVATE_SUBNET_IDS }}
+          TF_VAR_public_subnet_ids: ${{ vars.CLUSTER_PUBLIC_SUBNET_IDS }}
         run: |
           terraform plan -out=tfplan -input=false
           terraform show -no-color tfplan > plan.txt
@@ -124,6 +164,23 @@ jobs:
         with:
           terraform_version: "1.9.8"
 
+      - name: Resolve backend config
+        env:
+          IN_BUCKET: ${{ inputs.backend_bucket }}
+          IN_KEY: ${{ inputs.backend_key }}
+          IN_TABLE: ${{ inputs.backend_dynamodb_table }}
+          IN_REGION: ${{ inputs.backend_region }}
+          VAR_BUCKET: ${{ vars.TF_BACKEND_BUCKET }}
+          VAR_TABLE: ${{ vars.TF_BACKEND_DYNAMODB_TABLE }}
+          STACK: ${{ inputs.stack }}
+        run: |
+          {
+            echo "TF_BACKEND_BUCKET=${IN_BUCKET:-$VAR_BUCKET}"
+            echo "TF_BACKEND_KEY=${IN_KEY:-stacks/$STACK/terraform.tfstate}"
+            echo "TF_BACKEND_TABLE=${IN_TABLE:-$VAR_TABLE}"
+            echo "TF_BACKEND_REGION=${IN_REGION:-us-east-1}"
+          } >> "$GITHUB_ENV"
+
       - name: Download plan artifact
         uses: actions/download-artifact@v4
         with:
@@ -140,14 +197,16 @@ jobs:
         working-directory: ${{ env.STACK_DIR }}
         run: |
           terraform init \
-            -backend-config="bucket=${{ inputs.backend_bucket }}" \
-            -backend-config="key=${{ inputs.backend_key }}" \
-            -backend-config="region=${{ inputs.backend_region }}" \
-            -backend-config="dynamodb_table=${{ inputs.backend_dynamodb_table }}"
+            -backend-config="bucket=$TF_BACKEND_BUCKET" \
+            -backend-config="key=$TF_BACKEND_KEY" \
+            -backend-config="region=$TF_BACKEND_REGION" \
+            -backend-config="dynamodb_table=$TF_BACKEND_TABLE"
 
       - name: Terraform apply
         working-directory: ${{ env.STACK_DIR }}
         env:
           GRAFANA_CLOUD_PROVIDER_ACCESS_TOKEN: ${{ secrets.GRAFANA_CLOUD_PROVIDER_ACCESS_TOKEN }}
           TF_VAR_external_id: ${{ secrets.GRAFANA_CLOUD_EXTERNAL_ID }}
+          TF_VAR_private_subnet_ids: ${{ vars.CLUSTER_PRIVATE_SUBNET_IDS }}
+          TF_VAR_public_subnet_ids: ${{ vars.CLUSTER_PUBLIC_SUBNET_IDS }}
         run: terraform apply -input=false tfplan
