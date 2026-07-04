@@ -21,6 +21,18 @@ variable "github_repository" {
   description = "GitHub \"owner/repo\" allowed to assume the CI Terraform roles via OIDC."
 }
 
+variable "state_bucket_name" {
+  type        = string
+  default     = ""
+  description = "Name for the shared Terraform state S3 bucket. Empty means ensemble-grafana-tf-state-<account-id>."
+}
+
+variable "lock_table_name" {
+  type        = string
+  default     = ""
+  description = "Name for the Terraform state DynamoDB lock table. Empty means ensemble-grafana-tf-locks."
+}
+
 variable "github_environment" {
   type        = string
   default     = "terraform-apply"

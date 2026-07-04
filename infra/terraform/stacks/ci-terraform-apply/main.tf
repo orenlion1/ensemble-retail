@@ -22,6 +22,67 @@ locals {
 
   # stacks/cloudwatch-integration's own resource.
   grafana_role_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/GrafanaLabsCloudWatchIntegration"
+
+  state_bucket_name = var.state_bucket_name != "" ? var.state_bucket_name : "ensemble-grafana-tf-state-${data.aws_caller_identity.current.account_id}"
+  lock_table_name   = var.lock_table_name != "" ? var.lock_table_name : "ensemble-grafana-tf-locks"
+
+  # The exact state objects the CI roles may touch. Everything else in the bucket (e.g. a future
+  # stacks/data state, which would contain the DB master password) stays unreadable from CI.
+  ci_state_key_arns = [
+    "${aws_s3_bucket.tf_state.arn}/stacks/cluster/terraform.tfstate",
+    "${aws_s3_bucket.tf_state.arn}/stacks/cloudwatch-integration/terraform.tfstate",
+  ]
+}
+
+# --- Terraform state backend, shared by local operator runs and CI. Owned here (with local
+# --- state) because this is the bootstrap stack: it must be applied once by a human with real
+# --- credentials before any CI run can work, so it can't depend on the backend it creates. ---
+
+resource "aws_s3_bucket" "tf_state" {
+  bucket = local.state_bucket_name
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
+resource "aws_s3_bucket_versioning" "tf_state" {
+  bucket = aws_s3_bucket.tf_state.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "tf_state" {
+  bucket = aws_s3_bucket.tf_state.id
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
+    }
+  }
+}
+
+resource "aws_s3_bucket_public_access_block" "tf_state" {
+  bucket                  = aws_s3_bucket.tf_state.id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
+resource "aws_dynamodb_table" "tf_locks" {
+  name         = local.lock_table_name
+  billing_mode = "PAY_PER_REQUEST"
+  hash_key     = "LockID"
+
+  attribute {
+    name = "LockID"
+    type = "S"
+  }
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 # --- Plan role: read-only, assumable by any workflow run on this repo. Safe to use without
@@ -107,6 +168,25 @@ resource "aws_iam_role_policy" "terraform_plan" {
         Effect   = "Allow"
         Action   = ["iam:GetRole", "iam:GetRolePolicy", "iam:ListRolePolicies"]
         Resource = local.grafana_role_arn
+      },
+      {
+        Sid      = "StateBucketList"
+        Effect   = "Allow"
+        Action   = ["s3:ListBucket"]
+        Resource = aws_s3_bucket.tf_state.arn
+      },
+      {
+        Sid      = "StateObjectsRead"
+        Effect   = "Allow"
+        Action   = ["s3:GetObject"]
+        Resource = local.ci_state_key_arns
+      },
+      {
+        # plan acquires and releases the state lock too, not just apply
+        Sid      = "StateLocking"
+        Effect   = "Allow"
+        Action   = ["dynamodb:GetItem", "dynamodb:PutItem", "dynamodb:DeleteItem"]
+        Resource = aws_dynamodb_table.tf_locks.arn
       },
       {
         Sid      = "CallerIdentity"
@@ -243,6 +323,24 @@ resource "aws_iam_role_policy" "terraform_apply" {
           "iam:TagRole"
         ]
         Resource = local.grafana_role_arn
+      },
+      {
+        Sid      = "StateBucketList"
+        Effect   = "Allow"
+        Action   = ["s3:ListBucket"]
+        Resource = aws_s3_bucket.tf_state.arn
+      },
+      {
+        Sid      = "StateObjectsReadWrite"
+        Effect   = "Allow"
+        Action   = ["s3:GetObject", "s3:PutObject"]
+        Resource = local.ci_state_key_arns
+      },
+      {
+        Sid      = "StateLocking"
+        Effect   = "Allow"
+        Action   = ["dynamodb:GetItem", "dynamodb:PutItem", "dynamodb:DeleteItem"]
+        Resource = aws_dynamodb_table.tf_locks.arn
       },
       {
         Sid      = "CallerIdentity"
