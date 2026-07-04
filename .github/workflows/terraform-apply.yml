@@ -1,0 +1,153 @@
+name: Terraform Apply
+
+# Guarded, manual-only path for applying the operator-owned Terraform stacks (see
+# infra/terraform/stacks/README.md). This workflow never runs automatically and never applies
+# without a human first reading the plan: the "apply" job only runs when explicitly requested via
+# the `apply` input AND only after the "terraform-apply" GitHub environment's required reviewers
+# approve it. The AWS IAM role it applies with (see infra/terraform/stacks/ci-terraform-apply) is
+# scoped to just the EKS cluster logging config and the Grafana CloudWatch integration role — it
+# cannot touch anything else in the account.
+on:
+  workflow_dispatch:
+    inputs:
+      stack:
+        description: "Which Terraform stack to plan/apply"
+        type: choice
+        required: true
+        options:
+          - cluster
+          - cloudwatch-integration
+      backend_bucket:
+        description: "S3 bucket holding this stack's Terraform state"
+        type: string
+        required: true
+      backend_key:
+        description: "State object key within the bucket (e.g. cluster/terraform.tfstate)"
+        type: string
+        required: true
+      backend_dynamodb_table:
+        description: "DynamoDB table used for state locking"
+        type: string
+        required: true
+      backend_region:
+        description: "Region for the state bucket/lock table"
+        type: string
+        required: false
+        default: "us-east-1"
+      apply:
+        description: "Apply after plan. Leave false to only plan and review."
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: terraform-apply-${{ inputs.stack }}
+  cancel-in-progress: false
+
+env:
+  AWS_REGION: us-east-1
+  STACK_DIR: infra/terraform/stacks/${{ inputs.stack }}
+
+jobs:
+  plan:
+    name: Plan (${{ inputs.stack }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.9.8"
+
+      - name: Configure AWS credentials (read-only plan role)
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: ${{ secrets.TERRAFORM_PLAN_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Terraform init
+        working-directory: ${{ env.STACK_DIR }}
+        run: |
+          terraform init \
+            -backend-config="bucket=${{ inputs.backend_bucket }}" \
+            -backend-config="key=${{ inputs.backend_key }}" \
+            -backend-config="region=${{ inputs.backend_region }}" \
+            -backend-config="dynamodb_table=${{ inputs.backend_dynamodb_table }}"
+
+      - name: Terraform plan
+        working-directory: ${{ env.STACK_DIR }}
+        env:
+          GRAFANA_CLOUD_PROVIDER_ACCESS_TOKEN: ${{ secrets.GRAFANA_CLOUD_PROVIDER_ACCESS_TOKEN }}
+          TF_VAR_external_id: ${{ secrets.GRAFANA_CLOUD_EXTERNAL_ID }}
+        run: |
+          terraform plan -out=tfplan -input=false
+          terraform show -no-color tfplan > plan.txt
+
+      - name: Post plan summary
+        working-directory: ${{ env.STACK_DIR }}
+        run: |
+          {
+            echo "### Terraform plan: ${{ inputs.stack }}"
+            echo '```'
+            cat plan.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload plan artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: tfplan-${{ inputs.stack }}
+          path: |
+            ${{ env.STACK_DIR }}/tfplan
+            ${{ env.STACK_DIR }}/plan.txt
+          retention-days: 5
+
+  apply:
+    name: Apply (${{ inputs.stack }})
+    needs: plan
+    if: ${{ inputs.apply }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    # Required reviewers on this environment are the actual approval gate: the apply IAM role's
+    # trust policy only allows AssumeRoleWithWebIdentity from jobs running under this exact
+    # environment, so the role literally cannot be assumed until a reviewer approves this job.
+    environment: terraform-apply
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.9.8"
+
+      - name: Download plan artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: tfplan-${{ inputs.stack }}
+          path: ${{ env.STACK_DIR }}
+
+      - name: Configure AWS credentials (scoped apply role)
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: ${{ secrets.TERRAFORM_APPLY_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Terraform init
+        working-directory: ${{ env.STACK_DIR }}
+        run: |
+          terraform init \
+            -backend-config="bucket=${{ inputs.backend_bucket }}" \
+            -backend-config="key=${{ inputs.backend_key }}" \
+            -backend-config="region=${{ inputs.backend_region }}" \
+            -backend-config="dynamodb_table=${{ inputs.backend_dynamodb_table }}"
+
+      - name: Terraform apply
+        working-directory: ${{ env.STACK_DIR }}
+        env:
+          GRAFANA_CLOUD_PROVIDER_ACCESS_TOKEN: ${{ secrets.GRAFANA_CLOUD_PROVIDER_ACCESS_TOKEN }}
+          TF_VAR_external_id: ${{ secrets.GRAFANA_CLOUD_EXTERNAL_ID }}
+        run: terraform apply -input=false tfplan

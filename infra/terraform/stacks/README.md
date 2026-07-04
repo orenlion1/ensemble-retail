@@ -164,7 +164,59 @@ Current applied output:
 
 Troubleshooting: if Terraform cannot create the scrape job, confirm `GRAFANA_CLOUD_PROVIDER_ACCESS_TOKEN` is a Cloud Provider Observability token rather than a telemetry ingest token, and confirm `grafana_cloud_provider_url` matches the stack returned by `https://grafana.com/api/instances`. If Grafana reports `Failed to assume role on provided account`, confirm the Grafana AWS account form uses the exact `role_arn` output. A failed or successful connection attempt should appear in CloudTrail as an `AssumeRole` event for this role. If no event appears, Grafana is likely not calling this role ARN. If the Grafana UI shows different values for the 12-digit Grafana AWS account ID or External ID, pass them as `grafana_account_id` and `external_id` and reapply the stack.
 
-## 9. Kubernetes
+## 9. CI Terraform Apply (guarded OIDC)
+
+`stacks/cluster` and `stacks/cloudwatch-integration` now declare a partial `backend "s3" {}`
+block so state can be shared between local operator runs and CI, and `.github/workflows/terraform-apply.yml`
+provides a manual, guarded `workflow_dispatch` path that applies either stack via GitHub OIDC
+instead of static AWS keys.
+
+**One-time setup (do this before the workflow can run):**
+
+1. Create (or point at an existing) S3 bucket + DynamoDB lock table for Terraform state, if one
+   doesn't already exist for this account.
+2. If either stack currently has *local* state from a prior manual apply, migrate it first:
+   ```bash
+   cd infra/terraform/stacks/cluster   # or stacks/cloudwatch-integration
+   terraform init \
+     -backend-config="bucket=<state-bucket>" \
+     -backend-config="key=cluster/terraform.tfstate" \
+     -backend-config="region=us-east-1" \
+     -backend-config="dynamodb_table=<lock-table>" \
+     -migrate-state
+   ```
+   If there's no local state yet (fresh stack), a plain `terraform init` with the same
+   `-backend-config` flags is enough.
+3. Bootstrap `stacks/ci-terraform-apply` once, locally, with real AWS credentials — this stack
+   creates the two IAM roles the workflow assumes, so it can't bootstrap itself via CI:
+   ```bash
+   cd infra/terraform/stacks/ci-terraform-apply
+   terraform init
+   terraform plan
+   terraform apply
+   terraform output terraform_plan_role_arn
+   terraform output terraform_apply_role_arn
+   ```
+4. In the GitHub repo settings, create an environment named `terraform-apply` with required
+   reviewers configured. The apply IAM role's trust policy only allows
+   `AssumeRoleWithWebIdentity` from jobs running under that exact environment name — without the
+   environment (and its reviewer gate) existing, the apply job can't authenticate to AWS at all.
+5. Add repository secrets: `TERRAFORM_PLAN_ROLE_ARN`, `TERRAFORM_APPLY_ROLE_ARN` (the two outputs
+   above), and, for the `cloudwatch-integration` stack only, `GRAFANA_CLOUD_PROVIDER_ACCESS_TOKEN`
+   and `GRAFANA_CLOUD_EXTERNAL_ID` (`3254864`, per section 8 above).
+
+**Running it:** trigger "Terraform Apply" from the Actions tab, pick the stack and state backend
+location, leave `apply` unchecked to get a plan-only run (posted to the job summary), then re-run
+with `apply` checked once the plan looks right — the `apply` job will sit pending until a
+`terraform-apply` environment reviewer approves it.
+
+The IAM roles themselves (`ensemble-grafana-terraform-plan`, `ensemble-grafana-terraform-apply`)
+are scoped only to `eks:DescribeCluster`/`UpdateClusterConfig` on the `ensemble-grafana` cluster,
+the `/aws/eks/ensemble-grafana/cluster` log group, and the `GrafanaLabsCloudWatchIntegration` IAM
+role — they cannot touch anything else in the account. See
+`infra/terraform/stacks/ci-terraform-apply/main.tf`.
+
+## 10. Kubernetes
 
 Kubernetes manifests remain under `infra/k8s` because they are applied after the AWS substrate exists and service account annotations have been populated with `stacks/workload-iam` outputs.
 
@@ -187,7 +239,8 @@ Use deployment states in this order:
 6. `data`: DynamoDB tables, RDS/Aurora inventory database, Secrets Manager runtime secret.
 7. `workload-iam`: IRSA roles and policies for inventory, cart, and account services.
 8. `cloudwatch-integration`: IAM role Grafana Cloud assumes to scrape AWS CloudWatch metrics.
-9. `kubernetes`: Kubernetes manifests or Helm releases after EKS exists.
+9. `ci-terraform-apply`: IAM roles the guarded GitHub Actions workflow assumes via OIDC to plan/apply `cluster` and `cloudwatch-integration` (bootstrap locally first — see above).
+10. `kubernetes`: Kubernetes manifests or Helm releases after EKS exists.
 
 Downstream stacks should read upstream outputs through `terraform_remote_state` or a generated `*.auto.tfvars.json` file. Keep state movement explicit with `terraform state mv` when migrating already-created resources.
 

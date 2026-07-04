@@ -12,6 +12,8 @@ Authentication uses GitHub OIDC to assume the deploy IAM role; no static AWS key
 
 Manifest, secret, ingress, and Terraform changes are NOT applied by the automated workflow; they stay on the operator paths below (`scripts/kubernetes/apply-manifests.sh`, Terraform stacks). `scripts/ci/poll-and-deploy.sh` remains available as a local manifest-apply gate.
 
+For `stacks/cluster` and `stacks/cloudwatch-integration` specifically, `.github/workflows/terraform-apply.yml` offers a manual, guarded `workflow_dispatch` alternative to applying locally: it plans and applies via GitHub OIDC using IAM roles scoped only to those two stacks' resources, and the apply step requires a `terraform-apply` GitHub environment reviewer to approve it before AWS credentials are ever issued. See `infra/terraform/stacks/README.md` (section 9) for one-time setup and usage.
+
 ## Static Assets
 
 1. Build the storefront with `npm run build` from `frontend/`.
