@@ -191,6 +191,23 @@ AWS_PROFILE=ensemble-grafana terraform apply \
   -var='grafana_account_id=<grafana-aws-account-id>'
 ```
 
+**Current auth blocker:** the `GRAFANA_CLOUD_PROVIDER_ACCESS_TOKEN` GitHub Actions secret is set, but the token value returns `401 Unauthorized` when called directly against `https://cloud-provider-api-prod-us-east-3.grafana.net/api/v2/stacks/1665320/aws/jobs/cloudwatch/ensemble-grafana-rds-cloudwatch` (verified with `curl`, independent of GitHub Actions secret propagation). The token is not created or renewable via `gcx` (it targets the classic Grafana instance API, not the Cloud Provider Observability API) — generate a fresh Cloud Provider Access Policy Token with Grafana Cloud Provider Observability permissions from the Grafana Cloud Portal for org `1786210` / stack `1665320`, then `gh secret set GRAFANA_CLOUD_PROVIDER_ACCESS_TOKEN --body "<new-token>"` and re-run the `Terraform Apply` workflow for the `cloudwatch-integration` stack.
+
+The `infra/terraform/stacks/ci-terraform-apply` bootstrap stack uses local state on the operator's machine (see comment in its `main.tf`). If that local `terraform.tfstate` is lost or reset while the S3 bucket, DynamoDB lock table, and IAM roles/policies still exist in AWS, `terraform plan` will show `9 to add` instead of the expected in-place policy diff. Re-attach the state with `terraform import` before applying:
+
+```sh
+cd infra/terraform/stacks/ci-terraform-apply
+terraform import aws_s3_bucket.tf_state ensemble-grafana-tf-state-629513454417
+terraform import aws_s3_bucket_versioning.tf_state ensemble-grafana-tf-state-629513454417
+terraform import aws_s3_bucket_server_side_encryption_configuration.tf_state ensemble-grafana-tf-state-629513454417
+terraform import aws_s3_bucket_public_access_block.tf_state ensemble-grafana-tf-state-629513454417
+terraform import aws_dynamodb_table.tf_locks ensemble-grafana-tf-locks
+terraform import aws_iam_role.terraform_plan ensemble-grafana-terraform-plan
+terraform import aws_iam_role.terraform_apply ensemble-grafana-terraform-apply
+terraform import aws_iam_role_policy.terraform_plan ensemble-grafana-terraform-plan:TerraformPlanReadOnly
+terraform import aws_iam_role_policy.terraform_apply ensemble-grafana-terraform-apply:TerraformApplyScoped
+```
+
 ## Shopper Authentication
 
 The Account panel uses Cognito Hosted UI with Google federation. The browser starts an OAuth authorization-code flow with PKCE, receives the callback at `/auth/callback`, exchanges the code with Cognito, and populates the account name/email from the Cognito ID token claims. Anonymous cart and account changes stay in browser local storage and do not call protected write APIs. After sign-in, cart and account API writes use the Cognito `sub` as `shopperId` and send `Authorization: Bearer <access_token>` so the Spring Boot resource servers can validate the request.
