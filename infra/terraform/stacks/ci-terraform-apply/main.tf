@@ -171,9 +171,16 @@ resource "aws_iam_role_policy" "terraform_plan" {
         Resource = local.eks_log_group_arn
       },
       {
-        Sid      = "GrafanaCloudWatchIntegrationRoleRead"
-        Effect   = "Allow"
-        Action   = ["iam:GetRole", "iam:GetRolePolicy", "iam:ListRolePolicies"]
+        # ListAttachedRolePolicies included because the AWS provider's aws_iam_role refresh
+        # reads managed-policy attachments even when the config declares none.
+        Sid    = "GrafanaCloudWatchIntegrationRoleRead"
+        Effect = "Allow"
+        Action = [
+          "iam:GetRole",
+          "iam:GetRolePolicy",
+          "iam:ListRolePolicies",
+          "iam:ListAttachedRolePolicies"
+        ]
         Resource = local.grafana_role_arn
       },
       {
@@ -250,11 +257,14 @@ resource "aws_iam_role_policy" "terraform_apply" {
       {
         # Deliberately no eks:CreateCluster/DeleteCluster: if a plan ever wants to replace the
         # live cluster, apply should fail closed rather than tear it down via CI.
+        # eks:DescribeUpdate is how Terraform polls an in-flight UpdateClusterConfig to
+        # completion -- without it the update is submitted but the apply errors mid-wait.
         Sid    = "EksClusterInPlaceUpdate"
         Effect = "Allow"
         Action = [
           "eks:DescribeCluster",
           "eks:UpdateClusterConfig",
+          "eks:DescribeUpdate",
           "eks:ListTagsForResource",
           "eks:TagResource",
           "eks:UntagResource"
@@ -268,6 +278,7 @@ resource "aws_iam_role_policy" "terraform_apply" {
         Action = [
           "eks:DescribeNodegroup",
           "eks:UpdateNodegroupConfig",
+          "eks:DescribeUpdate",
           "eks:ListTagsForResource",
           "eks:TagResource",
           "eks:UntagResource"
@@ -332,6 +343,7 @@ resource "aws_iam_role_policy" "terraform_apply" {
           "iam:GetRolePolicy",
           "iam:DeleteRolePolicy",
           "iam:ListRolePolicies",
+          "iam:ListAttachedRolePolicies",
           "iam:TagRole"
         ]
         Resource = local.grafana_role_arn
