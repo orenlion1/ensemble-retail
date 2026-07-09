@@ -26,7 +26,7 @@ public class SecurityConfig {
             .frameOptions(frameOptions -> frameOptions.deny())
             .httpStrictTransportSecurity(hsts -> hsts.includeSubDomains(true).maxAgeInSeconds(31536000)))
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/actuator/health/**", "/actuator/prometheus").permitAll()
+            .requestMatchers("/actuator/health/**").permitAll()
             .requestMatchers("/products/**", "/categories", "/api/inventory/products/**", "/api/inventory/categories").permitAll()
             .anyRequest().denyAll())
         .build();

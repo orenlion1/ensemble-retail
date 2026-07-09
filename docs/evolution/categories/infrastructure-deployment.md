@@ -19,6 +19,7 @@
 | 2026-05-31 | `f15ee46` Reduce inventory service replicas to one | Capacity settings were tuned back after testing. |
 | 2026-05-31 | `64d3717` Balance traffic spike inventory load | Service load distribution was refined. |
 | 2026-07-01 | `.github/workflows/deploy.yml`, `infra/k8s/deploy-rbac.yaml` | AWS deployment became automatic: on Build success on `main`, GitHub Actions builds/pushes service images, rolls out EKS, syncs the frontend to S3, and invalidates CloudFront via a GitHub OIDC deploy role. |
+| 2026-07-09 | `infra/terraform/stacks/serverless`, `docs/serverless-migration.md` | Cost-reduction migration (Option D): the three Spring Boot services moved from EKS to API Gateway HTTP API + Lambda (Java 21, arm64, SnapStart) backed by DynamoDB, and the EKS cluster, Aurora cluster, NAT gateway, ALB, and regional WAF were torn down. Monthly run-rate dropped from ~$335 to ~$14. |
 
 ## What This Category Produced
 

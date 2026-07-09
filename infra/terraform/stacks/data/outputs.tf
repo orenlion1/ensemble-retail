@@ -14,12 +14,8 @@ output "account_table_name" {
   value = aws_dynamodb_table.accounts.name
 }
 
-output "inventory_cluster_arn" {
-  value = aws_rds_cluster.inventory.arn
-}
-
-output "inventory_cluster_endpoint" {
-  value = aws_rds_cluster.inventory.endpoint
+output "products_table_name" {
+  value = aws_dynamodb_table.products.name
 }
 
 output "app_runtime_secret_arn" {

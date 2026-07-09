@@ -82,9 +82,7 @@ jobs:
         service: ${{ fromJson(needs.changes.outputs.services) }}
     env:
       AWS_REGION: us-east-1
-      NAMESPACE: ensemble-grafana
       AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-      EKS_CLUSTER_NAME: ${{ secrets.EKS_CLUSTER_NAME }}
       HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
     steps:
       - name: Check out the CI-tested commit
@@ -98,7 +96,7 @@ jobs:
           java-version: "21"
           cache: maven
 
-      - name: Package Spring Boot service
+      - name: Package Lambda jar
         working-directory: services/${{ matrix.service }}
         run: mvn -B -ntp package -DskipTests
 
@@ -108,32 +106,31 @@ jobs:
           role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Build and push image
-        id: image
+      # Upload the shaded jar to S3, roll it onto the function, publish a new (SnapStart)
+      # version, wait for the snapshot to become Active, then move the `live` alias.
+      - name: Deploy to Lambda
         run: |
-          registry="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com"
-          tag="${HEAD_SHA:0:7}"
-          image="$registry/${{ matrix.service }}:$tag"
-          jar="$(ls services/${{ matrix.service }}/target/*.jar | grep -v '\.original$' | head -n 1)"
-          jar_rel="target/$(basename "$jar")"
-          aws ecr get-login-password --region "$AWS_REGION" \
-            | docker login --username AWS --password-stdin "$registry" >/dev/null
-          docker build --platform linux/amd64 \
-            --build-arg "JAR_FILE=$jar_rel" \
-            -t "$image" \
-            -f "services/${{ matrix.service }}/Dockerfile" \
-            "services/${{ matrix.service }}"
-          docker push "$image"
-          echo "image=$image" >> "$GITHUB_OUTPUT"
-
-      - name: Update kubeconfig
-        run: aws eks update-kubeconfig --name "$EKS_CLUSTER_NAME" --region "$AWS_REGION"
-
-      - name: Roll out deployment
-        run: |
-          kubectl -n "$NAMESPACE" set image "deployment/${{ matrix.service }}" \
-            "${{ matrix.service }}=${{ steps.image.outputs.image }}"
-          kubectl -n "$NAMESPACE" rollout status "deployment/${{ matrix.service }}" --timeout=300s
+          set -euo pipefail
+          service="${{ matrix.service }}"
+          short="${service%-service}"
+          fn="ensemble-grafana-$short"
+          bucket="ensemble-grafana-lambda-artifacts-$AWS_ACCOUNT_ID"
+          key="$short/$service.jar"
+          aws s3 cp "services/$service/target/$service.jar" "s3://$bucket/$key"
+          aws lambda update-function-code --function-name "$fn" \
+            --s3-bucket "$bucket" --s3-key "$key" >/dev/null
+          aws lambda wait function-updated --function-name "$fn"
+          version="$(aws lambda publish-version --function-name "$fn" \
+            --description "deploy ${HEAD_SHA:0:7}" --query Version --output text)"
+          echo "Published $fn version $version; waiting for SnapStart snapshot…"
+          for _ in $(seq 1 30); do
+            state="$(aws lambda get-function --function-name "$fn" --qualifier "$version" \
+              --query 'Configuration.State' --output text)"
+            [ "$state" = "Active" ] && break
+            sleep 10
+          done
+          aws lambda update-alias --function-name "$fn" --name live --function-version "$version"
+          echo "Moved $fn:live -> version $version"
 
   frontend:
     name: Frontend

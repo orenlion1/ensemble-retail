@@ -1,7 +1,5 @@
 package com.ensemblegrafana.account;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -22,11 +20,15 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 @RequestMapping({ "/accounts", "/api/account/accounts" })
 public class AccountController {
-  private final Map<String, Account> accounts = new ConcurrentHashMap<>();
+  private final AccountRepository repository;
+
+  public AccountController(AccountRepository repository) {
+    this.repository = repository;
+  }
 
   @GetMapping("/{shopperId}")
   public Account get(@PathVariable @Pattern(regexp = "[A-Za-z0-9._-]{3,80}") String shopperId) {
-    return accounts.getOrDefault(shopperId, Account.empty(shopperId));
+    return repository.find(shopperId);
   }
 
   @PutMapping("/{shopperId}")
@@ -34,9 +36,7 @@ public class AccountController {
     if (looksLikeFullCardNumber(account.wallet().label())) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "wallet may only store payment metadata");
     }
-    Account saved = account.withShopperId(shopperId);
-    accounts.put(shopperId, saved);
-    return saved;
+    return repository.save(account.withShopperId(shopperId));
   }
 
   private boolean looksLikeFullCardNumber(String value) {

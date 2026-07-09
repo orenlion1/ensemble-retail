@@ -254,6 +254,41 @@ Key evidence:
 - Repository secrets `AWS_ACCOUNT_ID`, `AWS_DEPLOY_ROLE_ARN`, `EKS_CLUSTER_NAME`, `FRONTEND_BUCKET`, and `CLOUDFRONT_DISTRIBUTION_ID` carry the real resource identifiers so committed files keep placeholder values.
 - `docs/deployment.md` and `README.md`: document the automated path and the retained operator bootstrap path.
 
+## Serverless Cost-Reduction Migration (Option D)
+
+Faced with a ~$335/month AWS run-rate dominated by fixed platform costs (EKS control plane, a
+2-node t3.medium node group, an Aurora PostgreSQL instance, a NAT gateway, an ALB, and two WAF
+web ACLs), the three Spring Boot services were migrated off Kubernetes to a serverless topology
+and the legacy stack was mothballed. The application layer changed very little: the services keep
+their `@RestController`s and Spring Security config and run behind `aws-serverless-java-container`,
+so the migration was mostly a data-access and packaging change.
+
+Representative prompt category:
+
+> Query AWS cost and usage, then migrate the services from EKS to Lambda and mothball the legacy
+> stack to cut the monthly bill.
+
+Key evidence:
+
+- `services/*/src/main/java/.../StreamLambdaHandler.java`: Lambda entry points bridging API Gateway
+  (payload format 1.0) into the existing controllers; Java 21 on arm64 with SnapStart.
+- `services/inventory-service`: `ProductRepository` moved from JDBC/Postgres to a DynamoDB scan;
+  `cart`/`account` moved from in-process maps to durable DynamoDB stores (`CartRepository`,
+  `AccountRepository`), which also makes them correct across concurrent Lambda executions.
+- `infra/terraform/stacks/serverless`: API Gateway HTTP API with stage throttling, three Lambdas
+  with per-function reserved concurrency, least-privilege per-table IAM, a custom domain for
+  `api.ensemble-grafana.com`, and a `$15` AWS Budgets alarm. `ensemble-products` added to
+  `stacks/data`.
+- `scripts/dynamodb/*`: catalog seed loader porting `data.sql` into the `ensemble-products` table.
+- Security posture: the retired WAF per-IP rate limit is replaced by API Gateway throttling;
+  reserved concurrency plus the Budgets alarm bound denial-of-wallet; `/actuator/prometheus` was
+  removed from the public edge; app-layer `X-Api-Key`/JWT auth is unchanged. The CloudFront edge
+  WAF is retained for the storefront.
+- Teardown: EKS cluster + node group, Aurora cluster/instance, NAT gateway + EIP, the k8s-managed
+  ALB, and the regional API WAF were destroyed. DynamoDB tables and the storefront (S3 + CloudFront)
+  were preserved. Monthly run-rate fell from ~$335 to roughly $14.
+- `docs/serverless-migration.md`: the migration and cutover runbook.
+
 ## End-to-End Shape
 
 The project now reads as an end-to-end operational application:
