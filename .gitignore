@@ -26,6 +26,12 @@ frontend/.env.*
 observability/synthetic-monitoring/.env
 observability/synthetic-monitoring/probe-tokens.env
 **/credentials.json
+# Sanitized gcx config template (all-placeholder; never a real config — see CLAUDE.md)
+gcx-config.txt
+
+# Local scratch files
+diff.txt
+*.scratch
 **/*-credentials.json
 *.pem
 *.key
