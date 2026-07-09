@@ -34,54 +34,54 @@ digraph request_flow_diagram {
   browser [label="Browser\nensemble-retail.com", fillcolor="#1e3a8a"];
   dns [label="Route53\nA/AAAA alias", fillcolor="#164e63"];
   wafEdge [label="AWS WAF\nedge rules", fillcolor="#7f1d1d"];
-  cf [label="CloudFront\nHTTPS + static/API routing", fillcolor="#1e3a8a"];
-  apiPath [label="/api/* ?", shape=diamond, fillcolor="#7c2d12"];
+  cf [label="CloudFront\nHTTPS storefront", fillcolor="#1e3a8a"];
   s3 [label="S3 frontend origin\nindex.html, JS, CSS", fillcolor="#713f12"];
   cognito [label="Cognito Hosted UI\nGoogle federation", fillcolor="#4c1d95"];
   google [label="Google IdP", fillcolor="#4c1d95"];
   localState [label="Browser localStorage\nanonymous cart/account", fillcolor="#0f172a"];
-  apiWaf [label="AWS WAF\nregional API rules", fillcolor="#7f1d1d"];
-  ingress [label="EKS API ingress / ALB", fillcolor="#3730a3"];
+  apiGw [label="API Gateway HTTP API\napi.ensemble-retail.com\nstage throttling", fillcolor="#3730a3"];
   k6 [label="Grafana Cloud k6\nregional, spike,\n5 rps baseline,\nbrowser checks", fillcolor="#6b21a8"];
   grafana [label="Grafana Cloud\nresults and telemetry", fillcolor="#6b21a8"];
 
-  inventory [label="inventory-service\n/api/inventory/*", fillcolor="#14532d"];
-  cart [label="cart-service\n/api/cart/*", fillcolor="#14532d"];
-  account [label="account-service\n/api/account/*", fillcolor="#14532d"];
-  postgres [label="Postgres\ninventory catalog", shape=cylinder, fillcolor="#166534"];
+  inventory [label="inventory-service Lambda\n/api/inventory/*", fillcolor="#14532d"];
+  cart [label="cart-service Lambda\n/api/cart/*", fillcolor="#14532d"];
+  account [label="account-service Lambda\n/api/account/*", fillcolor="#14532d"];
+  dynamoProducts [label="DynamoDB\nproduct catalog", shape=cylinder, fillcolor="#166534"];
   dynamoCart [label="DynamoDB\ncart state", shape=cylinder, fillcolor="#166534"];
   dynamoAccount [label="DynamoDB\naccount, address, wallet metadata", shape=cylinder, fillcolor="#166534"];
 
   browser -> dns [label="DNS lookup"];
-  dns -> browser [label="CloudFront target"];
-  browser -> wafEdge [label="HTTPS request"];
+  dns -> browser [label="CloudFront / API GW target"];
+  browser -> wafEdge [label="HTTPS storefront"];
   browser -> cognito [label="OAuth code + PKCE"];
   cognito -> google [label="Google authentication"];
   google -> cognito [label="identity claims"];
   cognito -> browser [label="Cognito JWTs"];
   browser -> localState [label="anonymous writes"];
   localState -> browser [label="restore local state"];
-  k6 -> wafEdge [label="Synthetic load\n5 rps baseline\nHTTPS + /api/*\nwith traceparent"];
+
+  // Storefront path (CloudFront + S3)
   wafEdge -> cf;
-  cf -> apiPath;
-  apiPath -> s3 [label="No: static route"];
+  cf -> s3 [label="static route"];
   s3 -> cf [label="HTML/assets"];
   cf -> browser [label="Storefront response"];
+  k6 -> wafEdge [label="storefront + browser checks"];
 
-  apiPath -> apiWaf [label="Yes: /api/*\nBearer JWT or API key"];
-  apiWaf -> ingress;
-  ingress -> inventory [label="/api/inventory/*"];
-  ingress -> cart [label="/api/cart/*"];
-  ingress -> account [label="/api/account/*"];
-  inventory -> postgres [label="Read products, categories, stock, pricing"];
-  postgres -> inventory;
+  // API path (API Gateway + Lambda + DynamoDB), a separate api.* host
+  browser -> apiGw [label="/api/*\nBearer JWT or X-Api-Key"];
+  k6 -> apiGw [label="Synthetic load\n5 rps baseline\nwith traceparent"];
+  apiGw -> inventory [label="/api/inventory/*"];
+  apiGw -> cart [label="/api/cart/*"];
+  apiGw -> account [label="/api/account/*"];
+  inventory -> dynamoProducts [label="Scan products, categories, stock, pricing"];
+  dynamoProducts -> inventory;
   cart -> dynamoCart [label="Read/write cart items"];
   dynamoCart -> cart;
   account -> dynamoAccount [label="Read/write profile, shipping, wallet"];
   dynamoAccount -> account;
-  inventory -> ingress [label="JSON response"];
-  cart -> ingress [label="JSON response"];
-  account -> ingress [label="JSON response"];
-  ingress -> apiWaf -> cf -> browser;
+  inventory -> apiGw [label="JSON response"];
+  cart -> apiGw [label="JSON response"];
+  account -> apiGw [label="JSON response"];
+  apiGw -> browser [label="JSON response"];
   k6 -> grafana [label="k6 result metrics\nand trace correlation"];
 }
