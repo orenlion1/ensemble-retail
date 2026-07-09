@@ -55,68 +55,58 @@ digraph network_diagram {
 
   shopper [label="Shopper browser", fillcolor="#1e3a8a"];
   registrar [label="Domain registrar"];
-  route53 [label="Route53 public DNS\nensemble-retail.com", fillcolor="#164e63"];
-  acm [label="ACM certificate\nus-east-1 / ISSUED", fillcolor="#155e75"];
+  route53 [label="Route53 public DNS\nensemble-retail.com\napi.ensemble-retail.com", fillcolor="#164e63"];
+  acm [label="ACM certificate\nus-east-1 / ISSUED\ncovers both domains", fillcolor="#155e75"];
   edgeWaf [label="AWS WAF\nCloudFront scope", fillcolor="#7f1d1d"];
   cloudfront [label="CloudFront distribution\nensemble-retail.com", fillcolor="#1e3a8a"];
   staticS3 [label="S3 frontend bucket\nprivate origin", fillcolor="#713f12"];
   imageS3 [label="S3 inventory images bucket", fillcolor="#713f12"];
-  logsS3 [label="S3 edge/API logs bucket\nCloudFront + ALB logs", fillcolor="#713f12"];
-  regionalWaf [label="AWS WAF\nregional API scope", fillcolor="#7f1d1d"];
-  apiAlb [label="API ingress / ALB\napi.ensemble-retail.com", fillcolor="#3730a3"];
+  logsS3 [label="S3 edge logs bucket\nCloudFront access logs", fillcolor="#713f12"];
+  apiGateway [label="API Gateway HTTP API\napi.ensemble-retail.com\nstage throttling", fillcolor="#3730a3"];
   cognito [label="AWS Cognito\nGoogle federation", fillcolor="#4c1d95"];
   google [label="Google Identity Provider", fillcolor="#4c1d95"];
-  postgres [label="Postgres inventory DB", shape=cylinder, fillcolor="#14532d"];
-  dynamodb [label="DynamoDB\ncart/account state", shape=cylinder, fillcolor="#14532d"];
-  cloudwatch [label="AWS CloudWatch\nRDS metrics", fillcolor="#334155"];
-  cloudwatchScrape [label="Grafana Cloud Provider\nAWS/RDS scrape job", fillcolor="#581c87"];
+  dynamodb [label="DynamoDB\nproducts / carts / accounts\non-demand, PITR", shape=cylinder, fillcolor="#14532d"];
+  cwLogs [label="AWS CloudWatch Logs\nAPI Gateway + Lambda", fillcolor="#334155"];
   grafana [label="Grafana Cloud\nFaro, metrics, logs, traces, profiles", fillcolor="#6b21a8"];
   k6 [label="Grafana Cloud k6\nload tests\n5 rps baseline + browser checks", fillcolor="#6b21a8"];
-  accountBaseline [label="Terraform account-baseline stack\nSSM host-management setting", fillcolor="#334155"];
 
-  subgraph cluster_eks {
-    label="EKS cluster";
+  subgraph cluster_lambda {
+    label="AWS Lambda (Java 21, arm64, SnapStart)";
     color="#64748b";
     fontcolor="#f8fafc";
     style="rounded,dashed";
-    beyla [label="Grafana Beyla", fillcolor="#581c87"];
-    alloy [label="Grafana Alloy\nOTel collector", fillcolor="#581c87"];
-    inventory [label="inventory-service\nSpring Boot pods", fillcolor="#14532d"];
-    cart [label="cart-service\nSpring Boot pods", fillcolor="#14532d"];
-    account [label="account-service\nSpring Boot pods", fillcolor="#14532d"];
+    inventory [label="inventory-service\nLambda + live alias", fillcolor="#14532d"];
+    cart [label="cart-service\nLambda + live alias", fillcolor="#14532d"];
+    account [label="account-service\nLambda + live alias", fillcolor="#14532d"];
   }
 
   registrar -> route53 [label="NS delegation"];
-  route53 -> cloudfront [label="A / AAAA alias"];
+  route53 -> cloudfront [label="storefront\nA / AAAA alias"];
+  route53 -> apiGateway [label="api.* A / AAAA alias"];
   acm -> cloudfront [label="TLS certificate"];
+  acm -> apiGateway [label="TLS certificate"];
   shopper -> edgeWaf [label="HTTPS storefront"];
   edgeWaf -> cloudfront;
+  shopper -> apiGateway [label="HTTPS /api/*\nX-Api-Key or Bearer JWT"];
   shopper -> cognito [label="Google sign-in"];
   cognito -> google;
   cloudfront -> staticS3 [label="static assets"];
   cloudfront -> imageS3 [label="inventory images"];
   cloudfront -> logsS3 [label="standard access logs"];
-  cloudfront -> regionalWaf [label="/api/*"];
-  regionalWaf -> apiAlb;
-  apiAlb -> logsS3 [label="ALB access logs"];
-  apiAlb -> inventory;
-  apiAlb -> cart;
-  apiAlb -> account;
-  inventory -> postgres;
-  cart -> dynamodb;
-  account -> dynamodb;
-  postgres -> cloudwatch [label="RDS metrics"];
-  cloudwatchScrape -> cloudwatch [label="assume AWS role\nand scrape metrics"];
-  cloudwatchScrape -> grafana [label="CloudWatch metrics"];
+  apiGateway -> inventory [label="/api/inventory/*"];
+  apiGateway -> cart [label="/api/cart/*"];
+  apiGateway -> account [label="/api/account/*"];
+  apiGateway -> cwLogs [label="access logs"];
+  inventory -> dynamodb [label="scan products"];
+  cart -> dynamodb [label="get/put cart"];
+  account -> dynamodb [label="get/put account"];
+  inventory -> cwLogs [label="function logs"];
+  cart -> cwLogs [label="function logs"];
+  account -> cwLogs [label="function logs"];
   shopper -> grafana [label="Faro web telemetry"];
-  accountBaseline -> beyla [label="SSM default role setting"];
-  k6 -> cloudfront [label="regional, spike,\n5 rps baseline,\nbrowser checks\nwith traceparent"];
+  k6 -> cloudfront [label="storefront + browser checks\nwith traceparent"];
+  k6 -> apiGateway [label="regional, spike,\n5 rps baseline API load"];
   k6 -> grafana [label="test results + trace correlation"];
-  beyla -> alloy [label="zero-code HTTP telemetry"];
-  inventory -> alloy [label="OTel + Prometheus"];
-  cart -> alloy [label="OTel + Prometheus"];
-  account -> alloy [label="OTel + Prometheus"];
-  alloy -> grafana;
 }
 ```
 
@@ -171,8 +161,8 @@ digraph sequence_dependency_diagram {
       <TD BGCOLOR="#164e63"><FONT COLOR="#f8fafc"><B>DNS / Edge</B></FONT></TD>
       <TD BGCOLOR="#713f12"><FONT COLOR="#f8fafc"><B>Static Origin</B></FONT></TD>
       <TD BGCOLOR="#4c1d95"><FONT COLOR="#f8fafc"><B>Identity</B></FONT></TD>
-      <TD BGCOLOR="#14532d"><FONT COLOR="#f8fafc"><B>API / Services</B></FONT></TD>
-      <TD BGCOLOR="#166534"><FONT COLOR="#f8fafc"><B>Data Stores</B></FONT></TD>
+      <TD BGCOLOR="#14532d"><FONT COLOR="#f8fafc"><B>API Gateway / Lambda</B></FONT></TD>
+      <TD BGCOLOR="#166534"><FONT COLOR="#f8fafc"><B>DynamoDB</B></FONT></TD>
       <TD BGCOLOR="#6b21a8"><FONT COLOR="#f8fafc"><B>Telemetry</B></FONT></TD>
       <TD BGCOLOR="#713f12"><FONT COLOR="#f8fafc"><B>k6</B></FONT></TD></TR>
     </TABLE>
@@ -225,16 +215,14 @@ digraph sequence_dependency_diagram {
     fontcolor="#bbf7d0";
     style="rounded,setlinewidth(2)";
     inv_browser [label="GET\n/api/inventory/products", fillcolor="#1e3a8a", color="#1e3a8a", group=c1];
-    inv_cf [label="CloudFront\n/api/* route", fillcolor="#164e63", color="#38bdf8", group=c2];
-    inv_api [label="ALB /\nAPI ingress", fillcolor="#14532d", color="#22c55e", group=c3];
-    inv_service [label="inventory-service\ntrace context", fillcolor="#14532d", color="#22c55e", group=c4];
-    inv_db [label="Postgres\ncatalog rows", shape=cylinder, fillcolor="#166534", color="#16a34a", group=c5];
-    inv_response [label="JSON product data\nback to browser", fillcolor="#1e3a8a", color="#1e3a8a", group=c6];
-    inv_browser -> inv_cf;
-    inv_cf -> inv_api;
+    inv_api [label="API Gateway\napi.* /api/inventory/*", fillcolor="#3730a3", color="#818cf8", group=c2];
+    inv_service [label="inventory-service\nLambda + trace context", fillcolor="#14532d", color="#22c55e", group=c3];
+    inv_db [label="DynamoDB\nproduct catalog scan", shape=cylinder, fillcolor="#166534", color="#16a34a", group=c4];
+    inv_response [label="JSON product data\nback to browser", fillcolor="#1e3a8a", color="#1e3a8a", group=c5];
+    inv_browser -> inv_api;
     inv_api -> inv_service;
-    inv_service -> inv_db [label="query"];
-    inv_db -> inv_response [label="rows -> JSON"];
+    inv_service -> inv_db [label="scan"];
+    inv_db -> inv_response [label="items -> JSON"];
   }
 
   subgraph cluster_cart {
@@ -244,15 +232,13 @@ digraph sequence_dependency_diagram {
     fontcolor="#bbf7d0";
     style="rounded,setlinewidth(2)";
     cart_browser [label="Cart change\nbrowser", fillcolor="#1e3a8a", color="#1e3a8a", group=c1];
-    cart_cf [label="CloudFront\n/api/* route", fillcolor="#164e63", color="#38bdf8", group=c2];
-    cart_api [label="ALB /\nJWT + trace", fillcolor="#14532d", color="#22c55e", group=c3];
-    cart_service [label="cart-service\nupdate cart", fillcolor="#14532d", color="#22c55e", group=c4];
-    cart_db [label="DynamoDB\ncart state", shape=cylinder, fillcolor="#166534", color="#16a34a", group=c5];
-    cart_response [label="Updated cart\nback to browser", fillcolor="#1e3a8a", color="#1e3a8a", group=c6];
+    cart_api [label="API Gateway\nJWT / X-Api-Key + throttle", fillcolor="#3730a3", color="#818cf8", group=c2];
+    cart_service [label="cart-service\nLambda update cart", fillcolor="#14532d", color="#22c55e", group=c3];
+    cart_db [label="DynamoDB\ncart state", shape=cylinder, fillcolor="#166534", color="#16a34a", group=c4];
+    cart_response [label="Updated cart\nback to browser", fillcolor="#1e3a8a", color="#1e3a8a", group=c5];
     cart_local [label="localStorage\nanonymous cart", fillcolor="#0f172a", color="#64748b", group=c2];
     cart_browser -> cart_local [label="no token"];
-    cart_browser -> cart_cf [label="signed-in PUT\nBearer JWT"];
-    cart_cf -> cart_api;
+    cart_browser -> cart_api [label="signed-in PUT\nBearer JWT"];
     cart_api -> cart_service;
     cart_service -> cart_db [label="persist"];
     cart_db -> cart_response [label="ack"];
@@ -265,13 +251,11 @@ digraph sequence_dependency_diagram {
     fontcolor="#bbf7d0";
     style="rounded,setlinewidth(2)";
     acct_browser [label="PUT\n/api/account/accounts/{shopperId}", fillcolor="#1e3a8a", color="#1e3a8a", group=c1];
-    acct_cf [label="CloudFront\n/api/* route", fillcolor="#164e63", color="#38bdf8", group=c2];
-    acct_api [label="ALB /\nJWT + trace", fillcolor="#14532d", color="#22c55e", group=c3];
-    acct_service [label="account-service\nprofile + wallet", fillcolor="#14532d", color="#22c55e", group=c4];
-    acct_db [label="DynamoDB\naccount state", shape=cylinder, fillcolor="#166534", color="#16a34a", group=c5];
-    acct_response [label="Saved account\nback to browser", fillcolor="#1e3a8a", color="#1e3a8a", group=c6];
-    acct_browser -> acct_cf [label="Bearer JWT"];
-    acct_cf -> acct_api;
+    acct_api [label="API Gateway\nJWT + throttle", fillcolor="#3730a3", color="#818cf8", group=c2];
+    acct_service [label="account-service\nLambda profile + wallet", fillcolor="#14532d", color="#22c55e", group=c3];
+    acct_db [label="DynamoDB\naccount state", shape=cylinder, fillcolor="#166534", color="#16a34a", group=c4];
+    acct_response [label="Saved account\nback to browser", fillcolor="#1e3a8a", color="#1e3a8a", group=c5];
+    acct_browser -> acct_api [label="Bearer JWT"];
     acct_api -> acct_service;
     acct_service -> acct_db [label="persist"];
     acct_db -> acct_response [label="ack"];
@@ -283,11 +267,11 @@ digraph sequence_dependency_diagram {
     color="#c084fc";
     fontcolor="#f3e8ff";
     style="rounded,setlinewidth(2)";
-    telemetry_services [label="inventory / cart /\naccount services", fillcolor="#14532d", color="#22c55e", group=c1];
-    telemetry_alloy [label="Grafana Alloy\nmetrics, logs, traces", fillcolor="#6b21a8", color="#c084fc", group=c2];
-    telemetry_grafana [label="Grafana Cloud\nMimir, Loki, Tempo,\nPyroscope", fillcolor="#6b21a8", color="#c084fc", group=c3];
-    telemetry_services -> telemetry_alloy [label="OTel + Prometheus"];
-    telemetry_alloy -> telemetry_grafana [label="export"];
+    telemetry_services [label="inventory / cart /\naccount Lambdas", fillcolor="#14532d", color="#22c55e", group=c1];
+    telemetry_cw [label="AWS CloudWatch\nfunction logs + metrics", fillcolor="#334155", color="#94a3b8", group=c2];
+    telemetry_grafana [label="Grafana Cloud\nCloudWatch integration,\nMimir, Loki", fillcolor="#6b21a8", color="#c084fc", group=c3];
+    telemetry_services -> telemetry_cw [label="logs + metrics"];
+    telemetry_cw -> telemetry_grafana [label="scrape / integration"];
   }
 
   subgraph cluster_k6 {
@@ -297,13 +281,11 @@ digraph sequence_dependency_diagram {
     fontcolor="#fde68a";
     style="rounded,setlinewidth(2)";
     k6_runner [label="Grafana Cloud k6\nregional + spike\n5 rps API + browser", fillcolor="#713f12", color="#f59e0b", group=c1];
-    k6_cf [label="CloudFront\n/api/* + storefront", fillcolor="#164e63", color="#38bdf8", group=c2];
-    k6_api [label="ALB / API\ntraceparent", fillcolor="#14532d", color="#22c55e", group=c3];
-    k6_services [label="inventory / cart /\naccount services", fillcolor="#14532d", color="#22c55e", group=c4];
-    k6_grafana [label="Grafana Cloud\nrun metrics + checks", fillcolor="#6b21a8", color="#c084fc", group=c5];
-    k6_runner -> k6_cf [label="regional, spike,\nbrowser actions"];
-    k6_cf -> k6_api;
-    k6_api -> k6_services;
+    k6_edge [label="CloudFront storefront +\nAPI Gateway /api/*", fillcolor="#164e63", color="#38bdf8", group=c2];
+    k6_services [label="inventory / cart /\naccount Lambdas", fillcolor="#14532d", color="#22c55e", group=c3];
+    k6_grafana [label="Grafana Cloud\nrun metrics + checks", fillcolor="#6b21a8", color="#c084fc", group=c4];
+    k6_runner -> k6_edge [label="regional, spike,\nbrowser actions"];
+    k6_edge -> k6_services;
     k6_runner -> k6_grafana [label="results"];
   }
 
@@ -361,55 +343,55 @@ digraph request_flow_diagram {
   browser [label="Browser\nensemble-retail.com", fillcolor="#1e3a8a"];
   dns [label="Route53\nA/AAAA alias", fillcolor="#164e63"];
   wafEdge [label="AWS WAF\nedge rules", fillcolor="#7f1d1d"];
-  cf [label="CloudFront\nHTTPS + static/API routing", fillcolor="#1e3a8a"];
-  apiPath [label="/api/* ?", shape=diamond, fillcolor="#7c2d12"];
+  cf [label="CloudFront\nHTTPS storefront", fillcolor="#1e3a8a"];
   s3 [label="S3 frontend origin\nindex.html, JS, CSS", fillcolor="#713f12"];
   cognito [label="Cognito Hosted UI\nGoogle federation", fillcolor="#4c1d95"];
   google [label="Google IdP", fillcolor="#4c1d95"];
   localState [label="Browser localStorage\nanonymous cart/account", fillcolor="#0f172a"];
-  apiWaf [label="AWS WAF\nregional API rules", fillcolor="#7f1d1d"];
-  ingress [label="EKS API ingress / ALB", fillcolor="#3730a3"];
+  apiGw [label="API Gateway HTTP API\napi.ensemble-retail.com\nstage throttling", fillcolor="#3730a3"];
   k6 [label="Grafana Cloud k6\nregional, spike,\n5 rps baseline,\nbrowser checks", fillcolor="#6b21a8"];
   grafana [label="Grafana Cloud\nresults and telemetry", fillcolor="#6b21a8"];
 
-  inventory [label="inventory-service\n/api/inventory/*", fillcolor="#14532d"];
-  cart [label="cart-service\n/api/cart/*", fillcolor="#14532d"];
-  account [label="account-service\n/api/account/*", fillcolor="#14532d"];
-  postgres [label="Postgres\ninventory catalog", shape=cylinder, fillcolor="#166534"];
+  inventory [label="inventory-service Lambda\n/api/inventory/*", fillcolor="#14532d"];
+  cart [label="cart-service Lambda\n/api/cart/*", fillcolor="#14532d"];
+  account [label="account-service Lambda\n/api/account/*", fillcolor="#14532d"];
+  dynamoProducts [label="DynamoDB\nproduct catalog", shape=cylinder, fillcolor="#166534"];
   dynamoCart [label="DynamoDB\ncart state", shape=cylinder, fillcolor="#166534"];
   dynamoAccount [label="DynamoDB\naccount, address, wallet metadata", shape=cylinder, fillcolor="#166534"];
 
   browser -> dns [label="DNS lookup"];
-  dns -> browser [label="CloudFront target"];
-  browser -> wafEdge [label="HTTPS request"];
+  dns -> browser [label="CloudFront / API GW target"];
+  browser -> wafEdge [label="HTTPS storefront"];
   browser -> cognito [label="OAuth code + PKCE"];
   cognito -> google [label="Google authentication"];
   google -> cognito [label="identity claims"];
   cognito -> browser [label="Cognito JWTs"];
   browser -> localState [label="anonymous writes"];
   localState -> browser [label="restore local state"];
-  k6 -> wafEdge [label="Synthetic load\n5 rps baseline\nHTTPS + /api/*\nwith traceparent"];
+
+  // Storefront path (CloudFront + S3)
   wafEdge -> cf;
-  cf -> apiPath;
-  apiPath -> s3 [label="No: static route"];
+  cf -> s3 [label="static route"];
   s3 -> cf [label="HTML/assets"];
   cf -> browser [label="Storefront response"];
+  k6 -> wafEdge [label="storefront + browser checks"];
 
-  apiPath -> apiWaf [label="Yes: /api/*\nBearer JWT or API key"];
-  apiWaf -> ingress;
-  ingress -> inventory [label="/api/inventory/*"];
-  ingress -> cart [label="/api/cart/*"];
-  ingress -> account [label="/api/account/*"];
-  inventory -> postgres [label="Read products, categories, stock, pricing"];
-  postgres -> inventory;
+  // API path (API Gateway + Lambda + DynamoDB), a separate api.* host
+  browser -> apiGw [label="/api/*\nBearer JWT or X-Api-Key"];
+  k6 -> apiGw [label="Synthetic load\n5 rps baseline\nwith traceparent"];
+  apiGw -> inventory [label="/api/inventory/*"];
+  apiGw -> cart [label="/api/cart/*"];
+  apiGw -> account [label="/api/account/*"];
+  inventory -> dynamoProducts [label="Scan products, categories, stock, pricing"];
+  dynamoProducts -> inventory;
   cart -> dynamoCart [label="Read/write cart items"];
   dynamoCart -> cart;
   account -> dynamoAccount [label="Read/write profile, shipping, wallet"];
   dynamoAccount -> account;
-  inventory -> ingress [label="JSON response"];
-  cart -> ingress [label="JSON response"];
-  account -> ingress [label="JSON response"];
-  ingress -> apiWaf -> cf -> browser;
+  inventory -> apiGw [label="JSON response"];
+  cart -> apiGw [label="JSON response"];
+  account -> apiGw [label="JSON response"];
+  apiGw -> browser [label="JSON response"];
   k6 -> grafana [label="k6 result metrics\nand trace correlation"];
 }
 ```
@@ -457,12 +439,12 @@ digraph observability_capabilities_flow {
   browser [label="Shopper browser\nReact storefront", fillcolor="#1e3a8a"];
   faro [label="Grafana Faro SDK\nweb vitals, errors, logs, sessions, user actions", fillcolor="#6b21a8"];
   tracing [label="Faro web tracing\ntrace context on fetch/XHR", fillcolor="#6b21a8"];
-  cloudfront [label="CloudFront\nstatic + /api/* routing", fillcolor="#1e3a8a"];
-  ingress [label="EKS API ingress / ALB", fillcolor="#3730a3"];
-  edgeLogs [label="S3 access logs\nCloudFront + ALB", fillcolor="#713f12"];
+  cloudfront [label="CloudFront\nstorefront routing", fillcolor="#1e3a8a"];
+  apiGw [label="API Gateway HTTP API\napi.* /api/* routing", fillcolor="#3730a3"];
+  edgeLogs [label="S3 access logs\nCloudFront", fillcolor="#713f12"];
 
   subgraph cluster_services {
-    label="Spring Boot services";
+    label="Lambda services (Java 21, arm64, SnapStart)";
     color="#64748b";
     fontcolor="#f8fafc";
     style="rounded,dashed";
@@ -471,14 +453,10 @@ digraph observability_capabilities_flow {
     account [label="account-service", fillcolor="#14532d"];
   }
 
-  actuator [label="Spring Actuator\n/actuator/prometheus", fillcolor="#164e63"];
-  otel [label="Spring OpenTelemetry\ntraces + resource attrs", fillcolor="#164e63"];
-  logs [label="Kubernetes pod logs\nservice labels", fillcolor="#164e63"];
-  beyla [label="Grafana Beyla\nzero-code HTTP telemetry", fillcolor="#6b21a8"];
-  pyroscope [label="Pyroscope Alloy DaemonSet\nJVM profiles", fillcolor="#6b21a8"];
-  alloy [label="Grafana Alloy\nOTel collector", fillcolor="#6b21a8"];
-  cloudwatch [label="AWS CloudWatch\nRDS metrics", fillcolor="#334155"];
-  cloudwatchScrape [label="Grafana Cloud Provider\nAWS/RDS scrape job", fillcolor="#6b21a8"];
+  otel [label="Lambda OTLP traces\n(pending Grafana Cloud\nOTLP re-wiring)", fillcolor="#334155"];
+  cwLogs [label="CloudWatch Logs\nAPI Gateway + Lambda", fillcolor="#164e63"];
+  cwMetrics [label="CloudWatch Metrics\nLambda + API Gateway", fillcolor="#164e63"];
+  cwIntegration [label="Grafana Cloud\nCloudWatch integration", fillcolor="#6b21a8"];
   synth [label="Grafana Synthetic Monitoring\nHTTP, DNS, Ping, TCP,\nscripted k6, k6 browser", fillcolor="#6b21a8"];
   k6 [label="Grafana Cloud k6\nregional load, spike benchmark,\n5 rps API baseline,\nbrowser actions", fillcolor="#6b21a8"];
   k6Tracing [label="k6 Tempo instrumentation\nW3C trace context", fillcolor="#6b21a8"];
@@ -486,59 +464,51 @@ digraph observability_capabilities_flow {
 
   grafana [label="Grafana Cloud stack\norenlion.grafana.net", fillcolor="#4c1d95"];
   frontendObs [label="Frontend Observability\nFaro events and exceptions", fillcolor="#581c87"];
-  tempo [label="Traces\nfrontend-to-backend waterfalls", fillcolor="#581c87"];
+  tempo [label="Traces\nfrontend spans + waterfalls", fillcolor="#581c87"];
   prometheus [label="Metrics\nRED + infrastructure signals", fillcolor="#581c87"];
-  loki [label="Logs\nnamespace + service labels", fillcolor="#581c87"];
-  profiles [label="Profiles\nJava CPU profiles", fillcolor="#581c87"];
+  loki [label="Logs\nfunction + service labels", fillcolor="#581c87"];
   smResults [label="Synthetic results\nuptime, TLS, DNS,\nlatency, browser actions", fillcolor="#581c87"];
   k6Results [label="k6 results\nVUs, checks, thresholds", fillcolor="#581c87"];
   incidents [label="IRM workflows\nseverity, ownership, response", fillcolor="#581c87"];
 
   browser -> faro [label="page views, errors, user actions"];
   browser -> tracing [label="HTTP requests with traceparent"];
-  tracing -> cloudfront -> ingress;
+  tracing -> cloudfront [label="storefront"];
+  tracing -> apiGw [label="/api/* with traceparent"];
   cloudfront -> edgeLogs [label="standard access logs"];
-  ingress -> edgeLogs [label="ALB access logs"];
-  ingress -> inventory;
-  ingress -> cart;
-  ingress -> account;
+  apiGw -> inventory;
+  apiGw -> cart;
+  apiGw -> account;
   faro -> grafana [label="collector endpoint"];
   tracing -> grafana [label="frontend spans"];
-  inventory -> actuator;
-  cart -> actuator;
-  account -> actuator;
   inventory -> otel;
   cart -> otel;
   account -> otel;
-  inventory -> logs;
-  cart -> logs;
-  account -> logs;
-  inventory -> beyla [label="HTTP telemetry"];
-  cart -> beyla [label="HTTP telemetry"];
-  account -> beyla [label="HTTP telemetry"];
-  inventory -> pyroscope [label="JVM attach"];
-  cart -> pyroscope [label="JVM attach"];
-  account -> pyroscope [label="JVM attach"];
-  actuator -> alloy [label="Prometheus scrape"];
-  otel -> alloy [label="OTLP traces"];
-  logs -> alloy [label="pod log collection"];
-  edgeLogs -> grafana [label="RCA source for edge/API status codes"];
-  beyla -> alloy [label="metrics + traces"];
-  pyroscope -> grafana [label="profiles write"];
-  alloy -> grafana [label="OTLP export"];
-  cloudwatchScrape -> cloudwatch [label="assume AWS role and scrape AWS/RDS metrics"];
-  cloudwatch -> grafana [label="RDS CloudWatch samples"];
-  synth -> cloudfront [label="checks production URL and API health"];
+  inventory -> cwLogs;
+  cart -> cwLogs;
+  account -> cwLogs;
+  inventory -> cwMetrics;
+  cart -> cwMetrics;
+  account -> cwMetrics;
+  apiGw -> cwLogs [label="access logs"];
+  apiGw -> cwMetrics [label="request metrics"];
+  cwLogs -> cwIntegration [label="log ingestion"];
+  cwMetrics -> cwIntegration [label="metric scrape"];
+  otel -> grafana [label="OTLP export (when enabled)", style=dashed];
+  edgeLogs -> grafana [label="RCA source for edge status codes"];
+  cwIntegration -> grafana [label="metrics + logs into Grafana"];
+  synth -> cloudfront [label="checks storefront health"];
+  synth -> apiGw [label="checks API health"];
   synth -> grafana [label="check samples"];
   k6 -> k6Tracing;
-  k6Tracing -> cloudfront [label="load checks with traceparent\n5 rps API baseline"];
+  k6Tracing -> apiGw [label="load checks with traceparent\n5 rps API baseline"];
+  k6Tracing -> cloudfront [label="browser + storefront checks"];
   k6 -> grafana [label="test metrics + trace correlation"];
   irm -> grafana [label="incident and schedule state"];
   grafana -> frontendObs;
   grafana -> tempo;
   grafana -> prometheus;
   grafana -> loki;
-  grafana -> profiles;
   grafana -> smResults;
   grafana -> k6Results;
   grafana -> incidents;

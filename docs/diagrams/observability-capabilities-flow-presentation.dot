@@ -42,9 +42,9 @@ digraph observability_capabilities_flow_presentation {
     style="rounded,dashed";
 
     browser [label="Shopper browser\nReact storefront", fillcolor="#1e3a8a"];
-    edgePath [label="CloudFront + ALB\nstatic and /api routing", fillcolor="#1e3a8a"];
-    services [label="Spring Boot services\ninventory, cart, account", fillcolor="#14532d"];
-    aws [label="AWS platform\nEKS, RDS, logs", fillcolor="#334155"];
+    edgePath [label="CloudFront + API Gateway\nstorefront and /api routing", fillcolor="#1e3a8a"];
+    services [label="Lambda services\ninventory, cart, account", fillcolor="#14532d"];
+    aws [label="AWS platform\nLambda, DynamoDB, CloudWatch", fillcolor="#334155"];
     operators [label="Operators and tests\nk6, Synthetic, IRM", fillcolor="#6b21a8"];
   }
 
@@ -57,7 +57,7 @@ digraph observability_capabilities_flow_presentation {
 
     frontendSignals [label="Frontend signals\nFaro events, exceptions,\nweb vitals, user actions", fillcolor="#6b21a8"];
     traceSignals [label="Distributed traces\ntraceparent from browser\nto backend services", fillcolor="#164e63"];
-    serviceSignals [label="Service health\nRED metrics, pod logs,\nBeyla HTTP telemetry", fillcolor="#164e63"];
+    serviceSignals [label="Service health\nRED metrics + Lambda logs\nvia CloudWatch", fillcolor="#164e63"];
     profileSignals [label="Runtime profiles\nJava CPU profiles\nfrom Pyroscope", fillcolor="#6b21a8"];
     externalSignals [label="External signals\nCloudWatch, k6,\nSynthetic, IRM state", fillcolor="#6b21a8"];
   }
@@ -70,7 +70,7 @@ digraph observability_capabilities_flow_presentation {
     style="rounded,dashed";
 
     faroCollector [label="Faro collector\nfrontend events and spans", fillcolor="#581c87"];
-    alloy [label="Grafana Alloy\nmetrics, logs, traces", fillcolor="#581c87"];
+    alloy [label="Grafana Cloud\nCloudWatch integration\nmetrics + logs", fillcolor="#581c87"];
     pyroscope [label="Pyroscope endpoint\nprofile ingestion", fillcolor="#581c87"];
     cloudIntegrations [label="Grafana Cloud integrations\nCloudWatch scrape,\nk6 and Synthetic samples", fillcolor="#581c87"];
   }

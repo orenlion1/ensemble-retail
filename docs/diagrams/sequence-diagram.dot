@@ -42,8 +42,8 @@ digraph sequence_dependency_diagram {
       <TD BGCOLOR="#164e63"><FONT COLOR="#f8fafc"><B>DNS / Edge</B></FONT></TD>
       <TD BGCOLOR="#713f12"><FONT COLOR="#f8fafc"><B>Static Origin</B></FONT></TD>
       <TD BGCOLOR="#4c1d95"><FONT COLOR="#f8fafc"><B>Identity</B></FONT></TD>
-      <TD BGCOLOR="#14532d"><FONT COLOR="#f8fafc"><B>API / Services</B></FONT></TD>
-      <TD BGCOLOR="#166534"><FONT COLOR="#f8fafc"><B>Data Stores</B></FONT></TD>
+      <TD BGCOLOR="#14532d"><FONT COLOR="#f8fafc"><B>API Gateway / Lambda</B></FONT></TD>
+      <TD BGCOLOR="#166534"><FONT COLOR="#f8fafc"><B>DynamoDB</B></FONT></TD>
       <TD BGCOLOR="#6b21a8"><FONT COLOR="#f8fafc"><B>Telemetry</B></FONT></TD>
       <TD BGCOLOR="#713f12"><FONT COLOR="#f8fafc"><B>k6</B></FONT></TD></TR>
     </TABLE>
@@ -96,16 +96,14 @@ digraph sequence_dependency_diagram {
     fontcolor="#bbf7d0";
     style="rounded,setlinewidth(2)";
     inv_browser [label="GET\n/api/inventory/products", fillcolor="#1e3a8a", color="#1e3a8a", group=c1];
-    inv_cf [label="CloudFront\n/api/* route", fillcolor="#164e63", color="#38bdf8", group=c2];
-    inv_api [label="ALB /\nAPI ingress", fillcolor="#14532d", color="#22c55e", group=c3];
-    inv_service [label="inventory-service\ntrace context", fillcolor="#14532d", color="#22c55e", group=c4];
-    inv_db [label="Postgres\ncatalog rows", shape=cylinder, fillcolor="#166534", color="#16a34a", group=c5];
-    inv_response [label="JSON product data\nback to browser", fillcolor="#1e3a8a", color="#1e3a8a", group=c6];
-    inv_browser -> inv_cf;
-    inv_cf -> inv_api;
+    inv_api [label="API Gateway\napi.* /api/inventory/*", fillcolor="#3730a3", color="#818cf8", group=c2];
+    inv_service [label="inventory-service\nLambda + trace context", fillcolor="#14532d", color="#22c55e", group=c3];
+    inv_db [label="DynamoDB\nproduct catalog scan", shape=cylinder, fillcolor="#166534", color="#16a34a", group=c4];
+    inv_response [label="JSON product data\nback to browser", fillcolor="#1e3a8a", color="#1e3a8a", group=c5];
+    inv_browser -> inv_api;
     inv_api -> inv_service;
-    inv_service -> inv_db [label="query"];
-    inv_db -> inv_response [label="rows -> JSON"];
+    inv_service -> inv_db [label="scan"];
+    inv_db -> inv_response [label="items -> JSON"];
   }
 
   subgraph cluster_cart {
@@ -115,15 +113,13 @@ digraph sequence_dependency_diagram {
     fontcolor="#bbf7d0";
     style="rounded,setlinewidth(2)";
     cart_browser [label="Cart change\nbrowser", fillcolor="#1e3a8a", color="#1e3a8a", group=c1];
-    cart_cf [label="CloudFront\n/api/* route", fillcolor="#164e63", color="#38bdf8", group=c2];
-    cart_api [label="ALB /\nJWT + trace", fillcolor="#14532d", color="#22c55e", group=c3];
-    cart_service [label="cart-service\nupdate cart", fillcolor="#14532d", color="#22c55e", group=c4];
-    cart_db [label="DynamoDB\ncart state", shape=cylinder, fillcolor="#166534", color="#16a34a", group=c5];
-    cart_response [label="Updated cart\nback to browser", fillcolor="#1e3a8a", color="#1e3a8a", group=c6];
+    cart_api [label="API Gateway\nJWT / X-Api-Key + throttle", fillcolor="#3730a3", color="#818cf8", group=c2];
+    cart_service [label="cart-service\nLambda update cart", fillcolor="#14532d", color="#22c55e", group=c3];
+    cart_db [label="DynamoDB\ncart state", shape=cylinder, fillcolor="#166534", color="#16a34a", group=c4];
+    cart_response [label="Updated cart\nback to browser", fillcolor="#1e3a8a", color="#1e3a8a", group=c5];
     cart_local [label="localStorage\nanonymous cart", fillcolor="#0f172a", color="#64748b", group=c2];
     cart_browser -> cart_local [label="no token"];
-    cart_browser -> cart_cf [label="signed-in PUT\nBearer JWT"];
-    cart_cf -> cart_api;
+    cart_browser -> cart_api [label="signed-in PUT\nBearer JWT"];
     cart_api -> cart_service;
     cart_service -> cart_db [label="persist"];
     cart_db -> cart_response [label="ack"];
@@ -136,13 +132,11 @@ digraph sequence_dependency_diagram {
     fontcolor="#bbf7d0";
     style="rounded,setlinewidth(2)";
     acct_browser [label="PUT\n/api/account/accounts/{shopperId}", fillcolor="#1e3a8a", color="#1e3a8a", group=c1];
-    acct_cf [label="CloudFront\n/api/* route", fillcolor="#164e63", color="#38bdf8", group=c2];
-    acct_api [label="ALB /\nJWT + trace", fillcolor="#14532d", color="#22c55e", group=c3];
-    acct_service [label="account-service\nprofile + wallet", fillcolor="#14532d", color="#22c55e", group=c4];
-    acct_db [label="DynamoDB\naccount state", shape=cylinder, fillcolor="#166534", color="#16a34a", group=c5];
-    acct_response [label="Saved account\nback to browser", fillcolor="#1e3a8a", color="#1e3a8a", group=c6];
-    acct_browser -> acct_cf [label="Bearer JWT"];
-    acct_cf -> acct_api;
+    acct_api [label="API Gateway\nJWT + throttle", fillcolor="#3730a3", color="#818cf8", group=c2];
+    acct_service [label="account-service\nLambda profile + wallet", fillcolor="#14532d", color="#22c55e", group=c3];
+    acct_db [label="DynamoDB\naccount state", shape=cylinder, fillcolor="#166534", color="#16a34a", group=c4];
+    acct_response [label="Saved account\nback to browser", fillcolor="#1e3a8a", color="#1e3a8a", group=c5];
+    acct_browser -> acct_api [label="Bearer JWT"];
     acct_api -> acct_service;
     acct_service -> acct_db [label="persist"];
     acct_db -> acct_response [label="ack"];
@@ -154,11 +148,11 @@ digraph sequence_dependency_diagram {
     color="#c084fc";
     fontcolor="#f3e8ff";
     style="rounded,setlinewidth(2)";
-    telemetry_services [label="inventory / cart /\naccount services", fillcolor="#14532d", color="#22c55e", group=c1];
-    telemetry_alloy [label="Grafana Alloy\nmetrics, logs, traces", fillcolor="#6b21a8", color="#c084fc", group=c2];
-    telemetry_grafana [label="Grafana Cloud\nMimir, Loki, Tempo,\nPyroscope", fillcolor="#6b21a8", color="#c084fc", group=c3];
-    telemetry_services -> telemetry_alloy [label="OTel + Prometheus"];
-    telemetry_alloy -> telemetry_grafana [label="export"];
+    telemetry_services [label="inventory / cart /\naccount Lambdas", fillcolor="#14532d", color="#22c55e", group=c1];
+    telemetry_cw [label="AWS CloudWatch\nfunction logs + metrics", fillcolor="#334155", color="#94a3b8", group=c2];
+    telemetry_grafana [label="Grafana Cloud\nCloudWatch integration,\nMimir, Loki", fillcolor="#6b21a8", color="#c084fc", group=c3];
+    telemetry_services -> telemetry_cw [label="logs + metrics"];
+    telemetry_cw -> telemetry_grafana [label="scrape / integration"];
   }
 
   subgraph cluster_k6 {
@@ -168,13 +162,11 @@ digraph sequence_dependency_diagram {
     fontcolor="#fde68a";
     style="rounded,setlinewidth(2)";
     k6_runner [label="Grafana Cloud k6\nregional + spike\n5 rps API + browser", fillcolor="#713f12", color="#f59e0b", group=c1];
-    k6_cf [label="CloudFront\n/api/* + storefront", fillcolor="#164e63", color="#38bdf8", group=c2];
-    k6_api [label="ALB / API\ntraceparent", fillcolor="#14532d", color="#22c55e", group=c3];
-    k6_services [label="inventory / cart /\naccount services", fillcolor="#14532d", color="#22c55e", group=c4];
-    k6_grafana [label="Grafana Cloud\nrun metrics + checks", fillcolor="#6b21a8", color="#c084fc", group=c5];
-    k6_runner -> k6_cf [label="regional, spike,\nbrowser actions"];
-    k6_cf -> k6_api;
-    k6_api -> k6_services;
+    k6_edge [label="CloudFront storefront +\nAPI Gateway /api/*", fillcolor="#164e63", color="#38bdf8", group=c2];
+    k6_services [label="inventory / cart /\naccount Lambdas", fillcolor="#14532d", color="#22c55e", group=c3];
+    k6_grafana [label="Grafana Cloud\nrun metrics + checks", fillcolor="#6b21a8", color="#c084fc", group=c4];
+    k6_runner -> k6_edge [label="regional, spike,\nbrowser actions"];
+    k6_edge -> k6_services;
     k6_runner -> k6_grafana [label="results"];
   }
 
