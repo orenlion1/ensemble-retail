@@ -1,16 +1,22 @@
 # Deployment Runbook
 
+> **Serverless since 2026-07-09.** The backend runs on AWS Lambda (Java 21, arm64, SnapStart)
+> behind an API Gateway HTTP API, backed by DynamoDB — see `docs/serverless-migration.md`. EKS,
+> Aurora, the NAT gateway, the ALB, and the regional WAF were decommissioned. The "Automated CI"
+> section below reflects the current Lambda path; the Kubernetes/EKS operator sections further
+> down are retained as historical context and no longer apply.
+
 ## Automated CI -> AWS Deployment (default path)
 
 Every push or merge to `main` runs the `Build` workflow. When it succeeds, the `Deploy` workflow (`.github/workflows/deploy.yml`) is triggered via `workflow_run` and deploys the exact CI-passing commit:
 
 1. Change detection: diffs the CI-passing commit against the head of the last successful `Deploy` run and computes which components changed. Docs-only pushes deploy nothing; `services/<name>/**` selects that service; `frontend/**` selects the storefront; a change to `deploy.yml` itself (or no usable base) selects everything.
-2. Backend (per changed service): packages the Spring Boot service, builds and pushes its image to ECR tagged with the short commit SHA, then runs `kubectl set image` and waits for rollout status in the `ensemble-grafana` namespace.
+2. Backend (per changed service): packages the shaded Lambda jar (`mvn package`), uploads it to the `ensemble-grafana-lambda-artifacts-<account-id>` S3 bucket, runs `aws lambda update-function-code`, publishes a new version (SnapStart snapshot), waits for it to become `Active`, and moves the `live` alias to it. The API Gateway integration targets the `live` alias, so the cutover is atomic.
 3. Frontend (when changed): builds the storefront, syncs `frontend/dist/` to the frontend S3 bucket with `--delete`, and creates a CloudFront invalidation for `/*`.
 
-Authentication uses GitHub OIDC to assume the deploy IAM role; no static AWS keys exist in GitHub. Required repository secrets: `AWS_ACCOUNT_ID`, `AWS_DEPLOY_ROLE_ARN`, `EKS_CLUSTER_NAME`, `FRONTEND_BUCKET`, `CLOUDFRONT_DISTRIBUTION_ID`. Kubernetes access is limited by `infra/k8s/deploy-rbac.yaml` plus an operator-managed `aws-auth` mapping to the `ensemble-retail-deployers` group.
+Authentication uses GitHub OIDC to assume the deploy IAM role; no static AWS keys exist in GitHub. Required repository secrets: `AWS_ACCOUNT_ID`, `AWS_DEPLOY_ROLE_ARN`, `FRONTEND_BUCKET`, `CLOUDFRONT_DISTRIBUTION_ID`. The deploy role needs `lambda:UpdateFunctionCode`, `lambda:PublishVersion`, `lambda:UpdateAlias`, `lambda:GetFunction`, and `s3:PutObject` on the artifacts bucket (EKS/ECR permissions are no longer required).
 
-Manifest, secret, ingress, and Terraform changes are NOT applied by the automated workflow; they stay on the operator paths below (`scripts/kubernetes/apply-manifests.sh`, Terraform stacks). `scripts/ci/poll-and-deploy.sh` remains available as a local manifest-apply gate.
+Secrets and Terraform changes (including `stacks/serverless`) are NOT applied by the automated workflow; run the Terraform stacks locally.
 
 For `stacks/cluster` and `stacks/cloudwatch-integration` specifically, `.github/workflows/terraform-apply.yml` offers a manual, guarded `workflow_dispatch` alternative to applying locally: it plans and applies via GitHub OIDC using IAM roles scoped only to those two stacks' resources, and the apply step requires a `terraform-apply` GitHub environment reviewer to approve it before AWS credentials are ever issued. See `infra/terraform/stacks/README.md` (section 9) for one-time setup and usage.
 
