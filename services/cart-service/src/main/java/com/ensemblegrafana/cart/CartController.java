@@ -2,8 +2,6 @@ package com.ensemblegrafana.cart;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Max;
@@ -26,11 +24,15 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 @RequestMapping({ "/carts", "/api/cart/carts" })
 public class CartController {
-  private final Map<String, Cart> carts = new ConcurrentHashMap<>();
+  private final CartRepository repository;
+
+  public CartController(CartRepository repository) {
+    this.repository = repository;
+  }
 
   @GetMapping("/{shopperId}")
   public Cart get(@PathVariable @Pattern(regexp = "[A-Za-z0-9._-]{3,80}") String shopperId) {
-    return carts.getOrDefault(shopperId, new Cart(shopperId, List.of()));
+    return repository.find(shopperId);
   }
 
   @PutMapping("/{shopperId}")
@@ -38,9 +40,7 @@ public class CartController {
     if (!shopperId.equals(cart.shopperId())) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "shopperId path and body must match");
     }
-    Cart saved = new Cart(shopperId, cart.items() == null ? List.of() : cart.items());
-    carts.put(shopperId, saved);
-    return saved;
+    return repository.save(new Cart(shopperId, cart.items() == null ? List.of() : cart.items()));
   }
 
   public record Cart(

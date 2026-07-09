@@ -44,7 +44,7 @@ public class SecurityConfig {
             .frameOptions(frameOptions -> frameOptions.deny())
             .httpStrictTransportSecurity(hsts -> hsts.includeSubDomains(true).maxAgeInSeconds(31536000)))
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/actuator/health/**", "/actuator/prometheus").permitAll()
+            .requestMatchers("/actuator/health/**").permitAll()
             .anyRequest().authenticated())
         .addFilterBefore(new ApiKeyAuthenticationFilter(apiKey), UsernamePasswordAuthenticationFilter.class);
 
