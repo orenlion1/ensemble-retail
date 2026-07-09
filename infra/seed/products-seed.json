@@ -1,0 +1,508 @@
+[
+  {
+    "ensemble-products": [
+      {
+        "PutRequest": {
+          "Item": {
+            "id": {
+              "S": "mens-shell-alpha"
+            },
+            "name": {
+              "S": "Men's Alpine Shell Jacket"
+            },
+            "department": {
+              "S": "mens"
+            },
+            "category": {
+              "S": "Shells"
+            },
+            "price": {
+              "N": "340.00"
+            },
+            "colors": {
+              "L": [
+                {
+                  "S": "Graphite"
+                },
+                {
+                  "S": "Lichen"
+                },
+                {
+                  "S": "Signal Red"
+                }
+              ]
+            },
+            "sizes": {
+              "L": [
+                {
+                  "S": "XS"
+                },
+                {
+                  "S": "S"
+                },
+                {
+                  "S": "M"
+                },
+                {
+                  "S": "L"
+                },
+                {
+                  "S": "XL"
+                }
+              ]
+            },
+            "badge": {
+              "S": "Storm ready"
+            },
+            "rating": {
+              "N": "4.8"
+            },
+            "stock": {
+              "N": "42"
+            },
+            "image": {
+              "S": "https://images.unsplash.com/photo-1548883354-7622d03aca27?auto=format&fit=crop&w=900&q=80"
+            }
+          }
+        }
+      },
+      {
+        "PutRequest": {
+          "Item": {
+            "id": {
+              "S": "mens-midlayer-grid"
+            },
+            "name": {
+              "S": "Men's Grid Fleece Midlayer"
+            },
+            "department": {
+              "S": "mens"
+            },
+            "category": {
+              "S": "Mid Layers"
+            },
+            "price": {
+              "N": "109.00"
+            },
+            "colors": {
+              "L": [
+                {
+                  "S": "Pine"
+                },
+                {
+                  "S": "Black"
+                },
+                {
+                  "S": "Ice"
+                }
+              ]
+            },
+            "sizes": {
+              "L": [
+                {
+                  "S": "S"
+                },
+                {
+                  "S": "M"
+                },
+                {
+                  "S": "L"
+                },
+                {
+                  "S": "XL"
+                }
+              ]
+            },
+            "badge": {
+              "S": "15% off"
+            },
+            "rating": {
+              "N": "4.7"
+            },
+            "stock": {
+              "N": "65"
+            },
+            "image": {
+              "S": "https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=900&q=80"
+            },
+            "originalPrice": {
+              "N": "128.00"
+            }
+          }
+        }
+      },
+      {
+        "PutRequest": {
+          "Item": {
+            "id": {
+              "S": "mens-trail-pant"
+            },
+            "name": {
+              "S": "Men's Traverse Trail Pant"
+            },
+            "department": {
+              "S": "mens"
+            },
+            "category": {
+              "S": "Pants"
+            },
+            "price": {
+              "N": "133.00"
+            },
+            "colors": {
+              "L": [
+                {
+                  "S": "Basalt"
+                },
+                {
+                  "S": "Moss"
+                }
+              ]
+            },
+            "sizes": {
+              "L": [
+                {
+                  "S": "28"
+                },
+                {
+                  "S": "30"
+                },
+                {
+                  "S": "32"
+                },
+                {
+                  "S": "34"
+                },
+                {
+                  "S": "36"
+                }
+              ]
+            },
+            "badge": {
+              "S": "15% off"
+            },
+            "rating": {
+              "N": "4.9"
+            },
+            "stock": {
+              "N": "38"
+            },
+            "image": {
+              "S": "https://images.unsplash.com/photo-1617612283917-5268a9d94651?auto=format&fit=crop&w=900&q=80"
+            },
+            "originalPrice": {
+              "N": "156.00"
+            }
+          }
+        }
+      },
+      {
+        "PutRequest": {
+          "Item": {
+            "id": {
+              "S": "mens-daypack-22"
+            },
+            "name": {
+              "S": "Men's Route 22 Pack"
+            },
+            "department": {
+              "S": "mens"
+            },
+            "category": {
+              "S": "Packs"
+            },
+            "price": {
+              "N": "118.00"
+            },
+            "colors": {
+              "L": [
+                {
+                  "S": "Black"
+                },
+                {
+                  "S": "Cobalt"
+                },
+                {
+                  "S": "Clay"
+                }
+              ]
+            },
+            "sizes": {
+              "L": [
+                {
+                  "S": "22L"
+                }
+              ]
+            },
+            "badge": {
+              "S": "Online exclusive"
+            },
+            "rating": {
+              "N": "4.6"
+            },
+            "stock": {
+              "N": "51"
+            },
+            "image": {
+              "S": "https://images.unsplash.com/photo-1622560480654-d96214fdc887?auto=format&fit=crop&w=900&q=80"
+            }
+          }
+        }
+      },
+      {
+        "PutRequest": {
+          "Item": {
+            "id": {
+              "S": "womens-base-merino"
+            },
+            "name": {
+              "S": "Women's Merino Base Crew"
+            },
+            "department": {
+              "S": "womens"
+            },
+            "category": {
+              "S": "Base Layers"
+            },
+            "price": {
+              "N": "88.00"
+            },
+            "colors": {
+              "L": [
+                {
+                  "S": "Heather"
+                },
+                {
+                  "S": "Night"
+                },
+                {
+                  "S": "Sage"
+                }
+              ]
+            },
+            "sizes": {
+              "L": [
+                {
+                  "S": "XS"
+                },
+                {
+                  "S": "S"
+                },
+                {
+                  "S": "M"
+                },
+                {
+                  "S": "L"
+                },
+                {
+                  "S": "XL"
+                }
+              ]
+            },
+            "badge": {
+              "S": "Warmth without bulk"
+            },
+            "rating": {
+              "N": "4.5"
+            },
+            "stock": {
+              "N": "72"
+            },
+            "image": {
+              "S": "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80"
+            }
+          }
+        }
+      },
+      {
+        "PutRequest": {
+          "Item": {
+            "id": {
+              "S": "womens-softshell-hoody"
+            },
+            "name": {
+              "S": "Women's Softshell Hoody"
+            },
+            "department": {
+              "S": "womens"
+            },
+            "category": {
+              "S": "Shells"
+            },
+            "price": {
+              "N": "187.00"
+            },
+            "colors": {
+              "L": [
+                {
+                  "S": "Mineral"
+                },
+                {
+                  "S": "Black"
+                },
+                {
+                  "S": "Juniper"
+                }
+              ]
+            },
+            "sizes": {
+              "L": [
+                {
+                  "S": "XS"
+                },
+                {
+                  "S": "S"
+                },
+                {
+                  "S": "M"
+                },
+                {
+                  "S": "L"
+                },
+                {
+                  "S": "XL"
+                }
+              ]
+            },
+            "badge": {
+              "S": "15% off"
+            },
+            "rating": {
+              "N": "4.7"
+            },
+            "stock": {
+              "N": "58"
+            },
+            "image": {
+              "S": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80"
+            },
+            "originalPrice": {
+              "N": "220.00"
+            }
+          }
+        }
+      },
+      {
+        "PutRequest": {
+          "Item": {
+            "id": {
+              "S": "womens-climb-pant"
+            },
+            "name": {
+              "S": "Women's Climb Pant"
+            },
+            "department": {
+              "S": "womens"
+            },
+            "category": {
+              "S": "Pants"
+            },
+            "price": {
+              "N": "148.00"
+            },
+            "colors": {
+              "L": [
+                {
+                  "S": "Black"
+                },
+                {
+                  "S": "Sage"
+                }
+              ]
+            },
+            "sizes": {
+              "L": [
+                {
+                  "S": "0"
+                },
+                {
+                  "S": "2"
+                },
+                {
+                  "S": "4"
+                },
+                {
+                  "S": "6"
+                },
+                {
+                  "S": "8"
+                },
+                {
+                  "S": "10"
+                },
+                {
+                  "S": "12"
+                }
+              ]
+            },
+            "badge": {
+              "S": "Articulated fit"
+            },
+            "rating": {
+              "N": "4.8"
+            },
+            "stock": {
+              "N": "44"
+            },
+            "image": {
+              "S": "https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&w=900&q=80"
+            }
+          }
+        }
+      },
+      {
+        "PutRequest": {
+          "Item": {
+            "id": {
+              "S": "womens-rain-cap"
+            },
+            "name": {
+              "S": "Women's Rainline Cap"
+            },
+            "department": {
+              "S": "womens"
+            },
+            "category": {
+              "S": "Accessories"
+            },
+            "price": {
+              "N": "37.00"
+            },
+            "colors": {
+              "L": [
+                {
+                  "S": "Black"
+                },
+                {
+                  "S": "Olive"
+                }
+              ]
+            },
+            "sizes": {
+              "L": [
+                {
+                  "S": "One Size"
+                }
+              ]
+            },
+            "badge": {
+              "S": "15% off"
+            },
+            "rating": {
+              "N": "4.4"
+            },
+            "stock": {
+              "N": "89"
+            },
+            "image": {
+              "S": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=900&q=80"
+            },
+            "originalPrice": {
+              "N": "44.00"
+            }
+          }
+        }
+      }
+    ]
+  }
+]
