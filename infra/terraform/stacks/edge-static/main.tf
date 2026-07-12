@@ -9,6 +9,10 @@ resource "aws_route53_zone" "secondary" {
   name = var.secondary_domain_name
 }
 
+resource "aws_route53_zone" "tertiary" {
+  name = var.tertiary_domain_name
+}
+
 resource "aws_acm_certificate" "edge" {
   provider          = aws.use1
   domain_name       = var.domain_name
@@ -19,6 +23,9 @@ resource "aws_acm_certificate" "edge" {
     var.secondary_domain_name,
     var.secondary_domain_name != "" ? "www.${var.secondary_domain_name}" : "",
     var.secondary_domain_name != "" ? "api.${var.secondary_domain_name}" : "",
+    var.tertiary_domain_name,
+    var.tertiary_domain_name != "" ? "www.${var.tertiary_domain_name}" : "",
+    var.tertiary_domain_name != "" ? "api.${var.tertiary_domain_name}" : "",
   ])
 
   # Adding SANs forces cert replacement; create the new cert (and switch CloudFront to it)
@@ -35,7 +42,7 @@ resource "aws_route53_record" "edge_certificate_validation" {
       record = option.resource_record_value
       type   = option.resource_record_type
       # Route each validation record into the zone that owns its domain.
-      zone_id = (var.secondary_domain_name != "" && endswith(trimsuffix(option.domain_name, "."), var.secondary_domain_name)) ? aws_route53_zone.secondary.zone_id : aws_route53_zone.primary.zone_id
+      zone_id = (var.secondary_domain_name != "" && endswith(trimsuffix(option.domain_name, "."), var.secondary_domain_name)) ? aws_route53_zone.secondary.zone_id : (var.tertiary_domain_name != "" && endswith(trimsuffix(option.domain_name, "."), var.tertiary_domain_name)) ? aws_route53_zone.tertiary.zone_id : aws_route53_zone.primary.zone_id
     }
   }
 
@@ -366,7 +373,7 @@ resource "aws_cloudfront_response_headers_policy" "security" {
       override        = true
     }
     content_security_policy {
-      content_security_policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://${var.api_origin_domain_name} https://api.${var.secondary_domain_name} https://${var.cognito_domain_prefix}.auth.${var.aws_region}.amazoncognito.com https://faro-collector-prod-us-east-3.grafana.net; font-src 'self'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'"
+      content_security_policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://${var.api_origin_domain_name} https://api.${var.secondary_domain_name} https://api.${var.tertiary_domain_name} https://${var.cognito_domain_prefix}.auth.${var.aws_region}.amazoncognito.com https://faro-collector-prod-us-east-3.grafana.net; font-src 'self'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'"
       override                = true
     }
     strict_transport_security {
@@ -408,6 +415,8 @@ resource "aws_cloudfront_distribution" "frontend" {
     "www.${var.domain_name}",
     var.secondary_domain_name,
     var.secondary_domain_name != "" ? "www.${var.secondary_domain_name}" : "",
+    var.tertiary_domain_name,
+    var.tertiary_domain_name != "" ? "www.${var.tertiary_domain_name}" : "",
   ])
   web_acl_id = aws_wafv2_web_acl.edge.arn
   depends_on = [aws_acm_certificate_validation.edge]
@@ -591,15 +600,57 @@ resource "aws_route53_record" "secondary_www_ipv6" {
   }
 }
 
-# api.<secondary> -> the existing api.<primary> record (which aliases the ALB). The ALB's
-# ingress must have a host rule for api.<secondary>, and its ACM cert must include that SAN.
-resource "aws_route53_record" "secondary_api" {
-  count   = var.secondary_domain_name != "" ? 1 : 0
-  name    = "api.${var.secondary_domain_name}"
-  type    = "CNAME"
-  ttl     = 300
-  zone_id = aws_route53_zone.secondary.zone_id
-  records = ["api.${var.domain_name}"]
+# --- Tertiary domain (ensemble-service.com) apex + www -> same CloudFront distribution ---
+resource "aws_route53_record" "tertiary_apex_ipv4" {
+  count   = var.tertiary_domain_name != "" ? 1 : 0
+  name    = var.tertiary_domain_name
+  type    = "A"
+  zone_id = aws_route53_zone.tertiary.zone_id
+
+  alias {
+    evaluate_target_health = false
+    name                   = aws_cloudfront_distribution.frontend.domain_name
+    zone_id                = aws_cloudfront_distribution.frontend.hosted_zone_id
+  }
+}
+
+resource "aws_route53_record" "tertiary_apex_ipv6" {
+  count   = var.tertiary_domain_name != "" ? 1 : 0
+  name    = var.tertiary_domain_name
+  type    = "AAAA"
+  zone_id = aws_route53_zone.tertiary.zone_id
+
+  alias {
+    evaluate_target_health = false
+    name                   = aws_cloudfront_distribution.frontend.domain_name
+    zone_id                = aws_cloudfront_distribution.frontend.hosted_zone_id
+  }
+}
+
+resource "aws_route53_record" "tertiary_www_ipv4" {
+  count   = var.tertiary_domain_name != "" ? 1 : 0
+  name    = "www.${var.tertiary_domain_name}"
+  type    = "A"
+  zone_id = aws_route53_zone.tertiary.zone_id
+
+  alias {
+    evaluate_target_health = false
+    name                   = aws_cloudfront_distribution.frontend.domain_name
+    zone_id                = aws_cloudfront_distribution.frontend.hosted_zone_id
+  }
+}
+
+resource "aws_route53_record" "tertiary_www_ipv6" {
+  count   = var.tertiary_domain_name != "" ? 1 : 0
+  name    = "www.${var.tertiary_domain_name}"
+  type    = "AAAA"
+  zone_id = aws_route53_zone.tertiary.zone_id
+
+  alias {
+    evaluate_target_health = false
+    name                   = aws_cloudfront_distribution.frontend.domain_name
+    zone_id                = aws_cloudfront_distribution.frontend.hosted_zone_id
+  }
 }
 
 data "aws_iam_policy_document" "cloudfront_frontend_read" {

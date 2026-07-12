@@ -21,6 +21,12 @@ variable "secondary_domain_name" {
   default     = "ensemble-retail.com"
 }
 
+variable "tertiary_domain_name" {
+  type        = string
+  description = "Additional apex domain served by the existing CloudFront distribution and certificate. Empty disables."
+  default     = "ensemble-service.com"
+}
+
 variable "cognito_domain_prefix" {
   type        = string
   description = "AWS-managed Cognito hosted UI domain prefix used by frontend OAuth token exchange."

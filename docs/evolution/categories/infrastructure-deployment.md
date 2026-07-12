@@ -20,6 +20,7 @@
 | 2026-05-31 | `64d3717` Balance traffic spike inventory load | Service load distribution was refined. |
 | 2026-07-01 | `.github/workflows/deploy.yml`, `infra/k8s/deploy-rbac.yaml` | AWS deployment became automatic: on Build success on `main`, GitHub Actions builds/pushes service images, rolls out EKS, syncs the frontend to S3, and invalidates CloudFront via a GitHub OIDC deploy role. |
 | 2026-07-09 | `infra/terraform/stacks/serverless`, `docs/serverless-migration.md` | Cost-reduction migration (Option D): the three Spring Boot services moved from EKS to API Gateway HTTP API + Lambda (Java 21, arm64, SnapStart) backed by DynamoDB, and the EKS cluster, Aurora cluster, NAT gateway, ALB, and regional WAF were torn down. Monthly run-rate dropped from ~$335 to ~$14. |
+| 2026-07-12 | `infra/terraform/stacks/edge-static`, `infra/terraform/stacks/serverless/api.tf`, `infra/terraform/stacks/auth` | `ensemble-service.com` added as a third apex domain: new Route 53 zone (Namecheap custom-nameserver delegation), shared ACM certificate replaced with SANs for apex/www/api, CloudFront aliases, API Gateway custom domain `api.ensemble-service.com`, and Cognito callback URLs. Stale ALB-era `api.ensemble-retail.com` CNAME resource removed from edge-static. |
 
 ## What This Category Produced
 

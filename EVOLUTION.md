@@ -254,6 +254,21 @@ Key evidence:
 - Repository secrets `AWS_ACCOUNT_ID`, `AWS_DEPLOY_ROLE_ARN`, `EKS_CLUSTER_NAME`, `FRONTEND_BUCKET`, and `CLOUDFRONT_DISTRIBUTION_ID` carry the real resource identifiers so committed files keep placeholder values.
 - `docs/deployment.md` and `README.md`: document the automated path and the retained operator bootstrap path.
 
+### July 12, 2026: Add ensemble-service.com as a Third Public Domain
+
+A third apex domain, `ensemble-service.com`, joined `ensemble-retail.com` and `ensemble-grafana.com` on the shared edge: same CloudFront distribution and ACM certificate for the storefront (apex + `www`), and a third API Gateway custom domain for `api.ensemble-service.com`. The domain is registered at Namecheap and delegated to a new Route 53 hosted zone via custom nameservers. Adding SANs replaced the shared ACM certificate (`create_before_destroy`), which required repointing both existing API Gateway custom domains to the new certificate before the old one could be deleted. The stale ALB-era `api.ensemble-retail.com` CNAME resource was removed from the edge-static stack since the serverless stack owns those alias records.
+
+Representative prompt category:
+
+> Add this domain so that it may serve up requests and certificates and get routed just like the existing domains.
+
+Key evidence:
+
+- `infra/terraform/stacks/edge-static`: `tertiary` Route 53 zone, certificate SANs (`ensemble-service.com`, `www.`, `api.`), CloudFront aliases, apex/www alias records, CSP `connect-src` addition, and zone id/nameserver outputs.
+- `infra/terraform/stacks/serverless/api.tf`: `enable_service_domain`-gated API Gateway custom domain, API mapping, and A/AAAA alias records for `api.ensemble-service.com`.
+- `infra/terraform/stacks/auth`: Cognito app client callback/logout URLs for the new origin.
+- Verified live: `https://ensemble-service.com/`, `https://www.ensemble-service.com/`, and `https://api.ensemble-service.com/api/inventory/products` all return HTTP 200 with valid TLS.
+
 ## Serverless Cost-Reduction Migration (Option D)
 
 Faced with a ~$335/month AWS run-rate dominated by fixed platform costs (EKS control plane, a

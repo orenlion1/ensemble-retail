@@ -14,6 +14,12 @@ variable "secondary_domain_name" {
   default     = "ensemble-retail.com"
 }
 
+variable "tertiary_domain_name" {
+  type        = string
+  description = "Additional apex domain whose OAuth callback/logout URLs are also allowed. Empty disables."
+  default     = "ensemble-service.com"
+}
+
 variable "cognito_domain_prefix" {
   type        = string
   description = "AWS-managed Cognito hosted UI domain prefix. Must be globally unique in the AWS region."

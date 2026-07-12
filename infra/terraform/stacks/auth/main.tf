@@ -41,10 +41,12 @@ resource "aws_cognito_user_pool_client" "web" {
   callback_urls = compact([
     "https://${var.domain_name}/auth/callback",
     var.secondary_domain_name != "" ? "https://${var.secondary_domain_name}/auth/callback" : "",
+    var.tertiary_domain_name != "" ? "https://${var.tertiary_domain_name}/auth/callback" : "",
   ])
   logout_urls = compact([
     "https://${var.domain_name}/",
     var.secondary_domain_name != "" ? "https://${var.secondary_domain_name}/" : "",
+    var.tertiary_domain_name != "" ? "https://${var.tertiary_domain_name}/" : "",
   ])
   prevent_user_existence_errors        = "ENABLED"
 

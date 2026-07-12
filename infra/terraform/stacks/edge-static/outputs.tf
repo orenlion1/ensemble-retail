@@ -6,6 +6,14 @@ output "route53_name_servers" {
   value = aws_route53_zone.primary.name_servers
 }
 
+output "tertiary_route53_zone_id" {
+  value = aws_route53_zone.tertiary.zone_id
+}
+
+output "tertiary_route53_name_servers" {
+  value = aws_route53_zone.tertiary.name_servers
+}
+
 output "edge_certificate_arn" {
   value = aws_acm_certificate.edge.arn
 }
