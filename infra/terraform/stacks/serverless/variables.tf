@@ -115,6 +115,22 @@ variable "retail_route53_zone_id" {
   default = ""
 }
 
+# Tertiary domain (api.ensemble-service.com). Same ACM cert covers it. Off by default.
+variable "enable_service_domain" {
+  type    = bool
+  default = false
+}
+
+variable "service_domain_name" {
+  type    = string
+  default = "api.ensemble-service.com"
+}
+
+variable "service_route53_zone_id" {
+  type    = string
+  default = ""
+}
+
 variable "budget_notification_email" {
   type        = string
   description = "Email address for the AWS Budgets alarm."

@@ -138,3 +138,37 @@ resource "aws_route53_record" "retail" {
     evaluate_target_health = false
   }
 }
+
+# --- Tertiary domain: api.ensemble-service.com (gated by enable_service_domain) ---
+resource "aws_apigatewayv2_domain_name" "service" {
+  count       = var.enable_service_domain ? 1 : 0
+  domain_name = var.service_domain_name
+
+  domain_name_configuration {
+    certificate_arn = var.acm_certificate_arn
+    endpoint_type   = "REGIONAL"
+    security_policy = "TLS_1_2"
+  }
+
+  tags = local.tags
+}
+
+resource "aws_apigatewayv2_api_mapping" "service" {
+  count       = var.enable_service_domain ? 1 : 0
+  api_id      = aws_apigatewayv2_api.http.id
+  domain_name = aws_apigatewayv2_domain_name.service[0].id
+  stage       = aws_apigatewayv2_stage.default.id
+}
+
+resource "aws_route53_record" "service" {
+  for_each = var.enable_service_domain ? toset(["A", "AAAA"]) : toset([])
+  zone_id  = var.service_route53_zone_id
+  name     = var.service_domain_name
+  type     = each.value
+
+  alias {
+    name                   = aws_apigatewayv2_domain_name.service[0].domain_name_configuration[0].target_domain_name
+    zone_id                = aws_apigatewayv2_domain_name.service[0].domain_name_configuration[0].hosted_zone_id
+    evaluate_target_health = false
+  }
+}
