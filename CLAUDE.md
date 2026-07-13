@@ -30,7 +30,12 @@
   `services/<name>/**` deploys only that service's Lambda, `frontend/**` deploys only the
   storefront, and documentation-only changes deploy nothing. A `deploy.yml` change redeploys all.
 - **Operator-only surface.** DynamoDB tables, secrets, the API/Lambda/IAM (`stacks/serverless`),
-  and all other Terraform are NOT applied by CI — run the Terraform stacks locally.
+  and all other Terraform are NOT applied by CI — run the Terraform stacks locally. Since
+  2026-07-12 the Terraform lives in the sibling repo
+  [core-infra](https://github.com/orenlion1/core-infra) (`../core-infra/terraform/stacks/...`),
+  which owns the shared surface (Route 53 zones, edge ACM cert, Cognito pool, tf-state bucket)
+  consumed by winnow; priority-email is self-contained. This repo keeps only legacy `infra/k8s`
+  manifests and `infra/seed` data.
 - The deploy role (`AWS_DEPLOY_ROLE_ARN`) needs `lambda:UpdateFunctionCode`, `lambda:PublishVersion`,
   `lambda:UpdateAlias`, `lambda:GetFunction`, and `s3:PutObject` on the artifacts bucket (it no
   longer needs EKS/ECR). Real resource identifiers live in GitHub repository secrets

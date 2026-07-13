@@ -13,8 +13,6 @@ terraform.tfstate.*
 # Terraform variables and generated handoff files (may contain secrets)
 *.tfvars
 *.tfvars.json
-infra/terraform/network.auto.tfvars.json
-infra/terraform/stacks/**/terraform.tfvars
 
 # Environment and credential files
 .env
