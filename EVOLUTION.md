@@ -269,6 +269,21 @@ Key evidence:
 - `infra/terraform/stacks/auth`: Cognito app client callback/logout URLs for the new origin.
 - Verified live: `https://ensemble-service.com/`, `https://www.ensemble-service.com/`, and `https://api.ensemble-service.com/api/inventory/products` all return HTTP 200 with valid TLS.
 
+### July 12, 2026: Extract Terraform Into the core-infra Repository
+
+All Terraform (stacks and modules under `infra/terraform`) moved to the dedicated shared-infrastructure repository [core-infra](https://github.com/orenlion1/core-infra), leaving this repo with application code plus legacy `infra/k8s` manifests and `infra/seed` data. The move recognizes that ensemble's stacks own resources consumed by other repos: winnow reads the `ensemble-grafana.com` hosted zone, the `ensemble-grafana-shoppers` Cognito pool, the GitHub OIDC provider, and stores its remote state in the shared `ensemble-grafana-tf-state-629513454417` bucket; priority-email was validated as fully self-contained. Local Terraform state files moved physically with their stacks, and state integrity was verified with no-change plans from the new location.
+
+Representative prompt category:
+
+> Extract infra into a dedicated repo, core-infra, to deal with shared infra, and validate what is used by the priority-email and winnow repos.
+
+Key evidence:
+
+- `core-infra` repository: `terraform/stacks/*` with per-stack local state, a README stack-ownership inventory, and a validated consumer matrix (ensemble-retail, winnow, priority-email).
+- No-change `terraform plan` from the new location for `edge-static`, `auth`, `ci-terraform-apply`, `data`, and `account-baseline`; `serverless` showed only pre-existing jar-artifact drift.
+- Live AWS validation of winnow's dependencies: hosted zone `Z0341661YMUM03LL4U91`, Cognito pool `us-east-1_h4d6Z9jSr`, the `token.actions.githubusercontent.com` OIDC provider, and the `stacks/winnow/terraform.tfstate` object in the shared state bucket.
+- This repo: `infra/terraform` removed, `infra/README.md` pointer added, `CLAUDE.md` and `docs/deployment.md` updated to reference the sibling `../core-infra` checkout (`stacks/serverless` locates built jars via a sibling-checkout `repo_root` default).
+
 ## Serverless Cost-Reduction Migration (Option D)
 
 Faced with a ~$335/month AWS run-rate dominated by fixed platform costs (EKS control plane, a

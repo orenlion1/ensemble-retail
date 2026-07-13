@@ -54,9 +54,17 @@ check_absent "$secret_pattern" "no obvious access keys, private keys, Grafana to
 check_present 'pod-security.kubernetes.io/enforce: restricted' infra/k8s/namespace.yaml "application namespace enforces restricted pod security"
 check_present 'allowPrivilegeEscalation: false' infra/k8s/services.yaml "application pods deny privilege escalation"
 check_present 'readOnlyRootFilesystem: true' infra/k8s/services.yaml "application pods use read-only root filesystems"
-check_present 'AWSManagedRulesSQLiRuleSet' infra/terraform/main.tf "CloudFront WAF includes SQLi managed rules"
-check_present 'point_in_time_recovery' infra/terraform/main.tf "DynamoDB point-in-time recovery is configured"
-check_present 'strict_transport_security' infra/terraform/main.tf "CloudFront HSTS response header is configured"
+# Terraform moved to the sibling core-infra repo (2026-07-12). Run these posture checks
+# against that checkout when present; in CI (no sibling checkout) they are skipped —
+# core-infra carries its own validation.
+core_infra_dir="${CORE_INFRA_DIR:-$root_dir/../core-infra}"
+if [[ -d "$core_infra_dir/terraform" ]]; then
+  check_present 'AWSManagedRulesSQLiRuleSet' "$core_infra_dir/terraform/stacks/edge-static/main.tf" "CloudFront WAF includes SQLi managed rules"
+  check_present 'point_in_time_recovery' "$core_infra_dir/terraform/stacks/data/main.tf" "DynamoDB point-in-time recovery is configured"
+  check_present 'strict_transport_security' "$core_infra_dir/terraform/stacks/edge-static/main.tf" "CloudFront HSTS response header is configured"
+else
+  echo "SKIP: core-infra checkout not found at $core_infra_dir; Terraform posture checks run in that repo"
+fi
 check_present 'spring-boot-starter-security' services/cart-service/pom.xml "cart service includes Spring Security"
 check_present 'spring-boot-starter-security' services/account-service/pom.xml "account service includes Spring Security"
 check_present 'spring-boot-starter-security' services/inventory-service/pom.xml "inventory service includes Spring Security"
