@@ -220,7 +220,33 @@ VITE_COGNITO_CLIENT_ID=<cognito-app-client-id>
 VITE_COGNITO_REDIRECT_URI=https://ensemble-retail.com/auth/callback
 ```
 
-The Google OAuth client must allow the Cognito IdP redirect URI from `terraform output google_oauth_redirect_uri`. Do not expose or commit the Google client secret; only the Cognito app client ID is a browser value.
+The Google OAuth client must allow the Cognito IdP redirect URI from `terraform output google_oauth_redirect_uri`. For the current Hosted UI domain this is:
+
+```
+https://ensemble-grafana.auth.us-east-1.amazoncognito.com/oauth2/idpresponse
+```
+
+Do not expose or commit the Google client secret; only the Cognito app client ID is a browser value.
+
+### Troubleshooting: `Error 400: redirect_uri_mismatch`
+
+If "Sign in with Google" fails with `Error 400: redirect_uri_mismatch` and the request details show
+`redirect_uri=https://ensemble-grafana.auth.us-east-1.amazoncognito.com/oauth2/idpresponse`, the Cognito
+IdP-response endpoint is not registered on the Google side. This is the fixed callback Cognito uses when
+it federates to Google (the second leg of the flow); it is internal to Cognito and is **not** derived from
+any frontend build variable, so no code change in this repo fixes it.
+
+Register it in Google Cloud Console:
+
+1. Open **APIs & Services → Credentials** for the project that owns the OAuth consent screen.
+2. Edit the **OAuth 2.0 Client ID** used by the Cognito Google identity provider.
+3. Under **Authorized redirect URIs**, add exactly (no trailing slash, `https`):
+   `https://ensemble-grafana.auth.us-east-1.amazoncognito.com/oauth2/idpresponse`
+4. **Save**. Propagation is usually immediate but can take a few minutes.
+
+Keep this URI in sync with the Cognito Hosted UI domain (`VITE_COGNITO_HOSTED_UI_DOMAIN`): if the domain
+changes, the `/oauth2/idpresponse` value changes and must be re-registered on the Google client. The
+per-app callback (`/auth/callback`) is separate and is registered on the Cognito app client, not on Google.
 
 ## Frontend Observability
 
