@@ -1,0 +1,160 @@
+name: Faro Telemetry Check
+
+# Read-only validation that the storefront actually allows Grafana Faro telemetry
+# to leave the browser. This is the CI counterpart to the "no Faro telemetry"
+# runbook in README.md: after the 2026-07-09 CloudFront migration the storefront
+# is fronted by a distribution whose `security-headers` response-headers policy
+# (core-infra `edge-static` stack) must list the Faro collector in `connect-src`,
+# or the browser silently drops every Faro request.
+#
+# It never changes anything. Two independent angles:
+#   * live-csp        — fetches the real Content-Security-Policy response header
+#                       from the public site (the exact policy the browser
+#                       enforces). This is the gating job.
+#   * cloudfront-policy — assumes the deploy role via GitHub OIDC and reads the
+#                       CSP straight off the CloudFront response-headers policy
+#                       (source of truth). Informational: it annotates findings
+#                       but never fails the run, so an OIDC trust/permission gap
+#                       degrades to a warning instead of a false red.
+on:
+  workflow_dispatch:
+    inputs:
+      site_urls:
+        description: "Space-separated storefront origins to check"
+        type: string
+        required: false
+        default: "https://ensemble-retail.com https://ensemble-grafana.com https://ensemble-service.com"
+  # Also run on Faro-related PRs so the live CSP is validated in the checks.
+  # The gating job (live-csp) needs no credentials; the OIDC source-of-truth job
+  # degrades to a warning when the deploy role can't be assumed from a PR event.
+  pull_request:
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/faro-telemetry-check.yml'
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: faro-telemetry-check
+  cancel-in-progress: true
+
+env:
+  AWS_REGION: us-east-1
+  FARO_COLLECTOR_HOST: faro-collector-prod-us-east-3.grafana.net
+  SITE_URLS: ${{ inputs.site_urls || 'https://ensemble-retail.com https://ensemble-grafana.com https://ensemble-service.com' }}
+
+jobs:
+  live-csp:
+    name: Live CSP allows the Faro collector
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check the served Content-Security-Policy
+        run: |
+          set -uo pipefail
+          host="$FARO_COLLECTOR_HOST"
+          overall=0
+          {
+            echo "### Faro telemetry check — live CSP"
+            echo ""
+            echo "Collector host: \`$host\`"
+            echo ""
+            echo "| Origin | connect-src verdict |"
+            echo "|---|---|"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          # Decide whether a CSP header permits connecting to the collector.
+          # Echoes a verdict token; the caller maps it to pass/fail.
+          evaluate_csp() {
+            csp="$(printf '%s' "$1" | tr '[:upper:]' '[:lower:]')"
+            [ -z "$csp" ] && { echo "NO_CSP"; return; }
+            scope="$(printf '%s' "$csp" | tr ';' '\n' | grep 'connect-src' || true)"
+            [ -z "$scope" ] && scope="$(printf '%s' "$csp" | tr ';' '\n' | grep 'default-src' || true)"
+            # No connect-src and no default-src => CSP does not restrict connections.
+            [ -z "$scope" ] && { echo "NO_CONNECT_RESTRICTION"; return; }
+            printf '%s' "$scope" | grep -qE '(^| )(\*|https:)( |$)' && { echo "ALLOWED_WILDCARD"; return; }
+            printf '%s' "$scope" | grep -qF "$host" && { echo "ALLOWED_HOST"; return; }
+            echo "BLOCKED"
+          }
+
+          for url in $SITE_URLS; do
+            headers="$(curl -sS -L -m 25 -A 'faro-telemetry-check' -D - -o /dev/null "$url" 2>/dev/null || true)"
+            csp="$(printf '%s' "$headers" | tr -d '\r' | grep -i '^content-security-policy:' | tail -n1 | cut -d: -f2- | sed 's/^ *//')"
+            verdict="$(evaluate_csp "$csp")"
+            case "$verdict" in
+              ALLOWED_HOST)          note="✅ connect-src lists the collector" ;;
+              ALLOWED_WILDCARD)      note="✅ connect-src is permissive (\`*\`/\`https:\`)" ;;
+              NO_CSP)                note="⚠️ no CSP header served (nothing blocks Faro, but the hardened header is missing)" ;;
+              NO_CONNECT_RESTRICTION) note="⚠️ CSP present but no connect-src/default-src (Faro not blocked)" ;;
+              BLOCKED)               note="❌ connect-src omits the collector — the browser will drop Faro requests"; overall=1 ;;
+              *)                     note="❌ could not evaluate (no response?)"; overall=1 ;;
+            esac
+            echo "| $url | $note |" >> "$GITHUB_STEP_SUMMARY"
+            echo "$url -> $verdict"
+            [ "$verdict" = "BLOCKED" ] && echo "::error::$url CSP connect-src does not allow $host"
+          done
+
+          if [ "$overall" -ne 0 ]; then
+            echo ""
+            echo "Fix: ensure the core-infra edge-static response-headers policy lists https://$host in connect-src and 'terraform apply' it (operator-applied; CI does not). See README 'Troubleshooting: no Faro telemetry'."
+            exit 1
+          fi
+          echo "All origins allow the Faro collector."
+
+  cloudfront-policy:
+    name: CloudFront CSP (source of truth via OIDC)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Configure AWS credentials (deploy role, read-only use)
+        id: creds
+        continue-on-error: true
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Read the distribution's response-headers policy
+        run: |
+          set -uo pipefail
+          echo "### Faro telemetry check — CloudFront response-headers policy" >> "$GITHUB_STEP_SUMMARY"
+          if [ "${{ steps.creds.outcome }}" != "success" ]; then
+            echo "::warning::Could not assume AWS_DEPLOY_ROLE_ARN via OIDC — skipping the source-of-truth read. The live-csp job result is authoritative."
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "⚠️ OIDC role assumption failed; relying on the live-csp job." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          dist="${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}"
+          if [ -z "$dist" ]; then
+            echo "::warning::CLOUDFRONT_DISTRIBUTION_ID secret is empty — skipping."
+            exit 0
+          fi
+          cfg="$(aws cloudfront get-distribution-config --id "$dist" 2>/tmp/awserr)" || {
+            echo "::warning::get-distribution-config failed (the deploy role likely lacks cloudfront:GetDistributionConfig). Grant read access to enable this source-of-truth check."
+            sed 's/^/  /' /tmp/awserr || true
+            echo "⚠️ Insufficient CloudFront read permission on the deploy role." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          }
+          rhp="$(printf '%s' "$cfg" | jq -r '.DistributionConfig.DefaultCacheBehavior.ResponseHeadersPolicyId // empty')"
+          if [ -z "$rhp" ]; then
+            echo "::warning::No response-headers policy attached to the default cache behavior."
+            echo "⚠️ No response-headers policy on the default behavior." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          csp="$(aws cloudfront get-response-headers-policy --id "$rhp" 2>/tmp/awserr | jq -r '.ResponseHeadersPolicy.ResponseHeadersPolicyConfig.SecurityHeadersConfig.ContentSecurityPolicy.ContentSecurityPolicy // empty')" || {
+            echo "::warning::get-response-headers-policy failed (missing cloudfront:GetResponseHeadersPolicy)."
+            exit 0
+          }
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "Policy id: \`$rhp\`" >> "$GITHUB_STEP_SUMMARY"
+          if printf '%s' "$csp" | grep -qF "$FARO_COLLECTOR_HOST"; then
+            echo "✅ CloudFront CSP lists \`$FARO_COLLECTOR_HOST\`." >> "$GITHUB_STEP_SUMMARY"
+            echo "CloudFront CSP allows the collector."
+          else
+            echo "❌ CloudFront CSP does NOT list \`$FARO_COLLECTOR_HOST\` — apply the edge-static fix." >> "$GITHUB_STEP_SUMMARY"
+            echo "::error::CloudFront response-headers policy CSP is missing $FARO_COLLECTOR_HOST"
+            echo "CSP: $csp"
+            exit 1
+          fi

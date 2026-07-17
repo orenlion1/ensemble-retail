@@ -274,6 +274,7 @@ connect-src 'self' … https://faro-collector-prod-us-east-3.grafana.net;
 
 To diagnose and fix:
 
+0. Run the **Faro Telemetry Check** workflow (`.github/workflows/faro-telemetry-check.yml`, `workflow_dispatch`) — a read-only validation that fetches the live `Content-Security-Policy` header and checks its `connect-src` allows the collector, and (via GitHub OIDC / the deploy role) reads the CSP straight off the CloudFront response-headers policy as the source of truth. It changes nothing; the run summary tells you whether the live edge allows Faro. This is the CI/OIDC counterpart to the manual steps below.
 1. Confirm the browser is blocking beacons: open `https://ensemble-retail.com/`, click around, and check the DevTools console for CSP `Refused to connect` errors naming `faro-collector-prod-us-east-3.grafana.net`, or watch the Network tab for blocked requests to `/collect/…`.
 2. Inspect the live response header:
 
