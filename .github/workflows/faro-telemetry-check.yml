@@ -24,6 +24,16 @@ on:
         type: string
         required: false
         default: "https://ensemble-retail.com https://ensemble-grafana.com https://ensemble-service.com"
+      probe_ingest:
+        description: "Also POST a labeled synthetic event to the Faro collector and assert it is accepted (writes one probe event to prod telemetry)"
+        type: boolean
+        required: false
+        default: false
+      collector_url:
+        description: "Faro collector ingest URL for the probe (defaults to the storefront's)"
+        type: string
+        required: false
+        default: "https://faro-collector-prod-us-east-3.grafana.net/collect/5a68e2237d01ef9a66c697cd87090b55"
   # Also run on Faro-related PRs so the live CSP is validated in the checks.
   # The gating job (live-csp) needs no credentials; the OIDC source-of-truth job
   # degrades to a warning when the deploy role can't be assumed from a PR event.
@@ -158,3 +168,83 @@ jobs:
             echo "CSP: $csp"
             exit 1
           fi
+
+  collector-ingest:
+    name: Collector accepts a synthetic event (opt-in probe)
+    # Opt-in only: this WRITES one labeled synthetic event to production Faro
+    # telemetry, so it never runs on PRs — only on a manual dispatch with the
+    # probe_ingest box checked. It localizes a downstream mismatch: with the CSP
+    # allowing the collector, a non-2xx here means the app key/endpoint itself
+    # changed (rotated/deleted), which would leave app 464 empty even though the
+    # browser is allowed to send.
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.probe_ingest }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: POST a labeled synthetic event to the collector
+        env:
+          COLLECTOR_URL: ${{ inputs.collector_url }}
+          # Optional: only needed if the Faro app requires an ingest API key.
+          FARO_API_KEY: ${{ secrets.FARO_API_KEY }}
+        run: |
+          set -uo pipefail
+          url="$COLLECTOR_URL"
+          if [ -z "$url" ]; then
+            echo "::error::No collector_url provided."; exit 1
+          fi
+          ts="$(date -u +%Y-%m-%dT%H:%M:%S.000Z)"
+          sid="synthetic-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          # Build the Faro payload with jq so it is always valid JSON.
+          payload="$(jq -n --arg ts "$ts" --arg sid "$sid" --arg run "$GITHUB_RUN_ID" '{
+            meta: {
+              sdk: { name: "@grafana/faro-web-sdk", version: "1.0.0" },
+              app: { name: "ensemble-retail", version: "1.0.0", environment: "synthetic-probe" },
+              session: { id: $sid, attributes: { probe: "faro-telemetry-check" } },
+              browser: { name: "github-actions", version: "1.0", os: "linux", mobile: "false" }
+            },
+            logs: [ {
+              message: "faro-telemetry-check synthetic ingest probe",
+              level: "info",
+              context: { probe: "faro-telemetry-check", runId: $run },
+              timestamp: $ts
+            } ],
+            events: [ {
+              name: "synthetic.telemetry.probe",
+              domain: "browser",
+              attributes: { probe: "faro-telemetry-check", runId: $run },
+              timestamp: $ts
+            } ]
+          }')"
+
+          auth=()
+          [ -n "${FARO_API_KEY:-}" ] && auth=(-H "x-api-key: $FARO_API_KEY")
+
+          code="$(curl -sS -m 25 -o /tmp/resp.txt -w '%{http_code}' \
+            -X POST "$url" \
+            -H 'Content-Type: application/json' \
+            "${auth[@]}" \
+            --data "$payload")"
+          echo "POST $url -> HTTP $code"
+          echo "Response body: $(cat /tmp/resp.txt 2>/dev/null)"
+          {
+            echo "### Faro telemetry check — collector ingest probe"
+            echo ""
+            echo "POST \`$url\` → HTTP **$code** (session \`$sid\`, filter events on \`probe=faro-telemetry-check\`)"
+          } >> "$GITHUB_STEP_SUMMARY"
+          case "$code" in
+            2*)
+              echo "✅ Collector accepted the event — the endpoint and app key are live and ingesting. If Frontend Observability app 464 is still empty, the mismatch is which app_id this key maps to, not ingestion." >> "$GITHUB_STEP_SUMMARY"
+              ;;
+            401|403)
+              echo "❌ Collector rejected auth ($code) — the app key may have been rotated/revoked, or an ingest API key is now required (set the FARO_API_KEY secret)." >> "$GITHUB_STEP_SUMMARY"
+              echo "::error::Faro collector returned $code — app key/auth problem"; exit 1
+              ;;
+            404)
+              echo "❌ Collector endpoint not found ($code) — the Faro app/collector may have been deleted or the URL changed." >> "$GITHUB_STEP_SUMMARY"
+              echo "::error::Faro collector returned 404 — endpoint/app changed"; exit 1
+              ;;
+            *)
+              echo "❌ Unexpected response ($code) from the collector." >> "$GITHUB_STEP_SUMMARY"
+              echo "::error::Faro collector returned $code"; exit 1
+              ;;
+          esac
