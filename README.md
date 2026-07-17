@@ -262,6 +262,35 @@ Once deployed, filter Faro exception events in Grafana with:
 
 Production builds also support Grafana source map uploads through `@grafana/faro-rollup-plugin`. Set `FARO_SOURCEMAP_ENDPOINT`, `FARO_SOURCEMAP_API_KEY`, `FARO_APP_ID`, and `FARO_STACK_ID` in the build environment to enable source map generation and upload during `npm run build`.
 
+### Troubleshooting: no Faro telemetry / user actions missing in Frontend Observability
+
+If Frontend Observability shows no data for `app_id="464"` — no user actions, and often no page views, errors, or web vitals either — the storefront's telemetry is being blocked *before* it leaves the browser. The storefront code and Faro config are not the usual cause: the `faro.user.action` signal that Frontend Observability's "User actions" view reads is emitted by `faro.api.startUserAction` in `frontend/src/App.jsx` and is covered end-to-end by `frontend/tests/e2e/storefront-actions.spec.js` (which asserts the real `faro.user.action` events, not just that an action name appears in some payload). If that suite passes, the browser is producing the signal correctly.
+
+The most common production cause is the **Content-Security-Policy** served by the storefront CloudFront distribution. Since the serverless migration (2026-07-09) the storefront is fronted by CloudFront with a `security-headers` response-headers policy (`aws_cloudfront_response_headers_policy` in the `edge-static` stack of the [core-infra](https://github.com/orenlion1/core-infra) repo, `override = true`). Its `connect-src` must list the Faro collector host, or the browser silently drops every Faro request:
+
+```
+connect-src 'self' … https://faro-collector-prod-us-east-3.grafana.net;
+```
+
+To diagnose and fix:
+
+1. Confirm the browser is blocking beacons: open `https://ensemble-retail.com/`, click around, and check the DevTools console for CSP `Refused to connect` errors naming `faro-collector-prod-us-east-3.grafana.net`, or watch the Network tab for blocked requests to `/collect/…`.
+2. Inspect the live response header:
+
+   ```sh
+   curl -sI https://ensemble-retail.com/ | grep -i content-security-policy
+   ```
+
+   Verify the `connect-src` directive includes `https://faro-collector-prod-us-east-3.grafana.net` (the same host as `VITE_FARO_URL` in `frontend/src/main.jsx`). The collector host must match the stack region (`prod-us-east-3`).
+3. If the header is missing the collector, update the CSP in the core-infra `edge-static` stack and apply it. **core-infra Terraform is operator-applied — CI does not apply it**, so committing the change is not enough:
+
+   ```sh
+   cd ../core-infra/terraform/stacks/edge-static
+   terraform apply
+   ```
+
+   CloudFront response-headers-policy changes take a few minutes to propagate to the edge; re-check the header with the `curl` above before retesting the site.
+
 ## Backend Observability
 
 Grafana Alloy is deployed in `ensemble-observability` and sends backend telemetry to Grafana Cloud through the OTLP gateway configured in `infra/k8s/observability-secrets.yaml` (copy from `infra/k8s/observability-secrets.example.template.yaml`; both runtime files are gitignored). The token used as `GRAFANA_CLOUD_API_KEY` must allow `traces:write`, `metrics:write`, `logs:write`, and `profiles:write`.
