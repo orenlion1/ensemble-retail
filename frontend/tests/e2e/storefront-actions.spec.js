@@ -275,6 +275,31 @@ async function expectActionAttribute(locator, actionName) {
   await expect(locator).toHaveAttribute('data-faro-user-action-name', actionName);
 }
 
+// Collect the names of the real `faro.user.action` events in the captured
+// collector payloads. This is the exact signal Grafana Cloud Frontend
+// Observability reads for the "User actions" view: an event whose `name` is
+// `faro.user.action` and whose `userActionName` attribute holds the action.
+// Asserting on this — rather than on any payload that merely contains the
+// action string — is what catches a regression where the storefront keeps
+// pushing custom events but stops emitting `faro.user.action` altogether.
+function collectFaroUserActionNames(faroBodies) {
+  const names = [];
+  for (const body of faroBodies) {
+    let parsed;
+    try {
+      parsed = JSON.parse(body);
+    } catch {
+      continue;
+    }
+    for (const event of parsed.events ?? []) {
+      if (event.name === 'faro.user.action' && event.attributes?.userActionName) {
+        names.push(event.attributes.userActionName);
+      }
+    }
+  }
+  return names;
+}
+
 async function expectFaroAction(faroBodies, actionName) {
-  await expect.poll(() => faroBodies.join('\n')).toContain(actionName);
+  await expect.poll(() => collectFaroUserActionNames(faroBodies)).toContain(actionName);
 }
