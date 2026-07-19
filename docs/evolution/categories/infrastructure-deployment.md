@@ -37,3 +37,4 @@
 - [.github/workflows/deploy.yml](../../../.github/workflows/deploy.yml)
 - [docs/deployment.md](../../deployment.md)
 - [skills/infrastructure/SKILLS.md](../../../skills/infrastructure/SKILLS.md)
+- [.github/workflows/synthetics-apply.yml](../../../.github/workflows/synthetics-apply.yml) — the Grafana Synthetic Monitoring checks run in CI under scoped OIDC roles (2026-07-19; orenlion1 Terraform-in-CI standard, non-AWS adaptation; see [terraform-scripted-check/README.md](../../../observability/synthetic-monitoring/terraform-scripted-check/README.md))

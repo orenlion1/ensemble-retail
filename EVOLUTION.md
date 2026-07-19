@@ -284,6 +284,32 @@ Key evidence:
 - Live AWS validation of winnow's dependencies: hosted zone `Z0341661YMUM03LL4U91`, Cognito pool `us-east-1_h4d6Z9jSr`, the `token.actions.githubusercontent.com` OIDC provider, and the `stacks/winnow/terraform.tfstate` object in the shared state bucket.
 - This repo: `infra/terraform` removed, `infra/README.md` pointer added, `CLAUDE.md` and `docs/deployment.md` updated to reference the sibling `../core-infra` checkout (`stacks/serverless` locates built jars via a sibling-checkout `repo_root` default).
 
+### July 19, 2026: Run the Synthetic-Check Terraform in CI Under Scoped OIDC Roles
+
+The one Terraform stack left in this repo — the Grafana Synthetic Monitoring scripted/browser
+checks under `observability/synthetic-monitoring/terraform-scripted-check` — was brought onto the
+orenlion1 standard (core-infra `docs/standards/terraform-ci-oidc.md`): applied in CI, never from a
+laptop, with no long-lived credentials. Because the checks are Grafana resources rather than AWS,
+this is the standard's non-AWS adaptation — the provider authenticates with a Grafana Cloud token
+from repo secrets, while AWS OIDC is used only for the S3 state backend and the stack's own two CI
+roles. State moved to the shared `ensemble-grafana-tf-state-<account>` bucket
+(`stacks/ensemble-retail-synthetics`, S3-native `use_lockfile` locking); there was no prior state to
+migrate (the checks had only ever been managed by the `sync-scripted-check.mjs` script path).
+
+`ci.tf` adds a read-only `ensemble-retail-synthetics-terraform-plan` role (any run, plans on PRs) and
+a write `ensemble-retail-synthetics-terraform-apply` role assumable only from the required-reviewer
+`terraform-apply` environment. The `Synthetics Apply` workflow plans on PRs and applies on `main`
+behind that gate.
+
+Key evidence:
+
+- `observability/synthetic-monitoring/terraform-scripted-check/ci.tf`: the two OIDC state roles.
+- `observability/synthetic-monitoring/terraform-scripted-check/main.tf`: added `backend "s3"` + the
+  `aws` provider alongside `grafana`.
+- `.github/workflows/synthetics-apply.yml`: plan-on-PR / apply-on-main, Grafana-token auth for the
+  provider, AWS OIDC for state.
+- `observability/synthetic-monitoring/terraform-scripted-check/README.md`: the one-time bootstrap.
+
 ## Serverless Cost-Reduction Migration (Option D)
 
 Faced with a ~$335/month AWS run-rate dominated by fixed platform costs (EKS control plane, a
