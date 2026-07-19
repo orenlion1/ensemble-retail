@@ -12,9 +12,9 @@ The repository and application are named `ensemble-retail`. Existing deployed AW
 - `services/inventory-service/` - Spring Boot API for categories, products, prices, stock, and image metadata.
 - `services/cart-service/` - Spring Boot API for shopper cart state.
 - `services/account-service/` - Spring Boot API for profile, shipping address, and wallet metadata.
-- `infra/k8s/` - EKS Kubernetes manifests for services, Alloy, Beyla, and API routing.
-- `infra/terraform/` - AWS infrastructure skeleton for Route53, ACM, CloudFront, WAF, S3, EKS, Postgres, and DynamoDB.
-- `infra/terraform/stacks/` - Incremental Terraform stacks for network, edge/static, auth, account-baseline, cluster, data, and workload IAM.
+- `infra/k8s/` - Legacy EKS Kubernetes manifests, retained for history (EKS decommissioned in the 2026-07-09 serverless migration).
+- `infra/seed/` - DynamoDB catalog seed data used by `scripts/dynamodb/`.
+- `infra/README.md` - Pointer: all Terraform (stacks, modules, runbook) moved to the sibling [core-infra](https://github.com/orenlion1/core-infra) repo on 2026-07-12, which owns the shared surface (Route53, ACM, CloudFront/WAF, S3, Cognito, serverless API/Lambda, DynamoDB, tf-state) applied locally by an operator.
 - `observability/` - Grafana Alloy config, k8s-monitoring Helm values, synthetic checks, and starter dashboards. See `observability/README.md`.
 - `load-tests/` - k6 API and browser scenarios covering users, categories, product browsing, cart, checkout, account, and synthetic button-action flows.
 - `docs/` - deployment, security, domain/TLS, and Grafana IRM runbooks.
