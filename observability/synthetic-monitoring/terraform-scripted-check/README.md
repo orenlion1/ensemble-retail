@@ -42,7 +42,22 @@ gh secret set GRAFANA_SM_URL; gh secret set GRAFANA_SM_ACCESS_TOKEN
 Then configure the `terraform-apply` GitHub environment with a required reviewer, restricted to
 `main`. After that, PRs plan and `main` applies — no laptop applies.
 
-> Note: the checks are currently `enabled = false`, and a script path
-> (`../sync-scripted-check.mjs`, `../create-synthetic-monitoring.sh`) also manages Synthetic
-> Monitoring. Terraform and that script both touch the same Grafana resources; decide on a single
-> source of truth before enabling the checks in production.
+## Ownership (source of truth)
+
+Synthetic Monitoring for ensemble-retail is split cleanly between two mechanisms — they do **not**
+overlap:
+
+| Checks (job names) | Owner | Managed by |
+| --- | --- | --- |
+| `ensemble-grafana-scripted-storefront-api`, `ensemble-grafana-browser-user-actions` | **This Terraform** (CI-applied) | the `grafana` provider here; the inline k6 script comes from `../ensemble-retail-scripted-check.js` / `../ensemble-retail-browser-action-check.js` |
+| `ensemble-grafana-site-uptime-tls`, `-api-response-time`, `-ping-reachability`, `-dns-resolution`, `-tcp-tls-connectivity` | **`../create-synthetic-monitoring.sh`** (manual/local, gcx) | the `check-*.yaml` manifests it loops over |
+
+`../sync-scripted-check.mjs` and `../sync-browser-action-check.mjs` do **not** talk to Grafana —
+they only regenerate the inline `script:` block of the two `.yaml` reference copies from the `.js`
+sources, and `build.yml` runs them in `--check` mode as a consistency lint. `create-synthetic-monitoring.sh`
+deliberately does **not** push the two `.js`-backed checks (they are Terraform's), so there is no
+dual-ownership to reconcile.
+
+> **Cost guardrail:** every check is `enabled = false` and must stay that way. They are expensive —
+> only ever toggle `false → true` transiently to validate, then revert in the same change. Never
+> commit them enabled.
