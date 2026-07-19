@@ -367,13 +367,10 @@ traces/logs are now sampled to 20% via a new `otelcol.processor.probabilistic_sa
 stage; Grafana Cloud keeps full fidelity. See `observability/README.md#honeycomb-burst-protection-2026-07-04`
 for how to apply, tune the sampling rate, or revert to full fan-out.
 
-Applying that ConfigMap change to the live cluster no longer strictly requires local
-`kubectl`/AWS credentials: the guarded `.github/workflows/observability-apply.yml`
-(`workflow_dispatch`) diffs and applies just the two Alloy ConfigMaps via GitHub OIDC, gated by
-an `observability-apply` environment reviewer, same pattern as the Terraform-apply workflow
-below. Because the workflow uses `kubectl diff` server-side dry-run, the planner RBAC includes
-`patch` on those two ConfigMaps. It needs a one-time bootstrap first — see
-`infra/terraform/stacks/README.md` section 11 and `TODO.md`.
+The guarded `observability-apply.yml` workflow that applied these two Alloy ConfigMaps to the
+live EKS cluster via GitHub OIDC was **retired on 2026-07-19**: the `ensemble-grafana` EKS cluster
+was decommissioned (no clusters remain in the account), so there is no longer a cluster to apply
+ConfigMap changes to. The Alloy config here is retained for reference/history only.
 
 ## Production Shape
 

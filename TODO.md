@@ -24,4 +24,9 @@ No pending items.
       was run by an operator (IAM roles created, RBAC applied, `aws-auth`
       mapped, `observability-apply` environment + secrets configured), plus the
       PR #16 follow-up granting the planner role `patch` so `kubectl diff`
-      works. The workflow is now usable for any future Alloy ConfigMap change.
+      works.
+      **Retired 2026-07-19:** the workflow and its `observability-apply-rbac.yaml`
+      were removed after the `ensemble-grafana` EKS cluster was decommissioned —
+      there is no longer a cluster to apply ConfigMaps to. The stale
+      `EKS_CLUSTER_NAME`, `OBSERVABILITY_PLAN_ROLE_ARN`, and
+      `OBSERVABILITY_APPLY_ROLE_ARN` repo secrets can now be deleted.
