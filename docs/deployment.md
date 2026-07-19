@@ -20,16 +20,10 @@ Secrets and Terraform changes (including `stacks/serverless`) are NOT applied by
 
 For `stacks/cluster` and `stacks/cloudwatch-integration` specifically, `.github/workflows/terraform-apply.yml` offers a manual, guarded `workflow_dispatch` alternative to applying locally: it plans and applies via GitHub OIDC using IAM roles scoped only to those two stacks' resources, and the apply step requires a `terraform-apply` GitHub environment reviewer to approve it before AWS credentials are ever issued. See `infra/terraform/stacks/README.md` (section 9) for one-time setup and usage.
 
-Similarly, for just the `alloy-config`/`pyroscope-alloy-config` ConfigMaps in
-`infra/k8s/alloy-beyla.yaml`, `.github/workflows/observability-apply.yml` offers a guarded
-`workflow_dispatch` alternative to running `apply-manifests.sh` locally: it diffs and applies via
-GitHub OIDC using an IAM role that only grants `eks:DescribeCluster`, with real authorization
-enforced by Kubernetes RBAC (`infra/k8s/observability-apply-rbac.yaml`) scoped to those two
-ConfigMaps and their owning Deployment/DaemonSet, and the apply step requires an
-`observability-apply` GitHub environment reviewer to approve it. See
-`infra/terraform/stacks/README.md` (section 11) for one-time setup and usage.
-The planner role also carries `patch` on those two ConfigMaps because `kubectl diff` performs
-server-side apply dry-run requests that require patch authorization.
+The `observability-apply.yml` workflow that previously offered a guarded `workflow_dispatch`
+alternative for applying the `alloy-config`/`pyroscope-alloy-config` ConfigMaps to the cluster was
+**retired on 2026-07-19**, along with its `infra/k8s/observability-apply-rbac.yaml`: the EKS
+cluster was decommissioned, so there is no cluster to apply Kubernetes ConfigMap changes to.
 
 ## Static Assets
 
