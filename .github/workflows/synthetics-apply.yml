@@ -1,0 +1,121 @@
+name: Synthetics Apply
+
+# Terraform for the ensemble-retail Grafana Synthetic Monitoring checks, run in CI
+# under the orenlion1 standard (core-infra docs/standards/terraform-ci-oidc.md),
+# non-AWS-provider adaptation:
+#
+#   - The CHECK resources are Grafana; the provider authenticates with a Grafana
+#     Cloud token injected from repo secrets (NOT AWS OIDC).
+#   - AWS OIDC is used ONLY for the S3 state backend and this stack's own CI roles:
+#       plan   read-only state, any run  -> posts the plan on the PR.
+#       apply  read/write state, on main -> gated by the required-reviewer
+#              "terraform-apply" environment.
+#
+# Both jobs SKIP until AWS_PLAN_ROLE_ARN / AWS_APPLY_ROLE_ARN repo variables are
+# set (the roles are created by the first, laptop, apply that bootstraps them).
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "observability/synthetic-monitoring/terraform-scripted-check/**"
+      - "observability/synthetic-monitoring/*.js"
+      - ".github/workflows/synthetics-apply.yml"
+  push:
+    branches: [main]
+    paths:
+      - "observability/synthetic-monitoring/terraform-scripted-check/**"
+      - "observability/synthetic-monitoring/*.js"
+      - ".github/workflows/synthetics-apply.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+  pull-requests: write
+
+concurrency:
+  group: synthetics-apply
+  cancel-in-progress: false
+
+env:
+  AWS_REGION: us-east-1
+  TF_VERSION: "1.11.0"
+  TF_IN_AUTOMATION: "true"
+  TF_DIR: observability/synthetic-monitoring/terraform-scripted-check
+  TF_STATE_KEY: stacks/ensemble-retail-synthetics/terraform.tfstate
+  # Grafana provider auth (from repo secrets) — the non-AWS half of the standard.
+  GRAFANA_URL: ${{ secrets.GRAFANA_URL }}
+  GRAFANA_AUTH: ${{ secrets.GRAFANA_AUTH }}
+  GRAFANA_SM_URL: ${{ secrets.GRAFANA_SM_URL }}
+  GRAFANA_SM_ACCESS_TOKEN: ${{ secrets.GRAFANA_SM_ACCESS_TOKEN }}
+
+jobs:
+  plan:
+    if: github.event_name == 'pull_request' && vars.AWS_PLAN_ROLE_ARN != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: ${{ vars.AWS_PLAN_ROLE_ARN }} # state read-only
+          aws-region: ${{ env.AWS_REGION }}
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
+      - name: init
+        run: |
+          terraform -chdir="$TF_DIR" init -input=false \
+            -backend-config="bucket=${{ vars.TF_STATE_BUCKET }}" \
+            -backend-config="key=${{ env.TF_STATE_KEY }}" \
+            -backend-config="region=${{ env.AWS_REGION }}" \
+            -backend-config="use_lockfile=true"
+
+      - name: plan
+        run: terraform -chdir="$TF_DIR" plan -no-color -input=false | tee plan.txt
+
+      - name: comment plan
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let plan = fs.readFileSync(process.env.TF_DIR + '/plan.txt', 'utf8');
+            if (plan.length > 60000) plan = plan.slice(0, 60000) + '\n... truncated ...';
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '### terraform plan: synthetic-monitoring checks\n```hcl\n' + plan + '\n```',
+            });
+
+  apply:
+    if: github.event_name != 'pull_request' && vars.AWS_APPLY_ROLE_ARN != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: terraform-apply # <- required reviewer lives here
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: ${{ vars.AWS_APPLY_ROLE_ARN }} # only assumable from this environment
+          aws-region: ${{ env.AWS_REGION }}
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
+      - name: init
+        run: |
+          terraform -chdir="$TF_DIR" init -input=false \
+            -backend-config="bucket=${{ vars.TF_STATE_BUCKET }}" \
+            -backend-config="key=${{ env.TF_STATE_KEY }}" \
+            -backend-config="region=${{ env.AWS_REGION }}" \
+            -backend-config="use_lockfile=true"
+
+      - name: apply
+        run: terraform -chdir="$TF_DIR" apply -auto-approve -input=false

@@ -4,10 +4,32 @@ terraform {
       source  = "grafana/grafana"
       version = "~> 4.0"
     }
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+
+  # Remote state in the shared bucket that core-infra's stacks/ci-terraform-apply
+  # owns (ensemble-grafana-tf-state-<account>), key stacks/ensemble-retail-synthetics.
+  # bucket/region/use_lockfile come from -backend-config at init (see the
+  # synthetics-apply workflow / README). S3-native locking, no DynamoDB table.
+  backend "s3" {
+    key     = "stacks/ensemble-retail-synthetics/terraform.tfstate"
+    encrypt = true
   }
 }
 
+# Grafana provider auth comes from the environment (GRAFANA_URL/GRAFANA_AUTH and
+# GRAFANA_SM_URL/GRAFANA_SM_ACCESS_TOKEN), injected in CI from repo secrets — the
+# non-AWS half of the orenlion1 Terraform-in-CI standard.
 provider "grafana" {}
+
+# AWS is used only for the state backend and to define this stack's own CI OIDC
+# roles (ci.tf). No AWS resources are created for the checks themselves.
+provider "aws" {
+  region = var.aws_region
+}
 
 data "grafana_synthetic_monitoring_probes" "main" {}
 
